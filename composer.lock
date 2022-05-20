@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ea00fe99102450eddb782659dee2971",
+    "content-hash": "ae5a5f38adbfab3d423af307a21567ed",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -160,16 +160,16 @@
         },
         {
             "name": "asuwebplatforms/webspark-module-asu_footer",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer.git",
-                "reference": "b66541f46a4d19a80289469df8ec7292444051c9"
+                "reference": "4d574ec4ce70ca856de82580d3b034026c5094f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_footer/zipball/b66541f46a4d19a80289469df8ec7292444051c9",
-                "reference": "b66541f46a4d19a80289469df8ec7292444051c9",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_footer/zipball/4d574ec4ce70ca856de82580d3b034026c5094f6",
+                "reference": "4d574ec4ce70ca856de82580d3b034026c5094f6",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -186,9 +186,9 @@
             "description": "ASU Web Standards 2 Footer",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer/tree/1.0.9"
+                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer/tree/1.0.10"
             },
-            "time": "2022-03-21T21:58:56+00:00"
+            "time": "2022-04-28T17:49:48+00:00"
         },
         {
             "name": "asuwebplatforms/webspark-module-asu_news",
@@ -320,16 +320,16 @@
         },
         {
             "name": "asuwebplatforms/webspark-module-webspark_blocks",
-            "version": "1.1.13",
+            "version": "1.1.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks.git",
-                "reference": "f746de74e9a1e9964b303d58b140b18a7166bc32"
+                "reference": "bbf648e6c4baad3bf134b1da3f1f9b6a110704e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_blocks/zipball/f746de74e9a1e9964b303d58b140b18a7166bc32",
-                "reference": "f746de74e9a1e9964b303d58b140b18a7166bc32",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_blocks/zipball/bbf648e6c4baad3bf134b1da3f1f9b6a110704e4",
+                "reference": "bbf648e6c4baad3bf134b1da3f1f9b6a110704e4",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -346,9 +346,9 @@
             "description": "Provide custom block types",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks/tree/1.1.13"
+                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks/tree/1.1.14"
             },
-            "time": "2022-03-21T22:04:23+00:00"
+            "time": "2022-04-28T19:49:24+00:00"
         },
         {
             "name": "asuwebplatforms/webspark-module-webspark_cas",
@@ -505,17 +505,43 @@
             "time": "2021-12-15T18:35:04+00:00"
         },
         {
-            "name": "asuwebplatforms/webspark-profile-webspark",
-            "version": "1.1.6",
+            "name": "asuwebplatforms/webspark-module-webspark_webdir",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-profile-webspark.git",
-                "reference": "3418f13c313bb241d61f51b33e2e5afd89561894"
+                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir.git",
+                "reference": "72aecf8b060ff62b205285378685255efe26375d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-profile-webspark/zipball/3418f13c313bb241d61f51b33e2e5afd89561894",
-                "reference": "3418f13c313bb241d61f51b33e2e5afd89561894",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_webdir/zipball/72aecf8b060ff62b205285378685255efe26375d",
+                "reference": "72aecf8b060ff62b205285378685255efe26375d",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "ASU Integrated Search Web Directory for Webspark",
+            "support": {
+                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/issues",
+                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/tree/1.0.6"
+            },
+            "time": "2022-04-29T13:52:16+00:00"
+        },
+        {
+            "name": "asuwebplatforms/webspark-profile-webspark",
+            "version": "1.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ASUWebPlatforms/webspark-profile-webspark.git",
+                "reference": "d259a62a2135399dbc098e5f56cc1830aa389745"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-profile-webspark/zipball/d259a62a2135399dbc098e5f56cc1830aa389745",
+                "reference": "d259a62a2135399dbc098e5f56cc1830aa389745",
                 "shasum": ""
             },
             "type": "drupal-profile",
@@ -532,22 +558,22 @@
             "description": "Custom profle for Webspark 2",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-profile-webspark/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-profile-webspark/tree/1.1.6"
+                "source": "https://github.com/ASUWebPlatforms/webspark-profile-webspark/tree/1.1.10"
             },
-            "time": "2021-12-10T14:41:46+00:00"
+            "time": "2022-04-15T18:59:50+00:00"
         },
         {
             "name": "asuwebplatforms/webspark-theme-renovation",
-            "version": "1.0.29",
+            "version": "1.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-theme-renovation.git",
-                "reference": "edb874cde95dc621789b317ab55cbf9d6debfb11"
+                "reference": "2b460b1485c39afe2d5d5390a644160386e01fce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-theme-renovation/zipball/edb874cde95dc621789b317ab55cbf9d6debfb11",
-                "reference": "edb874cde95dc621789b317ab55cbf9d6debfb11",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-theme-renovation/zipball/2b460b1485c39afe2d5d5390a644160386e01fce",
+                "reference": "2b460b1485c39afe2d5d5390a644160386e01fce",
                 "shasum": ""
             },
             "type": "drupal-theme",
@@ -564,9 +590,9 @@
             "description": "Theme for Webspark 2: Implements Web Standards 2.0",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/tree/1.0.29"
+                "source": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/tree/1.0.31"
             },
-            "time": "2022-03-29T16:49:15+00:00"
+            "time": "2022-04-28T19:48:06+00:00"
         },
         {
             "name": "asuwebplatforms/webspark_module_asu_breadcrumb",
@@ -666,16 +692,16 @@
         },
         {
             "name": "asuwebpplatforms/webspark-module-asu_brand",
-            "version": "1.2.5",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand.git",
-                "reference": "74213026622d09e13aa08860531a9ff3fa6d30e3"
+                "reference": "5f64138ed90183d24f1c7630e550c1be57af2fa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_brand/zipball/74213026622d09e13aa08860531a9ff3fa6d30e3",
-                "reference": "74213026622d09e13aa08860531a9ff3fa6d30e3",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_brand/zipball/5f64138ed90183d24f1c7630e550c1be57af2fa2",
+                "reference": "5f64138ed90183d24f1c7630e550c1be57af2fa2",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -692,9 +718,9 @@
             "description": "ASU Header component and brand assets.",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand/tree/1.2.5"
+                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand/tree/1.2.8"
             },
-            "time": "2022-03-09T16:57:34+00:00"
+            "time": "2022-04-22T14:22:20+00:00"
         },
         {
             "name": "bower-asset/fontawesome",
@@ -1014,16 +1040,16 @@
         },
         {
             "name": "consolidation/annotated-command",
-            "version": "4.5.4",
+            "version": "4.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/annotated-command.git",
-                "reference": "93398c3166d9026ab93219ce23b2092b4d7b7904"
+                "reference": "67cea8e8e7656b74da651ea6f49321853996c0fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/93398c3166d9026ab93219ce23b2092b4d7b7904",
-                "reference": "93398c3166d9026ab93219ce23b2092b4d7b7904",
+                "url": "https://api.github.com/repos/consolidation/annotated-command/zipball/67cea8e8e7656b74da651ea6f49321853996c0fd",
+                "reference": "67cea8e8e7656b74da651ea6f49321853996c0fd",
                 "shasum": ""
             },
             "require": {
@@ -1064,9 +1090,9 @@
             "description": "Initialize Symfony Console commands from annotated command class methods.",
             "support": {
                 "issues": "https://github.com/consolidation/annotated-command/issues",
-                "source": "https://github.com/consolidation/annotated-command/tree/4.5.4"
+                "source": "https://github.com/consolidation/annotated-command/tree/4.5.5"
             },
-            "time": "2022-04-05T17:58:10+00:00"
+            "time": "2022-04-26T16:18:25+00:00"
         },
         {
             "name": "consolidation/config",
@@ -3173,16 +3199,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.2.16",
+            "version": "9.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "e4f0a0d4c3add3ad735935b3cf1fbd2ec8706a6a"
+                "reference": "cd594b8bab3619a0a0047ea17bef5bb9e876ca06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/e4f0a0d4c3add3ad735935b3cf1fbd2ec8706a6a",
-                "reference": "e4f0a0d4c3add3ad735935b3cf1fbd2ec8706a6a",
+                "url": "https://api.github.com/repos/drupal/core/zipball/cd594b8bab3619a0a0047ea17bef5bb9e876ca06",
+                "reference": "cd594b8bab3619a0a0047ea17bef5bb9e876ca06",
                 "shasum": ""
             },
             "require": {
@@ -3421,13 +3447,13 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/9.2.16"
+                "source": "https://github.com/drupal/core/tree/9.2.18"
             },
-            "time": "2022-03-21T21:22:04+00:00"
+            "time": "2022-04-20T14:26:44+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.2.16",
+            "version": "9.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -3471,22 +3497,22 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.16"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.2.18"
             },
             "time": "2021-08-24T12:04:07+00:00"
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.2.16",
+            "version": "9.2.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "bb44c58dc0520852a0d031aebc175b5025300b40"
+                "reference": "3e8ce6dc92cc159c0fbf3e532f88c2bf9a93bc15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/bb44c58dc0520852a0d031aebc175b5025300b40",
-                "reference": "bb44c58dc0520852a0d031aebc175b5025300b40",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/3e8ce6dc92cc159c0fbf3e532f88c2bf9a93bc15",
+                "reference": "3e8ce6dc92cc159c0fbf3e532f88c2bf9a93bc15",
                 "shasum": ""
             },
             "require": {
@@ -3495,7 +3521,7 @@
                 "doctrine/annotations": "1.13.1",
                 "doctrine/lexer": "1.2.1",
                 "doctrine/reflection": "1.2.2",
-                "drupal/core": "9.2.16",
+                "drupal/core": "9.2.18",
                 "egulias/email-validator": "2.1.25",
                 "guzzlehttp/guzzle": "6.5.5",
                 "guzzlehttp/promises": "1.4.1",
@@ -3558,9 +3584,9 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/9.2.16"
+                "source": "https://github.com/drupal/core-recommended/tree/9.2.18"
             },
-            "time": "2022-03-21T21:22:04+00:00"
+            "time": "2022-04-20T14:26:44+00:00"
         },
         {
             "name": "drupal/crop",
@@ -4371,6 +4397,54 @@
             }
         },
         {
+            "name": "drupal/field_states_ui",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/field_states_ui.git",
+                "reference": "8.x-2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/field_states_ui-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "5d2d211d23f4e40af566fac359cb68d37b53d553"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.0",
+                    "datestamp": "1606502775",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "NickDickinsonWilde",
+                    "homepage": "https://www.drupal.org/user/3094661"
+                },
+                {
+                    "name": "sdstyles",
+                    "homepage": "https://www.drupal.org/user/1420228"
+                }
+            ],
+            "description": "Provides a user interface for using the States API on form fields.",
+            "homepage": "https://www.drupal.org/project/field_states_ui",
+            "support": {
+                "source": "https://git.drupalcode.org/project/field_states_ui"
+            }
+        },
+        {
             "name": "drupal/fontawesome",
             "version": "2.21.0",
             "source": {
@@ -4413,14 +4487,6 @@
                     "homepage": "https://www.drupal.org/user/1160788"
                 },
                 {
-                    "name": "RobLoach",
-                    "homepage": "https://www.drupal.org/user/61114"
-                },
-                {
-                    "name": "inders",
-                    "homepage": "https://www.drupal.org/user/127640"
-                },
-                {
                     "name": "truls1502",
                     "homepage": "https://www.drupal.org/user/325866"
                 }
@@ -4434,26 +4500,29 @@
         },
         {
             "name": "drupal/honeypot",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/honeypot.git",
-                "reference": "2.0.2"
+                "reference": "2.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/honeypot-2.0.2.zip",
-                "reference": "2.0.2",
-                "shasum": "8a3e15509f649c39e88c4f22105f12fb6445fc62"
+                "url": "https://ftp.drupal.org/files/projects/honeypot-2.1.0.zip",
+                "reference": "2.1.0",
+                "shasum": "7ddb2d0bfeaa65d55823d82bdf01c9c330a1e12f"
             },
             "require": {
-                "drupal/core": "^8.8.2 || ^9"
+                "drupal/core": "^9.2 || ^10"
+            },
+            "require-dev": {
+                "drupal/rules": "^3.0"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.2",
-                    "datestamp": "1638391833",
+                    "version": "2.1.0",
+                    "datestamp": "1651894953",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4924,10 +4993,6 @@
                     "homepage": "https://www.drupal.org/user/28539"
                 },
                 {
-                    "name": "pmichelazzo",
-                    "homepage": "https://www.drupal.org/user/182237"
-                },
-                {
                     "name": "srdtwc",
                     "homepage": "https://www.drupal.org/user/3422763"
                 }
@@ -5226,17 +5291,17 @@
         },
         {
             "name": "drupal/quick_node_clone",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/quick_node_clone.git",
-                "reference": "8.x-1.14"
+                "reference": "8.x-1.15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/quick_node_clone-8.x-1.14.zip",
-                "reference": "8.x-1.14",
-                "shasum": "c5189402778cba4e4159d61db7e822110b78eab7"
+                "url": "https://ftp.drupal.org/files/projects/quick_node_clone-8.x-1.15.zip",
+                "reference": "8.x-1.15",
+                "shasum": "bac562133cfab05c207d4e45daa95cd36a7fad51"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -5247,8 +5312,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.14",
-                    "datestamp": "1615309355",
+                    "version": "8.x-1.15",
+                    "datestamp": "1651684801",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5269,10 +5334,6 @@
                     "name": "Neslee Canil Pinto",
                     "homepage": "https://www.drupal.org/u/neslee-canil-pinto",
                     "role": "Maintainer"
-                },
-                {
-                    "name": "vilepickle",
-                    "homepage": "https://www.drupal.org/user/783006"
                 }
             ],
             "description": "Quickly clone a node with regular fields.",
@@ -7652,33 +7713,34 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "3824d4253315d955df5a9336942f4f300c78bf6c"
+                "reference": "082583a637ebd6518dfac4af500d3963cef97087"
             },
             "require": {
                 "asuwebplatforms/webspark-module-asu_components_appearance": "1.0.1",
                 "asuwebplatforms/webspark-module-asu_degree_rfi": "1.1.8",
                 "asuwebplatforms/webspark-module-asu_events": "1.2.6",
-                "asuwebplatforms/webspark-module-asu_footer": "1.0.9",
+                "asuwebplatforms/webspark-module-asu_footer": "1.0.10",
                 "asuwebplatforms/webspark-module-asu_news": "1.2.2",
                 "asuwebplatforms/webspark-module-asu_react_core": "1.2.2",
                 "asuwebplatforms/webspark-module-asu_react_integration": "1.0.1",
                 "asuwebplatforms/webspark-module-asu_user": "1.0.1",
-                "asuwebplatforms/webspark-module-webspark_blocks": "1.1.13",
+                "asuwebplatforms/webspark-module-webspark_blocks": "1.1.14",
                 "asuwebplatforms/webspark-module-webspark_cas": "1.0.1",
                 "asuwebplatforms/webspark-module-webspark_ckeditor_plugins": "1.0.6",
                 "asuwebplatforms/webspark-module-webspark_cropper_theme": "1.0.0",
                 "asuwebplatforms/webspark-module-webspark_isearch": "1.0.2",
                 "asuwebplatforms/webspark-module-webspark_utility": "1.1.6",
-                "asuwebplatforms/webspark-profile-webspark": "1.1.6",
-                "asuwebplatforms/webspark-theme-renovation": "1.0.29",
+                "asuwebplatforms/webspark-module-webspark_webdir": "1.0.6",
+                "asuwebplatforms/webspark-profile-webspark": "1.1.10",
+                "asuwebplatforms/webspark-theme-renovation": "1.0.31",
                 "asuwebplatforms/webspark_module_asu_breadcrumb": "1.0.1",
                 "asuwebplatforms/webspark_module_renovation_layouts": "1.0.3",
                 "asuwebplatforms/webspark_module_views_pager": "1.0.2",
-                "asuwebpplatforms/webspark-module-asu_brand": "1.2.5",
+                "asuwebpplatforms/webspark-module-asu_brand": "1.2.8",
                 "bower-asset/fontawesome": "5.15.3",
                 "ckeditor/fakeobjects": "4.16.0",
                 "ckeditor/link": "4.16.1",
@@ -7694,8 +7756,8 @@
                 "drupal/components": "2.4.0",
                 "drupal/config_readonly": "1.0.0-beta4",
                 "drupal/config_update": "1.7.0",
-                "drupal/core-composer-scaffold": "9.2.16",
-                "drupal/core-recommended": "9.2.16",
+                "drupal/core-composer-scaffold": "9.2.18",
+                "drupal/core-recommended": "9.2.18",
                 "drupal/crop": "2.1.0",
                 "drupal/current_page_crumb": "1.3.0",
                 "drupal/decorative_image_widget": "1.0.0-alpha4",
@@ -7705,6 +7767,7 @@
                 "drupal/environment_indicator": "4.0.3",
                 "drupal/field_group": "3.2.0",
                 "drupal/field_menu": "1.0.0",
+                "drupal/field_states_ui": "2.0",
                 "drupal/fontawesome": "2.21.0",
                 "drupal/image_widget_crop": "2.3.0",
                 "drupal/layout_builder_component_attributes": "2.0.1",
@@ -9149,16 +9212,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.4.3",
+            "version": "v5.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "231313534dded84c7ecaa79d14bc5da4ccb69b7d"
+                "reference": "9b630f3427f3ebe7cd346c277a1408b00249dad9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/231313534dded84c7ecaa79d14bc5da4ccb69b7d",
-                "reference": "231313534dded84c7ecaa79d14bc5da4ccb69b7d",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/9b630f3427f3ebe7cd346c277a1408b00249dad9",
+                "reference": "9b630f3427f3ebe7cd346c277a1408b00249dad9",
                 "shasum": ""
             },
             "require": {
@@ -9192,7 +9255,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.4.3"
+                "source": "https://github.com/symfony/finder/tree/v5.4.8"
             },
             "funding": [
                 {
@@ -9208,7 +9271,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-26T16:34:36+00:00"
+            "time": "2022-04-15T08:07:45+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -11378,5 +11441,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
