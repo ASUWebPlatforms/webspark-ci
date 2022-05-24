@@ -506,16 +506,16 @@
         },
         {
             "name": "asuwebplatforms/webspark-module-webspark_webdir",
-            "version": "1.0.6",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir.git",
-                "reference": "72aecf8b060ff62b205285378685255efe26375d"
+                "reference": "117909b9bd0885356aff86e5045e629d7d3d7d13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_webdir/zipball/72aecf8b060ff62b205285378685255efe26375d",
-                "reference": "72aecf8b060ff62b205285378685255efe26375d",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_webdir/zipball/117909b9bd0885356aff86e5045e629d7d3d7d13",
+                "reference": "117909b9bd0885356aff86e5045e629d7d3d7d13",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -526,9 +526,9 @@
             "description": "ASU Integrated Search Web Directory for Webspark",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/tree/1.0.6"
+                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/tree/1.0.12"
             },
-            "time": "2022-04-29T13:52:16+00:00"
+            "time": "2022-05-24T21:35:27+00:00"
         },
         {
             "name": "asuwebplatforms/webspark-profile-webspark",
@@ -564,16 +564,16 @@
         },
         {
             "name": "asuwebplatforms/webspark-theme-renovation",
-            "version": "1.0.31",
+            "version": "1.0.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ASUWebPlatforms/webspark-theme-renovation.git",
-                "reference": "2b460b1485c39afe2d5d5390a644160386e01fce"
+                "reference": "00ae67b279e1ec7ebbb2cad2444e49d3ad7bb34b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-theme-renovation/zipball/2b460b1485c39afe2d5d5390a644160386e01fce",
-                "reference": "2b460b1485c39afe2d5d5390a644160386e01fce",
+                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-theme-renovation/zipball/00ae67b279e1ec7ebbb2cad2444e49d3ad7bb34b",
+                "reference": "00ae67b279e1ec7ebbb2cad2444e49d3ad7bb34b",
                 "shasum": ""
             },
             "type": "drupal-theme",
@@ -590,9 +590,9 @@
             "description": "Theme for Webspark 2: Implements Web Standards 2.0",
             "support": {
                 "issues": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/tree/1.0.31"
+                "source": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/tree/1.0.32"
             },
-            "time": "2022-04-28T19:48:06+00:00"
+            "time": "2022-05-24T17:06:08+00:00"
         },
         {
             "name": "asuwebplatforms/webspark_module_asu_breadcrumb",
@@ -7713,11 +7713,11 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "082583a637ebd6518dfac4af500d3963cef97087"
+                "reference": "f4ce8fd48e29405b4a471a3b74f8ad967fd794f0"
             },
             "require": {
                 "asuwebplatforms/webspark-module-asu_components_appearance": "1.0.1",
@@ -7734,9 +7734,9 @@
                 "asuwebplatforms/webspark-module-webspark_cropper_theme": "1.0.0",
                 "asuwebplatforms/webspark-module-webspark_isearch": "1.0.2",
                 "asuwebplatforms/webspark-module-webspark_utility": "1.1.6",
-                "asuwebplatforms/webspark-module-webspark_webdir": "1.0.6",
+                "asuwebplatforms/webspark-module-webspark_webdir": "1.0.12",
                 "asuwebplatforms/webspark-profile-webspark": "1.1.10",
-                "asuwebplatforms/webspark-theme-renovation": "1.0.31",
+                "asuwebplatforms/webspark-theme-renovation": "1.0.32",
                 "asuwebplatforms/webspark_module_asu_breadcrumb": "1.0.1",
                 "asuwebplatforms/webspark_module_renovation_layouts": "1.0.3",
                 "asuwebplatforms/webspark_module_views_pager": "1.0.2",
