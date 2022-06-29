@@ -42,7 +42,17 @@
         }
     ],
     "require": {
-        "drush/drush": "^10",
+    "drupal/asset_injector": "^2.9",
+    "drupal/captcha": "^1.2",
+    "drupal/csv_importer": "^1.14",
+    "drupal/honeypot": "^2.0",
+    "drupal/mailsystem": "^4.3",
+    "drupal/quick_node_clone": "^1.14",
+    "drupal/recaptcha": "^3.0",
+    "drupal/smtp": "^1.0",
+    "drupal/vapn": "^1.5",
+    "drupal/views_bulk_edit": "^2.6",
+    "drush/drush": "^10",
         "pantheon-upstreams/upstream-configuration": "*"
     },
     "conflict": {
