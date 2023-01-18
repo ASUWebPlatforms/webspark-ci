@@ -45,6 +45,7 @@
         "drupal/asset_injector": "^2.9",
         "drupal/captcha": "^1.2",
         "drupal/csv_importer": "^1.14",
+        "drupal/field_permissions": "^1.2",
         "drupal/honeypot": "^2.0",
         "drupal/mailsystem": "^4.3",
         "drupal/mimemail": "^1.0@alpha",
