@@ -1,0 +1,12 @@
+uuid: e1e0abb6-5254-4109-ba8f-4210b9b380a0
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: RKhTouqbW6-FJ-wBqvPtYbD63An0oSE4JAA10KEYcSs
+id: card_group_with_icon
+label: 'Card Group with Icon'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

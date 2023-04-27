@@ -1,0 +1,35 @@
+uuid: 086d3d44-c4b2-4b83-af98-f1c0d9062250
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+_core:
+  default_config_hash: L_b3kXb_x1PJjWiAPiVtP6TyXeR78sMPHmnL_1OqlBI
+id: block_content.field_background_color
+field_name: field_background_color
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: bg-white
+      label: White
+    -
+      value: bg-gray-1
+      label: 'Gray 1'
+    -
+      value: bg-gray-2
+      label: 'Gray 2'
+    -
+      value: bg-dark
+      label: 'Gray 7'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

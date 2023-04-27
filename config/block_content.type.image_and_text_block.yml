@@ -1,0 +1,10 @@
+uuid: 4ea03c04-e359-4c8d-85ea-947e4d3b270c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: a_Xnjquvux3uuHXYhSMrjB5Y4FHpjks7ffOOstxSSAI
+id: image_and_text_block
+label: 'Image And Text Block'
+revision: 0
+description: ''

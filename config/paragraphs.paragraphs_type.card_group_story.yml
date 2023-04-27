@@ -1,0 +1,12 @@
+uuid: 3e65faf1-971d-475c-91b7-94e6736348d9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1fbQGUZXkH7lSLwqpOiEOnRRMra5AS5nC7-gP6qO0io
+id: card_group_story
+label: 'Card Group Story'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

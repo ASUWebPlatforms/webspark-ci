@@ -1,0 +1,26 @@
+uuid: a6a01e5d-bab0-4437-9e4d-1c982cb5e04d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date
+    - paragraphs.paragraphs_type.card_event
+  module:
+    - datetime
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: jlmbaqUC0fSZN0E4DxlMoJ5Wsesl35rVr7WMbxqHe8k
+id: paragraph.card_event.field_date
+field_name: field_date
+entity_type: paragraph
+bundle: card_event
+label: Date
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

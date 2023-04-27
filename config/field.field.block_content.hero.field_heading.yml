@@ -1,0 +1,21 @@
+uuid: c60c2c6d-65e2-423e-b0af-2eb7c6cd592b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: AGQAa2yL8ajRRfMyO34M4ext-4YXcK4mpbUXXLuyvmc
+id: block_content.hero.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: hero
+label: 'Hero Heading'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

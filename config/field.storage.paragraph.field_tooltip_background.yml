@@ -1,0 +1,35 @@
+uuid: 7e2928ed-6f00-4cc4-81a3-bfc05fc6809b
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+_core:
+  default_config_hash: jNLqRR5-17J7Ye8ixzROocU7OQK-VejqUXLNj0fgeys
+id: paragraph.field_tooltip_background
+field_name: field_tooltip_background
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: white
+      label: White
+    -
+      value: base-gray
+      label: 'Gray 1'
+    -
+      value: gray
+      label: 'Gray 2'
+    -
+      value: dark
+      label: 'Gray 7'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

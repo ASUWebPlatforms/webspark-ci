@@ -1,0 +1,23 @@
+uuid: 8d34195c-5651-42e9-b8d7-5a8ecb909100
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: '-WGhcePhtTFGVtTaK79XSns9HV3F4sslzAldLcu4DzI'
+id: block_content.field_events_feed_filter
+field_name: field_events_feed_filter
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,12 @@
+uuid: e2f3fec9-76e5-4524-a40a-9f4fccb7840e
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: YIxr1Izv29U1ZFRCk408bC1GroeJa6wwzFqOJoUvyJo
+id: block_content.story_card
+label: 'Story Card'
+targetEntityType: block_content
+cache: true

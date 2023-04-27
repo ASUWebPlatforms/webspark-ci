@@ -1,0 +1,21 @@
+uuid: 24a8544f-16ec-42f3-8fbe-f7ff79f13003
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+_core:
+  default_config_hash: MvVYvttmr-DzxIz8zt2RDQNWgTFJaCeEYQxN87wfR1I
+id: node.field_byline
+field_name: field_byline
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

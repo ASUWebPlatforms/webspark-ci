@@ -1,0 +1,16 @@
+uuid: beb2ca7d-8db1-4564-8037-08a02bcaa9e6
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+_core:
+  default_config_hash: v7YS2mnhDb1R0yy_VVTUaRLhaD1MCpWI7WHYDHQMtxI
+id: user_profile_urls
+label: 'User Profile URLs'
+type: 'canonical_entities:user'
+pattern: 'user/[user:account-name]'
+selection_criteria: {  }
+selection_logic: and
+weight: 10
+relationships: {  }

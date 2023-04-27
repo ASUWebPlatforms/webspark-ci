@@ -1,0 +1,25 @@
+uuid: ca366933-b427-4810-988c-04c7f8116848
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_color_options
+    - paragraphs.paragraphs_type.accordion_panel
+  module:
+    - options
+_core:
+  default_config_hash: gMsKfH6DEm_xApsZYsUaPR6YNz2KoqNWFA4eusTlqog
+id: paragraph.accordion_panel.field_color_options
+field_name: field_color_options
+entity_type: paragraph
+bundle: accordion_panel
+label: 'Color Options'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,29 @@
+uuid: 084e2d7b-fcfb-4296-9a85-4ca6c5f70f44
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: S0uVopWD5hl0WYRSuXW5km1VP2Pm0Di8VPYp7cTYQMY
+id: node.field_header_style
+field_name: field_header_style
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: default
+      label: Default
+    -
+      value: large
+      label: Large
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

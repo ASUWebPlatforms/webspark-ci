@@ -1,0 +1,12 @@
+uuid: 5ed38d0b-1464-4498-a86a-70932e86b1db
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: kXc78zi9IHloIRvJtHTHHi5hWz2BuBUdXNAI-b9nm68
+id: block_content.card_arrangement_horizontal
+label: 'Card Arrangement Horizontal'
+targetEntityType: block_content
+cache: true

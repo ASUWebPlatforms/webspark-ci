@@ -1,0 +1,29 @@
+uuid: ee5721fe-7b3c-4e88-b627-00a964bd4077
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.divider
+    - field.field.block_content.divider.field_divider_type
+_core:
+  default_config_hash: uWnOeZFmahHBLdEn97obnto7H31pQWs0xuaDzJNGsvA
+id: block_content.divider.default
+targetEntityType: block_content
+bundle: divider
+mode: default
+content:
+  field_divider_type:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

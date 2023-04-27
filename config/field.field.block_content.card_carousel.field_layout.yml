@@ -1,0 +1,23 @@
+uuid: f87c59c4-d213-4add-8713-56900f7df8ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_carousel
+    - field.storage.block_content.field_layout
+  module:
+    - options
+_core:
+  default_config_hash: 1984RLPGjGz5dBoaklHsB08ZyNUYe5l1i_4j_Hr6N9I
+id: block_content.card_carousel.field_layout
+field_name: field_layout
+entity_type: block_content
+bundle: card_carousel
+label: Layout
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

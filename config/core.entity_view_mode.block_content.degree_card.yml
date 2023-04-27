@@ -1,0 +1,12 @@
+uuid: 5fec3b23-8408-47b8-915d-286cb7a81473
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: yNNdYw9UyIyORiY8AgMfjrt4egeTfeSWQGD4KlepMq4
+id: block_content.degree_card
+label: 'Degree Card'
+targetEntityType: block_content
+cache: true

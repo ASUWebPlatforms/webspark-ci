@@ -1,0 +1,67 @@
+uuid: f32f4314-ab14-4342-8c7f-634ac02e7e1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.story_hero.field_media_image
+    - image.style.thumbnail
+    - media.type.story_hero
+  module:
+    - decorative_image_widget
+    - image
+    - path
+_core:
+  default_config_hash: 1pRj2U2CX9mKIpqTNIjOuyfzasocjMb4ffdTAKSlFN4
+id: media.story_hero.default
+targetEntityType: media
+bundle: story_hero
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media_image:
+    weight: 0
+    settings:
+      preview_image_style: thumbnail
+      progress_indicator: throbber
+    third_party_settings:
+      decorative_image_widget:
+        use_decorative_checkbox: true
+    type: image_image
+    region: content
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

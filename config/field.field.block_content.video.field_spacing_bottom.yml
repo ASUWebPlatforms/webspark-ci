@@ -1,0 +1,23 @@
+uuid: 441ef348-8726-4086-8556-25bf2c3dfac4
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video
+    - field.storage.block_content.field_spacing_bottom
+  module:
+    - options
+_core:
+  default_config_hash: pnNH6XQMRB1lwtbRBVIZy7FCOAPMvgeqyngDj2WE7bs
+id: block_content.video.field_spacing_bottom
+field_name: field_spacing_bottom
+entity_type: block_content
+bundle: video
+label: 'Spacing bottom'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,23 @@
+uuid: 19965a79-6b4a-4bc9-80df-8b8884cd949e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_on_image_background
+    - field.storage.block_content.field_spacing_top
+  module:
+    - options
+_core:
+  default_config_hash: 538APxYKUVnzzQl8dWGN1mLQJhSlYPC-jyArsibIlC0
+id: block_content.testimonial_on_image_background.field_spacing_top
+field_name: field_spacing_top
+entity_type: block_content
+bundle: testimonial_on_image_background
+label: 'Spacing top'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

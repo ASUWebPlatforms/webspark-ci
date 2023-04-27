@@ -1,0 +1,33 @@
+uuid: 10605803-7132-4716-a1c4-f76d14267e39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.card
+  module:
+    - allowed_formats
+    - text
+  enforced:
+    module:
+      - webspark_blocks
+third_party_settings:
+  allowed_formats:
+    minimal_format: minimal_format
+    basic_html: '0'
+    restricted_html: '0'
+    full_html: '0'
+_core:
+  default_config_hash: WnuBsViZCDGW_1WUJ6FRBin8bRa7RifYI_Ugx635T7c
+id: paragraph.card.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: card
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

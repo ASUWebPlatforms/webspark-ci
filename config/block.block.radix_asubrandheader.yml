@@ -1,0 +1,35 @@
+uuid: 0d263632-526f-4617-b450-eb286b2dd37f
+langcode: en
+status: true
+dependencies:
+  module:
+    - asu_brand
+  theme:
+    - radix
+_core:
+  default_config_hash: jN_7ogI31K8wL5I4ZZYqr2vut1Qs32-AwU9MWd0ZGeQ
+id: radix_asubrandheader
+theme: radix
+region: header
+weight: 0
+provider: null
+plugin: asu_brand_header
+settings:
+  id: asu_brand_header
+  label: 'ASU brand header'
+  label_display: '0'
+  provider: asu_brand
+  asu_brand_header_block_title: ''
+  asu_brand_header_block_parent_org: ''
+  asu_brand_header_block_parent_org_url: ''
+  asu_brand_header_block_sync_session: 1
+  asu_brand_header_block_menu_enabled: 1
+  asu_brand_header_block_menu_name: main
+  asu_brand_header_block_login_path: /caslogin
+  asu_brand_header_block_logout_path: /caslogout
+  asu_brand_header_block_cta1_label: ''
+  asu_brand_header_block_cta1_url: ''
+  asu_brand_header_block_cta2_label: ''
+  asu_brand_header_block_cta2_url: ''
+  asu_brand_header_block_expand_on_hover: 0
+visibility: {  }

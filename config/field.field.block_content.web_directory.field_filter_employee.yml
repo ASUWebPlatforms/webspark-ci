@@ -1,0 +1,21 @@
+uuid: 7fa400aa-26ae-438f-a48e-c71a272a42a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.web_directory
+    - field.storage.block_content.field_filter_employee
+_core:
+  default_config_hash: wRhVEHih4iDgIVSwX8Z_nfM9LKp208SZ7w8nASfHzAI
+id: block_content.web_directory.field_filter_employee
+field_name: field_filter_employee
+entity_type: block_content
+bundle: web_directory
+label: 'Filter by employee type'
+description: '<span class="description form-text text-muted">Only display profiles with a primary employee class matching one of these employee types.</span>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

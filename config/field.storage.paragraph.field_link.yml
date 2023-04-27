@@ -1,0 +1,24 @@
+uuid: 9a78a40e-220f-4fc6-b748-60feacb548ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: IvRA4r6rEP9VAwkPOmQpaCrRhLf8IpjX8R1ijhOx0OI
+id: paragraph.field_link
+field_name: field_link
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,25 @@
+uuid: 5e9f5093-f61b-4027-b24b-1e01795388d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_borders
+    - paragraphs.paragraphs_type.card_with_icon
+_core:
+  default_config_hash: x43dICVu5uPL3kU8Sd76GPM3mwXp62f1cKTre1VhuOM
+id: paragraph.card_with_icon.field_show_borders
+field_name: field_show_borders
+entity_type: paragraph
+bundle: card_with_icon
+label: 'Show borders'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

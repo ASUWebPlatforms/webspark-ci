@@ -1,0 +1,73 @@
+uuid: 75f3d3c6-b8ee-4a98-8a42-e0dff9ecde9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor
+_core:
+  default_config_hash: xrzsD50-EFx6qorY85b7mMGIP7aWJS6dUSFVtDsTMpk
+format: full_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - '-'
+        -
+          name: Linking
+          items:
+            - Anchor
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+        -
+          name: Media
+          items:
+            - DrupalFontAwesome
+            - DrupalImage
+            - DrupalMediaLibrary
+        -
+          name: 'Block Formatting'
+          items:
+            - Format
+        -
+          name: Tools
+          items:
+            - Source
+        -
+          name: Webspark
+          items:
+            - AddResponsiveArea
+            - WebsparkButton
+            - WebsparkDivider
+            - HorizontalRule
+            - WebsparkBlockquote
+            - WebsparkHighlightedHeading
+            - WebsparkLead
+        -
+          name: Table
+          items:
+            - WebsparkTable
+  plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

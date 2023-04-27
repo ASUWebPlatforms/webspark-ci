@@ -1,0 +1,23 @@
+uuid: 3e8dcba7-64b6-4e3a-b669-3fd72e71d6e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.blockquote
+    - field.storage.block_content.field_spacing_top
+  module:
+    - options
+_core:
+  default_config_hash: 7X4ShudhhEUnwYftSuKov5yAIPlod_IaHWKmbE0lE4k
+id: block_content.blockquote.field_spacing_top
+field_name: field_spacing_top
+entity_type: block_content
+bundle: blockquote
+label: 'Spacing top'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,22 @@
+uuid: 3e4c12e7-5d04-42ce-bcd6-00bb5e4e8876
+langcode: en
+status: false
+dependencies:
+  module:
+    - webspark_blocks
+  theme:
+    - radix
+_core:
+  default_config_hash: pM19nC7i7GNaH6fLHHPlN36qveIkSFpi62JTHh6k9nQ
+id: radix_backtotop
+theme: radix
+region: content
+weight: -2
+provider: null
+plugin: webspark_blocks_back_to_top
+settings:
+  id: webspark_blocks_back_to_top
+  label: 'Back to Top'
+  label_display: '0'
+  provider: webspark_blocks
+visibility: {  }

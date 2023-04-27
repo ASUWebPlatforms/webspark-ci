@@ -1,0 +1,10 @@
+uuid: 71505ee0-0c69-448a-96e8-d20c3af5fa29
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: NyKRiMBUy6wEaIKg7FV0M4l61dFT7fK7O5ZiHuFZh2U
+id: donut_chart
+label: 'Donut Chart'
+revision: 1
+description: ''

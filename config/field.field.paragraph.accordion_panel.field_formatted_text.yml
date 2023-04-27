@@ -1,0 +1,23 @@
+uuid: 149e045e-1336-49b2-8080-56497ff86b90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_formatted_text
+    - paragraphs.paragraphs_type.accordion_panel
+  module:
+    - text
+_core:
+  default_config_hash: ziBKOrFNSa1rbxhyyHnFjJHK7rx3jsVOFsYKs8yAiWU
+id: paragraph.accordion_panel.field_formatted_text
+field_name: field_formatted_text
+entity_type: paragraph
+bundle: accordion_panel
+label: 'Formatted Text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

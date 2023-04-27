@@ -1,0 +1,31 @@
+uuid: 8b5b197d-da8f-41d5-8930-c3e14088cb88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_group_degree.field_cards
+    - paragraphs.paragraphs_type.card_group_degree
+  module:
+    - paragraphs
+_core:
+  default_config_hash: ZTlaDLDG8lcIPJ694nRJTiOIErbKFo--BQErjRek_9A
+id: paragraph.card_group_degree.default
+targetEntityType: paragraph
+bundle: card_group_degree
+mode: default
+content:
+  field_cards:
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: button
+      form_display_mode: carousel_card
+      default_paragraph_type: card_degree
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+hidden:
+  created: true
+  status: true

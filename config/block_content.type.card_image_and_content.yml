@@ -1,0 +1,10 @@
+uuid: ffe77902-88c0-43ac-a7d8-a60a35522fa6
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1CFTftkWHj0UWIuFrwOPUX5F9anBt1-Nn48lKiv6zJE
+id: card_image_and_content
+label: 'Card image and content'
+revision: 0
+description: ''

@@ -1,0 +1,14 @@
+uuid: d2a8d030-fcb0-490f-bd69-cd84a923d080
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: nBwEVtoC6u_6uhNOE9eiPbLRElZFnPg468qZTPtQsro
+id: images_block
+label: '4:3'
+description: 'Used for the images block in Layout Builder.'
+aspect_ratio: '4:3'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: 800
+hard_limit_height: 600

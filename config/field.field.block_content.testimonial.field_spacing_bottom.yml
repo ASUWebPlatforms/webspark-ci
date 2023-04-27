@@ -1,0 +1,23 @@
+uuid: 4e46f144-f30b-4a6d-8c69-6e79d2938343
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial
+    - field.storage.block_content.field_spacing_bottom
+  module:
+    - options
+_core:
+  default_config_hash: 422TmfgkSv8exr2ByzQl2oljtiyrfni2QSblzmmzq5M
+id: block_content.testimonial.field_spacing_bottom
+field_name: field_spacing_bottom
+entity_type: block_content
+bundle: testimonial
+label: 'Spacing bottom'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

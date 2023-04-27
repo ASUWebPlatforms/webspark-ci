@@ -1,0 +1,10 @@
+uuid: 834ad0c3-bdde-4a84-8837-6118afa4dadb
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: zYkI-syFD1qlRPioPob5ryrazjUvij2nmNxqqqqKX84
+id: blockquote
+label: Blockquote
+revision: 0
+description: ''

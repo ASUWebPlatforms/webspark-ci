@@ -1,0 +1,25 @@
+uuid: b5c92937-2143-4ea2-91a9-573271b69043
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.news
+    - field.storage.block_content.field_news_link
+  module:
+    - link
+_core:
+  default_config_hash: hPOYmqvTvznzmfm3znvmbsgzlY5UbGA66fk6bybmKgc
+id: block_content.news.field_news_link
+field_name: field_news_link
+entity_type: block_content
+bundle: news
+label: CTA
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

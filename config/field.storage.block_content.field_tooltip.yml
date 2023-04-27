@@ -1,0 +1,23 @@
+uuid: f518f074-9f98-4636-8250-168e600d20d1
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - entity_reference_revisions
+    - paragraphs
+_core:
+  default_config_hash: F7-1Tu_8kzX8-uK8TugGhoCAe9ghT5D2i9Io608MHhI
+id: block_content.field_tooltip
+field_name: field_tooltip
+entity_type: block_content
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

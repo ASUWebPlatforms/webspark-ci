@@ -1,0 +1,23 @@
+uuid: 9c40a2e6-3c57-4b04-8c03-21b7cc9aaf72
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: JBnW0_oY8Mho2-JFSjnWYfRD09xUJfaqsgXBgXNA6yY
+id: block_content.field_people_list
+field_name: field_people_list
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

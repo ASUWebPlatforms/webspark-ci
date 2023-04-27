@@ -1,0 +1,22 @@
+uuid: fa8b0d1c-4767-4ec0-a782-92dae402b3ee
+langcode: en
+status: false
+dependencies:
+  module:
+    - webspark_blocks
+  theme:
+    - renovation
+_core:
+  default_config_hash: pM19nC7i7GNaH6fLHHPlN36qveIkSFpi62JTHh6k9nQ
+id: backtotop
+theme: renovation
+region: content
+weight: -2
+provider: null
+plugin: webspark_blocks_back_to_top
+settings:
+  id: webspark_blocks_back_to_top
+  label: 'Back to Top'
+  label_display: '0'
+  provider: webspark_blocks
+visibility: {  }

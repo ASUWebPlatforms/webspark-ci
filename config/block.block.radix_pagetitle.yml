@@ -1,0 +1,26 @@
+uuid: d5d73816-b6f7-4dcd-9d0f-6326d4ca12f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - radix
+_core:
+  default_config_hash: FdXhoJ-ZPOtN1GBX6LBfymCHpaf0fNLpmRNn2n5FTJw
+id: radix_pagetitle
+theme: radix
+region: content
+weight: -3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/user/*\r\n/node/*/layout/discard-changes\r\n/node/*/layout/revert"

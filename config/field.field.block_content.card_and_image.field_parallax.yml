@@ -1,0 +1,25 @@
+uuid: 8cf9df75-5ec7-4b78-8614-0e0650847002
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_and_image
+    - field.storage.block_content.field_parallax
+_core:
+  default_config_hash: Npw0RXJtePJs7_mSJ0k2EYjOcwuI0QLplHkR7SUEyCQ
+id: block_content.card_and_image.field_parallax
+field_name: field_parallax
+entity_type: block_content
+bundle: card_and_image
+label: Parallax
+description: 'Enables the Parallax effect'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

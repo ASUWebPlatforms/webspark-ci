@@ -1,0 +1,26 @@
+uuid: 9fcfa1ea-d775-48cc-aa6a-ceaa7dce1ea0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_group_default.field_cards
+    - paragraphs.paragraphs_type.card_group_default
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: Bbsd3_bge1Ta0OSjdqDmLCO7u-e8PSEVqfc6rQjdstg
+id: paragraph.card_group_default.default
+targetEntityType: paragraph
+bundle: card_group_default
+mode: default
+content:
+  field_cards:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: portrait
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

@@ -1,0 +1,11 @@
+uuid: b7fc6693-fba8-47f4-a5fa-7a84ac7bd178
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: fj-PqrkDov5hmb8jQZRidf7mL-t2zd3pxdcjJ9Hzj4g
+id: employee
+label: Employee
+weight: 3
+is_admin: null
+permissions: {  }

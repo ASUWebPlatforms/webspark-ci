@@ -1,0 +1,21 @@
+uuid: 605f5e82-4b2c-45dc-a355-9ad0001f1194
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.blockquote
+_core:
+  default_config_hash: yeXEW4-CjZQMXhnI6ha6Vm40i5t8x6OWm7-HkmY_oAk
+id: paragraph.blockquote.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: blockquote
+label: Heading
+description: '* Only for quotes with images added'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

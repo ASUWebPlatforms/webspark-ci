@@ -1,0 +1,12 @@
+uuid: 42c0e33d-1905-4822-9326-256f21fb9c3c
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: 82S-XLhsxTlFL1wlb2lCxhNbcbX0tpUSu9YhYyPLe9w
+id: block_content.event_card
+label: 'Event Card'
+targetEntityType: block_content
+cache: true

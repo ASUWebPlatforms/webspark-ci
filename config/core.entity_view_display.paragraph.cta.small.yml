@@ -1,0 +1,45 @@
+uuid: 855f0d04-3b82-430f-aef9-0cfda8a7c040
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.small
+    - field.field.paragraph.cta.field_cta_link
+    - field.field.paragraph.cta.field_icon
+    - paragraphs.paragraphs_type.cta
+  module:
+    - fontawesome
+    - layout_builder
+    - link
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+_core:
+  default_config_hash: Q8-oO5p5kriPvBOZb7fTaVIPOYZ-B7OkrFoAE8W0o6c
+id: paragraph.cta.small
+targetEntityType: paragraph
+bundle: cta
+mode: small
+content:
+  field_cta_link:
+    weight: 2
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_icon:
+    weight: 1
+    label: hidden
+    settings:
+      layers: false
+    third_party_settings: {  }
+    type: fontawesome_icon_formatter
+    region: content
+hidden: {  }

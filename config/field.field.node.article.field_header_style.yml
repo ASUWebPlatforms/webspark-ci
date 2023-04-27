@@ -1,0 +1,25 @@
+uuid: bbb9ec91-884d-4489-9cbe-8335c9dc5f19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_style
+    - node.type.article
+  module:
+    - options
+_core:
+  default_config_hash: DEoeOHx4BrxceMdxES2LRg5X4E4638e1gnHqHof4kcw
+id: node.article.field_header_style
+field_name: field_header_style
+entity_type: node
+bundle: article
+label: 'Header Style'
+description: 'Select either default or large header.'
+required: true
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

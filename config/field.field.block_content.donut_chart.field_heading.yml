@@ -1,0 +1,21 @@
+uuid: a639c0d4-39fc-47cb-a6c7-49d12eff549a
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.donut_chart
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: AHkfCj4W-gCh54NO-55gLwizRUFCpnz5WcR7S2HRV1o
+id: block_content.donut_chart.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: donut_chart
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

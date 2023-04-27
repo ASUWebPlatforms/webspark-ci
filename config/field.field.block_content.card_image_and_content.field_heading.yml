@@ -1,0 +1,21 @@
+uuid: a3f31635-ab43-4d73-9f8c-cc8fd0023318
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_image_and_content
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: 9fquSPZaZG8Pt84wTPkXjF6Q-jSjN9eBCoBx4yqqZlc
+id: block_content.card_image_and_content.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: card_image_and_content
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

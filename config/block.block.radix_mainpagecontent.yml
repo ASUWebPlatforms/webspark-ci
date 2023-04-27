@@ -1,0 +1,31 @@
+uuid: 21bf934b-35e0-498c-8fe5-07c55819b0e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - radix
+_core:
+  default_config_hash: FlOcvHCPhU6p0Ui_-8XGCe0JxjeqbvQOZYpDO_xKS0w
+id: radix_mainpagecontent
+theme: radix
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility:
+  node_type:
+    id: node_type
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

@@ -1,0 +1,20 @@
+uuid: 1ad78581-a018-4f9d-9186-1104d8a1f6bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: _none
+_core:
+  default_config_hash: cvB5En0hTkPTjw--pZdxRTwMbZ0at6VRLvZWAx4wXMY
+id: story_hero
+label: 'Story Hero'
+description: 'Used for article pages.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

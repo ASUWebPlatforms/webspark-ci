@@ -1,0 +1,25 @@
+uuid: 036be796-e5fe-40d8-99b0-9a6141815411
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_hero_background_color
+  module:
+    - options
+_core:
+  default_config_hash: Abs6yOD8ltaT3pzwlFGA-7rKwnSQnzdj9NTP68o1Ods
+id: block_content.hero.field_hero_background_color
+field_name: field_hero_background_color
+entity_type: block_content
+bundle: hero
+label: 'Hero Heading Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: gold
+default_value_callback: ''
+settings: {  }
+field_type: list_string

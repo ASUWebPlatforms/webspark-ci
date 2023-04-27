@@ -1,0 +1,21 @@
+uuid: 2aaf919d-fd1d-4f77-be8b-130bfeab098b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.testimonial
+_core:
+  default_config_hash: ZKyXCotPxZPxpG60Hv9mfg37DGWnGX8qBkwmoNfaWV0
+id: paragraph.testimonial.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: testimonial
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

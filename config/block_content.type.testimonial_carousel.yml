@@ -1,0 +1,10 @@
+uuid: d1a9ce85-c067-4b38-99e2-475b60df0fd8
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Lityco5lNPko4upBwvv1tyxp8TbrCS3PbjvXV1wjzU8
+id: testimonial_carousel
+label: 'Testimonial Carousel'
+revision: 0
+description: ''

@@ -1,0 +1,28 @@
+uuid: b20ef76c-53c1-4e8c-a475-d2f3060b2e5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_formatted_text
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats:
+      - plain_text
+_core:
+  default_config_hash: jAXUnuv0eJyXzU4qZhU__Kaxv2JULwevaVPsvXebdGQ
+id: paragraph.testimonial.field_formatted_text
+field_name: field_formatted_text
+entity_type: paragraph
+bundle: testimonial
+label: 'Formatted Text'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

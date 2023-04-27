@@ -1,0 +1,16 @@
+uuid: e0d42ebb-a0a5-42c7-a3d2-73891452908a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.employee
+  module:
+    - user
+_core:
+  default_config_hash: vK964-v2bOuXuEAiMpKhsci6xJJcRgUg0jdeWLGgOfA
+id: user_add_role_action.employee
+label: 'Add the Employee role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: employee

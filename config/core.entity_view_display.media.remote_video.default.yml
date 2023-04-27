@@ -1,0 +1,30 @@
+uuid: 563efbbf-68f9-4757-a004-f69343d7effe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.remote_video.field_media_oembed_video
+    - media.type.remote_video
+  module:
+    - media
+_core:
+  default_config_hash: JtlTV565ubXty6DQXQSiArg9IflDBOEn3vmzv1rYoXw
+id: media.remote_video.default
+targetEntityType: media
+bundle: remote_video
+mode: default
+content:
+  field_media_oembed_video:
+    weight: 0
+    label: hidden
+    settings:
+      max_width: 640
+      max_height: 360
+    third_party_settings: {  }
+    type: oembed
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

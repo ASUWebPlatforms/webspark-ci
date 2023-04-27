@@ -1,0 +1,31 @@
+uuid: 7cb24923-9c0c-433f-9d5b-14ad70b878f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - renovation
+_core:
+  default_config_hash: FlOcvHCPhU6p0Ui_-8XGCe0JxjeqbvQOZYpDO_xKS0w
+id: mainpagecontent
+theme: renovation
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

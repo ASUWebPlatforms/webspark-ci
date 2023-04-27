@@ -1,0 +1,60 @@
+uuid: e7900074-567e-4552-8641-6d4b8cbd3488
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner
+    - field.storage.block_content.field_ctas
+    - paragraphs.paragraphs_type.cta
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: ARlv2r4PogUqvFtMO6NfOOdCFMZ3n7T1cgdDOp1TwXY
+id: block_content.banner.field_ctas
+field_name: field_ctas
+entity_type: block_content
+bundle: banner
+label: CTAs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      cta: cta
+    target_bundles_drag_drop:
+      accordion_panel:
+        weight: 11
+        enabled: false
+      card:
+        weight: 12
+        enabled: false
+      card_degree:
+        weight: 13
+        enabled: false
+      card_event:
+        weight: 14
+        enabled: false
+      card_media:
+        weight: 15
+        enabled: false
+      card_story:
+        weight: 16
+        enabled: false
+      carousel_card:
+        weight: 17
+        enabled: false
+      cta:
+        enabled: true
+        weight: 18
+      gallery_image:
+        weight: 19
+        enabled: false
+      tab_content:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,21 @@
+uuid: e66c0ad3-d134-4d98-96d2-06c8d03193a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.web_directory
+    - field.storage.block_content.field_filter_expertise
+_core:
+  default_config_hash: Dxs9H5JNp7LMRYy4njyVmqygYxIgXgebdbq0XCRKSVw
+id: block_content.web_directory.field_filter_expertise
+field_name: field_filter_expertise
+entity_type: block_content
+bundle: web_directory
+label: 'Filter by expertise areas'
+description: '<span class="description form-text text-muted">Display profiles with at least one matching expertise area.</span>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

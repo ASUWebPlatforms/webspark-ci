@@ -1,0 +1,23 @@
+uuid: 8491db58-7544-4a93-ad79-ba6cee7bcfbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.storage.block_content.field_color
+  module:
+    - options
+_core:
+  default_config_hash: nffzjyg4q4B59K4bZ-YwprTgTKcbdpI8o8XT8k97NbA
+id: block_content.accordion.field_color
+field_name: field_color
+entity_type: block_content
+bundle: accordion
+label: Color
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

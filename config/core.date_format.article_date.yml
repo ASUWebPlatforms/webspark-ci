@@ -1,0 +1,10 @@
+uuid: 3ace9916-d0ac-45f7-b23f-2c9f0a6af757
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 4eiqEo7aGgq-_QuYzb0NdS5VHKyjJbfQCGT_1fiW-W4
+id: article_date
+label: 'Article date'
+locked: false
+pattern: 'F j, Y'

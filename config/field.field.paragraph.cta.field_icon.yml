@@ -1,0 +1,23 @@
+uuid: bfef7953-4915-4c81-b37f-6530c4303abc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.cta
+  module:
+    - fontawesome
+_core:
+  default_config_hash: Q5-C_WSXLc8_piqx0OpzlrTwegTEXwlMQ1sFGVXSY3g
+id: paragraph.cta.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: cta
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fontawesome_icon

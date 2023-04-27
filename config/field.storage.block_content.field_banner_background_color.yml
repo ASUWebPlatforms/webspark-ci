@@ -1,0 +1,38 @@
+uuid: 9d7601f8-fdfe-4d24-844c-759505073a77
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+_core:
+  default_config_hash: XQDiPl2d7ut0pKO0kUbByTVJM2idu1MY6bjWVII6Py8
+id: block_content.field_banner_background_color
+field_name: field_banner_background_color
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: banner-green
+      label: Green
+    -
+      value: banner-orange
+      label: Orange
+    -
+      value: banner-blue
+      label: Blue
+    -
+      value: banner-gray
+      label: 'Gray 2'
+    -
+      value: banner-black
+      label: 'Gray 7'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

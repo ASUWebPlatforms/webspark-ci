@@ -1,0 +1,15 @@
+uuid: b5c7cdb2-9e99-4e0b-8183-c2af0aad5082
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: 9rSXFengrElnspQRCk8ML8feQMX9jHstitz_OqYnGP8
+id: card_story
+label: 'Card Story'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

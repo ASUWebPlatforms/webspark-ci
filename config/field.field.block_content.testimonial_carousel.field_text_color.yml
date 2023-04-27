@@ -1,0 +1,25 @@
+uuid: 442ceeec-d896-42e0-9008-2599f5c53510
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_carousel
+    - field.storage.block_content.field_text_color
+  module:
+    - options
+_core:
+  default_config_hash: PnTl3dSC6e6Xdqh-pNPUVIlz9GozLBajCO88_AR2B1k
+id: block_content.testimonial_carousel.field_text_color
+field_name: field_text_color
+entity_type: block_content
+bundle: testimonial_carousel
+label: 'Text Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

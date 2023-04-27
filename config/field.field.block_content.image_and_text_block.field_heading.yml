@@ -1,0 +1,21 @@
+uuid: bdbda824-4986-4844-923a-7084b278a4dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_and_text_block
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: gbs47aFa-PEzlHSt9biSpKvhGCUJth4VlSu5bv5VYFI
+id: block_content.image_and_text_block.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: image_and_text_block
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

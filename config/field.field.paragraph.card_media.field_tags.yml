@@ -1,0 +1,31 @@
+uuid: 855110ec-1360-45d4-a3b7-2c0a8c241df3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tags
+    - paragraphs.paragraphs_type.card_media
+    - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: 3DozkUX4guyD4DIjG0atrdE49JMVnlsIAgo_rvvlRyA
+id: paragraph.card_media.field_tags
+field_name: field_tags
+entity_type: paragraph
+bundle: card_media
+label: Tags
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

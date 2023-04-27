@@ -1,0 +1,23 @@
+uuid: f5d6f8fe-84d8-4108-a018-02d5b9d49d80
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.menu_sidebar
+    - field.storage.block_content.field_spacing_top
+  module:
+    - options
+_core:
+  default_config_hash: KQ_uL-3B46NUsVe6z12gFBkWUSGKfBaZ-oShMOv5qIA
+id: block_content.menu_sidebar.field_spacing_top
+field_name: field_spacing_top
+entity_type: block_content
+bundle: menu_sidebar
+label: 'Spacing top'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

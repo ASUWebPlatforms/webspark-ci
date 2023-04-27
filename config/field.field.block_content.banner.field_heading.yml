@@ -1,0 +1,24 @@
+uuid: 6f3be80a-b9b4-4e7b-bcac-3a9ce41e122e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner
+    - field.storage.block_content.field_heading
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: m-px1PRzvgRT-ALB0Pee2vqQDJXhF73zjLrf1ZPZXBQ
+id: block_content.banner.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: banner
+label: Heading
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

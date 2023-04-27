@@ -1,0 +1,23 @@
+uuid: 91239f09-800b-4811-9b9f-c322a56abf4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_on_image_background
+    - field.storage.block_content.field_heading_highlight
+  module:
+    - options
+_core:
+  default_config_hash: 6fHaKFwtYCzwvp2X65csDIwRZglEqaqVUTxWyKy_rnY
+id: block_content.testimonial_on_image_background.field_heading_highlight
+field_name: field_heading_highlight
+entity_type: block_content
+bundle: testimonial_on_image_background
+label: 'Heading Highlight'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

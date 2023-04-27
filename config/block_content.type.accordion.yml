@@ -1,0 +1,10 @@
+uuid: 6ffeb425-0b4f-466e-aa01-5bd61177a378
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: TY19YCpAICaT1RPZ3wwloaXvuk6IzLa40gma3YzKo8I
+id: accordion
+label: Accordion
+revision: 0
+description: ''

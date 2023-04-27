@@ -1,0 +1,10 @@
+uuid: 5aa10132-af78-4d5e-a21c-f029db6b4a5f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9m-Sb_UjJfAKUS852CFJy-EaQLcMQrkPOvDtwbGVUsY
+id: testimonial_on_image_background
+label: 'Testimonial On Image Background'
+revision: 0
+description: ''
