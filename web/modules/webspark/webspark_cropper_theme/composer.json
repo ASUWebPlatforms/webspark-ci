@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-module-webspark_cropper_theme",
+  "description": "Adds cropping capabilities to media images.",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}
