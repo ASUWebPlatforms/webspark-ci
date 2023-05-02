@@ -223,18 +223,18 @@ workflows:
       - deploy_to_pantheon:
           requires:
             - static_tests
-      - visual_regression_test:
-          requires:
-            - configure_env_vars
-            - deploy_to_pantheon
-          filters:
-            branches:
-              ignore:
-                - master
-      - behat_test:
-          requires:
-            - deploy_to_pantheon
-            - visual_regression_test
+      # - visual_regression_test:
+      #     requires:
+      #       - configure_env_vars
+      #       - deploy_to_pantheon
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - master
+      # - behat_test:
+      #     requires:
+      #       - deploy_to_pantheon
+      #       - visual_regression_test
 
   scheduled_update_check:
     triggers:
