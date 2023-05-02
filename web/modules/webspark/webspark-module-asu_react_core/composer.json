@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-module-asu_react_core",
+  "description": "ASU react core components integration",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

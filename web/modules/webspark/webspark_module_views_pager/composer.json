@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark_module_views_pager",
+  "description": "Provides alternative pager functionality for ASU",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

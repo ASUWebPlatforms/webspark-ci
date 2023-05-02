@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-module-asu_user",
+  "description": "Contains drupal customisations for the asurite users.",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

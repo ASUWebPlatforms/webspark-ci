@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark_module_renovation_layouts",
+  "description": "ASU layouts for renovation theme.",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

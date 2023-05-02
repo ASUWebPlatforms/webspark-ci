@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-module-asu_news",
+  "description": "ASU News Integration",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

@@ -1,0 +1,7 @@
+{
+    "name": "asuwebplatforms/webspark-module-webspark_cas",
+    "description": "Webspark module with CAS overrides for ASU scenarios.",
+    "type": "drupal-module",
+    "license": "MIT",
+    "require": {}
+}

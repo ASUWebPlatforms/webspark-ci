@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark_module_asu_breadcrumb",
+  "description": "Provides a breadcrumb block for ASU",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}

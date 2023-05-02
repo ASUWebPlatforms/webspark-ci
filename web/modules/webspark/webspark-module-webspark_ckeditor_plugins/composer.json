@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-module-webspark_ckeditor_plugins",
+  "description": "Provide custom ckeditor plugins",
+  "type": "drupal-module",
+  "license": "MIT",
+  "require": {}
+}
