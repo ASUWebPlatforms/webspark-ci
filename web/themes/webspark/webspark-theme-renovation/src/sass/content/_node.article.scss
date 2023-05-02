@@ -1,0 +1,26 @@
+// Article: Default
+.article--headinfo {
+  font-weight: 700;
+  &.article--byline > .lead + hr {
+    margin: 2rem 0;
+    max-width: 700px;
+  }
+  &.article--date-published {
+    margin-bottom: 1rem;
+  }
+  &.article--author {
+    text-transform: uppercase
+  }
+}
+
+// Article: Teaser
+// -----------------------------------------------------------------------------
+.article--teaser {
+
+}
+
+// Article: Full
+// -----------------------------------------------------------------------------
+.article--full {
+
+}

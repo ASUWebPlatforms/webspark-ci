@@ -1,0 +1,7 @@
+{
+    "name": "asuwebplatforms/webspark-theme-renovation",
+    "description": "Theme for Webspark 2: Implements Web Standards 2.0",
+    "type": "drupal-theme",
+    "license": "MIT",
+    "require": {}
+}
