@@ -34,7 +34,7 @@ class WebsparkConfigureHeaderForm extends ConfigFormBase {
       '#markup' => '<h3>Add parent unit</h3><p>If this site is for a department/college/unit ' .
         'that has a parent unit to be displayed in the site\'s header, enter that information below.' .
         '<h4>Header example with Parent unit:</h4>' .
-        '<img src="/profiles/composer/webspark-profile-webspark/modules/webspark_installer_forms/img/parent-unit-header.jpg" ' .
+        '<img src="/profiles/webspark/webspark/modules/webspark_installer_forms/img/parent-unit-header.jpg" ' .
         'alt="Parent unit example" style="margin-top: 1rem; opacity: 0.6;" /></p>',
     ];
     $form['parent_unit_name'] = [
