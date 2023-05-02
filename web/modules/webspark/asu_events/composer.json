@@ -1,7 +1,0 @@
-{
-  "name": "asuwebplatforms/webspark-module-asu_events",
-  "description": "ASU Events Integration",
-  "type": "drupal-module",
-  "license": "MIT",
-  "require": {}
-}

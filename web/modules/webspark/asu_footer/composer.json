@@ -1,7 +1,0 @@
-{
-  "name": "asuwebplatforms/webspark-module-asu_footer",
-  "description": "ASU Web Standards 2 Footer",
-  "type": "drupal-module",
-  "license": "MIT",
-  "require": {}
-}

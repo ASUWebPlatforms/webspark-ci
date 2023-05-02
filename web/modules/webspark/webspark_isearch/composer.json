@@ -1,7 +1,0 @@
-{
-  "name": "asuwebplatforms/webspark-module-webspark_isearch",
-  "description": "Provide integration with isearch",
-  "type": "drupal-module",
-  "license": "MIT",
-  "require": {}
-}

@@ -1,7 +1,0 @@
-{
-  "name": "asuwebplatforms/webspark-module-webspark_blocks",
-  "description": "Provide custom block types",
-  "type": "drupal-module",
-  "license": "MIT",
-  "require": {}
-}

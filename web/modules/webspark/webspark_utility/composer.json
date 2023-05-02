@@ -1,7 +1,0 @@
-{
-  "name": "asuwebplatforms/webspark-module-webspark_utility",
-  "description": "Provide Utility Functionality Shared Accross All Webspark Modules",
-  "type": "drupal-module",
-  "license": "MIT",
-  "require": {}
-}
