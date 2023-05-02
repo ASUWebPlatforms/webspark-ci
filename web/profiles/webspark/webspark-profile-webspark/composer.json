@@ -1,0 +1,7 @@
+{
+  "name": "asuwebplatforms/webspark-profile-webspark",
+  "description": "Custom profle for Webspark 2",
+  "type": "drupal-profile",
+  "license": "MIT",
+  "require": {}
+}

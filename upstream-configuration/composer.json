@@ -10,7 +10,6 @@
     "require": {
         "asuwebplatforms/webspark-module-webspark_cropper_theme": "1.0.1",
         "asuwebplatforms/webspark-module-webspark_isearch": "1.0.2",
-        "asuwebplatforms/webspark-profile-webspark": "1.1.20",
         "bower-asset/fontawesome": "^5.15",
         "ckeditor/fakeobjects": "4.16.0",
         "ckeditor/link": "4.16.1",
