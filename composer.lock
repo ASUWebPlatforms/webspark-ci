@@ -63,600 +63,6 @@
             "time": "2019-12-24T22:41:47+00:00"
         },
         {
-            "name": "asuwebplatforms/webspark-module-asu_brand",
-            "version": "1.2.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand.git",
-                "reference": "4ba5da076026bea01fc18f7e534f0f5cdcc42e5d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_brand/zipball/4ba5da076026bea01fc18f7e534f0f5cdcc42e5d",
-                "reference": "4ba5da076026bea01fc18f7e534f0f5cdcc42e5d",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU Header component and brand assets.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_brand/tree/1.2.15"
-            },
-            "time": "2023-03-03T23:21:20+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_components_appearance",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_components_appearance.git",
-                "reference": "d77b9805fdda86569f0d8f9e278ba7a809275d55"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_components_appearance/zipball/d77b9805fdda86569f0d8f9e278ba7a809275d55",
-                "reference": "d77b9805fdda86569f0d8f9e278ba7a809275d55",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Poenaru Dan",
-                    "email": "dan.poenaru@deptagency.com"
-                }
-            ],
-            "description": "Provides dynamic appearance changes for the ASU components",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_components_appearance/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_components_appearance/tree/1.0.1"
-            },
-            "time": "2021-10-26T14:26:26+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_degree_rfi",
-            "version": "1.2.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_degree_rfi.git",
-                "reference": "5b402fe1a1a8d96d3a0ff4127080264e76c61b32"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_degree_rfi/zipball/5b402fe1a1a8d96d3a0ff4127080264e76c61b32",
-                "reference": "5b402fe1a1a8d96d3a0ff4127080264e76c61b32",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Webspark degree and RFI component launcher module.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_degree_rfi/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_degree_rfi/tree/1.2.12"
-            },
-            "time": "2023-04-01T00:52:00+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_events",
-            "version": "1.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_events.git",
-                "reference": "f5525f69644a24b9fb0198e57d62b9203238b28a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_events/zipball/f5525f69644a24b9fb0198e57d62b9203238b28a",
-                "reference": "f5525f69644a24b9fb0198e57d62b9203238b28a",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU Events Integration",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_events/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_events/tree/1.3.2"
-            },
-            "time": "2023-03-03T23:24:20+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_footer",
-            "version": "1.0.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer.git",
-                "reference": "035d6982e3b2cfa7142112f14bec879e1a1a7242"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_footer/zipball/035d6982e3b2cfa7142112f14bec879e1a1a7242",
-                "reference": "035d6982e3b2cfa7142112f14bec879e1a1a7242",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Daniela Duarte",
-                    "email": "daniela.duarte@deptagency.com"
-                }
-            ],
-            "description": "ASU Web Standards 2 Footer",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_footer/tree/1.0.14"
-            },
-            "time": "2022-09-29T13:50:50+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_news",
-            "version": "1.2.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_news.git",
-                "reference": "e0ed615d5fe27fd07af37ad61748af16d5fc2d8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_news/zipball/e0ed615d5fe27fd07af37ad61748af16d5fc2d8f",
-                "reference": "e0ed615d5fe27fd07af37ad61748af16d5fc2d8f",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU News Integration",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_news/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_news/tree/1.2.6"
-            },
-            "time": "2023-03-03T23:29:24+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_react_core",
-            "version": "1.4.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_core.git",
-                "reference": "0d7dafe5621ab94205c3a41086f7f3ac09fceb87"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_react_core/zipball/0d7dafe5621ab94205c3a41086f7f3ac09fceb87",
-                "reference": "0d7dafe5621ab94205c3a41086f7f3ac09fceb87",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU react core components integration",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_core/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_core/tree/1.4.4"
-            },
-            "time": "2023-03-14T14:28:35+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_react_integration",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_integration.git",
-                "reference": "1298b284a58375db90da040736f8283aa3e9908a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_react_integration/zipball/1298b284a58375db90da040736f8283aa3e9908a",
-                "reference": "1298b284a58375db90da040736f8283aa3e9908a",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Daniela Duarte",
-                    "email": "daniela.duarte@deptagency.com"
-                }
-            ],
-            "description": "Provide functionality related to  integration of react components",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_integration/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_react_integration/tree/1.0.1"
-            },
-            "time": "2021-11-16T16:35:06+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-asu_user",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-asu_user.git",
-                "reference": "f5f3c6552aeef457697c3711aa065fc244632501"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-asu_user/zipball/f5f3c6552aeef457697c3711aa065fc244632501",
-                "reference": "f5f3c6552aeef457697c3711aa065fc244632501",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Contains drupal customisations for the asurite users.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-asu_user/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-asu_user/tree/1.1.2"
-            },
-            "time": "2023-03-03T23:37:23+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_blocks",
-            "version": "1.1.23",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks.git",
-                "reference": "8e19c3232fbf25bd6fa7ea7d8a0ec53b0690d939"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_blocks/zipball/8e19c3232fbf25bd6fa7ea7d8a0ec53b0690d939",
-                "reference": "8e19c3232fbf25bd6fa7ea7d8a0ec53b0690d939",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Provide custom block types",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_blocks/tree/1.1.23"
-            },
-            "time": "2023-04-12T14:38:21+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_cas",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_cas.git",
-                "reference": "a9e3252c6aa8b9d55c75497e9c1e7b34a71d6ef2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_cas/zipball/a9e3252c6aa8b9d55c75497e9c1e7b34a71d6ef2",
-                "reference": "a9e3252c6aa8b9d55c75497e9c1e7b34a71d6ef2",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Webspark module with CAS overrides for ASU scenarios.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_cas/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_cas/tree/1.0.4"
-            },
-            "time": "2022-12-15T17:19:10+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_ckeditor_plugins",
-            "version": "1.0.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_ckeditor_plugins.git",
-                "reference": "47b1bfb640425c9297c73eceb8d68bf1d40541ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_ckeditor_plugins/zipball/47b1bfb640425c9297c73eceb8d68bf1d40541ce",
-                "reference": "47b1bfb640425c9297c73eceb8d68bf1d40541ce",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Provide custom ckeditor plugins",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_ckeditor_plugins/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_ckeditor_plugins/tree/1.0.8"
-            },
-            "time": "2023-02-09T22:22:35+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_cropper_theme",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark_cropper_theme.git",
-                "reference": "e0f9a1d3580616cacf3dc022da6618a207d8ff36"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark_cropper_theme/zipball/e0f9a1d3580616cacf3dc022da6618a207d8ff36",
-                "reference": "e0f9a1d3580616cacf3dc022da6618a207d8ff36",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Averill",
-                    "email": "anthony.averill@deptagency.com"
-                }
-            ],
-            "description": "Adds cropping capabilities to media images.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark_cropper_theme/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark_cropper_theme/tree/1.0.1"
-            },
-            "time": "2022-06-14T18:29:30+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_isearch",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_isearch.git",
-                "reference": "d10f54dd1dd800148b8ef6f7d39bfcff3f566448"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_isearch/zipball/d10f54dd1dd800148b8ef6f7d39bfcff3f566448",
-                "reference": "d10f54dd1dd800148b8ef6f7d39bfcff3f566448",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Euan Fergusson",
-                    "email": "euan.fergusson@deptagency.com"
-                }
-            ],
-            "description": "Provide integration with isearch",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_isearch/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_isearch/tree/1.0.2"
-            },
-            "time": "2021-11-17T09:49:28+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_utility",
-            "version": "1.1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_utility.git",
-                "reference": "1d5644f03426c970060c98a872aed7caa070057a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_utility/zipball/1d5644f03426c970060c98a872aed7caa070057a",
-                "reference": "1d5644f03426c970060c98a872aed7caa070057a",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Daniela Duarte",
-                    "email": "daniela.duarte@deptagency.com"
-                }
-            ],
-            "description": "Provide Utility Functionality Shared Accross All Webspark Modules",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_utility/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_utility/tree/1.1.6"
-            },
-            "time": "2021-12-15T18:35:04+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-module-webspark_webdir",
-            "version": "1.2.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir.git",
-                "reference": "a8447092607462113217c93e86b4d37d6b906699"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-module-webspark_webdir/zipball/a8447092607462113217c93e86b4d37d6b906699",
-                "reference": "a8447092607462113217c93e86b4d37d6b906699",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU Integrated Search Web Directory for Webspark",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-module-webspark_webdir/tree/1.2.7"
-            },
-            "time": "2023-04-12T17:38:42+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-profile-webspark",
-            "version": "1.1.20",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-profile-webspark.git",
-                "reference": "7d64daee174e7ca7c78ccd768e1b8e5792ef96ab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-profile-webspark/zipball/7d64daee174e7ca7c78ccd768e1b8e5792ef96ab",
-                "reference": "7d64daee174e7ca7c78ccd768e1b8e5792ef96ab",
-                "shasum": ""
-            },
-            "type": "drupal-profile",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Custom profle for Webspark 2",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-profile-webspark/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-profile-webspark/tree/1.1.20"
-            },
-            "time": "2023-04-13T17:48:22+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark-theme-renovation",
-            "version": "1.0.47",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark-theme-renovation.git",
-                "reference": "a3da3c345409fcf7f33934c521646ef39ee12e60"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark-theme-renovation/zipball/a3da3c345409fcf7f33934c521646ef39ee12e60",
-                "reference": "a3da3c345409fcf7f33934c521646ef39ee12e60",
-                "shasum": ""
-            },
-            "type": "drupal-theme",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Theme for Webspark 2: Implements Web Standards 2.0",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark-theme-renovation/tree/1.0.47"
-            },
-            "time": "2023-03-30T22:35:50+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark_module_asu_breadcrumb",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark_module_asu_breadcrumb.git",
-                "reference": "4b1451880283d48b1d0ca3414c856cca03b5dcb4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark_module_asu_breadcrumb/zipball/4b1451880283d48b1d0ca3414c856cca03b5dcb4",
-                "reference": "4b1451880283d48b1d0ca3414c856cca03b5dcb4",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Averill",
-                    "email": "anthony.averill@deptagency.com"
-                }
-            ],
-            "description": "Provides a breadcrumb block for ASU",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark_module_asu_breadcrumb/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark_module_asu_breadcrumb/tree/1.0.1"
-            },
-            "time": "2021-10-26T14:27:04+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark_module_renovation_layouts",
-            "version": "1.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark_module_renovation_layouts.git",
-                "reference": "fff1d301162132895d18ea0d142cc8435f35a8dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark_module_renovation_layouts/zipball/fff1d301162132895d18ea0d142cc8435f35a8dc",
-                "reference": "fff1d301162132895d18ea0d142cc8435f35a8dc",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "ASU layouts for renovation theme.",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark_module_renovation_layouts/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark_module_renovation_layouts/tree/1.0.9"
-            },
-            "time": "2023-03-16T17:22:34+00:00"
-        },
-        {
-            "name": "asuwebplatforms/webspark_module_views_pager",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ASUWebPlatforms/webspark_module_views_pager.git",
-                "reference": "eff5b30019c451e314355e91fd6ef00e1b9be528"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ASUWebPlatforms/webspark_module_views_pager/zipball/eff5b30019c451e314355e91fd6ef00e1b9be528",
-                "reference": "eff5b30019c451e314355e91fd6ef00e1b9be528",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Anthony Averill",
-                    "email": "anthony.averill@deptagency.com"
-                }
-            ],
-            "description": "Provides alternative pager functionality for ASU",
-            "support": {
-                "issues": "https://github.com/ASUWebPlatforms/webspark_module_views_pager/issues",
-                "source": "https://github.com/ASUWebPlatforms/webspark_module_views_pager/tree/1.0.3"
-            },
-            "time": "2022-06-08T17:14:48+00:00"
-        },
-        {
             "name": "bower-asset/fontawesome",
             "version": "5.15.4",
             "source": {
@@ -1409,16 +815,16 @@
         },
         {
             "name": "consolidation/site-alias",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/site-alias.git",
-                "reference": "103fbc9bad6bbadb1f7533454a8f070ddce18e13"
+                "reference": "b0eeb8c8f3d54d072824ee31b5e00cb5181f91c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/site-alias/zipball/103fbc9bad6bbadb1f7533454a8f070ddce18e13",
-                "reference": "103fbc9bad6bbadb1f7533454a8f070ddce18e13",
+                "url": "https://api.github.com/repos/consolidation/site-alias/zipball/b0eeb8c8f3d54d072824ee31b5e00cb5181f91c5",
+                "reference": "b0eeb8c8f3d54d072824ee31b5e00cb5181f91c5",
                 "shasum": ""
             },
             "require": {
@@ -1462,9 +868,9 @@
             "description": "Manage alias records for local and remote sites.",
             "support": {
                 "issues": "https://github.com/consolidation/site-alias/issues",
-                "source": "https://github.com/consolidation/site-alias/tree/4.0.0"
+                "source": "https://github.com/consolidation/site-alias/tree/4.0.1"
             },
-            "time": "2022-10-14T03:41:22+00:00"
+            "time": "2023-04-29T17:18:10+00:00"
         },
         {
             "name": "consolidation/site-process",
@@ -7640,30 +7046,9 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "121d6455d5922bb88fb39433d853dff173043c69"
+                "reference": "f75a30a73b96de74f5a8a83ff9bf550e494a5fe4"
             },
             "require": {
-                "asuwebplatforms/webspark-module-asu_brand": "1.2.15",
-                "asuwebplatforms/webspark-module-asu_components_appearance": "1.0.1",
-                "asuwebplatforms/webspark-module-asu_degree_rfi": "1.2.12",
-                "asuwebplatforms/webspark-module-asu_events": "1.3.2",
-                "asuwebplatforms/webspark-module-asu_footer": "1.0.14",
-                "asuwebplatforms/webspark-module-asu_news": "1.2.6",
-                "asuwebplatforms/webspark-module-asu_react_core": "1.4.4",
-                "asuwebplatforms/webspark-module-asu_react_integration": "1.0.1",
-                "asuwebplatforms/webspark-module-asu_user": "1.1.2",
-                "asuwebplatforms/webspark-module-webspark_blocks": "1.1.23",
-                "asuwebplatforms/webspark-module-webspark_cas": "1.0.4",
-                "asuwebplatforms/webspark-module-webspark_ckeditor_plugins": "1.0.8",
-                "asuwebplatforms/webspark-module-webspark_cropper_theme": "1.0.1",
-                "asuwebplatforms/webspark-module-webspark_isearch": "1.0.2",
-                "asuwebplatforms/webspark-module-webspark_utility": "1.1.6",
-                "asuwebplatforms/webspark-module-webspark_webdir": "1.2.7",
-                "asuwebplatforms/webspark-profile-webspark": "1.1.20",
-                "asuwebplatforms/webspark-theme-renovation": "1.0.47",
-                "asuwebplatforms/webspark_module_asu_breadcrumb": "1.0.1",
-                "asuwebplatforms/webspark_module_renovation_layouts": "1.0.9",
-                "asuwebplatforms/webspark_module_views_pager": "1.0.3",
                 "bower-asset/fontawesome": "^5.15",
                 "ckeditor/fakeobjects": "4.16.0",
                 "ckeditor/link": "4.16.1",
@@ -9043,16 +8428,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.4.21",
+            "version": "v5.4.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e75960b1bbfd2b8c9e483e0d74811d555ca3de9f"
+                "reference": "b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e75960b1bbfd2b8c9e483e0d74811d555ca3de9f",
-                "reference": "e75960b1bbfd2b8c9e483e0d74811d555ca3de9f",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5",
+                "reference": "b2f79d86cd9e7de0fff6d03baa80eaed7a5f38b5",
                 "shasum": ""
             },
             "require": {
@@ -9087,7 +8472,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v5.4.21"
+                "source": "https://github.com/symfony/filesystem/tree/v5.4.23"
             },
             "funding": [
                 {
@@ -9103,7 +8488,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T08:03:56+00:00"
+            "time": "2023-03-02T11:38:35+00:00"
         },
         {
             "name": "symfony/finder",
@@ -11017,16 +10402,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.4.22",
+            "version": "v5.4.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "e2edac9ce47e6df07e38143c7cfa6bdbc1a6dcc4"
+                "reference": "9a8a5b6d6508928174ded2109e29328a55342a42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e2edac9ce47e6df07e38143c7cfa6bdbc1a6dcc4",
-                "reference": "e2edac9ce47e6df07e38143c7cfa6bdbc1a6dcc4",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9a8a5b6d6508928174ded2109e29328a55342a42",
+                "reference": "9a8a5b6d6508928174ded2109e29328a55342a42",
                 "shasum": ""
             },
             "require": {
@@ -11086,7 +10471,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.4.22"
+                "source": "https://github.com/symfony/var-dumper/tree/v5.4.23"
             },
             "funding": [
                 {
@@ -11102,7 +10487,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-25T09:27:28+00:00"
+            "time": "2023-04-18T09:26:27+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -12834,16 +12219,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.20.3",
+            "version": "1.20.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2"
+                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6c04009f6cae6eda2f040745b6b846080ef069c2",
-                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
+                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
                 "shasum": ""
             },
             "require": {
@@ -12873,9 +12258,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.4"
             },
-            "time": "2023-04-25T09:01:03+00:00"
+            "time": "2023-05-02T09:19:37+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -13705,16 +13090,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "5.0.1",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02"
+                "reference": "912dc2fbe3e3c1e7873313cc801b100b6c68c87b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/aae9a0a43bff37bd5d8d0311426c87bf36153f02",
-                "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/912dc2fbe3e3c1e7873313cc801b100b6c68c87b",
+                "reference": "912dc2fbe3e3c1e7873313cc801b100b6c68c87b",
                 "shasum": ""
             },
             "require": {
@@ -13760,7 +13145,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
                 "security": "https://github.com/sebastianbergmann/diff/security/policy",
-                "source": "https://github.com/sebastianbergmann/diff/tree/5.0.1"
+                "source": "https://github.com/sebastianbergmann/diff/tree/5.0.3"
             },
             "funding": [
                 {
@@ -13768,7 +13153,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-23T05:12:41+00:00"
+            "time": "2023-05-01T07:48:21+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -14974,5 +14359,5 @@
     "platform-overrides": {
         "php": "8.1.6"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

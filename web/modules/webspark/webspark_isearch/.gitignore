@@ -1,0 +1,6 @@
+node_modules/asu-react-isearch-view
+!node_modules/asu-react-isearch-view
+node_modules/asu-react-isearch-view/*
+!node_modules/asu-react-isearch-view/dist
+node_modules/asu-react-isearch-view/dist/*
+!node_modules/asu-react-isearch-view/dist/drupalIsearchViewer.js

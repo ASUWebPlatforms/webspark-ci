@@ -1,0 +1,9 @@
+@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/blockquotes';
+
+@media (max-width: 892px) {
+  .uds-blockquote.with-image.reversed {
+    p {
+      max-width: 520px;
+    }
+  }
+}

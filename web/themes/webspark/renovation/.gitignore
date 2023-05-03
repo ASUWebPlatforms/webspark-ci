@@ -1,0 +1,21 @@
+# Ignore SASS files.
+/.sass-cache
+# Ignore OSX index files.
+.DS_Store
+# Ignore IDE/app specific files.
+*.codekit
+.idea
+.vscode
+
+config.local.js
+
+# Ignore node modules.
+node_modules/*
+!node_modules/@asu
+node_modules/@asu/*
+!node_modules/@asu/bootstrap4-theme
+node_modules/@asu/bootstrap4-theme/src/fontawesome/svgs
+
+# Ignore SASS source maps
+*.script.js.map
+*.style.css.map
