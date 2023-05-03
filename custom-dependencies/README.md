@@ -48,7 +48,7 @@ In order to simplify the process of adding custom dependencies and to maintain t
 
 ### Why is this needed?
 
-The `custom-require` command ensures that users can easily add custom dependencies without directly modifying the root `/composer.json` file. It reduces the chances of merge conflicts and provides a seamless experience for managing custom dependencies.
+The `custom-require` command ensures that users can easily add custom dependencies without directly modifying the root `composer.json` file. It reduces the chances of merge conflicts and provides a seamless experience for managing custom dependencies.
 
 ### How to use it?
 

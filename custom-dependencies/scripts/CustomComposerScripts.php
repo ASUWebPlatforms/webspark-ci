@@ -70,4 +70,44 @@ class CustomComposerScripts
 
     return $statusCode;
   }
+
+  /**
+   * Remove a dependency from the custom-dependencies composer.json file.
+   *
+   * To remove a dependency from your site:
+   *
+   *    composer custom-remove drupal/modulename
+   *
+   * Then update the dependencies:
+   *
+   *    composer update
+   */
+  public static function customRemove(Event $event) {
+    $io = $event->getIO();
+    $composer = $event->getComposer();
+    $arguments = $event->getArguments();
+
+    // Remove --working-dir, if provided
+    $arguments = array_filter($arguments, function ($item) {
+      return substr($item, 0, 13) != '--working-dir';
+    });
+
+    // Escape the arguments passed in.
+    $args = array_map(function ($item) {
+      return escapeshellarg($item);
+    }, $arguments);
+
+    // Remove the projects from the custom-dependencies composer.json
+    $cmd = "composer --working-dir=custom-dependencies remove " . implode(' ', $args);
+    $io->writeError($cmd . PHP_EOL);
+    passthru($cmd, $statusCode);
+
+    if ($statusCode) {
+      throw new \RuntimeException("Could not remove dependency from custom dependencies.");
+    }
+
+    $io->writeError('custom-dependencies/composer.json updated.');
+
+    return $statusCode;
+  }
 }
