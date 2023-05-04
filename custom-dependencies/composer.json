@@ -7,9 +7,7 @@
             "url": "https://packages.drupal.org/8"
         }
     ],
-    "require": {
-        "drupal/twig_tweak": "^3.2"
-    },
+    "require": {},
     "config": {
         "sort-packages": true
     },

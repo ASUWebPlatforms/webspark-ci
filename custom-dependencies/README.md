@@ -52,7 +52,7 @@ The `custom-require` command ensures that users can easily add custom dependenci
 
 ### How to use it?
 
-To add a new dependency, run the following command from the project root:
+To add a new dependency, run the following commands from the project root:
 
 ```sh
 composer custom-require drupal/module
@@ -61,4 +61,19 @@ composer update
 
 Replace `drupal/module` with the actual package name you want to require.
 
-By following these guidelines, you'll ensure a consistent and organized approach to managing your custom dependencies and patches within the project.
+## Custom Remove Composer Command
+
+Similar to the `custom-require` command to add dependencies, we have also added a `custom-remove` command to remove those dependencies.
+
+### How to use it?
+
+To remove a dependency from your `custom-dependencies/composer.json` file, run the following commands from the project root:
+
+```sh
+composer custom-remove drupal/module
+composer update
+```
+
+Replace `drupal/module` with the actual package name you want to require.
+
+By following these guidelines, you'll ensure a consistent and organized approach to managing your custom dependencies and patches within your project.

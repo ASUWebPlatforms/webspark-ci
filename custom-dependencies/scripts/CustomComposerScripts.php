@@ -106,8 +106,42 @@ class CustomComposerScripts
       throw new \RuntimeException("Could not remove dependency from custom dependencies.");
     }
 
+    // Delete composer.lock and vendor directory from custom-dependencies if they exist
+    if (file_exists('custom-dependencies/composer.lock')) {
+      unlink('custom-dependencies/composer.lock');
+    }
+
+    if (is_dir('custom-dependencies/vendor')) {
+      self::deleteDirectory('custom-dependencies/vendor');
+    }
+
     $io->writeError('custom-dependencies/composer.json updated.');
 
     return $statusCode;
+  }
+
+  /**
+   * Helper function to remove the composer.lock and vendor directory from /custom-dependencies.
+   */
+  public static function deleteDirectory($dirPath) {
+    if (! is_dir($dirPath)) {
+      throw new \InvalidArgumentException("$dirPath must be a directory");
+    }
+
+    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+      $dirPath .= '/';
+    }
+
+    $files = glob($dirPath . '*', GLOB_MARK);
+
+    foreach ($files as $file) {
+      if (is_dir($file)) {
+        self::deleteDirectory($file);
+      } else {
+        unlink($file);
+      }
+    }
+
+    rmdir($dirPath);
   }
 }
