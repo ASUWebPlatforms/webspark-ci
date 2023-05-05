@@ -10562,16 +10562,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.15.4",
+            "version": "v2.15.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e059001d6d597dd50ea7c74dd2464b4adea48d3"
+                "reference": "fc02a6af3eeb97c4bf5650debc76c2eda85ac22e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e059001d6d597dd50ea7c74dd2464b4adea48d3",
-                "reference": "3e059001d6d597dd50ea7c74dd2464b4adea48d3",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/fc02a6af3eeb97c4bf5650debc76c2eda85ac22e",
+                "reference": "fc02a6af3eeb97c4bf5650debc76c2eda85ac22e",
                 "shasum": ""
             },
             "require": {
@@ -10626,7 +10626,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v2.15.4"
+                "source": "https://github.com/twigphp/Twig/tree/v2.15.5"
             },
             "funding": [
                 {
@@ -10638,7 +10638,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-27T12:26:20+00:00"
+            "time": "2023-05-03T17:49:41+00:00"
         },
         {
             "name": "typo3/phar-stream-wrapper",
@@ -11750,16 +11750,16 @@
         },
         {
             "name": "genesis/behat-fail-aid",
-            "version": "3.7.4",
+            "version": "3.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/forceedge01/behat-fail-aid.git",
-                "reference": "43fb34def35a66a073d1b23cedf07d65fcf24572"
+                "reference": "bd25adc2b39352155b93eee7ba162194bb27259b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/forceedge01/behat-fail-aid/zipball/43fb34def35a66a073d1b23cedf07d65fcf24572",
-                "reference": "43fb34def35a66a073d1b23cedf07d65fcf24572",
+                "url": "https://api.github.com/repos/forceedge01/behat-fail-aid/zipball/bd25adc2b39352155b93eee7ba162194bb27259b",
+                "reference": "bd25adc2b39352155b93eee7ba162194bb27259b",
                 "shasum": ""
             },
             "require": {
@@ -11806,9 +11806,9 @@
             ],
             "support": {
                 "issues": "https://github.com/forceedge01/behat-fail-aid/issues",
-                "source": "https://github.com/forceedge01/behat-fail-aid/tree/3.7.4"
+                "source": "https://github.com/forceedge01/behat-fail-aid/tree/3.7.5"
             },
-            "time": "2022-07-28T21:59:26+00:00"
+            "time": "2023-05-04T10:11:46+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
