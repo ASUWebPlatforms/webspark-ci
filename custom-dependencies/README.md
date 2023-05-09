@@ -24,7 +24,7 @@ These changes allow for better organization and separation of concerns within th
 1. Locate the `composer.patches.json` file in the project root.
 2. Remove all custom patches out of the root `composer.json` file, and move them into `composer.patches.json`.
 3. Add, update, or remove patches in the "patches" section of the `composer.patches.json` file as needed.
-4. As we may need to add patches periodically, we recommend that you place your patches at the beginning of this file.
+4. As we may need to add patches periodically, we recommend that you place your patches at the end of this file.
 
 ## Managing Dependencies Moving Forward
 

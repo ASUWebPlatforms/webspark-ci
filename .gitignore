@@ -152,3 +152,4 @@ upstream/web/
 .DS_Store
 *.sql
 *.gz
+auth.json
