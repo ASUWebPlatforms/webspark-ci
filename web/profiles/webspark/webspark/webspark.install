@@ -277,3 +277,23 @@ function webspark_update_9012(&$sandbox) {
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * Updating Article content type to include top hero, improved node edit form
+ */
+function webspark_update_9013(&$sandbox) {
+  // Unlock the configuration storage.
+  \Drupal::logger("webspark")->notice("Updating article content type configs...");
+  \Drupal::state()->set('configuration_locked', FALSE);
+  // Update existing configs from webspark profile
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.node.article.body');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.node.article.field_author');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.node.article.field_date_published');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.node.article.field_header_style');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.node.article.field_media');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.node.article.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.node.article.default');
+  // Lock the configuration storage.
+  \Drupal::state()->set('configuration_locked', TRUE);
+  \Drupal::logger("webspark")->notice("Updates to Article content type were attempted.");
+}

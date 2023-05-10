@@ -24,10 +24,47 @@ third_party_settings:
     allow_custom: true
     sections:
       -
-        layout_id: onecol_fixed_width_section
+        layout_id: onecol_article_hero_section
         layout_settings:
           label: content
         components:
+          d9e62229-0055-4c05-97a2-45748b60a2dc:
+            uuid: d9e62229-0055-4c05-97a2-45748b60a2dc
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_header_style'
+              label: 'Header Style'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: list_key
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          478606b5-2b8d-4c9a-9520-5917d0cfa4c1:
+            uuid: 478606b5-2b8d-4c9a-9520-5917d0cfa4c1
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_media'
+              label: Media
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
           a79341a7-79d6-43c7-8645-5797d2074f49:
             uuid: a79341a7-79d6-43c7-8645-5797d2074f49
             region: first
@@ -46,6 +83,43 @@ third_party_settings:
                   link_to_entity: false
                 third_party_settings: {  }
             weight: 1
+            additional: {  }
+          49fe3214-b542-4b1d-a248-5cbdbadd77ac:
+            uuid: 49fe3214-b542-4b1d-a248-5cbdbadd77ac
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_byline'
+              label: Byline
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          50689186-d26d-4197-9cf7-434d5e299a0e:
+            uuid: 50689186-d26d-4197-9cf7-434d5e299a0e
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_author'
+              label: Author
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: 5
             additional: {  }
           f802ed83-10e9-4381-aae0-635595153e7d:
             uuid: f802ed83-10e9-4381-aae0-635595153e7d
@@ -67,24 +141,6 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 6
             additional: {  }
-          49fe3214-b542-4b1d-a248-5cbdbadd77ac:
-            uuid: 49fe3214-b542-4b1d-a248-5cbdbadd77ac
-            region: first
-            configuration:
-              id: 'field_block:node:article:field_byline'
-              label: Byline
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: text_default
-                label: hidden
-                settings: {  }
-                third_party_settings: {  }
-            weight: 3
-            additional: {  }
           5da478db-c08b-4f88-b9fe-5e70769db0bc:
             uuid: 5da478db-c08b-4f88-b9fe-5e70769db0bc
             region: first
@@ -102,25 +158,6 @@ third_party_settings:
                 settings: {  }
                 third_party_settings: {  }
             weight: 7
-            additional: {  }
-          50689186-d26d-4197-9cf7-434d5e299a0e:
-            uuid: 50689186-d26d-4197-9cf7-434d5e299a0e
-            region: first
-            configuration:
-              id: 'field_block:node:article:field_author'
-              label: Author
-              label_display: '0'
-              provider: layout_builder
-              context_mapping:
-                entity: layout_builder.entity
-                view_mode: view_mode
-              formatter:
-                type: string
-                label: hidden
-                settings:
-                  link_to_entity: false
-                third_party_settings: {  }
-            weight: 5
             additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:

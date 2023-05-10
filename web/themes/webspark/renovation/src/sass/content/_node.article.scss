@@ -1,16 +1,15 @@
 // Article: Default
 .article--headinfo {
   font-weight: 700;
-  &.article--byline > .lead + hr {
-    margin: 2rem 0;
-    max-width: 700px;
-  }
   &.article--date-published {
     margin-bottom: 1rem;
   }
   &.article--author {
     text-transform: uppercase
   }
+}
+.node.article.article--full .uds-story-hero .content h1.article {
+  margin-top: 3rem;
 }
 
 // Article: Teaser
