@@ -9,7 +9,7 @@ field_name: field_author
 entity_type: node
 bundle: article
 label: 'Article author'
-description: 'Author of the article (not the Drupal page creator). Will be displayed above article.'
+description: 'Author of the article (not the webpage creator). Will be displayed above article.'
 required: false
 translatable: false
 default_value: {  }

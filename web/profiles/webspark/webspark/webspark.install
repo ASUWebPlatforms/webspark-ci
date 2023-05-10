@@ -295,5 +295,5 @@ function webspark_update_9013(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.node.article.default');
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
-  \Drupal::logger("webspark")->notice("Updates to Article content type were attempted.");
+  \Drupal::logger("webspark")->notice("Article content type updated.");
 }
