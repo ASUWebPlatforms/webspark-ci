@@ -121,6 +121,7 @@
         ]
     },
     "scripts": {
+        "pre-command-run": ["DrupalComposerManaged\\ComposerScripts::writeComposerPatchFile"],
         "unit-test": "echo 'No unit test step defined.'",
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
         "code-sniff": [
