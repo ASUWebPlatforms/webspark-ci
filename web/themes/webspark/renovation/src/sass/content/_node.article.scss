@@ -8,7 +8,8 @@
     text-transform: uppercase
   }
 }
-.node.article.article--full .uds-story-hero .content h1.article {
+// Restores padding to articles with hero images
+.node.article.article--full .uds-story-hero .content h1.type--article {
   margin-top: 3rem;
 }
 
