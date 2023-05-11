@@ -298,3 +298,12 @@ function webspark_update_9013(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * Update the allowed HTML tags for the Basic HTML format.
+ */
+function webspark_update_9014(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}

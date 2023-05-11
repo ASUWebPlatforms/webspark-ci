@@ -53,6 +53,10 @@ figure.caption-img {
   }
 }
 
+.rounded-circle img {
+  border-radius: 50px!important;
+}
+
 @include media-breakpoint-down(sm) {
   figure.align-center {
     width: 100%;
