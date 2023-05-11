@@ -22,11 +22,11 @@ To provide an automated, pull request-based development workflow to validate and
 
 # Background
 
-This projects aims to provide an automated, pull request-based development workflow to validate and build future releases of [Webspark 2](https://brandguide.asu.edu/execution-guidelines/web/building-sites/webspark) (WS2) using continuous integration (CI).
+This project aims to provide an automated, pull request-based development workflow to validate and build future releases of [Webspark 2](https://brandguide.asu.edu/execution-guidelines/web/building-sites/webspark) (WS2) using continuous integration (CI).
 
 ## Our Approach
 
-This project leverages the [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools) workflow in order to streamline development, testing, and deployment of the Webspark Drupal codebase.
+This project leverages the [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools) workflow to streamline the development, testing, and deployment of the Webspark Drupal codebase.
 
 This approach enables us to use [GitHub](https://github.com/ASUWebPlatforms) as our preferred Git provider, [CircleCI](https://app.circleci.com) for Continuous Integration, and [Pantheon](https://pantheon.io) Multidev environments for testing builds.
 
@@ -36,9 +36,9 @@ This approach enables us to use [GitHub](https://github.com/ASUWebPlatforms) as 
 
 # Getting Started
 
-When creaing a website on Pantheon that will use the Build Tools workflow, it is important to follow the instructions outlined in the Build Tools documentation. A brief summary of those instructions is provided below, along with example code we used to setup the Webspark CI project. In our examples, we will assume the use of GitHub and CircleCI.
+When creating a website on Pantheon that will use the Build Tools workflow, it is important to follow the instructions outlined in the Build Tools documentation. A summary of those instructions is provided below, along with the example code we used to set up the Webspark CI project. In our examples, we will assume the use of GitHub and CircleCI.
 
-## Installing Composer, Terminus and the Build Tools plugin
+## Installing Composer, Terminus, and the Build Tools plugin
 
 Review the following [Build Tools Prerequisites Guide](https://docs.pantheon.io/guides/build-tools/create-project/#prerequisites) to
 
@@ -61,7 +61,7 @@ Review the following [Build Tools Project Creation Guide](https://docs.pantheon.
 
 1. Create a new site on Pantheon using the Build Tools workflow
 
-It is important to take note of all the available options you have when creating your project. Review the [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin) README for full options.
+It is important to take note of all the available options you have when creating your project. Review the [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin) for full options.
 
 ## Example commands
 
@@ -91,29 +91,29 @@ terminus build:project:repair webspark-ci
 
 # Local Development
 
-This workflow differs from a usual Pantheon workflow in that when developing locally, there really is no need for the Pantheon site itself to be cloned. The only use for the Pantheon site locally, is to pull down the database and files.
+This workflow differs from a usual Pantheon workflow in that when developing locally, there is no need for the Pantheon site itself to be cloned. The only use for the Pantheon site locally is to pull down the database and files.
 
 ## Setting up a local development environment
 
-> Although you may use whatever tool you choose, it is always a good idea to use the tool with better documentation!
+> Although you may use whatever tool you choose, it is always a good idea to use the tool with the best documentation!
 
 We recommend the use of [DDEV](https://ddev.com) or [Lando](https://docs.lando.dev) for local Drupal development. Both will require [Docker](https://www.docker.com) to be installed.
 
 - [DDEV installation](https://ddev.readthedocs.io/en/stable)
 - [Lando installation](https://docs.lando.dev/getting-started/installation.html)
 
-After your tool of choice is installed, you then need to setup that tool specifcally for Pantheon. This gives you the benefit of having Pantheon and Drupal specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
+After your tool of choice is installed, you then need to set up that tool specifically for Pantheon. This gives you the benefit of having Pantheon and Drupal-specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
 
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-- [Lando for Panteon](https://docs.lando.dev/pantheon)
+- [Lando for Pantheon](https://docs.lando.dev/pantheon)
 
-***A note on DDEV:*** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifcally for the `webspark-ci` project.
+***A note on DDEV:*** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
 
 ## Cloning the site locally
 
-Once your local development environment is setup for Pantheon, you are ready to begin developing locally for the `webspark-ci` project. Remember, we do not need to use the Pantheon site for anything other than its database and files, so we will **not** need to pull the Pantheon site locally.
+Once your local development environment is set up for Pantheon, you are ready to begin developing locally for the `webspark-ci` project. **Remember, we do not need to use the Pantheon site for anything other than its database and files, so we will not need to pull the Pantheon site locally.**
 
-Clone the `webspark-ci` repo locally:
+Clone the `webspark-ci` repo:
 
 ```bash
 git clone git@github.com:ASUWebPlatforms/webspark-ci.git
@@ -156,7 +156,7 @@ environment_variables:
   project: webspark-ci.dev
 ```
 
-Finally, we can pull the databse and files from the Pantheon site:
+Finally, we can pull the database and files from the Pantheon site:
 
 ```bash
 # Restart the container first since we changed the PHP version
@@ -169,25 +169,19 @@ ddev pull pantheon
 
 ### Using Lando
 
-Initiate the repo as a Drupal project:
+> Coming soon!
 
-```bash
-lando init
-lando start
-```
-
-TODO: Review https://docs.lando.dev/getting-started/first-app.html
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Sprints
 
-Arizona State University follows [Agile](https://www.atlassian.com/agile) software development principles. As such, teams work in [Sprints](https://www.atlassian.com/agile/scrum/sprints) to accomplish tasks in a timely, but orderly fashion. Webspark sprints are usually two weeks in length, and each sprint has a set number of tasks assigned to it.
+Arizona State University follows [Agile](https://www.atlassian.com/agile) software development principles. As such, teams work in [sprints](https://www.atlassian.com/agile/scrum/sprints) to accomplish tasks in a timely, but orderly fashion. Webspark sprints are usually two weeks in length, and each sprint has a set number of tasks assigned to it.
 
 ## How sprints fit into the Webspark CI workflow
 
-Each sprint has a name, usually it is simply the sprint number (ex: Sprint 39). To keep development organized, the Wespark CI GitHub repository will have a branch created for each specific sprint. So, if we are currently in Sprint 39, there will also be a `ws2-sprint-39` branch. This sprint branch will be used by all developers on the team as the base branch. All new branches should be created from this base branch, and all Pull Request(s) (PR) should be merged into this base branch. When the sprint is complete, the base branch will then be merged into the `master` branch via its own Pull Request.
+Each sprint has a name, often, it is simply the sprint number (ex: Sprint 39). To keep development organized, the Webspark CI GitHub repository will have a branch created for each specific sprint. So, if we are currently in Sprint 39, there will also be a `ws2-sprint-39` branch. This sprint branch will be used by all developers on the team as the base branch. All new branches should be created from this base branch, and all Pull Request(s) (PR) should be merged into this base branch. When the sprint is complete, the base branch will then be merged into the `master` branch via its own Pull Request.
 
 ### Typical developer workflow
 
@@ -210,15 +204,15 @@ As a developer working on the Webspark CI project, here is a typical workflow:
 
 # Deployment
 
-The benefit of the Pantheon Build Tools workflow is its automated deployment process between the GitHub repository and the Pantheon website. Previously, developers had to create and manage their own Pantheon sites to test their work in. The Pantheon Build Tools allows for a centralized site for all team members to use and contribute to. Below you will find a simplified breakdown of the [Pull Request Workflow](https://docs.pantheon.io/guides/build-tools/pr-workflow):
+The benefit of the Pantheon Build Tools workflow is its automated deployment process between the GitHub repository and the Pantheon website. Previously, developers had to create and manage their own Pantheon sites to test their work. The Pantheon Build Tools workflow allows for a centralized site for all team members to use and contribute to. Below, you will find a simplified breakdown of the Build Tools [Pull Request Workflow](https://docs.pantheon.io/guides/build-tools/pr-workflow):
 
-1. **Pull Request Issuance:** A developer makes changes to a task branch in their local environment and pushes these changes to the remote `webspark-ci` repository. They then create a pull request (PR) to propose merging these changes into the sprint branch.
+1. **Pull Request Issued:** A developer makes changes to a task branch in their local environment and pushes these changes to the remote `webspark-ci` repository. They then create a pull request (PR) to propose merging these changes into the sprint branch.
 2. **Continuous Integration (CI) Kicks In:** Upon the creation of the PR, the continuous integration (CI) process starts via CircleCI. CircleCI is configured to automatically pick up the PR event and initiate a series of tasks defined in a configuration file within the project, which Pantheon has already bootstrapped for us.
-3. **Automated Build Process:** CircleCI first checks out the proposed changes from the task branch, then it performs tasks such as installing dependencies, compiling code, running unit tests, and more. The base configuration simply runs Composer, however, we have the flexibilty to expanded upon this process as we see fit.
+3. **Automated Build Process:** CircleCI first checks out the proposed changes from the task branch, then performs tasks such as installing dependencies, compiling code, running unit tests, etc. The base configuration simply runs Composer, however, we have the flexibility to expand upon this process as we see fit.
 4. **Creation of the Pantheon Multidev:** If the build process is successful, CircleCI then uses Terminus to create a new Multidev environment in the `webspark-ci` Pantheon site, using the database and files from the `dev` environment. The Multidev will be named after the PR.
 5. **Automated Testing:** Depending on the project's configuration, CircleCI may then perform additional automated tests in the new Multidev environment. Pantheon provides Behat testing and visual regression testing by default, but we can expand these to include performance tests, accessibility tests, and more.
-6. **PR Update and Review:** Once the Multidev environment is ready, CircleCI updates the original PR with the URL of the new Multidev. This allows the team to review the proposed changes in a fully functional environment. Additional commits made to the task branch for the PR will trigger the build process, ensuring the Multidev is always using the most up to date code.
-7. **Deletion of the Pantheon Multidev:** When the PR is merged into the sprint branch and closed on GitHub, CircleCI will automatically destroy the Multidev environment for that PR.
+6. **PR Review:** Once the Multidev environment is ready, CircleCI updates the original PR with the URL of the new Multidev. This allows the team to review the proposed changes in a fully functional environment. Additional commits made to the task branch for the PR will trigger the build process, ensuring the Multidev is always using the most up-to-date code.
+7. **Deletion of the Pantheon Multidev:** When the PR is merged into the sprint branch and closed, CircleCI will automatically destroy the Multidev environment for that PR.
 
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
