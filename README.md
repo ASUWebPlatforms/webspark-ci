@@ -21,7 +21,6 @@ To provide an automated, pull request-based development workflow to validate and
 <br>
 
 # Background
-[↑ Top](#webspark-ci)
 
 This projects aims to provide an automated, pull request-based development workflow to validate and build future releases of [Webspark 2](https://brandguide.asu.edu/execution-guidelines/web/building-sites/webspark) (WS2) using continuous integration (CI).
 
@@ -31,11 +30,11 @@ This project leverages the [Pantheon Build Tools](https://docs.pantheon.io/guide
 
 This approach enables us to use [GitHub](https://github.com/ASUWebPlatforms) as our preferred Git provider, [CircleCI](https://app.circleci.com) for Continuous Integration, and [Pantheon](https://pantheon.io) Multidev environments for testing builds.
 
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Getting Started
-[↑ Top](#webspark-ci)
 
 When creaing a website on Pantheon that will use the Build Tools workflow, it is important to follow the instructions outlined in the Build Tools documentation. A brief summary of those instructions is provided below, along with example code we used to setup the Webspark CI project. In our examples, we will assume the use of GitHub and CircleCI.
 
@@ -86,11 +85,11 @@ Rotate the access tokens used to create the project:
 terminus build:project:repair webspark-ci
 ```
 
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Local Development
-[↑ Top](#webspark-ci)
 
 This workflow differs from a usual Pantheon workflow in that when developing locally, there really is no need for the Pantheon site itself to be cloned. The only use for the Pantheon site locally, is to pull down the database and files.
 
@@ -178,11 +177,11 @@ lando start
 ```
 
 TODO: Review https://docs.lando.dev/getting-started/first-app.html
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Sprints
-[↑ Top](#webspark-ci)
 
 Arizona State University follows [Agile](https://www.atlassian.com/agile) software development principles. As such, teams work in [Sprints](https://www.atlassian.com/agile/scrum/sprints) to accomplish tasks in a timely, but orderly fashion. Webspark sprints are usually two weeks in length, and each sprint has a set number of tasks assigned to it.
 
@@ -205,11 +204,11 @@ As a developer working on the Webspark CI project, here is a typical workflow:
 6. You create a new PR, looking to merge `origin/ws2-1596` into `origin/ws2-sprint-39`, and assign the `webspark-maintainers` group as Reviewers.
 7. The build process deploys a new Pantheon multidev named after your PR, ready for other team members to review.
 
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Deployment
-[↑ Top](#webspark-ci)
 
 The benefit of the Pantheon Build Tools workflow is its automated deployment process between the GitHub repository and the Pantheon website. Previously, developers had to create and manage their own Pantheon sites to test their work in. The Pantheon Build Tools allows for a centralized site for all team members to use and contribute to. Below you will find a simplified breakdown of the [Pull Request Workflow](https://docs.pantheon.io/guides/build-tools/pr-workflow):
 
@@ -221,11 +220,11 @@ The benefit of the Pantheon Build Tools workflow is its automated deployment pro
 6. **PR Update and Review:** Once the Multidev environment is ready, CircleCI updates the original PR with the URL of the new Multidev. This allows the team to review the proposed changes in a fully functional environment. Additional commits made to the task branch for the PR will trigger the build process, ensuring the Multidev is always using the most up to date code.
 7. **Deletion of the Pantheon Multidev:** When the PR is merged into the sprint branch and closed on GitHub, CircleCI will automatically destroy the Multidev environment for that PR.
 
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
 # Resources
-[↑ Top](#webspark-ci)
 
 ## Pantheon
 
@@ -258,3 +257,5 @@ The benefit of the Pantheon Build Tools workflow is its automated deployment pro
 ## Agile
 
 [Agile](https://www.atlassian.com/agile)
+
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
