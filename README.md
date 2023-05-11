@@ -92,7 +92,90 @@ terminus build:project:repair webspark-ci
 # Local Development
 [↑ Top](#webspark-ci)
 
-Proin id arcu orci. Duis id massa at velit eleifend imperdiet eu eget nisl. Morbi diam velit, ornare vel tempus eget, rhoncus eu orci. Nullam pharetra quam vitae eleifend suscipit. Etiam blandit ante nec mi interdum imperdiet. Fusce gravida sem vitae mauris egestas feugiat. Aenean quis odio arcu. Nunc placerat nulla quis quam aliquet, a rhoncus magna maximus. Sed maximus leo quam, eget ornare massa accumsan sit amet. Suspendisse elit lorem, cursus eu libero ut, maximus ornare sapien. Aliquam sed ornare mauris. Nullam felis erat, viverra id ornare non, maximus elementum lacus. Integer porttitor porta convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris rutrum, est sit amet blandit eleifend, lacus leo pellentesque nibh, in auctor purus purus sed arcu.
+This workflow differs from a usual Pantheon workflow in that when developing locally, there really is no need for the Pantheon site itself to be cloned. The only use for the Pantheon site locally, is to pull down the database and files.
+
+## Setting up a local development environment
+
+> Although you may use whatever tool you choose, it is always a good idea to use the tool with better documentation!
+
+We recommend the use of [DDEV](https://ddev.com) or [Lando](https://docs.lando.dev) for local Drupal development. Both will require [Docker](https://www.docker.com) to be installed.
+
+- [DDEV installation](https://ddev.readthedocs.io/en/stable)
+- [Lando installation](https://docs.lando.dev/getting-started/installation.html)
+
+After your tool of choice is installed, you then need to setup that tool specifcally for Pantheon. This gives you the benefit of having Pantheon and Drupal specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
+
+- [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
+- [Lando for Panteon](https://docs.lando.dev/pantheon)
+
+***A note on DDEV:*** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifcally for the `webspark-ci` project.
+
+## Cloning the site locally
+
+Once your local development environment is setup for Pantheon, you are ready to begin developing locally for the `webspark-ci` project. Remember, we do not need to use the Pantheon site for anything other than its database and files, so we will **not** need to pull the Pantheon site locally.
+
+Clone the `webspark-ci` repo locally:
+
+```bash
+git clone git@github.com:ASUWebPlatforms/webspark-ci.git
+```
+
+Navigate to the repo, and install its dependencies via Composer:
+
+```bash
+cd webspark-ci
+composer install
+```
+
+## Running the site locally
+
+### Using DDEV
+
+Initiate the repo as a Drupal project:
+
+```bash
+ddev init
+ddev start
+```
+
+Since we already installed the dependencies, DDEV will automatically configure itself as a Drupal 9 project for us. When using the `ddev init` command, you simply need to hit `return` until you are prompted to run `ddev start`.
+
+We now have a container for our `webspark-ci` project, so next it is time to pull down the database and files from the Pantheon site.
+
+First, we need to update the default PHP version in the DDEV config to 8.1, since Webspark expects us to use that:
+
+```yaml
+# .ddev/config.yaml
+php_version: "8.1"
+```
+
+Next, we need to tell DDEV which site in Pantheon to pull the database and files from. In `.ddev/providers`, you will find a file named `pantheon.yaml.example`. Copy the contents of this file into a new file called `pantheon.yaml`. Next, we will add the Webspark CI Pantheon site as our target site:
+
+```yaml
+# .ddev/providers/pantheon.yaml
+environment_variables:
+  project: webspark-ci.dev
+```
+
+Finally, we can pull the databse and files from the Pantheon site:
+
+```bash
+# Restart the container first since we changed the PHP version
+ddev restart
+# Establish a connection using our machine token
+ddev auth ssh
+# Pull the database and files
+ddev pull pantheon
+```
+
+### Using Lando
+
+Initiate the repo as a Drupal project:
+
+```bash
+lando init
+lando start
+```
 
 <br>
 <br>
@@ -116,8 +199,24 @@ Proin id arcu orci. Duis id massa at velit eleifend imperdiet eu eget nisl. Morb
 # Resources
 [↑ Top](#webspark-ci)
 
+## Pantheon
+
 [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools)
 
 [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
 
+## GitHub
+
 [GitHub](https://github.com/ASUWebPlatforms)
+
+## Local Development
+
+[Docker](https://www.docker.com)
+
+[DDEV](https://ddev.com)
+
+[DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
+
+[Lando](https://docs.lando.dev)
+
+[Lando for Pantheon](https://docs.lando.dev/pantheon)
