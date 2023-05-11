@@ -44,7 +44,8 @@ function renovation_form_editor_media_dialog_alter(array &$form, FormStateInterf
   if (isset($form_state->getUserInput()['editor_object'])) {
     $editor_object = $form_state->getUserInput()['editor_object'];
     $media_embed_element = $editor_object['attributes'];
-  } else {
+  }
+  else {
     // Retrieve the user input from form state.
     $media_embed_element = $form_state->get('media_embed_element');
   }
