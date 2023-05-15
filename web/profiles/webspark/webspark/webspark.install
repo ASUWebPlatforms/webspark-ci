@@ -318,3 +318,12 @@ function webspark_update_9014(&$sandbox) {
   \Drupal::state()->set('configuration_locked', TRUE);
   \Drupal::logger("webspark")->notice("Article content type updated.");
 }
+
+/**
+ * Update the allowed HTML tags for the Basic HTML format.
+ */
+function webspark_update_9015(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
