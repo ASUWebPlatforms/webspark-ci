@@ -10,7 +10,7 @@ id: node.article.field_header_style
 field_name: field_header_style
 entity_type: node
 bundle: article
-label: 'Header Style'
+label: 'Hero Size'
 description: 'Select either default or large header.'
 required: true
 translatable: false
