@@ -133,11 +133,11 @@ composer install
 Initiate the repo as a Drupal project:
 
 ```bash
-ddev init
+ddev config
 ddev start
 ```
 
-Since we already installed the dependencies, DDEV will automatically configure itself as a Drupal 9 project for us. When using the `ddev init` command, you simply need to hit `return` until you are prompted to run `ddev start`.
+Since we already installed the dependencies, DDEV will automatically configure itself as a Drupal 9 project for us. When using the `ddev config` command, you simply need to continue until you are prompted to run `ddev start`.
 
 We now have a container for our `webspark-ci` project, so next it is time to pull down the database and files from the Pantheon site.
 
