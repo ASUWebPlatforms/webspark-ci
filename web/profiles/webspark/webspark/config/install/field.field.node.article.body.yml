@@ -9,17 +9,14 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: '0'
-    restricted_html: '0'
-    full_html: '0'
-    plain_text: '0'
+    allowed_formats: {  }
 id: node.article.body
 field_name: body
 entity_type: node
 bundle: article
 label: Body
-description: ''
-required: false
+description: 'The body of the article goes here. Include any media, images, or other elements here (not as a separate Webspark block).'
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

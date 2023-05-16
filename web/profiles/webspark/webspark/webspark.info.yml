@@ -96,6 +96,9 @@ install:
   - webspark_webdir
   - maxlength
   - field_states_ui
+  - file_mdm
+  - sophron
+  - imagemagick
 themes:
   - bartik
   - seven
