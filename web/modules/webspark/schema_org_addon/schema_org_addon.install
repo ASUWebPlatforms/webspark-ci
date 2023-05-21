@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Requirements and update functions for the Schema Org Addon module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function schema_org_addon_install($is_syncing) {
+  \Drupal::logger("addon")->notice("Making metatag config updates for schema.org output.");
+  $cfgs_to_update = [
+    'metatag.metatag_defaults.front',
+    'metatag.metatag_defaults.global'
+  ];
+  $prefix = 'schema_org_addon.';
+  // Get your custom config
+  foreach ($cfgs_to_update as $yml) {
+    $new = \Drupal::configFactory()->getEditable($prefix . $yml)->get('tags');
+    if (count($new) > 0) {
+      $current = \Drupal::configFactory()->getEditable($yml);
+      $current_tags = $current->get('tags');
+      if (count($current_tags) > 0) {
+        $combined = array_replace($new, $current_tags); // current should override
+        ksort($combined);
+        $current->set('tags', $combined);
+        $current->save();
+      }
+      unset($current, $current_tags, $new);
+    }
+  }
+}

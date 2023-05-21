@@ -1,0 +1,9 @@
+# The 'type' should be "label" for short meta tags and "text" for ones which
+# could get longer, especially ones which use a textarea field instead of a
+# textfield.
+metatag.metatag_tag.schema_organization_parent_organization':
+  type: text
+  label: 'parentOrganization'
+metatag.metatag_tag.schema_organization_main_entity_of_page':
+  type: text
+  label: 'mainEntityOfPage'

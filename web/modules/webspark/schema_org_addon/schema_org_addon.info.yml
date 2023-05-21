@@ -1,0 +1,15 @@
+name: Schema.org Organization Addon
+type: module
+description: 'Adds more fields to multiple schema.org schemas.'
+core_version_requirement: ^8 || ^9
+php: 7.2.0
+package: SEO
+dependencies:
+  - schema_metatag:schema_organization
+  - schema_metatag:schema_web_page
+  - schema_metatag:schema_web_site
+
+# Information added by Drupal.org packaging script on 2022-03-04
+version: '8.x-2.0'
+project: 'schema_org_addon'
+datestamp: 1684203462

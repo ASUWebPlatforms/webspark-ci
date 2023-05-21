@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Contains schema_organization.module.
+ */
+
+/**
+ * Adjust Schema Metatags tags.
+ *
+ * Use hook_metatag_tags_alter() to change tag information.
+ *
+ * Schema Metatag adds new information to the standard Metatag definition.
+ * Use this hook to alter that information.
+ *
+ * @param array $definitions
+ *   An array of the tag definitions.
+ */
+function schema_org_addon_metatag_tags_alter(array &$definitions): void {
+  // schema: Organization
+  unset($definitions['schema_organization_accepts_reservations']);
+  unset($definitions['schema_organization_additional_type']);
+  unset($definitions['schema_organization_aggregate_rating']);
+  unset($definitions['schema_organization_brand']);
+  unset($definitions['schema_organization_member_of']);
+  unset($definitions['schema_organization_menu']);
+  unset($definitions['schema_organization_opening_hours_specification']);
+  unset($definitions['schema_organization_potential_action']);
+  unset($definitions['schema_organization_price_range']);
+  unset($definitions['schema_organization_review']);
+  unset($definitions['schema_organization_star_rating']);
+  unset($definitions['schema_organization_telephone']);
+  $definitions['schema_organization_address']['weight'] = 7;
+  $definitions['schema_organization_contact_point']['weight'] = 7.1;
+  $definitions['schema_organization_description']['weight'] = 1;
+  $definitions['schema_organization_geo']['weight'] = 8;
+  $definitions['schema_organization_image']['description'] = 'The primary marketing image (other than the logo) for this organization. (Ex. image of Old Main, etc.)';
+  $definitions['schema_organization_image']['tree_depth'] = -1;
+  $definitions['schema_organization_image']['weight'] = 6;
+  $definitions['schema_organization_logo']['weight'] = 5;
+  $definitions['schema_organization_name']['weight'] = 0;
+  $definitions['schema_organization_parent_organization']['weight'] = 25;
+  $definitions['schema_organization_parent_organization']['tree_depth'] = 3;
+  $definitions['schema_organization_same_as']['description'] = "Enter a comma-delimited list of absolute URLs that ALSO represent this organization, including any organization social media links.";
+  $definitions['schema_organization_same_as']['weight'] = 4;
+  $definitions['schema_organization_type']['description'] = 'If unsure, select CollegeOrUniversity.';
+  $definitions['schema_organization_url']['weight'] = 2;
+  // schema: WebPage
+  unset($definitions['schema_web_page_author']);
+// @TODO #nice-to-have Set geo coords in metatag advanced fields in formSubmit() for metatag edits??
+  unset($definitions['schema_web_page_has_part']);
+  unset($definitions['schema_web_page_is_accessible_for_free']);
+  unset($definitions['schema_web_page_publisher']);
+  unset($definitions['schema_web_page_speakable']);
+  $definitions['schema_web_page_main_entity_of_page']['weight'] = 2;
+  // schema: WebSite
+  unset($definitions['schema_web_site_potential_action']);
+  unset($definitions['schema_web_site_publisher']);
+}
+
+/**
+ * Adjust Schema Metatags property types.
+ *
+ * Use hook_schema_metatag_property_type_plugins_alter() to change property
+ * type information.
+ *
+ * @param array $definitions
+ *   An array of the property type definitions.
+ */
+function schema_org_addon_schema_metatag_property_type_plugins_alter(array &$definitions): void {
+  unset($definitions['contact_point']['sub_properties']['productSupported']);
+  unset($definitions['contact_point']['sub_properties']['areaServed']);
+  unset($definitions['program_membership']['sub_properties']['disambiguatingDescription']);
+  unset($definitions['program_membership']['sub_properties']['hostingOrganization']);
+  unset($definitions['program_membership']['sub_properties']['additionalType']);
+  unset($definitions['program_membership']['sub_properties']['membershipNumber']);
+  $definitions['program_membership']['sub_properties']['identifier']['description'] = "Enter the fully-qualified URL of the home page of this org.";
+}

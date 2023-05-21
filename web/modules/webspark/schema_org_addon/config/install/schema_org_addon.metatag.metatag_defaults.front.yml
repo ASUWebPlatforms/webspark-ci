@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: front
+label: 'Front page'
+tags:
+  schema_organization_contact_point: 'a:2:{s:5:"@type";s:13:"PostalAddress";s:17:"availableLanguage";s:7:"English";}'
+  schema_organization_description: '[current-page:metatag:description]'
+  schema_organization_id: '[site:url]'
+  schema_organization_slogan: '[site:slogan]'
+  schema_organization_url: '[site:url]'
+  schema_organization_parent_organization: 'a:6:{s:5:"@type";s:19:"CollegeOrUniversity";s:3:"@id";s:16:"https://asu.edu/";s:4:"name";s:24:"Arizona State University";s:3:"url";s:16:"https://asu.edu/";s:6:"sameAs";s:153:"https://www.facebook.com/FutureSunDevils/,https://twitter.com/FutureSunDevils,https://www.instagram.com/FutureSunDevils/,https://www.youtube.com/user/ASU";s:4:"logo";a:4:{s:5:"@type";s:11:"ImageObject";s:3:"url";s:170:"https://www.asu.edu/modules/composer/webspark-module-asu_brand/node_modules/@asu-design-system/component-header/dist/assets/img/arizona-state-university-logo-vertical.png";s:5:"width";s:3:"303";s:6:"height";s:3:"234";}}'
+  schema_web_page_id: '[site:url]'

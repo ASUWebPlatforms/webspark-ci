@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: global
+label: Global
+tags:
+  schema_web_page_description: '[current-page:metatag:description]'
+  schema_web_page_id: '[current-page:url]'
+  schema_web_page_main_entity_of_page: '[site:url]'
+  schema_web_page_type: 'WebPage'
+  schema_web_site_id: '[site:url]'
+  schema_web_site_name: '[site:name]'
+  schema_web_site_type: 'WebSite'
+  schema_web_site_url: '[site:url]'
