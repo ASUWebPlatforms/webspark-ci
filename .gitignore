@@ -139,3 +139,6 @@ upstream/web/
 # Ignore .env files as they are personal
 #/.env
 .DS_Store
+
+# Ignore local .gitignore changes with .git/info/exclude and a symbolic link via .gitignore_local
+.gitignore_local
