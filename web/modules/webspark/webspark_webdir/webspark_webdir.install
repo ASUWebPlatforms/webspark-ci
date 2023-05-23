@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\node\Entity\Node;
+use Drupal\field\Entity\FieldStorageConfig;
+
 /**
  * @file
  * Install, update and uninstall functions for the Web Directory Component module.
@@ -96,6 +99,76 @@ function webspark_webdir_update_9005(&$sandbox) {
  */
 function webspark_webdir_update_9006(&$sandbox) {
   _webspark_webdir_revert_all_module_config();
+}
+
+/**
+ * Create the new fields that will replace the old ones.
+ */
+function webspark_webdir_update_9007(&$sandbox) {
+  // Create an array to hold the names of the new fields to create
+  $fields = [
+    'field_webdir_exclude_profiles' => 'string',
+    'field_webdir_use_pager' => 'boolean',
+    'field_webdir_items_to_display' => 'integer',
+  ];
+
+  // Foreach new field, create the field
+  foreach ($fields as $field_name => $type) {
+    if (!FieldStorageConfig::loadByName('node', $field_name)) {
+      FieldStorageConfig::create([
+        'field_name' => $field_name,
+        'entity_type' => 'block_content',
+        'type' => $type,
+        'cardinality' => 1,
+      ])->save();
+    }
+  }
+}
+
+/**
+ * Update the new fields with the values from the old ones.
+ */
+function webspark_webdir_update_9008(&$sandbox) {
+  // Define the mapping of old fields to new ones.
+  $fields = [
+    'field_ids' => 'field_webdir_exclude_profiles',
+    'field_show_title' => 'field_webdir_use_pager',
+    'field_news_items_to_display' => 'field_webdir_items_to_display',
+  ];
+
+  foreach ($fields as $old_field => $new_field) {
+    $nids = \Drupal::entityQuery('node')
+      ->exists($old_field)
+      ->execute();
+
+    foreach ($nids as $nid) {
+      $node = Node::load($nid);
+      $node->{$new_field}->value = $node->{$old_field}->value;
+      $node->save();
+    }
+  }
+}
+
+/**
+ * Delete the old fields, and uninstall the old module.
+ */
+function webspark_webdir_update_9009(&$sandbox) {
+  $old_fields = [
+    'field_ids',
+    'field_show_title',
+    'field_news_items_to_display',
+  ];
+
+  foreach ($old_fields as $old_field) {
+    if ($field_storage = FieldStorageConfig::loadByName('node', $old_field)) {
+      $field_storage->delete();
+    }
+  }
+
+  // If the old module is installed, uninstall it
+  if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
+    \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
+  }
 }
 
 function _webspark_webdir_revert_all_module_config() {
