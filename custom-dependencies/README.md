@@ -3,7 +3,7 @@
 In order to provide better separation and management of custom dependencies and patches, we've introduced two new files:
 
 - `custom-dependencies/composer.json`: For managing custom dependencies
-- `composer.patches.json`: For managing Drupal patches
+- `custom-dependencies/patches.custom.json`: For managing your custom Drupal patches
 
 ## Why are we making these changes?
 
@@ -22,9 +22,10 @@ These changes allow for better organization and separation of concerns within th
 ### Drupal Patches
 
 1. Locate the `composer.patches.json` file in the project root.
-2. Remove all custom patches out of the root `composer.json` file, and move them into `composer.patches.json`.
-3. Add, update, or remove patches in the "patches" section of the `composer.patches.json` file as needed.
-4. As we may need to add patches periodically, we recommend that you place your patches at the end of this file.
+2. Remove all patches from the root `composer.json` file, and move **only the ones you have added** into the new `custom-dependencies/patches.custom.json` file. The patches that were added by webspark have been already added to a different file.
+3. Add, update, or remove patches in the `custom-dependencies/patches.custom.json` file as needed.
+4. All webspark patches will now be tracked separately in `upstream-configuration/patches.webspark.json`, so you will not need to worry about clashes. But, you may want to check that file from time to time to see if you are trying to add a patch that already exists.
+5. The `custom-dependencies/patches.custom.json` and `upstream-configuration/patches.webspark.json` files will be combined programmatically at runtime to dynamically create the `composer.patches.json` file. This file will now be ignored by git so that change-tracking will only happen on the two source files it is built from.
 
 ## Managing Dependencies Moving Forward
 
@@ -37,7 +38,7 @@ To manage your custom dependencies and patches moving forward, follow these step
 
 ### Drupal Patches
 
-1. Make changes to the `composer.patches.json` file as needed.
+1. Make changes to the `custom-dependencies/patches.custom.json` file as needed.
 2. Run `composer update` to apply the patches to your project.
 
 ---
