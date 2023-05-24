@@ -123,3 +123,26 @@ function renovation_page_attachments_alter(array &$page) {
   
   $page['#attached']['html_head'][] = [$tag, 'tagname'];
 }
+
+/**
+ * Implements hook_preprocess_media().
+ */
+function renovation_preprocess_media(array &$variables) {
+  if ($variables['elements']['#media']->bundle() == 'image') {
+    $attributes = &$variables['attributes'];
+    $spacing_fields = ['data-spacing-bottom', 'data-spacing-top', 'data-spacing-right', 'data-spacing-left'];
+
+    foreach ($spacing_fields as $spacing_field) {
+      if (!empty($attributes[$spacing_field])) {
+        $attributes['class'][] = $attributes[$spacing_field];
+      }
+
+      unset($attributes[$spacing_field]);
+    }
+
+    if (!empty($attributes['data-round'])) {
+      $attributes['class'][] = 'rounded-circle';
+    }
+    unset($attributes['data-round']);
+  }
+}
