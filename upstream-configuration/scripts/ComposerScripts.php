@@ -13,6 +13,7 @@ use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
 use Composer\Util\ProcessExecutor;
+use Composer\Plugin\PreCommandRunEvent;
 
 /**
  * Implementation for Composer scripts and Composer hooks.
@@ -231,4 +232,16 @@ class ComposerScripts {
     // This feature is disabled if the user selects an unsupported php version.
     return '';
   }
+
+  public static function writeComposerPatchFile(PreCommandRunEvent $event) {
+    $websparkPath = 'upstream-configuration/patches.webspark.json';
+    $customPath = 'custom-dependencies/patches.custom.json';
+    $websparkArray = json_decode(file_get_contents($websparkPath), true);
+    $customArray = json_decode(file_get_contents($customPath), true);
+    $combinedArray['patches'] = $websparkArray + $customArray;
+    $combinedJson = json_encode($combinedArray);
+
+    file_put_contents("composer.patches.json", $combinedJson . PHP_EOL);
+  }
+
 }

@@ -13,6 +13,7 @@
 !composer.lock
 !scripts
 !scripts/*
+!patches.webspark.json
 !locked
 
 ## Allow composer.lock to be committed in custom upstreams if you wish

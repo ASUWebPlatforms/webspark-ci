@@ -155,4 +155,9 @@ upstream/web/
 .DS_Store
 *.sql
 *.gz
+
+# Ignore the generated composer.patches.json file
+/composer.patches.json
+
+# Ignore the auth.json file
 auth.json
