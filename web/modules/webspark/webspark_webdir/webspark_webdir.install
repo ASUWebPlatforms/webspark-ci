@@ -4,6 +4,8 @@ use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
+use Drupal\layout_builder\SectionStorage\SectionStorageTrait;
+use Drupal\layout_builder\SectionStorageInterface;
 
 /**
  * @file
@@ -113,28 +115,28 @@ function webspark_webdir_update_9007() {
 /**
  * Update the new fields created in 9007 with the values from the old ones.
  */
-// function webspark_webdir_update_9008() {
-//   // Map the old fields to the new
-//   $fields = [
-//     'field_ids' => 'field_webdir_exclude_profiles',
-//     'field_show_title' => 'field_webdir_use_pager',
-//     'field_news_items_to_display' => 'field_webdir_items_to_display',
-//   ];
+function webspark_webdir_update_9008() {
+  // Map the old fields to the new
+  $fields = [
+    'field_ids' => 'field_webdir_exclude_profiles',
+    'field_show_title' => 'field_webdir_use_pager',
+    'field_news_items_to_display' => 'field_webdir_items_to_display',
+  ];
 
-//   // Load all nodes that contain the 'inline_block:web_directory' block and the block itself.
-//   $blocks = _webspark_webdir_get_blocks();
+  // Load all nodes that contain the 'inline_block:web_directory' block and the block itself.
+  $blocks = _webspark_webdir_get_blocks();
 
-//   foreach ($blocks as $nid => $block) {
-//     // Copy the values from the old fields to the new ones.
-//     foreach ($fields as $old_field => $new_field) {
-//       if ($block->hasField($old_field) && !$block->get($old_field)->isEmpty()) {
-//         $block->{$new_field}->value = $block->{$old_field}->value;
-//       }
-//     }
+  foreach ($blocks as $nid => $block) {
+    // Copy the values from the old fields to the new ones.
+    foreach ($fields as $old_field => $new_field) {
+      if ($block->hasField($old_field) && !$block->get($old_field)->isEmpty()) {
+        $block->{$new_field}->value = $block->{$old_field}->value;
+      }
+    }
 
-//     $block->save();
-//   }
-// }
+    $block->save();
+  }
+}
 
 /**
  * Delete the old fields, and uninstall the old module.
@@ -166,38 +168,38 @@ function webspark_webdir_update_9007() {
 /**
  * Helper function to get node IDs of nodes using the "inline_block:web_directory" block
  */
-// function _webspark_webdir_get_blocks() {
-//   $data = [];
-//   $nodes = \Drupal::entityTypeManager()
-//     ->getStorage('node')
-//     ->loadByProperties(['type' => 'page']);
+function _webspark_webdir_get_blocks() {
+  $nodes_and_blocks = [];
+  $nodes = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties(['type' => 'page']);
 
-//   foreach ($nodes as $node) {
-//     if ($node->hasField('layout_builder__layout') && !$node->get('layout_builder__layout')->isEmpty()) {
-//       $sections = $node->get('layout_builder__layout')->getValue();
+  foreach ($nodes as $node) {
+    if ($node->hasField('layout_builder__layout') && !$node->get('layout_builder__layout')->isEmpty()) {
+      $sections = $node->get('layout_builder__layout')->getValue();
+      foreach ($sections as $section_item) {
+        $section = $section_item['section'];
+        foreach ($section->getComponents() as $component) {
+          $component_config = $component->get('configuration');
+          if (isset($component_config['id']) && $component_config['id'] == 'inline_block:web_directory') {
+            if (isset($component_config['block_revision_id'])) {
+              // Load the block content from the revision id.
+              $block = \Drupal::entityTypeManager()->getStorage('block_content')->loadRevision($component_config['block_revision_id']);
+              if ($block) {
+                // Add the block to the array with the node ID as the key.
+                $nodes_and_blocks[$node->id()] = $block;
+                // Stop processing this node, we found what we wanted.
+                break 2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-//       foreach ($sections as $section_item) {
-//         $section = $section_item['section'];
-
-//         foreach ($section->getComponents() as $component) {
-//           $component_config = $component->get('configuration');
-
-//           if (isset($component_config['id']) && $component_config['id'] == 'inline_block:web_directory') {
-//             // Add the block to the array with the node ID as the key.
-//             $block_id = $component_config['block_plugin_configuration']['id'];
-//             $block = BlockContent::load($block_id);
-//             $nodes_and_blocks[$node->id()] = $block;
-
-//             // Stop processing this node, we found what we wanted.
-//             break 2;
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   return $data;
-// }
+  return $nodes_and_blocks;
+}
 
 function _webspark_webdir_revert_all_module_config() {
   // Get this module name.
