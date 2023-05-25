@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 
@@ -105,18 +106,28 @@ function webspark_webdir_update_9006(&$sandbox) {
 /**
  * Create the "field_ids", "field_show_title", and "field_news_items_to_display" field replacements.
  */
-function webspark_webdir_update_9007(&$sandbox) {
+function webspark_webdir_update_9007() {
+  // Hold the fields to create.
   $fields = [
     'field_webdir_exclude_profiles' => 'string',
     'field_webdir_use_pager' => 'boolean',
     'field_webdir_items_to_display' => 'integer',
   ];
 
+  // Ensure that the block type exists.
+  $block_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('web_directory');
+
+  if (!$block_type) {
+    throw new EntityStorageException('Block type web_directory not found.');
+  }
+
+  // Create each field if it doesn't already exist.
   foreach ($fields as $field_name => $type) {
     if (!FieldStorageConfig::loadByName('block_content', $field_name)) {
       FieldStorageConfig::create([
         'field_name' => $field_name,
         'entity_type' => 'block_content',
+        'bundle' => 'web_directory',
         'type' => $type,
         'cardinality' => 1,
       ])->save();
@@ -127,65 +138,68 @@ function webspark_webdir_update_9007(&$sandbox) {
 /**
  * Update the new fields created in 9007 with the values from the old ones.
  */
-function webspark_webdir_update_9008(&$sandbox) {
-  $fields = [
-    'field_ids' => 'field_webdir_exclude_profiles',
-    'field_show_title' => 'field_webdir_use_pager',
-    'field_news_items_to_display' => 'field_webdir_items_to_display',
-  ];
+// function webspark_webdir_update_9008(&$sandbox) {
+//   $fields = [
+//     'field_ids' => 'field_webdir_exclude_profiles',
+//     'field_show_title' => 'field_webdir_use_pager',
+//     'field_news_items_to_display' => 'field_webdir_items_to_display',
+//   ];
 
-  // First we get the block IDs.
-  $block_ids = \Drupal::entityQuery('block_content')
-      ->accessCheck(FALSE)
-      ->execute();
+//   // First we get the block IDs.
+//   $block_ids = \Drupal::entityQuery('block_content')
+//       ->accessCheck(FALSE)
+//       ->execute();
 
-  foreach ($block_ids as $block_id) {
-    $block = BlockContent::load($block_id);
-    foreach ($fields as $old_field => $new_field) {
-      if (isset($block->{$old_field}->value)) {
-        $block->{$new_field}->value = $block->{$old_field}->value;
-        $block->save();
-      }
-    }
-  }
-}
+//   foreach ($block_ids as $block_id) {
+//     $block = BlockContent::load($block_id);
+//     foreach ($fields as $old_field => $new_field) {
+//       if (isset($block->{$old_field}->value)) {
+//         $block->{$new_field}->value = $block->{$old_field}->value;
+//         $block->save();
+//       }
+//     }
+//   }
+// }
 
 /**
  * Delete the old fields, and uninstall the old module.
  */
-function webspark_webdir_update_9009(&$sandbox) {
-  $old_fields = [
-    'field_ids',
-    'field_show_title',
-    'field_news_items_to_display',
-  ];
+// function webspark_webdir_update_9009(&$sandbox) {
+//   $old_fields = [
+//     'field_ids',
+//     'field_show_title',
+//     'field_news_items_to_display',
+//   ];
 
-  foreach ($old_fields as $old_field) {
-    if ($field_storage = FieldStorageConfig::loadByName('block_content', $old_field)) {
-      $field_storage->delete();
-    }
-  }
-}
+//   foreach ($old_fields as $old_field) {
+//     if ($field_storage = FieldStorageConfig::loadByName('block_content', $old_field)) {
+//       $field_storage->delete();
+//     }
+//   }
+// }
 
 /**
  * Uninstall the old module.
  */
-function webspark_webdir_update_9010(&$sandbox) {
-  // If the old module is installed, uninstall it
-  if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
-    \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
-  }
-}
+// function webspark_webdir_update_9010(&$sandbox) {
+//   // If the old module is installed, uninstall it
+//   if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
+//     \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
+//   }
+// }
 
 function _webspark_webdir_revert_all_module_config() {
   // Get this module name.
   $module = \Drupal::service('module_handler')
     ->getModule(basename(__FILE__, '.install'))
     ->getName();
+
   // Unlock the configuration storage.
   \Drupal::state()->set('configuration_locked', FALSE);
+
   // Revert all configs from this module.
   \Drupal::service('webspark.config_manager')->revertAll($module);
+
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }
