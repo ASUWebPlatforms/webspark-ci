@@ -18,6 +18,9 @@ dependencies:
     - field.field.block_content.web_directory.field_people_list
     - field.field.block_content.web_directory.field_people_search
     - field.field.block_content.web_directory.field_show_title
+    - field.field.block_content.web_directory.field_webdir_exclude_profiles
+    - field.field.block_content.web_directory.field_webdir_items_to_display
+    - field.field.block_content.web_directory.field_webdir_use_pager
 id: block_content.web_directory.default
 targetEntityType: block_content
 bundle: web_directory
@@ -39,3 +42,6 @@ hidden:
   field_people_list: true
   field_people_search: true
   field_show_title: true
+  field_webdir_exclude_profiles: true
+  field_webdir_items_to_display: true
+  field_webdir_use_pager: true

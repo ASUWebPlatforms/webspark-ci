@@ -107,57 +107,32 @@ function webspark_webdir_update_9006(&$sandbox) {
  * Create the "field_ids", "field_show_title", and "field_news_items_to_display" field replacements.
  */
 function webspark_webdir_update_9007() {
-  // Hold the fields to create.
-  $fields = [
-    'field_webdir_exclude_profiles' => 'string',
-    'field_webdir_use_pager' => 'boolean',
-    'field_webdir_items_to_display' => 'integer',
-  ];
-
-  // Ensure that the block type exists.
-  $block_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('web_directory');
-
-  if (!$block_type) {
-    throw new EntityStorageException('Block type web_directory not found.');
-  }
-
-  // Create each field if it doesn't already exist.
-  foreach ($fields as $field_name => $type) {
-    if (!FieldStorageConfig::loadByName('block_content', $field_name)) {
-      FieldStorageConfig::create([
-        'field_name' => $field_name,
-        'entity_type' => 'block_content',
-        'bundle' => 'web_directory',
-        'type' => $type,
-        'cardinality' => 1,
-      ])->save();
-    }
-  }
+  _webspark_webdir_revert_all_module_config();
 }
 
 /**
  * Update the new fields created in 9007 with the values from the old ones.
  */
-// function webspark_webdir_update_9008(&$sandbox) {
+// function webspark_webdir_update_9008() {
+//   // Map the old fields to the new
 //   $fields = [
 //     'field_ids' => 'field_webdir_exclude_profiles',
 //     'field_show_title' => 'field_webdir_use_pager',
 //     'field_news_items_to_display' => 'field_webdir_items_to_display',
 //   ];
 
-//   // First we get the block IDs.
-//   $block_ids = \Drupal::entityQuery('block_content')
-//       ->accessCheck(FALSE)
-//       ->execute();
+//   // Load all nodes that contain the 'inline_block:web_directory' block and the block itself.
+//   $blocks = _webspark_webdir_get_blocks();
 
-//   foreach ($block_ids as $block_id) {
-//     $block = BlockContent::load($block_id);
+//   foreach ($blocks as $nid => $block) {
+//     // Copy the values from the old fields to the new ones.
 //     foreach ($fields as $old_field => $new_field) {
-//       if (isset($block->{$old_field}->value)) {
+//       if ($block->hasField($old_field) && !$block->get($old_field)->isEmpty()) {
 //         $block->{$new_field}->value = $block->{$old_field}->value;
-//         $block->save();
 //       }
 //     }
+
+//     $block->save();
 //   }
 // }
 
@@ -186,6 +161,42 @@ function webspark_webdir_update_9007() {
 //   if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
 //     \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
 //   }
+// }
+
+/**
+ * Helper function to get node IDs of nodes using the "inline_block:web_directory" block
+ */
+// function _webspark_webdir_get_blocks() {
+//   $data = [];
+//   $nodes = \Drupal::entityTypeManager()
+//     ->getStorage('node')
+//     ->loadByProperties(['type' => 'page']);
+
+//   foreach ($nodes as $node) {
+//     if ($node->hasField('layout_builder__layout') && !$node->get('layout_builder__layout')->isEmpty()) {
+//       $sections = $node->get('layout_builder__layout')->getValue();
+
+//       foreach ($sections as $section_item) {
+//         $section = $section_item['section'];
+
+//         foreach ($section->getComponents() as $component) {
+//           $component_config = $component->get('configuration');
+
+//           if (isset($component_config['id']) && $component_config['id'] == 'inline_block:web_directory') {
+//             // Add the block to the array with the node ID as the key.
+//             $block_id = $component_config['block_plugin_configuration']['id'];
+//             $block = BlockContent::load($block_id);
+//             $nodes_and_blocks[$node->id()] = $block;
+
+//             // Stop processing this node, we found what we wanted.
+//             break 2;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   return $data;
 // }
 
 function _webspark_webdir_revert_all_module_config() {

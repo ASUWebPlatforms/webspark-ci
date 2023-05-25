@@ -18,6 +18,9 @@ dependencies:
     - field.field.block_content.web_directory.field_people_list
     - field.field.block_content.web_directory.field_people_search
     - field.field.block_content.web_directory.field_show_title
+    - field.field.block_content.web_directory.field_webdir_exclude_profiles
+    - field.field.block_content.web_directory.field_webdir_items_to_display
+    - field.field.block_content.web_directory.field_webdir_use_pager
   module:
     - field_group
     - field_states_ui
@@ -28,8 +31,11 @@ third_party_settings:
       children:
         - field_default_sort
         - field_show_title
+        - field_webdir_use_pager
         - field_news_items_to_display
+        - field_webdir_items_to_display
         - field_ids
+        - field_webdir_exclude_profiles
       label: 'Display settings'
       region: content
       parent_name: ''
@@ -321,7 +327,7 @@ content:
         maxlength_js_truncate_html: false
   field_ids:
     type: string_textfield
-    weight: 19
+    weight: 21
     region: content
     settings:
       size: 60
@@ -329,7 +335,7 @@ content:
     third_party_settings: {  }
   field_news_items_to_display:
     type: number
-    weight: 18
+    weight: 19
     region: content
     settings:
       placeholder: ''
@@ -435,6 +441,28 @@ content:
   field_show_title:
     type: boolean_checkbox
     weight: 17
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_webdir_exclude_profiles:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_webdir_items_to_display:
+    type: number
+    weight: 20
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_webdir_use_pager:
+    type: boolean_checkbox
+    weight: 18
     region: content
     settings:
       display_label: true
