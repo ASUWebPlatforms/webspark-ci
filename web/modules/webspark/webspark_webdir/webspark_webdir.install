@@ -116,6 +116,17 @@ function webspark_webdir_update_9007() {
  * Update the new fields created in 9007 with the values from the old ones.
  */
 function webspark_webdir_update_9008() {
+  $block_storage = \Drupal::entityTypeManager()->getStorage('block_content');
+  $query = $block_storage->getQuery();
+  $query->condition('type', 'web_directory');
+  $query->accessCheck(false);
+  $block_ids = $query->execute();
+  $blocks = $block_storage->loadMultiple($block_ids);
+
+  if (empty($blocks)) {
+    return;
+  }
+
   // Map the old fields to the new
   $fields = [
     'field_ids' => 'field_webdir_exclude_profiles',
@@ -123,11 +134,8 @@ function webspark_webdir_update_9008() {
     'field_news_items_to_display' => 'field_webdir_items_to_display',
   ];
 
-  // Load all nodes that contain the 'inline_block:web_directory' block and the block itself.
-  $blocks = _webspark_webdir_get_blocks();
-
-  foreach ($blocks as $nid => $block) {
-    // Copy the values from the old fields to the new ones.
+  // Copy the values from the old fields to the new ones
+  foreach ($blocks as $block) {
     foreach ($fields as $old_field => $new_field) {
       if ($block->hasField($old_field) && !$block->get($old_field)->isEmpty()) {
         $block->{$new_field}->value = $block->{$old_field}->value;
@@ -139,21 +147,23 @@ function webspark_webdir_update_9008() {
 }
 
 /**
- * Delete the old fields, and uninstall the old module.
+ * Delete the old fields from the web directory block.
  */
-// function webspark_webdir_update_9009(&$sandbox) {
-//   $old_fields = [
-//     'field_ids',
-//     'field_show_title',
-//     'field_news_items_to_display',
-//   ];
+function webspark_webdir_update_9009(&$sandbox) {
+  $fields = [
+    'field_ids',
+    'field_show_title',
+    'field_news_items_to_display',
+  ];
 
-//   foreach ($old_fields as $old_field) {
-//     if ($field_storage = FieldStorageConfig::loadByName('block_content', $old_field)) {
-//       $field_storage->delete();
-//     }
-//   }
-// }
+  foreach ($fields as $field) {
+    $field_storage = FieldStorageConfig::loadByName('block_content', $field);
+
+    if ($field_storage) {
+      $field_storage->delete();
+    }
+  }
+}
 
 /**
  * Uninstall the old module.
@@ -164,42 +174,6 @@ function webspark_webdir_update_9008() {
 //     \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
 //   }
 // }
-
-/**
- * Helper function to get node IDs of nodes using the "inline_block:web_directory" block
- */
-function _webspark_webdir_get_blocks() {
-  $nodes_and_blocks = [];
-  $nodes = \Drupal::entityTypeManager()
-    ->getStorage('node')
-    ->loadByProperties(['type' => 'page']);
-
-  foreach ($nodes as $node) {
-    if ($node->hasField('layout_builder__layout') && !$node->get('layout_builder__layout')->isEmpty()) {
-      $sections = $node->get('layout_builder__layout')->getValue();
-      foreach ($sections as $section_item) {
-        $section = $section_item['section'];
-        foreach ($section->getComponents() as $component) {
-          $component_config = $component->get('configuration');
-          if (isset($component_config['id']) && $component_config['id'] == 'inline_block:web_directory') {
-            if (isset($component_config['block_revision_id'])) {
-              // Load the block content from the revision id.
-              $block = \Drupal::entityTypeManager()->getStorage('block_content')->loadRevision($component_config['block_revision_id']);
-              if ($block) {
-                // Add the block to the array with the node ID as the key.
-                $nodes_and_blocks[$node->id()] = $block;
-                // Stop processing this node, we found what we wanted.
-                break 2;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return $nodes_and_blocks;
-}
 
 function _webspark_webdir_revert_all_module_config() {
   // Get this module name.
