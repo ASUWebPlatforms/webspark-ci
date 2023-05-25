@@ -1,7 +1,8 @@
 <?php
 
-use Drupal\node\Entity\Node;
+use Drupal\block_content\Entity\BlockContent;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\Entity\Node;
 
 /**
  * @file
@@ -102,19 +103,17 @@ function webspark_webdir_update_9006(&$sandbox) {
 }
 
 /**
- * Create the new fields that will replace the old ones.
+ * Create the "field_ids", "field_show_title", and "field_news_items_to_display" field replacements.
  */
 function webspark_webdir_update_9007(&$sandbox) {
-  // Create an array to hold the names of the new fields to create
   $fields = [
     'field_webdir_exclude_profiles' => 'string',
     'field_webdir_use_pager' => 'boolean',
     'field_webdir_items_to_display' => 'integer',
   ];
 
-  // Foreach new field, create the field
   foreach ($fields as $field_name => $type) {
-    if (!FieldStorageConfig::loadByName('node', $field_name)) {
+    if (!FieldStorageConfig::loadByName('block_content', $field_name)) {
       FieldStorageConfig::create([
         'field_name' => $field_name,
         'entity_type' => 'block_content',
@@ -126,25 +125,27 @@ function webspark_webdir_update_9007(&$sandbox) {
 }
 
 /**
- * Update the new fields with the values from the old ones.
+ * Update the new fields created in 9007 with the values from the old ones.
  */
 function webspark_webdir_update_9008(&$sandbox) {
-  // Define the mapping of old fields to new ones.
   $fields = [
     'field_ids' => 'field_webdir_exclude_profiles',
     'field_show_title' => 'field_webdir_use_pager',
     'field_news_items_to_display' => 'field_webdir_items_to_display',
   ];
 
-  foreach ($fields as $old_field => $new_field) {
-    $nids = \Drupal::entityQuery('node')
-      ->exists($old_field)
+  // First we get the block IDs.
+  $block_ids = \Drupal::entityQuery('block_content')
+      ->accessCheck(FALSE)
       ->execute();
 
-    foreach ($nids as $nid) {
-      $node = Node::load($nid);
-      $node->{$new_field}->value = $node->{$old_field}->value;
-      $node->save();
+  foreach ($block_ids as $block_id) {
+    $block = BlockContent::load($block_id);
+    foreach ($fields as $old_field => $new_field) {
+      if (isset($block->{$old_field}->value)) {
+        $block->{$new_field}->value = $block->{$old_field}->value;
+        $block->save();
+      }
     }
   }
 }
@@ -160,11 +161,16 @@ function webspark_webdir_update_9009(&$sandbox) {
   ];
 
   foreach ($old_fields as $old_field) {
-    if ($field_storage = FieldStorageConfig::loadByName('node', $old_field)) {
+    if ($field_storage = FieldStorageConfig::loadByName('block_content', $old_field)) {
       $field_storage->delete();
     }
   }
+}
 
+/**
+ * Uninstall the old module.
+ */
+function webspark_webdir_update_9010(&$sandbox) {
   // If the old module is installed, uninstall it
   if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
     \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
