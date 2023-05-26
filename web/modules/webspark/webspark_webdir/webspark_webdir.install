@@ -159,7 +159,7 @@ function webspark_webdir_update_9008(&$sandbox): void
 }
 
 /**
- * Delete the old fields from the web directory block.
+ * Delete the old fields from the Web Directory block.
  */
 function webspark_webdir_update_9009(&$sandbox): void
 {
@@ -188,6 +188,34 @@ function webspark_webdir_update_9010(&$sandbox): void
   }
 }
 
+/**
+ * Delete the old field config files.
+ */
+// function webspark_webdir_update_9011(&$sandbox): void
+// {
+//   $module_path = \Drupal::moduleHandler()->getModule('webspark_webdir')->getPath();
+
+//   $config_files = [
+//     'field.field.block_content.web_directory.field_ids.yml',
+//     'field.field.block_content.web_directory.field_show_title.yml',
+//     'field.field.block_content.web_directory.field_news_items_to_display.yml',
+//     'field.storage.block_content.field_ids.yml',
+//     'field.storage.block_content.field_show_title.yml',
+//     'field.storage.block_content.field_news_items_to_display.yml',
+//   ];
+
+//   foreach ($config_files as $config_file) {
+//     $config_file_path = $module_path . '/config/install/' . $config_file;
+
+//     if (file_exists($config_file_path)) {
+//       unlink($config_file_path);
+//     }
+//   }
+// }
+
+/**
+ * Revert all the module's configs.
+ */
 function _webspark_webdir_revert_all_module_config(): void
 {
   // Get this module name.
