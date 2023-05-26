@@ -108,14 +108,14 @@ function webspark_webdir_update_9006(&$sandbox) {
 /**
  * Create the "field_ids", "field_show_title", and "field_news_items_to_display" field replacements.
  */
-function webspark_webdir_update_9007() {
+function webspark_webdir_update_9007(&$sandbox) {
   _webspark_webdir_revert_all_module_config();
 }
 
 /**
  * Update the new fields created in 9007 with the values from the old ones.
  */
-function webspark_webdir_update_9008() {
+function webspark_webdir_update_9008(&$sandbox) {
   $block_storage = \Drupal::entityTypeManager()->getStorage('block_content');
   $query = $block_storage->getQuery();
   $query->condition('type', 'web_directory');
@@ -166,14 +166,13 @@ function webspark_webdir_update_9009(&$sandbox) {
 }
 
 /**
- * Uninstall the old module.
+ * Uninstall the old webspark_isearch module.
  */
-// function webspark_webdir_update_9010(&$sandbox) {
-//   // If the old module is installed, uninstall it
-//   if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
-//     \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
-//   }
-// }
+function webspark_webdir_update_9010(&$sandbox) {
+  if (\Drupal::moduleHandler()->moduleExists('webspark_isearch')) {
+    \Drupal::service('module_installer')->uninstall(['webspark_isearch']);
+  }
+}
 
 function _webspark_webdir_revert_all_module_config() {
   // Get this module name.
