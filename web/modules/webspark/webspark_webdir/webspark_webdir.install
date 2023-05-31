@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 
 /**
@@ -170,16 +171,25 @@ function webspark_webdir_update_9009(&$sandbox): void
   ];
 
   foreach ($fields as $field) {
-    $field_storage = FieldStorageConfig::loadByName('block_content', $field);
+    // If this is 'field_news_items_to_display', only delete the field instance so the News module can still use it.
+    if ($field === 'field_news_items_to_display') {
+      $field_instance = FieldConfig::loadByName('block_content', 'web_directory', $field);
 
-    if ($field_storage) {
-      $field_storage->delete();
+      if ($field_instance) {
+        $field_instance->delete();
+      }
+    } else {
+      $field_storage = FieldStorageConfig::loadByName('block_content', $field);
+
+      if ($field_storage) {
+        $field_storage->delete();
+      }
     }
   }
 }
 
 /**
- * Uninstall the old webspark_isearch module.
+ * Uninstall the old webspark_isearch module, if enabled.
  */
 function webspark_webdir_update_9010(&$sandbox): void
 {
