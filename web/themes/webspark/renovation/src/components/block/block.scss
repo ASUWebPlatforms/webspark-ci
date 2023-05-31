@@ -69,6 +69,15 @@
     }
   }
 
+  @media screen and (max-width: $uds-grid-container-max-width-md) {
+    .uds-video-hero {
+      .poster {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+
   .uds-video-hero {
     &::before {
       content: " ";
