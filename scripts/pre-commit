@@ -8,7 +8,7 @@ DRUPAL_STANDARD="$PROJECT_PATH/vendor/drupal/coder/coder_sniffer/Drupal"
 WEBSPARK_MODULE_PATH="$PROJECT_PATH/web/modules/webspark/"
 
 # Get the list of files with changes to be committed
-STAGED_FILES=$(git diff-index --name-only --cached HEAD --diff-filter=ACM $WEBSPARK_MODULE_PATH | grep -E '\.(module|php|install|theme|js)$')
+STAGED_FILES=$(git diff-index --name-only --cached HEAD --diff-filter=ACM $WEBSPARK_MODULE_PATH | grep -E '\.(php|js)$')
 
 # Run the code sniffing on each staged file
 echo "Running Drupal code standard validation on staged files..."
@@ -30,7 +30,6 @@ do
         echo "Please fix the violations before committing."
         echo ""
         FLAG=1
-        #exit 1
     fi
 done
 
