@@ -5,6 +5,7 @@
  * Custom theme hooks.
  */
 
+
 /**
  * Implements hook_library_info_build().
  * Automatically creates components libraries (Not visible in theme's libraries.yml file)
@@ -145,4 +146,63 @@ function renovation_preprocess_media(array &$variables) {
     }
     unset($attributes['data-round']);
   }
+}
+
+
+/**
+ * Implements hook_preprocess_maintenance_page().
+ */
+
+function renovation_preprocess_maintenance_page(&$variables) {
+  // Getting variables for site name, parent unit, and urls for direct access in template
+
+  $block = \Drupal\block\Entity\Block::load('asubrandheader');
+  if ($block) {
+    $settings = $block->get('settings');
+    $sitename = $settings['asu_brand_header_block_title'];
+    $parent_org = $settings['asu_brand_header_block_parent_org'];
+    $parent_url = $settings['asu_brand_header_block_parent_org_url'];
+    $variables['site_name'] = $sitename;
+    $variables['parent_org'] = $parent_org;
+    $variables['parent_url'] = $parent_url;
+  }
+
+  
+  $block_manager = \Drupal::service('plugin.manager.block');
+  // Hard-coding footer block default configuration to avoid hitting database on maintenance page
+  $config = [
+    "label" => 'ASU footer',
+    "label_display" => '0',
+    "provider" => 'asu_footer',
+    "asu_footer_block_unit_logo" => null,
+    "asu_footer_block_unit_name" =>  '',
+    "asu_footer_block_show_logo_social_media" =>  0,
+    "asu_footer_block_facebook_url" =>  '',
+    "asu_footer_block_twitter_url" =>  '',
+    "asu_footer_block_linkedin_url" =>  '',
+    "asu_footer_block_instagram_url" =>  '',
+    "asu_footer_block_youtube_url" =>  '',
+    "asu_footer_block_show_columns" =>  0,
+    "asu_footer_block_link_title" => '',
+    "asu_footer_block_link_url" =>  '',
+    "asu_footer_block_cta_title" =>  '',
+    "asu_footer_block_cta_url" => '',
+    "asu_footer_block_second_title" =>  '',
+    "asu_footer_block_menu_second_column_name" => '_none',
+    "asu_footer_block_third_title" => '',
+    "asu_footer_block_menu_third_column_name" => '_none',
+    "asu_footer_block_fourth_title" => '',
+    "asu_footer_block_menu_fourth_column_name" => '_none',
+    "asu_footer_block_fifth_title" =>  '',
+    "asu_footer_block_menu_fifth_column_name" =>  '_none',
+    "asu_footer_block_sixth_title" => '',
+    "asu_footer_block_menu_sixth_column_name" => '_none'
+  ];
+  $plugin_block = $block_manager->createInstance('asu_footer', $config);
+  // Some blocks might implement access check.
+  $render = $plugin_block->build();
+  // Add the cache tags/contexts.
+  \Drupal::service('renderer')->addCacheableDependency($render, $plugin_block);
+  // return $render;
+  $variables['footer'] =   $render;
 }
