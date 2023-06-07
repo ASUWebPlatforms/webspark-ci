@@ -2,10 +2,8 @@
 
 namespace WebsparkCustomScripts;
 
-use Composer\IO\IOInterface;
 use Composer\Script\Event;
-use Composer\Util\Filesystem;
-use Composer\Util\ProcessExecutor;
+use Composer\Plugin\PreCommandRunEvent;
 
 class CustomComposerScripts
 {
@@ -20,15 +18,18 @@ class CustomComposerScripts
    *
    * To add a dependency to your site:
    *
-   *    composer custom-require drupal/modulename
+   *    composer custom-require <package>
    *
    * Then install the new dependency:
    *
    *    composer update
+   *
+   * @param Event $event
+   * @return int
    */
-  public static function customRequire(Event $event) {
+  public static function customRequire(Event $event): int
+  {
     $io = $event->getIO();
-    $composer = $event->getComposer();
     $arguments = $event->getArguments();
 
     $hasNoUpdate = array_search('--no-update', $arguments) !== false;
@@ -41,13 +42,13 @@ class CustomComposerScripts
         ($item != '--no-install');
     });
 
-    // Escape the arguments passed in.
+    // Escape the arguments passed in
     $args = array_map(function ($item) {
       return escapeshellarg($item);
     }, $arguments);
 
     // Run `require` with '--no-update' if there is no composer.lock file,
-    // and without it if there is.
+    // and without it if there is
     $addNoUpdate = $hasNoUpdate || !file_exists('custom-dependencies/composer.lock');
 
     if ($addNoUpdate) {
@@ -57,7 +58,7 @@ class CustomComposerScripts
     }
 
     // Insert the new projects into the custom-dependencies composer.json
-    // without writing vendor & etc to the custom-dependencies directory.
+    // without writing vendor & etc. to the custom-dependencies directory
     $cmd = "composer --working-dir=custom-dependencies require " . implode(' ', $args);
     $io->writeError($cmd . PHP_EOL);
     passthru($cmd, $statusCode);
@@ -76,15 +77,18 @@ class CustomComposerScripts
    *
    * To remove a dependency from your site:
    *
-   *    composer custom-remove drupal/modulename
+   *    composer custom-remove <package>
    *
    * Then update the dependencies:
    *
    *    composer update
+   *
+   * @param Event $event
+   * @return int
    */
-  public static function customRemove(Event $event) {
+  public static function customRemove(Event $event): int
+  {
     $io = $event->getIO();
-    $composer = $event->getComposer();
     $arguments = $event->getArguments();
 
     // Remove --working-dir, if provided
@@ -92,7 +96,7 @@ class CustomComposerScripts
       return substr($item, 0, 13) != '--working-dir';
     });
 
-    // Escape the arguments passed in.
+    // Escape the arguments passed in
     $args = array_map(function ($item) {
       return escapeshellarg($item);
     }, $arguments);
@@ -122,8 +126,12 @@ class CustomComposerScripts
 
   /**
    * Helper function to remove the composer.lock and vendor directory from /custom-dependencies.
+   *
+   * @param $dirPath
+   * @return void
    */
-  public static function deleteDirectory($dirPath) {
+  public static function deleteDirectory($dirPath): void
+  {
     if (! is_dir($dirPath)) {
       throw new \InvalidArgumentException("$dirPath must be a directory");
     }
@@ -143,5 +151,44 @@ class CustomComposerScripts
     }
 
     rmdir($dirPath);
+  }
+
+  /**
+   * Check what command the user is running, and provide the proper messaging.
+   *
+   * @param PreCommandRunEvent $event
+   * @return void
+   */
+  public static function checkCommand(PreCommandRunEvent $event): void
+  {
+    if ($event->getCommand() == 'require' || $event->getCommand() == 'remove') {
+      echo "\n";
+      echo " _   _ _____    _    ____  ____    _   _ ____  _ \n";
+      echo "| | | | ____|  / \  |  _ \/ ___|  | | | |  _ \| |\n";
+      echo "| |_| |  _|   / _ \ | | | \___ \  | | | | |_) | |\n";
+      echo "|  _  | |___ / ___ \| |_| |___) | | |_| |  __/|_|\n";
+      echo "|_| |_|_____/_/   \_\____/|____/   \___/|_|   (_)\n";
+      echo "\n";
+    }
+
+    if ($event->getCommand() == 'require') {
+      echo "\n";
+      echo "It looks like you want to install a new dependency.\n";
+      echo "To avoid potential conflicts in the future, we HIGHLY recommend the use of 'custom-require' instead:\n";
+      echo "\n";
+      echo "composer custom-require <package>\n";
+      echo "composer update\n";
+      echo "\n";
+    }
+
+    if ($event->getCommand() == 'remove') {
+      echo "\n";
+      echo "It looks like you want to remove a dependency.\n";
+      echo "To avoid potential conflicts in the future, we HIGHLY recommend the use of 'custom-remove' instead:\n";
+      echo "\n";
+      echo "composer custom-remove <package>\n";
+      echo "composer update\n";
+      echo "\n";
+    }
   }
 }
