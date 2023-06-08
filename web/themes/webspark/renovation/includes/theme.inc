@@ -154,21 +154,48 @@ function renovation_preprocess_media(array &$variables) {
  */
 
 function renovation_preprocess_maintenance_page(&$variables) {
-  // Getting variables for site name, parent unit, and urls for direct access in template
 
-  $block = \Drupal\block\Entity\Block::load('asubrandheader');
-  if ($block) {
-    $settings = $block->get('settings');
-    $sitename = $settings['asu_brand_header_block_title'];
-    $parent_org = $settings['asu_brand_header_block_parent_org'];
-    $parent_url = $settings['asu_brand_header_block_parent_org_url'];
-    $variables['site_name'] = $sitename;
-    $variables['parent_org'] = $parent_org;
-    $variables['parent_url'] = $parent_url;
+  $block_manager = \Drupal::service('plugin.manager.block');
+  
+  // Building header block and props, no navtree
+
+  $header_block = \Drupal\block\Entity\Block::load('asubrandheader');
+
+  // AsuBrandHeaderBlock
+
+  if ($header_block) {
+    $settings = $header_block->get('settings');
+    $header_built = $block_manager->createInstance('asubrandheader', $settings);
+    // Some blocks might implement access check.
+    $header_render =  $header_built->build();
+    // Add the cache tags/contexts.
+    \Drupal::service('renderer')->addCacheableDependency($header_render, $header_built);  
+
+    $header_config = $header_block->get('settings');
+
+    // why do I need to rebuild this here? I can't figure out a way to access the props object created in modules/webspark/asu_brand/src/Plugin/Block/AsuBrandHeaderBlock.php directly. Doing it here does give me the opportunity to set navtree to null though.
+    $props = [];
+    $props['baseUrl'] = $header_config['asu_brand_header_block_base_url'] ?? 'https://asu.edu';
+    $props['title'] = $header_config['asu_brand_header_block_title'];
+    $props['parentOrg'] = $header_config['asu_brand_header_block_parent_org'];
+    $props['parentOrgUrl'] = $header_config['asu_brand_header_block_parent_org_url'];
+    $props['expandOnHover'] = $header_config['asu_brand_header_block_expand_on_hover'];
+    $props['loginLink'] = $header_config['asu_brand_header_block_login_path'];
+    $props['logoutLink'] = $header_config['asu_brand_header_block_logout_path'];
+    $props['searchUrl'] = "https://search.asu.edu/search";
+    $props['navTree'] = null;
+    $props['loggedIn'] = FALSE;
+    $props['userName'] = '';
+
+    $variables['heading'] =  t("Site under maintenance");
+    $variables['#attached']['drupalSettings']['asu_brand'] = $header_config;
+    $variables['#attached']['drupalSettings']['asu_brand']['props'] = $props;
+    $variables['#attached']['library'][] = 'asu_react_core/react-core';
+    $variables['#attached']['library'][] = 'asu_brand/components-library';
   }
 
-  
-  $block_manager = \Drupal::service('plugin.manager.block');
+  // Building footer block
+
   // Hard-coding footer block default configuration to avoid hitting database on maintenance page
   $config = [
     "label" => 'ASU footer',

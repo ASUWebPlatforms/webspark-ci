@@ -28,11 +28,3 @@ renovation.chartjs:
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js: { type: external, minified: true }
-
-maintenance:
-  header: true
-  dependencies: 
-    - asu_react_integration/reactjs
-  js:
-    node_modules/@asu/component-header/dist/vendor.umd.js: { minified: true }
-    node_modules/@asu/component-header/dist/asuHeader.umd.js: { minified: true }

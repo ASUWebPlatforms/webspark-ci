@@ -13,41 +13,14 @@
 #}
 
 
-{# Pulls in unity header #}
-{{ attach_library('asu_react_integration/reactjs') }}
-{{ attach_library('renovation/maintenance') }}
-
   <div class="container">
-    <main role="main" style="padding-top:150px; padding-bottom:5px">
+    <main role="main" style="padding-top:50px; padding-bottom:5px">
       <header role="banner">
-        <div id="header-container"></div>
-
-
-
-        <script>
-          AsuHeader.initGlobalHeader({
-            targetSelector: "#header-container",
-            props: {
-              loggedIn: false,
-              logoutLink: "/caslogout",
-              loginLink: "/cas",
-              userName: "",
-              title: "{{site_name}}",
-              parentOrg: "{{parent_org}}",
-              parentOrgUrl: "{{ parent_url}}",
-              breakpoint: "Lg",
-              searchUrl: "https://search.asu.edu/search",
-              site: "subdomain",
-            },
-          });
-        </script>
+        <div id="ws2HeaderContainer"></div>
+        {{header}}
       </header>
 
-      {% if title %}
-        <h1>{{ title }}</h1>
-      {% endif %}
-
-      <h1>{{siteName}}</h1>
+      <h1>{{heading}}</h1>
 
       {{ page.highlighted }}
 
