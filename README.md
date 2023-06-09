@@ -1,3 +1,5 @@
+<div align="center">
+
 # Webspark CI
 
 [![CircleCI](https://circleci.com/gh/ASUWebPlatforms/webspark-ci.svg?style=shield)](https://circleci.com/gh/ASUWebPlatforms/webspark-ci)
@@ -159,8 +161,10 @@ Finally, we can pull the database and files from the Pantheon site:
 ```bash
 # Restart the container first since we changed the PHP version
 ddev restart
+
 # Establish a connection using our machine token
 ddev auth ssh
+
 # Pull the database and files
 ddev pull pantheon
 ```
@@ -218,36 +222,14 @@ The benefit of the Pantheon Build Tools workflow is its automated deployment pro
 
 # Resources
 
-## Pantheon
+- [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools)
+- [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
+- [GitHub](https://github.com/ASUWebPlatforms)
+- [Docker](https://www.docker.com)
+- [DDEV](https://ddev.com)
+- [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
+- [Lando](https://docs.lando.dev)
+- [Lando for Pantheon](https://docs.lando.dev/pantheon)
+- [Agile](https://www.atlassian.com/agile)
 
-[Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools)
-
-[Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
-
-<br>
-
-## GitHub
-
-[GitHub](https://github.com/ASUWebPlatforms)
-
-<br>
-
-## Local Development
-
-[Docker](https://www.docker.com)
-
-[DDEV](https://ddev.com)
-
-[DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-
-[Lando](https://docs.lando.dev)
-
-[Lando for Pantheon](https://docs.lando.dev/pantheon)
-
-<br>
-
-## Agile
-
-[Agile](https://www.atlassian.com/agile)
-
-<div align="right"><a href="#webspark-ci">↑ Top</a></div> 
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
