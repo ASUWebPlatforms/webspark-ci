@@ -8,7 +8,7 @@ DRUPAL_STANDARD="$PROJECT_PATH/vendor/drupal/coder/coder_sniffer/Drupal"
 WEBSPARK_MODULE_PATH="$PROJECT_PATH/web/modules/webspark/"
 
 # Get the list of files with changes to be committed
-STAGED_FILES=$(git diff-index --name-only --cached HEAD --diff-filter=ACM $WEBSPARK_MODULE_PATH | grep -E '\.(php|js)$')
+STAGED_FILES=$(git diff-index --name-only --cached HEAD --diff-filter=ACM $WEBSPARK_MODULE_PATH | grep -E '\.(php|module|inc|install|test|profile|theme|css|info|txt|md)$')
 
 # Run the code sniffing on each staged file
 echo "Running Drupal code standard validation on staged files..."
@@ -16,7 +16,7 @@ echo "Running Drupal code standard validation on staged files..."
 FLAG=0
 for FILE in $STAGED_FILES
 do
-    OUTPUT=$($PHPCSCHANGED --git --git-staged --phpcs-path $PHPCS_BIN --standard $DRUPAL_STANDARD $FILE)
+    OUTPUT=$($PHPCSCHANGED --git --git-staged --phpcs-path $PHPCS_BIN --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --standard $DRUPAL_STANDARD $FILE)
 
     # Check if there are any errors
     if [ -n "$OUTPUT" ]; then
