@@ -1,5 +1,3 @@
-<div align="center">
-
 # Webspark CI
 
 [![CircleCI](https://circleci.com/gh/ASUWebPlatforms/webspark-ci.svg?style=shield)](https://circleci.com/gh/ASUWebPlatforms/webspark-ci)
