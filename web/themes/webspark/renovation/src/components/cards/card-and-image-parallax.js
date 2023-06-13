@@ -4,7 +4,7 @@
   const scrollHandler = () => {
     document.querySelectorAll('.parallax-container').forEach((container) => {
       const the_image = container.querySelector('img');
-
+      the_image.style.minHeight = container.offsetHeight * MAGIC_PARALLAX_FACTOR + 'px';
       const default_position =
         container.offsetHeight - the_image.height * MAGIC_PARALLAX_FACTOR;
       const distance_to_travel =
