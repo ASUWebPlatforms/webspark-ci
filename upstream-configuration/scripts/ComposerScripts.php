@@ -243,5 +243,4 @@ class ComposerScripts {
 
     file_put_contents("composer.patches.json", $combinedJson . PHP_EOL);
   }
-
 }

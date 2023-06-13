@@ -3,11 +3,11 @@
 In order to provide better separation and management of custom dependencies and patches, we've introduced two new files:
 
 - `custom-dependencies/composer.json`: For managing custom dependencies
-- `composer.patches.json`: For managing Drupal patches
+- `custom-dependecies/patches.custom.json`: For managing Drupal patches
 
 ## Why are we making these changes?
 
-These changes allow for better organization and separation of concerns within the project. By isolating custom dependencies and patches in separate files, it reduces the likelihood of merge conflicts when updating the upstream and provides a clearer structure for managing project-specific dependencies and patches.
+These changes allow for better organization and separation of concerns within the project. By isolating custom dependencies and patches in separate files, it reduces the likelihood of merge conflicts when updating the upstream and provides a clearer structure for managing project-specific dependencies and patches. By following the guidelines introduced below, you'll ensure a consistent and organized approach to managing your custom dependencies and patches within your project.
 
 ---
 
@@ -19,14 +19,13 @@ These changes allow for better organization and separation of concerns within th
 2. Remove all custom dependencies out of the root `composer.json` file, and move them into `custom-dependencies/composer.json`.
 3. Add, update, or remove custom dependencies from the "require" section of the `custom-dependencies/composer.json` file as needed.
 
-### Drupal Patches
+### Custom Patches
 
-1. Locate the `composer.patches.json` file in the project root.
-2. Remove all custom patches out of the root `composer.json` file, and move them into `composer.patches.json`.
-3. Add, update, or remove patches in the "patches" section of the `composer.patches.json` file as needed.
-4. As we may need to add patches periodically, we recommend that you place your patches at the end of this file.
+1. Locate the `custom-dependencies/patches.custom.json` file in the project.
+2. Remove all custom patches out of the root `composer.json` file, and move them into `custom-dependencies/patches.custom.json`.
+3. Add, update, or remove patches in the "patches" section of the `custom-dependencies/patches.custom.json` file as needed.
 
-## Managing Dependencies Moving Forward
+## Managing Dependencies and Patches Moving Forward
 
 To manage your custom dependencies and patches moving forward, follow these steps:
 
@@ -35,9 +34,9 @@ To manage your custom dependencies and patches moving forward, follow these step
 1. Make changes to the `custom-dependencies/composer.json` file as needed.
 2. Run `composer update` to apply the changes to your project.
 
-### Drupal Patches
+### Custom Patches
 
-1. Make changes to the `composer.patches.json` file as needed.
+1. Make changes to the `custom-dependencies/patches.custom.json` file as needed.
 2. Run `composer update` to apply the patches to your project.
 
 ---
@@ -55,11 +54,9 @@ The `custom-require` command ensures that users can easily add custom dependenci
 To add a new dependency, run the following commands from the project root:
 
 ```sh
-composer custom-require drupal/module
+composer custom-require <package>
 composer update
 ```
-
-Replace `drupal/module` with the actual package name you want to require.
 
 ## Custom Remove Composer Command
 
@@ -70,10 +67,14 @@ Similar to the `custom-require` command to add dependencies, we have also added 
 To remove a dependency from your `custom-dependencies/composer.json` file, run the following commands from the project root:
 
 ```sh
-composer custom-remove drupal/module
+composer custom-remove <package>
 composer update
 ```
 
-Replace `drupal/module` with the actual package name you want to require.
+---
 
-By following these guidelines, you'll ensure a consistent and organized approach to managing your custom dependencies and patches within your project.
+## FAQS
+
+### What if I don't want to use the `custom-require` or `custom-remove` commands?
+
+The standard `composer require` and `composer remove` commands will still work, however we HIGHLY recommend that you try not to use them. In a future update, we may need to edit the root `composer.json` file, which puts you in danger of a nasty merge conflict.
