@@ -45,12 +45,14 @@
   // selected prop, aka active. We do this client side to avoid needing to break
   // the block cache.
   var currentPath = window.location.pathname+window.location.search;
-  for (var index = 0; index < props.navTree.length; index++) {
-    if (inActiveTrail(props.navTree[index], currentPath)) {
-      props.navTree[index]['selected'] = true;
+  if (props.navTree){
+    for (var index = 0; index < props.navTree.length; index++) {
+      if (inActiveTrail(props.navTree[index], currentPath)) {
+        props.navTree[index]['selected'] = true;
+      }
     }
   }
-
+  
   function inActiveTrail(item, path) {
     // Check if the item path is a match.
     if (item['href'] === path) {
