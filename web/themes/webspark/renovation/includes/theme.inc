@@ -173,7 +173,9 @@ function renovation_preprocess_maintenance_page(&$variables) {
 
     $header_config = $header_block->get('settings');
 
-    // why do I need to rebuild this here? I can't figure out a way to access the props object created in modules/webspark/asu_brand/src/Plugin/Block/AsuBrandHeaderBlock.php directly. Doing it here does give me the opportunity to set navtree to null though.
+    //  @todo Create a service to return props for a block based on block settings.
+    //   For now recreating the props object for the header block here in a semi-hardcoded way.
+
     $props = [];
     $props['baseUrl'] = $header_config['asu_brand_header_block_base_url'] ?? 'https://asu.edu';
     $props['title'] = $header_config['asu_brand_header_block_title'];
