@@ -225,6 +225,7 @@ The benefit of the Pantheon Build Tools workflow is its automated deployment pro
 - [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools)
 - [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
 - [GitHub](https://github.com/ASUWebPlatforms)
+- [CircleCI](https://circleci.com)
 - [Docker](https://www.docker.com)
 - [DDEV](https://ddev.com)
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
