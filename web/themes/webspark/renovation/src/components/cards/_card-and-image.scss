@@ -5,3 +5,9 @@
     padding: 0;
   }
 }
+
+@include media-breakpoint-up(lg) {
+  .uds-card-and-image-container .card .card-icon-top {
+    margin: $uds-size-spacing-3 auto -0.5rem $uds-size-spacing-4 !important;
+  }
+}
