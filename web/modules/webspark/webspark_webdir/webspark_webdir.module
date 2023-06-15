@@ -66,13 +66,13 @@ function webspark_webdir_preprocess_block__web_directory(&$variables)
   }
 
   $usePager = TRUE;
-  if ($blockContent->hasField('field_show_title')) {
-    $usePager = $blockContent->field_show_title->value;
+  if ($blockContent->hasField('field_webdir_use_pager')) {
+    $usePager = $blockContent->field_webdir_use_pager->value;
   }
 
   $profilesPerPage = 20;
-  if ($blockContent->hasField('field_news_items_to_display')) {
-    $profilesPerPage = $blockContent->field_news_items_to_display->value;
+  if ($blockContent->hasField('field_webdir_items_to_display')) {
+    $profilesPerPage = $blockContent->field_webdir_items_to_display->value;
   }
 
   $defaultSort = '';
@@ -86,8 +86,8 @@ function webspark_webdir_preprocess_block__web_directory(&$variables)
   }
 
   $dontDisplayProfiles = '';
-  if ($blockContent->hasField('field_ids')) {
-    $dontDisplayProfiles = $blockContent->field_ids->value;
+  if ($blockContent->hasField('field_webdir_exclude_profiles')) {
+    $dontDisplayProfiles = $blockContent->field_webdir_exclude_profiles->value;
   }
 
   $appPathFolder = \Drupal::service('webspark_webdir.helper_functions')->getAppPathFolder('app-webdir-ui');
