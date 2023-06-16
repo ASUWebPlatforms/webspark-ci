@@ -81,4 +81,10 @@
   }
 }
 
-
+.card-body {
+  div {
+    p {
+      margin: $uds-size-spacing-2 0;
+    }
+  }
+}
