@@ -53,6 +53,7 @@
 @import "../../node_modules/@asu/bootstrap4-theme/src/scss/extends/person-profile";
 @import "../../node_modules/@asu/bootstrap4-theme/src/scss/extends/image-parallax";
 @import "../components/cards/card-and-image-parallax";
+@import '../../node_modules/@asu/bootstrap4-theme/src/scss/extends/ranking-cards';
 
 // ----------------------------------------------------------------------------
 // Misc.
@@ -76,3 +77,5 @@
 @import "../components/testimonial-carousel/testimonial-carousel";
 // Includes an override for images
 @import "../components/story-hero/story-hero";
+// WS2-1674 - Ranking card overrides
+@import "../components/cards/card-ranking";

@@ -40,6 +40,9 @@ components:
   namespaces:
     renovation: ./src/components
 
+dependencies:
+  - webspark/asu_brand
+
 # Information added by Drupal.org packaging script on 2020-09-30
 version: '8.x-4.10'
 project: 'radix'
