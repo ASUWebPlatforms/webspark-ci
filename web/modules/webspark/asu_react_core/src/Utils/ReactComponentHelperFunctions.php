@@ -51,6 +51,9 @@ class ReactComponentHelperFunctions {
       case 'card_story':
         $card->cardType = 'story';
         break;
+      case 'card_ranking':
+        $card->cardType = 'ranking';
+        break;
     }
 
     if ($paragraph->field_media && $paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
@@ -106,11 +109,33 @@ class ReactComponentHelperFunctions {
       $cta->size = 'small';
       $card->buttons[] = $cta;
     }
+    // Field link URL with title and URL
     if ($paragraph->field_link && $paragraph->field_link->title && $paragraph->field_link->uri) {
       $card->linkLabel = $paragraph->field_link->title;
       $link = Url::fromUri($paragraph->field_link->uri);
       $card->linkUrl = $link->toString();
     }
+
+    // WS2-1674 - Card ranking image size 
+    if ($paragraph->field_card_ranking_image_size->value) {
+      if ($paragraph->field_card_ranking_image_size->value === 'small') {
+        $card->imageSize = 'small';
+      } elseif ($paragraph->field_card_ranking_size->value === 'large') {
+        $card->imageSize = 'large';
+      }
+    }
+    
+    // WS2-1674 - Card ranking link URL, no link title
+    if ($paragraph->field_card_ranking_image_size->value && $paragraph->field_link) {
+      $link = Url::fromUri($paragraph->field_link->uri);
+      $card->linkUrl = $link->toString();
+    }
+
+    // WS2-1674 - Card ranking citation
+    if ($paragraph->field_card_ranking_image_size->value === 'small') {
+      $card->citation = $paragraph->field_citation_title->value;
+    }
+
     //@TODO We are not going to send this information to the react component,
     // since the functionality in webspark for the tags has not yet been defined
     /*if (!empty($paragraph->field_tags)) {
