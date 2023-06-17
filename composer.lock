@@ -67,7 +67,7 @@
             "version": "5.15.4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:FortAwesome/Font-Awesome.git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
                 "reference": "7d3d774145ac38663f6d1effc6def0334b68ab7e"
             },
             "dist": {
@@ -15904,5 +15904,5 @@
     "platform-overrides": {
         "php": "8.1.6"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
