@@ -33,7 +33,7 @@
             // Update the tree.
             update_tree(currentSize);
           });
-          
+
           // Hide "Web Directory customized sort" option by conditions.
           // @see https://asudev.jira.com/browse/ASUIS-574
           $(
@@ -104,7 +104,7 @@ function convert_asurite_to_tree(data, departments) {
 
           new_element.id = element.asurite_id.raw + ':' + deptid;
           // Remove maybe.
-          new_element.sort = element.last_name.raw;
+          new_element.sort = element.display_last_name.raw;
           new_element.text = element.display_name.raw + ', ' + element.asurite_id.raw +
                   ', ' + department_data['name']+ ', ' + title;
           new_element.type = "person";
