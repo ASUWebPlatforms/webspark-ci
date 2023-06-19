@@ -1,3 +1,4 @@
+uuid: 99968650-409a-4032-a07b-4321d84b2951
 langcode: en
 status: true
 dependencies:
@@ -6,12 +7,14 @@ dependencies:
     - field.storage.block_content.field_component_type
   module:
     - options
+_core:
+  default_config_hash: lEymzAjE9G4u-YMZI4dqvtPg0se-eJits5X9ceUqefo
 id: block_content.web_directory.field_component_type
 field_name: field_component_type
 entity_type: block_content
 bundle: web_directory
 label: 'Component type'
-description: ''
+description: "Note: For large department listings (over 99 profiles), we recommend using 'Departments' or 'Faculty by rank.'<br>\r\nThe other options are not intended or optimized for large data sets."
 required: true
 translatable: false
 default_value: {  }
