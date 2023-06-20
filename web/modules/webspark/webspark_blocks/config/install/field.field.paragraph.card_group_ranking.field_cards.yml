@@ -2,20 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.card_arrangement
-    - field.storage.block_content.field_card_group
-    - paragraphs.paragraphs_type.card_group_default
-    - paragraphs.paragraphs_type.card_group_degree
+    - field.storage.paragraph.field_cards
     - paragraphs.paragraphs_type.card_group_ranking
-    - paragraphs.paragraphs_type.card_group_story
-    - paragraphs.paragraphs_type.card_group_with_icon
+    - paragraphs.paragraphs_type.card_ranking
   module:
     - entity_reference_revisions
-id: block_content.card_arrangement.field_card_group
-field_name: field_card_group
-entity_type: block_content
-bundle: card_arrangement
-label: 'Card Group'
+id: paragraph.card_group_ranking.field_cards
+field_name: field_cards
+entity_type: paragraph
+bundle: card_group_ranking
+label: Cards
 description: ''
 required: false
 translatable: true
@@ -25,71 +21,67 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      card_group_ranking: card_group_ranking
-      card_group_default: card_group_default
-      card_group_degree: card_group_degree
-      card_group_story: card_group_story
-      card_group_with_icon: card_group_with_icon
+      card_ranking: card_ranking
     negate: 0
     target_bundles_drag_drop:
       accordion_panel:
-        weight: 40
+        weight: 21
         enabled: false
       anchor_menu_settings:
-        weight: 44
+        weight: 22
         enabled: false
       blockquote:
-        weight: 42
+        weight: 23
         enabled: false
       card:
-        weight: 43
+        weight: 24
         enabled: false
       card_degree:
-        weight: 44
+        weight: 25
         enabled: false
       card_event:
-        weight: 45
+        weight: 26
         enabled: false
       card_group_default:
-        weight: 46
-        enabled: true
+        weight: 27
+        enabled: false
       card_group_degree:
-        weight: 47
-        enabled: true
+        weight: 28
+        enabled: false
       card_group_ranking:
         weight: 29
-        enabled: true
+        enabled: false
       card_group_story:
-        weight: 48
-        enabled: true
+        weight: 30
+        enabled: false
       card_group_with_icon:
-        weight: 53
-        enabled: true
+        weight: 31
+        enabled: false
       card_media:
-        weight: 49
+        weight: 32
         enabled: false
       card_ranking:
         weight: 33
-        enabled: false
+        enabled: true
       card_story:
-        weight: 50
+        weight: 34
         enabled: false
       card_with_icon:
-        weight: 56
+        weight: 35
         enabled: false
       cta:
-        weight: 51
+        weight: 36
         enabled: false
       gallery_image:
-        weight: 54
+        weight: 37
         enabled: false
       tab_content:
-        weight: 76
+        weight: 38
         enabled: false
       testimonial:
-        weight: 77
+        weight: 39
         enabled: false
       tooltip:
-        weight: 78
+        weight: 40
         enabled: false
 field_type: entity_reference_revisions

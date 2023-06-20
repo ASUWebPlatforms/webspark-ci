@@ -119,3 +119,9 @@ function asu_react_core_process_component_card_with_icon(&$variables) {
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
+// WS2-1674 - Adding Ranking card
+function asu_react_core_process_component_card_ranking(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $settings = \Drupal::service('asu_react_core.helper_functions')->getCardContent($paragraph);
+  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
+}
