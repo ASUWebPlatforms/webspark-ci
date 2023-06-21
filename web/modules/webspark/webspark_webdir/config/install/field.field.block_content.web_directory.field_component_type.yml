@@ -11,7 +11,7 @@ field_name: field_component_type
 entity_type: block_content
 bundle: web_directory
 label: 'Component type'
-description: ''
+description: "Note: For large department listings (over 99 profiles), we recommend using 'Departments' or 'Faculty by rank.'<br>\r\nThe other options are not intended or optimized for large data sets."
 required: true
 translatable: false
 default_value: {  }

@@ -126,7 +126,7 @@ class ReactComponentHelperFunctions {
     }
 
     // WS2-1674 - Card ranking link URL, no link title
-    if ($paragraph->field_card_ranking_image_size->value && $paragraph->field_link) {
+    if ($paragraph->field_card_ranking_image_size->value && $paragraph->field_link->uri) {
       $link = Url::fromUri($paragraph->field_link->uri);
       $card->linkUrl = $link->toString();
     }
