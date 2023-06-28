@@ -8,6 +8,22 @@ use Drupal\field\Entity\FieldStorageConfig;
  * Install, update and uninstall functions for the Web Directory Component module.
  */
 
+
+ function webspark_webdir_install(&$sandbox): void
+ {
+  // We need to leave the yml files for renamed fields from WS2-1587in place
+  // otherwise in some cases the field settings revert calls will wipe them out
+  // before the content can be copied. That's a problem though, since at
+  // install on new
+  // sites we'll have duplicate fields. This is the solution. A hook_install()
+  // that runs at site install, and re-runs update_9009 to delink the fields
+  // we need removed. See WS2-1587 for more details on why this cleanup was
+  // needed.
+  webspark_webdir_update_9009($sandbox);
+  // Note: we also invoke update 9009 in
+  // _webspark_webdir_revert_all_module_config() to do cleanup after reverts.
+ }
+
 /**
  * Updates the Department field label (ASUIS-474).
  */
@@ -105,7 +121,7 @@ function webspark_webdir_update_9004(&$sandbox): void
  */
 function webspark_webdir_update_9005(&$sandbox): void
 {
-  _webspark_webdir_revert_all_module_config();
+  _webspark_webdir_revert_all_module_config($legacy_cleanup = FALSE);
 }
 
 /**
@@ -113,7 +129,7 @@ function webspark_webdir_update_9005(&$sandbox): void
  */
 function webspark_webdir_update_9006(&$sandbox): void
 {
-  _webspark_webdir_revert_all_module_config();
+  _webspark_webdir_revert_all_module_config($legacy_cleanup = FALSE);
 }
 
 /**
@@ -121,7 +137,7 @@ function webspark_webdir_update_9006(&$sandbox): void
  */
 function webspark_webdir_update_9007(&$sandbox): void
 {
-  _webspark_webdir_revert_all_module_config();
+  _webspark_webdir_revert_all_module_config($legacy_cleanup = FALSE);
 }
 
 /**
@@ -233,7 +249,7 @@ function webspark_webdir_update_9012(&$sandbox): void {
 /**
  * Revert all the module's configs.
  */
-function _webspark_webdir_revert_all_module_config(): void
+function _webspark_webdir_revert_all_module_config($legacy_cleanup = TRUE): void
 {
   // Get this module name.
   $module = Drupal::service('module_handler')
@@ -248,4 +264,11 @@ function _webspark_webdir_revert_all_module_config(): void
 
   // Lock the configuration storage.
   Drupal::state()->set('configuration_locked', true);
+
+  // See note in webspark_webdir_install(). Need to re-run whenever we revert
+  // configs since update 9009 so we don't regress on removed fields we need
+  // to keep in config/install due not having control on order hooks will run.
+  if ($legacy_cleanup) {
+    webspark_webdir_update_9009([]);
+  }
 }
