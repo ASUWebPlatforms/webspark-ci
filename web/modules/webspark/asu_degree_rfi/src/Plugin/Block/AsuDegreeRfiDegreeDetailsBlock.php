@@ -121,7 +121,7 @@ class AsuDegreeRfiDegreeDetailsBlock extends BlockBase {
       if (isset($split[6]) && is_numeric($split[6])) {
         $node_storage = \Drupal::entityTypeManager()->getStorage('node');
         $listing_page_node = $node_storage->load($split[6]);
-        if ($node) {
+        if ($node && $listing_page_node) {
           $breadcrumbs[] = (object) [
             'text' => $listing_page_node->getTitle(),
             'url' => Url::fromRoute('entity.node.canonical', ['node' => $listing_page_node->id()])->toString(),
