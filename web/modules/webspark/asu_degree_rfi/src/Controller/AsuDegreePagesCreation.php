@@ -46,7 +46,9 @@ class AsuDegreePagesCreation extends ControllerBase {
     if (preg_match($pattern_url, $path)) {
       // Check if the Degree listing page exists.
       if (!isset($split_path[6]) || $node_storage->loadByProperties(['nid' => $split_path[6], 'type' => 'degree_listing_page']) == NULL) {
-        return ['#markup' => $this->t('The Degree listing page with nid: @nid could not be found', ['@nid' => $split_path[6]])];
+        $message = $this->t('The Degree listing page with nid: @nid could not be found', ['@nid' => $split_path[6]]);
+        \Drupal::logger('asu_degree_rfi')->warning($message);
+        return ['#markup' => $message];
       }
 
       $node = Node::create(['type' => 'degree_detail_page']);
