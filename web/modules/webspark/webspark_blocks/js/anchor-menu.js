@@ -1,14 +1,12 @@
 (function ($, Drupal, drupalSettings) {
   /**
    * Drupal Behavior for managing the Anchor Menu functionality.
-   * This behavior initiates when the DOM is loaded and initializes the anchor menu,
-   * adds an ID to the header, sets the navbar position, and shows the anchor menu.
    */
   Drupal.behaviors.anchorMenu = {
     attach: function (context, settings) {
       if ($(context).find('#uds-anchor-menu').length) {
-        // Grabs the links for the anchor menu and a section text for data attributes.
         let links = $('.webspark-anchor-link-data');
+
         if (!links.length) {
           return;
         }
@@ -22,7 +20,7 @@
           let href = $(item).attr('id');
           let data_title = title.toLowerCase();
 
-          $('#uds-anchor-menu .nav').append('<a class="nav-link" data-ga-event="link" data-ga-action="click" data-ga-name="onclick" data-ga-type="internal link" data-ga-region="main content" data-ga-component="" data-ga-section="' + section + '" data-ga-text="' + data_title + '" href="#' + href + '">' + icon + '</span>' + title + '</a>');
+          $('#uds-anchor-menu .nav').append('<a class="nav-link" data-ga-event="link" data-ga-action="click" data-ga-name="onclick" data-ga-type="internal link" data-ga-region="main content" data-ga-component="" data-ga-section="' + section + '" data-ga-text="' + data_title + '" href="#' + href + '">' + icon + title + '</a>');
         });
 
         // Adds an ID to the header.
