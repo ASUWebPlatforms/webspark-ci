@@ -72,8 +72,11 @@ function webspark_blocks_update_9017() {
 }
 
 /**
- * WS2-1674 - Add Ranking Card to Card Arrangement
- * Note: Deleted webspark_blocks_update_9006 - webspark_blocks_update_9016, in favor of webspark_blocks_update_9018
+ * WS2-1674 - Add Ranking Card to Card Arrangement.
+ *
+ * Note: Deleted webspark_blocks_update_9006 - webspark_blocks_update_9016,
+ *
+ * in favor of webspark_blocks_update_9018.
  */
 function webspark_blocks_update_9018(&$sandbox) {
   _webspark_blocks_revert_module_config();
