@@ -203,26 +203,29 @@
   }
 
   /**
-   * This function calculates and returns the position where the global header
-   * should be rendered.
+   * Calculate the position where the global header should be rendered.
    *
-   * @returns {number|*} The calculated height for the global header position
+   * @returns {number|*}
    */
   function getGlobalHeaderTop() {
-    // Grabbing toolbar and administration tray elements
-    let $toolbarBar = $('#toolbar-bar');
-    let $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
+    const $toolbarBar = $('#toolbar-bar');
+    const $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
+    let headerPosition = 0;
 
-    // If the toolbar doesn't exist, return 0
-    if (!$toolbarBar.length) return 0;
-
-    // If administration tray is active and not in a vertical state,
-    // return the combined height of the administration tray and toolbar
-    if ($toolbarItemAdministrationTray.hasClass('is-active') && !$toolbarItemAdministrationTray.hasClass('toolbar-tray-vertical')) {
-      return $toolbarItemAdministrationTray.height() + $toolbarBar.height();
+    // If the toolbar exists, add its height to the header position
+    if ($toolbarBar.length) {
+      headerPosition += $toolbarBar.height();
     }
 
-    // If none of the above conditions are met, return the height of the toolbar
-    return $toolbarBar.height();
+    // If the admin tray is active and not in a vertical state, add the height
+    // to the header position
+    if (
+      $toolbarItemAdministrationTray.hasClass('is-active') &&
+      !$toolbarItemAdministrationTray.hasClass('toolbar-tray-vertical')
+    ) {
+      headerPosition += $toolbarItemAdministrationTray.height();
+    }
+
+    return headerPosition;
   }
 })(jQuery, Drupal, drupalSettings);
