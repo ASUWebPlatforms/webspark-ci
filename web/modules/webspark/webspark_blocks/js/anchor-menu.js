@@ -170,36 +170,34 @@
   }
 
   /**
-   * This function calculates and returns the position where the Anchor menu
-   * should be rendered based on various conditions.
+   * Calculate the position where the Anchor menu should be rendered.
    *
-   * @returns {number|*} The calculated height for the Anchor menu position
+   * @returns {number|*}
    */
   function getAnchorMenuTop() {
-    // Grabbing toolbar, administration tray, and global header elements
-    let $toolbarBar = $('#toolbar-bar');
-    let $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
-    let $globalHeader = $('#global-header');
+    const $toolbarBar = $('#toolbar-bar');
+    const $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
+    const $globalHeader = $('#global-header');
+    const $navbar = $('#uds-anchor-menu');
+    let anchorMenuTop = (window.innerWidth < 610) ? $globalHeader.height() : 0;
 
-    // On mobile devices the Anchor Menu must be rendered after the global header.
-    if (window.innerWidth < 610) return $globalHeader.height();
-
-    // If the toolbar doesn't exist, return 0
-    if (!$toolbarBar.length) return 0;
-
-    // Grabbing navbar element
-    let $navbar = $('#uds-anchor-menu');
-
-    // If navbar exists and has specific classes, and administration tray is active and not vertical,
-    // return the combined height of the administration tray and toolbar
-    if ($navbar.length && $navbar.hasClass('uds-anchor-menu-sticky')
-      && $toolbarItemAdministrationTray.hasClass('is-active')
-      && !$toolbarItemAdministrationTray.hasClass('toolbar-tray-vertical')) {
-      return $toolbarItemAdministrationTray.height() + $toolbarBar.height();
-    } else {
-      // If none of the above conditions are met, return the height of the toolbar
-      return $toolbarBar.height();
+    // If the toolbar exists, add its height to anchorMenuTop
+    if ($toolbarBar.length) {
+      anchorMenuTop += $toolbarBar.height();
     }
+
+    // If navbar exists and has specific classes, and admin tray is active and
+    // not vertical, add the height of the admin tray
+    if (
+      $navbar.length &&
+      $navbar.hasClass('uds-anchor-menu-sticky') &&
+      $toolbarItemAdministrationTray.hasClass('is-active') &&
+      !$toolbarItemAdministrationTray.hasClass('toolbar-tray-vertical')
+    ) {
+      anchorMenuTop += $toolbarItemAdministrationTray.height();
+    }
+
+    return anchorMenuTop;
   }
 
   /**
