@@ -24,7 +24,7 @@
       bottom: $uds-size-spacing-4;
 
       h1 {
-        color: $uds-component-heading-highlight-white-bg-color;
+        color: $uds-color-base-white;
       }
 
       .btn+.btn {
@@ -49,7 +49,7 @@
     }
 
     .uds-video-hero {
-      height: $uds-component-heroes-uds-hero-uds-hero-md-height;
+      height: $uds-size-spacing-64;
 
       video {
         display: none;

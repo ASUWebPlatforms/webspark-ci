@@ -4,50 +4,50 @@
 // ----------------------------------------------------------------------------
 
 // Load UDS Design Tokens
-// @import "../../node_modules/@asu/bootstrap4-theme/src/scss/design-tokens/extra-vars";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/design-tokens/variables";
+// @import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/design-tokens/extra-vars";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/_custom-asu-variables.scss";
 
 // Default path for image assets (assuming the images will be hosted from the web root)
 // Storybook and themes override this for their particular path needs
 $image-assets-path: "../../img" !default;
 
 // Apply variable overrides before importing Bootstrap’s Sass files
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/colors";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/alerts";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/banners";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/spacing";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/typography";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/buttons";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/blockquotes";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/cards";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/icons";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/images";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/image-text-block";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/inset-box";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/headings";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/list";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/heroes";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/testimonials";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/paragraphs";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/pager";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/tabbed-panels";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/breadcrumb";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/dividers";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/dropdown";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/form-fields";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/quote-image-background";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/tooltips";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/video";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/card-and-image";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/grid-links";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/back-to-top-button";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/display-list";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/charts-and-graphs";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/card-image-and-content";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/card-arrangements";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/modals";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/image-background-with-cta";
-@import "../../node_modules/@asu/bootstrap4-theme/src/scss/variables/tables";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/colors";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/alerts";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/banners";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/spacing";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/typography";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/buttons";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/blockquotes";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/cards";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/icons";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/images";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/image-text-block";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/inset-box";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/headings";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/list";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/heroes";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/testimonials";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/paragraphs";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/pager";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/tabbed-panels";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/breadcrumb";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/dividers";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/dropdown";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/form-fields";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/quote-image-background";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/tooltips";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/video";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/card-and-image";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/grid-links";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/back-to-top-button";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/display-list";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/charts-and-graphs";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/card-image-and-content";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/card-arrangements";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/modals";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/image-background-with-cta";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/tables";
 
 // Bootstrap Required
 @import "../../node_modules/bootstrap/scss/functions";

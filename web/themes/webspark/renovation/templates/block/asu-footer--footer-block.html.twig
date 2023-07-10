@@ -127,9 +127,9 @@
         </div>
         {% for key, column in columns_data %}
         <div class="col-xl flex-footer">
-          <div class="card card-foldable desktop-disable-xl">
+          <div class="card accordion-item desktop-disable-xl">
           {% for c in column %}
-            <div class="card-header">
+            <div class="accordion-header">
               <h5>
                 <a
                   id="footlink-header-{{ key }}-{{ loop.index }}"
@@ -152,7 +152,7 @@
             </div>
             <div
               id="footlink-{{ key }}-{{ loop.index }}"
-              class="collapse card-body"
+              class="collapse accordion-body"
               aria-labelledby="footlink-header-{{ key }}-{{ loop.index }}"
             >
               {# WS2-1268: Adding block title to data-ga-footer-component attribute.

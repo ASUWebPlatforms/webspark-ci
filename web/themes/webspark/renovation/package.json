@@ -23,7 +23,7 @@
     "vue-template-compiler": "2.6.11"
   },
   "dependencies": {
-    "@asu/bootstrap4-theme": "1.10.6",
+    "@asu/unity-bootstrap-theme": "^1.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.0"
   }
 }
