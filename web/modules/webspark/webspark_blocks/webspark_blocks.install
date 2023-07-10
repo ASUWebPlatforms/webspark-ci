@@ -90,6 +90,14 @@ function webspark_blocks_update_9018(&$sandbox) {
 }
 
 /**
+ * WS2-1677 - Replace bootstrap4-theme with unity-bootstrap-theme
+ * in Renovation theme.
+ */
+function webspark_blocks_update_9019(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
