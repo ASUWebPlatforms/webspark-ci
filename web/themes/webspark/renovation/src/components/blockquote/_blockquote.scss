@@ -5,6 +5,7 @@
     @include media-breakpoint-up(sm) {
       gap: $uds-size-spacing-2;
     }
+
     @include media-breakpoint-up(lg) {
       gap: $uds-size-spacing-4;
     }
