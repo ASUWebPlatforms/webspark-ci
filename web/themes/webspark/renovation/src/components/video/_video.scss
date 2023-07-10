@@ -17,3 +17,7 @@
     margin: auto;
   }
 }
+
+.uds-video-with-caption + .uds-video-with-caption {
+  border-top: 0;
+}
