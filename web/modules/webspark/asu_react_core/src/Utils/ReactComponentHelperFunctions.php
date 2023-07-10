@@ -116,24 +116,20 @@ class ReactComponentHelperFunctions {
       $card->linkUrl = $link->toString();
     }
 
-    // WS2-1674 - Card ranking image size 
-    if ($paragraph->field_card_ranking_image_size->value) {
+    // WS2-1674 - Card ranking image size.
+    if (isset($paragraph->field_card_ranking_image_size->value)) {
       if ($paragraph->field_card_ranking_image_size->value === 'small') {
         $card->imageSize = 'small';
-      } elseif ($paragraph->field_card_ranking_size->value === 'large') {
+        $card->citation = $paragraph->field_citation_title->value;
+      } elseif ($paragraph->field_card_ranking_image_size->value === 'large') {
         $card->imageSize = 'large';
       }
     }
-    
+
     // WS2-1674 - Card ranking link URL, no link title
-    if ($paragraph->field_card_ranking_image_size->value && $paragraph->field_link) {
+    if (isset($paragraph->field_card_ranking_image_size->value) && isset($paragraph->field_link->uri)) {
       $link = Url::fromUri($paragraph->field_link->uri);
       $card->linkUrl = $link->toString();
-    }
-
-    // WS2-1674 - Card ranking citation
-    if ($paragraph->field_card_ranking_image_size->value === 'small') {
-      $card->citation = $paragraph->field_citation_title->value;
     }
 
     //@TODO We are not going to send this information to the react component,
@@ -148,15 +144,22 @@ class ReactComponentHelperFunctions {
       }
     }*/
 
-    if (isset($paragraph->field_icon)) {
+    // WS2-1643 - Adding validating to set icon setting only when it exists.
+    if (isset($paragraph->field_icon->icon_name)) {
       $icon_name = $paragraph->field_icon->icon_name;
       $icon_style = $paragraph->field_icon->style;
-      $icon_settings = unserialize($paragraph->field_icon->settings);
+      if (isset($paragraph->field_icon->settings)) {
+        // PHP 8.1 warning - when null is passed to build in function, 
+        // it is no longer silently converted to empty string
+        $icon_settings = unserialize($paragraph->field_icon->settings);
+      } else {
+        $icon_settings = '';
+      }
       $card->icon = [$icon_style, $icon_name, $icon_settings];
     }
 
     $card->clickable = false;
-    if ($paragraph->field_clickable->value && isset($paragraph->field_card_link->uri)){
+    if (isset($paragraph->field_clickable->value) && isset($paragraph->field_card_link->uri)){
       $card->clickable = true;
       $link = Url::fromUri($paragraph->field_card_link->uri);
       $card->clickHref = $link->toString();
