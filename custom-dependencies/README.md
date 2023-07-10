@@ -23,7 +23,16 @@ These changes allow for better organization and separation of concerns within th
 
 1. Locate the `custom-dependencies/patches.custom.json` file in the project.
 2. Remove all custom patches out of the root `composer.json` file, and move them into `custom-dependencies/patches.custom.json`.
-3. Add, update, or remove patches in the "patches" section of the `custom-dependencies/patches.custom.json` file as needed.
+3. Add, update, or remove patches in the `custom-dependencies/patches.custom.json` file as needed.
+
+Example of what the patches.custom.json file contents would look like with a single patch:
+```
+{
+  "drupal/image_widget_crop": {
+    "#2865396: Provide option to apply default crop if user doesn't select any": "https://www.drupal.org/files/issues/2022-06-23/2865396-67.patch"
+  }
+}
+```
 
 ## Managing Dependencies and Patches Moving Forward
 
