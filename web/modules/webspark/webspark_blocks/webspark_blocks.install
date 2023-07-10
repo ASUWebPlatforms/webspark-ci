@@ -51,82 +51,9 @@ function webspark_blocks_update_9005(&$sandbox) {
 }
 
 /**
- * Apply latest updates.
- */
-function webspark_blocks_update_9006(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Add poster image field for video hero block type.
- */
-function webspark_blocks_update_9007(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Only allow 4:3 images in the Content Image Overlap block.
- */
-function webspark_blocks_update_9008(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Only allow 16:9 images in the Card and Image block.
- * And remove the character limits from Cards.
- */
-function webspark_blocks_update_9009(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Add new fields to video hero to match hero options.
- */
-function webspark_blocks_update_9010(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Change Testimonial paragraph type to only allow plain text and be required.
- */
-function webspark_blocks_update_9011(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Remove markup on format switching in WYSIWYG.
- * Change view mode for the Content Image Overlap block to "large".
+ * WS2-1704 - Add back blocks revert call
  */
 function webspark_blocks_update_9012(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Add show borders field for card paragraphs.
- * Add media types for field_media in Paragraphs and custom Blocks.
- */
-function webspark_blocks_update_9013(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- * Remove field card link and field clickable for card and card with icon paragraphs.
- */
-function webspark_blocks_update_9014(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- *  Hide guideline text for formatted text field in Testimonial paragraph.
- */
-function webspark_blocks_update_9015(&$sandbox) {
-  _webspark_blocks_revert_module_config();
-}
-
-/**
- *  Adds new image style.
- */
-function webspark_blocks_update_9016(&$sandbox) {
   _webspark_blocks_revert_module_config();
 }
 
@@ -152,7 +79,11 @@ function webspark_blocks_update_9017() {
 }
 
 /**
- * WS2-1674 - Add Ranking Card to Card Arrangement
+ * WS2-1674 - Add Ranking Card to Card Arrangement.
+ *
+ * Note: Deleted webspark_blocks_update_9006 - webspark_blocks_update_9016,
+ *
+ * in favor of webspark_blocks_update_9018.
  */
 function webspark_blocks_update_9018(&$sandbox) {
   _webspark_blocks_revert_module_config();
