@@ -6,7 +6,7 @@
       {% if loop.first %}
         <a class="nav-item nav-link active"
            id="nav-{{ tab.heading|clean_id|lower }}-tab"
-           data-toggle="tab"
+           data-bs-toggle="tab"
            href="#nav-{{ tab.heading|clean_id|lower }}"
            role="tab"
            aria-controls="nav-{{ tab.heading|clean_id|lower }}"
@@ -23,7 +23,7 @@
       {% else %}
         <a class="nav-item nav-link"
            id="nav-{{ tab.heading|clean_id|lower }}-tab"
-           data-toggle="tab"
+           data-bs-toggle="tab"
            href="#nav-{{ tab.heading|clean_id|lower }}"
            role="tab"
            aria-controls="nav-{{ tab.heading|clean_id|lower }}"

@@ -8,7 +8,7 @@
   <div class="accordion-header{% if is_icon  %} accordion-header-icon{% endif %}">
     <h4>
       <a id="accordion-header-{{ link_id|lower }}" class="collapsed"
-         href="#accordion-content-{{ link_id|lower }}" data-toggle="collapse"
+         href="#accordion-content-{{ link_id|lower }}" data-bs-toggle="collapse"
          role="button" aria-expanded="false"
          aria-controls="accordion-content-{{ link_id|lower }}"
          data-ga-event="collapse"
@@ -34,7 +34,7 @@
   </div>
 
   {# Accordion Body #}
-  <div id="accordion-content-{{ link_id }}" class="collapse accordion-body" aria-labelledby="{{ heading }}" data-parent="#accordion-{{ parent_id }}">
+  <div id="accordion-content-{{ link_id }}" class="collapse accordion-body" aria-labelledby="{{ heading }}" data-bs-parent="#accordion-{{ parent_id }}">
     {# Body value #}
     {{ body_text  }}
   </div>
