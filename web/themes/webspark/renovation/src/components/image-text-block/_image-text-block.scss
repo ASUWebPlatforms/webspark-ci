@@ -6,6 +6,11 @@
       margin-top: 0;
     }
   }
+
+  .uds-image-text-block-container {
+    max-height: none;
+  }
+
   .uds-image-text-block-image-container {
     // WS2-1698 - override the media--image--default.html.twig div block display
     div {
