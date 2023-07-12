@@ -6,7 +6,7 @@
 
   {# Accordion Header #}
   <div class="accordion-header{% if is_icon  %} accordion-header-icon{% endif %}">
-    <h4>
+    <h3>
       <a id="accordion-header-{{ link_id|lower }}" class="collapsed"
          href="#accordion-content-{{ link_id|lower }}" data-bs-toggle="collapse"
          role="button" aria-expanded="false"
@@ -30,7 +30,7 @@
 
         <span class="fas fa-chevron-up"></span>
       </a>
-    </h4>
+    </h3>
   </div>
 
   {# Accordion Body #}
