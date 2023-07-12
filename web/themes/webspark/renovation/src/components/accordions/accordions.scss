@@ -20,4 +20,8 @@
     letter-spacing: -0.01875rem;
     max-width: none;
   }
+
+  & > .card:first-of-type {
+    margin-top: 0 !important;
+  }
 }

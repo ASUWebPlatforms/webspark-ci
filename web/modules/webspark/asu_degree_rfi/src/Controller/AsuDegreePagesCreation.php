@@ -9,7 +9,6 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\asu_degree_rfi\AsuDegreeRfiDegreeSearchClient;
 use Drupal\asu_degree_rfi\AsuDegreeRfiInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller for the RFI component proxy to the Submit Handler Lambda.
@@ -43,12 +42,18 @@ class AsuDegreePagesCreation extends ControllerBase {
     $node_storage = \Drupal::service('entity_type.manager')->getStorage('node');
     $split_path = explode('/', $path);
 
-    // Check if the Degree listing page exists.
-    if ($split_path[6] == NULL || $node_storage->loadByProperties(['nid' => $split_path[6], 'type' => 'degree_listing_page']) == NULL) {
-      return new Response(t('The Degree listing page with nid: @nid could not be found', ['@nid' => $split_path[6]]), 404);
-    }
-
     if (preg_match($pattern_url, $path)) {
+      // Check if the Degree listing page exists.
+      $degree_listing_page = $node_storage->loadByProperties([
+        'nid' => $split_path[6],
+        'type' => 'degree_listing_page',
+      ]);
+      if (!isset($split_path[6]) || $degree_listing_page == NULL) {
+        $message = $this->t('The Degree listing page with nid: @nid could not be found', ['@nid' => $split_path[6]]);
+        \Drupal::logger('asu_degree_rfi')->warning($message);
+        return ['#markup' => $message];
+      }
+
       $node = Node::create(['type' => 'degree_detail_page']);
       $degree_query = $this->degreeSearchClient->getDegreeByAcadPlan($split_path[3]);
       $title = isset($degree_query[0]['Descr100']) ? $degree_query[0]['Descr100'] : $split_path[3];
