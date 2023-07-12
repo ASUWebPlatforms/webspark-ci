@@ -19,8 +19,8 @@
           // Add buttons prev and next.
           $(this).wrap(wrapper);
           var added_wrapper = $(this).parent();
-          $(added_wrapper).prepend('<div class="scroll-control next"><button type="button" class="btn btn-circle btn-circle-alt-gray"><i class="fas fa-chevron-right"></i><span class="sr-only">Next</span></button></div>');
-          $(added_wrapper).prepend('<div class="scroll-control previous"><button type="button" class="btn btn-circle btn-circle-alt-gray"><i class="fas fa-chevron-left"></i><span class="sr-only">Previous</span></button></div>');
+          $(added_wrapper).prepend('<div class="scroll-control next"><button type="button" class="btn btn-circle btn-circle-alt-gray"><i class="fas fa-chevron-right"></i><span class="visually-hidden">Next</span></button></div>');
+          $(added_wrapper).prepend('<div class="scroll-control previous"><button type="button" class="btn btn-circle btn-circle-alt-gray"><i class="fas fa-chevron-left"></i><span class="visually-hidden">Previous</span></button></div>');
         });
       }
 

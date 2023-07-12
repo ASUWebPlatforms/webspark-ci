@@ -6,7 +6,7 @@
       {% if loop.first %}
         <a class="nav-item nav-link active"
            id="nav-{{ tab.heading|clean_id|lower }}-tab"
-           data-toggle="tab"
+           data-bs-toggle="tab"
            href="#nav-{{ tab.heading|clean_id|lower }}"
            role="tab"
            aria-controls="nav-{{ tab.heading|clean_id|lower }}"
@@ -23,7 +23,7 @@
       {% else %}
         <a class="nav-item nav-link"
            id="nav-{{ tab.heading|clean_id|lower }}-tab"
-           data-toggle="tab"
+           data-bs-toggle="tab"
            href="#nav-{{ tab.heading|clean_id|lower }}"
            role="tab"
            aria-controls="nav-{{ tab.heading|clean_id|lower }}"
@@ -54,7 +54,7 @@
       data-ga-region="main content"
       data-ga-text="left chevron">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+      <span class="visually-hidden">Previous</span>
     </a>
     <a
       class="scroll-control-next"
@@ -70,7 +70,7 @@
       data-ga-region="main content"
       data-ga-text="right chevron">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+      <span class="visually-hidden">Next</span>
     </a>
 </nav>
 

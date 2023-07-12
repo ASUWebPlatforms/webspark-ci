@@ -20,7 +20,7 @@
   {% if title %}
     <h2>{{ title }}</h2>
   {% endif %}
-  <div class="sidebar-toggler" data-toggle="collapse" data-target="#sidebar-left" aria-expanded="false" aria-controls="sidebar-left">
+  <div class="sidebar-toggler" data-bs-toggle="collapse" data-bs-target="#sidebar-left" aria-expanded="false" aria-controls="sidebar-left">
     <p>Select Section</p>
     <span class="fas fa-chevron-down"/>
   </div>
@@ -38,8 +38,8 @@
               <a id="{{ item.title|clean_id|lower }}"
                  class="collapsed nav-link"
                  href="#cardBody{{ item.title|clean_id|lower }}"
-                 data-toggle="collapse"
-                 data-target="#cardBody{{ item.title|clean_id|lower }}"
+                 data-bs-toggle="collapse"
+                 data-bs-target="#cardBody{{ item.title|clean_id|lower }}"
                  aria-expanded="false"
                  aria-controls="cardBody{{ item.title|clean_id|lower }}"
                  data-ga-event="collapse"
@@ -57,7 +57,7 @@
             <div id="cardBody{{ item.title|clean_id|lower }}"
                  class="collapse card-body"
                  aria-labelledby="{{ item.title|clean_id|lower }}"
-                 data-parent=".sidebar">
+                 data-bs-parent=".sidebar">
               {% if item.below %}
                 {% for subitem in item.below %}
                   {{ link(
