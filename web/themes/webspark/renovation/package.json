@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@asu/unity-bootstrap-theme": "^1.4.1",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@popperjs/core": "^2.11.8"
   }
 }
