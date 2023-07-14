@@ -11,6 +11,14 @@
     max-height: none;
   }
 
+  .btn {
+    margin-bottom: 14px;
+
+    &:first-child {
+      margin-right: 24px;
+    }
+  }
+
   .uds-image-text-block-image-container {
     // WS2-1698 - override the media--image--default.html.twig div block display
     div {
