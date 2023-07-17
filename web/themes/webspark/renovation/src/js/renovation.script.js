@@ -1,5 +1,6 @@
 import 'popper.js';
 import 'bootstrap';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 
 var icons = {
   "1_cube": [489.4, 512, [], "e001", "M244.7,0L0,106v300l244.7,106l244.7-106V106L244.7,0z M460,113.5l-215.3,93l-214.6-93l214.6-93.7L460,113.5z M18.5,128.5  l217.4,93.7v265.9L18.5,394.4V128.5z M254.3,488.1V222.2l217.4-93.7v265.9L254.3,488.1z"],
