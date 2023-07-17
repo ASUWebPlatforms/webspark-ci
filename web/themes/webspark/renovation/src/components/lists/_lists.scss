@@ -1,4 +1,4 @@
-@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/list';
+@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/list';
 
 ul ul {
   list-style: none;
@@ -16,17 +16,17 @@ ul.uds-list {
   &.fa-ul {
     // Maroon icon bullets
     &.maroon li svg {
-      color: $uds-component-list-icon-list-li-maroon-icon;
+      color: $uds-color-base-maroon;
     }
     &.gold li svg {
-      color: $uds-component-list-darkmode-gold-color;
+      color: $uds-color-base-gold;
     }
     li svg{
       position: absolute;
       text-align: center;
       width: 2em;
       line-height: inherit;
-      left: $uds-component-list-icon-list-icon-left;
+      left: -$uds-size-spacing-5;
     }
   }
 }

@@ -1,7 +1,7 @@
 /* Make skip to content link visible upon focus (it was hidden by the ASU
 Header */
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
+.visually-hidden-focusable:active,
+.visually-hidden-focusable:focus {
   position: relative;
   z-index: 1050;
 }
@@ -11,8 +11,8 @@ Header */
 // to target the .sr-focusable class here anyway
 .PXYlt .header-top .nav .links-container .nav-link:focus,
 .PXYlt .header-top .nav .links-container .nav-link:active,
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
+.visually-hidden-focusable:active,
+.visually-hidden-focusable:focus {
   padding: 0.25rem 0.5rem !important;
 }
 

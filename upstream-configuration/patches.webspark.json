@@ -1,7 +1,4 @@
 {
-    "drupal/radix": {
-        "3053579: Integrate with OffCanvas (Layout Builder)": "https://www.drupal.org/files/issues/2021-12-15/3053579-32.patch"
-    },
     "drupal/fakeobjects": {
         "3002953: Fix js plugin seems to be missing": "https://www.drupal.org/files/issues/2020-06-22/fakeobjects-missing_plugin-3002953-5.patch"
     },
