@@ -1,4 +1,4 @@
-@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/card-and-image';
+@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/card-and-image';
 
 .block-inline-blockcard-and-image {
   .parallax-container {
@@ -17,7 +17,7 @@
 
     .parallax-container-content {
       width: 100%;
-      position: absolute;
+      position: relative;
       top: 50px;
 
       @media screen and (max-width: $uds-breakpoint-md) {

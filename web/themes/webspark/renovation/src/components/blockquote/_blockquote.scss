@@ -1,16 +1,33 @@
-@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/blockquotes';
+@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/blockquotes';
 
-@include media-breakpoint-down(lg) {
-  .uds-blockquote {
+.uds-blockquote {
+  &.with-image {
+    @include media-breakpoint-up(sm) {
+      gap: $uds-size-spacing-2;
+    }
+
+    @include media-breakpoint-up(lg) {
+      gap: $uds-size-spacing-4;
+    }
+
+    img {
+      @include media-breakpoint-up(sm) {
+        width: 120px;
+        height: 120px;
+      }
+
+      @include media-breakpoint-up(md) {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
     grid-template-columns: auto auto;
   }
-}
 
-@include media-breakpoint-up(md) {
-  .uds-blockquote.with-image  {
-    img {
-      width: 180px;
-      height: 180px;
-    }
+  @include media-breakpoint-down(sm) {
+    padding: $uds-size-spacing-2;
   }
 }

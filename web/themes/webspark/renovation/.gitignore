@@ -9,12 +9,8 @@
 
 config.local.js
 
-# Ignore node modules.
+# Ignore node modules. Only needed locally when we compile.
 node_modules/*
-!node_modules/@asu
-node_modules/@asu/*
-!node_modules/@asu/bootstrap4-theme
-node_modules/@asu/bootstrap4-theme/src/fontawesome/svgs
 
 # Ignore SASS source maps
 *.script.js.map

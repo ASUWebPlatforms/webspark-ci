@@ -81,4 +81,18 @@
   }
 }
 
+.card-body {
+  div {
+    p {
+      margin: $uds-size-spacing-2 0;
+    }
+  }
+}
 
+.card .card-icon-top {
+  margin: $uds-size-spacing-3 auto $uds-size-spacing-1 $uds-size-spacing-4 !important;
+
+  @include media-breakpoint-down(md) {
+    margin: $uds-size-spacing-3 auto -0.5rem $uds-size-spacing-3 !important;
+  }
+}

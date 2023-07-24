@@ -1,4 +1,4 @@
-@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/video';
+@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/video';
 
 .block-inline-blockvideo {
   .container {
@@ -16,4 +16,8 @@
     display: block;
     margin: auto;
   }
+}
+
+.uds-video-with-caption + .uds-video-with-caption {
+  border-top: 0;
 }
