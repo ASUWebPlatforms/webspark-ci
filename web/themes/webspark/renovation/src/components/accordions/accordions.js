@@ -5,8 +5,8 @@
       const link = document.getElementById(sectionName);
 
       if (link) {
-        const section = link.closest(".card");
-        const content = section.querySelector(".card-body");
+        const section = link.closest(".accordion-item");
+        const content = section.querySelector(".accordion-body");
 
         link.setAttribute("aria-expanded", state);
 

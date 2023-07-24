@@ -35,7 +35,7 @@
   </head>
   <body{{attributes}}>
     {% if logged_in and user.hasPermission('Use the toolbar') %}
-      <a href="#skip-to-content" class="sr-only sr-only-focusable">
+      <a href="#skip-to-content" class="visually-hidden visually-hidden-focusable">
         {{ 'Skip to main content'|t }}
       </a>
     {% endif %}

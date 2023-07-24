@@ -191,7 +191,6 @@ Each sprint has a name, often, it is simply the sprint number (ex: Sprint 39). T
 
 As a developer working on the Webspark CI project, here is a typical workflow:
 
-
 1. `Sprint 39` is started in JIRA, and tasks are assigned to you.
 2. You begin your first task, `WS2-1596`.
 3. You fetch the `webspark-ci` repo from GitHub, gaining access to the `origin/ws2-sprint-39` branch.

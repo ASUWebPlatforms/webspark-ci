@@ -1,4 +1,4 @@
-@import '../../../node_modules/@asu/bootstrap4-theme/src/scss/extends/cards';
+@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/cards';
 
 // Set content width to 75 characters.
 .accordion {
@@ -14,10 +14,18 @@
     }
   }
 
-  .card-foldable .card-header h3 {
-    font-size: 1.25rem;
+  .accordion-item {
+    border-right: 1px solid $uds-color-base-gray-3;
+  }
+
+  .accordion-item .accordion-header h3 {
+    font-size: $uds-size-font-large;
     line-height: 1.625rem;
     letter-spacing: -0.01875rem;
     max-width: none;
+  }
+
+  & > .card:first-of-type {
+    margin-top: 0 !important;
   }
 }
