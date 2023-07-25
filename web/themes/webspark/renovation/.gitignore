@@ -9,12 +9,8 @@
 
 config.local.js
 
-# Ignore node modules.
+# Ignore node modules. Only needed locally when we compile.
 node_modules/*
-!node_modules/@asu
-node_modules/@asu/*
-!node_modules/@asu/unity-bootstrap-theme
-node_modules/@asu/unity-bootstrap-theme/src/fontawesome/svgs
 
 # Ignore SASS source maps
 *.script.js.map
