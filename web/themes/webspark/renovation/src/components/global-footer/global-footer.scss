@@ -7,3 +7,19 @@ html, body, .dialog-off-canvas-main-canvas {
   justify-content: space-between;
   height: 100%;
 }
+
+#endorsed-footer {
+  #endorsed-logo {
+    padding: 12px 0;
+
+    @media only screen and (max-width: $uds-breakpoint-md) {
+      padding: 6px 0;
+    }
+
+    a img {
+      margin: 0;
+      transform: initial;
+      padding: 0;
+    }
+  }
+}
