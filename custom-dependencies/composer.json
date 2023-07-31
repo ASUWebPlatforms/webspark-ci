@@ -1,0 +1,29 @@
+{
+    "name": "webspark/custom-dependencies",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "drupal/asset_injector": "^2.9",
+        "drupal/captcha": "^1.2",
+        "drupal/csv_importer": "^1.14",
+        "drupal/field_permissions": "^1.2",
+        "drupal/honeypot": "^2.0",
+        "drupal/mailsystem": "^4.3",
+        "drupal/mimemail": "^1.0@alpha",
+        "drupal/quick_node_clone": "^1.14",
+        "drupal/recaptcha": "^3.0",
+        "drupal/sendgrid_integration": "^2.0",
+        "drupal/smtp": "^1.2",
+        "drupal/vapn": "^1.5",
+        "drupal/views_bulk_edit": "^2.6"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "version": "1.0.0"
+}
