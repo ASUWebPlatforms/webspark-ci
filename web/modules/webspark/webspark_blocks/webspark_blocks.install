@@ -135,6 +135,13 @@ function webspark_blocks_update_9019(&$sandbox) {
 }
 
 /**
+ * WS2-1658 - Add new option to Spacing Top and Spacing Bottom fields.
+ */
+function webspark_blocks_update_9020(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
