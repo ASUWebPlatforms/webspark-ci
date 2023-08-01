@@ -7017,7 +7017,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "9742e3af1026cb5291882bde406dcd2adb356ad9"
+                "reference": "1f411bbfd3304652204d7295b5860792258813ce"
             },
             "require": {
                 "bower-asset/fontawesome": "5.15.4",
