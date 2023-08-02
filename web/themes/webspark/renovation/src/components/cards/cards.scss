@@ -96,3 +96,10 @@
     margin: $uds-size-spacing-3 auto -0.5rem $uds-size-spacing-3 !important;
   }
 }
+
+.cards-components {
+  .card-img-top {
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+  }
+}
