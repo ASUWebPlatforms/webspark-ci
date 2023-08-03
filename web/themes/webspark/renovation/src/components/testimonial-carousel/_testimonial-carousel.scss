@@ -1,4 +1,21 @@
 .testimonial-carousel-container {
   display: flex;
   justify-content: center;
+
+  .glide {
+    max-width: $testimonial-width !important;
+
+    .glide__slide .slider {
+      width: $testimonial-width !important;
+    }
+  }
+
+}
+
+.asu-testimonial-on-image-container {
+  .uds-quote-image-background {
+    .uds-quote-image-background-container {
+      max-width: $testimonial-width;
+    }
+  }
 }
