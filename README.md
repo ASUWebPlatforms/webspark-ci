@@ -107,7 +107,7 @@ After your tool of choice is installed, you then need to set up that tool specif
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
 - [Lando for Pantheon](https://docs.lando.dev/pantheon)
 
-***A note on DDEV:*** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
+**_A note on DDEV:_** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
 
 ## Cloning the site locally
 
