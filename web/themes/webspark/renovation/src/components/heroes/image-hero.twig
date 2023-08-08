@@ -1,5 +1,8 @@
-{# TODO: Where is this being used? #}
-<div>
+<div class="uds-hero-{{ size }} {{ size == 'lg' ? 'hide-content' }} {{ has_button_row ? 'has-btn-row' }}">
+  <div class="hero-overlay"></div>
+
+  <img class="hero" src="{{ hero_background }}" alt="{{ hero_alt }}" />
+
   <div role="doc-subtitle">
     <span class="{{ sub_heading_background }}">{{ sub_heading }}</span>
   </div>
@@ -16,7 +19,6 @@
     </div>
   {% endif %}
 
-  {# Print row of or single button. #}
   {% if cta_btn %}
     {% if has_button_row %}
       <div class="btn-row">
