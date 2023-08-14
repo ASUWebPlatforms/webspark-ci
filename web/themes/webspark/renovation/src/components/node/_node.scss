@@ -2,6 +2,7 @@
 // -----------------------------------------------------------------------------
 .node {
   &.node--unpublished {
-    background-color: $uds-color-background-error;
+    // background-color: $uds-color-background-error;
+    // TODO: Figure out that variable value
   }
 }

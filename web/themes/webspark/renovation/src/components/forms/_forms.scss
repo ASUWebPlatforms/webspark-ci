@@ -1,3 +1,11 @@
+form.uds-form {
+  .form-check {
+    .tableselect.form-check-input {
+      opacity: 1;
+    }
+  }
+}
+
 .layout-builder-discard-changes.confirmation,
 .layout-builder-revert-overrides.confirmation {
   padding-top: 2.5rem;
