@@ -1,12 +1,12 @@
 // ----------------------------------------------------------------------------
 // Bootstrap
+// Only import the mixins we need
 // ----------------------------------------------------------------------------
 
 @import "../../node_modules/bootstrap/scss/functions";
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
 @import "../../node_modules/bootstrap/scss/maps";
-// Load in the needed mixins individually
 @import "../../node_modules/bootstrap/scss/mixins/breakpoints";
 @import "../../node_modules/bootstrap/scss/utilities";
 
@@ -20,9 +20,8 @@
 // Renovation
 // ----------------------------------------------------------------------------
 
-@import "renovation-variables";
 @import "base";
 @import "helpers";
 @import "nodes";
 @import "pages";
-// @import "components";
+@import "components";
