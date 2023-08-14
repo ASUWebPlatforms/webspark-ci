@@ -2,5 +2,10 @@
     "/js/renovation.script.js": "/js/renovation.script.js",
     "/css/renovation.style.css": "/css/renovation.style.css",
     "/js/renovation.script.js.map": "/js/renovation.script.js.map",
-    "/css/renovation.style.css.map": "/css/renovation.style.css.map"
+    "/css/renovation.style.css.map": "/css/renovation.style.css.map",
+    "/css/unity-bootstrap-theme.css": "/css/unity-bootstrap-theme.css",
+    "/css/unity-bootstrap-footer.css": "/css/unity-bootstrap-footer.css",
+    "/js/bootstrap.bundle.min.js": "/js/bootstrap.bundle.min.js",
+    "/js/data-layer.js": "/js/data-layer.js",
+    "/js/global-header.js": "/js/global-header.js"
 }

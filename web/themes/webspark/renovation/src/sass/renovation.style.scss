@@ -2,77 +2,27 @@
 // Bootstrap
 // ----------------------------------------------------------------------------
 
-@import "~bootstrap/scss/functions";
-@import "base/variables";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/maps";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/utilities/api";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/images";
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/tables";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
-@import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/button-group";
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/card";
-@import "~bootstrap/scss/breadcrumb";
-@import "~bootstrap/scss/pagination";
-@import "~bootstrap/scss/badge";
-@import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/progress";
-@import "~bootstrap/scss/list-group";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/modal";
-@import "~bootstrap/scss/tooltip";
-@import "~bootstrap/scss/popover";
-@import "~bootstrap/scss/carousel";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+// Load in the needed mixins individually
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../node_modules/bootstrap/scss/utilities";
 
 // ----------------------------------------------------------------------------
-// Base
+// UDS
 // ----------------------------------------------------------------------------
 
-@import "base/mixins";
-@import "base/functions";
-@import "base/helpers";
-@import "base/elements";
-@import "base/typography";
-@import "base/drupal-admin-tweaks";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
 
 // ----------------------------------------------------------------------------
-// Unity
+// Renovation
 // ----------------------------------------------------------------------------
 
-@import "bootstrap-asu";
-
-// ----------------------------------------------------------------------------
-// Layout
-// ----------------------------------------------------------------------------
-
-@import "layout/page.header";
-@import "layout/page.content";
-@import "layout/page.footer";
-
-// ----------------------------------------------------------------------------
-// Component
-// ----------------------------------------------------------------------------
-
-@import "../components/node/node";
-@import "../components/headings/headings";
-
-// ----------------------------------------------------------------------------
-// Other
-// ----------------------------------------------------------------------------
-
-@import "block/block";
-@import "content/node.page";
-@import "content/node.article";
-@import "content/theme-tweaks";
-@import "renovation-extends/form-fields";
+@import "renovation-variables";
+@import "base";
+@import "helpers";
+@import "nodes";
+@import "pages";
+// @import "components";
