@@ -35,6 +35,28 @@ mix.browserSync({
 
 /*
  |--------------------------------------------------------------------------
+ | UDS
+ |--------------------------------------------------------------------------
+ */
+mix.copy(
+  [
+    "node_modules/@asu/unity-bootstrap-theme/dist/css/unity-bootstrap-theme.css",
+    'node_modules/@asu/unity-bootstrap-theme/dist/css/unity-bootstrap-footer.css'
+  ],
+  "assets/css"
+);
+
+mix.copy(
+  [
+    "node_modules/@asu/unity-bootstrap-theme/dist/js/bootstrap.bundle.min.js",
+    "node_modules/@asu/unity-bootstrap-theme/dist/js/data-layer.js",
+    "node_modules/@asu/unity-bootstrap-theme/dist/js/global-header.js",
+  ],
+  "assets/js"
+);
+
+/*
+ |--------------------------------------------------------------------------
  | SASS
  |--------------------------------------------------------------------------
  */
