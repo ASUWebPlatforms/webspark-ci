@@ -1,5 +1,3 @@
-import 'popper.js';
-import 'bootstrap';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 
 var icons = {

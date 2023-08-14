@@ -2,10 +2,14 @@ style:
   version: VERSION
   css:
     theme:
+      assets/css/unity-bootstrap-theme.css: {}
+      assets/css/unity-bootstrap-footer.css: {}
       assets/css/renovation.style.css: {}
   js:
-    assets/js/renovation.script.js: {}
+    assets/js/bootstrap.bundle.min.js: {}
+    # assets/js/global-header.js: {}
     js/datalayer.js: {}
+    assets/js/renovation.script.js: {}
   dependencies:
     - core/jquery
     - core/drupal
