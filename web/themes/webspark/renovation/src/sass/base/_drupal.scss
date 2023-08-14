@@ -1,3 +1,21 @@
+.toolbar-oriented .toolbar-bar {
+  z-index: 1200;
+}
+
+.page-wrapper-webspark main {
+  @include media-breakpoint-down(md) {
+    margin-top: 4px;
+  }
+
+  @include media-breakpoint-only(lg) {
+    margin-top: -28px;
+  }
+
+  @include media-breakpoint-only(xl) {
+    margin-top: -6px;
+  }
+}
+
 /* Make skip to content link visible upon focus (it was hidden by the ASU
 Header */
 .visually-hidden-focusable:active,
