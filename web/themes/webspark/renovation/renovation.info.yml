@@ -32,7 +32,7 @@ libraries-override:
         misc/dialog/off-canvas.button.css: css/core/dialog/off-canvas.button.css
 
 
-ckeditor_stylesheets:
+ckeditor5_stylesheets:
   - assets/css/renovation.style.css
   - css/ckeditor-override.css
 
