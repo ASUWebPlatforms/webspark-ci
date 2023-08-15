@@ -13,8 +13,12 @@
 // ----------------------------------------------------------------------------
 // UDS
 // ----------------------------------------------------------------------------
-
+$image-assets-path: "../img" !default;
 @import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/dividers";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/headings";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/colors";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/modals";
 
 // ----------------------------------------------------------------------------
 // Renovation

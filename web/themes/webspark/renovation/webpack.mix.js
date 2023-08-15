@@ -60,7 +60,13 @@ mix.copy(
  | SASS
  |--------------------------------------------------------------------------
  */
-mix.sass('src/sass/renovation.style.scss', 'css');
+mix.sass('src/sass/renovation.style.scss', 'css', {
+  sassOptions: {
+    includePaths: [
+      'node_modules/@asu/unity-bootstrap-theme/src/scss/variables',
+    ]
+  }
+});
 
 /*
  |--------------------------------------------------------------------------
