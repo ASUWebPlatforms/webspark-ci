@@ -362,6 +362,10 @@ body .layout-builder-block {
     margin-bottom: -48px;
   }
 }
+.center-container {
+  margin: 0 auto;
+}
+
 .article--headinfo {
   font-weight: 700;
 }
@@ -399,10 +403,6 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
     top: 168px !important;
   }
-}
-
-.black-bg {
-  background: #000;
 }
 
 .banner__text {
