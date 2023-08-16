@@ -20808,4 +20808,26 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   margin-bottom: 0;
 }
 
+@media (min-width: 992px) {
+  .uds-blockquote.with-image {
+    gap: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .uds-blockquote.with-image img {
+    width: 180px;
+    height: 180px;
+  }
+}
+@media (max-width: 991.98px) {
+  .uds-blockquote {
+    grid-template-columns: auto auto;
+  }
+}
+@media (max-width: 575.98px) {
+  .uds-blockquote {
+    padding: 1rem;
+  }
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
