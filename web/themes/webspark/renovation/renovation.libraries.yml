@@ -2,8 +2,6 @@ style:
   version: VERSION
   css:
     theme:
-      assets/css/unity-bootstrap-theme.css: {}
-      assets/css/unity-bootstrap-footer.css: {}
       assets/css/renovation.style.css: {}
   js:
     assets/js/bootstrap.bundle.min.js: {}

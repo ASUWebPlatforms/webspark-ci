@@ -1,24 +1,11 @@
 // ----------------------------------------------------------------------------
-// Bootstrap
-// Only import the mixins we need
-// ----------------------------------------------------------------------------
-
-@import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-@import "../../node_modules/bootstrap/scss/variables-dark";
-@import "../../node_modules/bootstrap/scss/maps";
-@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
-@import "../../node_modules/bootstrap/scss/utilities";
-
-// ----------------------------------------------------------------------------
 // UDS
+// Although the compiled CSS is provided in the package, its better to import
+// the source files so we get access to the mixins and variables.
 // ----------------------------------------------------------------------------
-$image-assets-path: "../img" !default;
-@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
-@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/dividers";
-@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/headings";
-@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/colors";
-@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/variables/modals";
+
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/unity-bootstrap-theme";
+@import "../../node_modules/@asu/unity-bootstrap-theme/src/scss/unity-bootstrap-footer";
 
 // ----------------------------------------------------------------------------
 // Renovation
