@@ -10,20 +10,25 @@
  * - utility_classes: An array of utility classes.
  */
 #}
+
 {% import _self as menus %}
-
 {% set alignment = 'flex-column' %}
-
 {% set nav_classes = [ 'nav', style, alignment, fill]|merge(utility_classes ? utility_classes : []) %}
 
 {% if items %}
   {% if title %}
     <h2>{{ title }}</h2>
   {% endif %}
-  <div class="sidebar-toggler" data-bs-toggle="collapse" data-bs-target="#sidebar-left" aria-expanded="false" aria-controls="sidebar-left">
+
+  <div class="sidebar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#sidebar-left"
+    aria-expanded="false"
+    aria-controls="sidebar-left">
     <p>Select Section</p>
-    <span class="fas fa-chevron-down"/>
+    <span class="fas fa-chevron-up"/>
   </div>
+
   <nav id="sidebar-left" class="sidebar collapse" aria-label="Secondary">
     {% block items %}
       {% for item in items %}
@@ -33,7 +38,6 @@
         ] %}
         {% if item.is_expanded and item.below %}
           <div class="card card-foldable">
-
             <div class="card-header">
               <a id="{{ item.title|clean_id|lower }}"
                  class="collapsed nav-link"
@@ -55,9 +59,9 @@
             </div>
 
             <div id="cardBody{{ item.title|clean_id|lower }}"
-                 class="collapse card-body"
-                 aria-labelledby="{{ item.title|clean_id|lower }}"
-                 data-bs-parent=".sidebar">
+              class="collapse card-body"
+              aria-labelledby="{{ item.title|clean_id|lower }}"
+              data-bs-parent=".sidebar">
               {% if item.below %}
                 {% for subitem in item.below %}
                   {{ link(
@@ -75,7 +79,6 @@
               {% endif %}
 
             </div><!-- end .card-body -->
-
           </div><!-- end .card -->
         {% else %}
           <div class="nav-link-container">
@@ -97,5 +100,3 @@
     {% endblock %}
   </nav><!-- end .sidebar -->
 {% endif %}
-
-{{ attach_library('renovation/sidebar') }}
