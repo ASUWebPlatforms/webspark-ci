@@ -1,10 +1,8 @@
+{{ attach_library('renovation/accordions') }}
 {% set is_icon = content.field_icon|render %}
-
 {% set link_id = paragraph.id() %}
-{# Accordion #}
-<div class="accordion-item mt-3{% if color != 'default' %} {{ color }}{% endif %}">
 
-  {# Accordion Header #}
+<div class="accordion-item mt-3{% if color != 'default' %} {{ color }}{% endif %}">
   <div class="accordion-header{% if is_icon  %} accordion-header-icon{% endif %}">
     <h3>
       <a id="accordion-header-{{ link_id|lower }}" class="collapsed"
@@ -18,12 +16,13 @@
          data-ga-section="accordion block"
          data-ga-region="main content"
          data-ga-text="{{ heading }}">
+
         {# If there is an icon print it else print header only. #}
         {% if is_icon  %}
           <span class="accordion-icon">
-          <i class="{{ content.field_icon[0]['#icons'][0]['#style'] }} {{ content.field_icon[0]['#icons'][0]['#name'] }}  me-2" role="img" aria-label="..."></i>
-          {{ heading }}
-         </span>
+            <i class="{{ content.field_icon[0]['#icons'][0]['#style'] }} {{ content.field_icon[0]['#icons'][0]['#name'] }}  me-2" role="img" aria-label="..."></i>
+            {{ heading }}
+          </span>
         {% else %}
           {{ heading }}
         {% endif %}
@@ -33,14 +32,7 @@
     </h3>
   </div>
 
-  {# Accordion Body #}
   <div id="accordion-content-{{ link_id }}" class="collapse accordion-body" aria-labelledby="{{ heading }}" data-bs-parent="#accordion-{{ parent_id }}">
-    {# Body value #}
     {{ body_text  }}
   </div>
-  {# End body #}
-
 </div>
-{# End Accordion #}
-
-{{ attach_library('renovation/accordions') }}

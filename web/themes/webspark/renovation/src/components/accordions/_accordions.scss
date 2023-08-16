@@ -1,5 +1,9 @@
-// Set content width to 75 characters.
-.accordion {
+.accordion-item {
+  // This can replace the mt-3 class in the markup, and expand this to be a sibling selector
+  &:first-of-type {
+    margin-top: 0 !important;
+  }
+
   p {
     max-width: 700px;
 
@@ -10,20 +14,5 @@
     &:last-child {
       margin-bottom: 0;
     }
-  }
-
-  .accordion-item {
-    border-right: 1px solid $uds-color-base-gray-3;
-  }
-
-  .accordion-item .accordion-header h3 {
-    font-size: $uds-size-font-large;
-    line-height: 1.625rem;
-    letter-spacing: -0.01875rem;
-    max-width: none;
-  }
-
-  & > .card:first-of-type {
-    margin-top: 0 !important;
   }
 }
