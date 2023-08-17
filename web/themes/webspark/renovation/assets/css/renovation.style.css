@@ -20830,4 +20830,108 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   }
 }
 
+.layout__full-width .block-webspark-module-asu-breadcrumb .uds-content-align {
+  max-width: 100%;
+}
+.layout__full-width .block-webspark-module-asu-breadcrumb .breadcrumb {
+  margin-bottom: 0;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #8c1d40;
+  border-color: #8c1d40;
+}
+
+.bg-dark a:not(.btn, .uds-modal-close-btn, .nav-link),
+.bg-primary a:not(.btn, .uds-modal-close-btn, .nav-link),
+.bg-black a:not(.btn, .uds-modal-close-btn, .nav-link) {
+  color: #e8e8e8;
+}
+
+.bg-light a:not(.btn, .uds-modal-close-btn, .nav-link),
+.bg-secondary a:not(.btn, .uds-modal-close-btn, .nav-link),
+.bg-white a:not(.btn, .uds-modal-close-btn, .nav-link) {
+  color: #8c1d40;
+}
+
+.bg-light .btn-gold,
+.bg-light .btn-gold:hover,
+.bg-light .btn-gray,
+.bg-light .btn-gray:hover,
+.bg-secondary .btn-gold,
+.bg-secondary .btn-gold:hover,
+.bg-secondary .btn-gray,
+.bg-secondary .btn-gray:hover,
+.bg-white .btn-gold,
+.bg-white .btn-gold:hover,
+.bg-white .btn-gray,
+.bg-white .btn-gray:hover,
+.bg-dark .btn-gold,
+.bg-dark .btn-gold:hover,
+.bg-dark .btn-gray,
+.bg-dark .btn-gray:hover,
+.bg-primary .btn-gold,
+.bg-primary .btn-gold:hover,
+.bg-primary .btn-gray,
+.bg-primary .btn-gray:hover,
+.bg-black .btn-gold,
+.bg-black .btn-gold:hover,
+.bg-black .btn-gray,
+.bg-black .btn-gray:hover,
+.bg-gray-1 .btn-gold,
+.bg-gray-1 .btn-gold:hover,
+.bg-gray-1 .btn-gray,
+.bg-gray-1 .btn-gray:hover,
+.bg-gray-2 .btn-gold,
+.bg-gray-2 .btn-gold:hover,
+.bg-gray-2 .btn-gray,
+.bg-gray-2 .btn-gray:hover,
+.bg-gray-7 .btn-gold,
+.bg-gray-7 .btn-gold:hover,
+.bg-gray-7 .btn-gray,
+.bg-gray-7 .btn-gray:hover {
+  color: #212529;
+}
+.bg-light .btn-maroon,
+.bg-light .btn-maroon:hover,
+.bg-light .btn-dark,
+.bg-light .btn-dark:hover,
+.bg-secondary .btn-maroon,
+.bg-secondary .btn-maroon:hover,
+.bg-secondary .btn-dark,
+.bg-secondary .btn-dark:hover,
+.bg-white .btn-maroon,
+.bg-white .btn-maroon:hover,
+.bg-white .btn-dark,
+.bg-white .btn-dark:hover,
+.bg-dark .btn-maroon,
+.bg-dark .btn-maroon:hover,
+.bg-dark .btn-dark,
+.bg-dark .btn-dark:hover,
+.bg-primary .btn-maroon,
+.bg-primary .btn-maroon:hover,
+.bg-primary .btn-dark,
+.bg-primary .btn-dark:hover,
+.bg-black .btn-maroon,
+.bg-black .btn-maroon:hover,
+.bg-black .btn-dark,
+.bg-black .btn-dark:hover,
+.bg-gray-1 .btn-maroon,
+.bg-gray-1 .btn-maroon:hover,
+.bg-gray-1 .btn-dark,
+.bg-gray-1 .btn-dark:hover,
+.bg-gray-2 .btn-maroon,
+.bg-gray-2 .btn-maroon:hover,
+.bg-gray-2 .btn-dark,
+.bg-gray-2 .btn-dark:hover,
+.bg-gray-7 .btn-maroon,
+.bg-gray-7 .btn-maroon:hover,
+.bg-gray-7 .btn-dark,
+.bg-gray-7 .btn-dark:hover {
+  color: #ffffff;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
