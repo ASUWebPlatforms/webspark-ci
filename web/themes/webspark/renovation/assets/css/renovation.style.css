@@ -20853,4 +20853,10 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   margin: 1.5rem auto 0.5rem 2rem !important;
 }
 
+@media screen and (min-width: 768px) {
+  .card-ranking {
+    width: 100%;
+  }
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
