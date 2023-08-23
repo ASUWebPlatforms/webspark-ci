@@ -20859,4 +20859,8 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   }
 }
 
+.uds-card-and-image i.fa-null {
+  display: none;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
