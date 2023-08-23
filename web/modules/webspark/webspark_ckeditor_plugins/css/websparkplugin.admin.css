@@ -1,0 +1,23 @@
+.ckeditor5-toolbar-button-simpleBox {
+  background-image: url(../icons/simpleBox.svg);
+}
+
+.ckeditor5-toolbar-button-websparkButton {
+  background-image: url(../icons/websparkButton.svg);
+}
+
+.ckeditor5-toolbar-button-websparkDivider {
+  background-image: url(../icons/websparkDivider.svg);
+}
+
+.ckeditor5-toolbar-button-websparkLead {
+  background-image: url(../icons/websparkLead.svg);
+}
+
+.ckeditor5-toolbar-button-websparkHighlitedHeading {
+  background-image: url(../icons/websparkHighlightedHeading.svg);
+}
+
+.ckeditor5-toolbar-button-websparkBlockquote {
+  background-image: url(../icons/websparkblockquote.svg);
+}

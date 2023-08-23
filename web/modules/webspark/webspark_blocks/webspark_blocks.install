@@ -142,6 +142,13 @@ function webspark_blocks_update_9020(&$sandbox) {
 }
 
 /**
+ * WS2-1452 - Add modifying editor and filter minimal format to allow ckeditor5.
+ */
+function webspark_blocks_update_9021(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {

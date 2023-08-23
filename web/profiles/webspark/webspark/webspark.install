@@ -328,3 +328,27 @@ function webspark_update_9015(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+/**
+ * Install new modules.
+ */
+function webspark_update_9016(&$sandbox) {
+  $module_installer = \Drupal::service("module_installer");
+
+  $module_installer->install(["ckeditor5"]);
+}
+
+/**
+ * Update the allowed HTML tags for the Basic HTML format.
+ */
+function webspark_update_9017(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.basic_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.full_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.full_html');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+
+}
+
+
