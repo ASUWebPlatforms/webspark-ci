@@ -20830,4 +20830,23 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   }
 }
 
+.parallax-container {
+  height: 36rem;
+}
+@media screen and (max-width: 768px) {
+  .parallax-container {
+    height: 45rem;
+  }
+}
+.parallax-container img {
+  left: 0 !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+  .parallax-container .parallax-container-content {
+    display: block;
+  }
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
