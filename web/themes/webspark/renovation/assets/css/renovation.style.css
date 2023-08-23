@@ -20849,4 +20849,16 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   }
 }
 
+.block-inline-blockcard-arrangement .container {
+  padding: 0;
+}
+
+.uds-card-and-image-container .card .card-icon-top {
+  margin: 1.5rem auto 0.5rem 2rem !important;
+}
+
+.uds-card-and-image-container .card .card-body {
+  display: block !important;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
