@@ -54,7 +54,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
       allowWhere: "$block",
     });
 
-    const options = ['h1','h2','h3','h4'];
+    const options = ["h1", "h2", "h3", "h4"];
     for (const option of options) {
       schema.register("websparkHighlitedHeadingHelement_" + option, {
         isLimit: true,
@@ -68,10 +68,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         allowContentOf: "$block",
         allowAttributes: ["text", "styles"],
       });
-    }  
-/*<div class="uds-highlighted-heading"> 
-<h1><span class="highlight-gold">Test content </span></h1>
-</div>*/
+    }
   }
 
   /**
@@ -82,7 +79,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     // Converters are registered via the central editor object.
     const { conversion } = this.editor;
 
-    const options = ['h1','h2','h3','h4'];
+    const options = ["h1", "h2", "h3", "h4"];
     for (const option of options) {
       conversion.for("upcast").elementToElement({
         model: "websparkHighlitedHeadingHelement_" + option,
@@ -109,55 +106,46 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
       conversion.for("upcast").elementToElement({
         view: {
           name: "span",
-          classes: [
-            /^highlight-(gold|black|white)$/,
-          ],
+          classes: [/^highlight-(gold|black|white)$/],
           attributes: true,
         },
         model: (viewElement, { writer }) => {
-          return writer.createElement("websparkHighlitedHeadingText_" + option, {
-            text: viewElement.getAttribute("text"),
-            styles: viewElement.getAttribute("styles"),
-          });
+          return writer.createElement(
+            "websparkHighlitedHeadingText_" + option,
+            {
+              text: viewElement.getAttribute("text"),
+              styles: viewElement.getAttribute("styles"),
+            }
+          );
         },
       });
-  
+
       conversion.for("dataDowncast").elementToElement({
         model: "websparkHighlitedHeadingText_" + option,
         view: (modelElement, { writer }) => {
-  
           return writer.createContainerElement("span", {
-            class: `highlight-${modelElement.getAttribute(
-              "styles"
-            )}`,
+            class: `highlight-${modelElement.getAttribute("styles")}`,
             text: modelElement.getAttribute("text"),
             styles: modelElement.getAttribute("styles"),
           });
         },
       });
-  
-  
+
       conversion.for("editingDowncast").elementToElement({
         model: "websparkHighlitedHeadingText_" + option,
         view: (modelElement, { writer }) => {
           const spHH = writer.createContainerElement("span", {
-            class: `highlight-${modelElement.getAttribute(
-              "styles"
-            )}`,
+            class: `highlight-${modelElement.getAttribute("styles")}`,
           });
           return toWidget(spHH, writer, { label: "Highlited Text" });
         },
       });
     }
 
-
-
     conversion.for("upcast").elementToElement({
       view: {
         name: "div",
-        classes: [
-          "uds-highlighted-heading",
-        ],
+        classes: ["uds-highlighted-heading"],
       },
       model: (viewElement, { writer }) => {
         return writer.createElement("websparkHighlitedHeading", {});
@@ -185,7 +173,5 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         return toWidget(divHH, writer, { label: "Highlited Heading" });
       },
     });
-
-    
   }
 }

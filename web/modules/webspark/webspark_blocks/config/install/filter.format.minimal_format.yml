@@ -1,8 +1,6 @@
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: g0ryLAB5Q7gfMKgMl9cNNzUt6bFf6VwtyAmJXKmDAQ0
 name: 'Minimal Format'
 format: minimal_format
 weight: 0

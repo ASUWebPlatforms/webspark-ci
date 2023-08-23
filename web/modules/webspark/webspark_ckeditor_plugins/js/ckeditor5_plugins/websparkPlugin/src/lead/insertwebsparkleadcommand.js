@@ -7,7 +7,6 @@
 import { Command } from "ckeditor5/src/core";
 
 export default class InsertWebsparkLeadCommand extends Command {
-  
   execute(option) {
     const { model } = this.editor;
 
@@ -16,9 +15,6 @@ export default class InsertWebsparkLeadCommand extends Command {
       // in a way that will result in creating a valid model structure.
       model.insertContent(createWebsparkLeadArea(writer));
     });
-   // const horizontalLine = writer.createElement('hr');
- //   writer.setAttribute('class', 'custom-horizontal-line', horizontalLine); // Hardcoded class
-  //  writer.insert(horizontalLine, editor.model.document.selection.getFirstPosition());
   }
 
   refresh() {
@@ -43,7 +39,7 @@ function createWebsparkLeadArea(writer) {
   // Create instances of the three elements registered with the editor in
   // websparkleadediting.js.
   const websparkLead = writer.createElement("websparkLead");
-  writer.setAttribute('class', 'lead', websparkLead);
+  writer.setAttribute("class", "lead", websparkLead);
   // Return the element to be added to the editor.
   return websparkLead;
 }

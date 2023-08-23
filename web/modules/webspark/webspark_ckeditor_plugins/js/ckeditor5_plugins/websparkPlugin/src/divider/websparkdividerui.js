@@ -17,8 +17,6 @@ export default class WebsparkDividerUI extends Plugin {
   init() {
     const editor = this.editor;
     const t = editor.t;
-    //this._balloon = this.editor.plugins.get(ContextualBalloon);
-
   
     editor.ui.componentFactory.add("websparkDivider", (locale) => {
       const command = editor.commands.get("insertWebsparkDivider");

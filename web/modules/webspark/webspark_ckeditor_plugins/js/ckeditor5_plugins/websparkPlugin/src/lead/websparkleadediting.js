@@ -57,10 +57,6 @@ export default class WebsparkLeadEditing extends Plugin {
 
     conversion.for("dataDowncast").elementToElement({
       model: "websparkLead",
-      // view: {
-      //   name: "p",
-      //   classes: "lead",
-      // },
       view: (modelElement, { writer }) => {
         return writer.createEmptyElement("p", {
           class: "lead",
@@ -74,42 +70,14 @@ export default class WebsparkLeadEditing extends Plugin {
         const wrapper = writer.createContainerElement(
           "div",
           null,
-          writer.createEmptyElement("p",{class:'lead'})
+          writer.createEmptyElement("p", { class: "lead" })
         );
 
-
-				writer.addClass( 'lead', wrapper );
-				writer.setCustomProperty( 'p', true, wrapper );
+        writer.addClass("lead", wrapper);
+        writer.setCustomProperty("p", true, wrapper);
 
         return toWidget(wrapper, writer, { label: "Lead" });
       },
     });
-
-    // conversion.for("upcast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: {
-    //     name: "p",
-    //     classes: "lead",
-    //   },
-    // });
-
-    // conversion.for("dataDowncast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: {
-    //     name: "p",
-    //     classes: "lead",
-    //   },
-    // });
-
-    // conversion.for("editingDowncast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: (modelElement, { writer: viewWriter }) => {
-    //     const section = viewWriter.createContainerElement("p", {
-    //       class: "lead",
-    //     });
-
-    //     return toWidget(section, viewWriter, { label: "divisorDivWrapper" });
-    //   },
-    // });
   }
 }

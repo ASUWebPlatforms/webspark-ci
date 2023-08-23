@@ -57,10 +57,6 @@ export default class WebsparkDividerEditing extends Plugin {
 
     conversion.for("dataDowncast").elementToElement({
       model: "websparkDivider",
-      // view: {
-      //   name: "hr",
-      //   classes: "copy-divider",
-      // },
       view: (modelElement, { writer }) => {
         return writer.createEmptyElement("hr", {
           class: "copy-divider",
@@ -84,32 +80,5 @@ export default class WebsparkDividerEditing extends Plugin {
         return toWidget(wrapper, writer, { label: "Webspark divider" });
       },
     });
-
-    // conversion.for("upcast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: {
-    //     name: "hr",
-    //     classes: "copy-divider",
-    //   },
-    // });
-
-    // conversion.for("dataDowncast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: {
-    //     name: "hr",
-    //     classes: "copy-divider",
-    //   },
-    // });
-
-    // conversion.for("editingDowncast").elementToElement({
-    //   model: "divisorDivWrapper",
-    //   view: (modelElement, { writer: viewWriter }) => {
-    //     const section = viewWriter.createContainerElement("hr", {
-    //       class: "copy-divider",
-    //     });
-
-    //     return toWidget(section, viewWriter, { label: "divisorDivWrapper" });
-    //   },
-    // });
   }
 }

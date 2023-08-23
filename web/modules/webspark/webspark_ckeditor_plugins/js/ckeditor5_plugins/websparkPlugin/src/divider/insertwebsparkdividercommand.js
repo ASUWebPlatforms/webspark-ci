@@ -16,9 +16,6 @@ export default class InsertWebsparkDividerCommand extends Command {
       // in a way that will result in creating a valid model structure.
       model.insertContent(createWebsparkDividerArea(writer));
     });
-   // const horizontalLine = writer.createElement('hr');
- //   writer.setAttribute('class', 'custom-horizontal-line', horizontalLine); // Hardcoded class
-  //  writer.insert(horizontalLine, editor.model.document.selection.getFirstPosition());
   }
 
   refresh() {

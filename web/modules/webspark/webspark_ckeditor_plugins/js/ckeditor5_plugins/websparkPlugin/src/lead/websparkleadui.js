@@ -17,9 +17,7 @@ export default class WebsparkLeadUI extends Plugin {
   init() {
     const editor = this.editor;
     const t = editor.t;
-    //this._balloon = this.editor.plugins.get(ContextualBalloon);
 
-  
     editor.ui.componentFactory.add("websparkLead", (locale) => {
       const command = editor.commands.get("insertWebsparkLead");
       const buttonView = new ButtonView(locale);

@@ -58,12 +58,9 @@ export default class InsertWebsparkBlockquoteCommand extends Command {
       }
 
       writer.append(websparkBlockQuotePath, websparkBlockquoteSvg);
-
       writer.append(websparkBlockquoteSvg, websparkBlockquote);
-
       writer.append(websparkBlockquoteParagraph, websparkBlockQuoteContainer);
       writer.append(websparkBlockquoteCitation, websparkBlockQuoteContainer);
-
       writer.append(websparkBlockQuoteContainer, websparkBlockquote);
       model.insertContent(websparkBlockquote);
     });
