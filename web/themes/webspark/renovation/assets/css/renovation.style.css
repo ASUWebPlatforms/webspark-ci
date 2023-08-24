@@ -21036,4 +21036,12 @@ form.uds-form input {
   padding-left: 2rem !important;
 }
 
+.h2,
+h2,
+.h3,
+h3 {
+  max-width: 700px;
+  overflow-wrap: break-word;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
