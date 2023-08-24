@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "bower-asset/fontawesome": "6.4.2",
+        "bower-asset/fontawesome": "5.15.4",
         "ckeditor/fakeobjects": "4.16.0",
         "ckeditor/link": "4.16.1",
         "composer/installers": "v2.0.0",
@@ -36,7 +36,7 @@
         "drupal/field_group": "3.4.0",
         "drupal/field_menu": "2.1.0",
         "drupal/field_states_ui": "3.0",
-        "drupal/fontawesome": "2.x-dev@dev",
+        "drupal/fontawesome": "2.26.0",
         "drupal/image_widget_crop": "2.4.0",
         "drupal/imagemagick": "3.4",
         "drupal/layout_builder_component_attributes": "2.1.1",
