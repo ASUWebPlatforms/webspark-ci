@@ -20403,6 +20403,19 @@ Should be included after @import scss/grid. Registered here for clarity.
   z-index: 1200;
 }
 
+html,
+body,
+.dialog-off-canvas-main-canvas {
+  height: 100%;
+}
+
+.page-wrapper-webspark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 @media (max-width: 767.98px) {
   .page-wrapper-webspark main {
     margin-top: 4px;
