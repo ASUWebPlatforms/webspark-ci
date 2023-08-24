@@ -6,8 +6,21 @@
 }
 
 // --------------------------------------------------------
-// Page Wrapper
+// Pages
 // --------------------------------------------------------
+html,
+body,
+.dialog-off-canvas-main-canvas {
+  height: 100%;
+}
+
+.page-wrapper-webspark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .page-wrapper-webspark main {
   @include media-breakpoint-down(md) {
     margin-top: 4px;
