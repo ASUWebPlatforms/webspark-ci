@@ -20,10 +20,11 @@ import {
   createSelect,
 } from "../utils/utils";
 
-export class WebsparkHighlitedHeadingFormView extends View {
-  DEFAULT_TEXT = "";
-  DEFAULT_STYLE = "gold";
-  DEFAULT_HEADING = "h1";
+export class WebsparkTableFormView extends View {
+  DEFAULT_ROWS = "3";
+  DEFAULT_COLS = "2";
+  DEFAULT_HEADER = "none";
+  DEFAULT_TYPE = "default";
 
   constructor(validators, locale) {
     super(locale);
@@ -33,17 +34,15 @@ export class WebsparkHighlitedHeadingFormView extends View {
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
-    this.textInputView = createInput(t("Content"), locale);
-    this.styleSelect = createSelect(
-      t("Style"),
-      this._getStyleOptions(t),
+    this.textInputRowsView = createInput(t("Rows"), locale);
+    this.textInputColsView = createInput(t("Columns"), locale);
+    this.headersSelect = createSelect(
+      t("Headers"),
+      this._getHeaderOptions(t),
       locale
     );
-    this.headingSelect = createSelect(
-      t("Heading"),
-      this._getHeadingOptions(t),
-      locale
-    );
+    this.tabletypeSelect = createSelect(t("Table Type"), this._getTableTypeOptions(t), locale);
+    this.textCaption = createInput(t("Caption"), locale);
 
     this.saveButtonView = createButton(
       t("Save"),
@@ -83,8 +82,11 @@ export class WebsparkHighlitedHeadingFormView extends View {
         tabindex: "-1",
       },
       children: [
-        createRow(this.textInputView),
-        createRow(this.styleSelect, this.headingSelect),
+        createRow(this.textInputRowsView),
+        createRow( this.textInputColsView),
+        createRow(this.headersSelect),
+        createRow(this.tabletypeSelect),
+        createRow(this.textCaption),
         createContainer(
           [this.saveButtonView, this.cancelButtonView],
           ["ck-webspark-form-buttons"]
@@ -102,9 +104,11 @@ export class WebsparkHighlitedHeadingFormView extends View {
 
     // TODO: Check why focus isn't working for a custom view
     const childViews = [
-      this.textInputView.children[1],
-      this.styleSelect.children[1],
-      this.headingSelect.children[1],
+      this.textInputRowsView.children[1],
+      this.textInputColsView.children[1],
+      this.headersSelect.children[1],
+      this.tabletypeSelect.children[1],
+      this.textCaption.children[1],
       this.saveButtonView,
       this.cancelButtonView,
     ];
@@ -142,36 +146,54 @@ export class WebsparkHighlitedHeadingFormView extends View {
     this._focusCycler.focusFirst();
   }
 
-  get text() {
-    return this.textInputView.children[1].element.value.trim();
+  get rows() {
+    return this.textInputRowsView.children[1].element.value.trim();
   }
 
-  set text(text) {
-    this.textInputView.children[1].element.value = text.trim();
+  set rows(rows) {
+    this.textInputRowsView.children[1].element.value = rows.trim();
   }
 
-  get styles() {
-    return this.styleSelect.children[1].value;
+  get cols() {
+    return this.textInputColsView.children[1].element.value.trim();
   }
 
-  set styles(styles) {
-    this.styleSelect.children[1].value = styles;
+  set cols(cols) {
+    this.textInputColsView.children[1].element.value = cols.trim();
   }
 
-  get heading() {
-    return this.headingSelect.children[1].value;
+  get headers() {
+    return this.headersSelect.children[1].value;
   }
 
-  set heading(heading) {
-    this.headingSelect.children[1].value = heading;
+  set headers(header) {
+    this.headersSelect.children[1].value = header;
+  }
+
+  get tabletype() {
+    return this.tabletypeSelect.children[1].value;
+  }
+
+  set tabletype(ttype) {
+    this.tabletypeSelect.children[1].value = ttype;
+  }
+
+  set caption(text) {
+    this.textCaption.children[1].element.value = text.trim();
+  }
+
+  get caption() {
+    return this.textCaption.children[1].element.value.trim();
   }
 
   setValues(values) {
-    this.text = values?.text || this.DEFAULT_TEXT;
-    this.styles = values?.styles || this.DEFAULT_STYLE;
-    this.heading = values?.heading || this.DEFAULT_HEADING;
+    this.rows = values?.rows || this.DEFAULT_ROWS;
+    this.cols = values?.cols || this.DEFAULT_COLS;
+    this.headers = values?.headers || this.DEFAULT_HEADER;
+    this.tabletype = values?.tabletype || this.DEFAULT_TYPE;
+    this.caption = values?.caption || '';
   }
-
+ 
   isValid() {
     this.resetFormStatus();
 
@@ -180,7 +202,9 @@ export class WebsparkHighlitedHeadingFormView extends View {
 
       if (errorText) {
         if (errorText.includes("text")) {
-          this.textInputView.errorText = errorText;
+          this.textInputRowsView.errorText = errorText;
+        } else if (errorText.includes("URL")) {
+          this.textInputColsView.errorText = errorText;
         }
 
         return false;
@@ -191,46 +215,40 @@ export class WebsparkHighlitedHeadingFormView extends View {
   }
 
   resetFormStatus() {
-    this.textInputView.errorText = null;
+    this.textInputRowsView.errorText = null;
+    this.textInputColsView.errorText = null;
   }
 
-  _getStyleOptions(t) {
+  _getHeaderOptions(t) {
     return [
       {
-        value: "gold",
-        title: t("Gold Highlight"),
+        value: "none",
+        title: t("None"),
       },
       {
-        value: "black",
-        title: t("Gray 7 Highlight"),
+        value: "row",
+        title: t("First row"),
       },
       {
-        value: "white",
-        title: t("White Highlight"),
+        value: "column",
+        title: t("First column"),
+      },
+      {
+        value: "both",
+        title: t("Both"),
       },
     ];
   }
 
-  _getHeadingOptions(t) {
+  _getTableTypeOptions(t) {
     return [
       {
-        value: "h1",
-        title: t("H1"),
+        value: "default",
+        title: t("Default"),
       },
-
       {
-        value: "h2",
-        title: t("H2"),
-      },
-
-      {
-        value: "h3",
-        title: t("H3"),
-      },
-
-      {
-        value: "h4",
-        title: t("H4"),
+        value: "fixed",
+        title: t("Fixed"),
       },
     ];
   }
@@ -244,7 +262,7 @@ function prepareListOptions(options) {
     const def = {
       type: "button",
       model: new Model({
-        commandName: "websparkHighlitedHeading",
+        commandName: "websparkTable",
         commandParam: option.model,
         label: option.title,
         withText: true,

@@ -17,3 +17,7 @@
 .ckeditor5-toolbar-button-websparkBlockquote {
   background-image: url(../icons/websparkblockquote.svg);
 }
+
+.ckeditor5-toolbar-button-websparkTable {
+  background-image: url(../icons/websparktable.svg);
+}

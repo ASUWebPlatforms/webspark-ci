@@ -12,6 +12,7 @@ import WebsparkDivider from "./divider/websparkdivider";
 import WebsparkLead from "./lead/websparklead";
 import WebsparkHighlitedHeading from "./heading/websparkhighlightedheading";
 import WebsparkBlockquote from "./quote/websparkblockquote";
+import WebsparkTable from "./table/websparktable";
 
 export default {
   WebsparkButton,
@@ -19,4 +20,5 @@ export default {
   WebsparkLead,
   WebsparkHighlitedHeading,
   WebsparkBlockquote,
+  WebsparkTable,
 };

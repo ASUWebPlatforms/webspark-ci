@@ -14,7 +14,7 @@ import InsertWebsparkBlockquoteCommand from "./insertwebsparkblockquotecommand";
  *
  * Which is converted for the browser/user as this markup
  * <a class="btn">
- *   <span class="text"></span>
+ *   <path class="text"></path>
  * </a>
  *
  * This file has the logic for defining the simpleBox model, and for how it is
@@ -34,9 +34,6 @@ export default class WebsparkBlockquoteEditing extends Plugin {
     );
   }
 
-  _defaultSvgPath() {
-    return "M113.61,245.82H0V164.56q0-49.34,8.69-77.83T40.84,35.58Q64.29,12.95,100.67,0l22.24,46.9q-34,11.33-48.72,31.54T58.63,132.21h55Zm180,0H180V164.56q0-49.74,8.7-78T221,35.58Q244.65,12.95,280.63,0l22.24,46.9q-34,11.33-48.72,31.54t-15.57,53.77h55Z";
-  }
   /*
    * This registers the structure that will be seen by CKEditor 5 as
    * <websparkBlockquote>
@@ -56,17 +53,10 @@ export default class WebsparkBlockquoteEditing extends Plugin {
     });
 
     schema.register("websparkBlockQuoteSvg", {
-      isLimit: true,
+      isObject: true,
       allowIn: "websparkBlockquote",
       allowContentOf: "$block",
       allowAttributes: ["role", "title", "viewbox"],
-    });
-
-    schema.register("websparkBlockQuotePath", {
-      isLimit: true,
-      allowIn: "websparkBlockQuoteSvg",
-      allowContentOf: "$block",
-      allowAttributes: ["d"],
     });
 
     schema.register("websparkBlockQuoteContainer", {
@@ -205,9 +195,9 @@ export default class WebsparkBlockquoteEditing extends Plugin {
     conversion.for("editingDowncast").elementToElement({
       model: "websparkBlockquoteParagraph",
       view: (_modelElement, { writer }) => {
-        const span = writer.createEditableElement("p", {});
+        const paragraphElement = writer.createEditableElement("p", {});
 
-        return toWidgetEditable(span, writer);
+        return toWidgetEditable(paragraphElement, writer);
       },
     });
 
@@ -236,42 +226,11 @@ export default class WebsparkBlockquoteEditing extends Plugin {
 
     conversion.for("upcast").elementToElement({
       view: {
-        name: "path",
-        classes: [],
-        attributes: true,
-      },
-      model: (viewElement, { writer }) => {
-        return writer.createElement("websparkBlockQuotePath", {
-          d: this._defaultSvgPath(),
-        });
-      },
-    });
-
-    conversion.for("dataDowncast").elementToElement({
-      model: "websparkBlockQuotePath",
-      view: (modelElement, { writer }) => {
-        return writer.createContainerElement("path", {
-          d: this._defaultSvgPath(),
-        });
-      },
-    });
-
-    conversion.for("editingDowncast").elementToElement({
-      model: "websparkBlockQuotePath",
-      view: (modelElement, { writer }) => {
-        const pathElement = writer.createContainerElement("path", {
-          d: this._defaultSvgPath(),
-        });
-
-        return toWidget(pathElement, writer, { label: "path" });
-      },
-    });
-
-    conversion.for("upcast").elementToElement({
-      view: {
         name: "svg",
-        classes: [],
-        attributes: true,
+        attributes: {
+          role: "presentation",
+          title: "Open quote",
+        },
       },
       model: (viewElement, { writer }) => {
         return writer.createElement("websparkBlockQuoteSvg", {
@@ -280,29 +239,25 @@ export default class WebsparkBlockquoteEditing extends Plugin {
           viewbox: "0 0 302.87 245.82",
         });
       },
+      converterPriority: "high",
     });
 
-    conversion.for("dataDowncast").elementToElement({
+    conversion.for("downcast").elementToElement({
       model: "websparkBlockQuoteSvg",
-      view: (modelElement, { writer }) => {
-        return writer.createContainerElement("svg", {
-          role: "presentation",
-          title: "Open quote",
-          viewbox: "0 0 302.87 245.82",
-        });
-      },
-    });
+      view: (modelElement, { writer: viewWriter }) => {
+        const element = viewWriter.createRawElement(
+          "svg",
+          {
+            role: "presentation",
+            title: "Open quote",
+            viewbox: "0 0 302.87 245.82",
+          },
+          function (domElement) {
+            domElement.innerHTML = `<path d="M113.61,245.82H0V164.56q0-49.34,8.69-77.83T40.84,35.58Q64.29,12.95,100.67,0l22.24,46.9q-34,11.33-48.72,31.54T58.63,132.21h55Zm180,0H180V164.56q0-49.74,8.7-78T221,35.58Q244.65,12.95,280.63,0l22.24,46.9q-34,11.33-48.72,31.54t-15.57,53.77h55Z"/>`;
+          }
+        );
 
-    conversion.for("editingDowncast").elementToElement({
-      model: "websparkBlockQuoteSvg",
-      view: (modelElement, { writer }) => {
-        const svgElement = writer.createContainerElement("svg", {
-          role: "presentation",
-          title: "Open quote",
-          viewbox: "0 0 302.87 245.82",
-        });
-
-        return toWidget(svgElement, writer, { label: "SVG" });
+        return element;
       },
     });
 

@@ -17,6 +17,7 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkLead
       - websparkPlugin.WebsparkHighlitedHeading
       - websparkPlugin.WebsparkBlockquote
+      - websparkPlugin.WebsparkTable
 
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
@@ -43,6 +44,8 @@ webspark_ckeditor_plugins_plugins:
         label: Highlited Heading
       websparkBlockquote:
         label: Blockquote
+      websparkTable:
+        label: Table
     # If the plugin does not provide elements, set this as
     # `elements: false`
     elements:
@@ -61,3 +64,5 @@ webspark_ckeditor_plugins_plugins:
       - <span class="text">
       - <hr class="copy-divider">
       - <p class="lead">
+      - <div class="uds-table">
+      - <div class="uds-table uds-table-fixed">
