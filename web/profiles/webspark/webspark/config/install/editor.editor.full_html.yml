@@ -18,15 +18,23 @@ settings:
       - bulletedList
       - numberedList
       - '|'
+      - fontawesome
       - drupalInsertImage
       - drupalMedia
       - '|'
       - heading
-      - codeBlock
       - '|'
       - sourceEditing
       - '|'
       - horizontalLine
+      - responsiveArea
+      - websparkButton
+      - websparkDivider
+      - websparkLead
+      - websparkHighlitedHeading
+      - websparkBlockquote
+      - '|'
+      - websparkTable
   plugins:
     ckeditor5_heading:
       enabled_headings:

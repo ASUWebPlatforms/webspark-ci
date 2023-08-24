@@ -18,6 +18,7 @@ settings:
       - bulletedList
       - numberedList
       - '|'
+      - fontawesome
       - drupalInsertImage
       - drupalMedia
       - '|'
@@ -26,12 +27,14 @@ settings:
       - sourceEditing
       - '|'
       - horizontalLine
-      - '|'
-      - blockQuote
-      - code
-      - fontawesome
       - responsiveArea
-      - insertTable
+      - websparkButton
+      - websparkDivider
+      - websparkLead
+      - websparkHighlitedHeading
+      - websparkBlockquote
+      - '|'
+      - websparkTable
   plugins:
     ckeditor5_heading:
       enabled_headings:
@@ -40,8 +43,6 @@ settings:
         - heading3
         - heading4
         - heading5
-    ckeditor5_style:
-      styles: {  }
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<dl>'
