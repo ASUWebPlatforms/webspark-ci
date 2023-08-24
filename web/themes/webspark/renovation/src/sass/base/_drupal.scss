@@ -1,3 +1,10 @@
+// This file is a place to put CSS overrides for default Drupal styles.
+// If you need to add an override to a UDS component, please do so in the
+// component's Sass file. As UDS components are designed to be used as
+// stand-alone components, they should not require any overrides unless in
+// the context of when a default Drupal style has an adverse effect on the
+// component.
+
 // --------------------------------------------------------
 // Admin
 // --------------------------------------------------------
@@ -67,6 +74,7 @@ body,
 // Fix center alignment
 .align-center {
   width: max-content;
+
   img {
     max-width: initial;
   }
@@ -103,5 +111,66 @@ figure.caption-drupal-media {
       color: $uds-color-base-gray-5;
       max-width: 75ch;
     }
+  }
+}
+
+// Apply border to embedded image
+.embedded-media {
+  max-width: 100% !important;
+
+  img {
+    border: 1px solid $uds-color-base-gray-3;
+    max-width: 100% !important;
+    height: auto;
+  }
+}
+
+// Figcaption Overrides CKeditor
+.caption-drupal-media {
+  img {
+    border: 1px solid $uds-color-base-gray-3;
+  }
+
+  figcaption {
+    span {
+      max-width: 700px !important;
+    }
+  }
+}
+
+figure.caption-img {
+  caption-side: bottom;
+
+  img {
+    border: 1px solid $uds-color-base-gray-3;
+    margin: 0 !important;
+  }
+
+  figcaption {
+    display: flex;
+    border: 1px solid #d0d0d0;
+    border-top: none;
+    opacity: 1;
+    background: #fff 0 0 no-repeat padding-box;
+    padding: .75rem;
+    font-size: .75rem;
+    text-align: left;
+
+    span {
+      flex-grow: 1;
+      max-width: 75ch;
+      width: 0;
+      color: $uds-color-base-gray-5;
+    }
+  }
+}
+
+.rounded-circle img {
+  border-radius: 50px !important;
+}
+
+@include media-breakpoint-down(sm) {
+  figure.align-center {
+    width: 100%;
   }
 }

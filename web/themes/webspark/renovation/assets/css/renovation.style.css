@@ -20482,6 +20482,55 @@ figure.caption-drupal-media figcaption span {
   max-width: 75ch;
 }
 
+.embedded-media {
+  max-width: 100% !important;
+}
+.embedded-media img {
+  border: 1px solid #d0d0d0;
+  max-width: 100% !important;
+  height: auto;
+}
+
+.caption-drupal-media img {
+  border: 1px solid #d0d0d0;
+}
+.caption-drupal-media figcaption span {
+  max-width: 700px !important;
+}
+
+figure.caption-img {
+  caption-side: bottom;
+}
+figure.caption-img img {
+  border: 1px solid #d0d0d0;
+  margin: 0 !important;
+}
+figure.caption-img figcaption {
+  display: flex;
+  border: 1px solid #d0d0d0;
+  border-top: none;
+  opacity: 1;
+  background: #fff 0 0 no-repeat padding-box;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  text-align: left;
+}
+figure.caption-img figcaption span {
+  flex-grow: 1;
+  max-width: 75ch;
+  width: 0;
+  color: #747474;
+}
+
+.rounded-circle img {
+  border-radius: 50px !important;
+}
+
+@media (max-width: 575.98px) {
+  figure.align-center {
+    width: 100%;
+  }
+}
 #drupal-off-canvas .form-text.description,
 #drupal-off-canvas .form-tel.description,
 #drupal-off-canvas .form-email.description,
@@ -21042,6 +21091,10 @@ h2,
 h3 {
   max-width: 700px;
   overflow-wrap: break-word;
+}
+
+.uds-img.uds-img-drop-shadow {
+  margin-bottom: 1rem;
 }
 
 /*# sourceMappingURL=renovation.style.css.map*/
