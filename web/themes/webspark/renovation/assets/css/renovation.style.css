@@ -20419,8 +20419,6 @@ Should be included after @import scss/grid. Registered here for clarity.
   }
 }
 
-/* Make skip to content link visible upon focus (it was hidden by the ASU
-Header */
 .visually-hidden-focusable:active,
 .visually-hidden-focusable:focus {
   position: relative;
@@ -20436,6 +20434,39 @@ Header */
 
 .pagination .page-link:hover {
   color: inherit;
+}
+
+.align-center {
+  width: -moz-max-content;
+  width: max-content;
+}
+.align-center img {
+  max-width: initial;
+}
+
+figure.caption.caption-drupal-media.align-left {
+  padding-right: 5px;
+}
+
+figure.caption.caption-drupal-media.align-left {
+  padding-left: 5px;
+}
+
+figure.caption-drupal-media .embedded-media img {
+  border: 1px solid #d0d0d0;
+}
+figure.caption-drupal-media figcaption {
+  border: 1px solid #d0d0d0;
+  border-top: none;
+  opacity: 1;
+  background: #fff 0% 0% no-repeat padding-box;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  text-align: left;
+}
+figure.caption-drupal-media figcaption span {
+  color: #747474;
+  max-width: 75ch;
 }
 
 .layout-builder-form .form-actions {

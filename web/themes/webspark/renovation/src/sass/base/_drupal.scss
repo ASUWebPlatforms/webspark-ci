@@ -1,7 +1,13 @@
+// --------------------------------------------------------
+// Admin
+// --------------------------------------------------------
 .toolbar-oriented .toolbar-bar {
   z-index: 1200;
 }
 
+// --------------------------------------------------------
+// Page Wrapper
+// --------------------------------------------------------
 .page-wrapper-webspark main {
   @include media-breakpoint-down(md) {
     margin-top: 4px;
@@ -16,8 +22,9 @@
   }
 }
 
-/* Make skip to content link visible upon focus (it was hidden by the ASU
-Header */
+// --------------------------------------------------------
+// Accessibility
+// --------------------------------------------------------
 .visually-hidden-focusable:active,
 .visually-hidden-focusable:focus {
   position: relative;
@@ -34,7 +41,54 @@ Header */
   padding: 0.25rem 0.5rem !important;
 }
 
-// Fix the hover color of the paginated links
+// --------------------------------------------------------
+// Pagination
+// --------------------------------------------------------
 .pagination .page-link:hover {
   color: inherit;
+}
+
+// --------------------------------------------------------
+// Embeded Media
+// --------------------------------------------------------
+// Fix center alignment
+.align-center {
+  width: max-content;
+  img {
+    max-width: initial;
+  }
+}
+
+// Normalize Drupal figures with UDS
+// TODO: Replace the hard values with UDS variables
+// TODO: Target both Drupal and UDS embeds
+figure.caption.caption-drupal-media.align-left {
+  padding-right: 5px;
+}
+
+figure.caption.caption-drupal-media.align-left {
+  padding-left: 5px;
+}
+
+figure.caption-drupal-media {
+  .embedded-media {
+    img {
+      border: 1px solid #d0d0d0;
+    }
+  }
+
+  figcaption {
+    border: 1px solid #d0d0d0;
+    border-top: none;
+    opacity: 1;
+    background: #fff 0% 0% no-repeat padding-box;
+    padding: .75rem;
+    font-size: .75rem;
+    text-align: left;
+
+    span {
+      color: $uds-color-base-gray-5;
+      max-width: 75ch;
+    }
+  }
 }
