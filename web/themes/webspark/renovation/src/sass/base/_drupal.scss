@@ -174,3 +174,12 @@ figure.caption-img {
     width: 100%;
   }
 }
+
+// --------------------------------------------------------
+// Drafts
+// --------------------------------------------------------
+.node {
+  &.node--unpublished {
+    background-color: $uds-color-background-error;
+  }
+}

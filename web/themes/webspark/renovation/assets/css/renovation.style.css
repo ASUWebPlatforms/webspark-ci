@@ -20531,6 +20531,10 @@ figure.caption-img figcaption span {
     width: 100%;
   }
 }
+.node.node--unpublished {
+  background-color: #f7dddd;
+}
+
 #drupal-off-canvas .form-text.description,
 #drupal-off-canvas .form-tel.description,
 #drupal-off-canvas .form-email.description,
