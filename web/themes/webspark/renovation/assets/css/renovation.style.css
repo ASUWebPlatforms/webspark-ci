@@ -20963,6 +20963,47 @@ html {
   scroll-padding-top: 11rem;
 }
 
+.topo-black .block > h2, .topo-black .block > .h2,
+.gray-7-bg .block > h2,
+.gray-7-bg .block > .h2,
+.morse-code-black .block > h2,
+.morse-code-black .block > .h2,
+.network-black .block > h2,
+.network-black .block > .h2 {
+  color: white;
+}
+.topo-black .layout-builder-block__content-preview-placeholder-label,
+.gray-7-bg .layout-builder-block__content-preview-placeholder-label,
+.morse-code-black .layout-builder-block__content-preview-placeholder-label,
+.network-black .layout-builder-block__content-preview-placeholder-label {
+  color: white;
+}
+.topo-black h1.article, .topo-black .article.h1,
+.gray-7-bg h1.article,
+.gray-7-bg .article.h1,
+.morse-code-black h1.article,
+.morse-code-black .article.h1,
+.network-black h1.article,
+.network-black .article.h1 {
+  color: white;
+}
+.topo-black .block-inline-blockisearch .profile,
+.gray-7-bg .block-inline-blockisearch .profile,
+.morse-code-black .block-inline-blockisearch .profile,
+.network-black .block-inline-blockisearch .profile {
+  color: white;
+}
+.topo-black .block-inline-blockisearch .profile a,
+.gray-7-bg .block-inline-blockisearch .profile a,
+.morse-code-black .block-inline-blockisearch .profile a,
+.network-black .block-inline-blockisearch .profile a {
+  color: white;
+}
+
+.white-bg {
+  border: 0px solid #ffffff !important;
+}
+
 .article--headinfo {
   font-weight: 700;
 }
