@@ -21113,4 +21113,8 @@ h3 {
   margin-bottom: 1rem;
 }
 
+ul.uds-list.fa-ul.gold li svg {
+  color: #ffc627;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
