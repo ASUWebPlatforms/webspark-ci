@@ -21148,4 +21148,10 @@ ul.uds-list.fa-ul.gold li svg {
   color: #ffc627;
 }
 
+p,
+li {
+  max-width: 700px;
+  overflow-wrap: break-word;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
