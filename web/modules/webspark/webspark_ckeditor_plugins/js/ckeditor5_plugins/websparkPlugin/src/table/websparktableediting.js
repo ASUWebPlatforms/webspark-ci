@@ -90,6 +90,12 @@ export default class WebsparkTableEditing extends Plugin {
       allowIn: "websparkTableTR",
       allowContentOf: "$block",
     });
+
+    schema.register("websparkTableTH", {
+      isLimit: true,
+      allowIn: "websparkTableTR",
+      allowContentOf: "$block",
+    });
   }
 
   /**
@@ -99,6 +105,28 @@ export default class WebsparkTableEditing extends Plugin {
   _defineConverters() {
     // Converters are registered via the central editor object.
     const { conversion } = this.editor;
+    conversion.for("upcast").elementToElement({
+      model: "websparkTableTH",
+      view: {
+        name: "th",
+      },
+    });
+
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkTableTH",
+      view: {
+        name: "th",
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkTableTH",
+      view: (_modelElement, { writer }) => {
+        const paragraphElement = writer.createEditableElement("th", {});
+        return toWidgetEditable(paragraphElement, writer);
+      },
+    });
+
     conversion.for("upcast").elementToElement({
       model: "websparkTableTD",
       view: {

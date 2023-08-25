@@ -41,7 +41,7 @@ export default class InsertWebsparkTableCommand extends Command {
             (headersTable === "column" && j === 0) ||
             (headersTable === "both" && (i === 0 || j === 0))
           ) {
-            $col = writer.createElement("websparkTableTHead");
+            $col = writer.createElement("websparkTableTH");
           } else {
             $col = writer.createElement("websparkTableTD");
           }
