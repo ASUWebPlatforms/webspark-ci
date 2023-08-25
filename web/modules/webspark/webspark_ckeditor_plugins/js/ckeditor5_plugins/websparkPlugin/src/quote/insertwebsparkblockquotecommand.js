@@ -7,7 +7,6 @@ import { Command } from "ckeditor5/src/core";
 export default class InsertWebsparkBlockquoteCommand extends Command {
   execute({ text, citationName, citationDescription }) {
     const { model } = this.editor;
-    console.log("citationDescription", citationDescription);
     model.change((writer) => {
       const websparkBlockquote = writer.createElement("websparkBlockquote");
       const websparkBlockQuoteSvg = writer.createElement(

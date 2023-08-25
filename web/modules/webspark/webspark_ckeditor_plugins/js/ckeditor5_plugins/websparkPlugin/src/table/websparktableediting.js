@@ -66,6 +66,30 @@ export default class WebsparkTableEditing extends Plugin {
       allowIn: "websparkTableHtmlElement",
       allowContentOf: "$block",
     });
+
+    schema.register("websparkTableTHead", {
+      isLimit: true,
+      allowIn: "websparkTableHtmlElement",
+      allowContentOf: "$block",
+    });
+
+    schema.register("websparkTableTBody", {
+      isLimit: true,
+      allowIn: "websparkTableHtmlElement",
+      allowContentOf: "$block",
+    });
+
+    schema.register("websparkTableTR", {
+      isLimit: true,
+      allowIn: "websparkTableTBody",
+      allowContentOf: "$block",
+    });
+
+    schema.register("websparkTableTD", {
+      isLimit: true,
+      allowIn: "websparkTableTR",
+      allowContentOf: "$block",
+    });
   }
 
   /**
@@ -75,8 +99,93 @@ export default class WebsparkTableEditing extends Plugin {
   _defineConverters() {
     // Converters are registered via the central editor object.
     const { conversion } = this.editor;
+    conversion.for("upcast").elementToElement({
+      model: "websparkTableTD",
+      view: {
+        name: "td",
+      },
+    });
 
-  
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkTableTD",
+      view: {
+        name: "td",
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkTableTD",
+      view: (_modelElement, { writer }) => {
+        const paragraphElement = writer.createEditableElement("td", {});
+        return toWidgetEditable(paragraphElement, writer);
+      },
+    });
+
+    conversion.for("upcast").elementToElement({
+      model: "websparkTableTR",
+      view: {
+        name: "tr",
+      },
+    });
+
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkTableTR",
+      view: {
+        name: "tr",
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkTableTR",
+      view: (_modelElement, { writer }) => {
+        const paragraphElement = writer.createEditableElement("tr", {});
+        return toWidgetEditable(paragraphElement, writer);
+      },
+    });
+    conversion.for("upcast").elementToElement({
+      model: "websparkTableTHead",
+      view: {
+        name: "thead",
+      },
+    });
+
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkTableTHead",
+      view: {
+        name: "thead",
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkTableTHead",
+      view: (_modelElement, { writer }) => {
+        const paragraphElement = writer.createEditableElement("thead", {});
+        return toWidgetEditable(paragraphElement, writer);
+      },
+    });
+
+    conversion.for("upcast").elementToElement({
+      model: "websparkTableTBody",
+      view: {
+        name: "tbody",
+      },
+    });
+
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkTableTBody",
+      view: {
+        name: "tbody",
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkTableTBody",
+      view: (_modelElement, { writer }) => {
+        const paragraphElement = writer.createEditableElement("tbody", {});
+        return toWidgetEditable(paragraphElement, writer);
+      },
+    });
+
     conversion.for("upcast").elementToElement({
       model: "websparkTableCaption",
       view: {
@@ -130,10 +239,7 @@ export default class WebsparkTableEditing extends Plugin {
     conversion.for("upcast").elementToElement({
       view: {
         name: "div",
-        classes: [
-          "uds-table",
-          /^(uds-table-fixed|\s*)$/,
-        ],
+        classes: ["uds-table", /^(uds-table-fixed|\s*)$/],
       },
       model: (viewElement, { writer }) => {
         return writer.createElement("websparkTable", {
@@ -145,11 +251,13 @@ export default class WebsparkTableEditing extends Plugin {
     conversion.for("dataDowncast").elementToElement({
       model: "websparkTable",
       view: (modelElement, { writer }) => {
-        const tabletypeClass = (modelElement.getAttribute("tabletype") === 'fixed') ? 'uds-table-fixed' : '';
-        console.log('tabletypeClass1',tabletypeClass)
+        const tabletypeClass =
+          modelElement.getAttribute("tabletype") === "fixed"
+            ? "uds-table-fixed"
+            : "";
         return writer.createContainerElement("div", {
-         class: `uds-table ${tabletypeClass}`,
-         tabletype: modelElement.getAttribute("tabletype"),
+          class: `uds-table ${tabletypeClass}`,
+          tabletype: modelElement.getAttribute("tabletype"),
         });
       },
     });
@@ -157,7 +265,10 @@ export default class WebsparkTableEditing extends Plugin {
     conversion.for("editingDowncast").elementToElement({
       model: "websparkTable",
       view: (modelElement, { writer }) => {
-        const tabletypeClass = modelElement.getAttribute("tabletype") === 'fixed' ? 'uds-table-fixed' : '';
+        const tabletypeClass =
+          modelElement.getAttribute("tabletype") === "fixed"
+            ? "uds-table-fixed"
+            : "";
         const div = writer.createContainerElement("div", {
           class: `uds-table ${tabletypeClass}`,
         });
@@ -165,6 +276,5 @@ export default class WebsparkTableEditing extends Plugin {
         return toWidget(div, writer, { label: "Webspark Table" });
       },
     });
-     
   }
 }
