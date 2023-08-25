@@ -21093,6 +21093,22 @@ h3 {
   overflow-wrap: break-word;
 }
 
+.block-inline-blockimage-and-text-block .uds-image-text-block-text-container :is(h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6):first-of-type {
+  margin-top: 0;
+}
+.block-inline-blockimage-and-text-block .btn:first-child, .block-inline-blockimage-and-text-block .uds-modal-close-btn:first-child {
+  margin-right: 24px;
+}
+.block-inline-blockimage-and-text-block .uds-image-text-block-image-container div {
+  display: flex;
+  flex-direction: column;
+}
+.block-inline-blockimage-and-text-block .uds-image-text-block-image-container div img {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .uds-img.uds-img-drop-shadow {
   margin-bottom: 1rem;
 }
