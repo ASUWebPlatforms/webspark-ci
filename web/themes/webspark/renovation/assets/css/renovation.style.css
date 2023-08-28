@@ -21199,4 +21199,9 @@ li {
   width: 100%;
 }
 
+.uds-table:not(.uds-table-fixed) table tr :nth-child(n+1) {
+  min-width: unset;
+  max-width: unset;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
