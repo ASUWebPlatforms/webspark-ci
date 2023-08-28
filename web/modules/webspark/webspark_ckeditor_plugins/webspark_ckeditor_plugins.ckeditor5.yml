@@ -67,9 +67,14 @@ webspark_ckeditor_plugins_plugins:
       - <div class="uds-table uds-table-fixed">
       - <div class>
       - <table>
-      - <caption>
-      - <tbody>
-      - <thead>
-      - <tfoot>
-      - <th rowspan colspan class="normal indent">
+      - <tr>
+      - <td>
       - <td rowspan colspan>
+      - <th>
+      - <th rowspan colspan>
+      - <thead>
+      - <tbody>
+      - <tfoot>
+      - <caption>
+      - <th rowspan colspan class="normal indent">
+      - <tr rowspan colspan>
