@@ -81,7 +81,7 @@ export default class WebsparkTableEditing extends Plugin {
 
     schema.register("websparkTableTR", {
       isLimit: true,
-      allowIn: "websparkTableTBody",
+      allowIn: ["websparkTableTBody", "websparkTableTHead"],
       allowContentOf: "$block",
     });
 
