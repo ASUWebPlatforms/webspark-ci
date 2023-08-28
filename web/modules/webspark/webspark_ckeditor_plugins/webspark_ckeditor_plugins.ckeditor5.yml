@@ -53,7 +53,6 @@ webspark_ckeditor_plugins_plugins:
       # (f.e. `<h2>`) and the attribute being added to the tag
       # (f.e. `<h2 class="simple-box-title">`).
       - <h2>
-      - <h2 class="simple-box-title">
       - <div>
       - <div class="simple-box-description">
       - <section>
@@ -66,3 +65,11 @@ webspark_ckeditor_plugins_plugins:
       - <p class="lead">
       - <div class="uds-table">
       - <div class="uds-table uds-table-fixed">
+      - <div class>
+      - <table>
+      - <caption>
+      - <tbody>
+      - <thead>
+      - <tfoot>
+      - <th rowspan colspan class="normal indent">
+      - <td rowspan colspan>
