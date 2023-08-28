@@ -21095,6 +21095,10 @@ body.toolbar-horizontal article.degree-detail-page--full .uds-anchor-menu {
   margin-bottom: 0;
 }
 
+.accordion-header h3, .accordion-header .h3 {
+  max-width: none;
+}
+
 @media (min-width: 992px) {
   .uds-blockquote.with-image {
     gap: 2rem;
