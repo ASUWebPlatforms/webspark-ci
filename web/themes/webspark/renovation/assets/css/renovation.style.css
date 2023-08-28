@@ -21004,6 +21004,14 @@ html {
   border: 0px solid #ffffff !important;
 }
 
+.gray-7-bg .block-inline-blocktext-content.text-white .formatted-text a:not(.btn):not(.uds-modal-close-btn) {
+  color: #ffc627;
+}
+
+.block-inline-blocktext-content :is(a):has(span):has(svg) {
+  display: inline-block;
+}
+
 .article--headinfo {
   font-weight: 700;
 }
