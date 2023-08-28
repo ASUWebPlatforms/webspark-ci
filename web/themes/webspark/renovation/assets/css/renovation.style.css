@@ -21204,4 +21204,19 @@ li {
   max-width: unset;
 }
 
+.asu-testimonial-on-image-container .uds-quote-image-background .uds-quote-image-background-container {
+  max-width: 700px;
+}
+
+.testimonial-carousel-container {
+  display: flex;
+  justify-content: center;
+}
+.testimonial-carousel-container .glide {
+  max-width: 700px !important;
+}
+.testimonial-carousel-container .glide .glide__slide .slider {
+  width: 700px !important;
+}
+
 /*# sourceMappingURL=renovation.style.css.map*/
