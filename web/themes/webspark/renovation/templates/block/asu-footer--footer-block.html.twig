@@ -103,7 +103,7 @@
     <div class="container" id="footer-columns">
       <div class="row">
         <div class="col-xl" id="info-column">
-          <h5>{{ unit_name }}</h5>
+          <div class="h5">{{ unit_name }}</div>
           {% if link_url and link_title %}
             <p class="contact-link">
             <a
@@ -130,7 +130,7 @@
           <div class="card accordion-item desktop-disable-xl">
           {% for c in column %}
             <div class="accordion-header">
-              <h5>
+              <div class="h5">
                 <a
                   id="footlink-header-{{ key }}-{{ loop.index }}"
                   class="collapsed"
@@ -148,7 +148,7 @@
                   {{ c.title }}
                   <span class="fas fa-chevron-up"></span>
                 </a>
-              </h5>
+              </div>
             </div>
             <div
               id="footlink-{{ key }}-{{ loop.index }}"
