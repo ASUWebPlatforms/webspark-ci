@@ -1,16 +1,20 @@
 span.btn.btn-maroon,
 span.btn.btn-dark {
   margin-right: 2rem;
+
   a {
     color: #fff;
     text-decoration: none;
   }
+
   &:visited {
     color: #fff;
   }
+
   &:hover {
     color: #fff;
   }
+
   &:active {
     color: #fff;
   }
@@ -19,23 +23,27 @@ span.btn.btn-dark {
 span.btn.btn-gold,
 span.btn.btn-gray {
   margin-right: 2rem;
+
   a {
     color: #212529;
     text-decoration: none;
   }
+
   &:visited {
     color: #212529;
   }
+
   &:hover {
     color: #212529;
   }
+
   &:active {
     color: #212529;
   }
 }
 
 div.copy-divider {
-  height: .5rem;
+  height: 0.5rem;
   max-width: 16rem;
   margin: 45px 0;
 }
