@@ -5,8 +5,6 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
-_core:
-  default_config_hash: aDjcCPLVYd5pHz222uIsfk-BdArIvONknboXb_Ut6l4
 name: block_image_16_9_med
 label: 'Block Image 16:9 MED'
 effects:
@@ -17,11 +15,11 @@ effects:
     data:
       crop_type: '16_9'
       automatic_crop_provider: null
-  869ce27f-f47e-42ed-87b4-5f4c4181e47d:
-    uuid: 869ce27f-f47e-42ed-87b4-5f4c4181e47d
-    id: image_scale_and_crop
+  9189f0ad-656f-4ea0-9914-3a7252b0f900:
+    uuid: 9189f0ad-656f-4ea0-9914-3a7252b0f900
+    id: image_scale
     weight: 2
     data:
       width: 600
-      height: 337
-      anchor: center-center
+      height: null
+      upscale: false

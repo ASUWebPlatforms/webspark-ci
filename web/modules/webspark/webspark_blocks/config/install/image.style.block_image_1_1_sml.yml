@@ -5,8 +5,6 @@ dependencies:
     - crop.type.1_1
   module:
     - crop
-_core:
-  default_config_hash: 6bdZIwtgehRw2-DWrcNnLlpysBotWzkzRpsIHnCKvrM
 name: block_image_1_1_sml
 label: 'Block Image 1:1 SML'
 effects:
@@ -17,11 +15,11 @@ effects:
     data:
       crop_type: '1_1'
       automatic_crop_provider: null
-  869ce27f-f47e-42ed-87b4-5f4c4181e47d:
-    uuid: 869ce27f-f47e-42ed-87b4-5f4c4181e47d
-    id: image_scale_and_crop
+  dcca3cee-9b08-4dd1-ac36-830fed719a2b:
+    uuid: dcca3cee-9b08-4dd1-ac36-830fed719a2b
+    id: image_scale
     weight: 2
     data:
       width: 300
-      height: 300
-      anchor: center-center
+      height: null
+      upscale: false
