@@ -5,6 +5,8 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
+_core:
+  default_config_hash: 52PalyXnG0m6vyNyfJ6CL2C1FQ2IyRIaqWxkqpK1ZOw
 name: block_image_16_9_sml
 label: 'Block Image 16:9 SML'
 effects:
@@ -15,11 +17,11 @@ effects:
     data:
       crop_type: '16_9'
       automatic_crop_provider: null
-  850e3332-df80-4773-bdc4-4ef08495d250:
-    uuid: 850e3332-df80-4773-bdc4-4ef08495d250
-    id: image_scale
+  869ce27f-f47e-42ed-87b4-5f4c4181e47d:
+    uuid: 869ce27f-f47e-42ed-87b4-5f4c4181e47d
+    id: image_scale_and_crop
     weight: 2
     data:
       width: 300
-      height: null
-      upscale: false
+      height: 168
+      anchor: center-center

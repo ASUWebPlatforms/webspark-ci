@@ -5,6 +5,8 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
+_core:
+  default_config_hash: N9Lp5_JUcAmX9LZ7Z3lgguP_sezJntBe5y6naDaaACw
 name: block_image_16_9_lge
 label: 'Block Image 16:9 LGE'
 effects:
@@ -15,11 +17,11 @@ effects:
     data:
       crop_type: '16_9'
       automatic_crop_provider: null
-  176d45d2-41a1-47d5-92f8-6f92eeaf7f7f:
-    uuid: 176d45d2-41a1-47d5-92f8-6f92eeaf7f7f
-    id: image_scale
+  869ce27f-f47e-42ed-87b4-5f4c4181e47d:
+    uuid: 869ce27f-f47e-42ed-87b4-5f4c4181e47d
+    id: image_scale_and_crop
     weight: 2
     data:
       width: 1200
-      height: null
-      upscale: false
+      height: 675
+      anchor: center-center
