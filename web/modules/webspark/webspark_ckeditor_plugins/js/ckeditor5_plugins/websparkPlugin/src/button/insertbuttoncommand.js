@@ -47,11 +47,10 @@ export default class InsertWebsparkButtonCommand extends Command {
     if (selectedElement?.name === "websparkButton") {
       const text = selectedElement?.getChild(0)?.getChild(0)?._data;
 
-      model.change((writer) => {
-        writer.setAttribute("text", text, selectedElement);
-      });
-
-      this.value = Object.fromEntries(selectedElement.getAttributes());
+      this.value = {
+        ...Object.fromEntries(selectedElement.getAttributes()),
+        text,
+      };
     } else {
       this.value = null;
     }

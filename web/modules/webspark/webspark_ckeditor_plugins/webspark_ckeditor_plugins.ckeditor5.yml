@@ -18,7 +18,6 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkHighlitedHeading
       - websparkPlugin.WebsparkBlockquote
       - websparkPlugin.WebsparkTable
-
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:
@@ -26,6 +25,7 @@ webspark_ckeditor_plugins_plugins:
 
   # Configuration that will be used directly by Drupal.
   drupal:
+
     label: Webspark CKEditor 5 Plugins
     # The library loaded while using the editor.
     library: webspark_ckeditor_plugins/websparkplugin
@@ -78,3 +78,4 @@ webspark_ckeditor_plugins_plugins:
       - <caption>
       - <th rowspan colspan class="normal indent">
       - <tr rowspan colspan>
+      - <a class target role name hreflang>

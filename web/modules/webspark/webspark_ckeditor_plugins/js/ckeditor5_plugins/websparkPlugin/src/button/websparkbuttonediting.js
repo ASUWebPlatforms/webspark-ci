@@ -52,7 +52,7 @@ export default class WebsparkButtonEditing extends Plugin {
     schema.register("websparkButton", {
       isObject: true,
       allowWhere: "$block",
-      allowAttributes: ["text", "href", "target", "styles","role", "size"],
+      allowAttributes: ["text", "href", "target", "styles", "role", "size"],
     });
 
     schema.register("websparkButtonText", {
@@ -73,20 +73,17 @@ export default class WebsparkButtonEditing extends Plugin {
     conversion.for("upcast").elementToElement({
       view: {
         name: "a",
-        classes: [
-          "btn",
-          /^btn-(gold|maroon|gray|dark)$/,
-          /^btn-(default|md|sm)$/,
-        ],
+        classes: ["btn", /^btn-(gold|maroon|gray|dark)$/],
         attributes: true,
       },
       model: (viewElement, { writer }) => {
+        const classes = viewElement.getAttribute("class");
+
         return writer.createElement("websparkButton", {
           text: viewElement.getAttribute("text"),
           href: viewElement.getAttribute("href"),
-          styles: viewElement.getAttribute("styles"),
-          size: viewElement.getAttribute("size"),
-
+          styles: extractStyleFromClasses(classes),
+          size: extractSizeFromClasses(classes),
           role: "button",
           target: viewElement.getAttribute("target") || "unset",
         });
@@ -97,16 +94,17 @@ export default class WebsparkButtonEditing extends Plugin {
       model: "websparkButton",
       view: (modelElement, { writer }) => {
         const target = modelElement.getAttribute("target");
+        let classes = `btn btn-${modelElement.getAttribute("styles")}`;
+
+        const size = modelElement.getAttribute("size");
+
+        if (size !== "default") {
+          classes += ` btn-${size}`;
+        }
 
         return writer.createContainerElement("a", {
-          class: `btn btn-${modelElement.getAttribute(
-            "styles"
-          )} btn-${modelElement.getAttribute("size")}`,
-          text: modelElement.getAttribute("text"),
+          class: classes,
           href: modelElement.getAttribute("href"),
-          styles: modelElement.getAttribute("styles"),
-          size: modelElement.getAttribute("size"),
-
           role: "button",
           ...(target !== "unset" && { target }),
         });
@@ -116,10 +114,16 @@ export default class WebsparkButtonEditing extends Plugin {
     conversion.for("editingDowncast").elementToElement({
       model: "websparkButton",
       view: (modelElement, { writer }) => {
+        let classes = `btn btn-${modelElement.getAttribute("styles")}`;
+
+        const size = modelElement.getAttribute("size");
+
+        if (size !== "default") {
+          classes += ` btn-${size}`;
+        }
+
         const a = writer.createContainerElement("a", {
-          class: `btn btn-${modelElement.getAttribute(
-            "styles"
-          )} btn-${modelElement.getAttribute("size")}`,
+          class: classes,
         });
 
         return toWidget(a, writer, { label: "Webspark button" });
@@ -153,4 +157,36 @@ export default class WebsparkButtonEditing extends Plugin {
       },
     });
   }
+}
+
+function extractStyleFromClasses(classes) {
+  const styleMap = {
+    "btn-gold": "gold",
+    "btn-maroon": "maroon",
+    "btn-gray": "gray",
+    "btn-dark": "dark",
+  };
+
+  for (const className in styleMap) {
+    if (classes.includes(className)) {
+      return styleMap[className];
+    }
+  }
+
+  return null; // Or a default value if needed
+}
+
+function extractSizeFromClasses(classes) {
+  const sizeMap = {
+    "btn-md": "md",
+    "btn-sm": "sm"
+  };
+
+  for (const className in sizeMap) {
+    if (classes.includes(className)) {
+      return sizeMap[className];
+    }
+  }
+
+  return "default";
 }

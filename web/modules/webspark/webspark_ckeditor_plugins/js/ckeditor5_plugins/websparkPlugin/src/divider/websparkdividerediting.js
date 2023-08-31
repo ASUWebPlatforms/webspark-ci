@@ -1,5 +1,5 @@
 import { Plugin } from "ckeditor5/src/core";
-import { toWidget, toWidgetEditable } from "ckeditor5/src/widget";
+import { toWidget } from "ckeditor5/src/widget";
 import { Widget } from "ckeditor5/src/widget";
 import InsertWebsparkDividerCommand from "./insertwebsparkdividercommand";
 
@@ -70,12 +70,11 @@ export default class WebsparkDividerEditing extends Plugin {
         const wrapper = writer.createContainerElement(
           "div",
           null,
-          writer.createEmptyElement("hr",{class:'copy-divider'})
+          writer.createEmptyElement("hr", { class: "copy-divider" })
         );
 
-
-				writer.addClass( 'copy-divider', wrapper );
-				writer.setCustomProperty( 'hr', true, wrapper );
+        writer.addClass("copy-divider", wrapper);
+        writer.setCustomProperty("hr", true, wrapper);
 
         return toWidget(wrapper, writer, { label: "Webspark divider" });
       },

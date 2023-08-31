@@ -8,18 +8,23 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
   execute({ text, styles, heading }) {
     const { model } = this.editor;
     model.change((writer) => {
-      const websparkHighlitedHeading = writer.createElement("websparkHighlitedHeading");
-      const websparkHighlitedHeadingHelement = writer.createElement("websparkHighlitedHeadingHelement_"+heading);
-
-      const websparkHighlitedHeadingText = writer.createElement("websparkHighlitedHeadingText_"+heading,{
-        text,
-        heading,
-        styles,
-      });
+      const websparkHighlitedHeading = writer.createElement(
+        "websparkHighlitedHeading"
+      );
+      const websparkHighlitedHeadingHelement = writer.createElement(
+        "websparkHighlitedHeadingHelement_" + heading
+      );
+      const websparkHighlitedHeadingText = writer.createElement(
+        "websparkHighlitedHeadingText_" + heading,
+        { heading, styles }
+      );
       const textNode = writer.createText(text);
 
       writer.append(textNode, websparkHighlitedHeadingText);
-      writer.append(websparkHighlitedHeadingText,websparkHighlitedHeadingHelement)
+      writer.append(
+        websparkHighlitedHeadingText,
+        websparkHighlitedHeadingHelement
+      );
       writer.append(websparkHighlitedHeadingHelement, websparkHighlitedHeading);
 
       model.insertContent(websparkHighlitedHeading);
@@ -45,13 +50,13 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
     const selectedElement = selection.getSelectedElement();
 
     if (selectedElement?.name === "websparkHighlitedHeading") {
-      const text = selectedElement?.getChild(0)?.getChild(0)?._data;
+      const span = selectedElement.getChild(0)?.getChild(0);
 
-      model.change((writer) => {
-        writer.setAttribute("text", text, selectedElement);
-      });
-
-      this.value = Object.fromEntries(selectedElement.getAttributes());
+      this.value = {
+        ...Object.fromEntries(span.getAttributes()),
+        text: span.getChild(0)._data,
+        heading: span.name.split("_")[1],
+      };
     } else {
       this.value = null;
     }
