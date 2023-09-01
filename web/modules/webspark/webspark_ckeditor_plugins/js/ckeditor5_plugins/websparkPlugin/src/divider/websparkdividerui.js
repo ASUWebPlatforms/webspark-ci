@@ -24,7 +24,7 @@ export default class WebsparkDividerUI extends Plugin {
 
       // Create the toolbar button.
       buttonView.set({
-        label: editor.t("Webspark Divider"),
+        label: editor.t("Divider"),
         icon,
         tooltip: true,
       });

@@ -41,7 +41,7 @@ export default class WebsparkBlockquoteUI extends Plugin {
     dropdown.panelView.children.add(form);
 
     button.set({
-      label: t("BlockQuote"),
+      label: t("Blockquote"),
       icon: icon,
       tooltip: true,
     });

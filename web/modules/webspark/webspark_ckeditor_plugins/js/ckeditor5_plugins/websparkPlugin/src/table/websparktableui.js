@@ -41,7 +41,7 @@ export default class WebsparkTableUI extends Plugin {
     dropdown.panelView.children.add(form);
 
     button.set({
-      label: t("Button"),
+      label: t("Webspark table"),
       icon: icon,
       tooltip: true,
     });

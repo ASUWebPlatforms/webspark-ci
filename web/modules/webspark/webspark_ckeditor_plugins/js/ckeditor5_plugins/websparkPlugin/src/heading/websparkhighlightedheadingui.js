@@ -41,7 +41,7 @@ export default class WebsparkHighlitedHeadingUI extends Plugin {
     dropdown.panelView.children.add(form);
 
     button.set({
-      label: t("Higlited Heading"),
+      label: t("Highlighted Heading"),
       icon: icon,
       tooltip: true,
     });

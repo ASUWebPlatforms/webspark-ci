@@ -24,7 +24,7 @@ export default class WebsparkLeadUI extends Plugin {
 
       // Create the toolbar button.
       buttonView.set({
-        label: editor.t("Webspark Lead"),
+        label: editor.t("Lead"),
         icon,
         tooltip: true,
       });

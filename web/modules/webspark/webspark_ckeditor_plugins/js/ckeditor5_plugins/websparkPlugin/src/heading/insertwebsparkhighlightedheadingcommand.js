@@ -51,10 +51,9 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
 
     if (selectedElement?.name === "websparkHighlitedHeading") {
       const span = selectedElement.getChild(0)?.getChild(0);
-
       this.value = {
         ...Object.fromEntries(span.getAttributes()),
-        text: span.getChild(0)._data,
+        text: span.getChild(0)._data ?? '',
         heading: span.name.split("_")[1],
       };
     } else {

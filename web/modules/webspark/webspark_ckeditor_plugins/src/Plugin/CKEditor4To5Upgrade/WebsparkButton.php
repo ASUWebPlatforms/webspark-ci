@@ -32,7 +32,7 @@ class WebsparkButton extends PluginBase implements CKEditor4To5UpgradePluginInte
   public function mapCKEditor4ToolbarButtonToCKEditor5ToolbarItem(string $cke4_button, HTMLRestrictions $text_format_html_restrictions): ?array {
     switch ($cke4_button) {
       case 'WebsparkButton':
-        return ['WebsparkButton'];
+        return ['websparkButton'];
 
       default:
         throw new \OutOfBoundsException();

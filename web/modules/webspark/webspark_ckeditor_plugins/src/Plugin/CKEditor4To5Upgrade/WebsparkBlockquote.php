@@ -32,7 +32,7 @@ class WebsparkBlockquote extends PluginBase implements CKEditor4To5UpgradePlugin
   public function mapCKEditor4ToolbarButtonToCKEditor5ToolbarItem(string $cke4_button, HTMLRestrictions $text_format_html_restrictions): ?array {
     switch ($cke4_button) {
       case 'WebsparkBlockquote':
-        return ['WebsparkBlockquote'];
+        return ['websparkBlockquote'];
 
       default:
         throw new \OutOfBoundsException();
