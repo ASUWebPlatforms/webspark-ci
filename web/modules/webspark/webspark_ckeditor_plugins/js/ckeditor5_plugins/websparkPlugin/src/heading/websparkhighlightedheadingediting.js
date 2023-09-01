@@ -1,6 +1,9 @@
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
 import InsertWebsparkHighlitedHeadingCommand from "./insertwebsparkhighlightedheadingcommand";
+import {
+  extractDataFromClasses
+} from "../utils/utils";
 
 // cSpell:ignore simplebox insertsimpleboxcommand
 
@@ -112,7 +115,11 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
 
           return writer.createElement(
             "websparkHighlitedHeadingText_" + option,
-            { styles: extractStyleFromClasses(classes) }
+            { styles: extractDataFromClasses(classes, {
+              "highlight-gold": "gold",
+              "highlight-black": "black",
+              "highlight-white": "white",
+            }, null), }
           );
         },
       });
@@ -175,17 +182,4 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
   }
 }
 
-function extractStyleFromClasses(classes) {
-  const styleMap = {
-    "highlight-gold": "gold",
-    "highlight-black": "black",
-    "highlight-white": "white",
-  };
-  for (const className in styleMap) {
-    if (classes.includes(className)) {
-      return styleMap[className];
-    }
-  }
-
-  return null; // Or a default value if needed
-}
+ 

@@ -1,7 +1,9 @@
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
 import InsertWebsparkButtonCommand from "./insertbuttoncommand";
-
+import {
+  extractDataFromClasses
+} from "../utils/utils";
 // cSpell:ignore simplebox insertsimpleboxcommand
 
 /**
@@ -82,8 +84,16 @@ export default class WebsparkButtonEditing extends Plugin {
         return writer.createElement("websparkButton", {
           text: viewElement.getAttribute("text"),
           href: viewElement.getAttribute("href"),
-          styles: extractStyleFromClasses(classes),
-          size: extractSizeFromClasses(classes),
+          styles: extractDataFromClasses(classes, {
+            "btn-gold": "gold",
+            "btn-maroon": "maroon",
+            "btn-gray": "gray",
+            "btn-dark": "dark",
+          }, null),
+          size: extractDataFromClasses(classes, {
+            "btn-md": "md",
+            "btn-sm": "sm"
+          }, 'default'),
           role: "button",
           target: viewElement.getAttribute("target") || "unset",
         });
@@ -159,34 +169,6 @@ export default class WebsparkButtonEditing extends Plugin {
   }
 }
 
-function extractStyleFromClasses(classes) {
-  const styleMap = {
-    "btn-gold": "gold",
-    "btn-maroon": "maroon",
-    "btn-gray": "gray",
-    "btn-dark": "dark",
-  };
 
-  for (const className in styleMap) {
-    if (classes.includes(className)) {
-      return styleMap[className];
-    }
-  }
 
-  return null; // Or a default value if needed
-}
-
-function extractSizeFromClasses(classes) {
-  const sizeMap = {
-    "btn-md": "md",
-    "btn-sm": "sm"
-  };
-
-  for (const className in sizeMap) {
-    if (classes.includes(className)) {
-      return sizeMap[className];
-    }
-  }
-
-  return "default";
-}
+ 
