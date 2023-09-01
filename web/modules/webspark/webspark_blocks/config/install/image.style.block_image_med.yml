@@ -5,8 +5,6 @@ dependencies:
     - crop.type.images_block
   module:
     - crop
-_core:
-  default_config_hash: wbXksEugCDokft1KXOlV8FBuWEKTEVncYeZ8RSvaF8M
 name: block_image_med
 label: 'Block Image 4:3 MED'
 effects:

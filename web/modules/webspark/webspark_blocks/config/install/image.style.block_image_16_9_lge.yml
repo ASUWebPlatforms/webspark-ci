@@ -5,8 +5,6 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
-_core:
-  default_config_hash: N9Lp5_JUcAmX9LZ7Z3lgguP_sezJntBe5y6naDaaACw
 name: block_image_16_9_lge
 label: 'Block Image 16:9 LGE'
 effects:

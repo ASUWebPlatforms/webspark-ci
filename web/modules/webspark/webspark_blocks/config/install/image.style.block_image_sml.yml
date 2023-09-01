@@ -5,8 +5,6 @@ dependencies:
     - crop.type.images_block
   module:
     - crop
-_core:
-  default_config_hash: s5gSpvG770qeE17cO1--5I1uBi8QObO4Ol0QwThk310
 name: block_image_sml
 label: 'Block Image 4:3 SML'
 effects:
