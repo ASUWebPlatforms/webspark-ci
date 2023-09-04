@@ -18,6 +18,7 @@ import {
   createInput,
   createRow,
   createSelect,
+  createTextArea,
 } from "../utils/utils";
 
 export class WebsparkBlockquoteFormView extends View {
@@ -33,7 +34,7 @@ export class WebsparkBlockquoteFormView extends View {
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
-    this.textInputView = createInput(t("Content"), locale);
+    this.textInputView = createTextArea(t("Content"), locale);
     this.citationNameView = createInput(t("Citation Name"), locale);
     this.citationDescriptionView = createInput(t("Citation Description"), locale);
 
@@ -71,7 +72,7 @@ export class WebsparkBlockquoteFormView extends View {
     this.setTemplate({
       tag: "form",
       attributes: {
-        class: ["ck", "ck-webspark-form"],
+        class: ["ck", "ck-webspark-form","webspark-blockquote-dialog"],
         tabindex: "-1",
       },
       children: [

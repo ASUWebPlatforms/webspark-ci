@@ -63,9 +63,11 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
       schema.register("websparkHighlitedHeadingHelement_" + option, {
         allowIn: "websparkHighlitedHeading",
         allowWhere: "$block",
+        isObject: true,
       });
 
       schema.register("websparkHighlitedHeadingText_" + option, {
+        isObject: true,
         allowIn: "websparkHighlitedHeadingHelement_" + option,
         allowAttributes: ["styles"],
         allowChildren: "$text",

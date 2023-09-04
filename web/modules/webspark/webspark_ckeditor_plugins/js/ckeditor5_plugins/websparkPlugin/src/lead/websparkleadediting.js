@@ -33,6 +33,7 @@ export default class WebsparkLeadEditing extends Plugin {
     schema.register("websparkLead", {
       isObject: true,
       allowWhere: "$block",
+      allowChildren: "$text",
     });
   }
 
@@ -58,7 +59,7 @@ export default class WebsparkLeadEditing extends Plugin {
     conversion.for("dataDowncast").elementToElement({
       model: "websparkLead",
       view: (modelElement, { writer }) => {
-        return writer.createEmptyElement("p", {
+        return writer.createContainerElement("p", {
           class: "lead",
         });
       },
@@ -76,7 +77,7 @@ export default class WebsparkLeadEditing extends Plugin {
         writer.addClass("lead", wrapper);
         writer.setCustomProperty("p", true, wrapper);
 
-        return toWidget(wrapper, writer, { label: "Lead" });
+        return toWidgetEditable(wrapper, writer, { label: "Lead" });
       },
     });
   }

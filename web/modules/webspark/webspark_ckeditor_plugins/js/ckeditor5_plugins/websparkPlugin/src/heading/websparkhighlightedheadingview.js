@@ -174,6 +174,7 @@ export class WebsparkHighlitedHeadingFormView extends View {
   }
 
   isValid() {
+    return true;
     this.resetFormStatus();
 
     for (const validator of this._validators) {

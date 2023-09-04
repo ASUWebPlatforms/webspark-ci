@@ -29,10 +29,15 @@
   width: 100% !important;
 }
 
-form .webspark-heading-dialog {
+form .webspark-heading-dialog,
+form .webspark-blockquote-dialog {
   width:400px !important;
 }
 
 textarea.ck-webspark-form-textarea {
   width:100% !important;
+}
+
+form .webspark-blockquote-dialog  input.ck-input {
+  width: 100%;
 }
