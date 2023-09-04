@@ -128,7 +128,6 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         model: "websparkHighlitedHeadingText_" + option,
         view: (modelElement, { writer }) => {
           const classes = `highlight-${modelElement.getAttribute("styles")}`;
-
           return writer.createContainerElement("span", {
             class: classes,
           });
@@ -139,7 +138,6 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         model: "websparkHighlitedHeadingText_" + option,
         view: (modelElement, { writer }) => {
           const classes = `highlight-${modelElement.getAttribute("styles")}`;
-
           const spHH = writer.createContainerElement("span", {
             class: classes,
           });

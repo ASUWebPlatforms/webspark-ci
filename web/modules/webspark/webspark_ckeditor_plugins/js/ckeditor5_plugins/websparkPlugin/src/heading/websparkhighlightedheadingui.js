@@ -49,13 +49,12 @@ export default class WebsparkHighlitedHeadingUI extends Plugin {
     // Note: Use the low priority to make sure the following listener starts working after the
     // default action of the drop-down is executed (i.e. the panel showed up). Otherwise, the
     // invisible form/input cannot be focused/selected.
+ 
     button.on(
       "open",
       () => {
         form.setValues(command.value);
-        form.textInputView.children[1].select();
-
-        form.focus();
+        form.textInputView.children[1].element.select() ;
       },
       { priority: "low" }
     );

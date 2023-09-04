@@ -18,6 +18,7 @@ import {
   createInput,
   createRow,
   createSelect,
+  createTextArea
 } from "../utils/utils";
 
 export class WebsparkHighlitedHeadingFormView extends View {
@@ -33,7 +34,7 @@ export class WebsparkHighlitedHeadingFormView extends View {
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
-    this.textInputView = createInput(t("Content"), locale);
+    this.textInputView = createTextArea(t("Content"), locale);
     this.styleSelect = createSelect(
       t("Style"),
       this._getStyleOptions(t),
@@ -79,7 +80,7 @@ export class WebsparkHighlitedHeadingFormView extends View {
     this.setTemplate({
       tag: "form",
       attributes: {
-        class: ["ck", "ck-webspark-form"],
+        class: ["ck", "ck-webspark-form", "webspark-heading-dialog"],
         tabindex: "-1",
       },
       children: [

@@ -6,6 +6,7 @@ import {
   addListToDropdown,
 } from "ckeditor5/src/ui";
 import { SelectView } from "./selectview";
+import { TextAreaView } from "./textareaview";
 
 // Creates a container element with specified children and CSS classes.
 export function createContainer(children, classes = []) {
@@ -91,7 +92,7 @@ export function createDropdown(label, options, locale, onExecute) {
 
 // Extracts data from classes and returns a default value if no matching class is found.
 export function extractDataFromClasses(classes, data, defaultValue = "default") {
-  if (data.length > 0) {
+  if (!isObjectEmpty(data)) {
     for (const className in data) {
       if (classes.includes(className)) {
         return data[className];
@@ -99,4 +100,16 @@ export function extractDataFromClasses(classes, data, defaultValue = "default") 
     }
   }
   return defaultValue;
+}
+
+export function createTextArea(label, locale) {
+  const labelView = new LabelView(locale);
+  const textAreaView = new TextAreaView(locale);
+
+  labelView.text = label;
+
+  return createContainer([labelView, textAreaView]);
+}
+const isObjectEmpty = (objectName) => {
+  return Object.keys(objectName).length === 0
 }

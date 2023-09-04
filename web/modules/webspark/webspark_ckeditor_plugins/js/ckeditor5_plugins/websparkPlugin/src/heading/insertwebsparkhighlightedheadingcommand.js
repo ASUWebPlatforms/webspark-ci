@@ -7,6 +7,7 @@ import { Command } from "ckeditor5/src/core";
 export default class InsertWebsparkHighlitedHeadingCommand extends Command {
   execute({ text, styles, heading }) {
     const { model } = this.editor;
+
     model.change((writer) => {
       const websparkHighlitedHeading = writer.createElement(
         "websparkHighlitedHeading"
@@ -48,7 +49,6 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
     this.isEnabled = allowedIn !== null;
 
     const selectedElement = selection.getSelectedElement();
-
     if (selectedElement?.name === "websparkHighlitedHeading") {
       const span = selectedElement.getChild(0)?.getChild(0);
       this.value = {
