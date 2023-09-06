@@ -11,6 +11,7 @@ mix.browserSync(config.browserSync);
 
 // UDS
 // ----------------------------------------------------------------------------
+mix.copy("node_modules/@asu/unity-bootstrap-theme/dist/js/bootstrap.bundle.min.js", "assets/js");
 mix.copy("node_modules/@asu/unity-bootstrap-theme/dist/img", "assets/img");
 
 // SASS
