@@ -2,7 +2,7 @@
 {% set is_icon = content.field_icon|render %}
 {% set link_id = paragraph.id() %}
 
-<div class="accordion-item mt-3 {{ color is not 'default' ? 'color' }}">
+<div class="accordion-item mt-3 {{ color != 'default' ? color }}">
   <div class="accordion-header {{ is_icon ? 'accordion-header-icon' }}">
     <h3>
       <a id="accordion-header-{{ link_id|lower }}" class="collapsed"
