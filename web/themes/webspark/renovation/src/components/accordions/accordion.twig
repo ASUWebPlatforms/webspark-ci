@@ -2,8 +2,8 @@
 {% set is_icon = content.field_icon|render %}
 {% set link_id = paragraph.id() %}
 
-<div class="accordion-item mt-3{% if color != 'default' %} {{ color }}{% endif %}">
-  <div class="accordion-header{% if is_icon  %} accordion-header-icon{% endif %}">
+<div class="accordion-item mt-3 {{ color is not 'default' ? 'color' }}">
+  <div class="accordion-header {{ is_icon ? 'accordion-header-icon' }}">
     <h3>
       <a id="accordion-header-{{ link_id|lower }}" class="collapsed"
          href="#accordion-content-{{ link_id|lower }}" data-bs-toggle="collapse"
@@ -18,9 +18,9 @@
          data-ga-text="{{ heading }}">
 
         {# If there is an icon print it else print header only. #}
-        {% if is_icon  %}
+        {% if is_icon %}
           <span class="accordion-icon">
-            <i class="{{ content.field_icon[0]['#icons'][0]['#style'] }} {{ content.field_icon[0]['#icons'][0]['#name'] }}  me-2" role="img" aria-label="..."></i>
+            <i class="{{ content.field_icon[0]['#icons'][0]['#style'] }} {{ content.field_icon[0]['#icons'][0]['#name'] }} me-2" role="img" aria-label="..."></i>
             {{ heading }}
           </span>
         {% else %}
