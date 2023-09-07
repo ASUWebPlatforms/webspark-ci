@@ -211,7 +211,7 @@ class AsuFooterBlock extends BlockBase {
     ];
     $form['asu_footer_block_twitter_url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Twitter Social Media'),
+      '#title' => $this->t('X / Twitter Social Media'),
       '#field_prefix' => 'https://twitter.com/',
       '#size' => 40,
       '#default_value' => $config['asu_footer_block_twitter_url'] ?? '',

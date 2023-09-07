@@ -135,6 +135,13 @@ function webspark_blocks_update_9019(&$sandbox) {
 }
 
 /**
+ * WS2-1658 - Add new option to Spacing Top and Spacing Bottom fields.
+ */
+function webspark_blocks_update_9020(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
@@ -148,5 +155,23 @@ function _webspark_blocks_revert_module_config() {
   // Revert all configs from this module.
   \Drupal::service('webspark.config_manager')->revertAll($module);
   // Lock the configuration storage.
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * update cropping image styles
+ */
+function webspark_blocks_update_9021(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_lge');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_med');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_sml');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_lge');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_med');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_sml');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_lge');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_med');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_sml');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.video_poster_image');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
