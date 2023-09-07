@@ -13,7 +13,7 @@ use_brands_file: true
 use_duotone_file: false
 use_thin_file: false
 external_svg_integrity: ''
-bypass_validation: false
+bypass_validation: true
 use_sharpregular_file: false
 use_sharplight_file: false
 use_sharpsolid_file: false
