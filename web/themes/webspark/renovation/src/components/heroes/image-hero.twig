@@ -1,7 +1,7 @@
 <div class="uds-hero-{{ size }} {{ size == 'lg' ? 'hide-content' }} {{ has_button_row ? 'has-btn-row' }}">
   <div class="hero-overlay"></div>
 
-  <img class="hero" src="{{ hero_background }}" alt="{{ hero_alt }}" />
+  <img class="hero" src="{{ hero_background }}" alt="{{ hero_alt }}" loading="lazy" decoding="async" fetchpriority="high"/>
 
   <div role="doc-subtitle">
     <span class="{{ sub_heading_background }}">{{ sub_heading }}</span>

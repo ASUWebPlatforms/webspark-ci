@@ -1,4 +1,5 @@
-(function () {
+// Allow Accordion items to be opened from the URL
+(function() {
   const toggler = (url, state) => {
     if (url.indexOf("#") !== -1) {
       const sectionName = url.split("#").at(-1);

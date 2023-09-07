@@ -1,0 +1,9 @@
+// NOTE: Move this CSS to UDS
+// Ensure the Testimonial width is consistent
+.asu-testimonial-on-image-container {
+  .uds-quote-image-background {
+    .uds-quote-image-background-container {
+      max-width: $testimonial-width;
+    }
+  }
+}

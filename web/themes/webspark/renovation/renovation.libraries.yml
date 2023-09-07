@@ -4,8 +4,9 @@ style:
     theme:
       assets/css/renovation.style.css: {}
   js:
-    assets/js/renovation.script.js: {}
+    assets/js/bootstrap.bundle.min.js: {}
     js/datalayer.js: {}
+    # assets/js/renovation.script.js: {}
   dependencies:
     - core/jquery
     - core/drupal

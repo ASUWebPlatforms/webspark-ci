@@ -1,30 +1,18 @@
-@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/card-and-image';
+.parallax-container {
+  height: 36rem;
 
-.block-inline-blockcard-and-image {
-  .parallax-container {
-    height: 36rem;
-    position: relative;
-    overflow: hidden;
-    img {
-      position: absolute;
-      left: 0 !important;
-      object-fit: cover;
-    }
+  @media screen and (max-width: $uds-breakpoint-md) {
+    height: 45rem;
+  }
 
+  img {
+    left: 0 !important;
+    object-fit: cover;
+  }
+
+  .parallax-container-content {
     @media screen and (max-width: $uds-breakpoint-md) {
-      height: 45rem;
-    }
-
-    .parallax-container-content {
-      width: 100%;
-      position: relative;
-      top: 50px;
-
-      @media screen and (max-width: $uds-breakpoint-md) {
-        display: block;
-        margin: 0;
-        top: 150px;
-      }
+      display: block;
     }
   }
 }

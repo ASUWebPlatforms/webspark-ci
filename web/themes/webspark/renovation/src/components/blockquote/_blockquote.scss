@@ -1,21 +1,10 @@
-@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/blockquotes';
-
 .uds-blockquote {
   &.with-image {
-    @include media-breakpoint-up(sm) {
-      gap: $uds-size-spacing-2;
-    }
-
     @include media-breakpoint-up(lg) {
       gap: $uds-size-spacing-4;
     }
 
     img {
-      @include media-breakpoint-up(sm) {
-        width: 120px;
-        height: 120px;
-      }
-
       @include media-breakpoint-up(md) {
         width: 180px;
         height: 180px;
