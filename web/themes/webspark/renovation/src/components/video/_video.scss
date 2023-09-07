@@ -1,23 +1,7 @@
-@import '../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/video';
-
-.block-inline-blockvideo {
-  .container {
-    padding: 0;
-    .col-12,
-    .col-md-10,
-    .col-lg-12 {
-      padding: 0;
-    }
-  }
-}
-
+// TODO: This might not be needed
 .uds-video-player {
   img {
     display: block;
     margin: auto;
   }
-}
-
-.uds-video-with-caption + .uds-video-with-caption {
-  border-top: 0;
 }

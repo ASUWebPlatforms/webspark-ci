@@ -32,6 +32,16 @@
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token }}">
     <js-placeholder token="{{ placeholder_token }}">
+    {# Load only Fontawesome Solid and Brands, because that's all that is
+    available in the free version of Fontawesome. So, it's a waste to load
+    everything else. Also, load ASU Awesome and the shim file. Loading it this
+    way resolves clashes that happened with ASU Awesome the old way. #}
+    <script defer src="/libraries/fontawesome/js/brands.js"></script>
+    <script defer src="/libraries/fontawesome/js/solid.js"></script>
+    <script defer src="/themes/webspark/renovation/js/asuawesome.js"></script>
+    <script defer src="/libraries/fontawesome/js/fontawesome.js"></script>
+    <script defer src="/libraries/fontawesome/js/v4-shims.js"></script>
+  </head>
   </head>
   <body{{attributes}}>
     {% if logged_in and user.hasPermission('Use the toolbar') %}
