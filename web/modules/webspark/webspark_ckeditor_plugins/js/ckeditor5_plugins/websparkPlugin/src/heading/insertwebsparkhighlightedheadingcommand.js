@@ -7,17 +7,17 @@ import { Command } from "ckeditor5/src/core";
 export default class InsertWebsparkHighlitedHeadingCommand extends Command {
   execute({ text, styles, heading }) {
     const { model } = this.editor;
-
     model.change((writer) => {
       const websparkHighlitedHeading = writer.createElement(
         "websparkHighlitedHeading"
       );
       const websparkHighlitedHeadingHelement = writer.createElement(
-        "websparkHighlitedHeadingHelement_" + heading
+        "websparkHighlitedHeadingHelement",
+        { level: heading }
       );
       const websparkHighlitedHeadingText = writer.createElement(
-        "websparkHighlitedHeadingText_" + heading,
-        { heading, styles }
+        "websparkHighlitedHeadingText",
+        { styles }
       );
       const textNode = writer.createText(text);
 
@@ -51,11 +51,13 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
     const selectedElement = selection.getSelectedElement();
     if (selectedElement?.name === "websparkHighlitedHeading") {
       const span = selectedElement.getChild(0)?.getChild(0);
-      this.value = {
-        ...Object.fromEntries(span.getAttributes()),
-        text: span.getChild(0)._data ?? '',
-        heading: span.name.split("_")[1],
-      };
+      if (span) {
+        this.value = {
+          ...Object.fromEntries(span.getAttributes()),
+          text: span.getChild(0)._data ?? "",
+          heading: span.parent.getAttribute("level"),
+        };
+      }
     } else {
       this.value = null;
     }
