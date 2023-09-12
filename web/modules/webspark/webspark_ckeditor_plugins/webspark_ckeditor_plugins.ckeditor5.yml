@@ -93,4 +93,3 @@ webspark_ckeditor_plugins_advancedImage:
       - <img>
     conditions:
       plugins: [ckeditor5_image]
-      

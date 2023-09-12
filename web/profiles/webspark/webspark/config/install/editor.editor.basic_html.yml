@@ -60,6 +60,7 @@ settings:
         - '<h5 id>'
         - '<drupal-media data-spacing-top data-spacing-bottom data-spacing-left data-spacing-right data-round title>'
         - '<h2 id>'
+        - '<img class>'
     ckeditor5_list:
       reversed: false
       startIndex: false
