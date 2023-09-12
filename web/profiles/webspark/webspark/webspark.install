@@ -6,6 +6,7 @@
  */
 
 use Drupal\user\Entity\User;
+use Drupal\user\Entity\Role;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\pathauto\PathautoGeneratorInterface;
 
@@ -332,8 +333,13 @@ function webspark_update_9015(&$sandbox) {
 /**
  * Update the settings of the FontAwesome module to work with ASUAwesome better.
  */
-function webspark_update_9016(&$sandbox) {
+function webspark_update_9017(&$sandbox) {
   \Drupal::state()->set('configuration_locked', FALSE);
   \Drupal::service('webspark.config_manager')->updateConfigFile('fontawesome.settings');
   \Drupal::state()->set('configuration_locked', TRUE);
+
+  // Revoke additional fontawesome settings permissions for authenticated role.
+  $role = Role::load('authenticated');
+  $role->revokePermission('access fontawesome additional settings');
+  $role->trustData()->save();
 }
