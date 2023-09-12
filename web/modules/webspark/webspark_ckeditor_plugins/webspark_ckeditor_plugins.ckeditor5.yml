@@ -79,3 +79,18 @@ webspark_ckeditor_plugins_plugins:
       - <th rowspan colspan class="normal indent">
       - <tr rowspan colspan>
       - <a class target role name hreflang>
+
+webspark_ckeditor_plugins_advancedImage:
+  ckeditor5:
+    plugins:
+      - websparkPlugin.WebsparkAdvancedImage
+    config:
+      image:
+        toolbar: [WebsparkAdvancedImage]
+  drupal:
+    label: Webspark advanced image
+    elements:
+      - <img>
+    conditions:
+      plugins: [ckeditor5_image]
+      

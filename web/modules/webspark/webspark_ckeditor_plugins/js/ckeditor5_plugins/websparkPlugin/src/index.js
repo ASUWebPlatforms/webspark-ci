@@ -13,6 +13,7 @@ import WebsparkLead from "./lead/websparklead";
 import WebsparkHighlitedHeading from "./heading/websparkhighlightedheading";
 import WebsparkBlockquote from "./quote/websparkblockquote";
 import WebsparkTable from "./table/websparktable";
+import WebsparkAdvancedImage from "./advancedimage/websparkadvancedimage";
 
 export default {
   WebsparkButton,
@@ -21,4 +22,5 @@ export default {
   WebsparkHighlitedHeading,
   WebsparkBlockquote,
   WebsparkTable,
+  WebsparkAdvancedImage,
 };
