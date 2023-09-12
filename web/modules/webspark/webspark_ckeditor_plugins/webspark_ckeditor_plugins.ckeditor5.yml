@@ -18,6 +18,7 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkHighlitedHeading
       - websparkPlugin.WebsparkBlockquote
       - websparkPlugin.WebsparkTable
+      - websparkPlugin.WebsparkMediaAlter
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:

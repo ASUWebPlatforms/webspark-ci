@@ -14,6 +14,7 @@ import WebsparkHighlitedHeading from "./heading/websparkhighlightedheading";
 import WebsparkBlockquote from "./quote/websparkblockquote";
 import WebsparkTable from "./table/websparktable";
 import WebsparkAdvancedImage from "./advancedimage/websparkadvancedimage";
+import WebsparkMediaAlter from "./mediaalter/websparkmediaalter";
 
 export default {
   WebsparkButton,
@@ -23,4 +24,5 @@ export default {
   WebsparkBlockquote,
   WebsparkTable,
   WebsparkAdvancedImage,
+  WebsparkMediaAlter,
 };
