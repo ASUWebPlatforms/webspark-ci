@@ -4,6 +4,9 @@
  */
 
 import { Command } from "ckeditor5/src/core";
+import TableUtils from "@ckeditor/ckeditor5-table/src/tableutils";
+import { TableToolbar } from "@ckeditor/ckeditor5-table";
+
 export default class InsertWebsparkTableCommand extends Command {
   execute({ rows, cols, headers, tabletype, caption }) {
     const { model } = this.editor;
@@ -11,54 +14,26 @@ export default class InsertWebsparkTableCommand extends Command {
     let colTables = parseInt(cols, 10) || 1;
     let headersTable = headers;
     let captionTable = caption || "";
-
+    const tableUtils = this.editor.plugins.get("TableUtils");
+    const selection = this.editor.model.document.selection;
     model.change((writer) => {
-      const websparkTable = writer.createElement("websparkTable", {
-        tabletype,
+      const insertAbove = false;
+      const affectedTableCells =
+        tableUtils.getSelectionAffectedTableCells(selection);
+    
+      const isHeadingColumns = headersTable !== "none" ? 1 : 0;
+      const table = tableUtils.createTable(writer, {
+        rows: 1,
+        headingColums: isHeadingColumns,
+        headingRows: isHeadingColumns,
+        columns: 5,
       });
-      const websparkTableHtmlElement = writer.createElement(
-        "websparkTableHtmlElement"
+      
+      model.insertObject(table, null, null, { findOptimalPosition: "auto" });
+      // Placing the cursor on the first element.
+      writer.setSelection(
+        writer.createPositionAt(table.getNodeByPath([0, 0, 0]), 0)
       );
-
-      if (captionTable.length > 0) {
-        const textNode = writer.createText(captionTable);
-        const websparkTableCaption = writer.createElement(
-          "websparkTableCaption"
-        );
-        writer.append(textNode, websparkTableCaption);
-        writer.append(websparkTableCaption, websparkTableHtmlElement);
-      }
-      let body = writer.createElement("websparkTableTBody");
-      let header = writer.createElement("websparkTableTHead");
-
-      for (let i = 0; i < rowsTable; i++) {
-        let $row = writer.createElement("websparkTableTR");
-
-        for (let j = 0; j < colTables; j++) {
-          let $col = {};
-          if (
-            (headersTable === "row" && i === 0) ||
-            (headersTable === "column" && j === 0) ||
-            (headersTable === "both" && (i === 0 || j === 0))
-          ) {
-            $col = writer.createElement("websparkTableTH");
-          } else {
-            $col = writer.createElement("websparkTableTD");
-          }
-          writer.append($col, $row);
-        }
-
-        if (i === 0 && (headersTable === "row" || headersTable === "both")) {
-          writer.append($row, header);
-          writer.append(header, websparkTableHtmlElement);
-        } else {
-          writer.append($row, body);
-        }
-      }
-
-      writer.append(body, websparkTableHtmlElement);
-      writer.append(websparkTableHtmlElement, websparkTable);
-      model.insertContent(websparkTable);
     });
   }
 

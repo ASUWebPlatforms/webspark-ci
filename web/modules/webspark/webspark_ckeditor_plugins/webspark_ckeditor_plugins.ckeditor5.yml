@@ -23,7 +23,9 @@ webspark_ckeditor_plugins_plugins:
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:
     #     editorPluginProperty: editorPluginValue
-
+    config:
+      table:
+        contentToolbar: [tableColumn, tableRow, mergeTableCells, tableProperties, tableCellProperties, toggleTableCaption]
   # Configuration that will be used directly by Drupal.
   drupal:
 

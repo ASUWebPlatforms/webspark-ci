@@ -21,3 +21,6 @@
 .ckeditor5-toolbar-button-websparkTable {
   background-image: url(../icons/websparktable.svg);
 }
+.cke_button__anchor_icon {
+  background-image: url('../img/websparkanchorlink.png') !important;
+}

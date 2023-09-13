@@ -7,7 +7,7 @@
  * before it's made discoverable via index.js.
  */
 
-import WebsparkMediaAlterEditing from "./websparkmediaalterediting";
+import WebsparkMediaAlterEditing from "./websparkmediaAlterediting";
 import { Plugin } from "ckeditor5/src/core";
 
 export default class WebsparkMediaAlter extends Plugin {

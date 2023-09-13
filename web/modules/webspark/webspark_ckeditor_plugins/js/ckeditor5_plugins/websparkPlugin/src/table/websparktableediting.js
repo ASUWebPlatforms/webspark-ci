@@ -1,6 +1,15 @@
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
 import InsertWebsparkTableCommand from "./inserttablecommand";
+import {
+  PlainTableOutput,
+  Table,
+  TableCaption,
+  TableCellProperties,
+  TableProperties,
+  TableToolbar,
+  TableUtils,
+} from "@ckeditor/ckeditor5-table";
 
 // cSpell:ignore simplebox insertsimpleboxcommand
 
@@ -24,7 +33,16 @@ import InsertWebsparkTableCommand from "./inserttablecommand";
  */
 export default class WebsparkTableEditing extends Plugin {
   static get requires() {
-    return [Widget];
+    return [
+      Widget,
+      Table,
+      TableUtils,
+      TableToolbar,
+      PlainTableOutput,
+      TableCaption,
+      TableProperties,
+      TableCellProperties,
+    ];
   }
 
   init() {
@@ -61,7 +79,7 @@ export default class WebsparkTableEditing extends Plugin {
       allowContentOf: "$block",
     });
 
-    schema.register("websparkTableCaption", {
+    schema.register("websparkTableCaption", { 
       isLimit: true,
       allowIn: "websparkTableHtmlElement",
       allowContentOf: "$block",

@@ -36,6 +36,7 @@ export default class WebsparkTableUI extends Plugin {
     const editor = this.editor;
     const t = editor.t;
     const button = dropdown.buttonView;
+    const commando =  this.editor.commands.get('insertTable');
 
     dropdown.bind("isEnabled").to(command);
     dropdown.panelView.children.add(form);
@@ -62,13 +63,15 @@ export default class WebsparkTableUI extends Plugin {
 
     dropdown.on("submit", () => {
       if (form.isValid()) {
-        editor.execute("insertWebsparkTable", {
+       editor.execute("insertWebsparkTable", {
           rows: form.rows,
           cols: form.cols,
           headers: form.headers,
           tabletype: form.tabletype,
           caption: form.caption,
         });
+
+         //editor.execute('insertTable', { rows: 20, columns: 5 })
 
         closeUI();
       }
