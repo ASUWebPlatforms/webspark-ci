@@ -1,3 +1,6 @@
+@import "node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
+@import "base/mixins";
+
 // Adjust the styles of the description boxes found in .layout-builder-configure-section
 #drupal-off-canvas {
   .form-text,
@@ -127,6 +130,23 @@
 
   .banner-black {
     outline: $uds-color-base-gray-2 5px solid;
+  }
+
+  input {
+    padding: 8px 20px !important;
+  }
+
+  th {
+    color: #fff;
+  }
+
+  .form-wrapper + .form-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  .icons-selector.fip-grey .fip-box:hover,
+  .icons-selector .selected-icon {
+    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
   }
 }
 
