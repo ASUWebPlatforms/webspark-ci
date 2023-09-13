@@ -1,17 +1,9 @@
-# Ignore SASS files.
-/.sass-cache
-# Ignore OSX index files.
 .DS_Store
-# Ignore IDE/app specific files.
+.sass-cache
 *.codekit
 .idea
 .vscode
-
+node_modules
+*.js.map
+*.css.map
 config.local.js
-
-# Ignore node modules. Only needed locally when we compile.
-node_modules/*
-
-# Ignore SASS source maps
-*.script.js.map
-*.style.css.map
