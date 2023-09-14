@@ -5,8 +5,7 @@
  * @see seven/css/components/buttons.css
  */
 
-// The most recent version of Radix removed the .button class
-// from the form inputs. We manually added .btn targeting here.
+/* Radix removed the ".button" class from the form inputs. Added ".btn" targeting here.*/
 #drupal-off-canvas button:not(.close),
 #drupal-off-canvas .btn,
 #drupal-off-canvas .button {
