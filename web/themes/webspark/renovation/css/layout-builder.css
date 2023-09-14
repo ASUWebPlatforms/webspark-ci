@@ -115,6 +115,9 @@
 #drupal-off-canvas .js-filter-guidelines {
   font-size: 12px;
 }
+#drupal-off-canvas .webform-element-more .cm-s-default * {
+  color: #ddd;
+}
 
 .layout-builder-form .form-actions {
   display: flex;

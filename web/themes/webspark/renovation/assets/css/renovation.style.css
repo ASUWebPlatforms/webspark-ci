@@ -14671,7 +14671,8 @@ label {
   color: #8c1d40;
 }
 
-.visually-hidden:not(:focus):not(:active) {
+.visually-hidden:not(:focus):not(:active),
+.visually-hidden-focusable:not(:focus):not(:active) {
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
           clip-path: inset(100%);
@@ -15536,11 +15537,6 @@ Cards - Table of Contents
 .uds-image-text-block-container-right {
   flex-direction: row-reverse;
 }
-@media (min-width: 1260px) {
-  .uds-image-text-block-container {
-    max-height: 540px;
-  }
-}
 @media screen and (max-width: 768px) {
   .uds-image-text-block-container {
     flex-direction: column;
@@ -16212,6 +16208,7 @@ Cards - Table of Contents
 .accordion-item .accordion-header {
   padding: 0.5rem;
   overflow: hidden;
+  background-color: #ffffff;
 }
 .accordion-item .accordion-header.accordion-header-icon .accordion-icon {
   display: flex;
@@ -18026,25 +18023,31 @@ form.uds-form label.uds-form-label-disabled,
 form.uds-form legend.uds-form-label-disabled {
   color: #484848;
 }
-form.uds-form .form-control {
+form.uds-form .form-control,
+form.uds-form .form-select {
   color: #191919;
   border: 1px solid #747474;
   /* Disabled input */
 }
-form.uds-form .form-control.is-invalid::-moz-placeholder {
+form.uds-form .form-control.is-invalid::-moz-placeholder, form.uds-form .form-select.is-invalid::-moz-placeholder {
   color: #191919;
 }
-form.uds-form .form-control.is-invalid::placeholder {
+form.uds-form .form-control.is-invalid::placeholder,
+form.uds-form .form-select.is-invalid::placeholder {
   color: #191919;
 }
-form.uds-form .form-control:disabled, form.uds-form .form-control[readonly] {
+form.uds-form .form-control:disabled, form.uds-form .form-control[readonly],
+form.uds-form .form-select:disabled,
+form.uds-form .form-select[readonly] {
   color: #bfbfbf;
   background: #e8e8e8;
 }
-form.uds-form .form-control:disabled::-moz-placeholder, form.uds-form .form-control[readonly]::-moz-placeholder {
+form.uds-form .form-control:disabled::-moz-placeholder, form.uds-form .form-control[readonly]::-moz-placeholder, form.uds-form .form-select:disabled::-moz-placeholder, form.uds-form .form-select[readonly]::-moz-placeholder {
   color: #484848;
 }
-form.uds-form .form-control:disabled::placeholder, form.uds-form .form-control[readonly]::placeholder {
+form.uds-form .form-control:disabled::placeholder, form.uds-form .form-control[readonly]::placeholder,
+form.uds-form .form-select:disabled::placeholder,
+form.uds-form .form-select[readonly]::placeholder {
   color: #484848;
 }
 form.uds-form input,
@@ -18056,8 +18059,8 @@ form.uds-form input:focus,
 form.uds-form textarea:focus,
 form.uds-form select:focus {
   outline: none !important;
-  box-shadow: none !important;
-  border: 2px solid #191919 !important;
+  box-shadow: 0 0 0 1px #191919 !important;
+  border: 1px solid #191919 !important;
   border-radius: none;
 }
 form.uds-form fieldset {
@@ -18176,6 +18179,11 @@ form.uds-form select.is-invalid {
   border: 1px solid #b72a2a;
   border-bottom: 8px solid #b72a2a;
 }
+form.uds-form input.is-invalid:focus,
+form.uds-form textarea.is-invalid:focus,
+form.uds-form select.is-invalid:focus {
+  border-bottom: 8px solid #b72a2a !important;
+}
 form.uds-form small.is-invalid, form.uds-form .is-invalid.small,
 form.uds-form div.is-invalid {
   margin-left: -1rem;
@@ -18204,6 +18212,11 @@ form.uds-form select.is-valid {
   border-style: solid;
   border: 1px solid #446d12;
   border-bottom: 8px solid #446d12;
+}
+form.uds-form input.is-valid:focus,
+form.uds-form textarea.is-valid:focus,
+form.uds-form select.is-valid:focus {
+  border-bottom: 8px solid #446d12 !important;
 }
 form.uds-form small.is-valid, form.uds-form .is-valid.small,
 form.uds-form div.is-valid {
@@ -18327,8 +18340,11 @@ form.uds-form.uds-form-gray7 input:focus,
 form.uds-form.uds-form-gray7 textarea:focus,
 form.uds-form.uds-form-gray7 select:focus {
   background-color: #191919;
-  border: 2px solid #fafafa !important;
   color: #fafafa;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #fafafa !important;
+  border: 1px solid #fafafa !important;
+  border-radius: none;
 }
 form.uds-form.uds-form-gray7 .form-check input[type=radio] + label::before,
 form.uds-form.uds-form-gray7 .form-check input[type=checkbox] + label::before {
@@ -18361,7 +18377,12 @@ form.uds-form.uds-form-gray7 textarea.is-invalid,
 form.uds-form.uds-form-gray7 select.is-invalid {
   border-style: solid;
   border: 1px solid #cc2f2f;
-  border-bottom: 8px solid #cc2f2f;
+  border-bottom: 8px solid #cc2f2f !important;
+}
+form.uds-form.uds-form-gray7 input.is-invalid:focus,
+form.uds-form.uds-form-gray7 textarea.is-invalid:focus,
+form.uds-form.uds-form-gray7 select.is-invalid:focus {
+  border-bottom: 8px solid #cc2f2f !important;
 }
 form.uds-form.uds-form-gray7 .invalid-feedback {
   font-weight: bold;
@@ -18377,6 +18398,11 @@ form.uds-form.uds-form-gray7 select.is-valid {
   border-style: solid;
   border: 1px solid #78be20;
   border-bottom: 8px solid #78be20;
+}
+form.uds-form.uds-form-gray7 input.is-valid:focus,
+form.uds-form.uds-form-gray7 textarea.is-valid:focus,
+form.uds-form.uds-form-gray7 select.is-valid:focus {
+  border-bottom: 8px solid #78be20 !important;
 }
 form.uds-form.uds-form-gray7 .valid-feedback {
   font-weight: bold;
