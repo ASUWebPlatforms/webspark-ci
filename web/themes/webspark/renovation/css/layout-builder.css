@@ -86,7 +86,7 @@
   outline: #e8e8e8 5px solid;
 }
 #drupal-off-canvas input {
-  padding: 8px 20px !important;
+  padding: 4px 20px !important;
 }
 #drupal-off-canvas th {
   color: #fff;
@@ -94,9 +94,26 @@
 #drupal-off-canvas .form-wrapper + .form-wrapper {
   margin-top: 0.5rem;
 }
+#drupal-off-canvas .form-wrapper .form-wrapper {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 #drupal-off-canvas .icons-selector.fip-grey .fip-box:hover,
 #drupal-off-canvas .icons-selector .selected-icon {
   color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+}
+#drupal-off-canvas fieldset {
+  background: inherit;
+  color: #ddd;
+}
+#drupal-off-canvas .card-header:not(summary) {
+  padding: 0;
+}
+#drupal-off-canvas .js-form-type-checkbox .description {
+  margin-left: 1rem;
+}
+#drupal-off-canvas .js-filter-guidelines {
+  font-size: 12px;
 }
 
 .layout-builder-form .form-actions {
@@ -156,8 +173,12 @@
   margin-top: 2.5rem;
 }
 
+form.uds-form.layout-builder-configure-block .form-check.js-form-type-radio {
+  padding: 0;
+}
 form.uds-form.layout-builder-configure-block .form-check input[type=radio] {
   opacity: 1;
+  margin-right: 4px !important;
 }
 form.uds-form.layout-builder-configure-block .form-check input[type=radio] + label:before, form.uds-form.layout-builder-configure-block .form-check input[type=radio] + label:after {
   content: none;
