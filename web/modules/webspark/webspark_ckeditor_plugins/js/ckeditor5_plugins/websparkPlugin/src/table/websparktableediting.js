@@ -48,24 +48,6 @@ export default class WebsparkTableEditing extends Plugin {
   _defineConverters() {
     const { conversion } = this.editor;
 
-    // Override default table data downcast converter.
-		/*conversion.for( 'dataDowncast' ).elementToStructure( {
-			model: 'table',
-			view: downcastTableElement,
-			converterPriority: 'high'
-		} );*/
- 
-// editingDowncast for editing pipeline
-/*conversion.for( 'editingDowncast' ).elementToElement( {
-        model: 'table',
-        view: downcastTableCustom,
-       view: {
-            name: 'table',
-            classes: 'paragraph-in-editing-view'
-        },
-        converterPriority: 'high'
-    } );*/
-
     conversion.for("upcast").elementToElement({
       view: {
         name: "div",
