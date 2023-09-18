@@ -1,22 +1,14 @@
+// @see https://asudev.jira.com/browse/WS2-1731
 .uds-blockquote {
+  p {
+    max-width: none;
+  }
+
   &.with-image {
-    @include media-breakpoint-up(lg) {
-      gap: $uds-size-spacing-4;
-    }
-
-    img {
-      @include media-breakpoint-up(md) {
-        width: 180px;
-        height: 180px;
-      }
-    }
-  }
-
-  @include media-breakpoint-down(lg) {
     grid-template-columns: auto auto;
-  }
 
-  @include media-breakpoint-down(sm) {
-    padding: $uds-size-spacing-2;
+    h3 {
+      margin-top: 0;
+    }
   }
 }
