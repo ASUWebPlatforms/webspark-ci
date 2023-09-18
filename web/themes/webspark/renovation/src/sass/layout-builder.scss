@@ -99,6 +99,7 @@
   }
 
   a {
+    background: inherit;
     color: $uds-color-background-info;
   }
 
@@ -134,10 +135,6 @@
 
   input {
     padding: 4px 20px !important;
-
-    // &:not(.btn) {
-    //   min-height: 35px;
-    // }
   }
 
   th {
@@ -232,9 +229,6 @@
 }
 
 form.uds-form.layout-builder-configure-block .form-check {
-  // display: flex;
-  // align-items: center;
-
   &.js-form-type-radio {
     padding: 0;
   }
