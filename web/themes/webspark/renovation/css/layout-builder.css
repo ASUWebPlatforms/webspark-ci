@@ -118,6 +118,11 @@
 #drupal-off-canvas .webform-element-more .cm-s-default * {
   color: #ddd;
 }
+#drupal-off-canvas .draggable a.tabledrag-handle .handle {
+  height: 18px;
+  -webkit-mask: inherit;
+          mask: inherit;
+}
 
 .layout-builder-form .form-actions {
   display: flex;

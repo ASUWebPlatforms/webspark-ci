@@ -180,6 +180,13 @@
   .webform-element-more .cm-s-default *{
     color: #ddd;
   }
+
+  // Fix broken sort handler introduced by "a.tabledrag-handle .handle"
+  // @see https://www.drupal.org/project/thunder_admin/issues/3345482
+  .draggable a.tabledrag-handle .handle {
+    height: 18px;
+    mask: inherit;
+  }
 }
 
 .layout-builder-form {
