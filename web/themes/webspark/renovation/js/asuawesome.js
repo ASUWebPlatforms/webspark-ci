@@ -319,8 +319,8 @@
   }
 
   bunker(function () {
-    defineIcons('fasu', icons);
-    defineIcons('fa-asu', icons);
+    defineIcons('fas', icons);
+    defineIcons('fa-solid', icons);
   });
 
 }());
