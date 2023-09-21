@@ -20,6 +20,7 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkTable
       - websparkPlugin.WebsparkMediaAlter
       - websparkPlugin.WebsparkListStyle
+
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:

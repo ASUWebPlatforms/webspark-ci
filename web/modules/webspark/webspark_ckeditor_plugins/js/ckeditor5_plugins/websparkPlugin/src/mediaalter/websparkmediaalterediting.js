@@ -8,7 +8,7 @@
  */
 
 import {Plugin} from "ckeditor5/src/core";
-import WebsparkMediaAlterCommand from "./websparkmediaAlterCommand";
+import WebsparkMediaAlterCommand from "./websparkmediaaltercommand";
 
 export default class WebsparkMediaAlterEditing extends Plugin {
 

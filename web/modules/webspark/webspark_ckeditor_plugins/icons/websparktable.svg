@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">  <image id="image0" width="16" height="16" x="0" y="0"
-    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
-AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ
-cwAADdcAAA3XAUIom3gAAAAHdElNRQfnCBYXMDhsuvmAAAAAuUlEQVQoz4XRPW7CQBDF8f/Ys9ik
-iMSHCPIJOAENl8ltuUkUkBAUNjKSw6NYsSgYmX3Nr5jizayJ4We8mfDvwQnDWzquQIahnhw/ceSM
-KCm40EKS8cEE1lIXU73QWt6A/wALDup8/08VjRygQDiGM4Iki1sEYAbAJzB/UiDLMMUUL5ThDfqL
-O4/zvla51+A7xJJW+C8kGV/UsWRI1wzphuFeMgemkanuQzlWqh34ixK00fZ+t1622twA9RB7Xi8V
-+l0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDgtMjJUMjE6NDg6NTYrMDI6MDBxFr4YAAAAJXRF
-WHRkYXRlOm1vZGlmeQAyMDIzLTA4LTIyVDIxOjQ4OjU2KzAyOjAwAEsGpAAAABl0RVh0U29mdHdh
-cmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII=" />
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="16.000000pt" height="16.000000pt" viewBox="0 0 16.000000 16.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,16.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M0 80 l0 -70 80 0 80 0 0 70 0 70 -80 0 -80 0 0 -70z m50 10 c0 -13
+-7 -20 -20 -20 -13 0 -20 7 -20 20 0 13 7 20 20 20 13 0 20 -7 20 -20z m50 0
+c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20 0 13 7 20 20 20 13 0 20 -7 20 -20z
+m50 0 c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20 0 13 7 20 20 20 13 0 20 -7
+20 -20z m-100 -50 c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20 0 13 7 20 20 20
+13 0 20 -7 20 -20z m50 0 c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20 0 13 7 20
+20 20 13 0 20 -7 20 -20z m50 0 c0 -13 -7 -20 -20 -20 -13 0 -20 7 -20 20 0
+13 7 20 20 20 13 0 20 -7 20 -20z"/>
+</g>
 </svg>
