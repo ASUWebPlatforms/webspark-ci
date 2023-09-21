@@ -1,4 +1,4 @@
-webspark_ckeditor_plugins.ckeditor5.yml# If using yml to configure plugins, rename this to {module_name}.ckeditor5.yml.
+# If using yml to configure plugins, rename this to {module_name}.ckeditor5.yml.
 # If using annotations, this file can be removed.
 # @see https://www.drupal.org/docs/drupal-apis/plugin-api/annotations-based-plugins
 #   For information on using annotations to define plugins.
