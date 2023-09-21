@@ -18,6 +18,7 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-list": "^39.0.2",
     "@ckeditor/ckeditor5-table": "^39.0.2"
   }
 }

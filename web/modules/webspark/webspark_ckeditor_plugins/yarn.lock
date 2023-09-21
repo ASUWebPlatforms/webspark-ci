@@ -222,6 +222,14 @@
     "@ckeditor/ckeditor5-engine" "39.0.2"
     "@ckeditor/ckeditor5-utils" "39.0.2"
 
+"@ckeditor/ckeditor5-list@^39.0.2":
+  "integrity" "sha512-XRcp67PuDK/mP0sL8g+TFLIr/MigVHKATwO+7OAJZlGAGxr73V/eRw3G6ZAe6Lh0lVQPRA54r+h5DHG5P+KRRg=="
+  "resolved" "https://registry.npmjs.org/@ckeditor/ckeditor5-list/-/ckeditor5-list-39.0.2.tgz"
+  "version" "39.0.2"
+  dependencies:
+    "@ckeditor/ckeditor5-ui" "39.0.2"
+    "ckeditor5" "39.0.2"
+
 "@ckeditor/ckeditor5-paragraph@^34.1.0":
   "integrity" "sha512-xcXUsXz3PY355gJ8u+y0qFLWcScYo0CZPZSbs5YwDz7g9lV8foVVzzdW7ITYwr5/YIpJsjjxYC+dDUqsH6EpBQ=="
   "resolved" "https://registry.npmjs.org/@ckeditor/ckeditor5-paragraph/-/ckeditor5-paragraph-34.2.0.tgz"

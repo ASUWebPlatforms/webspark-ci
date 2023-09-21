@@ -1,4 +1,4 @@
-# If using yml to configure plugins, rename this to {module_name}.ckeditor5.yml.
+webspark_ckeditor_plugins.ckeditor5.yml# If using yml to configure plugins, rename this to {module_name}.ckeditor5.yml.
 # If using annotations, this file can be removed.
 # @see https://www.drupal.org/docs/drupal-apis/plugin-api/annotations-based-plugins
 #   For information on using annotations to define plugins.
@@ -19,16 +19,39 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkBlockquote
       - websparkPlugin.WebsparkTable
       - websparkPlugin.WebsparkMediaAlter
+      - websparkPlugin.WebsparkListStyle
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:
     #     editorPluginProperty: editorPluginValue
     config:
       table:
-        contentToolbar: [tableColumn, tableRow, mergeTableCells, tableProperties, tableCellProperties, toggleTableCaption]
+        contentToolbar:
+          - tableColumn
+          - tableRow
+          - mergeTableCells
+          - tableProperties
+          - tableCellWsProperties
+          - toggleTableCaption
+          - tableCellBorderStyle
+          - tableCellBorderColor
+          - tableCellBorderWidth
+          - tableCellHeight
+          - tableCellPadding
+          - tableCellBackgroundColor
+          - tableCellHorizontalAlignment
+          - tableCellVerticalAlignment
+          - tableCellWidth
+          - tableBackgroundColor
+          - tableBorderColor
+          - tableBorderWidth
+          - tableHeight
+          - tableWidth
+          - tableAlignment
+          - tableBorderStyle
+
   # Configuration that will be used directly by Drupal.
   drupal:
-
     label: Webspark CKEditor 5 Plugins
     # The library loaded while using the editor.
     library: webspark_ckeditor_plugins/websparkplugin
@@ -82,7 +105,6 @@ webspark_ckeditor_plugins_plugins:
       - <th rowspan colspan class="normal indent">
       - <tr rowspan colspan>
       - <a class target role name hreflang>
-
 webspark_ckeditor_plugins_advancedImage:
   ckeditor5:
     plugins:
