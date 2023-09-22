@@ -225,6 +225,22 @@ figure.caption-img {
   }
 }
 
+// @see https://asudev.jira.com/browse/WS2-1782
+.ui-dialog.media-library-widget-modal .ui-dialog-titlebar-close {
+  padding: 0;
+
+  &::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(../../img/ui-icons/times.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 4px;
+  }
+}
+
 .ui-widget.ui-widget-content {
   border: none;
   border-radius: 0;

@@ -7,3 +7,10 @@
     }
   }
 }
+
+// @see https://asudev.jira.com/browse/WS2-1787
+.uds-testimonial {
+  h3 {
+    max-width: none;
+  }
+}
