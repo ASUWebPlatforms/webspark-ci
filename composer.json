@@ -46,7 +46,6 @@
         }
     ],
     "require": {
-        "drupal/radix": "^5.0",
         "pantheon-upstreams/upstream-configuration": "*",
         "webspark/custom-dependencies": "*"
     },
