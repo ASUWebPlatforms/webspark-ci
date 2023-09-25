@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f797ed472bcd0fdad98cb48772b8265",
+    "content-hash": "55ed8018e3e8e0feae2bcc590fa21822",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3876,7 +3876,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/fontawesome.git",
-                "reference": "a38b572554fe152c395b793772960bc1349649f0"
+                "reference": "65e140fe9124b65ef7862e266fddf50382580264"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10"
@@ -3887,8 +3887,8 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.26+5-dev",
-                    "datestamp": "1692735647",
+                    "version": "8.x-2.26+6-dev",
+                    "datestamp": "1694619484",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -4709,45 +4709,30 @@
         },
         {
             "name": "drupal/radix",
-            "version": "5.0.9",
+            "version": "5.0.11",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/radix.git",
-                "reference": "5.0.9"
+                "reference": "5.0.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/radix-5.0.9.zip",
-                "reference": "5.0.9",
-                "shasum": "50fc691ec7aa7173a101420caa5cd376eb240ff3"
+                "url": "https://ftp.drupal.org/files/projects/radix-5.0.11.zip",
+                "reference": "5.0.11",
+                "shasum": "04c00ab0c606ac889a671f3cf66f159756fdc60a"
             },
             "require": {
-                "drupal/components": "^3.0",
                 "drupal/core": "^8.7.7 || ^9.0 || ^10"
-            },
-            "require-dev": {
-                "consolidation/robo": "^1.1.4 || ^2",
-                "drush/drush": "^11.5"
             },
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "5.0.9",
-                    "datestamp": "1686822381",
+                    "version": "5.0.11",
+                    "datestamp": "1692276534",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "drush": {
-                    "services": {
-                        "drush.services.yml": "^11"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drush\\Commands\\radix\\": "Commands/radix/"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4756,29 +4741,23 @@
             ],
             "authors": [
                 {
-                    "name": "Arshad Chummun",
-                    "homepage": "https://arshad.io",
-                    "email": "arshad@chummun.com",
-                    "role": "Maintainer"
+                    "name": "ckng",
+                    "homepage": "https://www.drupal.org/user/16307"
                 },
                 {
-                    "name": "Ng Chin Kiong",
-                    "homepage": "https://www.o8.agency",
-                    "email": "ck@o8.agency",
-                    "role": "Maintainer"
+                    "name": "doxigo",
+                    "homepage": "https://www.drupal.org/user/1331334"
                 },
                 {
-                    "name": "Sohail Lajevardi",
-                    "homepage": "https://www.drupal.org/user/571032",
-                    "email": "doxigo@gmail.com",
-                    "role": "Maintainer"
+                    "name": "shadcn",
+                    "homepage": "https://www.drupal.org/user/571032"
                 }
             ],
-            "description": "Radix is a base theme for Drupal. It has Bootstrap, Sass, BrowserSync and Font Awesome built-in.",
+            "description": "Responsive Bootstrap 5 base theme for Drupal.",
             "homepage": "https://www.drupal.org/project/radix",
             "support": {
                 "source": "https://git.drupalcode.org/project/radix",
-                "issues": "https://www.drupal.org/project/issues/radix"
+                "error": "autoload.psr-4 : invalid value (classmap), namespaces must end with a namespace separator, should be classmap\\\\"
             }
         },
         {
@@ -6429,30 +6408,30 @@
         },
         {
             "name": "laminas/laminas-stdlib",
-            "version": "3.17.0",
+            "version": "3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stdlib.git",
-                "reference": "dd35c868075bad80b6718959740913e178eb4274"
+                "reference": "e85b29076c6216e7fc98e72b42dbe1bbc3b95ecf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/dd35c868075bad80b6718959740913e178eb4274",
-                "reference": "dd35c868075bad80b6718959740913e178eb4274",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/e85b29076c6216e7fc98e72b42dbe1bbc3b95ecf",
+                "reference": "e85b29076c6216e7fc98e72b42dbe1bbc3b95ecf",
                 "shasum": ""
             },
             "require": {
-                "php": "~8.1.0 || ~8.2.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
             },
             "conflict": {
                 "zendframework/zend-stdlib": "*"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "^2.5",
-                "phpbench/phpbench": "^1.2.9",
-                "phpunit/phpunit": "^10.0.16",
+                "phpbench/phpbench": "^1.2.14",
+                "phpunit/phpunit": "^10.3.3",
                 "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.8"
+                "vimeo/psalm": "^5.15.0"
             },
             "type": "library",
             "autoload": {
@@ -6484,7 +6463,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-03-20T13:51:37+00:00"
+            "time": "2023-09-19T10:15:21+00:00"
         },
         {
             "name": "league/container",
@@ -7022,7 +7001,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "3b986d46b765271788be10f36e6396e0611bc41f"
+                "reference": "874342a3aba6355f9f9cbc1704800845e5a3e183"
             },
             "require": {
                 "bower-asset/fontawesome": "6.4.2",
@@ -7065,7 +7044,7 @@
                 "drupal/metatag": "1.26.0",
                 "drupal/paragraphs": "1.15.0",
                 "drupal/pathauto": "1.11.0",
-                "drupal/radix": "5.0.9",
+                "drupal/radix": "5.0.11",
                 "drupal/redirect": "1.8.0",
                 "drupal/robotstxt": "1.5.0",
                 "drupal/schema_metatag": "2.5.0",
@@ -7634,16 +7613,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.20",
+            "version": "v0.11.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "0fa27040553d1d280a67a4393194df5228afea5b"
+                "reference": "bcb22101107f3bf770523b65630c9d547f60c540"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/0fa27040553d1d280a67a4393194df5228afea5b",
-                "reference": "0fa27040553d1d280a67a4393194df5228afea5b",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/bcb22101107f3bf770523b65630c9d547f60c540",
+                "reference": "bcb22101107f3bf770523b65630c9d547f60c540",
                 "shasum": ""
             },
             "require": {
@@ -7673,6 +7652,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-main": "0.11.x-dev"
+                },
+                "bamarni-bin": {
+                    "bin-links": false,
+                    "forward-command": false
                 }
             },
             "autoload": {
@@ -7704,9 +7687,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.20"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.21"
             },
-            "time": "2023-07-31T14:32:22+00:00"
+            "time": "2023-09-17T21:15:54+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -12110,7 +12093,7 @@
         },
         {
             "name": "drupal/core-dev",
-            "version": "9.5.10",
+            "version": "9.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-dev.git",
@@ -12154,7 +12137,7 @@
             ],
             "description": "require-dev dependencies from drupal/drupal; use in addition to drupal/core-recommended to run tests from drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-dev/tree/9.5.10"
+                "source": "https://github.com/drupal/core-dev/tree/9.5.11"
             },
             "time": "2022-07-27T00:23:55+00:00"
         },
@@ -13286,16 +13269,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.24.0",
+            "version": "1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6"
+                "reference": "9f854d275c2dbf84915a5c0ec9a2d17d2cd86b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/3510b0a6274cc42f7219367cb3abfc123ffa09d6",
-                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9f854d275c2dbf84915a5c0ec9a2d17d2cd86b01",
+                "reference": "9f854d275c2dbf84915a5c0ec9a2d17d2cd86b01",
                 "shasum": ""
             },
             "require": {
@@ -13327,22 +13310,22 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.1"
             },
-            "time": "2023-09-07T20:46:32+00:00"
+            "time": "2023-09-18T12:18:02+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.28",
+            "version": "9.2.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef"
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6a3a87ac2bbe33b25042753df8195ba4aa534c76",
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76",
                 "shasum": ""
             },
             "require": {
@@ -13399,7 +13382,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.28"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.29"
             },
             "funding": [
                 {
@@ -13407,7 +13390,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-12T14:36:20+00:00"
+            "time": "2023-09-19T04:57:46+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
