@@ -29,10 +29,9 @@ export class WebsparkListStyleFormView extends View {
 
         this.focusTracker = new FocusTracker();
         this.keystrokes = new KeystrokeHandler();
-
         this.classSelect = createSelect(
             t("List properties"),
-            this._getPropertiesOptions(t),
+            this._getBulletedPropertiesOptions(t),
             locale
         );
 
@@ -81,7 +80,10 @@ export class WebsparkListStyleFormView extends View {
         });
     }
 
-    _getPropertiesOptions(t) {
+    /*
+    * Bulleted List Properties
+    */
+    _getBulletedPropertiesOptions(t) {
         return [
             {
                 value: "default-list",
@@ -185,7 +187,6 @@ export class WebsparkListStyleFormView extends View {
 
     setValues(values) {
         this.classselect = values?.classselect;
-        console.log(values , this.classSelect);
     }
 
     isValid() {

@@ -19,6 +19,7 @@ export default class WebsparkListStyleUI extends Plugin {
     const editor = this.editor;
     const command = editor.commands.get("insertliststyle");
     const balloon = this.editor.plugins.get(ContextualBalloon);
+
     this.form = new WebsparkListStyleFormView(
       getFormValidators(this.editor.t),
       this.editor.locale,
@@ -28,7 +29,7 @@ export default class WebsparkListStyleUI extends Plugin {
     const dropdown = createDropdown(editor.locale);
     this._setUpDropdown(dropdown, this.form, command, balloon);
     this._setUpForm(this.form, dropdown, command);
-    this._defineBalloon(balloon);
+    this._defineBalloon(balloon, this.form);
   }
 
   /**
@@ -46,8 +47,8 @@ export default class WebsparkListStyleUI extends Plugin {
       return element;
     }
     return this._findUlParent(element.parent);
-  }   
-  
+  }
+
   /**
    * Defines the behavior of the ContextualBalloon for this plugin.
    *
@@ -71,6 +72,26 @@ export default class WebsparkListStyleUI extends Plugin {
           position: this._getBalloonPositionData(),
         });
       }
+
+      const listOptions = this.editor.commands.get("bulletedList").value
+        ? this._getBulletedPropertiesOptions(this.editor.t)
+        : this.editor.commands.get("numberedList").value
+        ? this._getNumberedPropertiesOptions(this.editor.t)
+        : "";
+
+      if (!listOptions) {
+        return;
+      }
+
+      //remove current options
+      this.form.classSelect.children[1].element.options.length = 0;
+
+      listOptions.forEach((optionData) => {
+        const optionElement = document.createElement("option");
+        optionElement.value = optionData.value;
+        optionElement.text = optionData.title;
+        this.form.classSelect.children[1].element.appendChild(optionElement);
+      });
     });
 
     // Close on click outside of balloon panel element.
@@ -80,6 +101,134 @@ export default class WebsparkListStyleUI extends Plugin {
       contextElements: [balloon.view.element],
       callback: () => balloon.remove(this.form),
     });
+  }
+
+  /**
+   * Generate an array of objects with specified values and titles.
+   * @param {function} t - Translation function to translate titles.
+   * @returns {Array} An array of objects with 'value' and 'title' properties.
+   */
+  _getBulletedPropertiesOptions(t) {
+    return [
+      {
+        value: "default-list",
+        title: t("Default"),
+      },
+      {
+        value: `maroon`,
+        title: t("Maroon"),
+      },
+      {
+        value: `light-smokemode`,
+        title: t("Gray 1"),
+      },
+      {
+        value: `smokemode`,
+        title: t("Gray 2"),
+      },
+      {
+        value: `darkmode`,
+        title: t("Gray 7"),
+      },
+      {
+        value: `darkmode-gold`,
+        title: t("Gray 7 Gold Bullet"),
+      },
+      {
+        value: `icn-default`,
+        title: t("Icon list"),
+      },
+      {
+        value: `icn-maroon`,
+        title: t("Icon list Maroon"),
+      },
+      {
+        value: `icn-darkmode`,
+        title: t("Icon list Gray 7"),
+      },
+      {
+        value: `icn-darkmode-gold`,
+        title: t("Icon list Gray 7 Gold"),
+      },
+    ];
+  }
+
+  /**
+   * Generate an array of objects with specified values and titles.
+   * @param {function} t - Translation function to translate titles.
+   * @returns {Array} An array of objects with 'value' and 'title' properties.
+   */
+  _getNumberedPropertiesOptions(t) {
+    return [
+      {
+        value: "default-list",
+        title: t("Default"),
+      },
+      {
+        value: "maroon",
+        title: t("Maroon"),
+      },
+      {
+        value: "light-smokemode",
+        title: t("Gray 1"),
+      },
+      {
+        value: "smokemode",
+        title: t("Gray 2"),
+      },
+      {
+        value: "darkmode",
+        title: t("Gray 7"),
+      },
+      {
+        value: "darkmode-gold",
+        title: t("Gray 7 Gold"),
+      },
+      {
+        value: "stp-default",
+        title: t("Step List Default"),
+      },
+      {
+        value: "stp-gold-counter",
+        title: t("Step List Gold Counter"),
+      },
+      {
+        value: "stp-maroon-counter",
+        title: t("Step List Maroon Counter"),
+      },
+      {
+        value: "stp-smokemode",
+        title: t("Step List Gray 2"),
+      },
+      {
+        value: "stp-smokemode-gold",
+        title: t("Step List Gray 2 Gold Counter"),
+      },
+      {
+        value: "stp-smokemode-maroon",
+        title: t("Step List Gray 2 Maroon Counter"),
+      },
+      {
+        value: "stp-lightsmokemode",
+        title: t("Step List Gray 1"),
+      },
+      {
+        value: "stp-lightsmokemode-gold",
+        title: t("Step List Gray 1 Gold Counter"),
+      },
+      {
+        value: "stp-lightsmokemode-maroon",
+        title: t("Step List Gray 1 Maroon Counter"),
+      },
+      {
+        value: "stp-darkmode",
+        title: t("Step List Gray 7"),
+      },
+      {
+        value: "stp-darkmode-gold",
+        title: t("Step List Gray 7 Gold Counter"),
+      },
+    ];
   }
 
   /**
