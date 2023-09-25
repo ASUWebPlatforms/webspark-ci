@@ -266,19 +266,20 @@ export default class InsertWebsparkListStyleCommand extends Command {
     if (bulletedClass.startsWith("icn")) {
       stclass += " uds-list fa-ul";
 
-      if (bulletedClass == "icn-maroon") {
-        stclass = this._removeClassesFromString(stclass, ["darkmode", "gold"]);
-        stclass += " maroon";
-      }
-
-      if (bulletedClass == "icn-darkmode") {
-        stclass = this._removeClassesFromString(stclass, ["gold", "maroon"]);
-        stclass += " darkmode";
-      }
-
-      if (bulletedClass == "icn-darkmode-gold") {
-        stclass = this._removeClassesFromString(stclass, ["maroon"]);
-        stclass += " darkmode gold";
+      switch (bulletedClass) {
+        case "icn-maroon":
+          stclass = this._removeClassesFromString(stclass, ["darkmode", "gold"]);
+          stclass += " maroon";
+          break;
+        case "icn-darkmode":
+          stclass = this._removeClassesFromString(stclass, ["gold", "maroon"]);
+          stclass += " darkmode";
+          break;
+        case "icn-darkmode-gold":
+          stclass = this._removeClassesFromString(stclass, ["maroon"]);
+          stclass += " darkmode gold";
+          break;
+        // Add more cases if needed
       }
     } else {
       // Remove step list elements.
