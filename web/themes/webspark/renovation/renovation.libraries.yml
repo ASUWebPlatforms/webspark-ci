@@ -29,3 +29,9 @@ renovation.chartjs:
     gpl-compatible: true
   js:
     https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js: { type: external, minified: true }
+
+layout_builder:
+  version: VERSION
+  css:
+    theme:
+      css/layout-builder.css: {}
