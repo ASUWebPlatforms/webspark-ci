@@ -1,18 +1,53 @@
-.parallax-container {
-  height: 36rem;
+// @see https://asudev.jira.com/browse/WS2-1768
+$parallax-height: 720px;
+$parallax-height-desktop: 466px;
 
-  @media screen and (max-width: $uds-breakpoint-md) {
-    height: 45rem;
+.parallax-container {
+  height: rfs-value($parallax-height-desktop);
+
+  @media screen and (max-width: $uds-breakpoint-sm) {
+    min-height: rfs-value($parallax-height);
   }
 
   img {
-    left: 0 !important;
     object-fit: cover;
+
+    @media screen and (max-width: $uds-breakpoint-sm) {
+      margin-top: 48px;
+    }
   }
 
   .parallax-container-content {
-    @media screen and (max-width: $uds-breakpoint-md) {
+    top: unset;
+    padding: 3rem 6rem;
+    position: relative;
+
+    @media screen and (max-width: $uds-breakpoint-sm) {
       display: block;
+      max-width: 100%;
+      padding: rfs-value(24px);
+    }
+
+    @media screen and (max-width: $uds-breakpoint-md) {
+      width: unset;
+    }
+
+    &.uds-card-and-image-right {
+      flex-direction: unset;
+    }
+
+    .uds-content-align {
+      @media screen and (max-width: $uds-breakpoint-sm) {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        // Bottom margin here will never be perfect since the JS repositions the image
+        margin: 0 24px 36px;
+      }
+    }
+
+    .card-body p:first-of-type {
+      margin-top: 0;
     }
   }
 }
