@@ -1,18 +1,45 @@
-.parallax-container {
-  height: 36rem;
+// @see https://asudev.jira.com/browse/WS2-1768
+// After the markup for this block is updated, most if not all of the CSS can be removed
+$parallax-height: 720px;
+$parallax-height-desktop: 466px;
 
-  @media screen and (max-width: $uds-breakpoint-md) {
-    height: 45rem;
+.parallax-container {
+  height: rfs-value($parallax-height-desktop);
+
+  @media screen and (max-width: $uds-breakpoint-sm) {
+    min-height: rfs-value($parallax-height);
   }
 
   img {
-    left: 0 !important;
     object-fit: cover;
+
+    @media screen and (max-width: $uds-breakpoint-sm) {
+      margin-top: 48px;
+    }
   }
 
   .parallax-container-content {
-    @media screen and (max-width: $uds-breakpoint-md) {
-      display: block;
+    top: unset;
+    padding: 3rem 6rem;
+    position: relative;
+    max-width: 100%;
+    width: unset;
+
+    @media screen and (max-width: $uds-breakpoint-sm) {
+      display: flex;
+      padding: rfs-value(24px);
+    }
+
+    @media screen and (min-width: $uds-breakpoint-md) {
+      max-width: 600px;
+    }
+
+    &.uds-card-and-image-right {
+      margin-left: auto;
+    }
+
+    .card-body p:first-of-type {
+      margin-top: 0;
     }
   }
 }
