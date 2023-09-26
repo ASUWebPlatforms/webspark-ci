@@ -87,10 +87,10 @@ export default class WebsparkBlockquoteUI extends Plugin {
 
 function getFormValidators(t) {
   return [
-    (form) => {
+    (form) => {}/*{
       if (!form.text.length) {
         return t("The text must not be empty.");
       }
-    },
+    },*/
   ];
 }

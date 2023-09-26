@@ -54,7 +54,7 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
       if (span) {
         this.value = {
           ...Object.fromEntries(span.getAttributes()),
-          text: span.getChild(0)._data ?? "",
+          text: span.getChild(0)?._data ?? "",
           heading: span.parent.getAttribute("level"),
         };
       }

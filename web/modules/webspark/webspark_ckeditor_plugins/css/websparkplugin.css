@@ -31,13 +31,14 @@
 
 form .webspark-heading-dialog,
 form .webspark-blockquote-dialog {
-  width:400px !important;
+  width:700px !important;
 }
 
 textarea.ck-webspark-form-textarea {
   width:100% !important;
+  height: 80px !important;
 }
 
 form .webspark-blockquote-dialog  input.ck-input {
-  width: 100%;
+  width: 80%;
 }
