@@ -3,7 +3,7 @@
         "3002953: Fix js plugin seems to be missing": "https://www.drupal.org/files/issues/2020-06-22/fakeobjects-missing_plugin-3002953-5.patch"
     },
     "drupal/core": {
-        "#2951547: Fix issue with layout overflow": "https://www.drupal.org/files/issues/2020-01-08/layout-builder-tray-size-2951547-42.patch",
+        "#2951547: Fix issue with layout overflow": "https://www.drupal.org/files/issues/2022-07-13/f245f21ea664f22c81d8d28c6f0f4a42fb9a5890.patch",
         "3109650: Refactor Xss::attributes() to allow filtering of style attribute values": "https://www.drupal.org/files/issues/2021-09-22/core-9.2-xss-refactor_filter_attributes-3109650-43.patch"
     },
     "drupal/config_readonly": {
@@ -14,9 +14,6 @@
     },
     "drupal/linkit": {
         "2877535: Fix issue with path alias": "https://www.drupal.org/files/issues/2022-06-07/2877535-39.patch"
-    },
-    "drupal/fontawesome": {
-        "#3219579: Hidding font awesome additional settings": "https://www.drupal.org/files/issues/2022-12-14/hidding_font_awesome_additional_settings-3219579-18.patch"
     },
     "drupal/cas": {
         "3318382: TypeError: in_array(): Argument #2 ($haystack) must be of type array": "https://www.drupal.org/files/issues/2022-10-31/cas-null-in_array-3318382-0.patch"

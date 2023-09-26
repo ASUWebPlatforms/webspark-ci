@@ -16,7 +16,6 @@ module.exports = {
 };
 
 mix
-  .setPublicPath("assets")
   .disableNotifications()
   .sourceMaps(false, "eval-source-map")
   .webpackConfig({

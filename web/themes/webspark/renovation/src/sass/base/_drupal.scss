@@ -5,6 +5,7 @@
 // stand-alone components, they should not require any overrides unless in
 // the context of when a default Drupal style has an adverse effect on the
 // component.
+// TODO: As these are for admin only styles, move these so they are not also loaded in the front end.
 // --------------------------------------------------------
 
 // Admin
@@ -221,6 +222,22 @@ figure.caption-img {
 
   .ui-button:active {
     border: 2px solid $white;
+  }
+}
+
+// @see https://asudev.jira.com/browse/WS2-1782
+.ui-dialog.media-library-widget-modal .ui-dialog-titlebar-close {
+  padding: 0;
+
+  &::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url(../../img/ui-icons/times.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 4px;
   }
 }
 

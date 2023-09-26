@@ -1,19 +1,5 @@
 .block-inline-blockimage-and-text-block {
-  // TODO: Move to UDS
-  .uds-image-text-block-text-container {
-    :is(h2, h3, h4, h5, h6):first-of-type {
-      margin-top: 0;
-    }
-  }
-
-  // TODO: Move to UDS
-  .btn {
-    &:first-child {
-      margin-right: 24px;
-    }
-  }
-
-  // WS2-1698 - Override the media--image--default.html.twig div block display
+  // @see https://asudev.jira.com/browse/WS2-1698
   .uds-image-text-block-image-container {
     div {
       display: flex;
