@@ -6,22 +6,37 @@ import {
   TableProperties,
   TableToolbar,
   TableUtils,
+  TableColumnResize,
+  TableSelection,
+  TableClipboard,
+  TableMouse,
+  TableKeyboard,
+ 
 } from "@ckeditor/ckeditor5-table";
+import TableCellWsProperties from "../tablecellwsproperties/tablecellwsproperties";
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget } from "ckeditor5/src/widget";
 import InsertWebsparkTableCommand from "./inserttablecommand";
+//return [TableEditing, TableUI, TableSelection, TableMouse, TableKeyboard, TableClipboard, Widget];
 
 export default class WebsparkTableEditing extends Plugin {
   static get requires() {
     return [
-      Widget,
       Table,
       TableUtils,
       TableToolbar,
       PlainTableOutput,
       TableCaption,
-      TableProperties,
-      TableCellProperties,
+      // TODO: Revisit the issue with the Color constructor not being a function after the CKEditor5 update for Drupal.
+      // TableProperties,
+      // TableCellProperties,
+      TableColumnResize,
+      TableSelection,
+      TableClipboard,
+      TableMouse,
+      TableKeyboard,
+      Widget,
+      TableCellWsProperties,
     ];
   }
 
