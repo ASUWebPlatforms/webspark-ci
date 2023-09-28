@@ -5,7 +5,6 @@
  *
  * I.e. this file's purpose is to make plugin(s) discoverable.
  */
-// cSpell:ignore simplebox
 
 import WebsparkButton from "./button/websparkbutton";
 import WebsparkDivider from "./divider/websparkdivider";

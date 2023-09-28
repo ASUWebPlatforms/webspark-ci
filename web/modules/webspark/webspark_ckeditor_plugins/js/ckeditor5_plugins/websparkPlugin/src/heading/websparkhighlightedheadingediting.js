@@ -3,14 +3,14 @@ import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
 import InsertWebsparkHighlitedHeadingCommand from "./insertwebsparkhighlightedheadingcommand";
 import { extractDataFromClasses } from "../utils/utils";
 
-// cSpell:ignore simplebox insertsimpleboxcommand
+// cSpell:ignore websparkHighlitedHeading insertwebsparkhighlightedheadingcommand
 
 /**
  * CKEditor 5 plugins do not work directly with the DOM. They are defined as
  * plugin-specific data models that are then converted to markup that
  * is inserted in the DOM.
  *
- * CKEditor 5 internally interacts with simpleBox as this model:
+ * CKEditor 5 internally interacts with websparkHighlitedHeading as this model:
  * <websparkHighlitedHeading>
  *    <websparkHighlitedHeadingText></websparkHighlitedHeadingText>
  * </websparkHighlitedHeading>
@@ -20,7 +20,7 @@ import { extractDataFromClasses } from "../utils/utils";
  *   <span class="text"></span>
  * </a>
  *
- * This file has the logic for defining the simpleBox model, and for how it is
+ * This file has the logic for defining the websparkHighlitedHeading model, and for how it is
  * converted to standard DOM markup.
  */
 export default class WebsparkHighlitedHeadingEditing extends Plugin {

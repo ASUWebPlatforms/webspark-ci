@@ -71,7 +71,7 @@ export default class InsertWebsparkBlockquoteCommand extends Command {
       "websparkBlockquote"
     );
 
-    // If the cursor is not in a location where a simpleBox can be added, return
+    // If the cursor is not in a location where a websparkBlockQuote can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
 

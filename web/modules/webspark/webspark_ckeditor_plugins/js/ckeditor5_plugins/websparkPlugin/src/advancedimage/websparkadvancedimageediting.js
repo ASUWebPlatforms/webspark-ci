@@ -2,8 +2,6 @@ import { Plugin } from "ckeditor5/src/core";
 import { Widget } from "ckeditor5/src/widget";
 import InsertWebsparkAdvancedImageCommand from "./insertadvancedimagecommand";
 
-// cSpell:ignore simplebox insertsimpleboxcommand
-
 export default class WebsparkAdvancedImageEditing extends Plugin {
   static get requires() {
     return [Widget];
@@ -77,7 +75,8 @@ export default class WebsparkAdvancedImageEditing extends Plugin {
         modelName: "roundedImage",
       },
     ];
-
+    
+    // Iterates over each space object and defines attribute converters for upcast and downcast.
     spaces.forEach((space) => {
       conversion.for("upcast").attributeToAttribute({
         view: {

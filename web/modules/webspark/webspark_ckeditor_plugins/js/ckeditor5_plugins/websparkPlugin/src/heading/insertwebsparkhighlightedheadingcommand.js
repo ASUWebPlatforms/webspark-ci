@@ -44,10 +44,14 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
       "websparkHighlitedHeading"
     );
 
-    // If the cursor is not in a location where a simpleBox can be added, return
+    // If the cursor is not in a location where a websparkHighlitedHeading can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
 
+    // Checks if the selected element is a "websparkHighlitedHeading".
+    // If it is, retrieves the attributes, text, and heading level from the first child span element.
+    // Sets the value object with the retrieved data.
+    // If the selected element is not a "websparkHighlitedHeading", sets the value object to null.
     const selectedElement = selection.getSelectedElement();
     if (selectedElement?.name === "websparkHighlitedHeading") {
       const span = selectedElement.getChild(0)?.getChild(0);

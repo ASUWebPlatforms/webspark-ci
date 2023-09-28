@@ -198,17 +198,14 @@ export class WebsparkButtonFormView extends View {
 
   isValid() {
     this.resetFormStatus();
-
     for (const validator of this._validators) {
       const errorText = validator(this);
-
       if (errorText) {
         if (errorText.includes("text")) {
           this.textInputView.errorText = errorText;
         } else if (errorText.includes("URL")) {
           this.urlInputView.errorText = errorText;
         }
-
         return false;
       }
     }

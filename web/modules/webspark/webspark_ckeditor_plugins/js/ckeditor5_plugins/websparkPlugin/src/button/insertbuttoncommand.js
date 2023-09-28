@@ -38,7 +38,7 @@ export default class InsertWebsparkButtonCommand extends Command {
       "websparkButton"
     );
 
-    // If the cursor is not in a location where a simpleBox can be added, return
+    // If the cursor is not in a location where a websparkButton can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
 

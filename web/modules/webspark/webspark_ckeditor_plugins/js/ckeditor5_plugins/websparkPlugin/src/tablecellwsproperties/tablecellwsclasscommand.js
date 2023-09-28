@@ -30,6 +30,12 @@ export default class TableCellWsClassCommand extends TableCellPropertyCommand {
     super(editor);
   }
 
+  /**
+   * Refreshes the editor.
+   *
+   * @param {type} None - This function does not accept any parameters.
+   * @return {type} None - This function does not return any value.
+   */
   refresh() {
     let cell = first(this.editor.model.document.selection.getSelectedBlocks());
     this.isEnabled = cell;
@@ -39,6 +45,11 @@ export default class TableCellWsClassCommand extends TableCellPropertyCommand {
     }
   }
 
+  /**
+   * Executes the function.
+   *
+   * @param {Object} value - The value used for execution.
+   */
   execute({ value }) {
     const { model } = this.editor;
     model.change((writer) => {

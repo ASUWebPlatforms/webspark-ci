@@ -41,7 +41,11 @@ export class WebsparkTableFormView extends View {
       this._getHeaderOptions(t),
       locale
     );
-    this.tabletypeSelect = createSelect(t("Table Type"), this._getTableTypeOptions(t), locale);
+    this.tabletypeSelect = createSelect(
+      t("Table Type"),
+      this._getTableTypeOptions(t),
+      locale
+    );
     this.textCaption = createInput(t("Caption"), locale);
 
     this.saveButtonView = createButton(
@@ -83,7 +87,7 @@ export class WebsparkTableFormView extends View {
       },
       children: [
         createRow(this.textInputRowsView),
-        createRow( this.textInputColsView),
+        createRow(this.textInputColsView),
         createRow(this.headersSelect),
         createRow(this.tabletypeSelect),
         createRow(this.textCaption),
@@ -191,9 +195,9 @@ export class WebsparkTableFormView extends View {
     this.cols = values?.cols || this.DEFAULT_COLS;
     this.headers = values?.headers || this.DEFAULT_HEADER;
     this.tabletype = values?.tabletype || this.DEFAULT_TYPE;
-    this.caption = values?.caption || '';
+    this.caption = values?.caption || "";
   }
- 
+
   isValid() {
     this.resetFormStatus();
 
@@ -206,7 +210,6 @@ export class WebsparkTableFormView extends View {
         } else if (errorText.includes("URL")) {
           this.textInputColsView.errorText = errorText;
         }
-
         return false;
       }
     }

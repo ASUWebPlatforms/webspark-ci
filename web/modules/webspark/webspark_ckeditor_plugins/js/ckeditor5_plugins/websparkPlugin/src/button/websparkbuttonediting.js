@@ -4,14 +4,13 @@ import InsertWebsparkButtonCommand from "./insertbuttoncommand";
 import {
   extractDataFromClasses
 } from "../utils/utils";
-// cSpell:ignore simplebox insertsimpleboxcommand
 
 /**
  * CKEditor 5 plugins do not work directly with the DOM. They are defined as
  * plugin-specific data models that are then converted to markup that
  * is inserted in the DOM.
  *
- * CKEditor 5 internally interacts with simpleBox as this model:
+ * CKEditor 5 internally interacts with websparkButton as this model:
  * <websparkButton>
  *    <websparkButtonText></websparkButtonText>
  * </websparkButton>
@@ -21,7 +20,7 @@ import {
  *   <span class="text"></span>
  * </a>
  *
- * This file has the logic for defining the simpleBox model, and for how it is
+ * This file has the logic for defining the websparkButton model, and for how it is
  * converted to standard DOM markup.
  */
 export default class WebsparkButtonEditing extends Plugin {
@@ -168,7 +167,3 @@ export default class WebsparkButtonEditing extends Plugin {
     });
   }
 }
-
-
-
- 

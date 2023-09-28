@@ -7,7 +7,7 @@ import InsertWebsparkBlockquoteCommand from "./insertwebsparkblockquotecommand";
  * plugin-specific data models that are then converted to markup that
  * is inserted in the DOM.
  *
- * CKEditor 5 internally interacts with simpleBox as this model:
+ * CKEditor 5 internally interacts with websparkBlockquote as this model:
  * <websparkBlockquote>
  *    <websparkBlockquoteText></websparkBlockquoteText>
  * </websparkBlockquote>
@@ -17,7 +17,7 @@ import InsertWebsparkBlockquoteCommand from "./insertwebsparkblockquotecommand";
  *   <path class="text"></path>
  * </a>
  *
- * This file has the logic for defining the simpleBox model, and for how it is
+ * This file has the logic for defining the websparkBlockquote model, and for how it is
  * converted to standard DOM markup.
  */
 export default class WebsparkBlockquoteEditing extends Plugin {

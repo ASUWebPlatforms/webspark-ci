@@ -1,5 +1,5 @@
 /**
- * @file registers the simpleBox toolbar button and binds functionality to it.
+ * @file registers the websparkBlock toolbar button and binds functionality to it.
  */
 
 import { Plugin } from "ckeditor5/src/core";
