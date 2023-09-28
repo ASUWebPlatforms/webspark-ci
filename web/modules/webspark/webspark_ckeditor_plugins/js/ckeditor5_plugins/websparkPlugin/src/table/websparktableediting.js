@@ -17,7 +17,6 @@ import TableCellWsProperties from "../tablecellwsproperties/tablecellwspropertie
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget } from "ckeditor5/src/widget";
 import InsertWebsparkTableCommand from "./inserttablecommand";
-//return [TableEditing, TableUI, TableSelection, TableMouse, TableKeyboard, TableClipboard, Widget];
 
 export default class WebsparkTableEditing extends Plugin {
   static get requires() {

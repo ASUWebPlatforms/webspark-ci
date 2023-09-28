@@ -35,6 +35,12 @@ export default class InsertWebsparkLeadCommand extends Command {
   }
 }
 
+/**
+ * Creates a webspark lead area.
+ *
+ * @param {object} writer - The object used for creating elements.
+ * @return {object} The webspark lead element to be added to the editor.
+ */
 function createWebsparkLeadArea(writer) {
   // Create instances of the three elements registered with the editor in
   // websparkleadediting.js.

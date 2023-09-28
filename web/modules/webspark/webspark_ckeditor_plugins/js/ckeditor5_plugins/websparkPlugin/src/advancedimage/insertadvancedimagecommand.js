@@ -5,6 +5,16 @@ import { Command } from "ckeditor5/src/core";
 
 
 export default class InsertWebsparkAdvancedImageCommand extends Command {
+  
+  /**
+   * Executes the function with the given parameters.
+   *
+   * @param {number} spacingtop - the spacing from the top
+   * @param {number} spacingbottom - the spacing from the bottom
+   * @param {number} spacingleft - the spacing from the left
+   * @param {number} spacingright - the spacing from the right
+   * @param {boolean} roundedimage - whether the image is rounded or not
+   */
   execute({ spacingtop, spacingbottom, spacingleft, spacingright, roundedimage }) {
     const { model } = this.editor;
 
@@ -21,6 +31,11 @@ export default class InsertWebsparkAdvancedImageCommand extends Command {
     });
   }
 
+  /**
+   * Refreshes the editor by updating the model and selection.
+   *
+   * @return {void} 
+   */
   refresh() {
     const { model } = this.editor;
     const { selection } = model.document;

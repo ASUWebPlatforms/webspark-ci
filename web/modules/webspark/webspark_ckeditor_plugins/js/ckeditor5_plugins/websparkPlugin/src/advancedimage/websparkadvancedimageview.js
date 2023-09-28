@@ -24,9 +24,7 @@ export class WebsparkAdvancedImageFormView extends View {
 
   constructor(validators, locale) {
     super(locale);
-
     const t = locale.t;
-
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
@@ -68,12 +66,6 @@ export class WebsparkAdvancedImageFormView extends View {
       ],
       locale
     )
-
-
-    // this.roundedImage = createCheckbox(
-    //   t("Rounded image"),
-    //   locale
-    // )
 
     this.saveButtonView = createButton(
       t("Save"),
@@ -124,6 +116,13 @@ export class WebsparkAdvancedImageFormView extends View {
     });
   }
 
+  /**
+   * Generates an array of spacing options based on the given position.
+   *
+   * @param {type} t - A function for translating strings.
+   * @param {type} position - The position of the spacing options.
+   * @return {type} An array of spacing options.
+   */
   _getSpacingOptions(t, position) {
     return [
       {
@@ -250,6 +249,16 @@ export class WebsparkAdvancedImageFormView extends View {
   }
 }
 
+/**
+ * Generates a list of dropdown items based on the given options.
+ *
+ * @param {Array} options - An array of objects representing the dropdown options.
+ * Each object should have the following properties:
+ *   - model: The command parameter for the dropdown item.
+ *   - title: The label to display for the dropdown item.
+ *   - value: The value of the dropdown item.
+ * @return {Collection} - A Collection object containing the generated dropdown items.
+ */
 function prepareListOptions(options) {
   const itemDefinitions = new Collection();
 

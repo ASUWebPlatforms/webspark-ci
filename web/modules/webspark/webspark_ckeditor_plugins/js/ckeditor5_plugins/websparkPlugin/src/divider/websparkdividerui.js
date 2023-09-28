@@ -4,11 +4,7 @@
 
 import { Plugin } from "ckeditor5/src/core";
 import {
-  createDropdown,
-  addListToDropdown,
   ButtonView,
-  ContextualBalloon,
-  Model,
 } from "ckeditor5/src/ui";
 import icon from "../../../../../icons/websparkDivider.svg";
 import { Collection } from "ckeditor5/src/utils";

@@ -1,196 +1,192 @@
-import {icons} from "ckeditor5/src/core";
+import { icons } from "ckeditor5/src/core";
 import {
-    FocusCycler,
-    Model,
-    View,
-    ViewCollection,
-    submitHandler,
+  FocusCycler,
+  Model,
+  View,
+  ViewCollection,
+  submitHandler,
 } from "ckeditor5/src/ui";
 import {
-    Collection,
-    FocusTracker,
-    KeystrokeHandler,
+  Collection,
+  FocusTracker,
+  KeystrokeHandler,
 } from "ckeditor5/src/utils";
 
 import {
-    createButton,
-    createContainer,
-    createRow,
-    createSelect,
+  createButton,
+  createContainer,
+  createRow,
+  createSelect,
 } from "../utils/utils";
 
 export class WebsparkListStyleFormView extends View {
+  constructor(validators, locale) {
+    super(locale);
 
+    const t = locale.t;
 
-    constructor(validators, locale) {
-        super(locale);
+    this.focusTracker = new FocusTracker();
+    this.keystrokes = new KeystrokeHandler();
+    this.classSelect = createSelect(
+      t("List properties"),
+      this._getBulletedPropertiesOptions(t),
+      locale
+    );
 
-        const t = locale.t;
+    this.saveButtonView = createButton(
+      t("Save"),
+      icons.check,
+      "ck-button-save",
+      locale
+    );
+    this.saveButtonView.type = "submit";
 
-        this.focusTracker = new FocusTracker();
-        this.keystrokes = new KeystrokeHandler();
-        this.classSelect = createSelect(
-            t("List properties"),
-            this._getBulletedPropertiesOptions(t),
-            locale
-        );
+    this.cancelButtonView = createButton(
+      t("Cancel"),
+      icons.cancel,
+      "ck-button-cancel",
+      locale
+    );
 
-        this.saveButtonView = createButton(
-            t("Save"),
-            icons.check,
-            "ck-button-save",
-            locale
-        );
-        this.saveButtonView.type = "submit";
+    this.cancelButtonView.delegate("execute").to(this, "cancel");
 
-        this.cancelButtonView = createButton(
-            t("Cancel"),
-            icons.cancel,
-            "ck-button-cancel",
-            locale
-        );
+    this._focusables = new ViewCollection();
 
-        this.cancelButtonView.delegate("execute").to(this, "cancel");
+    this._focusCycler = new FocusCycler({
+      focusables: this._focusables,
+      focusTracker: this.focusTracker,
+      keystrokeHandler: this.keystrokes,
+      actions: {
+        focusPrevious: "shift + tab",
+        focusNext: "tab",
+      },
+    });
 
-        this._focusables = new ViewCollection();
+    this.setTemplate({
+      tag: "form",
+      attributes: {
+        class: ["ck", "ck-webspark-form"],
+        tabindex: "-1",
+      },
+      children: [
+        createRow(this.classSelect),
+        createContainer(
+          [this.saveButtonView, this.cancelButtonView],
+          ["ck-webspark-form-buttons"]
+        ),
+      ],
+    });
+  }
 
-        this._focusCycler = new FocusCycler({
-            focusables: this._focusables,
-            focusTracker: this.focusTracker,
-            keystrokeHandler: this.keystrokes,
-            actions: {
-                focusPrevious: "shift + tab",
-                focusNext: "tab",
-            },
-        });
+  /*
+   * Bulleted List Properties
+   */
+  _getBulletedPropertiesOptions(t) {
+    return [
+      {
+        value: "default-list",
+        title: t("Default"),
+      },
+      {
+        value: `maroon`,
+        title: t("Maroon"),
+      },
+      {
+        value: `light-smokemode`,
+        title: t("Gray 1"),
+      },
+      {
+        value: `smokemode`,
+        title: t("Gray 2"),
+      },
+      {
+        value: `darkmode`,
+        title: t("Gray 7"),
+      },
+      {
+        value: `darkmode-gold`,
+        title: t("Gray 7 Gold Bullet"),
+      },
+      {
+        value: `icn-default`,
+        title: t("Icon list"),
+      },
+      {
+        value: `icn-maroon`,
+        title: t("Icon list Maroon"),
+      },
+      {
+        value: `icn-darkmode`,
+        title: t("Icon list Gray 7"),
+      },
+      {
+        value: `icn-darkmode-gold`,
+        title: t("Icon list Gray 7 Gold"),
+      },
+    ];
+  }
 
-        this.setTemplate({
-            tag: "form",
-            attributes: {
-                class: ["ck", "ck-webspark-form"],
-                tabindex: "-1",
-            },
-            children: [
-                createRow(this.classSelect),
-                createContainer(
-                    [this.saveButtonView, this.cancelButtonView],
-                    ["ck-webspark-form-buttons"]
-                ),
-            ],
-        });
-    }
+  render() {
+    super.render();
 
-    /*
-    * Bulleted List Properties
-    */
-    _getBulletedPropertiesOptions(t) {
-        return [
-            {
-                value: "default-list",
-                title: t("Default"),
-            },
-            {
-                value: `maroon`,
-                title: t("Maroon"),
-            },
-            {
-                value: `light-smokemode`,
-                title: t("Gray 1"),
-            },
-            {
-                value: `smokemode`,
-                title: t("Gray 2"),
-            },
-            {
-                value: `darkmode`,
-                title: t("Gray 7"),
-            },
-            {
-                value: `darkmode-gold`,
-                title: t("Gray 7 Gold Bullet"),
-            },
-            {
-                value: `icn-default`,
-                title: t("Icon list"),
-            },
-            {
-                value: `icn-maroon`,
-                title: t("Icon list Maroon"),
-            },
-            {
-                value: `icn-darkmode`,
-                title: t("Icon list Gray 7"),
-            },
-            {
-                value: `icn-darkmode-gold`,
-                title: t("Icon list Gray 7 Gold"),
-            },
-        ];
-    }
+    submitHandler({
+      view: this,
+    });
 
-    render() {
-        super.render();
+    // TODO: Check why focus isn't working for a custom view
+    const childViews = [
+      this.classSelect.children[1],
 
-        submitHandler({
-            view: this,
-        });
+      this.saveButtonView,
+      this.cancelButtonView,
+    ];
 
-        // TODO: Check why focus isn't working for a custom view
-        const childViews = [
-            this.classSelect.children[1],
+    childViews.forEach((v) => {
+      // Register the view as focusable.
+      this._focusables.add(v);
 
-            this.saveButtonView,
-            this.cancelButtonView,
-        ];
+      // Register the view in the focus tracker.
+      this.focusTracker.add(v.element);
+    });
 
-        childViews.forEach((v) => {
-            // Register the view as focusable.
-            this._focusables.add(v);
+    // Start listening for the keystrokes coming from #element.
+    this.keystrokes.listenTo(this.element);
 
-            // Register the view in the focus tracker.
-            this.focusTracker.add(v.element);
-        });
+    const stopPropagation = (data) => data.stopPropagation();
 
-        // Start listening for the keystrokes coming from #element.
-        this.keystrokes.listenTo(this.element);
+    // Since the form is in the dropdown panel which is a child of the toolbar, the toolbar's
+    // keystroke handler would take over the key management in the URL input. We need to prevent
+    // this ASAP. Otherwise, the basic caret movement using the arrow keys will be impossible.
+    this.keystrokes.set("arrowright", stopPropagation);
+    this.keystrokes.set("arrowleft", stopPropagation);
+    this.keystrokes.set("arrowup", stopPropagation);
+    this.keystrokes.set("arrowdown", stopPropagation);
+  }
 
-        const stopPropagation = (data) => data.stopPropagation();
+  destroy() {
+    super.destroy();
 
-        // Since the form is in the dropdown panel which is a child of the toolbar, the toolbar's
-        // keystroke handler would take over the key management in the URL input. We need to prevent
-        // this ASAP. Otherwise, the basic caret movement using the arrow keys will be impossible.
-        this.keystrokes.set("arrowright", stopPropagation);
-        this.keystrokes.set("arrowleft", stopPropagation);
-        this.keystrokes.set("arrowup", stopPropagation);
-        this.keystrokes.set("arrowdown", stopPropagation);
-    }
+    this.focusTracker.destroy();
+    this.keystrokes.destroy();
+  }
 
-    destroy() {
-        super.destroy();
+  focus() {
+    this._focusCycler.focusFirst();
+  }
 
-        this.focusTracker.destroy();
-        this.keystrokes.destroy();
-    }
+  get classselect() {
+    return this.classSelect.children[1].value;
+  }
 
-    focus() {
-        this._focusCycler.focusFirst();
-    }
+  set classselect(classselect) {
+    this.classSelect.children[1].value = classselect;
+  }
 
-    get classselect() {
-        return this.classSelect.children[1].value;
-    }
+  setValues(values) {
+    this.classselect = values?.classselect;
+  }
 
-    set classselect(classselect) {
-        this.classSelect.children[1].value = classselect;
-    }
-
-
-    setValues(values) {
-        this.classselect = values?.classselect;
-    }
-
-    isValid() {
-        return true;
-    }
+  isValid() {
+    return true;
+  }
 }
-

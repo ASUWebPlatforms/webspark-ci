@@ -71,8 +71,6 @@ export default class WebsparkTableUI extends Plugin {
           caption: form.caption,
         });
 
-         //editor.execute('insertTable', { rows: 20, columns: 5 })
-
         closeUI();
       }
     });

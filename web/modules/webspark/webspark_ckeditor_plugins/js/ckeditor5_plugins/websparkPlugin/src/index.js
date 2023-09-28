@@ -15,7 +15,6 @@ import WebsparkBlockquote from "./quote/websparkblockquote";
 import WebsparkTable from "./table/websparktable";
 import WebsparkAdvancedImage from "./advancedimage/websparkadvancedimage";
 import WebsparkMediaAlter from "./mediaalter/websparkmediaalter";
-//import TableCellWsProperties from "./tablecellwsproperties/tablecellwsproperties";
 import WebsparkListStyle from "./liststyle/websparkliststyle";
 
 export default {
@@ -27,6 +26,5 @@ export default {
   WebsparkTable,
   WebsparkAdvancedImage,
   WebsparkMediaAlter,
- // TableCellWsProperties,
   WebsparkListStyle,
 };

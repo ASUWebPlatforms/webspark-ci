@@ -196,6 +196,12 @@ export class WebsparkHighlitedHeadingFormView extends View {
     this.textInputView.errorText = null;
   }
 
+  /**
+   * Generates an array of style options.
+   *
+   * @param {function} t - the translation function
+   * @return {array} an array of style options
+   */
   _getStyleOptions(t) {
     return [
       {
@@ -213,6 +219,12 @@ export class WebsparkHighlitedHeadingFormView extends View {
     ];
   }
 
+  /**
+   * Generates an array of heading options.
+   *
+   * @param {type} t - a function used for translation
+   * @return {Array} an array of heading options
+   */
   _getHeadingOptions(t) {
     return [
       {

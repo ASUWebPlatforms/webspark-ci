@@ -72,7 +72,8 @@ export default class WebsparkListStyleUI extends Plugin {
           position: this._getBalloonPositionData(),
         });
       }
-
+      // This const will store the list options. Depending on the
+      // list type(Bulleted or Numbered) it will display a set of data.
       const listOptions = this.editor.commands.get("bulletedList").value
         ? this._getBulletedPropertiesOptions(this.editor.t)
         : this.editor.commands.get("numberedList").value

@@ -219,6 +219,12 @@ export class WebsparkTableFormView extends View {
     this.textInputColsView.errorText = null;
   }
 
+  /**
+   * Generates an array of header options.
+   *
+   * @param {string} t - The translation function.
+   * @return {Array} An array of header options.
+   */
   _getHeaderOptions(t) {
     return [
       {
@@ -240,6 +246,12 @@ export class WebsparkTableFormView extends View {
     ];
   }
 
+  /**
+   * Retrieves the table type options.
+   *
+   * @param {type} t - the translation function
+   * @return {Array} an array of table type options
+   */
   _getTableTypeOptions(t) {
     return [
       {

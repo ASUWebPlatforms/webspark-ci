@@ -82,7 +82,6 @@ export default class InsertWebsparkListStyleCommand extends Command {
         ]);
 
         // Add classes.
-        // element.addClass('uds-steplist-gold');
         stclass += " uds-steplist-gold";
       }
       // Default maroon.
@@ -233,7 +232,6 @@ export default class InsertWebsparkListStyleCommand extends Command {
         if (numberedClass == "darkmode-gold") {
           stclass += " darkmode gold";
         } else {
-          //element.addClass(value);
           stclass += " " + numberedClass;
         }
       }
