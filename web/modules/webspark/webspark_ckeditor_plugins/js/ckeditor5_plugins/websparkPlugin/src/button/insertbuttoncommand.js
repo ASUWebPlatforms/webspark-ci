@@ -4,6 +4,7 @@
  */
 
 import { Command } from "ckeditor5/src/core";
+
 export default class InsertWebsparkButtonCommand extends Command {
   execute({ href, text, styles, target, size }) {
     const { model } = this.editor;
@@ -38,7 +39,7 @@ export default class InsertWebsparkButtonCommand extends Command {
       "websparkButton"
     );
 
-    // If the cursor is not in a location where a websparkButton can be added, return
+    // If the cursor is not in a location where a simpleBox can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
 
@@ -54,5 +55,20 @@ export default class InsertWebsparkButtonCommand extends Command {
     } else {
       this.value = null;
     }
+
+    // In the layout view, when the editor inserts a webspark button in the editor,then
+    // undesired styles are added. So, a timeout and some javascript code is applied to remove them.
+    // TO DO: A better solution should be sought.
+    setTimeout(function () {
+      let offCanvasCssStyle = document.getElementById("ckeditor5-off-canvas-reset");
+      if (offCanvasCssStyle) {
+        document.body.removeChild(offCanvasCssStyle);
+        offCanvasCssStyle.textContent = offCanvasCssStyle.textContent.replace(
+          "#drupal-off-canvas [data-drupal-ck-style-fence] .ck.ck-content * {display:revert;background:revert;color:initial;padding:revert;}",
+          "#drupal-off-canvas [data-drupal-ck-style-fence] .ck.ck-content * {color:initial;}"
+        );
+        document.body.appendChild(offCanvasCssStyle);
+      }
+    }, 500);
   }
 }
