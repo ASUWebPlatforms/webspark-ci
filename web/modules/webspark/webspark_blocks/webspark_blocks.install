@@ -55,9 +55,51 @@ function webspark_blocks_update_9005(&$sandbox) {
  *
  * Note: Removed due to problems solved by update_9019.
  */
-/* function webspark_blocks_update_9012(&$sandbox) {
-_webspark_blocks_revert_module_config();
-} */
+function webspark_blocks_update_9012(&$sandbox) {
+  /* Originally...
+  _webspark_blocks_revert_module_config();
+   */
+
+  /*
+  Avoid errors with "future" ymls, only bring in what is needed for next
+  step. All configs related to show borders. In 9019, later, all other
+  configs for this module will be read in.
+   */
+  $yml_list = [
+    'core.entity_form_display.paragraph.card_degree.carousel_card',
+    'core.entity_form_display.paragraph.card_degree.default',
+    'core.entity_form_display.paragraph.card_story.carousel_card',
+    'core.entity_form_display.paragraph.card_story.default',
+    'core.entity_form_display.paragraph.card_with_icon.card_and_image',
+    'core.entity_form_display.paragraph.card_with_icon.default',
+    'core.entity_form_display.paragraph.card.carousel_card',
+    'core.entity_form_display.paragraph.card.default',
+    'core.entity_view_display.paragraph.card_degree.default',
+    'core.entity_view_display.paragraph.card_degree.landscape',
+    'core.entity_view_display.paragraph.card_degree.portrait',
+    'core.entity_view_display.paragraph.card_story.default',
+    'core.entity_view_display.paragraph.card_story.landscape',
+    'core.entity_view_display.paragraph.card_story.portrait',
+    'core.entity_view_display.paragraph.card_with_icon.default',
+    'core.entity_view_display.paragraph.card_with_icon.landscape',
+    'field.storage.paragraph.field_show_borders',
+    'field.field.paragraph.card.field_show_borders',
+    'field.field.paragraph.card_with_icon.field_show_borders',
+    'field.field.paragraph.card_story.field_show_borders',
+    'field.field.paragraph.card_degree.field_show_borders',
+    'core.entity_view_display.paragraph.card.portrait',
+    'core.entity_view_display.paragraph.card.landscape',
+    'core.entity_view_display.paragraph.card.default',
+    'core.entity_view_display.paragraph.card_with_icon.portrait',
+  ];
+
+  \Drupal::state()->set('configuration_locked', FALSE);
+  foreach ($yml_list as $yml) {
+    \Drupal::service('webspark.config_manager')->updateConfigFile($yml);
+  }
+  \Drupal::state()->set('configuration_locked', TRUE);
+
+}
 
 /**
  * Update 'Show borders' field on cards paragraphs to ensure it has a default value.
@@ -73,9 +115,11 @@ function webspark_blocks_update_9017() {
   $cards = $paragraph_storage->loadMultiple($result);
 
   foreach ($cards as $card) {
-    if ($card->get('field_show_borders')->value == NULL) {
+    if ($card->hasField('field_show_borders')) {
+      if ($card->get('field_show_borders')->value == NULL) {
         $card->set('field_show_borders', '1');
         $card->save();
+      }
     }
   }
 }
