@@ -1,17 +1,12 @@
-@import "../../../node_modules/@asu/unity-bootstrap-theme/src/scss/extends/heroes";
+/*--------------------------------------------------------------
+Temporary override until unity is updated
+WS2-1795
+--------------------------------------------------------------*/
 
-.block-inline-blockhero {
-  .uds-hero-sm,
-  .uds-hero-md,
-  .uds-hero-lg {
-    img.hero {
-      width: 100%;
-    }
-
-    .btn-row {
-      a {
-        margin-right: 0.5em;
-      }
-    }
+@include media-breakpoint-up(xl) {
+  div.uds-hero-lg.uds-video-hero.uds-video-hero video {
+    height: 100%;
+    object-fit: cover;
   }
 }
+

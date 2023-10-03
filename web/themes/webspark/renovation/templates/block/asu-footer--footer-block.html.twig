@@ -52,7 +52,7 @@
                 data-ga-footer="twitter icon"
                 data-ga-footer-component=""
               >
-                <span title="Twitter Social Media Icon" class="fab fa-twitter-square"></span>
+                <span title="X / Twitter Social Media Icon" class="fab fa-square-x-twitter"></span>
               </a>
             {% endif %}
             {% if instagram_ulr %}
@@ -103,7 +103,7 @@
     <div class="container" id="footer-columns">
       <div class="row">
         <div class="col-xl" id="info-column">
-          <h5>{{ unit_name }}</h5>
+          <div class="h5">{{ unit_name }}</div>
           {% if link_url and link_title %}
             <p class="contact-link">
             <a
@@ -130,7 +130,7 @@
           <div class="card accordion-item desktop-disable-xl">
           {% for c in column %}
             <div class="accordion-header">
-              <h5>
+              <div class="h5">
                 <a
                   id="footlink-header-{{ key }}-{{ loop.index }}"
                   class="collapsed"
@@ -148,7 +148,7 @@
                   {{ c.title }}
                   <span class="fas fa-chevron-up"></span>
                 </a>
-              </h5>
+              </div>
             </div>
             <div
               id="footlink-{{ key }}-{{ loop.index }}"
@@ -238,7 +238,7 @@
             data-ga-footer="#1 in the u.s. for innovation"
             data-ga-footer-component=""
           >
-            <img src="{{ src_footer_img }}" loading="lazy" height="{{ src_footer_img_height }}" width="{{ src_footer_img_width }}" alt="Number one in the U.S. for innovation. #1 ASU, #2 Stanford, #3 MIT. - U.S. News and World Report, 8 years, 2016-2023">
+            <img src="{{ src_footer_img }}" loading="lazy" height="{{ src_footer_img_height }}" width="{{ src_footer_img_width }}" alt="Repeatedly ranked #1 in innovation (ASU ahead of MIT and Stanford), sustainability (ASU ahead of Stanford and UC Berkeley), and global impact (ASU ahead of MIT and Penn State)">
           </a>
         </div>
       </div>
@@ -292,13 +292,6 @@
               data-ga-footer="emergency"
               data-ga-footer-component=""
             >Emergency</a>
-            <a
-              class="nav-link"
-              href="https://eoss.asu.edu/health/announcements/coronavirus"
-              data-ga-footer-type="internal link"
-              data-ga-footer-section="tertiary footer"
-              data-ga-footer="covid-19 information"
-            >COVID-19 Information</a>
           </nav>
         </div>
       </div>
