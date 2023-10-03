@@ -6,7 +6,6 @@ import {
   TableProperties,
   TableToolbar,
   TableUtils,
-  TableColumnResize,
   TableSelection,
   TableClipboard,
   TableMouse,
@@ -29,7 +28,6 @@ export default class WebsparkTableEditing extends Plugin {
       // TODO: Revisit the issue with the Color constructor not being a function after the CKEditor5 update for Drupal.
       // TableProperties,
       // TableCellProperties,
-      TableColumnResize,
       TableSelection,
       TableClipboard,
       TableMouse,
