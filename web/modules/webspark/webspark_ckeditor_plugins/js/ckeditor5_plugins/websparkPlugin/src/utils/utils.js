@@ -12,7 +12,7 @@ import { TextAreaView } from "./textareaview";
 export function createContainer(children, classes = []) {
   return {
     tag: "div",
-    attributes: { class: ["ck-wbspark-form-container", ...classes] },
+    attributes: { class: ["ck-webspark-form-container", ...classes] },
     children,
   };
 }

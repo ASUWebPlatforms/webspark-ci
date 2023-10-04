@@ -1,29 +1,29 @@
 import { Plugin } from "ckeditor5/src/core";
 import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
-import InsertWebsparkHighlitedHeadingCommand from "./insertwebsparkhighlightedheadingcommand";
+import InsertWebsparkHighlightedHeadingCommand from "./insertwebsparkhighlightedheadingcommand";
 import { extractDataFromClasses } from "../utils/utils";
 
-// cSpell:ignore websparkHighlitedHeading insertwebsparkhighlightedheadingcommand
+// cSpell:ignore websparkHighlightedHeading insertwebsparkhighlightedheadingcommand
 
 /**
  * CKEditor 5 plugins do not work directly with the DOM. They are defined as
  * plugin-specific data models that are then converted to markup that
  * is inserted in the DOM.
  *
- * CKEditor 5 internally interacts with websparkHighlitedHeading as this model:
- * <websparkHighlitedHeading>
- *    <websparkHighlitedHeadingText></websparkHighlitedHeadingText>
- * </websparkHighlitedHeading>
+ * CKEditor 5 internally interacts with websparkHighlightedHeading as this model:
+ * <websparkHighlightedHeading>
+ *    <websparkHighlightedHeadingText></websparkHighlightedHeadingText>
+ * </websparkHighlightedHeading>
  *
  * Which is converted for the browser/user as this markup
  * <a class="btn">
  *   <span class="text"></span>
  * </a>
  *
- * This file has the logic for defining the websparkHighlitedHeading model, and for how it is
+ * This file has the logic for defining the websparkHighlightedHeading model, and for how it is
  * converted to standard DOM markup.
  */
-export default class WebsparkHighlitedHeadingEditing extends Plugin {
+export default class WebsparkHighlightedHeadingEditing extends Plugin {
   static get requires() {
     return [Widget];
   }
@@ -32,16 +32,16 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     this._defineSchema();
     this._defineConverters();
     this.editor.commands.add(
-      "insertWebsparkHighlitedHeading",
-      new InsertWebsparkHighlitedHeadingCommand(this.editor)
+      "insertWebsparkHighlightedHeading",
+      new InsertWebsparkHighlightedHeadingCommand(this.editor)
     );
   }
 
   /*
    * This registers the structure that will be seen by CKEditor 5 as
-   * <websparkHighlitedHeading>
-   *    <websparkHighlitedHeadingText></websparkHighlitedHeadingText>
-   * </websparkHighlitedHeading>
+   * <websparkHighlightedHeading>
+   *    <websparkHighlightedHeadingText></websparkHighlightedHeadingText>
+   * </websparkHighlightedHeading>
    *
    * The logic in _defineConverters() will determine how this is converted to
    * markup.
@@ -50,18 +50,18 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     // Schemas are registered via the central `editor` object.
     const schema = this.editor.model.schema;
 
-    schema.register("websparkHighlitedHeading", {
+    schema.register("websparkHighlightedHeading", {
       isObject: true,
       allowWhere: "$block",
     });
 
-    schema.register("websparkHighlitedHeadingHelement", {
-      allowIn: "websparkHighlitedHeading",
+    schema.register("websparkHighlightedHeadingHelement", {
+      allowIn: "websparkHighlightedHeading",
       allowAttributes: ["level"],
     });
 
-    schema.register("websparkHighlitedHeadingText", {
-      allowIn: "websparkHighlitedHeadingHelement",
+    schema.register("websparkHighlightedHeadingText", {
+      allowIn: "websparkHighlightedHeadingHelement",
       allowAttributes: ["styles"],
       allowChildren: "$text",
     });
@@ -80,7 +80,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         name: /^(h1|h2|h3|h4)$/,
       },
       model: (viewElement, { writer }) => {
-        return writer.createElement("websparkHighlitedHeadingHelement", {
+        return writer.createElement("websparkHighlightedHeadingHelement", {
           level: viewElement.name,
         });
       },
@@ -88,7 +88,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
 
     conversion.for("downcast").elementToElement({
       model: {
-        name: "websparkHighlitedHeadingHelement",
+        name: "websparkHighlightedHeadingHelement",
         attributes: ["level"],
       },
       view: (modelElement, { writer }) => {
@@ -106,7 +106,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
       model: (viewElement, { writer }) => {
         const classes = viewElement.getAttribute("class");
 
-        return writer.createElement("websparkHighlitedHeadingText", {
+        return writer.createElement("websparkHighlightedHeadingText", {
           styles: extractDataFromClasses(
             classes,
             {
@@ -121,7 +121,7 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     });
 
     conversion.for("dataDowncast").elementToElement({
-      model: "websparkHighlitedHeadingText",
+      model: "websparkHighlightedHeadingText",
       view: (modelElement, { writer }) => {
         const classes = `highlight-${modelElement.getAttribute("styles")}`;
 
@@ -132,14 +132,14 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     });
 
     conversion.for("editingDowncast").elementToElement({
-      model: "websparkHighlitedHeadingText",
+      model: "websparkHighlightedHeadingText",
       view: (modelElement, { writer }) => {
         const classes = `highlight-${modelElement.getAttribute("styles")}`;
         const span = writer.createEditableElement("span", {
           class: classes,
         });
 
-        return toWidgetEditable(span, writer, { label: "Highlited Text" });
+        return toWidgetEditable(span, writer, { label: "Highlighted Text" });
       },
     });
 
@@ -149,12 +149,12 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
         classes: ["uds-highlighted-heading"],
       },
       model: (viewElement, { writer }) => {
-        return writer.createElement("websparkHighlitedHeading");
+        return writer.createElement("websparkHighlightedHeading");
       },
     });
 
     conversion.for("dataDowncast").elementToElement({
-      model: "websparkHighlitedHeading",
+      model: "websparkHighlightedHeading",
       view: (modelElement, { writer }) => {
         return writer.createContainerElement("div", {
           class: "uds-highlighted-heading",
@@ -163,13 +163,13 @@ export default class WebsparkHighlitedHeadingEditing extends Plugin {
     });
 
     conversion.for("editingDowncast").elementToElement({
-      model: "websparkHighlitedHeading",
+      model: "websparkHighlightedHeading",
       view: (modelElement, { writer }) => {
         const divHH = writer.createContainerElement("div", {
           class: "uds-highlighted-heading",
         });
 
-        return toWidget(divHH, writer, { label: "Highlited Heading" });
+        return toWidget(divHH, writer, { label: "Highlighted Heading" });
       },
     });
   }

@@ -1,34 +1,34 @@
 /**
- * @file defines InsertWebsparkHighlitedHeadingCommand, which is executed when the websparkHighlitedHeading
+ * @file defines InsertWebsparkHighlightedHeadingCommand, which is executed when the websparkHighlightedHeading
  * form is submitted.
  */
 
 import { Command } from "ckeditor5/src/core";
-export default class InsertWebsparkHighlitedHeadingCommand extends Command {
+export default class InsertWebsparkHighlightedHeadingCommand extends Command {
   execute({ text, styles, heading }) {
     const { model } = this.editor;
     model.change((writer) => {
-      const websparkHighlitedHeading = writer.createElement(
-        "websparkHighlitedHeading"
+      const websparkHighlightedHeading = writer.createElement(
+        "websparkHighlightedHeading"
       );
-      const websparkHighlitedHeadingHelement = writer.createElement(
-        "websparkHighlitedHeadingHelement",
+      const websparkHighlightedHeadingHelement = writer.createElement(
+        "websparkHighlightedHeadingHelement",
         { level: heading }
       );
-      const websparkHighlitedHeadingText = writer.createElement(
-        "websparkHighlitedHeadingText",
+      const websparkHighlightedHeadingText = writer.createElement(
+        "websparkHighlightedHeadingText",
         { styles }
       );
       const textNode = writer.createText(text);
 
-      writer.append(textNode, websparkHighlitedHeadingText);
+      writer.append(textNode, websparkHighlightedHeadingText);
       writer.append(
-        websparkHighlitedHeadingText,
-        websparkHighlitedHeadingHelement
+        websparkHighlightedHeadingText,
+        websparkHighlightedHeadingHelement
       );
-      writer.append(websparkHighlitedHeadingHelement, websparkHighlitedHeading);
+      writer.append(websparkHighlightedHeadingHelement, websparkHighlightedHeading);
 
-      model.insertContent(websparkHighlitedHeading);
+      model.insertContent(websparkHighlightedHeading);
     });
   }
 
@@ -37,23 +37,23 @@ export default class InsertWebsparkHighlitedHeadingCommand extends Command {
     const { selection } = model.document;
 
     // Determine if the cursor (selection) is in a position where adding a
-    // websparkHighlitedHeading is permitted. This is based on the schema of the model(s)
+    // websparkHighlightedHeading is permitted. This is based on the schema of the model(s)
     // currently containing the cursor.
     const allowedIn = model.schema.findAllowedParent(
       selection.getFirstPosition(),
-      "websparkHighlitedHeading"
+      "websparkHighlightedHeading"
     );
 
-    // If the cursor is not in a location where a websparkHighlitedHeading can be added, return
+    // If the cursor is not in a location where a websparkHighlightedHeading can be added, return
     // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
 
-    // Checks if the selected element is a "websparkHighlitedHeading".
+    // Checks if the selected element is a "websparkHighlightedHeading".
     // If it is, retrieves the attributes, text, and heading level from the first child span element.
     // Sets the value object with the retrieved data.
-    // If the selected element is not a "websparkHighlitedHeading", sets the value object to null.
+    // If the selected element is not a "websparkHighlightedHeading", sets the value object to null.
     const selectedElement = selection.getSelectedElement();
-    if (selectedElement?.name === "websparkHighlitedHeading") {
+    if (selectedElement?.name === "websparkHighlightedHeading") {
       const span = selectedElement.getChild(0)?.getChild(0);
       if (span) {
         this.value = {

@@ -21,7 +21,7 @@ import {
   createTextArea
 } from "../utils/utils";
 
-export class WebsparkHighlitedHeadingFormView extends View {
+export class WebsparkHighlightedHeadingFormView extends View {
   DEFAULT_TEXT = "";
   DEFAULT_STYLE = "gold";
   DEFAULT_HEADING = "h1";
@@ -258,7 +258,7 @@ function prepareListOptions(options) {
     const def = {
       type: "button",
       model: new Model({
-        commandName: "websparkHighlitedHeading",
+        commandName: "websparkHighlightedHeading",
         commandParam: option.model,
         label: option.title,
         withText: true,

@@ -9,7 +9,7 @@
 import WebsparkButton from "./button/websparkbutton";
 import WebsparkDivider from "./divider/websparkdivider";
 import WebsparkLead from "./lead/websparklead";
-import WebsparkHighlitedHeading from "./heading/websparkhighlightedheading";
+import WebsparkHighlightedHeading from "./heading/websparkhighlightedheading";
 import WebsparkBlockquote from "./quote/websparkblockquote";
 import WebsparkTable from "./table/websparktable";
 import WebsparkAdvancedImage from "./advancedimage/websparkadvancedimage";
@@ -20,7 +20,7 @@ export default {
   WebsparkButton,
   WebsparkDivider,
   WebsparkLead,
-  WebsparkHighlitedHeading,
+  WebsparkHighlightedHeading,
   WebsparkBlockquote,
   WebsparkTable,
   WebsparkAdvancedImage,

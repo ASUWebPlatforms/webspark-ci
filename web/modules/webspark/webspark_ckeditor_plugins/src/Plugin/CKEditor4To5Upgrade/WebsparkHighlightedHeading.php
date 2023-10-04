@@ -32,7 +32,7 @@ class WebsparkHighlightedHeading extends PluginBase implements CKEditor4To5Upgra
   public function mapCKEditor4ToolbarButtonToCKEditor5ToolbarItem(string $cke4_button, HTMLRestrictions $text_format_html_restrictions): ?array {
     switch ($cke4_button) {
       case 'WebsparkHighlightedHeading':
-        return ['websparkHighlitedHeading'];
+        return ['websparkHighlightedHeading'];
 
       default:
         throw new \OutOfBoundsException();

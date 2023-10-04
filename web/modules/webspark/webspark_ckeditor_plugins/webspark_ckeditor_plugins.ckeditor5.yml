@@ -15,7 +15,7 @@ webspark_ckeditor_plugins_plugins:
       - websparkPlugin.WebsparkButton
       - websparkPlugin.WebsparkDivider
       - websparkPlugin.WebsparkLead
-      - websparkPlugin.WebsparkHighlitedHeading
+      - websparkPlugin.WebsparkHighlightedHeading
       - websparkPlugin.WebsparkBlockquote
       - websparkPlugin.WebsparkTable
       - websparkPlugin.WebsparkMediaAlter
@@ -67,8 +67,8 @@ webspark_ckeditor_plugins_plugins:
         label: Webspark Divider
       websparkLead:
         label: Lead
-      websparkHighlitedHeading:
-        label: Highlited Heading
+      websparkHighlightedHeading:
+        label: Highlighted Heading
       websparkBlockquote:
         label: Blockquote
       websparkTable:

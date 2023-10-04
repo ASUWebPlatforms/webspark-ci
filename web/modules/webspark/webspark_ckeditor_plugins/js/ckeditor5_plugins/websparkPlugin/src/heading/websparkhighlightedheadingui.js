@@ -5,24 +5,24 @@
 import { Plugin } from "ckeditor5/src/core";
 import { ContextualBalloon, createDropdown } from "ckeditor5/src/ui";
 import icon from "../../../../../icons/websparkHighlightedHeading.svg";
-import { WebsparkHighlitedHeadingFormView } from "./websparkhighlightedheadingview";
+import { WebsparkHighlightedHeadingFormView } from "./websparkhighlightedheadingview";
 
-export default class WebsparkHighlitedHeadingUI extends Plugin {
+export default class WebsparkHighlightedHeadingUI extends Plugin {
   static get requires() {
     return [ContextualBalloon];
   }
 
   init() {
     const editor = this.editor;
-    const command = editor.commands.get("insertWebsparkHighlitedHeading");
+    const command = editor.commands.get("insertWebsparkHighlightedHeading");
 
-    this.form = new WebsparkHighlitedHeadingFormView(
+    this.form = new WebsparkHighlightedHeadingFormView(
       getFormValidators(editor.t),
       editor.locale,
       command
     );
 
-    editor.ui.componentFactory.add("websparkHighlitedHeading", (locale) => {
+    editor.ui.componentFactory.add("websparkHighlightedHeading", (locale) => {
       const dropdown = createDropdown(locale);
 
       this._setUpDropdown(dropdown, this.form, command);
@@ -61,7 +61,7 @@ export default class WebsparkHighlitedHeadingUI extends Plugin {
 
     dropdown.on("submit", () => {
       if (form.isValid()) {
-        editor.execute("insertWebsparkHighlitedHeading", {
+        editor.execute("insertWebsparkHighlightedHeading", {
           text: form.text,
           styles: form.styles,
           heading: form.heading,

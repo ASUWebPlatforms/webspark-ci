@@ -31,7 +31,7 @@ settings:
       - websparkButton
       - websparkDivider
       - websparkLead
-      - websparkHighlitedHeading
+      - websparkHighlightedHeading
       - websparkBlockquote
       - '|'
       - websparkTable

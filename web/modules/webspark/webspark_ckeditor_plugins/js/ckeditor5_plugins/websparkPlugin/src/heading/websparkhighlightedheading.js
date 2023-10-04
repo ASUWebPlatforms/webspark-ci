@@ -7,12 +7,12 @@
  * before it's made discoverable via index.js.
  */
 
-import WebsparkHighlitedHeadingEditing from "./websparkhighlightedheadingediting";
-import WebsparkHighlitedHeadingUI from "./websparkhighlightedheadingui";
+import WebsparkHighlightedHeadingEditing from "./websparkhighlightedheadingediting";
+import WebsparkHighlightedHeadingUI from "./websparkhighlightedheadingui";
 import { Plugin } from "ckeditor5/src/core";
 
-export default class WebsparkHighlitedHeading extends Plugin {
+export default class WebsparkHighlightedHeading extends Plugin {
   static get requires() {
-    return [WebsparkHighlitedHeadingEditing, WebsparkHighlitedHeadingUI];
+    return [WebsparkHighlightedHeadingEditing, WebsparkHighlightedHeadingUI];
   }
 }
