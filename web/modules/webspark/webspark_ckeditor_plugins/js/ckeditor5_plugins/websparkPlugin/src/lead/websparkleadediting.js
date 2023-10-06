@@ -29,9 +29,13 @@ export default class WebsparkLeadEditing extends Plugin {
   _defineSchema() {
     // Schemas are registered via the central `editor` object.
     const schema = this.editor.model.schema;
+    /* schema.register( 'simpleBox', {
+      // Behaves like a self-contained block object (e.g. a block image)
+      // allowed in places where other blocks are allowed (e.g. directly in the root).
+      inheritAllFrom: '$blockObject'
+  } );*/
 
     schema.register("websparkLead", {
-      isObject: true,
       allowWhere: "$block",
       allowChildren: "$text",
     });
@@ -56,28 +60,24 @@ export default class WebsparkLeadEditing extends Plugin {
       converterPriority: "high",
     });
 
+    // dataDowncast for data pipeline
     conversion.for("dataDowncast").elementToElement({
       model: "websparkLead",
-      view: (modelElement, { writer }) => {
-        return writer.createContainerElement("p", {
-          class: "lead",
-        });
+      view: {
+        name: "p",
+        classes: "lead",
       },
     });
 
+    // editingDowncast for editing pipeline
     conversion.for("editingDowncast").elementToElement({
       model: "websparkLead",
-      view: (modelElement, { writer }) => {
-        const wrapper = writer.createContainerElement(
-          "div",
-          null,
-          writer.createEmptyElement("p", { class: "lead" })
-        );
+      view: (_modelElement, { writer }) => {
+        const span = writer.createEditableElement("p", {
+          class: "lead",
+        });
 
-        writer.addClass("lead", wrapper);
-        writer.setCustomProperty("p", true, wrapper);
-
-        return toWidgetEditable(wrapper, writer, { label: "Lead" });
+        return toWidgetEditable(span, writer);
       },
     });
   }
