@@ -4,3 +4,21 @@
     display: none;
   }
 }
+
+.uds-card-arrangement {
+  &-card-container {
+    .card-wrapper {
+      .card {
+        padding-top: 24px;
+
+        .card-header {
+          padding: 0 32px 16px;
+        }
+
+        .card-icon-top {
+          margin: 0 2rem;
+        }
+      }
+    }
+  }
+}
