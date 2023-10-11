@@ -51,7 +51,6 @@ settings:
         - '<mark>'
         - '<cite class>'
         - '<blockquote cite class>'
-        - '<code>'
         - '<svg title role viewbox class>'
         - '<path d fill>'
         - '<button class="uds-tooltip">'
