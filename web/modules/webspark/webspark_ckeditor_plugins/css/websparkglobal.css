@@ -1,5 +1,8 @@
 .ck-editor__editable_inline, .ck-source-editing-area,
-div.ck.ck-content.ck-editor__editable  {
-  min-height: 300px !important;
+div.ck.ck-content.ck-editor__editable {
+  height: 350px !important;
 }
 
+.ck-content {
+  color: rgb(0, 0, 0);
+}
