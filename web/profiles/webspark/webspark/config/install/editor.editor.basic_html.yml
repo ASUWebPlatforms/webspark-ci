@@ -51,10 +51,11 @@ settings:
         - '<mark>'
         - '<cite class>'
         - '<blockquote cite class>'
+        - '<code>'
         - '<svg title role viewbox class>'
         - '<path d fill>'
         - '<button class="uds-tooltip">'
-        - '<ol ol>'
+        - '<ol class>'
         - '<h3 id>'
         - '<h4 id>'
         - '<h5 id>'
@@ -62,6 +63,7 @@ settings:
         - '<h2 id>'
         - '<img class>'
         - '<ul class>'
+        - '<svg title role viewBox class>'
     ckeditor5_list:
       reversed: false
       startIndex: false
