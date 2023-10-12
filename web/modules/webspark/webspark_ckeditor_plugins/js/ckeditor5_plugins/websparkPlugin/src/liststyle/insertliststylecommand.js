@@ -3,6 +3,7 @@
  */
 import { Command } from "ckeditor5/src/core";
 import { Collection, first, toMap } from "ckeditor5/src/utils";
+import {_getSibling} from "./utils";
 
 export default class InsertWebsparkListStyleCommand extends Command {
   /**
@@ -20,14 +21,14 @@ export default class InsertWebsparkListStyleCommand extends Command {
       this.editor.model.document.selection.getSelectedBlocks()
     );
     const elementsBelow = [];
-    const listTypeClasses = this.editor.commands.get("bulletedList").value
+    const listTypeClasses = this.editor.commands.get("bulletedListOld").value
       ? this._formatStyleBulletedClass(styleClass)
-      : this.editor.commands.get("numberedList").value
+      : this.editor.commands.get("numberedListOld").value
       ? this._formatStyleNumberedClass(styleClass)
       : "";
     model.change((writer) => {
-      this._getSibling(currentNode, elementsBelow, "backward");
-      this._getSibling(currentNode, elementsBelow, "forward");
+      _getSibling(currentNode, elementsBelow, "backward");
+      _getSibling(currentNode, elementsBelow, "forward");
       elementsBelow.forEach((element) => {
         writer.setAttribute(
           "htmlListAttributes",
@@ -336,32 +337,6 @@ export default class InsertWebsparkListStyleCommand extends Command {
     }
     return result;
   }
-  /**
-   * Retrieves sibling elements in a specified direction within the same list type.
-   *
-   * @param {Element} currentNode - The current element to start from.
-   * @param {Array} elementsBelow - An array to store the retrieved sibling elements.
-   * @param {string} direction - The direction to search for siblings ('forward' or 'backward').
-   * @private
-   */
-  _getSibling(currentNode, elementsBelow, direction) {
-    const listType = currentNode ? currentNode.getAttribute("listType") : "";
-    if (direction === "forward") {
-      while (currentNode && currentNode.getAttribute("listType") === listType) {
-        if (!elementsBelow.includes(currentNode)) {
-          elementsBelow.push(currentNode);
-        }
-        currentNode = currentNode.nextSibling;
-      }
-    } else {
-      while (currentNode && currentNode.getAttribute("listType") === listType) {
-        if (!elementsBelow.includes(currentNode)) {
-          elementsBelow.push(currentNode);
-        }
-        currentNode = currentNode.previousSibling;
-      }
-    }
-  }
 
   /**
    * Refreshes the state of the action.
@@ -374,8 +349,8 @@ export default class InsertWebsparkListStyleCommand extends Command {
     );
 
     const elementsBelow = [];
-    this._getSibling(currentNode, elementsBelow, "backward");
-    this._getSibling(currentNode, elementsBelow, "forward");
+    _getSibling(currentNode, elementsBelow, "backward");
+    _getSibling(currentNode, elementsBelow, "forward");
     elementsBelow.forEach((element) => {
       this.value = Object.fromEntries(element.getAttributes());
     });
@@ -389,10 +364,10 @@ export default class InsertWebsparkListStyleCommand extends Command {
   _checkEnabled() {
     const editor = this.editor;
 
-    const numberedList = editor.commands.get("numberedList");
-    const bulletedList = editor.commands.get("bulletedList");
+    const numberedListOld = editor.commands.get("numberedListOld");
+    const bulletedListOld = editor.commands.get("bulletedListOld");
 
-    return numberedList.isEnabled || bulletedList.isEnabled;
+    return numberedListOld.isEnabled || bulletedListOld.isEnabled;
   }
 
   /**

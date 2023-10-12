@@ -61,8 +61,8 @@ export default class WebsparkListStyleUI extends Plugin {
       let element = viewDocument.selection.getFirstPosition().parent.parent;
       element = this._findUlParent(element);
       if (
-        this.editor.commands.get("bulletedList").value ||
-        this.editor.commands.get("numberedList").value
+        this.editor.commands.get("bulletedListOld").value ||
+        this.editor.commands.get("numberedListOld").value
       ) {
         if (element && element._classes !== null) {
           this.form.classselect = Array.from(element._classes)[0];
@@ -74,9 +74,9 @@ export default class WebsparkListStyleUI extends Plugin {
       }
       // This const will store the list options. Depending on the
       // list type(Bulleted or Numbered) it will display a set of data.
-      const listOptions = this.editor.commands.get("bulletedList").value
+      const listOptions = this.editor.commands.get("bulletedListOld").value
         ? this._getBulletedPropertiesOptions(this.editor.t)
-        : this.editor.commands.get("numberedList").value
+        : this.editor.commands.get("numberedListOld").value
           ? this._getNumberedPropertiesOptions(this.editor.t)
           : "";
 

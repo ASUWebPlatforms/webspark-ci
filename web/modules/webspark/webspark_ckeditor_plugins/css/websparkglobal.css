@@ -6,3 +6,11 @@ div.ck.ck-content.ck-editor__editable {
 .ck-content {
   color: rgb(0, 0, 0);
 }
+
+li {
+  display: flex !important;
+}
+
+li::marker {
+  content: '';
+}
