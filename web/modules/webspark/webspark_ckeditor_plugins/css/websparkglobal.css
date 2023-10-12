@@ -14,3 +14,7 @@ li {
 li::marker {
   content: '';
 }
+
+span.highlight-black.ck-editor__nested-editable_focused {
+  color: rgb(0, 0, 0);
+}
