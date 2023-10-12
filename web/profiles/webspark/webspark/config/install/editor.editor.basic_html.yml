@@ -62,7 +62,6 @@ settings:
         - '<h2 id>'
         - '<img class>'
         - '<ul class>'
-        - '<svg title role viewBox class>'
     ckeditor5_list:
       reversed: false
       startIndex: false
