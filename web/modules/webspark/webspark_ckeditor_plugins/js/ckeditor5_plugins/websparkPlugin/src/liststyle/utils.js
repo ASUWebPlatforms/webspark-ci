@@ -27,15 +27,22 @@ export function _getSibling(currentNode, elementsBelow, direction) {
   }
 }
 
-
+/**
+ * Initialize the UDS list class for selected blocks in the model.
+ *
+ * @param {Model} model - The model to operate on.
+ */
 export function _initUdsListClass(model) {
+  // Get the currently selected block
   let currentNode = first(
     model.document.selection.getSelectedBlocks()
   );
   const elementsBelow = [];
   model.change((writer) => {
+    // Find and store sibling elements both backward and forward
     _getSibling(currentNode, elementsBelow, "backward");
     _getSibling(currentNode, elementsBelow, "forward");
+    // Set the 'uds-list' class for each element below the current block
     elementsBelow.forEach((element) => {
       writer.setAttribute(
         "htmlListAttributes",
