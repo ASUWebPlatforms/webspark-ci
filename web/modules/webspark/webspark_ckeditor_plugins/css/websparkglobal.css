@@ -1,6 +1,10 @@
-.ck-editor__editable_inline, .ck-source-editing-area,
+.ck-editor__editable_inline,
 div.ck.ck-content.ck-editor__editable {
   height: 350px !important;
+}
+
+.ck-source-editing-area {
+  min-height: 250px !important;
 }
 
 .ck-content {
