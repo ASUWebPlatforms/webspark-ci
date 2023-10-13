@@ -1,10 +1,23 @@
-.ck-editor__editable_inline,
+.ck-editor__editable_inline,.ck-source-editing-area,
 div.ck.ck-content.ck-editor__editable {
-  height: 350px !important;
+  min-height: 350px !important;
 }
 
-.ck-source-editing-area {
-  min-height: 250px !important;
+.ck-editor__top {
+  position: sticky !important;
+  top: -4px !important;
+  width: 100% !important;
+  z-index: 99 !important;
+}
+
+.ck-sticky-panel__placeholder {
+  display: none !important;
+}
+
+.ck-sticky-panel__content {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
 }
 
 .ck-content {
