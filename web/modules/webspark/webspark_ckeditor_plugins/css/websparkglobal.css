@@ -24,8 +24,8 @@ div.ck.ck-content.ck-editor__editable {
   color: rgb(0, 0, 0);
 }
 
-li {
-  display: flex !important;
+li > span.ck-list-bogus-paragraph {
+  display: inline !important;
 }
 
 li::marker {

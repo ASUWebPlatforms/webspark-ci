@@ -3,7 +3,7 @@
  */
 import { Command } from "ckeditor5/src/core";
 import { Collection, first, toMap } from "ckeditor5/src/utils";
-import {_getSibling} from "./utils";
+import { _getSibling } from "./utils";
 
 export default class InsertWebsparkListStyleCommand extends Command {
   /**
@@ -30,11 +30,13 @@ export default class InsertWebsparkListStyleCommand extends Command {
       _getSibling(currentNode, elementsBelow, "backward");
       _getSibling(currentNode, elementsBelow, "forward");
       elementsBelow.forEach((element) => {
-        writer.setAttribute(
-          "htmlListAttributes",
-          { classes: listTypeClasses },
-          element
-        );
+        if (element.getAttribute("listIndent") == 0) {
+          writer.setAttribute(
+            "htmlListAttributes",
+            { classes: listTypeClasses },
+            element
+          );
+        }
       });
     });
   }
@@ -267,7 +269,10 @@ export default class InsertWebsparkListStyleCommand extends Command {
 
       switch (bulletedClass) {
         case "icn-maroon":
-          stclass = this._removeClassesFromString(stclass, ["darkmode", "gold"]);
+          stclass = this._removeClassesFromString(stclass, [
+            "darkmode",
+            "gold",
+          ]);
           stclass += " maroon";
           break;
         case "icn-darkmode":
@@ -312,7 +317,10 @@ export default class InsertWebsparkListStyleCommand extends Command {
           ]);
         }
 
-        stclass += (bulletedClass === "darkmode-gold") ? " darkmode gold" : " " + bulletedClass;
+        stclass +=
+          bulletedClass === "darkmode-gold"
+            ? " darkmode gold"
+            : " " + bulletedClass;
       }
       // Apply uds-list class if element does not have it.
       if (!stclass.includes("uds-list")) {
@@ -380,6 +388,6 @@ export default class InsertWebsparkListStyleCommand extends Command {
     // Define a regular expression pattern to match words starting with "wp-"
     let pattern = /\bwp-\w+\b/g;
     // Use the replace method to remove all words that match the pattern
-    return element.replace(pattern, "");
+    return element ? element.replace(pattern, "") : "";
   }
 }

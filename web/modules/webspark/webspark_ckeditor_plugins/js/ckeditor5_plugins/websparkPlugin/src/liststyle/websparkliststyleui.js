@@ -1,10 +1,10 @@
-import {Plugin, Range} from "ckeditor5/src/core";
+import { Plugin, Range } from "ckeditor5/src/core";
 import {
   clickOutsideHandler,
   ContextualBalloon,
   createDropdown,
 } from "ckeditor5/src/ui";
-import {WebsparkListStyleFormView} from "./websparklistsyleview";
+import { WebsparkListStyleFormView } from "./websparklistsyleview";
 
 export default class WebsparkListStyleUI extends Plugin {
   static get requires() {
@@ -67,18 +67,20 @@ export default class WebsparkListStyleUI extends Plugin {
         if (element && element._classes !== null) {
           this.form.classselect = Array.from(element._classes)[0];
         }
-        balloon.add({
-          view: this.form,
-          position: this._getBalloonPositionData(),
-        });
+        try {
+          balloon.add({
+            view: this.form,
+            position: this._getBalloonPositionData(),
+          });
+        } catch (e) {}
       }
       // This const will store the list options. Depending on the
       // list type(Bulleted or Numbered) it will display a set of data.
       const listOptions = this.editor.commands.get("bulletedListOld").value
         ? this._getBulletedPropertiesOptions(this.editor.t)
         : this.editor.commands.get("numberedListOld").value
-          ? this._getNumberedPropertiesOptions(this.editor.t)
-          : "";
+        ? this._getNumberedPropertiesOptions(this.editor.t)
+        : "";
 
       if (!listOptions) {
         return;
@@ -106,9 +108,7 @@ export default class WebsparkListStyleUI extends Plugin {
     this.listenTo(viewDocument, "keydown", (evt, data) => {
       try {
         balloon.remove(this.form);
-      } catch (e) {
-
-      }
+      } catch (e) {}
     });
   }
 
@@ -251,20 +251,29 @@ export default class WebsparkListStyleUI extends Plugin {
     const viewDocument = view.document;
     let target = null;
     let selectionLi;
-    let fragmentActual
-    const arrayDeFragments = viewDocument.selection.getFirstRange().getCommonAncestor().getAncestors();
+    let fragmentActual;
+    const arrayDeFragments = viewDocument.selection
+      .getFirstRange()
+      .getCommonAncestor()
+      .getAncestors();
 
     for (let i = 0; i < arrayDeFragments.length; i++) {
       fragmentActual = arrayDeFragments[i];
-      if (fragmentActual.name === 'ul' || fragmentActual.name === 'ol') {
-        selectionLi = fragmentActual._children[fragmentActual._children.length - 1];
+      if (fragmentActual.name === "ul" || fragmentActual.name === "ol") {
+        if (
+          fragmentActual._id === "list-bulleted-0" ||
+          fragmentActual._id === "list-numbered-0"
+        ) {
+          selectionLi =
+            fragmentActual._children[fragmentActual._children.length - 1];
+        }
       }
     }
-    const range = view.createRangeOn(selectionLi);
-    // Set a target position by converting view selection range to DOM
-    target = () =>
-      view.domConverter.viewRangeToDom(range);
-
+    try {
+      const range = view.createRangeOn(selectionLi);
+      // Set a target position by converting view selection range to DOM
+      target = () => view.domConverter.viewRangeToDom(range);
+    } catch (e) {}
     return {
       target,
     };
@@ -296,7 +305,7 @@ export default class WebsparkListStyleUI extends Plugin {
         form.setValues("maroon");
         form.focus();
       },
-      {priority: "low"}
+      { priority: "low" }
     );
 
     dropdown.on("submit", () => {
