@@ -73,6 +73,8 @@ webspark_ckeditor_plugins_plugins:
         label: Blockquote
       websparkTable:
         label: Table
+      websparkListStyle:
+        label: List Properties
     # If the plugin does not provide elements, set this as
     # `elements: false`
     elements:

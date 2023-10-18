@@ -27,7 +27,7 @@ export class WebsparkListStyleFormView extends View {
 
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
-    this.label = t("List properties");
+
     this.classSelect = createSelect(
       t("List properties"),
       this._getBulletedPropertiesOptions(t),
@@ -66,11 +66,10 @@ export class WebsparkListStyleFormView extends View {
     this.setTemplate({
       tag: "form",
       attributes: {
-        class: ["ck", "ck-text-alternative-form", "ck-responsive-form"],
+        class: ["ck", "ck-webspark-form"],
         tabindex: "-1",
       },
       children: [
-        createRow(this.label),
         createRow(this.classSelect),
         createContainer(
           [this.saveButtonView, this.cancelButtonView],
