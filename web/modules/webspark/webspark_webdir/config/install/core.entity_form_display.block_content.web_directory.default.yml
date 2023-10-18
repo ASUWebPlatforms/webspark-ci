@@ -21,6 +21,7 @@ dependencies:
     - field.field.block_content.web_directory.field_webdir_exclude_profiles
     - field.field.block_content.web_directory.field_webdir_items_to_display
     - field.field.block_content.web_directory.field_webdir_use_pager
+    - field.field.block_content.web_directory.field_webdir_disable_alpha
   module:
     - field_group
     - field_states_ui
@@ -36,6 +37,7 @@ third_party_settings:
         - field_webdir_items_to_display
         - field_ids
         - field_webdir_exclude_profiles
+        - field_webdir_disable_alpha
       label: 'Display settings'
       region: content
       parent_name: ''
@@ -463,6 +465,13 @@ content:
   field_webdir_use_pager:
     type: boolean_checkbox
     weight: 18
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_webdir_disable_alpha:
+    type: boolean_checkbox
+    weight: 23
     region: content
     settings:
       display_label: true

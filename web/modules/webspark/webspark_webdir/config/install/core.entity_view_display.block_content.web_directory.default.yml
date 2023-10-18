@@ -21,6 +21,7 @@ dependencies:
     - field.field.block_content.web_directory.field_webdir_exclude_profiles
     - field.field.block_content.web_directory.field_webdir_items_to_display
     - field.field.block_content.web_directory.field_webdir_use_pager
+    - field.field.block_content.web_directory.field_webdir_disable_alpha
 id: block_content.web_directory.default
 targetEntityType: block_content
 bundle: web_directory
@@ -45,3 +46,4 @@ hidden:
   field_webdir_exclude_profiles: true
   field_webdir_items_to_display: true
   field_webdir_use_pager: true
+  field_webdir_disable_alpha: true
