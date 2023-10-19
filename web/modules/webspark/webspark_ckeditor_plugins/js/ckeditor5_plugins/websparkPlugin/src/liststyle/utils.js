@@ -67,6 +67,21 @@ export function _setUpClassSelect(form, editor) {
     return;
   }
 
+  let currentNode = first(
+    editor.model.document.selection.getSelectedBlocks()
+  );
+  const elementsBelow = [];
+  let currentClasses = [];
+  _getSibling(currentNode, elementsBelow, "backward");
+  _getSibling(currentNode, elementsBelow, "forward");
+  elementsBelow.forEach((element) => {
+    if (element.getAttribute("listIndent") == 0) {
+      try {
+        currentClasses = element.getAttribute("htmlListAttributes").classes
+      } catch (e) {}
+    }
+  });
+
   //remove current options
   form.classSelect.children[1].element.options.length = 0;
 
@@ -74,6 +89,11 @@ export function _setUpClassSelect(form, editor) {
     const optionElement = document.createElement("option");
     optionElement.value = optionData.value;
     optionElement.text = optionData.title;
+
+    if (currentClasses.includes(optionElement.value)) {
+      optionElement.defaultSelected = true;
+    }
+
     form.classSelect.children[1].element.appendChild(optionElement);
   });
 }

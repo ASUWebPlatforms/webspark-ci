@@ -18,6 +18,7 @@ import {
   createRow,
   createSelect,
 } from "../utils/utils";
+import {_getBulletedPropertiesOptions} from "./utils";
 
 export class WebsparkListStyleFormView extends View {
   constructor(validators, locale) {
@@ -30,7 +31,7 @@ export class WebsparkListStyleFormView extends View {
 
     this.classSelect = createSelect(
       t("List properties"),
-      this._getBulletedPropertiesOptions(t),
+      _getBulletedPropertiesOptions(t),
       locale
     );
 
@@ -66,7 +67,7 @@ export class WebsparkListStyleFormView extends View {
     this.setTemplate({
       tag: "form",
       attributes: {
-        class: ["ck", "ck-webspark-form"],
+        class: ["ck", "ck-webspark-form", "webspark-liststyle-dialog"],
         tabindex: "-1",
       },
       children: [
@@ -77,54 +78,6 @@ export class WebsparkListStyleFormView extends View {
         ),
       ],
     });
-  }
-
-  /*
-   * Bulleted List Properties
-   */
-  _getBulletedPropertiesOptions(t) {
-    return [
-      {
-        value: "default-list",
-        title: t("Default"),
-      },
-      {
-        value: `maroon`,
-        title: t("Maroon"),
-      },
-      {
-        value: `light-smokemode`,
-        title: t("Gray 1"),
-      },
-      {
-        value: `smokemode`,
-        title: t("Gray 2"),
-      },
-      {
-        value: `darkmode`,
-        title: t("Gray 7"),
-      },
-      {
-        value: `darkmode-gold`,
-        title: t("Gray 7 Gold Bullet"),
-      },
-      {
-        value: `icn-default`,
-        title: t("Icon list"),
-      },
-      {
-        value: `icn-maroon`,
-        title: t("Icon list Maroon"),
-      },
-      {
-        value: `icn-darkmode`,
-        title: t("Icon list Gray 7"),
-      },
-      {
-        value: `icn-darkmode-gold`,
-        title: t("Icon list Gray 7 Gold"),
-      },
-    ];
   }
 
   render() {

@@ -20,7 +20,6 @@ export default class WebsparkListStyleUI extends Plugin {
   init() {
     const editor = this.editor;
     const command = editor.commands.get("insertliststyle");
-    const balloon = this.editor.plugins.get(ContextualBalloon);
 
     this.form = new WebsparkListStyleFormView(
       getFormValidators(this.editor.t),
@@ -37,9 +36,9 @@ export default class WebsparkListStyleUI extends Plugin {
       _setUpClassSelect(this.form, this.editor);
     });
 
-    editor.ui.componentFactory.add("websparkListStyle", (locale) => {
+    editor.ui.componentFactory.add("websparkListStyle", () => {
       const dropdown = createDropdown(editor.locale);
-      this._setUpDropdown(dropdown, this.form, command, balloon);
+      this._setUpDropdown(dropdown, this.form);
       this._setUpForm(this.form, dropdown, command);
 
       const command1 = this.editor.commands.get("bulletedListOld");
@@ -70,108 +69,6 @@ export default class WebsparkListStyleUI extends Plugin {
   }
 
   /**
-   * Defines the behavior of the ContextualBalloon for this plugin.
-   *
-   * @param {ContextualBalloon} balloon - The ContextualBalloon instance to configure.
-   * @private
-   */
-  _defineBalloon(balloon) {
-    const viewDocument = this.editor.editing.view.document;
-    this.listenTo(viewDocument, "click", () => {
-      let element = viewDocument.selection.getFirstPosition().parent.parent;
-      element = this._findUlParent(element);
-      if (
-        this.editor.commands.get("bulletedListOld").value ||
-        this.editor.commands.get("numberedListOld").value
-      ) {
-        if (element && element._classes !== null) {
-          this.form.classselect = Array.from(element._classes)[0];
-        }
-        try {
-          balloon.add({
-            view: this.form,
-            position: this._getBalloonPositionData(),
-          });
-        } catch (e) {}
-      }
-      // This const will store the list options. Depending on the
-      // list type(Bulleted or Numbered) it will display a set of data.
-      const listOptions = this.editor.commands.get("bulletedListOld").value
-        ? _getBulletedPropertiesOptions(this.editor.t)
-        : this.editor.commands.get("numberedListOld").value
-          ? _getNumberedPropertiesOptions(this.editor.t)
-          : "";
-
-      if (!listOptions) {
-        return;
-      }
-
-      //remove current options
-      this.form.classSelect.children[1].element.options.length = 0;
-
-      listOptions.forEach((optionData) => {
-        const optionElement = document.createElement("option");
-        optionElement.value = optionData.value;
-        optionElement.text = optionData.title;
-        this.form.classSelect.children[1].element.appendChild(optionElement);
-      });
-    });
-
-    // Close on click outside of balloon panel element.
-    clickOutsideHandler({
-      emitter: this.form,
-      activator: () => balloon.visibleView === this.form,
-      contextElements: [balloon.view.element],
-      callback: () => balloon.remove(this.form),
-    });
-
-    this.listenTo(viewDocument, "keydown", (evt, data) => {
-      try {
-        balloon.remove(this.form);
-      } catch (e) {}
-    });
-  }
-
-  /**
-   * Calculates the position data for the balloon.
-   *
-   * @returns {Object} The position data for the balloon.
-   * @private
-   */
-  _getBalloonPositionData() {
-    const view = this.editor.editing.view;
-    const viewDocument = view.document;
-    let target = null;
-    let selectionLi;
-    let fragmentActual;
-    const arrayDeFragments = viewDocument.selection
-      .getFirstRange()
-      .getCommonAncestor()
-      .getAncestors();
-
-    for (let i = 0; i < arrayDeFragments.length; i++) {
-      fragmentActual = arrayDeFragments[i];
-      if (fragmentActual.name === "ul" || fragmentActual.name === "ol") {
-        if (
-          fragmentActual._id === "list-bulleted-0" ||
-          fragmentActual._id === "list-numbered-0"
-        ) {
-          selectionLi =
-            fragmentActual._children[fragmentActual._children.length - 1];
-        }
-      }
-    }
-    try {
-      const range = view.createRangeOn(selectionLi);
-      // Set a target position by converting view selection range to DOM
-      target = () => view.domConverter.viewRangeToDom(range);
-    } catch (e) {}
-    return {
-      target,
-    };
-  }
-
-  /**
    * Set up the dropdown with the form, command, and balloon.
    *
    * @param {Dropdown} dropdown - The dropdown instance to set up.
@@ -180,7 +77,7 @@ export default class WebsparkListStyleUI extends Plugin {
    * @param {ContextualBalloon} balloon - The ContextualBalloon instance to interact with.
    * @private
    */
-  _setUpDropdown(dropdown, form, command, balloon) {
+  _setUpDropdown(dropdown, form) {
     const editor = this.editor;
     const t = editor.t;
     const button = dropdown.buttonView;
@@ -206,18 +103,6 @@ export default class WebsparkListStyleUI extends Plugin {
       {priority: "low"}
     );
 
-    // Note: Use the low priority to make sure the following listener starts working after the
-    // default action of the drop-down is executed (i.e. the panel showed up). Otherwise, the
-    // invisible form/input cannot be focused/selected.
-    balloon.on(
-      "open",
-      () => {
-        form.setValues("maroon");
-        form.focus();
-      },
-      {priority: "low"}
-    );
-
     dropdown.on("submit", () => {
       editor.execute("insertliststyle", {
         styleClass: form.classselect,
@@ -231,9 +116,6 @@ export default class WebsparkListStyleUI extends Plugin {
     function closeUI() {
       editor.editing.view.focus();
       dropdown.isOpen = false;
-      try {
-        balloon.remove(form);
-      } catch (e) {}
     }
   }
 

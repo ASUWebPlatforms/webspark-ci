@@ -43,3 +43,7 @@ textarea.ck-webspark-form-textarea {
 form .webspark-blockquote-dialog input.ck-input {
   width: 80%;
 }
+
+form .webspark-liststyle-dialog {
+  width: 250px !important;
+}
