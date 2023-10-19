@@ -27,9 +27,9 @@ settings:
       - '|'
       - sourceEditing
       - '|'
-      - horizontalLine
       - responsiveArea
       - websparkButton
+      - horizontalLine
       - websparkDivider
       - websparkLead
       - websparkHighlightedHeading
