@@ -93,10 +93,11 @@ export default class WebsparkListStyleUI extends Plugin {
     button.on(
       "open",
       () => {
-        form.setValues(command.value);
-        if(form.classselect) {
-          form.classselect.children[1].select();
-        }
+        try {
+          if(form.classselect) {
+            form.classselect.children[1].select();
+          }
+        } catch (e) {}
 
         form.focus();
       },
