@@ -1,51 +1,50 @@
 /**
  * @file defines InsertWebsparkLeadCommand, which is executed when the websparkLead
- * toolbar button is pressed.
+ * form is submitted.
  */
-// cSpell:ignore websparkleadediting
 
-import { Command } from "ckeditor5/src/core";
+import {Command} from "ckeditor5/src/core";
 
 export default class InsertWebsparkLeadCommand extends Command {
-  execute(option) {
-    const { model } = this.editor;
-
+  execute({text}) {
+    const {model} = this.editor;
     model.change((writer) => {
-      // Insert <websparkLeadArea>*</websparkLeadArea> at the current selection position
-      // in a way that will result in creating a valid model structure.
-      model.insertContent(createWebsparkLeadArea(writer));
+      const websparkLead = writer.createElement(
+        "websparkLead"
+      );
+      const websparkLeadText = writer.createElement(
+        "websparkLeadText",
+      );
+      const textNode = writer.createText(text);
+      writer.append(textNode, websparkLeadText);
+      writer.append(websparkLeadText, websparkLead);
+      // writer.append(websparkLead);
+      model.insertContent(websparkLead);
     });
   }
 
   refresh() {
-    const { model } = this.editor;
-    const { selection } = model.document;
+    const {model} = this.editor;
+    const {selection} = model.document;
 
-    // Determine if the cursor (selection) is in a position where adding a
-    // websparkLead is permitted. This is based on the schema of the model(s)
-    // currently containing the cursor.
     const allowedIn = model.schema.findAllowedParent(
       selection.getFirstPosition(),
-      "$block"
+      "websparkLead"
     );
 
-    // If the cursor is not in a location where a websparkLead can be added, return
-    // null so the addition doesn't happen.
     this.isEnabled = allowedIn !== null;
-  }
-}
 
-/**
- * Creates a webspark lead area.
- *
- * @param {object} writer - The object used for creating elements.
- * @return {object} The webspark lead element to be added to the editor.
- */
-function createWebsparkLeadArea(writer) {
-  // Create instances of the three elements registered with the editor in
-  // websparkleadediting.js.
-  const websparkLead = writer.createElement("websparkLead");
-  writer.setAttribute("class", "lead", websparkLead);
-  // Return the element to be added to the editor.
-  return websparkLead;
+    const selectedElement = selection.getSelectedElement();
+    if (selectedElement?.name === "websparkLead") {
+      const span = selectedElement.getChild(0)?.getChild(0);
+      if (span) {
+        this.value = {
+          ...Object.fromEntries(span.getAttributes()),
+          text: span._data ?? "",
+        };
+      }
+    } else {
+      this.value = null;
+    }
+  }
 }

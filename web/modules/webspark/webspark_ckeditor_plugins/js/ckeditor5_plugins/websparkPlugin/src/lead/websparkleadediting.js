@@ -1,9 +1,27 @@
 import { Plugin } from "ckeditor5/src/core";
-import { toWidget, toWidgetEditable } from "ckeditor5/src/widget";
-import { Widget } from "ckeditor5/src/widget";
+import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
 import InsertWebsparkLeadCommand from "./insertwebsparkleadcommand";
 
-// cSpell:ignore responsivearea insertresponsiveareacommand
+// cSpell:ignore websparkLead insertwebsparkleadcommand
+
+/**
+ * CKEditor 5 plugins do not work directly with the DOM. They are defined as
+ * plugin-specific data models that are then converted to markup that
+ * is inserted in the DOM.
+ *
+ * CKEditor 5 internally interacts with websparkLead as this model:
+ * <websparkLead>
+ *    <websparkLeadText></websparkLeadText>
+ * </websparkLead>
+ *
+ * Which is converted for the browser/user as this markup
+ * <a class="btn">
+ *   <span class="text"></span>
+ * </a>
+ *
+ * This file has the logic for defining the websparkLead model, and for how it is
+ * converted to standard DOM markup.
+ */
 export default class WebsparkLeadEditing extends Plugin {
   static get requires() {
     return [Widget];
@@ -18,25 +36,18 @@ export default class WebsparkLeadEditing extends Plugin {
     );
   }
 
-  /*
-   * This registers the structure that will be seen by CKEditor 5 as
-   * <websparkLead>
-   * </websparkLead>
-   *
-   * The logic in _defineConverters() will determine how this is converted to
-   * markup.
-   */
   _defineSchema() {
     // Schemas are registered via the central `editor` object.
     const schema = this.editor.model.schema;
-    /* schema.register( 'simpleBox', {
-      // Behaves like a self-contained block object (e.g. a block image)
-      // allowed in places where other blocks are allowed (e.g. directly in the root).
-      inheritAllFrom: '$blockObject'
-  } );*/
 
     schema.register("websparkLead", {
+      isObject: true,
       allowWhere: "$block",
+    });
+
+    schema.register("websparkLeadText", {
+      allowIn: "websparkLead",
+      allowAttributes: ["classes"],
       allowChildren: "$text",
     });
   }
@@ -52,32 +63,62 @@ export default class WebsparkLeadEditing extends Plugin {
     conversion.for("upcast").elementToElement({
       view: {
         name: "p",
-        classes: "lead",
+        class: "lead",
       },
       model: (viewElement, { writer }) => {
-        return writer.createElement("websparkLead");
+        const classes = viewElement.getAttribute("class");
+
+        return writer.createElement("websparkLeadText", { classes: classes });
       },
-      converterPriority: "high",
     });
 
-    // dataDowncast for data pipeline
     conversion.for("dataDowncast").elementToElement({
-      model: "websparkLead",
-      view: {
-        name: "p",
-        classes: "lead",
+      model: "websparkLeadText",
+      view: (modelElement, { writer }) => {
+        return writer.createContainerElement("p", {
+          class: "lead",
+        });
       },
     });
 
-    // editingDowncast for editing pipeline
     conversion.for("editingDowncast").elementToElement({
-      model: "websparkLead",
-      view: (_modelElement, { writer }) => {
+      model: "websparkLeadText",
+      view: (modelElement, { writer }) => {
         const span = writer.createEditableElement("p", {
           class: "lead",
         });
 
-        return toWidgetEditable(span, writer);
+        return toWidgetEditable(span, writer, { label: "Lead Text" });
+      },
+    });
+
+    conversion.for("upcast").elementToElement({
+      view: {
+        name: "div",
+        classes: ["uds-lead"],
+      },
+      model: (viewElement, { writer }) => {
+        return writer.createElement("websparkLead");
+      },
+    });
+
+    conversion.for("dataDowncast").elementToElement({
+      model: "websparkLead",
+      view: (modelElement, { writer }) => {
+        return writer.createContainerElement("div", {
+          class: "uds-lead",
+        });
+      },
+    });
+
+    conversion.for("editingDowncast").elementToElement({
+      model: "websparkLead",
+      view: (modelElement, { writer }) => {
+        const divHH = writer.createContainerElement("div", {
+          class: "uds-lead",
+        });
+
+        return toWidget(divHH, writer, { label: "Lead" });
       },
     });
   }
