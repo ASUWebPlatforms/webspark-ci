@@ -18,7 +18,6 @@ export default class InsertWebsparkLeadCommand extends Command {
       const textNode = writer.createText(text);
       writer.append(textNode, websparkLeadText);
       writer.append(websparkLeadText, websparkLead);
-      // writer.append(websparkLead);
       model.insertContent(websparkLead);
     });
   }

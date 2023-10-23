@@ -41,7 +41,7 @@ export default class WebsparkLeadUI extends Plugin {
     dropdown.panelView.children.add(form);
 
     button.set({
-      label: t("Highlighted Heading"),
+      label: t("Lead"),
       icon: icon,
       tooltip: true,
     });
