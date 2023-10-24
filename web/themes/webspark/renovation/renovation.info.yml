@@ -35,7 +35,7 @@ libraries-extend:
   core/drupal.dialog.off_canvas:
     - renovation/layout_builder
 
-ckeditor_stylesheets:
+ckeditor5_stylesheets:
   - assets/css/renovation.style.css
   - css/ckeditor-override.css
 

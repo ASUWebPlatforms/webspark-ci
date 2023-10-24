@@ -4,32 +4,31 @@ dependencies:
   config:
     - filter.format.minimal_format
   module:
-    - ckeditor
+    - ckeditor5
 format: minimal_format
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formatting
-          items:
-            - Format
-            - Bold
-            - Italic
-        -
-          name: Links
-          items:
-            - DrupalLink
-            - DrupalUnlink
+    items:
+      - heading
+      - bold
+      - italic
+      - '|'
+      - link
+      - sourceEditing
   plugins:
-    drupallink:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_sourceEditing:
+      allowed_tags:
+        - '<a hreflang>'
+    linkit_extension:
       linkit_enabled: false
-      linkit_profile: ''
-    stylescombo:
-      styles: ''
-    language:
-      language_list: un
 image_upload:
   status: false
   scheme: public

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55ed8018e3e8e0feae2bcc590fa21822",
+    "content-hash": "4238a71266f84d7128c889cdd7b458b4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -158,38 +158,35 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.11.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b"
+                "reference": "5a546a8cc4607f38cfbd8e20b3de234e45b2110f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/ae03311f45dfe194412081526be2e003960df74b",
-                "reference": "ae03311f45dfe194412081526be2e003960df74b",
+                "url": "https://api.github.com/repos/composer/installers/zipball/5a546a8cc4607f38cfbd8e20b3de234e45b2110f",
+                "reference": "5a546a8cc4607f38cfbd8e20b3de234e45b2110f",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0 || ^2.0"
-            },
-            "replace": {
-                "roundcube/plugin-installer": "*",
-                "shama/baton": "*"
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "1.6.* || ^2.0",
                 "composer/semver": "^1 || ^3",
                 "phpstan/phpstan": "^0.12.55",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "symfony/phpunit-bridge": "^4.2 || ^5",
-                "symfony/process": "^2.3"
+                "symfony/phpunit-bridge": "^5.3",
+                "symfony/process": "^5"
             },
             "type": "composer-plugin",
             "extra": {
                 "class": "Composer\\Installers\\Plugin",
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
+                    "dev-main": "2.x-dev"
                 }
             },
             "autoload": {
@@ -211,7 +208,6 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "https://composer.github.io/installers/",
             "keywords": [
-                "Craft",
                 "Dolibarr",
                 "Eliasis",
                 "Hurad",
@@ -232,7 +228,6 @@
                 "Whmcs",
                 "WolfCMS",
                 "agl",
-                "aimeos",
                 "annotatecms",
                 "attogram",
                 "bitrix",
@@ -251,7 +246,6 @@
                 "grav",
                 "installer",
                 "itop",
-                "joomla",
                 "known",
                 "kohana",
                 "laravel",
@@ -266,6 +260,7 @@
                 "modx",
                 "moodle",
                 "osclass",
+                "pantheon",
                 "phpbb",
                 "piwik",
                 "ppi",
@@ -278,9 +273,7 @@
                 "silverstripe",
                 "sydes",
                 "sylius",
-                "symfony",
                 "tastyigniter",
-                "typo3",
                 "wordpress",
                 "yawik",
                 "zend",
@@ -288,7 +281,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.11.0"
+                "source": "https://github.com/composer/installers/tree/v2.0.0"
             },
             "funding": [
                 {
@@ -304,7 +297,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-28T06:42:17+00:00"
+            "time": "2021-08-04T13:56:36+00:00"
         },
         {
             "name": "composer/semver",
@@ -2401,30 +2394,26 @@
         },
         {
             "name": "drupal/ckeditor_responsive_plugin",
-            "version": "2.0.1",
+            "version": "dev-2.1.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor_responsive_plugin.git",
-                "reference": "2.0.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor_responsive_plugin-2.0.1.zip",
-                "reference": "2.0.1",
-                "shasum": "6754cd46cc7fdc83154870ef1b640cbadcc412fb"
+                "reference": "22b2e1b19f3ffbdf44223d82c7e9662f20518b02"
             },
             "require": {
-                "drupal/ckeditor": "*",
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^8 || ^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.1.x": "2.1.x-dev"
+                },
                 "drupal": {
-                    "version": "2.0.1",
-                    "datestamp": "1612188226",
+                    "version": "2.1.x-dev",
+                    "datestamp": "1689923873",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2443,8 +2432,8 @@
             "description": "This module provide a CKeditor plugin which allows the user to add responsive area in a textarea",
             "homepage": "https://www.drupal.org/project/ckeditor_responsive_plugin",
             "support": {
-                "source": "http://cgit.drupalcode.org/ckeditor_responsive_plugin",
-                "issues": "https://www.drupal.org/project/issues/2424721"
+                "source": "https://git.drupalcode.org/project/ckeditor_responsive_plugin",
+                "issues": "https://www.drupal.org/project/issues/ckeditor_responsive_plugin"
             }
         },
         {
@@ -3361,6 +3350,54 @@
                 }
             ],
             "time": "2023-01-06T17:22:24+00:00"
+        },
+        {
+            "name": "drupal/editor_advanced_link",
+            "version": "2.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/editor_advanced_link.git",
+                "reference": "2.2.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/editor_advanced_link-2.2.4.zip",
+                "reference": "2.2.4",
+                "shasum": "cd0db397827f2e21ec8a68211e8a153463a6c89b"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10"
+            },
+            "require-dev": {
+                "drupal/ckeditor": "*",
+                "phpro/grumphp": "^2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.2.4",
+                    "datestamp": "1688040059",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "DuaelFr",
+                    "homepage": "https://www.drupal.org/user/931394"
+                }
+            ],
+            "description": "Editor Advanced link",
+            "homepage": "https://www.drupal.org/project/editor_advanced_link",
+            "support": {
+                "source": "https://git.drupalcode.org/project/editor_advanced_link"
+            }
         },
         {
             "name": "drupal/editoria11y",
@@ -6876,21 +6913,21 @@
         },
         {
             "name": "oomphinc/composer-installers-extender",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oomphinc/composer-installers-extender.git",
-                "reference": "8d3fe38a1723e0e91076920c8bb946b1696e28ca"
+                "reference": "cbf4b6f9a24153b785d09eee755b995ba87bd5f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/8d3fe38a1723e0e91076920c8bb946b1696e28ca",
-                "reference": "8d3fe38a1723e0e91076920c8bb946b1696e28ca",
+                "url": "https://api.github.com/repos/oomphinc/composer-installers-extender/zipball/cbf4b6f9a24153b785d09eee755b995ba87bd5f9",
+                "reference": "cbf4b6f9a24153b785d09eee755b995ba87bd5f9",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.1 || ^2.0",
-                "composer/installers": "^1.0",
+                "composer/installers": "^1.0 || ^2.0",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -6927,9 +6964,9 @@
             "homepage": "http://www.oomphinc.com/",
             "support": {
                 "issues": "https://github.com/oomphinc/composer-installers-extender/issues",
-                "source": "https://github.com/oomphinc/composer-installers-extender/tree/2.0.0"
+                "source": "https://github.com/oomphinc/composer-installers-extender/tree/2.0.1"
             },
-            "time": "2020-08-11T21:06:11+00:00"
+            "time": "2021-12-15T12:32:42+00:00"
         },
         {
             "name": "pantheon-systems/drupal-integrations",
@@ -7009,13 +7046,13 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "655f99319e3e0513e549ef43e7b1fbabdcdf55c0"
+                "reference": "9b1a09c6adf011dbdfc96766d0a5fbb324a427b4"
             },
             "require": {
                 "bower-asset/fontawesome": "6.4.2",
                 "ckeditor/fakeobjects": "4.16.0",
                 "ckeditor/link": "4.16.1",
-                "composer/installers": "v1.11.0",
+                "composer/installers": "v2.0.0",
                 "cweagans/composer-patches": "1.7.1",
                 "drupal/admin_toolbar": "3.4.1",
                 "drupal/allowed_formats": "2.0.0",
@@ -7023,7 +7060,7 @@
                 "drupal/block_field": "1.0.0-rc4",
                 "drupal/captcha": "1.10.0",
                 "drupal/cas": "2.1.0",
-                "drupal/ckeditor_responsive_plugin": "2.0.1",
+                "drupal/ckeditor_responsive_plugin": "2.1.x-dev@dev",
                 "drupal/components": "3.0.0-beta3",
                 "drupal/config_readonly": "1.0.0-beta5",
                 "drupal/config_update": "2.0.0-alpha3",
@@ -7064,7 +7101,7 @@
                 "drush/drush": "11.5.1",
                 "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
                 "npm-asset/select2": "4.1.0-RC.0",
-                "oomphinc/composer-installers-extender": "2.0.0",
+                "oomphinc/composer-installers-extender": "2.0.1",
                 "pantheon-systems/drupal-integrations": "9.0.2",
                 "pantheon-systems/quicksilver-pushback": "2.1.1",
                 "php": ">=8.1.6",
