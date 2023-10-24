@@ -1,7 +1,9 @@
-name: Webspark Ckeditor plugins
+# This has 'change-this-to-info' in the filename instead of 'info' so this
+# template isn't discovered as a module.
+name: Webspark CKEditor 5 plugins
 type: module
-description: Module with custom ckeditor plugins
-core_version_requirement: ^8 || ^9
-package: webspark
+description: Module with custom CKEditor 5 plugins
+package: CKEditor 5
+core_version_requirement: ^9 || ^10
 dependencies:
-  - ckeditor
+  - drupal:ckeditor5

@@ -4,7 +4,8 @@
     },
     "drupal/core": {
         "#2951547: Fix issue with layout overflow": "https://www.drupal.org/files/issues/2022-07-13/f245f21ea664f22c81d8d28c6f0f4a42fb9a5890.patch",
-        "3109650: Refactor Xss::attributes() to allow filtering of style attribute values": "https://www.drupal.org/files/issues/2021-09-22/core-9.2-xss-refactor_filter_attributes-3109650-43.patch"
+        "3109650: Refactor Xss::attributes() to allow filtering of style attribute values": "https://www.drupal.org/files/issues/2021-09-22/core-9.2-xss-refactor_filter_attributes-3109650-43.patch",
+        "3267440: Add ckeditor5-stylesheets config - Seven theme": "https://www.drupal.org/files/issues/2023-08-23/seven_add_ckeditor5-stylesheets-3267440-8.patch"
     },
     "drupal/config_readonly": {
         "#3085001: Config blacklist to only block some configuration while in read only mode": "https://www.drupal.org/files/issues/2019-10-31/config_readonly-3085001-2.patch"
@@ -14,6 +15,9 @@
     },
     "drupal/linkit": {
         "2877535: Fix issue with path alias": "https://www.drupal.org/files/issues/2022-06-07/2877535-39.patch"
+    },
+    "drupal/fontawesome": {
+        "#3274028: Fixing CKEditor 5 compatibility": "https://www.drupal.org/files/issues/2023-06-05/3274028-fontawesome-ckeditor5-compatibility-16.patch"
     },
     "drupal/cas": {
         "3318382: TypeError: in_array(): Argument #2 ($haystack) must be of type array": "https://www.drupal.org/files/issues/2022-10-31/cas-null-in_array-3318382-0.patch"

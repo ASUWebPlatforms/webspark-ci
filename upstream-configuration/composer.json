@@ -11,7 +11,7 @@
         "bower-asset/fontawesome": "6.4.2",
         "ckeditor/fakeobjects": "4.16.0",
         "ckeditor/link": "4.16.1",
-        "composer/installers": "v1.11.0",
+        "composer/installers": "v2.0.0",
         "cweagans/composer-patches": "1.7.1",
         "drupal/admin_toolbar": "3.4.1",
         "drupal/allowed_formats": "2.0.0",
@@ -19,7 +19,7 @@
         "drupal/block_field": "1.0.0-rc4",
         "drupal/captcha": "1.10.0",
         "drupal/cas": "2.1.0",
-        "drupal/ckeditor_responsive_plugin": "2.0.1",
+        "drupal/ckeditor_responsive_plugin": "2.1.x-dev@dev",
         "drupal/components": "3.0.0-beta3",
         "drupal/config_readonly": "1.0.0-beta5",
         "drupal/config_update": "2.0.0-alpha3",
@@ -60,11 +60,12 @@
         "drush/drush": "11.5.1",
         "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
         "npm-asset/select2": "4.1.0-RC.0",
-        "oomphinc/composer-installers-extender": "2.0.0",
+        "oomphinc/composer-installers-extender": "2.0.1",
         "pantheon-systems/drupal-integrations": "9.0.2",
         "pantheon-systems/quicksilver-pushback": "2.1.1",
         "php": ">=8.1.6",
-        "zaporylie/composer-drupal-optimizations": "1.2.0"
+        "zaporylie/composer-drupal-optimizations": "1.2.0",
+        "drupal/editor_advanced_link": "^2.2"
     },
     "extra": {
         "merge-plugin": {
