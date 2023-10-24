@@ -90,6 +90,12 @@ function webspark_webdir_preprocess_block__web_directory(&$variables)
     $dontDisplayProfiles = $blockContent->field_webdir_exclude_profiles->value;
   }
 
+  $alphaFilter = "true";
+  if ($blockContent->hasField('field_webdir_disable_alpha')) {
+    // Note, we negate here. Easier to roll out backwards compability like this.
+    $alphaFilter = !($blockContent->field_webdir_disable_alpha->value) ? 'true' : 'false';
+  }
+
   $appPathFolder = \Drupal::service('webspark_webdir.helper_functions')->getAppPathFolder('app-webdir-ui');
 
   $markup = <<<HTML
@@ -110,6 +116,7 @@ function webspark_webdir_preprocess_block__web_directory(&$variables)
   data-profiles-per-page="{$profilesPerPage}"
   data-default-sort="{$defaultSort}"
   data-do-not-display-profiles="{$dontDisplayProfiles}"
+  data-alpha-filter="{$alphaFilter}"
   data-app-path-folder="{$appPathFolder}"
 ></div>
 HTML;
