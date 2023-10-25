@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4238a71266f84d7128c889cdd7b458b4",
+    "content-hash": "55ed8018e3e8e0feae2bcc590fa21822",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7046,7 +7046,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "9b1a09c6adf011dbdfc96766d0a5fbb324a427b4"
+                "reference": "4eb1d2342391f04be4594617903ef261f9b283c6"
             },
             "require": {
                 "bower-asset/fontawesome": "6.4.2",
@@ -7072,6 +7072,7 @@
                 "drupal/decorative_image_widget": "1.0.0-alpha4",
                 "drupal/devel": "5.0.2",
                 "drupal/devel_kint_extras": "1.1.0",
+                "drupal/editor_advanced_link": "^2.2",
                 "drupal/editoria11y": "2.0.12",
                 "drupal/environment_indicator": "4.0.14",
                 "drupal/field_group": "3.4.0",
