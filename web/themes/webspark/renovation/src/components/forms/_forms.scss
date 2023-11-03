@@ -13,3 +13,14 @@ form.uds-form {
     padding-left: $uds-size-spacing-4 !important;
   }
 }
+
+// Override BS styles applying on admin forms
+.was-validated .form-control:invalid, .was-validated .form-control.is-invalid {
+  border-color: #b72a2a;
+}
+.was-validated .form-check:valid, .was-validated .form-check:invalid {
+  border-color: var(--bs-gray-5)
+}
+.was-validated .form-check-input:valid ~ .form-check-label {
+  color: var(--bs-secondary-color);
+}
