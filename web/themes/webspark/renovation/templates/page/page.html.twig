@@ -4,14 +4,14 @@
  * Template for the main page.
  */
 #}
+{% if page.header %}
+  <div class="container">
+    {{ page.header }}
+  </div>
+{% endif %}
 <main>
   <div class="page page-wrapper-webspark">
     <div class="pt-5 pb-5">
-      {% if page.header %}
-        <div class="container">
-          {{ page.header }}
-        </div>
-      {% endif %}
 
       {% if page.pre_content %}
         <div class="page__pre-content center-container max-size-container">
