@@ -25,11 +25,10 @@
         </div>
       {% endif %}
     </div>
-
-    {% if page.footer %}
-      <footer class="page__footer" id="asu-footer" role="contentinfo">
-        {{ page.footer }}
-      </footer>
-    {% endif %}
   </div>
 </main>
+{% if page.footer %}
+  <footer class="page__footer" id="asu-footer" role="contentinfo">
+    {{ page.footer }}
+  </footer>
+{% endif %}
