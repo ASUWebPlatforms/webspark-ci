@@ -216,6 +216,25 @@ function webspark_blocks_update_9022(&$sandbox) {
 }
 
 /**
+ * WS2-1839 - The default value was added to the field_hero_background_color in blocks with type=video_hero.
+ */
+function webspark_blocks_update_9023() {
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $blockType = 'video_hero';
+  $blockStorage = $entityTypeManager->getStorage('block_content');
+  $blockContents = $blockStorage->loadByProperties([
+    'type' => $blockType,
+  ]);
+
+  foreach ($blockContents as $blockContent) {
+    if (!isset($blockContent->field_hero_background_color->value) || empty($blockContent->field_hero_background_color->value)) {
+      $blockContent->set('field_hero_background_color', 'default');
+      $blockContent->save();
+    }
+  }
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
