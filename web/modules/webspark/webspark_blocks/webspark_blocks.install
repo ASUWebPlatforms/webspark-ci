@@ -235,6 +235,13 @@ function webspark_blocks_update_9023() {
 }
 
 /**
+ * WS2-1839 - Add required and default value to field_hero_background_color.
+ */
+function webspark_blocks_update_9024(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
