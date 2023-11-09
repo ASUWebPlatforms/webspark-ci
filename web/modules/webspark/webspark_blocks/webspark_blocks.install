@@ -216,10 +216,37 @@ function webspark_blocks_update_9022(&$sandbox) {
 }
 
 /**
+ * WS2-1839 - The default value was added to the field_hero_background_color in blocks with type=video_hero.
+ */
+function webspark_blocks_update_9023() {
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $blockType = 'video_hero';
+  $blockStorage = $entityTypeManager->getStorage('block_content');
+  $blockContents = $blockStorage->loadByProperties([
+    'type' => $blockType,
+  ]);
+
+  foreach ($blockContents as $blockContent) {
+    if (!isset($blockContent->field_hero_background_color->value) || empty($blockContent->field_hero_background_color->value)) {
+      $blockContent->set('field_hero_background_color', 'default');
+      $blockContent->save();
+    }
+  }
+}
+
+/**
+ * WS2-1839 - Add required and default value to field_hero_background_color.
+ */
+function webspark_blocks_update_9024(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * WS2-1533 - Changed description text for field_media in Card, Card Degree, Card Story.
  */
 function webspark_blocks_update_9025(&$sandbox) {
-  _webspark_blocks_revert_module_config();
+  $configs = ['field.field.paragraph.card.field_media', 'field.field.paragraph.card_degree.field_media', 'field.field.paragraph.card_story.field_media'];
+  _webspark_blocks_revert_module_config_list($configs);
 }
 
 /**
@@ -236,5 +263,16 @@ function _webspark_blocks_revert_module_config() {
   // Revert all configs from this module.
   \Drupal::service('webspark.config_manager')->revertAll($module);
   // Lock the configuration storage.
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * Update specific configuration files.
+ */
+function _webspark_blocks_update_module_config_list($config_list = []) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  foreach ($config_list as $config) {
+    \Drupal::service('webspark.config_manager')->updateConfigFile($config);
+  }
   \Drupal::state()->set('configuration_locked', TRUE);
 }
