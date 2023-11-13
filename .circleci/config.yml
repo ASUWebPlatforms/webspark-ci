@@ -112,7 +112,8 @@ jobs:
           name: compile theme assets
           command: |
             cd web/themes/webspark/renovation
-            echo "@asu:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > .npmrc
+            echo "@asu:registry=https://npm.pkg.github.com" >> .npmrc
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
             yarn install && yarn production
             # rm .npmrc # .npmrc is excluded in .gitignore
 
