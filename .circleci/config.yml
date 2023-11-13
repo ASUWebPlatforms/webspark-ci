@@ -114,7 +114,7 @@ jobs:
             cd web/themes/webspark/renovation
             echo "@asu:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > .npmrc
             yarn install && yarn production
-            rm .npmrc
+            # rm .npmrc # .npmrc is excluded in .gitignore
 
       - persist_to_workspace:
           root: .
@@ -241,7 +241,7 @@ workflows:
             - configure_env_vars
       - deploy_to_pantheon:
           requires:
-            - static_tests
+            - compile_theme_assets
       # - visual_regression_test:
       #     requires:
       #       - configure_env_vars
