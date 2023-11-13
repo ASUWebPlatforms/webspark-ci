@@ -110,7 +110,11 @@ jobs:
 
       - run:
           name: compile theme assets
-          command: cd web/themes/webspark/renovation && yarn install && yarn production
+          command: |
+            cd web/themes/webspark/renovation
+            echo "@asu:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > .npmrc
+            yarn install && yarn production
+            rm .npmrc
 
       - persist_to_workspace:
           root: .
