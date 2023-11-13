@@ -103,25 +103,6 @@ jobs:
           paths:
             - $HOME/.composer/cache
 
-  compile_theme_assets:
-    <<: *defaults
-    steps:
-      - checkout
-
-      - run:
-          name: compile theme assets
-          command: |
-            cd web/themes/webspark/renovation
-            echo "@asu:registry=https://npm.pkg.github.com" >> .npmrc
-            echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
-            yarn install && yarn production
-            # rm .npmrc # .npmrc is excluded in .gitignore
-
-      - persist_to_workspace:
-          root: .
-          paths:
-            - web/themes/webspark/renovation/assets
-
   deploy_to_pantheon:
     <<: *defaults
     steps:
@@ -130,6 +111,17 @@ jobs:
       # Attach the workspace
       - attach_workspace:
           at: /tmp
+
+      # Install and compile theme assets.
+      - run:
+          name: compile theme assets
+          command: |
+            cd web/themes/webspark/renovation
+            echo "@asu:registry=https://npm.pkg.github.com" >> .npmrc
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+            yarn install && yarn production
+            # .npmrc is excluded in .gitignore, but let's be extra guarded
+            rm .npmrc
 
       - run:
           # Set TERMINUS_ENV and related environment variables.
@@ -236,13 +228,10 @@ workflows:
     jobs:
       - configure_env_vars
       - static_tests
-      - compile_theme_assets:
+      - deploy_to_pantheon:
           requires:
             - static_tests
             - configure_env_vars
-      - deploy_to_pantheon:
-          requires:
-            - compile_theme_assets
       # - visual_regression_test:
       #     requires:
       #       - configure_env_vars
