@@ -8,7 +8,3 @@ node_modules
 *.js.map
 *.css.map
 config.local.js
-# Ignore assets compiled in CI. Synced to Pantheon.
-# Not ignoring img though in case there are assets added there manually.
-assets/css/
-assets/js/
