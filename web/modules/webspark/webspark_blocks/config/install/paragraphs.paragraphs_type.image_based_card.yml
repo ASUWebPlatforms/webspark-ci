@@ -1,0 +1,10 @@
+uuid: ed93f9f7-33a9-4829-8c47-5814e2f9e9a8
+langcode: en
+status: true
+dependencies: {  }
+id: image_based_card
+label: 'Image based card'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

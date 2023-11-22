@@ -242,6 +242,13 @@ function webspark_blocks_update_9024(&$sandbox) {
 }
 
 /**
+ * WS2-1711 - Add new paragraph type for Image based card component.
+ */
+function webspark_blocks_update_9025(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {

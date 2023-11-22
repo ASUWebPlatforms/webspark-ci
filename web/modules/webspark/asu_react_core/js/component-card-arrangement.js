@@ -29,6 +29,24 @@
                 // TODO: RankingCard does not support showBorders
               },
             });
+          } else if (card.cardType === "image") {
+            AsuWebCore.initImage({
+              targetSelector: "#card-" + card.id,
+              props: {
+                src: card.imageSource,
+                alt: card.imageAltText,
+                // Optional props
+                cssClasses: ["w-100"],
+                loading: "lazy", // one of "lazy" or "eager" // TODO: check this
+                decoding: "async", // one of "sync" or "async" or "auto" // TODO: check this
+                dataTestId: "my-test-id", // TODO: check this
+                fetchPriority: "auto", // one of "auto" or "high" or "low" // TODO: check this
+                // width: "100", // integer for # px, do not include unit
+                // height: "100", // integer for # px, do not include unit
+                cardLink: card.linkUrl,
+                title: card.linkLabel, // will be visually-hidden
+              }
+            });
           } else {
             AsuWebCore.initCard({
               targetSelector: '#card-' + card.id,

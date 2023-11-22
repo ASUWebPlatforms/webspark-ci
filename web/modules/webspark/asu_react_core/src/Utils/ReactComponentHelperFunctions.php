@@ -54,6 +54,9 @@ class ReactComponentHelperFunctions {
       case 'card_ranking':
         $card->cardType = 'ranking';
         break;
+      case 'image_based_card':
+        $card->cardType = 'image';
+        break;
     }
 
     if ($paragraph->field_media && $paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
@@ -75,10 +78,10 @@ class ReactComponentHelperFunctions {
       $card->imageSource = $image_source;
       $card->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
     }
-    if ($paragraph->field_heading->value) {
+    if ($paragraph->hasField('field_heading') && $paragraph->field_heading->value) {
       $card->title = $paragraph->field_heading->value;
     }
-    if ($paragraph->field_body->value) {
+    if ($paragraph->hasField('field_body') && $paragraph->field_body->value) {
       $card->content = $paragraph->field_body->value;
     }
     if ($paragraph->field_cta && $paragraph->field_cta->entity) {
