@@ -9,6 +9,8 @@ dependencies:
     - editor
     - linkit
     - media
+_core:
+  default_config_hash: PwHijPIQ1KW7KrMXy_TzSdLjozhXG7INtrEZ3dLRVVM
 name: 'Full HTML'
 format: full_html
 weight: 2
@@ -43,7 +45,7 @@ filters:
     status: false
     weight: -50
     settings:
-      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <p> <br> <img src alt height width data-entity-type data-entity-uuid data-align data-caption> <h1 class="article"> <mark> <a href hreflang data-entity-substitution data-entity-type data-entity-uuid title class> <div class="span"> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title> <span class="highlight-gold highlight-black highlight-white"> <s> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr class>'
+      allowed_html: ''
       filter_html_help: true
       filter_html_nofollow: false
   linkit:
