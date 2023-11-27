@@ -275,7 +275,7 @@ function _webspark_blocks_revert_module_config() {
 /**
  * Update specific configuration files.
  */
-function _webspark_blocks_update_module_config_list($config_list = []) {
+function _webspark_blocks_revert_module_config_list($config_list = []) {
   \Drupal::state()->set('configuration_locked', FALSE);
   foreach ($config_list as $config) {
     \Drupal::service('webspark.config_manager')->updateConfigFile($config);
