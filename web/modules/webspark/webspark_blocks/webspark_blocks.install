@@ -245,8 +245,12 @@ function webspark_blocks_update_9024(&$sandbox) {
  * WS2-1533 - Changed description text for field_media in Card, Card Degree, Card Story.
  */
 function webspark_blocks_update_9025(&$sandbox) {
-  $configs = ['field.field.paragraph.card.field_media', 'field.field.paragraph.card_degree.field_media', 'field.field.paragraph.card_story.field_media'];
-  _webspark_blocks_revert_module_config_list($configs);
+  $configs = [
+    'field.field.paragraph.card.field_media',
+    'field.field.paragraph.card_degree.field_media',
+    'field.field.paragraph.card_story.field_media',
+  ];
+  _webspark_blocks_update_module_config_list($configs);
 }
 
 /**
