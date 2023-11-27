@@ -173,6 +173,20 @@ class ReactComponentHelperFunctions {
       $card->showBorders = true;
     }
 
+    // WS2-1711 - Image based card
+    if (isset($paragraph->field_loading->value)) {
+      $card->loading = $paragraph->field_loading->value;
+    }
+    if (isset($paragraph->field_caption->value)) {
+      $card->caption = $paragraph->field_caption->value;
+    }
+    if (isset($paragraph->field_caption_title->value)) {
+      $card->captionTitle = $paragraph->field_caption_title->value;
+    }
+    if (isset($paragraph->field_drop_shadow->value) && $paragraph->field_drop_shadow->value) {
+      $card->dropShadow = true;
+    }
+
     $settings = [];
     $settings['components']['card'][$id] = $card;
 

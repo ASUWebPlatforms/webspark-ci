@@ -36,15 +36,17 @@
                 src: card.imageSource,
                 alt: card.imageAltText,
                 // Optional props
-                cssClasses: ["w-100"],
-                loading: "lazy", // one of "lazy" or "eager" // TODO: check this
-                decoding: "async", // one of "sync" or "async" or "auto" // TODO: check this
-                dataTestId: "my-test-id", // TODO: check this
-                fetchPriority: "auto", // one of "auto" or "high" or "low" // TODO: check this
-                // width: "100", // integer for # px, do not include unit
-                // height: "100", // integer for # px, do not include unit
+                cssClasses: ["w-100", "ws2-img"],
+                loading: card.loading,
+                decoding: "auto",
+                fetchPriority: "auto",
                 cardLink: card.linkUrl,
-                title: card.linkLabel, // will be visually-hidden
+                title: card.linkLabel,
+                //TODO: TO BE Added to component in UDS-1531
+                caption: card.caption,
+                captionTitle: card.captionTitle,
+                border: card.showBorders,
+                dropShadow: card.dropShadow
               }
             });
           } else {
