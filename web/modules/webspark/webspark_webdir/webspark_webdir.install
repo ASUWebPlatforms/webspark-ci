@@ -264,6 +264,13 @@ function webspark_webdir_update_9013(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_webdir_disable_alpha');
 }
 
+/**
+ * Enable reordering of items in 'People' and 'People in Departments' listings.
+ */
+function webspark_webdir_update_9014(&$sandbox): void {
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_asurite_ids');
+}
+
 // @todo This module doesn't implement hook_config_readonly_whitelist_patterns()
 // We should add that eventually. Likelihood of users tweaking this block's
 // field settings is low, no not a rush.
