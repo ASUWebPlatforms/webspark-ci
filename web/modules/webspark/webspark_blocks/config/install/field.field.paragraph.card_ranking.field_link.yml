@@ -1,3 +1,4 @@
+uuid: 4f3f0a77-7213-47c5-b306-ec76918ceffa
 langcode: en
 status: true
 dependencies:
@@ -12,7 +13,7 @@ entity_type: paragraph
 bundle: card_ranking
 label: Link
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
