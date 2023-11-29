@@ -254,6 +254,16 @@ function webspark_blocks_update_9025(&$sandbox) {
 }
 
 /**
+ * WS2-1800 - Ranking card "read more" "Link" field now optional.
+ */
+function webspark_blocks_update_9026(&$sandbox) {
+  $configs = [
+    'field.field.paragraph.card_ranking.field_link',
+  ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
