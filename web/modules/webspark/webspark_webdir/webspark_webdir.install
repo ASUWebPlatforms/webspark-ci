@@ -271,6 +271,16 @@ function webspark_webdir_update_9014(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_asurite_ids');
 }
 
+/**
+ * Update to add field_states_ui handling to hide disble_alpha for faculty_rank.
+ *
+ * Also removes the filter by title group since it's not conditionally driven
+ * like the field inside of it, so it's problematic. Just display the field.
+ */
+function webspark_webdir_update_9015(&$sandbox): void {
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
+}
+
 // @todo This module doesn't implement hook_config_readonly_whitelist_patterns()
 // We should add that eventually. Likelihood of users tweaking this block's
 // field settings is low, no not a rush.
