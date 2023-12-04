@@ -42,7 +42,6 @@
                 fetchPriority: "auto",
                 cardLink: card.linkUrl,
                 title: card.linkLabel,
-                //TODO: TO BE Added to component in UDS-1531
                 caption: card.caption,
                 captionTitle: card.captionTitle,
                 border: card.showBorders,
