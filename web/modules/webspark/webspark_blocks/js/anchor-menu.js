@@ -26,7 +26,7 @@
         let navbar = document.getElementById('uds-anchor-menu');
 
         setTimeout(function() {
-          let globalHeader = document.getElementById('global-header');
+          let globalHeader = document.getElementById('asuHeader');
 
           // Compensate for a fixed admin toolbar.
           let offset = getAnchorMenuTop();
@@ -155,7 +155,7 @@
   function getAnchorMenuTop() {
     let $toolbarBar = $('#toolbar-bar');
     let $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
-    let $globalHeader = $('#global-header');
+    let $globalHeader = $('#asuHeader');
 
     // On mobile devices the Anchor Menu must be rendered after the global header.
     if (window.innerWidth < 610) return $globalHeader.height();
