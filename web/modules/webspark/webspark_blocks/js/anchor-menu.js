@@ -57,6 +57,7 @@
     const navbarInitialPosition = navbar.getBoundingClientRect().top + window.scrollY;
     const anchorTargets = new Map();
     let previousScrollPosition = window.scrollY;
+    let toolbar = document.getElementById('toolbar-bar');
 
     // Cache the anchor target elements by mapping them as a key/pair so don't have to
     // parse the dom on every scroll event
@@ -76,11 +77,14 @@
         !navbar.classList.contains('uds-anchor-menu-sticky')
       ) {
         if (navbarY > offset && navbarY < headerHeight + offset) {
-          if (window.innerWidth > 610) { globalHeader.style.top = -(headerHeight - navbarY) + 'px' };
+          if (window.innerWidth > 610) {
+            globalHeader.style.top = -(headerHeight - navbarY) + 'px';
+
+        };
         } else if (navbarY <= offset) {
-          if (window.innerWidth > 610) { globalHeader.style.top = -globalHeader.offsetHeight + 'px' };
+          if (window.innerWidth > 610) { globalHeader.style.top = toolbar?.offsetHeight > 0  ? `${toolbar?.offsetHeight * 2}px` : "0px" };
           navbar.classList.add('uds-anchor-menu-sticky');
-          navbar.style.top = getAnchorMenuTop() + 'px';
+          navbar.style.top = (getAnchorMenuTop() - 24) + 'px'; // 24 seems to be the most consistent to not show any space between the anchor menu and the global header
         }
       }
       // If scrolling UP
@@ -157,7 +161,7 @@
     if (window.innerWidth < 610) return $globalHeader.height();
     // If the Administration toolbar is not rendered
     // the Anchor menu must be rendered at the top of the page.
-    if (!$toolbarBar.length) return 0;
+    if (!$toolbarBar.length) return $globalHeader.height();
 
     let $navbar = $('#uds-anchor-menu');
     if ($navbar.length && $navbar.hasClass('uds-anchor-menu-sticky')
@@ -165,7 +169,7 @@
       && !$toolbarItemAdministrationTray.hasClass('toolbar-tray-vertical')) {
       // If the Administration toolbar and the Secondary Administration toolbar are rendered
       // the Anchor menu must be rendered after the Secondary Administration toolbar.
-      return $toolbarItemAdministrationTray.height() + $toolbarBar.height();
+      return $toolbarItemAdministrationTray.height() + $toolbarBar.height() + $globalHeader.height();
     }
     else {
       // If the Administration toolbar is rendered and the Secondary Administration toolbar is not rendered
