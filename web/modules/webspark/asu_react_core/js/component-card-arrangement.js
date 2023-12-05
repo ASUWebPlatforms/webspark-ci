@@ -34,7 +34,7 @@
               targetSelector: '#card-' + card.id,
               props: {
                 type: card.cardType,
-                horizontal: false,
+                horizontal: settings.asu.horizontal,
                 clickable: card.clickable,
                 clickHref: card.clickHref,
                 image: card.imageSource,

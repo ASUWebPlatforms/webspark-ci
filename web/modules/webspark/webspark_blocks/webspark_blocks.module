@@ -73,6 +73,22 @@ function webspark_blocks_form_alter(&$form, FormStateInterface $form_state, $for
   }
 
   $form['settings']['block_form']['#process'][] = '_webspark_blocks_hero_block_form_alter';
+
+  if($form_id == 'layout_builder_add_block' || $form_id == 'layout_builder_update_block') {
+    if(isset($form['settings']['block_form']['#block']) && $form['settings']['block_form']['#block']->get('type')->getValue()[0]['target_id'] ==  'card_arrangement') {
+      $fieldDefinition = \Drupal::service('entity_field.manager')->getFieldDefinitions('block_content', 'card_arrangement')['field_card_arrangement_display'];
+      if($fieldDefinition) {
+        $columnValues = [];
+        foreach ($fieldDefinition->getSetting('allowed_values') as $key => $value) {
+          //Comparing againts Two columns option
+          if ($key != "''") {
+            $columnValues[] = [$key => $value];
+          }
+        }
+        $form['#attached']['drupalSettings']['columns_values'] = $columnValues;
+      }
+    }
+  }
 }
 
 /**
