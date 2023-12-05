@@ -10,10 +10,12 @@ body {
 }
 
 /* If #toolbar_administration our js adds asu_brand-toolbar-*-compat classes */
-#ws2HeaderContainer.asu-brand-toolbar-header-tray-open-compat header {
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-open-compat header,
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-open-compat div#asuHeader {
   top:79px;
 }
-#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat header {
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat header,
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat div#asuHeader {
   top:39px;
 }
 body.toolbar-horizontal.toolbar-tray-open {
@@ -24,7 +26,9 @@ body.toolbar-horizontal {
 }
 /* vertical variations */
 #ws2HeaderContainer.asu-brand-toolbar-header-tray-open-compat-vertical header,
-#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat-vertical header {
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat-vertical header,
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-open-compat-vertical div#asuHeader,
+#ws2HeaderContainer.asu-brand-toolbar-header-tray-closed-compat-vertical div#asuHeader {
   top:39px;
   z-index: 1200 !important;
 }
@@ -84,7 +88,8 @@ body .ui-dialog.ui-widget.ui-widget-content.media-library-widget-modal {
   }
 
   /* Guard against css bleeding in from CMS */
-  #ws2HeaderContainer header .navbar-container ul.navlist li {
+  #ws2HeaderContainer header .navbar-container ul.navlist li,
+  #ws2HeaderContainer div .navbar-container ul.navlist li {
     max-width: 100% !important;
   }
 

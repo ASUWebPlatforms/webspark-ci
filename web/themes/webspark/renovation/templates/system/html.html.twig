@@ -38,11 +38,6 @@
     <script defer src="/themes/webspark/renovation/js/asuawesome.js"></script>
   </head>
   <body{{attributes}}>
-    {% if logged_in and user.hasPermission('Use the toolbar') %}
-      <a href="#skip-to-content" class="visually-hidden visually-hidden-focusable">
-        {{ 'Skip to main content'|t }}
-      </a>
-    {% endif %}
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
