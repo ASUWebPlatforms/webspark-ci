@@ -21,8 +21,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: WOLAj-YMQLU_fliiT6XynL-aqPYOJg6X-yFUDV0xJKk
 id: block_content.card_arrangement.card_arrangement_vertical
 targetEntityType: block_content
 bundle: card_arrangement

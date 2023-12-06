@@ -21,8 +21,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: zY4_VoBWbYWNtSLvNkeOO2HFYJy9Ybd1q7MAR-HIDuU
 id: block_content.card_arrangement.story_card
 targetEntityType: block_content
 bundle: card_arrangement

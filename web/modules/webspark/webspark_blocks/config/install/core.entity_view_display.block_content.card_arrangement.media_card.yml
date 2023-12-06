@@ -21,8 +21,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: aDWye1mbty7WvpbbRIQiFBJDWdkANrzwD5Yd3AYjNjw
 id: block_content.card_arrangement.media_card
 targetEntityType: block_content
 bundle: card_arrangement
