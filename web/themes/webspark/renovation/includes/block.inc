@@ -121,3 +121,10 @@ function getPosterImage(array $variables): string {
 function renovation_preprocess_block__inline_block__video_hero(&$variables) {
   $variables['poster'] = getPosterImage($variables);
 }
+
+
+function renovation_preprocess_block__inline_block__accordion(array &$variables) {
+  //get block content and field_expanded variable
+  $block_content = $variables['content']['#block_content'];
+  $variables['expanded'] = $block_content->field_expanded->value;
+}
