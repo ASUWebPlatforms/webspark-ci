@@ -18,7 +18,7 @@
         _showDisplayOrientation();
       }
 
-      if (settings && settings.columns_values && Array.isArray(settings.columns_values)) {
+      if (settings && settings.columns_values && Array.isArray(settings.columns_values) && selectCountColumn) {
         // Initial setup of options and event listener for display orientation change
         _updateColumnsOptions();
         displayOrientation.addEventListener('change', _updateColumnsOptions);
