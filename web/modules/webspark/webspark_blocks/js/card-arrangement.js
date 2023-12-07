@@ -8,9 +8,12 @@
       const displayDiv = document.querySelector('[data-drupal-selector="edit-settings-block-form-field-display-orientation-wrapper"]');
 
       // Get the element to identify Ranking cards
-      const element = document.querySelector('[name*="[field_card_ranking_image_size]"]');
+      const elementRanking = document.querySelector('[name*="[field_card_ranking_image_size]"]');
+      // Get the element to identify Image based cards
+      const elementBasedCard = document.querySelector('[name*="[field_loading]"]');
+
       // Check if the element exists to determine display orientation
-      if (element) {
+      if (elementRanking || elementBasedCard) {
         // Hide display orientation
         _showDisplayOrientation('none');
       } else {
