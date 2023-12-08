@@ -4,7 +4,6 @@
  * Template for a accordion block.
  */
 #}
-
 {% set classes = [
   'block',
   'block-' ~ configuration.provider|clean_class,
@@ -23,8 +22,8 @@
   {{ content.field_tooltip }}
   {% set unique_id = block.id.value %}
 
-  <div class="accordion" id="accordion-{{ unique_id }}" data-first-expanded="{{ expanded }}">
-    {{ content|without('field_color', 'field_anchor_menu_settings', 'field_tooltip', 'field_anchor_menu_settings', 'field_expanded') }}
+  <div class="accordion" id="accordion-{{ unique_id }}">
+    {{ content|without('field_color', 'field_anchor_menu_settings', 'field_tooltip', 'field_anchor_menu_settings') }}
   </div>
 
 </div>
