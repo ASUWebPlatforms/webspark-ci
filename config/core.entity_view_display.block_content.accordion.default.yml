@@ -1,0 +1,70 @@
+uuid: 49754d14-8af0-4d2b-8751-8c3eba000739
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.field.block_content.accordion.field_anchor_menu_settings
+    - field.field.block_content.accordion.field_color
+    - field.field.block_content.accordion.field_expanded
+    - field.field.block_content.accordion.field_paragraph
+    - field.field.block_content.accordion.field_spacing_bottom
+    - field.field.block_content.accordion.field_spacing_top
+    - field.field.block_content.accordion.field_tooltip
+  module:
+    - entity_reference_revisions
+    - options
+_core:
+  default_config_hash: 8lhtODRhqZ3XMvHQz24E0noL9Nm005lcmsv_rF8Vzn4
+id: block_content.accordion.default
+targetEntityType: block_content
+bundle: accordion
+mode: default
+content:
+  field_anchor_menu_settings:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_color:
+    type: list_key
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_expanded:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_paragraph:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_tooltip:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_spacing_bottom: true
+  field_spacing_top: true
