@@ -1,0 +1,23 @@
+uuid: 63b6eff5-e77c-49fb-a737-5c3c55f1cfe6
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.storage.block_content.field_expanded
+id: block_content.accordion.field_expanded
+field_name: field_expanded
+entity_type: block_content
+bundle: accordion
+label: 'Expand first accordion panel'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
