@@ -299,3 +299,15 @@ function _webspark_blocks_update_module_config_list($config_list = []) {
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-1598: Add accordion default open field_expanded configs
+ */
+function webspark_blocks_update_9028(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.accordion.field_expanded');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_expanded');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.accordion.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.block_content.accordion.default');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
