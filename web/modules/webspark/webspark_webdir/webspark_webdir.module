@@ -98,9 +98,15 @@ function webspark_webdir_preprocess_block__web_directory(&$variables)
 
   $appPathFolder = \Drupal::service('webspark_webdir.helper_functions')->getAppPathFolder('app-webdir-ui');
 
+  $customPadding = '';
+  if ($blockContent->hasField('field_padding')) {
+    $customPadding = $blockContent->field_padding->value . 'px';
+  }
+
   $markup = <<<HTML
 <div
   class="webdir-container"
+  style="padding: {$customPadding}"
   id="webdir-container-{$blockContent->id()}"
   data-search-type="{$searchType}"
   data-search-url="{$config->get('api')}"

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.web_directory
+    - field.storage.block_content.field_padding
+id: block_content.web_directory.field_padding
+field_name: field_padding
+entity_type: block_content
+bundle: web_directory
+label: Padding
+description: 'Set only numeric values, this value will be used with px units.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

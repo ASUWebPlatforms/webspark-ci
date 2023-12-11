@@ -281,6 +281,13 @@ function webspark_webdir_update_9015(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
 }
 
+/**
+ * WS2-1822 - Added custom field for global div padding value.
+ */
+function webspark_blocks_update_9016(&$sandbox) {
+  _webspark_blocks_revert_module_config();
+}
+
 // @todo This module doesn't implement hook_config_readonly_whitelist_patterns()
 // We should add that eventually. Likelihood of users tweaking this block's
 // field settings is low, no not a rush.
