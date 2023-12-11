@@ -282,7 +282,7 @@ function webspark_webdir_update_9015(&$sandbox): void {
 }
 
 /**
- * WS2-1822 - Added custom field for global div padding value.
+ * WS2-1822 - Added Apparence settings for Web directory block.
  */
 function webspark_webdir_update_9016(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
