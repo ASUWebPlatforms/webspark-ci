@@ -44,8 +44,6 @@ third_party_settings:
         id: ''
         description: ''
         required_fields: true
-_core:
-  default_config_hash: TlQU5n8o-du7WlbVO5aVPwmvyCv9Ke6dJxQr9nK6Upw
 id: block_content.web_directory.default
 targetEntityType: block_content
 bundle: web_directory
