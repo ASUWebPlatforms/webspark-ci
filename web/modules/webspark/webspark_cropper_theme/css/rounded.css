@@ -1,3 +1,5 @@
-.cropper-view-box {
+form[action*='media_library_selected_type=cropped_image_rounded_1_1_'] .cropper-view-box,
+form[id='media-cropped-image-rounded-1-1-edit-form'] .cropper-view-box,
+form[id='media-cropped-image-rounded-1-1-add-form'] .cropper-view-box{
   border-radius: 50% !important;
 }
