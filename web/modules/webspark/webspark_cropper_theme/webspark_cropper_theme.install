@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Apply Bio field related changes.
+ */
+function webspark_cropper_theme_update_9001(&$sandbox) {
+  // Unlock the configuration storage.
+  \Drupal::state()->set('configuration_locked', FALSE);
+  // Revert all configs from this module.
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.media.cropped_image_rounded_1_1_.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.media.cropped_image_rounded_1_1_.media_library');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.media.cropped_image_rounded_1_1_.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.media.cropped_image_rounded_1_1_.media_library');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.image.field_media');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.media.cropped_image_rounded_1_1_.field_media_image');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('media.type.cropped_image_rounded_1_1_');
+  // Lock the configuration storage.
+  \Drupal::state()->set('configuration_locked', TRUE);
+}

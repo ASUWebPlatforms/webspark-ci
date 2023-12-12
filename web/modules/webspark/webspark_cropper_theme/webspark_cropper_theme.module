@@ -89,6 +89,11 @@ function webspark_cropper_theme_form_alter(array &$form, FormStateInterface $for
   if ($form_id == 'node_page_edit_form' || $form_id == 'node_page_form') {
     $form['#attached']['library'][] = 'webspark_cropper_theme/dialog';
   }
+
+
+  if($form_id == 'media_cropped_image_rounded_1_1__edit_form') {
+    $form['#attached']['library'][] = 'webspark_cropper_theme/rounded';
+  }
 }
 
 /**
