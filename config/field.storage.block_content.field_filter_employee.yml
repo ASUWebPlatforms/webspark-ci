@@ -1,0 +1,23 @@
+uuid: d9cc7fe8-7fe9-40c4-9f27-4e607943c051
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: VB2Xbn01d2hdDreAHhEKLnmglwxIzTyf-qM4yCzlXuA
+id: block_content.field_filter_employee
+field_name: field_filter_employee
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,10 @@
+uuid: 50443266-a34a-4ee9-a7d3-dddd537eaee2
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: atqa5HOuRt57mM_bNQwNbT84pjI3IHNZV9k3EF8pdzI
+id: news
+label: News
+revision: 0
+description: ''

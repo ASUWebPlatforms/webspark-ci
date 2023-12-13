@@ -1,0 +1,12 @@
+uuid: f5b0e0b7-dd7f-4f3a-84a6-7f07a778d1ef
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: Kb1JFkFogBDPsuc4IUVd-Xtnj5Wcy1ukA8DvI6l9FqI
+id: paragraph.portrait
+label: Portrait
+targetEntityType: paragraph
+cache: true

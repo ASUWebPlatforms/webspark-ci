@@ -1,0 +1,35 @@
+uuid: a5ca845a-63c3-4c10-97f1-8dd04d80c2c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+_core:
+  default_config_hash: dPQyEmb2mwEBA0g8m0zpe8Db2QZnb5RCC7acE0P9goc
+id: block_content.field_grid_links_display
+field_name: field_grid_links_display
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: one-column
+      label: 'One Column'
+    -
+      value: two-columns
+      label: 'Two Columns'
+    -
+      value: three-columns
+      label: 'Three Columns'
+    -
+      value: four-columns
+      label: 'Four Columns'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,31 @@
+uuid: 58809d0a-bd0b-46a3-bf58-67aee2da42bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - radix
+_core:
+  default_config_hash: oj5MGqptYBy91Y4Z6s7TRS6E1VRMBO1Ex58olL0aVcE
+id: radix_messages
+theme: radix
+region: navbar_branding
+weight: -2
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

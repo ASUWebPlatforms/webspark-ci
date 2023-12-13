@@ -1,0 +1,28 @@
+uuid: 24063f15-2f26-4638-98e5-38fe796a4cb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_degree_detail_locations
+    - node.type.degree_detail_page
+  module:
+    - link
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: QJIsY0n0mfSXrQ4eUO0AlaupTy66vBYuBIy7Y__ZbDA
+id: node.degree_detail_page.field_degree_detail_locations
+field_name: field_degree_detail_locations
+entity_type: node
+bundle: degree_detail_page
+label: Locations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

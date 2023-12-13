@@ -1,0 +1,25 @@
+uuid: c589e42a-7b8f-45cb-a9f9-89b8928f26ab
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: B1zOtq_USfewjF-Cw__eunC3GQSGR-wI5W9CKEfa0Gw
+id: paragraph.field_media
+field_name: field_media
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

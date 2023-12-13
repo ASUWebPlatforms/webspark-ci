@@ -1,0 +1,21 @@
+uuid: 7a795729-d944-410c-9942-f9620126f625
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_sub_heading
+_core:
+  default_config_hash: c_33YP4K3Lzn9JXKF9apIJ7H7v15LsdgOw2a3shNQWk
+id: block_content.hero.field_sub_heading
+field_name: field_sub_heading
+entity_type: block_content
+bundle: hero
+label: 'Sub Heading'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,32 @@
+uuid: 4be21c83-585f-4791-8401-14b075163ef9
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+_core:
+  default_config_hash: lGG2CDgr0Man_qJj_qxvVf2T-pQXOjnmd4DSizJ83I4
+id: block_content.field_image_size
+field_name: field_image_size
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: default
+      label: Default
+    -
+      value: '25'
+      label: 25%
+    -
+      value: '50'
+      label: 50%
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

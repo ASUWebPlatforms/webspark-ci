@@ -1,0 +1,25 @@
+uuid: 4bc94c47-7b16-43b7-8881-02a787aea822
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_color
+    - paragraphs.paragraphs_type.blockquote
+  module:
+    - options
+_core:
+  default_config_hash: AJM_D21QyRC1c3kM1_UGkZwfGPxaXwsLbHSYerCdEek
+id: paragraph.blockquote.field_text_color
+field_name: field_text_color
+entity_type: paragraph
+bundle: blockquote
+label: 'Text Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

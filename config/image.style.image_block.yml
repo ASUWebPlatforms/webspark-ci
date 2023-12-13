@@ -1,0 +1,28 @@
+uuid: dacbc7e8-8fd9-419e-8a15-7cf1f3de7cf0
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.images_block
+  module:
+    - crop
+_core:
+  default_config_hash: TH5zsRw8JOqu_KBPeWW7SxCgw7UDWKlxsU_gGY0jRKI
+name: image_block
+label: 'Image Block'
+effects:
+  71628ec3-71c0-4155-8d49-943dcab56571:
+    uuid: 71628ec3-71c0-4155-8d49-943dcab56571
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: images_block
+      automatic_crop_provider: null
+  26c6669e-8171-4ca6-a25b-7193e54dc731:
+    uuid: 26c6669e-8171-4ca6-a25b-7193e54dc731
+    id: image_scale
+    weight: 2
+    data:
+      width: 600
+      height: null
+      upscale: false

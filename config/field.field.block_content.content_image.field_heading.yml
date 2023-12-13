@@ -1,0 +1,21 @@
+uuid: cbc77332-ff1c-4263-a1d7-f9f2bb57f117
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_image
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: dCF3O10pKCDXkbQ3NC77KDkqi3oxuX-EJwl7l-ybbZc
+id: block_content.content_image.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: content_image
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

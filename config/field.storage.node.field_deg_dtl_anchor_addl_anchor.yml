@@ -1,0 +1,24 @@
+uuid: 658c6c29-23d3-42e1-9e10-98eea8ed8011
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: Oal_vUU4bJefOezirGHUAVXnmTNVmfJx1hnEn5zEZW4
+id: node.field_deg_dtl_anchor_addl_anchor
+field_name: field_deg_dtl_anchor_addl_anchor
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

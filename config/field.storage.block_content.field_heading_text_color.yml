@@ -1,0 +1,29 @@
+uuid: 981d0338-1dbb-4c27-9ff3-87d461a2797a
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+_core:
+  default_config_hash: zb7DcRBoWdqkInrYV28gVrgTBb-uj638mN64ApmHySs
+id: block_content.field_heading_text_color
+field_name: field_heading_text_color
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: black
+      label: Black
+    -
+      value: white
+      label: White
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

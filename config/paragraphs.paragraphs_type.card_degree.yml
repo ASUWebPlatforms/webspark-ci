@@ -1,0 +1,15 @@
+uuid: 65a2ea2d-fa73-4a5f-ae76-df1385a5b51f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: kf_8D7QvwYms0DYBX7EqxDgcM4qE2E4TqVld_fsGz98
+id: card_degree
+label: 'Card Degree'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

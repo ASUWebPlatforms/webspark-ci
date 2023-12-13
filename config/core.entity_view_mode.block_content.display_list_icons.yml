@@ -1,0 +1,12 @@
+uuid: e890f020-6200-4ca6-9e34-3e3adadc0742
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: IuJ4k5SioIjq4t1VhP1ZQJl7YDoVc2AupWeW5avG_Ik
+id: block_content.display_list_icons
+label: 'Display List Icons'
+targetEntityType: block_content
+cache: true

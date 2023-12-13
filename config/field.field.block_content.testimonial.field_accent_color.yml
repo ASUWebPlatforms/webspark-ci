@@ -1,0 +1,25 @@
+uuid: 3d0207ad-af19-4b47-8a7b-e9d0e7566e90
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial
+    - field.storage.block_content.field_accent_color
+  module:
+    - options
+_core:
+  default_config_hash: yTqXoGGx2R1_PyBFC1cJPpPyfyq1G5YcqwI4tHm2TRQ
+id: block_content.testimonial.field_accent_color
+field_name: field_accent_color
+entity_type: block_content
+bundle: testimonial
+label: 'Accent Color'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: ''''''
+default_value_callback: ''
+settings: {  }
+field_type: list_string

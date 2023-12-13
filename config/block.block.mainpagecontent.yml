@@ -1,0 +1,31 @@
+uuid: 16b20c8d-20e8-4627-8e50-1690003f3c45
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - renovation
+_core:
+  default_config_hash: l3k6DyiEAUkFr8EM3akMrza63i3pAMVFMSQTM1kS5DY
+id: mainpagecontent
+theme: renovation
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

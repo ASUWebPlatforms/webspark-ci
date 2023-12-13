@@ -1,0 +1,12 @@
+uuid: f2a69a77-abb0-4993-bf3a-5b74260e399f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: vv6cA19wZUiB10wUgfe-9KRgjdbiGcNsQ2GpRAoO6bA
+id: paragraph.hero_cta
+label: 'Hero CTA'
+targetEntityType: paragraph
+cache: true

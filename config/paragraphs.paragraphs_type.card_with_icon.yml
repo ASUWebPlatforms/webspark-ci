@@ -1,0 +1,12 @@
+uuid: f37238c3-ad7e-4507-a86c-8abd71ad6cb9
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9JNbgjGmvrCCvvcJNZ7iTIhb78b4Bt9lK9d9fSiSYSk
+id: card_with_icon
+label: 'Card with Icon'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,10 @@
+uuid: 1d0910b0-7a39-4d4c-9756-1aa019afc98c
+langcode: en
+status: true
+dependencies: {  }
+id: degree_details_why_choose
+label: 'Degree Details Why Choose'
+icon_uuid: null
+icon_default: null
+description: 'Custom cards for Why Choose ASU section of degree pages.'
+behavior_plugins: {  }

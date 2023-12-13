@@ -1,0 +1,10 @@
+uuid: 5a05ccb0-070e-45c7-9943-e4b396bd74e4
+langcode: en
+status: true
+dependencies: {  }
+id: image_based_card
+label: 'Image based card'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

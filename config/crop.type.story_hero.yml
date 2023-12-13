@@ -1,0 +1,14 @@
+uuid: 351f4a70-4597-46c4-ae14-a65ba1d0571e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 0kAyRNFY8lw6RelGMQkKmDDXVcyVcHIkY3zo2AWxUjs
+label: 'Story Hero'
+id: story_hero
+description: ''
+aspect_ratio: '15:4'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: 1800
+hard_limit_height: null

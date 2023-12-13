@@ -1,0 +1,10 @@
+uuid: 034443a2-d1d9-4503-932e-05aacc277c13
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: r8UbeJtjPBX2yC-xdgnxrcChj69pNbfZwGlsLbfMqCk
+id: inset_box
+label: 'Inset Box'
+revision: 0
+description: ''

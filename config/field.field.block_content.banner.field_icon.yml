@@ -1,0 +1,23 @@
+uuid: 8570d943-54f3-4a9c-8259-f7a21ae752aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner
+    - field.storage.block_content.field_icon
+  module:
+    - fontawesome
+_core:
+  default_config_hash: XkZAlBfHJnG-WHdm4xHJndd-BqUVQfKcMWRnG4b7Vbo
+id: block_content.banner.field_icon
+field_name: field_icon
+entity_type: block_content
+bundle: banner
+label: Icon
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fontawesome_icon

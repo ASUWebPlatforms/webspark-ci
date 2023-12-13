@@ -1,0 +1,28 @@
+uuid: 7f0e2f01-b4fd-4f25-b08e-e39ffe5487ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deg_dtl_hide_app_reqs
+    - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: nCdKLKA7Gedly8CdBH_z5hVZOAOE5eCfGWIjKZOXnKo
+id: node.degree_detail_page.field_deg_dtl_hide_app_reqs
+field_name: field_deg_dtl_hide_app_reqs
+entity_type: node
+bundle: degree_detail_page
+label: 'Hide application requirements'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

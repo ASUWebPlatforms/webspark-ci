@@ -1,0 +1,28 @@
+uuid: fdefc7e5-07a0-4580-8a81-27edbc741623
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deg_dtl_anchor_next_steps
+    - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: 8dp1J7DXZLm66xnxPuQzBYyX9xLpi8Xg1bcwNFb2_Qc
+id: node.degree_detail_page.field_deg_dtl_anchor_next_steps
+field_name: field_deg_dtl_anchor_next_steps
+entity_type: node
+bundle: degree_detail_page
+label: 'Next steps'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

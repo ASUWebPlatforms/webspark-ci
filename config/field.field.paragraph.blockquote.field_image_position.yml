@@ -1,0 +1,25 @@
+uuid: ae3bd322-9789-415e-b2e2-d4c9d289e264
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_position
+    - paragraphs.paragraphs_type.blockquote
+  module:
+    - options
+_core:
+  default_config_hash: esGL5jmjz2rJkJiJdWbkIgd8q_BaFaQl5Sr_5mZbop0
+id: paragraph.blockquote.field_image_position
+field_name: field_image_position
+entity_type: paragraph
+bundle: blockquote
+label: 'Image Position'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

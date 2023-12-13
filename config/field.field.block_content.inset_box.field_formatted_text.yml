@@ -1,0 +1,30 @@
+uuid: aae0fc9f-6a26-4543-a55e-9b03a6762264
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.inset_box
+    - field.storage.block_content.field_formatted_text
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: '0'
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
+_core:
+  default_config_hash: 0pzG7HqunuEa5f1aTo9Pdcwm4Pr3auuhXkio4AwaRBs
+id: block_content.inset_box.field_formatted_text
+field_name: field_formatted_text
+entity_type: block_content
+bundle: inset_box
+label: Content
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

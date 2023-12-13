@@ -1,0 +1,25 @@
+uuid: 474848c3-4c68-4d77-a26d-c6f9db0530dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero
+    - field.storage.block_content.field_hero_size
+  module:
+    - options
+_core:
+  default_config_hash: c1KrFLyAKDDXpT_Xkt1FK4E82DglZag-cRCqNd1gcnU
+id: block_content.hero.field_hero_size
+field_name: field_hero_size
+entity_type: block_content
+bundle: hero
+label: 'Hero Size'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: lg
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,31 @@
+uuid: fd92a8cb-4030-496f-895d-0599f46423c8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - radix
+_core:
+  default_config_hash: l3k6DyiEAUkFr8EM3akMrza63i3pAMVFMSQTM1kS5DY
+id: radix_mainpagecontent
+theme: radix
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

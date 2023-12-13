@@ -1,0 +1,26 @@
+uuid: a3058e1d-8025-409f-b707-a5cb38c5ee04
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - renovation
+_core:
+  default_config_hash: 8TTuxNh0ZnUdfosv1gEYwUsK7ZeD71__x9KGUi8dxmM
+id: pagetitle
+theme: renovation
+region: content
+weight: -3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/user/*\r\n/node/*/layout/discard-changes\r\n/node/*/layout/revert"

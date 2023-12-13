@@ -1,0 +1,23 @@
+uuid: a36a1c42-d1bc-4d8b-bbb5-2bd478316a52
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video
+    - field.storage.block_content.field_spacing_top
+  module:
+    - options
+_core:
+  default_config_hash: hK9jnnodBx1vSdW1pZbF1_CfMV61omeBNOfVwKbYU-8
+id: block_content.video.field_spacing_top
+field_name: field_spacing_top
+entity_type: block_content
+bundle: video
+label: 'Spacing top'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

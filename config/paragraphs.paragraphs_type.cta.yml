@@ -1,0 +1,12 @@
+uuid: 2548e11d-e1e4-44e9-8946-e8e76fbe394f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: tMUmT8uJKX48gejk3KWVHQFGDSl0XVGqrdrX7rowcuw
+id: cta
+label: CTA
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,21 @@
+uuid: 5c974e09-99ec-42f6-bead-e297166ee3b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.card_media
+_core:
+  default_config_hash: eGTRdHmDrkE6oCED7mNIeNPkdoAKBH8iDs9iI7ajT1c
+id: paragraph.card_media.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: card_media
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

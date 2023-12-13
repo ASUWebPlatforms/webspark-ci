@@ -1,0 +1,26 @@
+uuid: 8d0e8ae2-24a0-4ad2-a256-39a572044908
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: dsdo68rpRuReSH_hC3J3qUrOWqBaPJkPc5O0__pF_cM
+id: node.field_degree_detail_math_intense
+field_name: field_degree_detail_math_intense
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

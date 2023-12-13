@@ -1,0 +1,23 @@
+uuid: 6a1ca9f4-2cc8-40c6-b356-c33466deead5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.anchor_menu_settings
+  module:
+    - fontawesome
+_core:
+  default_config_hash: PVsdl2MebqVBx4LjW7dKshNOsI8cDal5l1h7FXNnjGM
+id: paragraph.anchor_menu_settings.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: anchor_menu_settings
+label: Icon
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: fontawesome_icon

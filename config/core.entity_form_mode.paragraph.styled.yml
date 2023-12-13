@@ -1,0 +1,12 @@
+uuid: df757191-6274-4e45-b007-32c0dae0702e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: zC8YBj4-Qnti-dbHGXHgHy1apEIVLSyIcKLFtKCqLJQ
+id: paragraph.styled
+label: Styled
+targetEntityType: paragraph
+cache: true

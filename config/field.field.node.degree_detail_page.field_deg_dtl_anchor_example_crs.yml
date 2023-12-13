@@ -1,0 +1,28 @@
+uuid: bfa598cf-fa22-4cdc-b1f6-6789545eee21
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deg_dtl_anchor_example_crs
+    - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: uTJNUk1qaVx0cg5h3DSdXBPVorrsgin9ctvJ3dKAVDQ
+id: node.degree_detail_page.field_deg_dtl_anchor_example_crs
+field_name: field_deg_dtl_anchor_example_crs
+entity_type: node
+bundle: degree_detail_page
+label: 'Example careers'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

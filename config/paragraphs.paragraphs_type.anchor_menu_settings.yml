@@ -1,0 +1,12 @@
+uuid: eea3f68a-f733-4e4c-b654-2961f5e3ce33
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: aLhhZb0fUDuGUATyWoAlZYDEluUCP9ZpTjLwa-sJ41c
+id: anchor_menu_settings
+label: 'anchor Menu Settings'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

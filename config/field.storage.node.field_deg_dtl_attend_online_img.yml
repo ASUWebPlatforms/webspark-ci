@@ -1,0 +1,25 @@
+uuid: 06f9a363-c0ad-43b8-b9c7-52ba1e884603
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: E1xIm_JzkUY2stZjC_R3eHCdi2v3w9zd5Tef9I-FVJQ
+id: node.field_deg_dtl_attend_online_img
+field_name: field_deg_dtl_attend_online_img
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

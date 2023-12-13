@@ -1,0 +1,31 @@
+uuid: bdd8d8c3-020c-4ae7-a8e5-82472dbd0124
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+  theme:
+    - renovation
+_core:
+  default_config_hash: oj5MGqptYBy91Y4Z6s7TRS6E1VRMBO1Ex58olL0aVcE
+id: messages
+theme: renovation
+region: pre_content
+weight: -2
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

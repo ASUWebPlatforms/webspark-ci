@@ -1,0 +1,10 @@
+uuid: de2e0abc-e299-4156-a69b-b8c24722e038
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: MTioxvmSsJoKIzigLuFSZUQQ2zcm8cOfGIkK79ys_sw
+id: tabbed_content
+label: 'Tabbed Content'
+revision: 0
+description: ''

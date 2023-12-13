@@ -1,0 +1,23 @@
+uuid: 5ffc0219-d220-49b9-9885-3aa34bfa4d7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: GYwvWrkdoJXbpVz3iu0nJMoEaf-JKboNmtvXYnrkUBk
+id: node.field_deg_dtl_anchor_glance
+field_name: field_deg_dtl_anchor_glance
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

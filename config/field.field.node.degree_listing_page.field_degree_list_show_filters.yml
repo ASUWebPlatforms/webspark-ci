@@ -1,0 +1,28 @@
+uuid: 2b4afcd9-41d0-4214-9cc1-bdc564e248af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_degree_list_show_filters
+    - node.type.degree_listing_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: Bmr0OAuE9Krg1ktzlwqs2o4Dk3-tINI7JnCkoWun1gM
+id: node.degree_listing_page.field_degree_list_show_filters
+field_name: field_degree_list_show_filters
+entity_type: node
+bundle: degree_listing_page
+label: 'Show filters'
+description: 'If enabled, the degree listing page will display controls for filtering the degrees listed.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

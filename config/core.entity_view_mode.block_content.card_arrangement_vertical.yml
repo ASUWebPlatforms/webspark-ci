@@ -1,0 +1,12 @@
+uuid: cc6ac577-d2bb-40fa-9dd8-571d08a6b8f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+_core:
+  default_config_hash: EfRvspLDeSgHQtH_Bk4nYBbmR8mbncwz0ZJCcZrcuqk
+id: block_content.card_arrangement_vertical
+label: 'Card Arrangement Vertical'
+targetEntityType: block_content
+cache: true

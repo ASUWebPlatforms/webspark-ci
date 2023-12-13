@@ -1,0 +1,28 @@
+uuid: fee2e564-5e0a-4b22-a7f2-0b6d301dcf30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_deg_dtl_anchor_global_opp
+    - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: PS9dwRUbhCh7vlqeiwo4qWgXt2nAW7Az76fA45WNLE0
+id: node.degree_detail_page.field_deg_dtl_anchor_global_opp
+field_name: field_deg_dtl_anchor_global_opp
+entity_type: node
+bundle: degree_detail_page
+label: 'Global opportunity'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,10 @@
+uuid: 34568e43-71f5-4efe-abdb-750eb5475b24
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9-z55a_4kbhqbE8QSGy4H0C5nags9jNSgrxQSJLAHsc
+id: image_background_with_cta
+label: 'Image Background With Call To Action'
+revision: 0
+description: ''

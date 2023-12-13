@@ -1,0 +1,25 @@
+uuid: b56eefd6-0cdc-4485-b95c-9e0603e1d62c
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.card_image_and_content
+    - field.storage.block_content.field_heading_color
+  module:
+    - options
+_core:
+  default_config_hash: r8x6X5lCIXi3u2djMEca1Jfi6Kb8Ylwzbv9WA0taxWk
+id: block_content.card_image_and_content.field_heading_color
+field_name: field_heading_color
+entity_type: block_content
+bundle: card_image_and_content
+label: 'Heading color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: text-white
+default_value_callback: ''
+settings: {  }
+field_type: list_string

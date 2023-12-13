@@ -1,0 +1,21 @@
+uuid: 11824b0d-c798-4ea5-b9a8-5c37136d1f58
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.news
+    - field.storage.block_content.field_heading
+_core:
+  default_config_hash: vYQl_ot6Yph2i9l5lJ1RgpADtOIiUtaCfc6ZxGMVw-k
+id: block_content.news.field_heading
+field_name: field_heading
+entity_type: block_content
+bundle: news
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,27 @@
+uuid: 92226fb8-75c8-4fb8-9bb9-3970638f8eda
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.degree_listing_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: '-qDn-yY38oziseWDiBy7yFxklekbKM2F07yA5ccVPaU'
+id: node.degree_listing_page.promote
+field_name: promote
+entity_type: node
+bundle: degree_listing_page
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

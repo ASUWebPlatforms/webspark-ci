@@ -1,0 +1,25 @@
+uuid: baf5ed5b-f8f8-4513-b384-11a30d090a09
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+  enforced:
+    module:
+      - webspark_blocks
+_core:
+  default_config_hash: 2x_300JX-1W98rFfA6W5aPhqXeux6crgkOiGEqFY09o
+id: paragraph.field_date
+field_name: field_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

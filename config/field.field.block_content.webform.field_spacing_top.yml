@@ -1,0 +1,23 @@
+uuid: fee037ec-5f95-4d7f-9034-7cdfd1ddafa1
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.webform
+    - field.storage.block_content.field_spacing_top
+  module:
+    - options
+_core:
+  default_config_hash: BPL3xP6x0bQmGmZHIiwFx3LXTI0yPtp4AXl08tfe56g
+id: block_content.webform.field_spacing_top
+field_name: field_spacing_top
+entity_type: block_content
+bundle: webform
+label: 'Spacing top'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

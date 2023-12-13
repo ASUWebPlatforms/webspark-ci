@@ -1,0 +1,30 @@
+uuid: a7da18ea-4b64-4e9b-834b-7aa34139087d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  theme:
+    - radix
+_core:
+  default_config_hash: NbZuJS-SjpyLHLAK3PR7HD6px2LMD9mGIIxfPZ2wNlY
+id: radix_primaryadminactions
+theme: radix
+region: navbar_branding
+weight: -1
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      article: article
+      page: page

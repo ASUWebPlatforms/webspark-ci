@@ -1,0 +1,23 @@
+uuid: 38777331-1db7-4141-8c2d-6b5132c3ea80
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: Uh3Rt8aAfO79VkE9Wu9TmNVhKJhP3aYr7U8AQGKFR-M
+id: node.field_degree_list_show_search
+field_name: field_degree_list_show_search
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,67 @@
+uuid: 87a6fdcf-7fa8-4eb5-909f-c047bc1c192c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asu_footer
+  theme:
+    - renovation
+_core:
+  default_config_hash: gPs7oSRQNrH2OHjL2PX3fZytvhGDQw4Ym9t9e_RLDIY
+id: asufooter
+theme: renovation
+region: footer
+weight: 0
+provider: null
+plugin: asu_footer
+settings:
+  id: asu_footer
+  label: 'ASU footer'
+  label_display: '0'
+  provider: asu_footer
+  asu_footer_block_unit_logo: null
+  asu_footer_block_unit_name: 'College Name'
+  asu_footer_block_show_logo_social_media: 1
+  asu_footer_block_facebook_url: '#'
+  asu_footer_block_twitter_url: '#'
+  asu_footer_block_linkedin_url: '#'
+  asu_footer_block_instagram_url: '#'
+  asu_footer_block_youtube_url: '#'
+  asu_footer_block_show_columns: 1
+  asu_footer_block_link_title: 'Link Title'
+  asu_footer_block_link_url: '#'
+  asu_footer_block_cta_title: 'CTA Title'
+  asu_footer_block_cta_url: '#'
+  asu_footer_block_second_title: 'Second Column'
+  asu_footer_block_menu_second_column_name: main
+  asu_footer_block_third_title: 'Third Column'
+  asu_footer_block_menu_third_column_name: main
+  asu_footer_block_fourth_title: 'Fouth Column'
+  asu_footer_block_menu_fourth_column_name: main
+  asu_footer_block_fifth_title: 'Fifth Column'
+  asu_footer_block_menu_fifth_column_name: main
+  asu_footer_block_sixth_title: 'Sixth Column'
+  asu_footer_block_menu_sixth_column_name: main
+  asu_footer_block_unit_logo_img: '11'
+  asu_footer_block_logo_link_url: '#'
+  asu_footer_block_second_title_2: ''
+  asu_footer_block_menu_second_column_name_2: _none
+  asu_footer_block_second_title_3: ''
+  asu_footer_block_menu_second_column_name_3: _none
+  asu_footer_block_third_title_2: ''
+  asu_footer_block_menu_third_column_name_2: _none
+  asu_footer_block_third_title_3: ''
+  asu_footer_block_menu_third_column_name_3: _none
+  asu_footer_block_fourth_title_2: ''
+  asu_footer_block_menu_fourth_column_name_2: _none
+  asu_footer_block_fourth_title_3: ''
+  asu_footer_block_menu_fourth_column_name_3: _none
+  asu_footer_block_fifth_title_2: ''
+  asu_footer_block_menu_fifth_column_name_2: _none
+  asu_footer_block_fifth_title_3: ''
+  asu_footer_block_menu_fifth_column_name_3: _none
+  asu_footer_block_sixth_title_2: ''
+  asu_footer_block_menu_sixth_column_name_2: _none
+  asu_footer_block_sixth_title_3: ''
+  asu_footer_block_menu_sixth_column_name_3: _none
+visibility: {  }

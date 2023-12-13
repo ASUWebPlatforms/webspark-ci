@@ -1,0 +1,26 @@
+uuid: 96be94fe-53f5-4f74-a375-e58551c2f82d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_group_with_icon.field_cards
+    - paragraphs.paragraphs_type.card_group_with_icon
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: IUQVJcH5vpFvs1nk-02iog2ibbgENtzcQhhlMH0cVxw
+id: paragraph.card_group_with_icon.default
+targetEntityType: paragraph
+bundle: card_group_with_icon
+mode: default
+content:
+  field_cards:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: portrait
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

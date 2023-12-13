@@ -1,0 +1,23 @@
+uuid: 09586d8c-3a5d-486d-94cd-aaeccbd5681b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: _tkBplpBYHWxZdJEjNh1gfkh2674GeGfxdSHtSQq_5c
+id: node.field_deg_dtl_hide_global_opp
+field_name: field_deg_dtl_hide_global_opp
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
