@@ -1,8 +1,0 @@
-uuid: 21fafddf-c544-44d4-bf78-0571e7b12472
-langcode: en
-status: true
-dependencies: {  }
-id: sidebar-menu
-label: 'Sidebar Menu'
-description: ''
-locked: false

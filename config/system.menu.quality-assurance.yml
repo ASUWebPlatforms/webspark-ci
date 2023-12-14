@@ -1,8 +1,0 @@
-uuid: 6607e4b1-708d-4873-a2e5-7f079338cdfc
-langcode: en
-status: true
-dependencies: {  }
-id: quality-assurance
-label: 'Quality Assurance'
-description: 'Pages to ensure we test when performing QA.'
-locked: false
