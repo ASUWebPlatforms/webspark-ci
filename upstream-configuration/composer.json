@@ -65,7 +65,9 @@
         "pantheon-systems/quicksilver-pushback": "2.1.1",
         "php": ">=8.1.6",
         "zaporylie/composer-drupal-optimizations": "1.2.0",
-        "drupal/editor_advanced_link": "2.2.4"
+        "drupal/editor_advanced_link": "2.2.4",
+        "drupal/ckeditor": "^1.0",
+        "drupal/fakeobjects": "^1.2"
     },
     "extra": {
         "merge-plugin": {
