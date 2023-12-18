@@ -273,6 +273,14 @@ function webspark_blocks_update_9027(&$sandbox) {
 }
 
 /**
+ * Install Single Directory Components module (required by Radix 6).
+ */
+function webspark_blocks_update_10000(&$sandbox) {
+  $module_installer = \Drupal::service("module_installer");
+  $module_installer->install(["sdc"]);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
