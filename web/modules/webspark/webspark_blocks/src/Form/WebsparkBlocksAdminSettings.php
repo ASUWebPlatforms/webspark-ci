@@ -33,7 +33,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     // Config for this instance.
     $config = \Drupal::config('webspark_blocks.settings');

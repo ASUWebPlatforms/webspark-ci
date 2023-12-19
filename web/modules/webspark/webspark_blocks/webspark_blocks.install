@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Config\FileStorage;
 
 /**
@@ -9,7 +10,7 @@ use Drupal\Core\Config\FileStorage;
 function webspark_blocks_update_9002(&$sandbox) {
   // Remove all the blocks of type basic.
   $bids = \Drupal::entityQuery('block_content')->condition('type','basic')->execute();
-  $blocks = \Drupal\block_content\Entity\BlockContent::loadMultiple($bids);
+  $blocks = BlockContent::loadMultiple($bids);
   foreach ($blocks as $block) {
     $block->delete();
   }
@@ -31,7 +32,7 @@ function webspark_blocks_update_9005(&$sandbox) {
     ->condition('field_background_color', 'default')
     ->execute();
 
-  $blocks = Drupal\block_content\Entity\BlockContent::loadMultiple($bids);
+  $blocks = BlockContent::loadMultiple($bids);
   // Updates field_background_color values.
   $updated_value_map = [
     'default' => 'bg-white',

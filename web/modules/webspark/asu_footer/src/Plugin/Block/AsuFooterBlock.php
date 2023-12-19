@@ -2,6 +2,7 @@
 
 namespace Drupal\asu_footer\Plugin\Block;
 
+use Drupal\system\Entity\Menu;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -369,7 +370,7 @@ class AsuFooterBlock extends BlockBase {
     ];
 
     // Get system menu options.
-    $menu_options = array_map(function ($menu) { return $menu->label(); }, \Drupal\system\Entity\Menu::loadMultiple());
+    $menu_options = array_map(function ($menu) { return $menu->label(); }, Menu::loadMultiple());
     asort($menu_options);
     foreach (static::ORDINAL_INDEX as $index) {
 
