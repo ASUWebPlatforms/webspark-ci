@@ -17,6 +17,7 @@ function webspark_cropper_theme_update_9001(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.card_image_and_content.field_media');
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.card.field_media');
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.image_based_card.field_media');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.image_and_text_block.field_media');
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }
