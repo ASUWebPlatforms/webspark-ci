@@ -4347,29 +4347,29 @@
         },
         {
             "name": "drupal/radix",
-            "version": "6.0.0-beta4",
+            "version": "5.0.11",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/radix.git",
-                "reference": "6.0.0-beta4"
+                "reference": "5.0.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/radix-6.0.0-beta4.zip",
-                "reference": "6.0.0-beta4",
-                "shasum": "6a4021f0ea0610686bdb585ecba0c210e0e1036a"
+                "url": "https://ftp.drupal.org/files/projects/radix-5.0.11.zip",
+                "reference": "5.0.11",
+                "shasum": "04c00ab0c606ac889a671f3cf66f159756fdc60a"
             },
             "require": {
-                "drupal/core": "^10.1"
+                "drupal/core": "^8.7.7 || ^9.0 || ^10"
             },
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "6.0.0-beta4",
-                    "datestamp": "1701507308",
+                    "version": "5.0.11",
+                    "datestamp": "1692276534",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -4387,7 +4387,7 @@
                     "homepage": "https://www.drupal.org/user/571032"
                 }
             ],
-            "description": "Responsive base theme for Drupal.",
+            "description": "Responsive Bootstrap 5 base theme for Drupal.",
             "homepage": "https://www.drupal.org/project/radix",
             "support": {
                 "source": "https://git.drupalcode.org/project/radix",
@@ -6412,7 +6412,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "3507a8b1e5f2f75f7752c87dd72b248445572440"
+                "reference": "e764f0fc589f703ea39c078e38ef97260666fccc"
             },
             "require": {
                 "ckeditor/fakeobjects": "4.16.0",
@@ -6457,7 +6457,7 @@
                 "drupal/metatag": "2.0.0",
                 "drupal/paragraphs": "1.16.0",
                 "drupal/pathauto": "1.12.0",
-                "drupal/radix": "6.0.0-beta4",
+                "drupal/radix": "5.0.11",
                 "drupal/redirect": "1.9.0",
                 "drupal/robotstxt": "1.5.0",
                 "drupal/schema_metatag": "3.0.1",

@@ -48,7 +48,7 @@
         "drupal/metatag": "2.0.0",
         "drupal/paragraphs": "1.16.0",
         "drupal/pathauto": "1.12.0",
-        "drupal/radix": "6.0.0-beta4",
+        "drupal/radix": "5.0.11",
         "drupal/redirect": "1.9.0",
         "drupal/robotstxt": "1.5.0",
         "drupal/schema_metatag": "3.0.1",
