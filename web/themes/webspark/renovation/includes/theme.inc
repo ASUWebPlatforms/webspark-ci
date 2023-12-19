@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Serialization\Json;
+use Drupal\block\Entity\Block;
 /**
  * @file
  * Custom theme hooks.
@@ -109,7 +111,7 @@ function renovation_page_attachments_alter(array &$page) {
   $version = '1.0';
   if (file_exists($composer_path)) {
     $composerJSON = file_get_contents($composer_path);
-    $composer_contents = \Drupal\Component\Serialization\Json::decode($composerJSON);
+    $composer_contents = Json::decode($composerJSON);
     $version = $composer_contents['version'] ?? '1.0';
   }
 
@@ -157,7 +159,7 @@ function renovation_preprocess_maintenance_page(&$variables) {
   $block_manager = \Drupal::service('plugin.manager.block');
 
   // Building header block and props, no navtree
-  $header_block = \Drupal\block\Entity\Block::load('asubrandheader');
+  $header_block = Block::load('asubrandheader');
 
   // AsuBrandHeaderBlock
   if ($header_block) {
