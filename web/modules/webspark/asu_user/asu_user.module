@@ -55,8 +55,7 @@ function _asu_user_get_elastic_profile_record($asurite) {
     return $record; // Should only be one.
   }
   catch (Exception $e) {
-    DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => watchdog_exception('asu_user', $e), fn() => Error::logException(\Drupal::logger('asu_user'), $e));
-    return [];
+    Error::logException(\Drupal::logger('asu_user'), $e);
   }
   return [];
 }

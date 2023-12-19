@@ -9,7 +9,7 @@ use Drupal\Core\Config\FileStorage;
  */
 function webspark_blocks_update_9002(&$sandbox) {
   // Remove all the blocks of type basic.
-  $bids = \Drupal::entityQuery('block_content')->condition('type','basic')->execute();
+  $bids = \Drupal::entityQuery('block_content')->condition('type','basic')->accessCheck(FALSE)->execute();
   $blocks = BlockContent::loadMultiple($bids);
   foreach ($blocks as $block) {
     $block->delete();
@@ -28,6 +28,7 @@ function webspark_blocks_update_9002(&$sandbox) {
 function webspark_blocks_update_9005(&$sandbox) {
   // Queries for relevant nodes already using that field.
   $bids = \Drupal::entityQuery('block_content')
+    ->accessCheck(FALSE)
     ->condition('type', 'tabbed_content')
     ->condition('field_background_color', 'default')
     ->execute();
@@ -111,6 +112,7 @@ function webspark_blocks_update_9017() {
 
   $query->condition('type', ['card', 'card_degree', 'card_story', 'card_with_icon'], 'IN');
   $query->condition('status', 1);
+  $query->accessCheck(FALSE);
   $result = $query->execute();
 
   $cards = $paragraph_storage->loadMultiple($result);
@@ -148,7 +150,7 @@ function webspark_blocks_update_9019(&$sandbox) {
   $query = $paragraph_storage->getQuery();
 
   $query->condition('type', 'accordion_panel', 'IN');
-  $result = $query->execute();
+  $result = $query->accessCheck(FALSE)->execute();
 
   $accordions = $paragraph_storage->loadMultiple($result);
   $accordions_to_update = [];

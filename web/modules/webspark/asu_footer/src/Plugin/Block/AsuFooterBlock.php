@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\media\Entity\Media;
 use Drupal\file\Entity\File;
-use Drupal\core\Url;
+use Drupal\Core\Url;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\File\FileSystemInterface;
 
