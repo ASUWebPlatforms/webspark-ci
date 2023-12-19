@@ -70,6 +70,7 @@
         "drupal/drupal-extension": "5.0.0",
         "friends-of-behat/mink-extension": "2.7.4",
         "genesis/behat-fail-aid": "3.7.5",
+        "palantirnet/drupal-rector": "^0.18.4",
         "sirbrillig/phpcs-changed": "v2.11.4"
     },
     "conflict": {
