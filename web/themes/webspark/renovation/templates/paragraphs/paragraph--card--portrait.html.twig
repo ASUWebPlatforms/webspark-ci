@@ -1,2 +1,4 @@
-<div class="card-wrapper" id="card-{{ paragraph.uuid.value }}"></div>
+{% set media_entity = content.field_media[0]['#media'] %}
+<div class="card-wrapper {{ 'rounded' in media_entity.get('bundle').value[0]['target_id']  ? 'img-rounded' : '' }}"
+     id="card-{{ paragraph.uuid.value }}"></div>
 {{ content|without('field_media', 'field_media', 'field_heading', 'field_body', 'field_cta', 'field_cta_secondary', 'field_link', 'field_tags', 'field_clickable', 'field_card_link') }}

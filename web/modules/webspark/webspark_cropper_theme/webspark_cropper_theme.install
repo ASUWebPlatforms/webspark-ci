@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Apply Bio field related changes.
+ * WS2-1834: Rounded crop for media entitiy.
  */
 function webspark_cropper_theme_update_9001(&$sandbox) {
   // Unlock the configuration storage.
@@ -14,6 +14,9 @@ function webspark_cropper_theme_update_9001(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.image.field_media');
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.media.cropped_image_rounded_1_1_.field_media_image');
   \Drupal::service('webspark.config_manager')->updateConfigFile('media.type.cropped_image_rounded_1_1_');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.card_image_and_content.field_media');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.card.field_media');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.image_based_card.field_media');
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }
