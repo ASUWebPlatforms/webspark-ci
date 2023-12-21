@@ -1,18 +1,10 @@
 {
     "name": "pantheon-upstreams/upstream-configuration",
     "type": "project",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
     "require": {
         "npm-asset/fontawesome": "6.4.2",
-        "ckeditor/fakeobjects": "4.16.0",
-        "ckeditor/link": "4.16.1",
         "composer/installers": "v2.0.0",
-        "cweagans/composer-patches": "1.7.1",
+        "cweagans/composer-patches": "1.7.3",
         "drupal/admin_toolbar": "3.4.2",
         "drupal/allowed_formats": "3.0.0",
         "drupal/anchor_link": "3.0.0-alpha1",
@@ -67,14 +59,29 @@
         "zaporylie/composer-drupal-optimizations": "1.2.0",
         "drupal/editor_advanced_link": "2.2.4",
         "drupal/ckeditor": "^1.0",
-        "drupal/fakeobjects": "^1.2"
-    },
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "composer.libraries.json"
-            ]
-        }
+        "drupal/fakeobjects": "^1.2",
+        "algolia/places": "*",
+        "choices/choices": "*",
+        "codemirror/codemirror": "*",
+        "jquery/chosen": "*",
+        "jquery/geocomplete": "*",
+        "jquery/hotkeys": "*",
+        "jquery/icheck": "*",
+        "jquery/image-picker": "*",
+        "jquery/inputmask": "*",
+        "jquery/intl-tel-input": "*",
+        "jquery/rateit": "*",
+        "jquery/select2": "*",
+        "jquery/textcounter": "*",
+        "jquery/timepicker": "*",
+        "jquery/toggles": "*",
+        "popperjs/popperjs": "*",
+        "progress-tracker/progress-tracker": "*",
+        "signature_pad/signature_pad": "*",
+        "svg-pan-zoom/svg-pan-zoom": "*",
+        "tabby/tabby": "*",
+        "tippyjs/tippyjs": "*",
+        "northernco/ckeditor5-anchor-drupal": "^0.4.0"
     },
     "config": {
         "sort-packages": true
