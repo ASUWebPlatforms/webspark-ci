@@ -44,11 +44,19 @@ export function _initUdsListClass(model) {
     _getSibling(currentNode, elementsBelow, "forward");
     // Set the 'uds-list' class for each element below the current block
     elementsBelow.forEach((element) => {
-      writer.setAttribute(
-        "htmlListAttributes",
-        {classes: 'uds-list'},
-        element
-      );
+      if (element.getAttribute("listType") === 'bulleted') {
+        writer.setAttribute(
+          "htmlUlAttributes",
+          {classes: 'uds-list'},
+          element
+        );
+      } else if (element.getAttribute("listType") === 'numbered') {
+        writer.setAttribute(
+          "htmlOlAttributes",
+          {classes: 'uds-list'},
+          element
+        );
+      }
     });
   });
 }
@@ -78,9 +86,15 @@ export function _setUpClassSelect(form, editor) {
   elementsBelow.forEach((element) => {
     if (element.getAttribute("listIndent") == 0) {
       try {
-        currentClasses = element.getAttribute("htmlListAttributes").classes
-        listType = element.getAttribute('listType');
-      } catch (e) {}
+        if (element.getAttribute("listType") === 'bulleted') {
+          currentClasses = element.getAttribute("htmlUlAttributes").classes
+          listType = element.getAttribute('listType');
+        } else if (element.getAttribute("listType") === 'numbered') {
+          currentClasses = element.getAttribute("htmlOlAttributes").classes
+          listType = element.getAttribute('listType');
+        }
+      } catch (e) {
+      }
     }
   });
 
