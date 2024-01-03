@@ -281,6 +281,17 @@ function webspark_webdir_update_9015(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
 }
 
+/**
+ * WS2-1822 - Added Apparence settings for Web directory block.
+ */
+function webspark_webdir_update_9016(&$sandbox): void {
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_anchor_menu_settings');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_bottom');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_top');
+}
+
 // @todo This module doesn't implement hook_config_readonly_whitelist_patterns()
 // We should add that eventually. Likelihood of users tweaking this block's
 // field settings is low, no not a rush.
