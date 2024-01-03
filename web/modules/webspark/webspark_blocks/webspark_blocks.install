@@ -212,7 +212,8 @@ function webspark_blocks_update_9021(&$sandbox) {
  * WS2-1452 - Add modifying editor and filter minimal format to allow ckeditor5.
  */
 function webspark_blocks_update_9022(&$sandbox) {
-  _webspark_blocks_revert_module_config();
+  // In WS2 2.12.0 release this will run again in 9024, so duplicate run not needed here.
+  // _webspark_blocks_revert_module_config();
 }
 
 /**
@@ -269,7 +270,8 @@ function webspark_blocks_update_9026(&$sandbox) {
  * WS2-1711 - Add new paragraph type for Image based card component.
  */
 function webspark_blocks_update_9027(&$sandbox) {
-  _webspark_blocks_revert_module_config();
+  // Was already run for WS2 2.12.0 release in 9024. This update was needed for iterative pre-release dev workflow.
+  // _webspark_blocks_revert_module_config();
 }
 
 /**
