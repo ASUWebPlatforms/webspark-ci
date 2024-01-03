@@ -1,5 +1,3 @@
-# This has 'change-this-to-info' in the filename instead of 'info' so this
-# template isn't discovered as a module.
 name: Webspark CKEditor 5 plugins
 type: module
 description: Module with custom CKEditor 5 plugins
