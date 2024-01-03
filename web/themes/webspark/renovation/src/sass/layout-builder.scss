@@ -184,6 +184,11 @@
     height: 18px;
     mask: inherit;
   }
+
+  details {
+    border-width: 2px !important;
+    border-color: $uds-color-base-gray-5 !important;
+  }
 }
 
 .layout-builder-form {
