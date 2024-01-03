@@ -1,12 +1,6 @@
 {
     "name": "pantheon-upstreams/upstream-configuration",
     "type": "project",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
     "require": {
         "npm-asset/fontawesome": "6.4.2",
         "ckeditor/fakeobjects": "4.16.0",
@@ -66,14 +60,9 @@
         "php": ">=8.1.6",
         "zaporylie/composer-drupal-optimizations": "1.2.0",
         "drupal/editor_advanced_link": "2.2.4",
-        "drupal/ckeditor": "^1.0"
-    },
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "composer.libraries.json"
-            ]
-        }
+        "drupal/ckeditor": "^1.0",
+        "drupal/fakeobjects": "^1.2",
+        "northernco/ckeditor5-anchor-drupal": "^0.4.0"
     },
     "config": {
         "sort-packages": true

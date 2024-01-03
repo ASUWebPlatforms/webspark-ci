@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "67cce55c23e05ec05fc7af8ccf804a6c",
+    "content-hash": "afa2e94d44a2bb9abebe4e87609c98ed",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3227,6 +3227,60 @@
             }
         },
         {
+            "name": "drupal/fakeobjects",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/fakeobjects.git",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/fakeobjects-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "a49094752f972e7db51ef5ec7abade1a4eba48f5"
+            },
+            "require": {
+                "drupal/ckeditor": "*",
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1674760765",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Quillen (kevinquillen)",
+                    "homepage": "https://www.drupal.org/u/kevinquillen",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "kevinquillen",
+                    "homepage": "https://www.drupal.org/user/317279"
+                }
+            ],
+            "description": "Adds the FakeObjects plugin to CKEditor. This plugin is a utility plugin that is required by certain user-facing CKEditor plugins.",
+            "homepage": "http://drupal.org/project/fakeobjects",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/fakeobjects",
+                "issues": "http://drupal.org/project/issues/fakeobjects"
+            }
+        },
+        {
             "name": "drupal/field_group",
             "version": "3.4.0",
             "source": {
@@ -6191,6 +6245,15 @@
             "time": "2023-12-10T21:03:43+00:00"
         },
         {
+            "name": "northernco/ckeditor5-anchor-drupal",
+            "version": "0.4.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@northernco/ckeditor5-anchor-drupal/-/ckeditor5-anchor-drupal-0.4.0.tgz"
+            },
+            "type": "drupal-library"
+        },
+        {
             "name": "npm-asset/fontawesome",
             "version": "6.4.2",
             "dist": {
@@ -6358,7 +6421,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "d20de89ec7ebda243be977f956681f94b7f4e591"
+                "reference": "884af98916aebdbeb9b544f62c64a674fe0d4b88"
             },
             "require": {
                 "ckeditor/fakeobjects": "4.16.0",
@@ -6387,6 +6450,7 @@
                 "drupal/editor_advanced_link": "2.2.4",
                 "drupal/editoria11y": "2.0.12",
                 "drupal/environment_indicator": "4.0.14",
+                "drupal/fakeobjects": "^1.2",
                 "drupal/field_group": "3.4.0",
                 "drupal/field_menu": "2.1.0",
                 "drupal/field_states_ui": "3.0",
@@ -6412,6 +6476,7 @@
                 "drupal/webform": "6.2.2",
                 "drush-ops/behat-drush-endpoint": "9.4.1",
                 "drush/drush": "^11 || 12.4.3",
+                "northernco/ckeditor5-anchor-drupal": "^0.4.0",
                 "npm-asset/fontawesome": "6.4.2",
                 "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
                 "npm-asset/select2": "4.1.0-RC.0",
@@ -6422,13 +6487,6 @@
                 "zaporylie/composer-drupal-optimizations": "1.2.0"
             },
             "type": "project",
-            "extra": {
-                "merge-plugin": {
-                    "include": [
-                        "composer.libraries.json"
-                    ]
-                }
-            },
             "transport-options": {
                 "relative": true
             }
