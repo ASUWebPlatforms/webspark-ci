@@ -7032,11 +7032,11 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "2.11.0",
+            "version": "2.12.0",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "64184f223c71ba7bdcad5ae2ce73aacb06596c3b"
+                "reference": "33aba890d120575f0009eae64d4e194fd1348f1d"
             },
             "require": {
                 "ckeditor/fakeobjects": "4.16.0",
