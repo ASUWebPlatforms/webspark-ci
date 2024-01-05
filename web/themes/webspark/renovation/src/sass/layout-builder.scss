@@ -2,7 +2,9 @@
 @import "node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
 @import "base/mixins";
 
-#drupal-off-canvas {
+#drupal-off-canvas-wrapper  {
+  padding-right: 0;
+
   .form-text,
   .form-tel,
   .form-email,
@@ -183,6 +185,21 @@
   .draggable a.tabledrag-handle .handle {
     height: 18px;
     mask: inherit;
+  }
+
+  .ui-dialog-titlebar {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    margin-right: 0;
+  }
+
+  #drupal-off-canvas {
+    padding-bottom: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 68vh !important;
+    padding-right: 20px;
   }
 }
 
