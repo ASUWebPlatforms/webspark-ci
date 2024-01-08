@@ -29,7 +29,8 @@ class WebSparkCasSubscriber extends CasRouteSubscriber {
    *   The check result.
    */
   protected function isElasticCrawlerRequest(): bool {
-    $current_request = $this->requestStack->getCurrentRequest();
+    $requestStack = \Drupal::service('request_stack');
+    $current_request = $requestStack->getCurrentRequest();
 
     $defaultPattern = '/^Elastic-Crawler .*$/';
 

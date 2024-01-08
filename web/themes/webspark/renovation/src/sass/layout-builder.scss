@@ -201,6 +201,11 @@
     max-height: 68vh !important;
     padding-right: 20px;
   }
+  
+  details {
+    border-width: 2px !important;
+    border-color: $uds-color-base-gray-5 !important;
+  }
 }
 
 .layout-builder-form {

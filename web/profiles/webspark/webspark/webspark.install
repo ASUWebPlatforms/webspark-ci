@@ -189,7 +189,7 @@ function webspark_update_9010(&$sandbox) {
     \Drupal::state()->set('configuration_locked', TRUE);
 
     $entities = [];
-    $entities['user'] = \Drupal::entityQuery('user')->execute();
+    $entities['user'] = \Drupal::entityQuery('user')->accessCheck(FALSE)->execute();
     $result = [];
     foreach ($entities as $type => $entity_list) {
       foreach ($entity_list as $entity_id) {
