@@ -301,3 +301,19 @@ function _webspark_blocks_update_module_config_list($config_list = []) {
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * Ensure required updates happen before they are needed here.
+ */
+function webspark_blocks_update_dependencies() {
+
+  // Indicate that the webspark_blocks_update_9024() function provided by this module
+  // must run after the webspark_update_9018() function provided by the
+  // 'webspark' profile. Otherwise we might try and import ckeditor5 related configs
+  // before it has been installed, and generate errors.
+  $dependencies['webspark_blocks'][9024] = [
+    'webspark' => 9018,
+  ];
+
+  return $dependencies;
+}
