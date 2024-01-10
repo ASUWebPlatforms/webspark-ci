@@ -1,5 +1,5 @@
 #drupal-off-canvas-wrapper {
-  padding-right: 0;
+  padding-right: 0.25rem;
 }
 #drupal-off-canvas-wrapper .form-text.description,
 #drupal-off-canvas-wrapper .form-tel.description,
@@ -19,10 +19,6 @@
   font-size: 10px !important;
   margin-top: 0 !important;
   padding-left: 0;
-}
-#drupal-off-canvas-wrapper .field-group-tab.form-wrapper {
-  margin-left: 0;
-  margin-right: 0;
 }
 #drupal-off-canvas-wrapper form.uds-form.layout-builder-configure-block .media-library-widget .fieldset-legend::after {
   background-image: none;
@@ -138,11 +134,15 @@
   margin-right: 0;
 }
 #drupal-off-canvas-wrapper #drupal-off-canvas {
-  padding-bottom: 20px;
-  overflow-x: hidden;
+  padding: 0 0.5rem 0 1rem !important;
+  max-height: 75vh !important;
+  overflow-x: visible;
   overflow-y: auto;
-  max-height: 68vh !important;
-  padding-right: 20px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#drupal-off-canvas-wrapper #drupal-off-canvas::-webkit-scrollbar {
+  display: none !important;
 }
 #drupal-off-canvas-wrapper details {
   border-width: 2px !important;
