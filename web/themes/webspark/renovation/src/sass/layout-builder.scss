@@ -1,10 +1,9 @@
 // @see https://asudev.jira.com/browse/WS2-1730
-@import "node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
+@import "@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
 @import "base/mixins";
 
 #drupal-off-canvas-wrapper  {
-  padding-right: 0;
-
+  padding-right: .25rem;
   .form-text,
   .form-tel,
   .form-email,
@@ -195,13 +194,17 @@
   }
 
   #drupal-off-canvas {
-    padding-bottom: 20px;
-    overflow-x: hidden;
+    padding: 0 0.5rem 0 1rem !important;
+    max-height: 75vh !important;
+    overflow-x: visible;
     overflow-y: auto;
-    max-height: 68vh !important;
-    padding-right: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
   }
-  
+
   details {
     border-width: 2px !important;
     border-color: $uds-color-base-gray-5 !important;
