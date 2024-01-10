@@ -371,7 +371,7 @@ function webspark_update_9019(&$sandbox) {
  * WS2-1871 : Uninstall FakeObjects module.
  */
 function webspark_update_9020(&$sandbox) {
-  if (Drupal::moduleHandler()->moduleExists('ckeditor/fakeobjects')) {
-    Drupal::service('module_installer')->uninstall(['ckeditor/fakeobjects']);
+  if (Drupal::moduleHandler()->moduleExists('fakeobjects')) {
+    Drupal::service('module_installer')->uninstall(['fakeobjects']);
   }
 }
