@@ -4,7 +4,7 @@
 websparkplugin:
   js:
     js/build/websparkPlugin.js: { preprocess: false, minified: true }
-    /libraries/fontawesome/js/all.min.js: {}
+    /libraries/fontawesome/js/all.min.js: { preprocess: false, minified: true }
   css:
     theme:
       css/websparkplugin.css: { }
