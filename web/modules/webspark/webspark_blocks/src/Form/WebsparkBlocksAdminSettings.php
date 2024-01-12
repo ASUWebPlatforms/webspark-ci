@@ -66,7 +66,6 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
       $form['links_fieldset']['link_fieldset'. $i] = [
         '#type' => 'fieldset',
         '#title' => $this->t('Link'),
-         ''
       ];
       $form['links_fieldset']['link_fieldset'. $i]['link_url'] = [
         '#type' => 'textfield',
@@ -112,7 +111,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
   }
 
 
-   /**
+  /**
    * Callback for both ajax-enabled buttons.
    *
    * Selects and returns the fieldset with the names in it.
