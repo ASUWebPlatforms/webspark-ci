@@ -151,9 +151,34 @@
     margin-bottom: 0.5rem;
   }
 
-  .icons-selector.fip-grey .fip-box:hover,
-  .icons-selector .selected-icon {
-    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+  .icons-selector.fip-grey {
+    .fip-icon-block:before {
+      color: #f54848;
+    }
+    .selector-search {
+      i {
+        color: #999;
+        top: 3px;
+      }
+      .icons-search-input::placeholder {
+        color: #999 !important;
+      }
+    }
+    .fip-box {
+      color: #333;
+    }
+    .fip-box:hover {
+      color: #000;
+    }
+    .selector-pages, .selector-arrows i {
+      color: #999;
+    }
+    .selected-icon {
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   fieldset {

@@ -93,6 +93,10 @@ function renovation_theme_suggestions_input_alter(array &$suggestions, array $va
     // Specifically for radio inputs on color selector.
     $suggestions[] = $variables['theme_hook_original'] . '__' . 'field_banner_background_color';
   }
+  if (isset($element['#name']) && preg_match('/^settings\[block_form\].*?\[field_icon\]/', $element['#name'])) {
+    // Target the Fontawesome icon picker widget.
+    $suggestions[] = $variables['theme_hook_original'] . '__' . 'settings_block_subform_field_icon';
+  }
 }
 
 /**
