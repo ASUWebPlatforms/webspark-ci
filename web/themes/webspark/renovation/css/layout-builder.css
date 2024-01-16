@@ -102,9 +102,33 @@
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-#drupal-off-canvas-wrapper .icons-selector.fip-grey .fip-box:hover,
-#drupal-off-canvas-wrapper .icons-selector .selected-icon {
-  color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .fip-icon-block:before {
+  color: #f54848;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .selector-search i {
+  color: #999;
+  top: 3px;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .selector-search .icons-search-input::-moz-placeholder {
+  color: #999 !important;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .selector-search .icons-search-input::placeholder {
+  color: #999 !important;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .fip-box {
+  color: #333;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .fip-box:hover {
+  color: #000;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .selector-pages, #drupal-off-canvas-wrapper .icons-selector.fip-grey .selector-arrows i {
+  color: #999;
+}
+#drupal-off-canvas-wrapper .icons-selector.fip-grey .selected-icon {
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #drupal-off-canvas-wrapper fieldset {
   background: inherit;
