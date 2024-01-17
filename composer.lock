@@ -5422,6 +5422,18 @@
             "time": "2023-06-20T07:10:35+00:00"
         },
         {
+            "name": "fontawesome/fontawesome",
+            "version": "6.4.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://use.fontawesome.com/releases/v6.4.2/fontawesome-free-6.4.2-web.zip"
+            },
+            "type": "drupal-library",
+            "extra": {
+                "installer-name": "fontawesome"
+            }
+        },
+        {
             "name": "grasmash/expander",
             "version": "3.0.0",
             "source": {
@@ -6259,15 +6271,6 @@
             "type": "drupal-library"
         },
         {
-            "name": "npm-asset/fontawesome",
-            "version": "6.4.2",
-            "dist": {
-                "type": "tar",
-                "url": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz"
-            },
-            "type": "npm-asset"
-        },
-        {
             "name": "npm-asset/fonticonpicker--fonticonpicker",
             "version": "3.1.1",
             "dist": {
@@ -6481,8 +6484,8 @@
                 "drupal/webform": "6.2.2",
                 "drush-ops/behat-drush-endpoint": "9.4.1",
                 "drush/drush": "^11 || 12.4.3",
+                "fontawesome/fontawesome": "6.4.2",
                 "northernco/ckeditor5-anchor-drupal": "^0.4.0",
-                "npm-asset/fontawesome": "6.4.2",
                 "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
                 "npm-asset/select2": "4.1.0-RC.0",
                 "oomphinc/composer-installers-extender": "2.0.1",
