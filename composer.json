@@ -77,7 +77,7 @@
     "require-dev": {
         "behat/behat": "3.13.0",
         "dmore/behat-chrome-extension": "1.4.0",
-        "drupal/core-dev": "10.1.7",
+        "drupal/core-dev": "10.1.8",
         "drupal/drupal-driver": "2.2.2",
         "drupal/drupal-extension": "5.0.0",
         "friends-of-behat/mink-extension": "2.7.4",
