@@ -35,3 +35,7 @@ li::marker {
 span.highlight-black.ck-editor__nested-editable_focused {
   color: rgb(0, 0, 0);
 }
+
+.drupal-off-canvas-reset .uds-blockquote {
+  display: grid !important;
+}
