@@ -189,7 +189,7 @@ function webspark_update_9010(&$sandbox) {
     \Drupal::state()->set('configuration_locked', TRUE);
 
     $entities = [];
-    $entities['user'] = \Drupal::entityQuery('user')->execute();
+    $entities['user'] = \Drupal::entityQuery('user')->accessCheck(FALSE)->execute();
     $result = [];
     foreach ($entities as $type => $entity_list) {
       foreach ($entity_list as $entity_id) {
@@ -365,4 +365,13 @@ function webspark_update_9019(&$sandbox) {
 
   \Drupal::state()->set('configuration_locked', TRUE);
 
+}
+
+/**
+ * WS2-1871 : Uninstall FakeObjects module.
+ */
+function webspark_update_9020(&$sandbox) {
+  if (Drupal::moduleHandler()->moduleExists('fakeobjects')) {
+    Drupal::service('module_installer')->uninstall(['fakeobjects']);
+  }
 }

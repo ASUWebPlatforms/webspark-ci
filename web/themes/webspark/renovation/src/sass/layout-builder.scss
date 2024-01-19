@@ -1,8 +1,9 @@
 // @see https://asudev.jira.com/browse/WS2-1730
-@import "node_modules/@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
+@import "@asu/unity-bootstrap-theme/src/scss/custom-asu-variables";
 @import "base/mixins";
 
-#drupal-off-canvas {
+#drupal-off-canvas-wrapper  {
+  padding-right: .25rem;
   .form-text,
   .form-tel,
   .form-email,
@@ -150,9 +151,34 @@
     margin-bottom: 0.5rem;
   }
 
-  .icons-selector.fip-grey .fip-box:hover,
-  .icons-selector .selected-icon {
-    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+  .icons-selector.fip-grey {
+    .fip-icon-block:before {
+      color: #f54848;
+    }
+    .selector-search {
+      i {
+        color: #999;
+        top: 3px;
+      }
+      .icons-search-input::placeholder {
+        color: #999 !important;
+      }
+    }
+    .fip-box {
+      color: #333;
+    }
+    .fip-box:hover {
+      color: #000;
+    }
+    .selector-pages, .selector-arrows i {
+      color: #999;
+    }
+    .selected-icon {
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   fieldset {
@@ -183,6 +209,25 @@
   .draggable a.tabledrag-handle .handle {
     height: 18px;
     mask: inherit;
+  }
+
+  .ui-dialog-titlebar {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    margin-right: 0;
+  }
+
+  #drupal-off-canvas {
+    padding: 0 0.5rem 0 1rem !important;
+    max-height: 75vh !important;
+    overflow-x: visible;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
   }
 
   details {
