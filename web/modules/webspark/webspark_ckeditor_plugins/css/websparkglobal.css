@@ -9,6 +9,18 @@ div.ck.ck-content.ck-editor__editable {
   width: 100% !important;
   z-index: 99 !important;
 }
+/* Node edit forms need to avoid admin toolbar overlappig wysiwyg */
+/* When admin toolbar horizontal */
+body.toolbar-fixed.toolbar-horizontal form.node-page-edit-form .ck-editor__top {
+  top: 36px !important;
+}
+body.toolbar-fixed.toolbar-horizontal.toolbar-tray-open form.node-page-edit-form .ck-editor__top {
+  top: 76px !important;
+}
+/* When admin toolbar vertical */
+body.toolbar-fixed.toolbar-vertical form.node-page-edit-form .ck-editor__top {
+  top: 36px !important;
+}
 
 .ck-sticky-panel__placeholder {
   display: none !important;
