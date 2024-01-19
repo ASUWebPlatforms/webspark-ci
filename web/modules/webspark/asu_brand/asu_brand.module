@@ -34,6 +34,7 @@ function asu_brand_entity_base_field_info(EntityTypeInterface $entity_type) {
         'allowed_values' => [
           //'icon' => 'Icon', // First link always becomes icon. Not allowing select for this.
           'heading' => 'Heading - starts a column',
+          'stackable heading' => 'Heading - stackable in a column',
           'column break' => 'Column break - starts a column without a heading',
           'button' => 'Button - within column',
         ],
@@ -162,7 +163,8 @@ function asu_brand_form_menu_link_content_form_alter(array &$form, FormStateInte
         ASU Brand Headers.</li>
         <li>Create columns by configuring "Heading" or "Column break" menu
         items at the second level. These special menu items will not render as
-        links, but will instead start new columns. Use &lt;nolink&gt; as
+        links, but will instead start new columns unless they are labelled as
+        "stackable." Use &lt;nolink&gt; as
         their link value.</li>
         <li>When you configure a second level menu item as a button within a
         column, please ensure it is the last item in a column, otherwise it may
