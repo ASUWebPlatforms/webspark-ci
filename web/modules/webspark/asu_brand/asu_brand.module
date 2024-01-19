@@ -164,8 +164,7 @@ function asu_brand_form_menu_link_content_form_alter(array &$form, FormStateInte
         <li>Create columns by configuring "Heading" or "Column break" menu
         items at the second level. These special menu items will not render as
         links, but will instead start new columns unless they are labelled as
-        "stackable." Use &lt;nolink&gt; as
-        their link value.</li>
+        "stackable." Use &lt;nolink&gt; as their link value.</li>
         <li>When you configure a second level menu item as a button within a
         column, please ensure it is the last item in a column, otherwise it may
         render incorrectly in the mobile menu.</li>
