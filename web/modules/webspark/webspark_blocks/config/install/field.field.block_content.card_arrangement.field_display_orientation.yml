@@ -10,7 +10,7 @@ id: block_content.card_arrangement.field_display_orientation
 field_name: field_display_orientation
 entity_type: block_content
 bundle: card_arrangement
-label: 'Display orientation'
+label: 'Card orientation'
 description: ''
 required: true
 translatable: false

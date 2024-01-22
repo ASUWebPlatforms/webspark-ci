@@ -21,8 +21,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: X5e0iH8NVMibexlUWXX_IU4kEcRDpLKqVNYbB3-Nu6U
 id: block_content.card_arrangement.event_card
 targetEntityType: block_content
 bundle: card_arrangement
