@@ -123,24 +123,6 @@
             "time": "2023-10-21T12:57:05+00:00"
         },
         {
-            "name": "ckeditor/fakeobjects",
-            "version": "4.16.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.0.zip"
-            },
-            "type": "drupal-library"
-        },
-        {
-            "name": "ckeditor/link",
-            "version": "4.16.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://download.ckeditor.com/link/releases/link_4.16.1.zip"
-            },
-            "type": "drupal-library"
-        },
-        {
             "name": "composer/installers",
             "version": "v2.0.0",
             "source": {
@@ -6439,8 +6421,6 @@
                 "reference": "880445bffbcdb9a8d24a1d2e84c4aff5d1e7e94e"
             },
             "require": {
-                "ckeditor/fakeobjects": "4.16.0",
-                "ckeditor/link": "4.16.1",
                 "composer/installers": "v2.0.0",
                 "cweagans/composer-patches": "1.7.1",
                 "drupal/admin_toolbar": "3.4.2",

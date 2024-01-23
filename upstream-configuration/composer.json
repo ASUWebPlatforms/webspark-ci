@@ -2,8 +2,6 @@
     "name": "pantheon-upstreams/upstream-configuration",
     "type": "project",
     "require": {
-        "ckeditor/fakeobjects": "4.16.0",
-        "ckeditor/link": "4.16.1",
         "composer/installers": "v2.0.0",
         "cweagans/composer-patches": "1.7.1",
         "drupal/admin_toolbar": "3.4.2",

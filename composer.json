@@ -30,30 +30,6 @@
         {
             "type": "package",
             "package": {
-                "name": "ckeditor/link",
-                "version": "4.16.1",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://download.ckeditor.com/link/releases/link_4.16.1.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/fakeobjects",
-                "version": "4.16.0",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.0.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "northernco/ckeditor5-anchor-drupal",
                 "version": "0.4.0",
                 "type": "drupal-library",
