@@ -626,6 +626,11 @@ class AsuBrandHeaderBlock extends BlockBase {
       if ($tripwire && ($v['type'] === "heading" || $v['type'] === "column break")) {
         $col++;
       }
+
+      // "stackable heading" is a concept on the module side only. Converting
+      // to "heading" now for use in props. See WS2-1486
+      $v['type'] = ($v['type'] === "stackable heading") ? "heading" : $v['type'];
+
       $childItemCols[$col][] = $v;
       // We want first heading/column to stay in 0, so trigger here.
       // All subsequent passes will use new columns.
