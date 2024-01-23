@@ -354,24 +354,26 @@ function webspark_update_9018(&$sandbox) {
   $module_installer->install(["ckeditor5"]);
 }
 /**
- * WS2-1452 : Update the allowed HTML tags for the Basic HTML format.
+ * WS2-1452 & 1871: Update text formats; install editor_advanced_link; uninstall CKEditor4 and Fakeobjects.
  */
-function webspark_update_9019(&$sandbox) {
-  \Drupal::state()->set('configuration_locked', FALSE);
-  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.basic_html');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.full_html');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.full_html');
-
-  \Drupal::state()->set('configuration_locked', TRUE);
-
-}
-
-/**
- * WS2-1871 : Uninstall FakeObjects module.
- */
-function webspark_update_9020(&$sandbox) {
+function webspark_update_10000(&$sandbox) {
   if (Drupal::moduleHandler()->moduleExists('fakeobjects')) {
     Drupal::service('module_installer')->uninstall(['fakeobjects']);
   }
+  if (Drupal::moduleHandler()->moduleExists('ckeditor')) {
+    Drupal::service('module_installer')->uninstall(['ckeditor']);
+  }
+  if (!Drupal::moduleHandler()->moduleExists('editor_advanced_link')) {
+    Drupal::service('module_installer')->install(['editor_advanced_link']);
+  }
+
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.basic_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.full_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.minimal_format');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.full_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.minimal_format');
+  \Drupal::state()->set('configuration_locked', TRUE);
 }
+
