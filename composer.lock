@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f4786f26869d7f0275a172cf6b55b15",
+    "content-hash": "37b960060723ffa2138e858c453f1351",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -121,24 +121,6 @@
                 "source": "https://github.com/Chi-teck/drupal-code-generator/tree/3.3.0"
             },
             "time": "2023-10-21T12:57:05+00:00"
-        },
-        {
-            "name": "ckeditor/fakeobjects",
-            "version": "4.16.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.0.zip"
-            },
-            "type": "drupal-library"
-        },
-        {
-            "name": "ckeditor/link",
-            "version": "4.16.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://download.ckeditor.com/link/releases/link_4.16.1.zip"
-            },
-            "type": "drupal-library"
         },
         {
             "name": "composer/installers",
@@ -6425,15 +6407,13 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "3.0.0",
+            "version": "2.12.0",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "d727986be43f200a25234c54624ce224e251e695"
+                "reference": "9b09b5f6dfa191d71d9049fd905d3f02a99633aa"
             },
             "require": {
-                "ckeditor/fakeobjects": "4.16.0",
-                "ckeditor/link": "4.16.1",
                 "composer/installers": "v2.0.0",
                 "cweagans/composer-patches": "1.7.1",
                 "drupal/admin_toolbar": "3.4.2",
@@ -13250,16 +13230,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.15",
+            "version": "9.6.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "05017b80304e0eb3f31d90194a563fd53a6021f1"
+                "reference": "3767b2c56ce02d01e3491046f33466a1ae60a37f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/05017b80304e0eb3f31d90194a563fd53a6021f1",
-                "reference": "05017b80304e0eb3f31d90194a563fd53a6021f1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3767b2c56ce02d01e3491046f33466a1ae60a37f",
+                "reference": "3767b2c56ce02d01e3491046f33466a1ae60a37f",
                 "shasum": ""
             },
             "require": {
@@ -13333,7 +13313,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.15"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.16"
             },
             "funding": [
                 {
@@ -13349,7 +13329,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-01T16:55:19+00:00"
+            "time": "2024-01-19T07:03:14+00:00"
         },
         {
             "name": "react/promise",
