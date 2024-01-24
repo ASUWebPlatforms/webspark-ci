@@ -74,7 +74,7 @@ ul.media-library-menu.nav {
   margin-right: 5px;
 }
 
-.image-data__crop-wrapper .seven-details__summary {
+.image-data__crop-wrapper .claro-details__summary {
   padding: 10px 32px;
   font-weight: 700;
   color: #8c1d40;
@@ -90,5 +90,9 @@ ul.media-library-menu.nav {
   background-image: url(../icons/required.svg);
   background-repeat: no-repeat;
   background-size: 6px 6px;
+}
+
+ul.js-media-library-menu.media-library-menu li a.active {
+  background-color: #d0d0d0;
 }
 

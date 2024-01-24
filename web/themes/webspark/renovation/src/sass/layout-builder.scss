@@ -25,6 +25,12 @@
       padding-left: 0;
     }
   }
+  .js-hide {
+   /* Temporarily hide the js-hide class.
+    * See https://www.drupal.org/project/drupal/issues/3121239.
+    */
+    display: none;
+  }
 
   form {
     &.uds-form {
