@@ -80,14 +80,25 @@
   color: inherit;
   text-decoration: underline;
 }
-#drupal-off-canvas-wrapper .banner-green,
-#drupal-off-canvas-wrapper .banner-orange,
-#drupal-off-canvas-wrapper .banner-blue,
+#drupal-off-canvas-wrapper .banner-green {
+  outline: black 5px solid;
+  background: #78be20;
+}
+#drupal-off-canvas-wrapper .banner-orange {
+  outline: black 5px solid;
+  background: #ff7f32;
+}
+#drupal-off-canvas-wrapper .banner-blue {
+  outline: black 5px solid;
+  background: #00a3e0;
+}
 #drupal-off-canvas-wrapper .banner-gray {
   outline: black 5px solid;
+  background: #e8e8e8;
 }
 #drupal-off-canvas-wrapper .banner-black {
   outline: #e8e8e8 5px solid;
+  background: #191919;
 }
 #drupal-off-canvas-wrapper input {
   padding: 4px 20px !important;
