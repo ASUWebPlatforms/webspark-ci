@@ -2,6 +2,7 @@
 viewcard:
   js:
     js/viewcard.js: {}
+    js/test.js: {}
   css:
     component:
       css/viewcard.css: {}

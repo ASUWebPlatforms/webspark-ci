@@ -1,6 +1,5 @@
 <?php
 
-/**
- * @file
- * Primary module hooks for viewcard module.
- */
+function viewcard_page_attachments_alter($attachments){
+  $attachments['#attached']['library'][] = 'viewcard/viewcard';
+}
