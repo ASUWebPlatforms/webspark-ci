@@ -30,30 +30,6 @@
         {
             "type": "package",
             "package": {
-                "name": "ckeditor/link",
-                "version": "4.16.1",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://download.ckeditor.com/link/releases/link_4.16.1.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/fakeobjects",
-                "version": "4.16.0",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.0.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "northernco/ckeditor5-anchor-drupal",
                 "version": "0.4.0",
                 "type": "drupal-library",
@@ -79,7 +55,7 @@
     "require-dev": {
         "behat/behat": "3.13.0",
         "dmore/behat-chrome-extension": "1.4.0",
-        "drupal/core-dev": "10.1.8",
+        "drupal/core-dev": "10.2.2",
         "drupal/drupal-driver": "2.2.2",
         "drupal/drupal-extension": "5.0.0",
         "friends-of-behat/mink-extension": "2.7.4",

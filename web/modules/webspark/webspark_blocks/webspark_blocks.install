@@ -278,6 +278,26 @@ function webspark_blocks_update_9027(&$sandbox) {
 }
 
 /**
+ * WS2-1847 - Add display orientation option for Card Arrangament.
+ */
+function webspark_blocks_update_9028(&$sandbox) {
+  $configs = [
+    'field.storage.block_content.field_display_orientation',
+    'field.field.block_content.card_arrangement.field_display_orientation',
+    'core.entity_view_display.block_content.card_arrangement.card_arrangement_horizontal',
+    'core.entity_view_display.block_content.card_arrangement.card_arrangement_vertical',
+    'core.entity_view_display.block_content.card_arrangement.default',
+    'core.entity_view_display.block_content.card_arrangement.degree_card',
+    'core.entity_view_display.block_content.card_arrangement.event_card',
+    'core.entity_view_display.block_content.card_arrangement.landscape',
+    'core.entity_view_display.block_content.card_arrangement.media_card',
+    'core.entity_view_display.block_content.card_arrangement.story_card',
+    'core.entity_form_display.block_content.card_arrangement.default'
+  ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
