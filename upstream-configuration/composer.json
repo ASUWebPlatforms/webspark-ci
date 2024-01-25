@@ -2,7 +2,6 @@
     "name": "pantheon-upstreams/upstream-configuration",
     "type": "project",
     "require": {
-        "npm-asset/fontawesome": "6.4.2",
         "composer/installers": "v2.0.0",
         "cweagans/composer-patches": "1.7.3",
         "drupal/admin_toolbar": "3.4.2",
@@ -15,8 +14,8 @@
         "drupal/components": "3.0.0-beta3",
         "drupal/config_readonly": "1.0.0-beta5",
         "drupal/config_update": "2.0.0-alpha3",
-        "drupal/core-composer-scaffold": "10.1.7",
-        "drupal/core-recommended": "10.1.7",
+        "drupal/core-composer-scaffold": "10.2.2",
+        "drupal/core-recommended": "10.2.2",
         "drupal/crop": "2.3.0",
         "drupal/ctools": "4.0.4",
         "drupal/current_page_crumb": "1.5.0",
@@ -28,7 +27,7 @@
         "drupal/field_group": "3.4.0",
         "drupal/field_menu": "2.1.0",
         "drupal/field_states_ui": "3.0",
-        "drupal/fontawesome": "2.x-dev@dev",
+        "drupal/fontawesome": "2.26.0",
         "drupal/image_widget_crop": "2.4.0",
         "drupal/imagemagick": "3.6.0",
         "drupal/layout_builder_component_attributes": "2.1.1",
@@ -38,7 +37,7 @@
         "drupal/maxlength": "2.1.2",
         "drupal/media_library_form_element": "2.0.6",
         "drupal/metatag": "2.0.0",
-        "drupal/paragraphs": "1.16.0",
+        "drupal/paragraphs": "1.17.0",
         "drupal/pathauto": "1.12.0",
         "drupal/radix": "5.0.11",
         "drupal/redirect": "1.9.0",
@@ -46,10 +45,11 @@
         "drupal/schema_metatag": "3.0.1",
         "drupal/seckit": "2.0.1",
         "drupal/select2": "1.15.0",
-        "drupal/simple_sitemap": "4.1.7",
+        "drupal/simple_sitemap": "4.1.8",
         "drupal/webform": "6.2.2",
         "drush/drush": "^11 || 12.4.3",
         "drush-ops/behat-drush-endpoint": "9.4.1",
+        "fontawesome/fontawesome": "6.4.2",
         "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
         "npm-asset/select2": "4.1.0-RC.0",
         "oomphinc/composer-installers-extender": "2.0.1",
@@ -86,5 +86,5 @@
     "config": {
         "sort-packages": true
     },
-    "version": "3.0.0"
+    "version": "2.12.0"
 }

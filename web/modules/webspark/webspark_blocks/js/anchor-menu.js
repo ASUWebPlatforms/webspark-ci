@@ -61,6 +61,7 @@
     const anchorTargets = new Map();
     let previousScrollPosition = window.scrollY;
     let isNavbarAttached = false;  // Flag to track if navbar is attached to header
+    const body = document.body;
 
     let toolbarBar = document.getElementById('toolbar-bar');
     let toolbarItemAdministrationTray = document.getElementById('toolbar-item-administration-tray');
@@ -77,6 +78,11 @@
       anchorTargets.set(anchor, target);
     }
 
+    const scrollSpy = new bootstrap.ScrollSpy(body, {
+      target: '#uds-anchor-menu nav',
+      rootMargin: '20%'
+    });
+
     window.addEventListener("scroll", function () {
       const navbarY = navbar.getBoundingClientRect().top;
       const headerHeight = globalHeader.classList.contains("scrolled") ?  globalHeader.offsetHeight - 32 : globalHeader.offsetHeight;
@@ -85,15 +91,15 @@
       if (
         window.scrollY > previousScrollPosition &&
         navbarY > 0 && navbarY < headerHeight
-      ) {
-        if (!isNavbarAttached) {
-          // Attach navbar to globalHeader
-          globalHeader.appendChild(navbar);
-          isNavbarAttached = true;
-          navbar.classList.add('uds-anchor-menu-attached');
-        }
+        ) {
+          if (!isNavbarAttached) {
+            // Attach navbar to globalHeader
+            globalHeader.appendChild(navbar);
+            isNavbarAttached = true;
+            navbar.classList.add('uds-anchor-menu-attached');
+          }
           previousScrollPosition = window.scrollY;
-      }
+        }
 
       // If scrolling UP and past the initial navbar position
       if (
@@ -107,18 +113,6 @@
           previousScrollPosition = window.scrollY;
       }
 
-      for (let [anchor, target] of anchorTargets) {
-        const offsets = navbar.offsetHeight;
-
-        if (
-          target.getBoundingClientRect().top < offsets &&
-          target.getBoundingClientRect().top + target.offsetHeight > offsets
-        ) {
-          anchor.classList.add('active');
-        } else {
-          anchor.classList.remove('active');
-        }
-      }
       previousScrollPosition = window.scrollY;
     }, { passive: true });
 

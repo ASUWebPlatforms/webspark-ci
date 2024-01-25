@@ -44,11 +44,19 @@ export function _initUdsListClass(model) {
     _getSibling(currentNode, elementsBelow, "forward");
     // Set the 'uds-list' class for each element below the current block
     elementsBelow.forEach((element) => {
-      writer.setAttribute(
-        "htmlListAttributes",
-        {classes: 'uds-list'},
-        element
-      );
+      if (element.getAttribute("listType") === 'bulleted') {
+        writer.setAttribute(
+          "htmlUlAttributes",
+          {classes: 'uds-list'},
+          element
+        );
+      } else if (element.getAttribute("listType") === 'numbered') {
+        writer.setAttribute(
+          "htmlOlAttributes",
+          {classes: 'uds-list'},
+          element
+        );
+      }
     });
   });
 }
@@ -78,9 +86,15 @@ export function _setUpClassSelect(form, editor) {
   elementsBelow.forEach((element) => {
     if (element.getAttribute("listIndent") == 0) {
       try {
-        currentClasses = element.getAttribute("htmlListAttributes").classes
-        listType = element.getAttribute('listType');
-      } catch (e) {}
+        if (element.getAttribute("listType") === 'bulleted') {
+          currentClasses = element.getAttribute("htmlUlAttributes").classes
+          listType = element.getAttribute('listType');
+        } else if (element.getAttribute("listType") === 'numbered') {
+          currentClasses = element.getAttribute("htmlOlAttributes").classes
+          listType = element.getAttribute('listType');
+        }
+      } catch (e) {
+      }
     }
   });
 
@@ -371,7 +385,7 @@ export function _formatStyleNumberedClass(styleClass) {
     stclass += " uds-list uds-steplist";
 
     // Remove NLR clases.
-    if (numberedClass == "stp-default") {
+    if (numberedClass === "stp-default") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -383,7 +397,7 @@ export function _formatStyleNumberedClass(styleClass) {
       ]);
     }
     // Default gold.
-    if (numberedClass == "stp-gold-counter") {
+    if (numberedClass === "stp-gold-counter") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-maroon",
@@ -396,7 +410,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " uds-steplist-gold";
     }
     // Default maroon.
-    if (numberedClass == "stp-maroon-counter") {
+    if (numberedClass === "stp-maroon-counter") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -406,10 +420,10 @@ export function _formatStyleNumberedClass(styleClass) {
       ]);
 
       // Add classes.
-      stclass = " uds-steplist-maroon";
+      stclass += " uds-steplist-maroon";
     }
     // Smoke mode.
-    if (numberedClass == "stp-smokemode") {
+    if (numberedClass === "stp-smokemode") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -422,7 +436,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " smokemode";
     }
     // Smoke mode gold.
-    if (numberedClass == "stp-smokemode-gold") {
+    if (numberedClass === "stp-smokemode-gold") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-maroon",
@@ -434,7 +448,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " smokemode uds-steplist-gold";
     }
     // Smoke mode maroon.
-    if (numberedClass == "stp-smokemode-maroon") {
+    if (numberedClass === "stp-smokemode-maroon") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-maroon",
@@ -443,10 +457,10 @@ export function _formatStyleNumberedClass(styleClass) {
       ]);
 
       // Add classes.
-      stclass += "smokemode uds-steplist-maroon";
+      stclass += " smokemode uds-steplist-maroon";
     }
     // Light Smoke mode.
-    if (numberedClass == "stp-lightsmokemode") {
+    if (numberedClass === "stp-lightsmokemode") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -459,7 +473,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " light-smokemode";
     }
     // Light Smoke mode gold.
-    if (numberedClass == "stp-lightsmokemode-gold") {
+    if (numberedClass === "stp-lightsmokemode-gold") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-maroon",
@@ -471,7 +485,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " light-smokemode uds-steplist-gold";
     }
     // Light Smoke mode maroon.
-    if (numberedClass == "stp-lightsmokemode-maroon") {
+    if (numberedClass === "stp-lightsmokemode-maroon") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -482,7 +496,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " light-smokemode uds-steplist-maroon";
     }
     // Darkmode.
-    if (numberedClass == "stp-darkmode") {
+    if (numberedClass === "stp-darkmode") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-gold",
@@ -494,7 +508,7 @@ export function _formatStyleNumberedClass(styleClass) {
       stclass += " darkmode";
     }
     // Darkmode gold.
-    if (numberedClass == "stp-darkmode-gold") {
+    if (numberedClass === "stp-darkmode-gold") {
       // Remove NLR classes.
       stclass = _removeClassesFromString(stclass, [
         "uds-steplist-maroon",
@@ -540,7 +554,7 @@ export function _formatStyleNumberedClass(styleClass) {
           "gold",
         ]);
       }
-      if (numberedClass == "darkmode-gold") {
+      if (numberedClass === "darkmode-gold") {
         stclass += " darkmode gold";
       } else {
         stclass += " " + numberedClass;

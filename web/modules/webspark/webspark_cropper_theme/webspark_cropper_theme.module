@@ -2,6 +2,8 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\ViewExecutable;
+use Drupal\media\MediaForm;
+use Drupal\views\Form\ViewsForm;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().

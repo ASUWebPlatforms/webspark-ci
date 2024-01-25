@@ -9,8 +9,6 @@ dependencies:
     - editor
     - linkit
     - media
-_core:
-  default_config_hash: PwHijPIQ1KW7KrMXy_TzSdLjozhXG7INtrEZ3dLRVVM
 name: 'Full HTML'
 format: full_html
 weight: 2
@@ -99,3 +97,9 @@ filters:
     weight: -42
     settings:
       filter_url_length: 72
+  filter_image_lazy_load:
+    id: filter_image_lazy_load
+    provider: filter
+    status: true
+    weight: -44
+    settings: {  }

@@ -20,6 +20,10 @@
                 "license": "MIT"
             }
         },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
         "choices": {
             "type": "package",
             "package": {
@@ -64,6 +68,10 @@
                 "license": "MIT"
             }
         },
+        "composer": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
         "custom-dependencies": {
             "type": "path",
             "url": "custom-dependencies"
@@ -71,6 +79,21 @@
         "drupal-packages": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "fontawesome": {
+            "type": "package",
+            "package": {
+                "name": "fontawesome/fontawesome",
+                "version": "6.4.2",
+                "type": "drupal-library",
+                "extra": {
+                    "installer-name": "fontawesome"
+                },
+                "dist": {
+                    "url": "https://use.fontawesome.com/releases/v6.4.2/fontawesome-free-6.4.2-web.zip",
+                    "type": "zip"
+                }
+            }
         },
         "jquery.chosen": {
             "type": "package",
@@ -264,25 +287,6 @@
                 "license": "MIT"
             }
         },
-        "npm-asset-fontawesome": {
-            "type": "package",
-            "package": {
-                "name": "npm-asset/fontawesome",
-                "version": "6.4.2",
-                "dist": {
-                    "type": "tar",
-                    "url": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz"
-                },
-                "type": "npm-asset"
-            }
-        },
-        "packagist-fontawesome": {
-            "type": "composer",
-            "url": "https://asset-packagist.org",
-            "exclude": [
-                "npm-asset/fontawesome"
-            ]
-        },
         "popperjs": {
             "type": "package",
             "package": {
@@ -391,11 +395,12 @@
     "require-dev": {
         "behat/behat": "3.13.0",
         "dmore/behat-chrome-extension": "1.4.0",
-        "drupal/core-dev": "10.1.7",
+        "drupal/core-dev": "10.2.2",
         "drupal/drupal-driver": "2.2.2",
         "drupal/drupal-extension": "5.0.0",
         "friends-of-behat/mink-extension": "2.7.4",
         "genesis/behat-fail-aid": "3.7.5",
+        "palantirnet/drupal-rector": "^0.18.4",
         "sirbrillig/phpcs-changed": "v2.11.4"
     },
     "conflict": {

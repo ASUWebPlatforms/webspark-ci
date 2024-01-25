@@ -89,7 +89,9 @@ webspark_ckeditor_plugins_plugins:
       - <a>
       - <a class="webspark-button">
       - <span>
-      - <span class="text">
+      - <span class>
+      - <i>
+      - <i class>
       - <hr class="copy-divider">
       - <p class="lead">
       - <div class="uds-table">
