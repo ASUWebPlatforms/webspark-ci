@@ -130,15 +130,29 @@
     }
   }
 
-  .banner-green,
-  .banner-orange,
-  .banner-blue,
+  .banner-green {
+    outline: black 5px solid;
+    background: $uds-color-base-green;
+  }
+
+  .banner-orange {
+    outline: black 5px solid;
+    background: $uds-color-base-orange;
+  }
+
+  .banner-blue {
+    outline: black 5px solid;
+    background: $uds-color-base-blue;
+  }
+
   .banner-gray {
     outline: black 5px solid;
+    background: $uds-color-base-gray-2;
   }
 
   .banner-black {
     outline: $uds-color-base-gray-2 5px solid;
+    background: $uds-color-base-gray-7;
   }
 
   input {
