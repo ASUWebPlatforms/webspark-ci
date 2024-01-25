@@ -4,37 +4,6 @@
     "type": "project",
     "license": "MIT",
     "repositories": {
-        "custom-dependencies": {
-            "type": "path",
-            "url": "custom-dependencies"
-        },
-        "drupal-packages": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        "npm-asset-fontawesome": {
-            "type": "package",
-            "package": {
-                "name": "npm-asset/fontawesome",
-                "version": "6.4.2",
-                "dist": {
-                    "type": "tar",
-                    "url": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz"
-                },
-                "type": "npm-asset"
-            }
-        },
-        "packagist-fontawesome": {
-            "type": "composer",
-            "url": "https://asset-packagist.org",
-            "exclude": [
-                "npm-asset/fontawesome"
-            ]
-        },
-        "upstream-configuration": {
-            "type": "path",
-            "url": "upstream-configuration"
-        },
         "algolia.places": {
             "type": "package",
             "package": {
@@ -67,6 +36,18 @@
                 "license": "MIT"
             }
         },
+        "ckeditor5-anchor-drupal": {
+            "type": "package",
+            "package": {
+                "name": "northernco/ckeditor5-anchor-drupal",
+                "version": "0.4.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://registry.npmjs.org/@northernco/ckeditor5-anchor-drupal/-/ckeditor5-anchor-drupal-0.4.0.tgz",
+                    "type": "tar"
+                }
+            }
+        },
         "codemirror": {
             "type": "package",
             "package": {
@@ -82,6 +63,14 @@
                 },
                 "license": "MIT"
             }
+        },
+        "custom-dependencies": {
+            "type": "path",
+            "url": "custom-dependencies"
+        },
+        "drupal-packages": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
         },
         "jquery.chosen": {
             "type": "package",
@@ -275,6 +264,25 @@
                 "license": "MIT"
             }
         },
+        "npm-asset-fontawesome": {
+            "type": "package",
+            "package": {
+                "name": "npm-asset/fontawesome",
+                "version": "6.4.2",
+                "dist": {
+                    "type": "tar",
+                    "url": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz"
+                },
+                "type": "npm-asset"
+            }
+        },
+        "packagist-fontawesome": {
+            "type": "composer",
+            "url": "https://asset-packagist.org",
+            "exclude": [
+                "npm-asset/fontawesome"
+            ]
+        },
         "popperjs": {
             "type": "package",
             "package": {
@@ -371,17 +379,9 @@
                 "license": "MIT"
             }
         },
-        "ckeditor5-anchor-drupal": {
-            "type": "package",
-            "package": {
-                "name": "northernco/ckeditor5-anchor-drupal",
-                "version": "0.4.0",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://registry.npmjs.org/@northernco/ckeditor5-anchor-drupal/-/ckeditor5-anchor-drupal-0.4.0.tgz",
-                    "type": "tar"
-                }
-            }
+        "upstream-configuration": {
+            "type": "path",
+            "url": "upstream-configuration"
         }
     },
     "require": {
@@ -498,7 +498,8 @@
             "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/webspark"
         ],
         "pre-update-cmd": [
-            "DrupalComposerManaged\\ComposerScripts::preUpdate"
+            "DrupalComposerManaged\\ComposerScripts::preUpdate",
+            "./upstream-configuration/scripts/webform_library_updater.sh"
         ],
         "post-update-cmd": [
             "DrupalComposerManaged\\ComposerScripts::postUpdate"
