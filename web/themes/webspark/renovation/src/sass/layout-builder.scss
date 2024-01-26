@@ -4,7 +4,7 @@
 
 #drupal-off-canvas-wrapper  {
   padding-right: .25rem;
-  padding-bottom: 9rem;
+  padding-bottom: 16rem;
   .form-text,
   .form-tel,
   .form-email,
@@ -241,7 +241,6 @@
 
   #drupal-off-canvas {
     padding: 0 0.5rem 0 1rem !important;
-    max-height: 75vh !important;
     overflow-x: visible;
     overflow-y: auto;
     -ms-overflow-style: none;
