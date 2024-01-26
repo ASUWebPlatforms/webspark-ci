@@ -45,6 +45,10 @@
   padding: 15px;
 }
 
+.media-library-menu li a:hover {
+  background-color: #d0d0d0;
+}
+
 .media-library-menu li a.active {
   background-color: #fff;
   font-weight: bold;
