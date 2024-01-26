@@ -98,7 +98,6 @@ install:
   - sophron
   - imagemagick
 themes:
-  - bartik
-  - seven
   - renovation
+  - claro
 project: 'asu_webspark_profile'

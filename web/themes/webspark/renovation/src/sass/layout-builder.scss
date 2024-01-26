@@ -3,7 +3,7 @@
 @import "base/mixins";
 
 #drupal-off-canvas-wrapper  {
-  padding-right: .25rem;
+  z-index: 1500;
   .form-text,
   .form-tel,
   .form-email,
@@ -24,6 +24,12 @@
       margin-top: 0 !important;
       padding-left: 0;
     }
+  }
+  .js-hide {
+   /* Temporarily hide the js-hide class.
+    * See https://www.drupal.org/project/drupal/issues/3121239.
+    */
+    display: none;
   }
 
   form {
@@ -225,29 +231,14 @@
     mask: inherit;
   }
 
-  .ui-dialog-titlebar {
-    position: sticky;
-    z-index: 1;
-    top: 0;
-    margin-right: 0;
-  }
-
-  #drupal-off-canvas {
-    padding: 0 0.5rem 0 1rem !important;
-    max-height: 75vh !important;
-    overflow-x: visible;
-    overflow-y: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none !important;
-    }
-  }
-
   details {
     border-width: 2px !important;
     border-color: $uds-color-base-gray-5 !important;
   }
+}
+
+body .ui-dialog.ui-widget.ui-widget-content.media-library-widget-modal {
+  z-index: 1501 !important;
 }
 
 .layout-builder-form {
