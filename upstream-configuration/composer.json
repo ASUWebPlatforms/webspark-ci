@@ -27,7 +27,7 @@
         "drupal/field_group": "3.4.0",
         "drupal/field_menu": "2.1.0",
         "drupal/field_states_ui": "3.0",
-        "drupal/fontawesome": "2.26.0",
+        "drupal/fontawesome": "2.x-dev@dev",
         "drupal/image_widget_crop": "2.4.0",
         "drupal/imagemagick": "3.6.0",
         "drupal/layout_builder_component_attributes": "2.1.1",
