@@ -53,14 +53,15 @@
         "webspark/custom-dependencies": "*"
     },
     "require-dev": {
-        "behat/behat": "3.13.0",
+        "behat/behat": "3.14.0",
+        "behat/mink-goutte-driver": "2.0",
         "dmore/behat-chrome-extension": "1.4.0",
         "drupal/core-dev": "10.2.2",
         "drupal/drupal-driver": "2.2.2",
         "drupal/drupal-extension": "5.0.0",
-        "friends-of-behat/mink-extension": "2.7.4",
         "genesis/behat-fail-aid": "3.7.5",
-        "palantirnet/drupal-rector": "^0.18.4",
+        "nuvoleweb/drupal-behat": "1.3.0",
+        "palantirnet/drupal-rector": "0.18.6",
         "sirbrillig/phpcs-changed": "v2.11.4"
     },
     "conflict": {
