@@ -11,7 +11,6 @@ install:
   - history
   - block
   - breakpoint
-  - ckeditor
   - ckeditor5
   - config
   - comment
@@ -97,6 +96,7 @@ install:
   - file_mdm
   - sophron
   - imagemagick
+  - editor_advanced_link
 themes:
   - renovation
   - claro
