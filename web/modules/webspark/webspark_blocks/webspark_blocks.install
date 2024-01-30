@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Config\FileStorage;
 
 /**
@@ -8,8 +9,8 @@ use Drupal\Core\Config\FileStorage;
  */
 function webspark_blocks_update_9002(&$sandbox) {
   // Remove all the blocks of type basic.
-  $bids = \Drupal::entityQuery('block_content')->condition('type','basic')->execute();
-  $blocks = \Drupal\block_content\Entity\BlockContent::loadMultiple($bids);
+  $bids = \Drupal::entityQuery('block_content')->condition('type','basic')->accessCheck(FALSE)->execute();
+  $blocks = BlockContent::loadMultiple($bids);
   foreach ($blocks as $block) {
     $block->delete();
   }
@@ -27,11 +28,12 @@ function webspark_blocks_update_9002(&$sandbox) {
 function webspark_blocks_update_9005(&$sandbox) {
   // Queries for relevant nodes already using that field.
   $bids = \Drupal::entityQuery('block_content')
+    ->accessCheck(FALSE)
     ->condition('type', 'tabbed_content')
     ->condition('field_background_color', 'default')
     ->execute();
 
-  $blocks = Drupal\block_content\Entity\BlockContent::loadMultiple($bids);
+  $blocks = BlockContent::loadMultiple($bids);
   // Updates field_background_color values.
   $updated_value_map = [
     'default' => 'bg-white',
@@ -110,6 +112,7 @@ function webspark_blocks_update_9017() {
 
   $query->condition('type', ['card', 'card_degree', 'card_story', 'card_with_icon'], 'IN');
   $query->condition('status', 1);
+  $query->accessCheck(FALSE);
   $result = $query->execute();
 
   $cards = $paragraph_storage->loadMultiple($result);
@@ -147,7 +150,7 @@ function webspark_blocks_update_9019(&$sandbox) {
   $query = $paragraph_storage->getQuery();
 
   $query->condition('type', 'accordion_panel', 'IN');
-  $result = $query->execute();
+  $result = $query->accessCheck(FALSE)->execute();
 
   $accordions = $paragraph_storage->loadMultiple($result);
   $accordions_to_update = [];
@@ -272,6 +275,26 @@ function webspark_blocks_update_9026(&$sandbox) {
 function webspark_blocks_update_9027(&$sandbox) {
   // Was already run for WS2 2.12.0 release in 9024. This update was needed for iterative pre-release dev workflow.
   // _webspark_blocks_revert_module_config();
+}
+
+/**
+ * WS2-1847 - Add display orientation option for Card Arrangament.
+ */
+function webspark_blocks_update_9028(&$sandbox) {
+  $configs = [
+    'field.storage.block_content.field_display_orientation',
+    'field.field.block_content.card_arrangement.field_display_orientation',
+    'core.entity_view_display.block_content.card_arrangement.card_arrangement_horizontal',
+    'core.entity_view_display.block_content.card_arrangement.card_arrangement_vertical',
+    'core.entity_view_display.block_content.card_arrangement.default',
+    'core.entity_view_display.block_content.card_arrangement.degree_card',
+    'core.entity_view_display.block_content.card_arrangement.event_card',
+    'core.entity_view_display.block_content.card_arrangement.landscape',
+    'core.entity_view_display.block_content.card_arrangement.media_card',
+    'core.entity_view_display.block_content.card_arrangement.story_card',
+    'core.entity_form_display.block_content.card_arrangement.default'
+  ];
+  _webspark_blocks_update_module_config_list($configs);
 }
 
 /**
