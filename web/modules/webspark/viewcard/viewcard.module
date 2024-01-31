@@ -1,5 +1,0 @@
-<?php
-
-function viewcard_page_attachments_alter($attachments){
-  $attachments['#attached']['library'][] = 'viewcard/viewcard';
-}

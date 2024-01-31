@@ -1,5 +1,0 @@
-name: viewcard
-type: module
-description: Provides view mode for cards.
-package: Webspark
-core_version_requirement: ^9 || ^10

@@ -1,14 +1,13 @@
 # Custom module library for general purposes.
-viewcard:
+webspark_view_modes:
   js:
-    js/viewcard.js: {}
-    js/test.js: {}
+    js/webspark-view-modes.js: {}
   css:
     component:
-      css/viewcard.css: {}
+      css/webspark-view-modes.css: {}
   dependencies:
     - core/drupalSettings
-    - viewcard/jquery-labelauty
+    - webspark_view_modes/jquery-labelauty
 
 # Third-party library (self hosted).
 jquery-labelauty:

@@ -1,0 +1,5 @@
+name: Webspark View Modes
+type: module
+description: Provides web standards compliant view modes.
+package: Custom
+core_version_requirement: ^9 || ^10
