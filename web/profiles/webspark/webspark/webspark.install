@@ -380,7 +380,7 @@ function webspark_update_10000(&$sandbox) {
 /**
  * Install Layout builder report module
  */
-function webspark_blocks_update_10001(&$sandbox) {
+function webspark_update_10001(&$sandbox) {
   if (!Drupal::moduleHandler()->moduleExists('layout_builder_usage_reports')) {
     Drupal::service('module_installer')->install(['layout_builder_usage_reports']);
   }
