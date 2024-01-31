@@ -298,15 +298,6 @@ function webspark_blocks_update_9028(&$sandbox) {
 }
 
 /**
- * Install Layout builder report module
- */
-function webspark_blocks_update_10000(&$sandbox) {
-  if (!Drupal::moduleHandler()->moduleExists('layout_builder_usage_reports')) {
-    Drupal::service('module_installer')->install(['layout_builder_usage_reports']);
-  }
-}
-
-/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
