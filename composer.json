@@ -49,6 +49,7 @@
         }
     ],
     "require": {
+        "drupal/layout_builder_usage_reports": "^1.0",
         "pantheon-upstreams/upstream-configuration": "*",
         "webspark/custom-dependencies": "*"
     },

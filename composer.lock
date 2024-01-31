@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c55389407d4253c8cc0f16e58fde13c",
+    "content-hash": "5ba122bedea718082cfcd05ea775f7d7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3863,6 +3863,60 @@
             }
         },
         {
+            "name": "drupal/layout_builder_usage_reports",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_usage_reports.git",
+                "reference": "1.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_usage_reports-1.0.2.zip",
+                "reference": "1.0.2",
+                "shasum": "497e5fd196fcbb6a5c9aa1ca5d8491d23254a3ca"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9.0 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.2",
+                    "datestamp": "1688663333",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nikhil Dubbaka (TechNikh)",
+                    "homepage": "https://www.drupal.org/u/technikh",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "TechNikh",
+                    "homepage": "https://www.drupal.org/user/372123"
+                }
+            ],
+            "description": "Lists all nodes using layout builder, blocks & block types being used in the layout and more.",
+            "homepage": "http://drupal.org/project/layout_builder_usage_reports",
+            "keywords": [
+                "Drupal",
+                "Layout Builder"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_usage_reports",
+                "issues": "https://www.drupal.org/project/issues/layout_builder_usage_reports"
+            }
+        },
+        {
             "name": "drupal/layout_section_classes",
             "version": "1.5.0",
             "source": {
@@ -6418,7 +6472,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "880445bffbcdb9a8d24a1d2e84c4aff5d1e7e94e"
+                "reference": "5211edaab853f3e831c15ef958157313549a2cea"
             },
             "require": {
                 "composer/installers": "v2.0.0",
