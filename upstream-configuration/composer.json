@@ -60,7 +60,8 @@
         "drupal/editor_advanced_link": "2.2.4",
         "drupal/ckeditor": "^1.0",
         "drupal/fakeobjects": "^1.2",
-        "northernco/ckeditor5-anchor-drupal": "^0.4.0"
+        "northernco/ckeditor5-anchor-drupal": "^0.4.0",
+        "drupal/layout_builder_usage_reports": "^1.0"
     },
     "config": {
         "sort-packages": true
