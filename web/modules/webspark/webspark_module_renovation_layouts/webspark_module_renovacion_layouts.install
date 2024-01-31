@@ -3,7 +3,7 @@
 /**
  * Install Layout builder report module
  */
-function webspark_module_renovacion_layouts_update_9001(&$sandbox): void {
+function webspark_module_renovacion_layouts_update_1001(&$sandbox): void {
   if (!Drupal::moduleHandler()->moduleExists('layout_builder_usage_reports')) {
     Drupal::service('module_installer')->install(['layout_builder_usage_reports']);
   }
