@@ -7,16 +7,38 @@
       const displayOrientation = document.querySelector('[name="settings[block_form][field_display_orientation]"]');
       const displayDiv = document.querySelector('[data-drupal-selector="edit-settings-block-form-field-display-orientation-wrapper"]');
 
+      let rankingOrBased = false;
+      // Get the div with the class "ajax-new-content"
+      const ajaxNewContentDiv = document.querySelector('.ajax-new-content');
+      if (ajaxNewContentDiv) {
+        // Get all child elements
+        const elements = ajaxNewContentDiv.querySelectorAll('*');
+        for (let i = 0; i < elements.length; i++) {
+          const attrs = elements[i].attributes; // Get the attributes of the element
+          // Iterate through the attributes of the element and check if any contains the word "ranking"
+          for (let j = 0; j < attrs.length; j++) {
+            if (attrs[j].value.includes('ranking') || attrs[j].value.includes('based')) {
+              rankingOrBased = true;
+              break; // End the iteration if the word is found
+            }
+          }
+        }
+      }
+      else {
+        rankingOrBased = false;
+      }
+
       // Get the element to identify Ranking cards
       const elementRanking = document.querySelector('[name*="[field_card_ranking_image_size]"]');
       // Get the element to identify Image based cards
       const elementBasedCard = document.querySelector('[name*="[field_loading]"]');
 
       // Check if the element exists to determine display orientation
-      if (elementRanking || elementBasedCard) {
+      if (elementRanking || elementBasedCard || rankingOrBased) {
         // Hide display orientation
         _showDisplayOrientation('none');
-      } else {
+      }
+      else {
         // Show display orientation
         _showDisplayOrientation();
       }
@@ -39,7 +61,8 @@
               }
             }
           });
-        } else {
+        }
+        else {
           // Add options when display orientation is not horizontal
           settings.columns_values.forEach(option => {
             const key = Object.keys(option)[0];
