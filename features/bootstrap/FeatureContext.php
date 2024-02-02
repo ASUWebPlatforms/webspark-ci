@@ -52,29 +52,6 @@ class FeatureContext extends RawDrupalContext {
   }
 
   /**
-   * Check if user is a "Department admin".
-   *
-   * @Given I am a department admin
-   *
-   * @throws \RuntimeException
-   */
-  public function iAmaDepartmentAdmin() {
-    $dept_admin = $this->getSession()->evaluateScript(
-      "(function(drupalSettings) {
-        if (drupalSettings && drupalSettings.dept_admin) {
-          return drupalSettings.dept_admin;
-        }
-        return false;
-      })(drupalSettings);"
-    );
-
-    if (filter_var($dept_admin, FILTER_VALIDATE_BOOLEAN) === TRUE) {
-      return;
-    }
-    throw new \RuntimeException("This user is NOT a department admin.");
-  }
-
-  /**
    * Scroll selector into view.
    *
    * Borrowed from https://gist.github.com/MKorostoff/c94824a467ffa53f4fa9?permalink_comment_id=2095785#gistcomment-2095785
