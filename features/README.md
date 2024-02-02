@@ -1,6 +1,6 @@
 # Behat behavioral testing
 
-This `features` folder contains the tests which are used by Behat to ensure that iSearch is working properly. There is a `bootstrap` directory which contains a file named `FeatureContext.php`. This file is populated with custom functionality which can be used by Behat in the `.feature` files within this directory. These `.feature` files are written in Gherkin, which is a human readable language.
+This `features` folder contains the tests which are used by Behat to ensure that Webspark is working properly. There is a `bootstrap` directory which contains a file named `FeatureContext.php`. This file is populated with custom functionality which can be used by Behat in the `.feature` files within this directory. These `.feature` files are written in Gherkin, which is a human readable language.
 
 Setting up Behat testing can be challenging. Please refer to our getting started document to get your local development environment (using DDEV) ready for testing with Behat. (https://docs.google.com/document/d/1k2IZuaEFSdX8I-uGota2v7XXLwDWxKyGImBsrnDz4gE/edit?usp=sharing)
 
