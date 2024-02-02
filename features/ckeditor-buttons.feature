@@ -3,7 +3,7 @@ Feature: Layout Builder Custom Blocks Check
   As an anonymous user
   I want to verify that each custom block is included.
 
-  @api @javascript @test
+  @api @javascript
   Scenario: Verify Card Arrangements (components-core)
     Given I am logged in as user "admin"
     When I am at '/node/28/layout'
