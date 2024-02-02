@@ -10,7 +10,7 @@ Feature: Layout Builder Custom Blocks Check
     Then I scroll ".layout__region--first" into view
     Then I click "Add block"
     Then I click "Create content block"
-    Then I should see that 30 "#drupal-off-canvas-wrapper ul li" elements exist
+    Then I should see that there are 30 "#drupal-off-canvas-wrapper ul li" elements exist
     Then I should see the link "Accordion"
     Then I should see the link "Blockquote"
     Then I should see the link "Card and Image"

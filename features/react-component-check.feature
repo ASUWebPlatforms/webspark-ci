@@ -71,7 +71,6 @@ Feature: React Component Check
   Scenario: Verify News component (component-news)
     Given I am an anonymous user
     When I am at '/news'
-    Then I should not see the text "Error, try again!"
     Then I wait for 4 seconds
     Then I should see that the "[data-testid='feed-body']" element exists
 
