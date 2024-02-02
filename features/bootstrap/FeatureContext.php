@@ -1,5 +1,6 @@
 <?php
 
+use Behat\Mink\Element\NodeElement;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 
 /**
@@ -120,6 +121,15 @@ JS;
 JS;
         break;
 
+      // 'data-drupal-selector' attribute selectors.
+      case (bool)$locator:
+        $function = <<<JS
+(function(){
+  let elems = document.querySelectorAll(`[data-drupal-selector="${selector}"]`);
+  elems[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+})()
+JS;
+
       default:
         throw new \Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
     }
@@ -163,6 +173,25 @@ JS;
 (function(){
   var elem = document.querySelectorAll("$selector");
   return elem.length > 1;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if X number of elements exist on the page.
+   *
+   * @Then I should see that :number :selector elements exist
+   * @throws \Exception
+   */
+  public function xNumberElementsExist($number, $selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelectorAll("$selector");
+  return elem.length === $number;
 })()
 JS;
     if ($this->getSession()->evaluateScript($function)) {

@@ -75,7 +75,7 @@ Feature: React Component Check
     Then I wait for 4 seconds
     Then I should see that the "[data-testid='feed-body']" element exists
 
-  @api @javascript @test
+  @api @javascript
   Scenario: Verify Web Directory component (app-webdir-ui)
     Given I am an anonymous user
     When I am at '/web-directory'
