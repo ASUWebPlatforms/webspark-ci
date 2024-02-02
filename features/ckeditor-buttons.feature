@@ -1,10 +1,10 @@
-Feature: Layout Builder Custom Blocks Check
-  In order to have confidence in my site's Layout Builder custom blocks
+Feature: CKEditor button verification
+  In order to have confidence in the WYSIWYG configuration
   As an anonymous user
-  I want to verify that each custom block is included.
+  I want to verify that each button exists.
 
   @api @javascript
-  Scenario: Verify Card Arrangements (components-core)
+  Scenario: Verify CKEditor buttons
     Given I am logged in as user "admin"
     When I am at '/node/28/layout'
     Then I scroll ".layout__region--first" into view
