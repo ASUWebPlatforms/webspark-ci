@@ -195,6 +195,26 @@ JS;
   }
 
   /**
+   * Check if a single element does not exist on the page.
+   *
+   * @Then I should see that the :selector element does not exist
+   *
+   * @throws \Exception
+   */
+  public function singleElementDoesNotExist($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if (!$this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Check if multiple elements exist on the page.
    *
    * @Then I should see that multiple :selector elements exist
@@ -216,7 +236,7 @@ JS;
   /**
    * Check if X number of elements exist on the page.
    *
-   * @Then I should see that there are :number :selector elements exist
+   * @Then I should see that there are :number :selector elements that exist
    * @throws \Exception
    */
   public function xNumberElementsExist($number, $selector) {
@@ -224,6 +244,31 @@ JS;
 (function(){
   var elem = document.querySelectorAll("$selector");
   return elem.length === $number;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if active menu has gold underline.
+   *
+   * @Then I should see the gold underline exists on :selector menu item
+   *
+   * @throws \Exception
+   */
+  public function goldUnderlineExists($selector) {
+    $function = <<<JS
+(function(){
+  var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('background');
+  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box") {
+    return elem;
+  }
+  else {
+    return FALSE;
+  }
 })()
 JS;
     if ($this->getSession()->evaluateScript($function)) {
