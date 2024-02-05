@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f1d7c178ca47644230e9a616d7d3162",
+    "content-hash": "058a7230de4d0facb25ce433939aff73",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1154,16 +1154,16 @@
         },
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "4f2d4f2836e7ec4e7a8625e75c6aa916004db931"
+                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/4f2d4f2836e7ec4e7a8625e75c6aa916004db931",
-                "reference": "4f2d4f2836e7ec4e7a8625e75c6aa916004db931",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
+                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
                 "shasum": ""
             },
             "require": {
@@ -1195,9 +1195,9 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.2"
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.3"
             },
-            "time": "2023-09-27T20:04:15+00:00"
+            "time": "2024-01-30T19:34:25+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -3860,6 +3860,60 @@
             }
         },
         {
+            "name": "drupal/layout_builder_usage_reports",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_usage_reports.git",
+                "reference": "1.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_usage_reports-1.0.2.zip",
+                "reference": "1.0.2",
+                "shasum": "497e5fd196fcbb6a5c9aa1ca5d8491d23254a3ca"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9.0 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.2",
+                    "datestamp": "1688663333",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nikhil Dubbaka (TechNikh)",
+                    "homepage": "https://www.drupal.org/u/technikh",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "TechNikh",
+                    "homepage": "https://www.drupal.org/user/372123"
+                }
+            ],
+            "description": "Lists all nodes using layout builder, blocks & block types being used in the layout and more.",
+            "homepage": "http://drupal.org/project/layout_builder_usage_reports",
+            "keywords": [
+                "Drupal",
+                "Layout Builder"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_usage_reports",
+                "issues": "https://www.drupal.org/project/issues/layout_builder_usage_reports"
+            }
+        },
+        {
             "name": "drupal/layout_section_classes",
             "version": "1.5.0",
             "source": {
@@ -6415,7 +6469,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "a857cb23c6e9d3de5608421f1f911bf123191d74"
+                "reference": "886fcf9bdaca7552cd077fd572e956fc37673d2b"
             },
             "require": {
                 "composer/installers": "v2.0.0",
@@ -6446,11 +6500,12 @@
                 "drupal/field_group": "3.4.0",
                 "drupal/field_menu": "2.1.0",
                 "drupal/field_states_ui": "3.0",
-                "drupal/fontawesome": "2.x-dev@dev",
+                "drupal/fontawesome": "2.x-dev#65e140f",
                 "drupal/image_widget_crop": "2.4.0",
                 "drupal/imagemagick": "3.6.0",
                 "drupal/layout_builder_component_attributes": "2.1.1",
                 "drupal/layout_builder_restrictions": "2.19.0",
+                "drupal/layout_builder_usage_reports": "^1.0",
                 "drupal/layout_section_classes": "1.5.0",
                 "drupal/linkit": "6.1.2",
                 "drupal/maxlength": "2.1.2",
@@ -10324,16 +10379,16 @@
     "packages-dev": [
         {
             "name": "behat/behat",
-            "version": "v3.13.0",
+            "version": "v3.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "9dd7cdb309e464ddeab095cd1a5151c2dccba4ab"
+                "reference": "2a3832d9cb853a794af3a576f9e524ae460f3340"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/9dd7cdb309e464ddeab095cd1a5151c2dccba4ab",
-                "reference": "9dd7cdb309e464ddeab095cd1a5151c2dccba4ab",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/2a3832d9cb853a794af3a576f9e524ae460f3340",
+                "reference": "2a3832d9cb853a794af3a576f9e524ae460f3340",
                 "shasum": ""
             },
             "require": {
@@ -10342,18 +10397,18 @@
                 "ext-mbstring": "*",
                 "php": "^7.2 || ^8.0",
                 "psr/container": "^1.0 || ^2.0",
-                "symfony/config": "^4.4 || ^5.0 || ^6.0",
-                "symfony/console": "^4.4 || ^5.0 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0",
-                "symfony/translation": "^4.4 || ^5.0 || ^6.0",
-                "symfony/yaml": "^4.4 || ^5.0 || ^6.0"
+                "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/console": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/translation": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/yaml": "^4.4 || ^5.0 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "herrera-io/box": "~1.6.1",
                 "phpspec/prophecy": "^1.15",
                 "phpunit/phpunit": "^8.5 || ^9.0",
-                "symfony/process": "^4.4 || ^5.0 || ^6.0",
+                "symfony/process": "^4.4 || ^5.0 || ^6.0 || ^7.0",
                 "vimeo/psalm": "^4.8"
             },
             "suggest": {
@@ -10405,9 +10460,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Behat/issues",
-                "source": "https://github.com/Behat/Behat/tree/v3.13.0"
+                "source": "https://github.com/Behat/Behat/tree/v3.14.0"
             },
-            "time": "2023-04-18T15:40:53+00:00"
+            "time": "2023-12-09T13:55:02+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -10605,6 +10660,66 @@
                 "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v2.2.0"
             },
             "time": "2023-12-09T11:30:50+00:00"
+        },
+        {
+            "name": "behat/mink-goutte-driver",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/minkphp/MinkGoutteDriver.git",
+                "reference": "a60fba46520c17d39b839151831cbc0710764b56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/minkphp/MinkGoutteDriver/zipball/a60fba46520c17d39b839151831cbc0710764b56",
+                "reference": "a60fba46520c17d39b839151831cbc0710764b56",
+                "shasum": ""
+            },
+            "require": {
+                "behat/mink-browserkit-driver": "^2.0@dev",
+                "fabpot/goutte": "^4.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "mink/driver-testsuite": "dev-master",
+                "symfony/error-handler": "^4.4 || ^5.0"
+            },
+            "type": "mink-driver",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Behat\\Mink\\Driver\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                }
+            ],
+            "description": "Goutte driver for Mink framework",
+            "homepage": "https://mink.behat.org/",
+            "keywords": [
+                "browser",
+                "goutte",
+                "headless",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/minkphp/MinkGoutteDriver/issues",
+                "source": "https://github.com/minkphp/MinkGoutteDriver/tree/v2.0.0"
+            },
+            "abandoned": "behat/mink-browserkit-driver",
+            "time": "2021-12-29T10:56:50+00:00"
         },
         {
             "name": "behat/mink-selenium2-driver",
@@ -11801,24 +11916,81 @@
             "time": "2023-12-13T17:17:05+00:00"
         },
         {
-            "name": "friends-of-behat/mink-extension",
-            "version": "v2.7.4",
+            "name": "fabpot/goutte",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfBehat/MinkExtension.git",
-                "reference": "18d5a53dff3e2c8934c53e2db8b02b7ea345fe85"
+                "url": "https://github.com/FriendsOfPHP/Goutte.git",
+                "reference": "e3f28671c87a48a0f13ada1baea0d95acc2138c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/MinkExtension/zipball/18d5a53dff3e2c8934c53e2db8b02b7ea345fe85",
-                "reference": "18d5a53dff3e2c8934c53e2db8b02b7ea345fe85",
+                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/e3f28671c87a48a0f13ada1baea0d95acc2138c3",
+                "reference": "e3f28671c87a48a0f13ada1baea0d95acc2138c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.3",
+                "symfony/browser-kit": "^4.4|^5.0|^6.0",
+                "symfony/css-selector": "^4.4|^5.0|^6.0",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/dom-crawler": "^4.4|^5.0|^6.0",
+                "symfony/http-client": "^4.4|^5.0|^6.0",
+                "symfony/mime": "^4.4|^5.0|^6.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^6.0"
+            },
+            "type": "application",
+            "autoload": {
+                "psr-4": {
+                    "Goutte\\": "Goutte"
+                },
+                "exclude-from-classmap": [
+                    "Goutte/Tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "A simple PHP Web Scraper",
+            "homepage": "https://github.com/FriendsOfPHP/Goutte",
+            "keywords": [
+                "scraper"
+            ],
+            "support": {
+                "issues": "https://github.com/FriendsOfPHP/Goutte/issues",
+                "source": "https://github.com/FriendsOfPHP/Goutte/tree/v4.0.3"
+            },
+            "abandoned": "symfony/browser-kit",
+            "time": "2023-04-01T09:05:33+00:00"
+        },
+        {
+            "name": "friends-of-behat/mink-extension",
+            "version": "v2.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/MinkExtension.git",
+                "reference": "854336030e11983f580f49faad1b49a1238f9846"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/MinkExtension/zipball/854336030e11983f580f49faad1b49a1238f9846",
+                "reference": "854336030e11983f580f49faad1b49a1238f9846",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.0.5",
                 "behat/mink": "^1.5",
                 "php": ">=7.4",
-                "symfony/config": "^4.4 || ^5.0 || ^6.0"
+                "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0"
             },
             "replace": {
                 "behat/mink-extension": "self.version"
@@ -11861,9 +12033,10 @@
                 "web"
             ],
             "support": {
-                "source": "https://github.com/FriendsOfBehat/MinkExtension/tree/v2.7.4"
+                "issues": "https://github.com/FriendsOfBehat/MinkExtension/issues",
+                "source": "https://github.com/FriendsOfBehat/MinkExtension/tree/v2.7.5"
             },
-            "time": "2023-10-03T13:15:12+00:00"
+            "time": "2024-01-11T09:12:02+00:00"
         },
         {
             "name": "genesis/behat-fail-aid",
@@ -12369,6 +12542,90 @@
                 }
             ],
             "time": "2023-03-08T13:26:56+00:00"
+        },
+        {
+            "name": "nuvoleweb/drupal-behat",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nuvoleweb/drupal-behat.git",
+                "reference": "9afd13c000036e90a3b9a43b48f590ffaeec6f26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nuvoleweb/drupal-behat/zipball/9afd13c000036e90a3b9a43b48f590ffaeec6f26",
+                "reference": "9afd13c000036e90a3b9a43b48f590ffaeec6f26",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/drupal-extension": "^5.0@alpha",
+                "symfony/config": "^4.0 || ^5.0 || ^6.0"
+            },
+            "require-dev": {
+                "composer/installers": "^1.2 || ^2.0",
+                "drupal/chosen": "^4.0@RC",
+                "drupal/coffee": "^1.3",
+                "drupal/core-composer-scaffold": "^9.0 || ^10.0",
+                "drupal/core-dev": "^9.0 || ^10.0",
+                "drupal/paragraphs": "^1.15",
+                "drush/drush": "^10.0 || ^11.0 || ^12.0",
+                "ergebnis/composer-normalize": "^2.5",
+                "harvesthq/chosen": "1.8.7",
+                "openeuropa/task-runner": "^2.0@alpha",
+                "phpro/grumphp-shim": "^1.6"
+            },
+            "type": "behat-extension",
+            "extra": {
+                "drupal-scaffold": {
+                    "locations": {
+                        "web-root": "build/"
+                    }
+                },
+                "installer-paths": {
+                    "build/core": [
+                        "type:drupal-core"
+                    ],
+                    "build/modules/contrib/{$name}": [
+                        "type:drupal-module"
+                    ],
+                    "build/profiles/contrib/{$name}": [
+                        "type:drupal-profile"
+                    ],
+                    "build/themes/contrib/{$name}": [
+                        "type:drupal-theme"
+                    ],
+                    "build/libraries/{$name}": [
+                        "type:drupal-library"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NuvoleWeb\\Drupal\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Nuvole Web",
+                    "email": "info@nuvole.org"
+                }
+            ],
+            "description": "Drupal Behat extension.",
+            "keywords": [
+                "Behat",
+                "drupal",
+                "test",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/nuvoleweb/drupal-behat/issues",
+                "source": "https://github.com/nuvoleweb/drupal-behat/tree/1.3.0"
+            },
+            "time": "2023-11-09T15:14:28+00:00"
         },
         {
             "name": "open-telemetry/api",

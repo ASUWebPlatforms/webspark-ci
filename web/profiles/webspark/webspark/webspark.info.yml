@@ -96,6 +96,7 @@ install:
   - file_mdm
   - sophron
   - imagemagick
+  - layout_builder_usage_reports
   - editor_advanced_link
 themes:
   - renovation
