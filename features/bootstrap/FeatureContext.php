@@ -20,6 +20,8 @@ class FeatureContext extends RawDrupalContext {
   /**
    * Behat test for logging in.
    *
+   * @param string $name
+   *
    * @Given I am logged in as user :name
    */
   public function iAmLoggedInAsUser($name) {
@@ -139,7 +141,11 @@ JS;
   }
 
   /**
+   * Hover over an element
+   *
    * @When /^I hover over the element "([^"]*)"$/
+   *
+   *  @param string $locator
    *
    * Borrowed from https://stackoverflow.com/questions/18499851/how-do-i-tell-behat-mink-to-hover-over-an-element-on-a-webpage
    */
@@ -158,6 +164,10 @@ JS;
   }
 
   /**
+   * Click a specific CSS selector's element
+   *
+   * @param string $locator
+   *
    * @When /^I click the element "([^"]*)"$/
    */
   public function iClickTheElement($locator)
@@ -175,7 +185,32 @@ JS;
   }
 
   /**
+   * Remove CSS class from selector
+   *
+   * @param string $class
+   * @param string $selector
+   *
+   * @Then I remove the :class CSS class from :selector
+   */
+  public function removeClassFromSelector(string $class, string $selector)
+  {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  elem.classList.remove("$class");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Check if a single element exists on the page.
+   *
+   * @param string $selector
    *
    * @Then I should see that the :selector element exists
    *
@@ -212,6 +247,28 @@ JS;
       return;
     }
     throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Submit a form.
+   *
+   * @param string $selector
+   *
+   * @Then I submit the :selector form
+   */
+  public function submitForm($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  elem.submit();
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+
   }
 
   /**

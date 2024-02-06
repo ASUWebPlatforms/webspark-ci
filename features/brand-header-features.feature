@@ -1,12 +1,17 @@
 Feature: Brand header configs and features
   In order to have confidence in the Brand Header's functionality
-  As an anonymous user
+  As an anonymous and admin user
   I want to verify that each feature works properly.
 
-  @api @javascript @test
+  @api @javascript
   Scenario: Verify Menu functionality
     Given I am an anonymous user
     When I go to the homepage
+    ## Skip to content
+      # Reveal the "Skip to main content" link
+      Then I remove the "visually-hidden-focusable" CSS class from "#asuHeader .universal-nav a.nav-link:nth-child(1)"
+      Then I click "Skip to main content"
+      Then the url should match "^.*?\/#skip-to-content$"
     ## Test logos
       # Logo link
       Then I should see that the "a.navbar-brand" element exists
@@ -98,10 +103,17 @@ Feature: Brand header configs and features
       Then I should see that the ".nav-link.login-status > a.signout" element does not exist
       # And the sign in link exists again
       And I should see that the ".nav-link.login-status > a" element exists
-    ## Search functionality
-      #
-
-
-
-
-
+    ## Test Search functionality
+      # Verify search icon (magnifying glass)
+      Then I should see that the "nav form button.search-button" element exists
+      And I should see that the "nav form button.search-button > svg.fa-magnifying-glass" element exists
+      # Click the button to reveal form field
+      Then I click the element "nav form button.search-button"
+      And I should see that the "input[type='search'][placeholder='Search asu.edu']" element exists
+      And I should see that the "button.close-search" element exists
+      # Enter search value
+      Given for "q" I enter "Michael Crow"
+      Then I submit the "[name='gs']" form
+      # Verify that the form redirects to 'search.asu.edu' with the query string
+      Then the url should match "^\/\#gsc\.tab\=0\&gsc\.q=Michael%20Crow.*?$"
+      And I should see the heading "Search"
