@@ -25,7 +25,8 @@ class Block {
   public ViewModeType $view_mode_type;
   public ColumnType $column_type;
 
-  //Each block will have an ordered array of cards
+  //Each block will have an ordered array of cards (Card.php)
+  //TODO:  Discuss the option to associate cards by using a collection of Card UIDs instead of Card objects.
   public array $cards = array();
 
 
