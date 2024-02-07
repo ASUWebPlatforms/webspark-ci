@@ -30,12 +30,12 @@ class Block {
 
 
   //Assign default values in the constructor (eventually load existing props *OR* set defaults)
-  //TODO: Add ternary operator to pass in property if one exists.
-  //TODO: NEVER regenerate uniqid if one exists.
+  //TODO: Add ternary operator to pass in property if one exists,
+  //      or separate the initializer from the load existing block function.
 
   public function __construct() {
 
-    $this->uid = uniqid();
+    $this->uid = uniqid(); //TODO: NEVER regenerate uniqid if one exists.
     $this->block_title = "";
     $this->block_heading = "";
     $this->block_body = "";
@@ -46,6 +46,7 @@ class Block {
     $this->spacing_top = SpacingType::None;
     $this->view_mode_type = ViewModeType::Default;
     $this->column_type = ColumnType::None;
+
   }
 }
 
