@@ -1,6 +1,6 @@
 <?php
 
-// Card Group option types available
+// Card Group Types available with cooresponding text to present in UI
 enum CardGroupType: String {
   case Ranking = "Add Card Group Ranking";
   case Default = "Add Card Group Default";

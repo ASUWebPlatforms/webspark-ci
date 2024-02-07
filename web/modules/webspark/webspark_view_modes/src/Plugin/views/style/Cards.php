@@ -48,24 +48,9 @@ class Cards extends StylePluginBase {
   /**
    * Render the given style.
    */
-  //TODO: CARDS Properties needed:
-  //admin_title: String
-  //is_displaying_title: Bool
-  //heading, text_color (ColorType.php [grey_7, white])
-  //cta_url: String
-  //cta_text: String
-  //target (TargetType.php)
-  //cta_style (ColorType.php only [gold, maroon, grey_2, grey_7])
-  //vertical_alignment_text,
-  //columns_displayed (ColumnType.php)
-  //view_mode (ViewModeType.php only [default, landscape])
-  //cards (Card.php)
-  //cards_group_type (CardGroupType.php)
-  //anchors (TBD)
-  //spacing_bottom (Spacing.php)
-  //spacing_top (Spacing.php)
 
 
+   //TODO: Allow the buildOptionsForm function the ability to accept appropriate properties
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
     $form['type'] = [
