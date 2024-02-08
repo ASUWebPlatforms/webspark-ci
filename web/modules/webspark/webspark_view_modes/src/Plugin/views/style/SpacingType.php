@@ -2,7 +2,7 @@
 
 // Top or Bottom Spacing options in Pixels
 enum SpacingType: String {
-  case None = "- None -";
+  case Default = "- None -";
   case Eight = "8px";
   case Sixteen = "16px";
   case TwentyFour = "24px";

@@ -30,23 +30,21 @@ class Block {
   public array $cards = array();
 
 
-  //Assign default values in the constructor (eventually load existing props *OR* set defaults)
-  //TODO: Add ternary operator to pass in property if one exists,
-  //      or separate the initializer from the load existing block function.
 
-  public function __construct() {
+  // When constructing a Block if arguments are not passed in, generate a new one with the default paramaters as defined in the constructor argument.
+  public function __construct($uid = "", $block_title = "", $block_heading = "", $block_body = "", $block_isDisplaying_title = false, $block_text_color = ColorType::Default, $block_card_group_type = CardGroupType::Default, $spacing_bottom = SpacingType::Default, $spacing_top = SpacingType::Default, $view_mode_type = ViewModeType::Default, $column_type = ColumnType::Default) {
 
-    $this->uid = uniqid(); //TODO: NEVER regenerate uniqid if one exists.
-    $this->block_title = "";
-    $this->block_heading = "";
-    $this->block_body = "";
-    $this->block_isDisplaying_title = false;
-    $this->block_text_color = ColorType::Default;
-    $this->block_card_group_type = CardGroupType::Default;
-    $this->spacing_bottom = SpacingType::None;
-    $this->spacing_top = SpacingType::None;
-    $this->view_mode_type = ViewModeType::Default;
-    $this->column_type = ColumnType::None;
+    $this->uid = $uid ? $uid : uniqid(); //if there is no existing uid: generate one.
+    $this->block_title = $block_title;
+    $this->block_heading = $block_heading;
+    $this->block_body = $block_body;
+    $this->block_isDisplaying_title = $block_isDisplaying_title;
+    $this->block_text_color = $block_text_color;
+    $this->block_card_group_type = $block_card_group_type;
+    $this->spacing_bottom = $spacing_bottom;
+    $this->spacing_top = $spacing_top;
+    $this->view_mode_type = $view_mode_type;
+    $this->column_type = $column_type;
 
   }
 }
@@ -54,7 +52,12 @@ class Block {
 
 
 //TODO:  Remove this test when complete.
-$test_block = new Block();
+// Before block is created, check if uid exists.  If exists, fill in fields, else generate new uid.
+$test_existing_block = new Block(uid: "12345", block_title: "Title of the Block", block_heading: "heading text", block_body:"body", block_isDisplaying_title: true);
+$test_new_block = new Block();
+
 echo "Printing test to the Debug Console from Block.php";
-var_dump($test_block);
+var_dump($test_existing_block);
+var_dump($test_new_block);
+
 
