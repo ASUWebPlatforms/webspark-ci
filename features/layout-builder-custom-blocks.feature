@@ -4,13 +4,13 @@ Feature: Layout Builder Custom Blocks Check
   I want to verify that each custom block is included.
 
   @api @javascript
-  Scenario: Verify Card Arrangements (components-core)
+  Scenario: Verify Layout Builder Custom Blocks
     Given I am logged in as user "admin"
     When I am at '/node/2/layout'
     Then I scroll ".layout__region--first" into view
     Then I click "Add block"
     Then I click "Create content block"
-    Then I should see that there are 30 "#drupal-off-canvas-wrapper ul li" elements exist
+    Then I should see that there are 30 "#drupal-off-canvas-wrapper ul li" elements that exist
     Then I should see the link "Accordion"
     Then I should see the link "Blockquote"
     Then I should see the link "Card and Image"
