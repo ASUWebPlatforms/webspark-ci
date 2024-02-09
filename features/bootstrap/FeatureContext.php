@@ -293,7 +293,10 @@ JS;
   /**
    * Check if X number of elements exist on the page.
    *
-   * @Then I should see that there are :number :selector elements that exist
+   * @param int $number
+   * @param string $selector
+   *
+   * @Then I should see that (\d+) of :selector elements exist
    * @throws \Exception
    */
   public function xNumberElementsExist($number, $selector) {

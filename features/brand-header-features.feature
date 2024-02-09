@@ -69,7 +69,7 @@ Feature: Brand header configs and features
       Then I should see that the "[aria-owns='dropdown-5'][title='Mega Menu'].open-link" element exists
       And I should see that the ".header-dropdown-5.opened.mega" element exists
       # Check for contents of mega menu
-      Then I should see that there are "4" "[id^='dropdown-5-dropdown-item-']" elements that exist
+      Then I should see that 4 of "[id^='dropdown-5-dropdown-item-']" elements exist
       Then I should see the heading "Column 1"
       Then I should see the heading "Column 2"
       Then I should see the heading "Column 3"
