@@ -43,5 +43,17 @@ Feature: Layout Builder Custom Blocks Check
     Then I should see that the "#drupal-off-canvas > div > ul > li:nth-child(29) > a" element exists
     Then I should see the link "Webform"
 
-
+  @api @javascript @apparence_settings_test
+  Scenario: Verify that each of our Layout Builder Custom Block options has an Appearance Settings section on the form, with the correct fields and options.
+    Given I am logged in as user "admin"
+    When I am at '/node/2/layout'
+    Then I scroll ".layout__region--first" into view
+    Then I click "Add block"
+    Then I click "Create content block"
+    Then I click "Accordion"
+    Then I click the element "summary[aria-controls*=edit-group-appearance-settings]"
+    When I scroll "summary[aria-controls*=edit-group-appearance-settings]" into view
+    Then I wait for 2 seconds
+    Then I should see that the "table[id*=field-anchor-menu-settings-values]" element exists
+    Then I should see that there are 2 "select[data-drupal-selector*=edit-settings-block-form-field-spacing]" elements that exist
 
