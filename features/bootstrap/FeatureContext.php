@@ -97,16 +97,6 @@ JS;
 JS;
         break;
 
-      // 'data-drupal-selector' attribute selectors.
-      case (bool)$locator:
-        $function = <<<JS
-(function(){
-  let elems = document.querySelectorAll(`[data-drupal-selector="${selector}"]`);
-  elems[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
-})()
-JS;
-        break;
-
       default:
         throw new \Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
     }
@@ -117,6 +107,45 @@ JS;
     catch (Exception $e) {
       throw new \Exception(__METHOD__ . ' failed');
     }
+  }
+
+  /**
+   * Check if a single element exists on the page.
+   *
+   * @Then I should see that the :selector element exists
+   *
+   * @throws \Exception
+   */
+  public function singleElementExists($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if multiple elements exist on the page.
+   *
+   * @Then I should see that multiple :selector elements exist
+   * @throws \Exception
+   */
+  public function multipleElementsExist($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelectorAll("$selector");
+  return elem.length > 1;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
   }
 
   /**
