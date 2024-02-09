@@ -55,5 +55,4 @@ Feature: Layout Builder Custom Blocks Check
     When I scroll "summary[aria-controls*=edit-group-appearance-settings]" into view
     Then I wait for 2 seconds
     Then I should see that the "table[id*=field-anchor-menu-settings-values]" element exists
-    Then I should see that there are 2 "select[data-drupal-selector*=edit-settings-block-form-field-spacing]" elements that exist
-
+    Then I should see that 2 of "select[data-drupal-selector*=edit-settings-block-form-field-spacing]" elements exist
