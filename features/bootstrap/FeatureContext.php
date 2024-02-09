@@ -98,14 +98,14 @@ JS;
 JS;
         break;
 
-      // 'data-drupal-selector' attribute selectors.
-      case (bool)$locator:
+      case (bool) $locator:
         $function = <<<JS
 (function(){
-  let elems = document.querySelectorAll(`[data-drupal-selector="${selector}"]`);
-  elems[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  let elems = document.querySelectorAll("$locator");
+  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
 })()
 JS;
+        break;
 
       default:
         throw new \Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
@@ -117,6 +117,61 @@ JS;
     catch (Exception $e) {
       throw new \Exception(__METHOD__ . ' failed');
     }
+  }
+
+  /**
+   * Scroll the window vertically by N pixels
+   *
+   * @param int $number
+   *   Allowed selectors: positive and negative numbers
+   *
+   * @Then I scroll vertically by :number pixels
+   *
+   * @throws \Exception
+   */
+  public function scrollByN(int $number) {
+    $function = <<<JS
+(function(){
+  window.scrollBy(0, $number);
+})()
+JS;
+    $this->getSession()->evaluateScript($function);
+  }
+
+  /**
+   * @When /^I hover over the element "([^"]*)"$/
+   *
+   * Borrowed from https://stackoverflow.com/questions/18499851/how-do-i-tell-behat-mink-to-hover-over-an-element-on-a-webpage
+   */
+  public function iHoverOverTheElement($locator)
+  {
+    $session = $this->getSession(); // get the mink session
+    $element = $session->getPage()->find('css', $locator); // runs the actual query and returns the element
+
+    // errors must not pass silently
+    if (null === $element) {
+      throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $locator));
+    }
+
+    // ok, let's hover it
+    $element->mouseOver();
+  }
+
+  /**
+   * @When /^I click the element "([^"]*)"$/
+   */
+  public function iClickTheElement($locator)
+  {
+    $session = $this->getSession(); // get the mink session
+    $element = $session->getPage()->find('css', $locator); // runs the actual query and returns the element
+
+    // errors must not pass silently
+    if (null === $element) {
+      throw new \InvalidArgumentException(sprintf('Could not evaluate CSS selector: "%s"', $locator));
+    }
+
+    // ok, let's click it
+    $element->click();
   }
 
   /**

@@ -27,6 +27,7 @@ default:
                   - "--no-sandbox"
                   - "--disable-dev-shm-usage"
                   - "--ignore-certificate-errors"
+                  - "--window-size=1920,1080"
               marionette: true
     NuvoleWeb\Drupal\DrupalExtension:
       blackbox: ~
