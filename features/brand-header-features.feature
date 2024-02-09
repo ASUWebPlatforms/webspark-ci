@@ -4,7 +4,7 @@ Feature: Brand header configs and features
   I want to verify that each feature works properly.
 
   @api @javascript
-  Scenario: Verify Menu functionality
+  Scenario: Verify Brand header functionality
     Given I am an anonymous user
     When I go to the homepage
     ## Skip to content
