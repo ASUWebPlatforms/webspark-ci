@@ -1,6 +1,6 @@
 Feature: Layout Builder Custom Blocks Check
   In order to have confidence in my site's Layout Builder custom blocks
-  As an anonymous user
+  As an administrative user
   I want to verify that each custom block is included.
 
   @api @javascript

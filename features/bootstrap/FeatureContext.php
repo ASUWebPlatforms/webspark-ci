@@ -20,6 +20,8 @@ class FeatureContext extends RawDrupalContext {
   /**
    * Behat test for logging in.
    *
+   * @param string $name
+   *
    * @Given I am logged in as user :name
    */
   public function iAmLoggedInAsUser($name) {
@@ -139,7 +141,11 @@ JS;
   }
 
   /**
+   * Hover over an element
+   *
    * @When /^I hover over the element "([^"]*)"$/
+   *
+   *  @param string $locator
    *
    * Borrowed from https://stackoverflow.com/questions/18499851/how-do-i-tell-behat-mink-to-hover-over-an-element-on-a-webpage
    */
@@ -158,6 +164,10 @@ JS;
   }
 
   /**
+   * Click a specific CSS selector's element
+   *
+   * @param string $locator
+   *
    * @When /^I click the element "([^"]*)"$/
    */
   public function iClickTheElement($locator)
@@ -175,7 +185,32 @@ JS;
   }
 
   /**
+   * Remove CSS class from selector
+   *
+   * @param string $class
+   * @param string $selector
+   *
+   * @Then I remove the :class CSS class from :selector
+   */
+  public function removeClassFromSelector(string $class, string $selector)
+  {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  elem.classList.remove("$class");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Check if a single element exists on the page.
+   *
+   * @param string $selector
    *
    * @Then I should see that the :selector element exists
    *
@@ -192,6 +227,48 @@ JS;
       return;
     }
     throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if a single element does not exist on the page.
+   *
+   * @Then I should see that the :selector element does not exist
+   *
+   * @throws \Exception
+   */
+  public function singleElementDoesNotExist($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if (!$this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Submit a form.
+   *
+   * @param string $selector
+   *
+   * @Then I submit the :selector form
+   */
+  public function submitForm($selector) {
+    $function = <<<JS
+(function(){
+  var elem = document.querySelector("$selector");
+  elem.submit();
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+
   }
 
   /**
@@ -224,6 +301,31 @@ JS;
 (function(){
   var elem = document.querySelectorAll("$selector");
   return elem.length === $number;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if active menu has gold underline.
+   *
+   * @Then I should see the gold underline exists on :selector menu item
+   *
+   * @throws \Exception
+   */
+  public function goldUnderlineExists($selector) {
+    $function = <<<JS
+(function(){
+  var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('background');
+  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box") {
+    return elem;
+  }
+  else {
+    return FALSE;
+  }
 })()
 JS;
     if ($this->getSession()->evaluateScript($function)) {
