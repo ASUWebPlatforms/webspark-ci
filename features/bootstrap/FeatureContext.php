@@ -296,7 +296,7 @@ JS;
    * @param int $number
    * @param string $selector
    *
-   * @Then I should see that (\d+) of :selector elements exist
+   * @Then I should see that :number of :selector elements exist
    * @throws \Exception
    */
   public function xNumberElementsExist($number, $selector) {
