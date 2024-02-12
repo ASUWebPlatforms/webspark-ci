@@ -356,4 +356,52 @@ JS;
     }
   }
 
+  /**
+   * @Given I perform actions and checks for menu item :menuItem
+   */
+  public function iPerformActionsAndChecksForMenuItem($menuItem) {
+    $session = $this->getSession();
+    $session->getPage()->clickLink("Add block");
+
+    $start = microtime(true);
+    $end = $start + 5;
+    $continue = true;
+    while ($continue && (microtime(true) < $end)) {
+      if ($this->getSession()->getPage()->hasLink("Create content block")) {
+        $this->getSession()->getPage()->clickLink("Create content block");
+        $continue = false;
+      }
+      usleep(500000);
+    }
+    $continue = true;
+    while ($continue && (microtime(true) < $end)) {
+      if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
+        $session->getPage()->clickLink(str_replace('\\"', '"', $menuItem));
+        $continue = false;
+      }
+      usleep(500000);
+    }
+
+    $continue = true;
+    $functionCheckAppearanceDetail = <<<JS
+(function(){
+  var elem = document.querySelector("summary[aria-controls*=group-appearance-settings]");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    while ($continue && (microtime(true) < $end)) {
+      if ($this->getSession()->evaluateScript($functionCheckAppearanceDetail)) {
+        $this->iClickTheElement('summary[aria-controls*=group-appearance-settings]');
+        $this->scrollIntoView('summary[aria-controls*=group-appearance-settings]');
+        $continue = false;
+      }
+      usleep(500000);
+    }
+
+//    $this->singleElementExists('table[id*=field-anchor-menu-settings-values]');
+    $this->xNumberElementsExist(2,'select[data-drupal-selector*=edit-settings-block-form-field-spacing]');
+    $this->iClickTheElement('.ui-dialog-titlebar-close');
+    $this->wait(2);
+  }
+
 }

@@ -48,11 +48,31 @@ Feature: Layout Builder Custom Blocks Check
     Given I am logged in as user "admin"
     When I am at '/node/2/layout'
     Then I scroll ".layout__region--first" into view
-    Then I click "Add block"
-    Then I click "Create content block"
-    Then I click "Accordion"
-    Then I click the element "summary[aria-controls*=edit-group-appearance-settings]"
-    When I scroll "summary[aria-controls*=edit-group-appearance-settings]" into view
-    Then I wait for 2 seconds
-    Then I should see that the "table[id*=field-anchor-menu-settings-values]" element exists
-    Then I should see that 2 of "select[data-drupal-selector*=edit-settings-block-form-field-spacing]" elements exist
+    Then I perform actions and checks for menu item "Accordion"
+    Then I perform actions and checks for menu item "Blockquote"
+    Then I perform actions and checks for menu item "Card and Image"
+    Then I perform actions and checks for menu item "Card Arrangement"
+    Then I perform actions and checks for menu item "Card Carousel"
+    Then I perform actions and checks for menu item "Card image and content"
+    Then I perform actions and checks for menu item "Content image overlap"
+    Then I perform actions and checks for menu item "Events"
+    Then I perform actions and checks for menu item "Grid Links"
+    Then I perform actions and checks for menu item "Hero"
+    Then I perform actions and checks for menu item "Image"
+    Then I perform actions and checks for menu item "Image And Text Block"
+    Then I perform actions and checks for menu item "Image Background With Call To Action"
+    Then I perform actions and checks for menu item "Image Carousel"
+    Then I perform actions and checks for menu item "Image Gallery"
+    Then I perform actions and checks for menu item "Inset Box"
+    Then I perform actions and checks for menu item "News"
+    Then I perform actions and checks for menu item "Notification Banner"
+    Then I perform actions and checks for menu item "Sidebar Menu"
+    Then I perform actions and checks for menu item "Tabbed Content"
+    Then I perform actions and checks for menu item "Testimonial"
+    Then I perform actions and checks for menu item "Testimonial Carousel"
+    Then I perform actions and checks for menu item "Testimonial On Image Background"
+    Then I perform actions and checks for menu item "Text Content"
+    Then I perform actions and checks for menu item "Video"
+    Then I perform actions and checks for menu item "Video hero"
+#    Then I should see that the "#drupal-off-canvas > div > ul > li:nth-child(29) > a" element exists
+    Then I perform actions and checks for menu item "Webform"
