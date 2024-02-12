@@ -64,7 +64,7 @@ export default class InsertWebsparkButtonCommand extends Command {
       if (offCanvasCssStyle) {
         document.body.removeChild(offCanvasCssStyle);
         offCanvasCssStyle.textContent = offCanvasCssStyle.textContent.replace(
-          "#drupal-off-canvas [data-drupal-ck-style-fence] .ck.ck-content * {display:revert;background:revert;color:initial;padding:revert;}",
+          "#drupal-off-canvas-wrapper [data-drupal-ck-style-fence] .ck.ck-content * {display:revert;background:revert;color:initial;padding:revert;}",
           ""
         );
         document.body.appendChild(offCanvasCssStyle);
