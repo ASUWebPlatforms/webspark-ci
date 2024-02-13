@@ -1,12 +1,15 @@
+uuid: 60652e00-0066-4abb-8939-af6530830f3c
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - asu_degree_rfi
   config:
     - field.storage.node.field_deg_dtl_intro_hide_req_crs
     - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: YtevL6baI8N-kj3CMl9vZ-_8Yo6mTwPxCFjg79FkwlI
 id: node.degree_detail_page.field_deg_dtl_intro_hide_req_crs
 field_name: field_deg_dtl_intro_hide_req_crs
 entity_type: node

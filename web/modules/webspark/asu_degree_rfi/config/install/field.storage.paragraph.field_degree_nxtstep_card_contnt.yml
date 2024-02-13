@@ -1,11 +1,14 @@
+uuid: 30456a72-92ad-4b60-86dc-3829eee2c18d
 langcode: en
 status: true
 dependencies:
+  module:
+    - paragraphs
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - paragraphs
+_core:
+  default_config_hash: dLkk4l8w9QT1OPg8Yb5P9yjhiAaeBkcmzvFKFwmaRrs
 id: paragraph.field_degree_nxtstep_card_contnt
 field_name: field_degree_nxtstep_card_contnt
 entity_type: paragraph

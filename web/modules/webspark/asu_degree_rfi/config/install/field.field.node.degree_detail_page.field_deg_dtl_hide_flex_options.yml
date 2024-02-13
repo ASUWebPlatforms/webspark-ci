@@ -1,12 +1,15 @@
+uuid: 8b6f4141-c254-4056-9a5e-516022e5f134
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - asu_degree_rfi
   config:
     - field.storage.node.field_deg_dtl_hide_flex_options
     - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: 7NXsG0ltEr0uCnHemeUvlHkK_cfDPNqXL13MJ6lO8gQ
 id: node.degree_detail_page.field_deg_dtl_hide_flex_options
 field_name: field_deg_dtl_hide_flex_options
 entity_type: node

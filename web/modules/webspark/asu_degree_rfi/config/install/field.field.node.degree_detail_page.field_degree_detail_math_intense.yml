@@ -1,3 +1,4 @@
+uuid: 67ecef2a-f730-414d-b462-0554eea31064
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
+_core:
+  default_config_hash: bpD19ZUe5M9pnxzAdyphYsvU9GcpwvBGIZft0F55SDE
 id: node.degree_detail_page.field_degree_detail_math_intense
 field_name: field_degree_detail_math_intense
 entity_type: node

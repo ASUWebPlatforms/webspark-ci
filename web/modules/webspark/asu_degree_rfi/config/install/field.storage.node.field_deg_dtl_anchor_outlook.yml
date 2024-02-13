@@ -1,11 +1,14 @@
+uuid: 8dbd2446-9e97-4d37-a119-f3fbc9d8fc2d
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - node
+_core:
+  default_config_hash: 1_OFvPghOXo97jW7RAhpT8MYuOJ2a-IUraqpHKI2y3Y
 id: node.field_deg_dtl_anchor_outlook
 field_name: field_deg_dtl_anchor_outlook
 entity_type: node

@@ -1,14 +1,17 @@
+uuid: e1bf787b-16de-4c91-8fa2-7a84f4c74119
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_deg_dtl_anchor_addl_anchor
     - node.type.degree_detail_page
+  module:
+    - link
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - link
+_core:
+  default_config_hash: ne0OXUOMyQNT48J605hp85REtoWaXJ8Lfuzo2mya0u0
 id: node.degree_detail_page.field_deg_dtl_anchor_addl_anchor
 field_name: field_deg_dtl_anchor_addl_anchor
 entity_type: node
@@ -20,6 +23,6 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 1
   title: 2
+  link_type: 1
 field_type: link

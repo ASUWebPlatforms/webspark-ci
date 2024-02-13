@@ -1,19 +1,22 @@
+uuid: 0869b42a-e5cc-4e16-aa76-fc61fb2d7398
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - node
+_core:
+  default_config_hash: a4iKHwt8vFBvHjcfGRrWN2e7OuN3wOShiAxPTUcGn-k
 id: node.field_degree_list_intro_title
 field_name: field_degree_list_intro_title
 entity_type: node
 type: string
 settings:
   max_length: 120
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

@@ -1,9 +1,12 @@
+uuid: 9552f8b5-606c-4f5d-9eff-9767006800f3
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - asu_degree_rfi
+_core:
+  default_config_hash: RsRLclmZECFKrzeUPf2abzbXYE21hbEmFLpmtDEExjs
 id: degree_details_next_steps
 label: 'Degree details next steps card'
 icon_uuid: null

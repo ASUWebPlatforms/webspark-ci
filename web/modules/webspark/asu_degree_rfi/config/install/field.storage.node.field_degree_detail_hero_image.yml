@@ -1,12 +1,15 @@
+uuid: 04b43505-a724-499b-8ff6-2d67fedb7bc4
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - asu_degree_rfi
   module:
     - media
     - node
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: 3hg4XoP3LVllT-QGplZXAiAvOxpIRzeXctc2VfdUhTU
 id: node.field_degree_detail_hero_image
 field_name: field_degree_detail_hero_image
 entity_type: node

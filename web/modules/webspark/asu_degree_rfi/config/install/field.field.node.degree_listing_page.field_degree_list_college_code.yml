@@ -1,14 +1,17 @@
+uuid: 93faf7d1-67ff-46a6-a612-59a9b25d5ac3
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_degree_list_college_code
     - node.type.degree_listing_page
+  module:
+    - options
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - options
+_core:
+  default_config_hash: Uy-OeGNiZ9ZHRrX1tvvR3Kmu__ZUiJpCH8NRaEV2I28
 id: node.degree_listing_page.field_degree_list_college_code
 field_name: field_degree_list_college_code
 entity_type: node

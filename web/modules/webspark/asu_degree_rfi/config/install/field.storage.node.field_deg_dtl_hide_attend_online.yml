@@ -1,11 +1,14 @@
+uuid: 34cc783c-c609-4a5f-9501-636849ca514a
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
   enforced:
     module:
       - asu_degree_rfi
-  module:
-    - node
+_core:
+  default_config_hash: 2fffLPpLnDS-dlynjoIweAAAJDqIOrDy6qI5XAmJ-kw
 id: node.field_deg_dtl_hide_attend_online
 field_name: field_deg_dtl_hide_attend_online
 entity_type: node

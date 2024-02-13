@@ -1,3 +1,4 @@
+uuid: 33f4633b-32a3-4e2a-a777-1ce33a15c339
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
+_core:
+  default_config_hash: owg-N7cawHhr-1ElrPN1qoJnozIymj4-0VbWOIEXEzo
 id: node.degree_detail_page.field_degree_detail_time_commit
 field_name: field_degree_detail_time_commit
 entity_type: node

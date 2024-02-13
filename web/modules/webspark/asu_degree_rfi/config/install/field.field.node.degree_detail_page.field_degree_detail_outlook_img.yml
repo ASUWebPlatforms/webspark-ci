@@ -1,3 +1,4 @@
+uuid: 3d79ef5c-25e0-4daa-badf-1c4ecbb54169
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
+_core:
+  default_config_hash: PXRDcwapUn5SQt-fXjv30tRggpHUe6XQf4uEMvC8154
 id: node.degree_detail_page.field_degree_detail_outlook_img
 field_name: field_degree_detail_outlook_img
 entity_type: node

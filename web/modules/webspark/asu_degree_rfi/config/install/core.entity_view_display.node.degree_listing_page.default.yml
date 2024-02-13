@@ -1,3 +1,4 @@
+uuid: fa4047ea-cb36-49a3-90b2-b2310a7a51da
 langcode: en
 status: true
 dependencies:
@@ -63,9 +64,11 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      blacklisted_blocks: {  }
-      whitelisted_blocks: {  }
+      denylisted_blocks: {  }
+      allowlisted_blocks: {  }
       restricted_categories: {  }
+_core:
+  default_config_hash: 0uI4EcP3qcsd-h82p-6yCONMJC1t1f87-3BMzZKwWU0
 id: node.degree_listing_page.default
 targetEntityType: node
 bundle: degree_listing_page

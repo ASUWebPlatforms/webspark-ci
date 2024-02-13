@@ -1,12 +1,15 @@
+uuid: 5c679b92-99db-4ff2-b464-6796929d84b3
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - asu_degree_rfi
   config:
     - field.storage.node.field_deg_dtl_anchor_pgm_contact
     - node.type.degree_detail_page
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: cZdgNVyDOeKztCldbjr1B7P6aETbT1sMylFkM2GpN6I
 id: node.degree_detail_page.field_deg_dtl_anchor_pgm_contact
 field_name: field_deg_dtl_anchor_pgm_contact
 entity_type: node

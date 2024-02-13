@@ -1,9 +1,12 @@
+uuid: ae749f73-e277-4b6d-bf07-a36b17625540
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - options
+_core:
+  default_config_hash: 6YMhnLAzg1CoGelW7LYXQXbpqnrL4FDHCaHEscLB7Xc
 id: node.field_degree_list_default_view
 field_name: field_degree_list_default_view
 entity_type: node

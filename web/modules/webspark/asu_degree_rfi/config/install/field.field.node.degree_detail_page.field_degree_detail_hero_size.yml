@@ -1,14 +1,17 @@
+uuid: c6d73714-ee59-4a07-80eb-898f32fcef42
 langcode: en
 status: true
 dependencies:
-  enforced:
-    module:
-      - asu_degree_rfi
   config:
     - field.storage.node.field_degree_detail_hero_size
     - node.type.degree_detail_page
   module:
     - options
+  enforced:
+    module:
+      - asu_degree_rfi
+_core:
+  default_config_hash: Y3a2QVtq8R6YktHn4oFa1vU8ca6ZKcktFQz9VFdDmME
 id: node.degree_detail_page.field_degree_detail_hero_size
 field_name: field_degree_detail_hero_size
 entity_type: node
