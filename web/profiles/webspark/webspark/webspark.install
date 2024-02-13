@@ -354,7 +354,7 @@ function webspark_update_9018(&$sandbox) {
   $module_installer->install(["ckeditor5"]);
 }
 /**
- * WS2-1452 & 1871: Update text formats; install editor_advanced_link; uninstall CKEditor4 and Fakeobjects.
+ * WS2-1452, 1871 & 1915: Update layouts and text formats; install editor_advanced_link; uninstall CKEditor4 and Fakeobjects.
  */
 function webspark_update_10000(&$sandbox) {
   if (Drupal::moduleHandler()->moduleExists('fakeobjects')) {
@@ -374,6 +374,7 @@ function webspark_update_10000(&$sandbox) {
   \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
   \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.full_html');
   \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.minimal_format');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.node.page.default');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
