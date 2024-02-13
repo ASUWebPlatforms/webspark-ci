@@ -78,11 +78,7 @@ third_party_settings:
           - asu_footer
         'Custom blocks':
           - webspark_blocks_back_to_top
-      allowlisted_blocks:
-        'Content fields': {  }
-        System: {  }
-        core: {  }
-      restricted_categories: {  }
+      allowlisted_blocks: {  }
 id: node.page.default
 targetEntityType: node
 bundle: page
