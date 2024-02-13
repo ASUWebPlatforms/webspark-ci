@@ -1,9 +1,12 @@
+uuid: 16006281-54d5-41df-beeb-2e3285c0de94
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.events
     - field.storage.block_content.field_feed_taxonomy_term
+_core:
+  default_config_hash: jGhAj98iGVYmghO3Yjtrlg44NWHGqhzVSx4WO9g33lQ
 id: block_content.events.field_feed_taxonomy_term
 field_name: field_feed_taxonomy_term
 entity_type: block_content

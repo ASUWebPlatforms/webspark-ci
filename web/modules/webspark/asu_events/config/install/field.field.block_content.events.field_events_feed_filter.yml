@@ -1,15 +1,18 @@
+uuid: b9998794-81b2-4380-a10a-8d8abf360493
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.events
     - field.storage.block_content.field_events_feed_filter
+_core:
+  default_config_hash: 7ZHzw_8FQbXoLasC_u7p982VZ66PRedxeHADn9-DxHk
 id: block_content.events.field_events_feed_filter
 field_name: field_events_feed_filter
 entity_type: block_content
 bundle: events
 label: 'Feed Filter'
-description: 'Filters are a string containing all desired filters separated by a comma '','''
+description: "Filters are a string containing all desired filters separated by a comma ','"
 required: false
 translatable: false
 default_value: {  }

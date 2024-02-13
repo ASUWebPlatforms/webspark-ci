@@ -1,9 +1,12 @@
+uuid: 1587cde1-9c30-4bd1-89da-74f7b6bb4a05
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.events
     - field.storage.block_content.field_events_heading
+_core:
+  default_config_hash: '-nUKt0IXm3S7Ru-cQveYcMFfUP8diYrklA1EgUfuzIk'
 id: block_content.events.field_events_heading
 field_name: field_events_heading
 entity_type: block_content

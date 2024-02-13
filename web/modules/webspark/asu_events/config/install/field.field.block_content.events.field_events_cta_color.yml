@@ -1,3 +1,4 @@
+uuid: 407360fb-0073-422d-bb6d-6224f3cb73d3
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_events_cta_color
   module:
     - options
+_core:
+  default_config_hash: w5AHboog32KyxY3WpVtPc0a0-97SBDTnOftu6l7dIzY
 id: block_content.events.field_events_cta_color
 field_name: field_events_cta_color
 entity_type: block_content
