@@ -1,3 +1,4 @@
+uuid: 6e66d1ce-0ed9-4228-bc63-26cefca6abb6
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_card_cta_color
   module:
     - options
+_core:
+  default_config_hash: ZxsL_4xUxD2RTdBOt5tQNs4kxc1aa9rJaEkJ7C7F7mA
 id: block_content.news.field_card_cta_color
 field_name: field_card_cta_color
 entity_type: block_content

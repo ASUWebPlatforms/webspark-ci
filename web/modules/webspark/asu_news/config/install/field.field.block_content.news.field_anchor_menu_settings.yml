@@ -1,3 +1,4 @@
+uuid: fcaabde4-832b-4df3-a8da-3a8e845bb4b5
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: ifSayfOP43faPMWtz54SuH4ov6k3kW4F-MIpSMi_Si4
 id: block_content.news.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content
@@ -20,16 +23,16 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       anchor_menu_settings: anchor_menu_settings
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 41
         enabled: false
       anchor_menu_settings:
-        enabled: true
         weight: 42
+        enabled: true
       basic_list:
         weight: 43
         enabled: false

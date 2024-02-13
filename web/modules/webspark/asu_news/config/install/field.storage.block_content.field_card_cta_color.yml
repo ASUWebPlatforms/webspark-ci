@@ -1,9 +1,12 @@
+uuid: e171b847-5e5a-4ea1-94d7-fa60518a897f
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: NH8v1eGk2B0_XNYb220GXZgvqJTKe9vegazuFi7kZVM
 id: block_content.field_card_cta_color
 field_name: field_card_cta_color
 entity_type: block_content
