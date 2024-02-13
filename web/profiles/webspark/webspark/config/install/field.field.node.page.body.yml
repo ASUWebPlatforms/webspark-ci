@@ -1,3 +1,4 @@
+uuid: 4f4d54c5-cb26-4bf6-9c7c-2b5f9b22ab9b
 langcode: en
 status: true
 dependencies:
@@ -13,6 +14,8 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
+_core:
+  default_config_hash: aW0t3TBci0vwKc4JDJdmx-MRH0uemKwcVCJ0HLhrce8
 id: node.page.body
 field_name: body
 entity_type: node
@@ -26,4 +29,5 @@ default_value_callback: ''
 settings:
   display_summary: false
   required_summary: false
+  allowed_formats: {  }
 field_type: text_with_summary

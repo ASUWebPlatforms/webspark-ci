@@ -1,3 +1,4 @@
+uuid: ed55af0f-c833-4d15-9b85-adc18df36a14
 langcode: en
 status: false
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - webspark_blocks
   theme:
     - renovation
+_core:
+  default_config_hash: 85kq9ukalkh3gLBGjAe1Y3onUj-Iyebw5YIZX4ePQcc
 id: backtotop
 theme: renovation
 region: content

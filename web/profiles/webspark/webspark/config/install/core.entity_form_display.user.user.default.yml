@@ -1,3 +1,4 @@
+uuid: ba176180-eb08-4a8c-81e6-ddfc82a83474
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - image
     - path
     - user
+_core:
+  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
 id: user.user.default
 targetEntityType: user
 bundle: user
@@ -33,10 +36,10 @@ content:
     region: content
   user_picture:
     type: image_image
+    weight: -1
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: -1
-    region: content
 hidden: {  }

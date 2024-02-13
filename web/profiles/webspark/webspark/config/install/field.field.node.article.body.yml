@@ -1,3 +1,4 @@
+uuid: fff5c504-6b09-4bb9-97f3-413d9748ce81
 langcode: en
 status: true
 dependencies:
@@ -5,11 +6,9 @@ dependencies:
     - field.storage.node.body
     - node.type.article
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats: {  }
+_core:
+  default_config_hash: _FVyXI59jJs48zqNWmEwl3QGi8j3jtEmfhh2sjGAUOo
 id: node.article.body
 field_name: body
 entity_type: node
@@ -23,4 +22,5 @@ default_value_callback: ''
 settings:
   display_summary: false
   required_summary: false
+  allowed_formats: {  }
 field_type: text_with_summary

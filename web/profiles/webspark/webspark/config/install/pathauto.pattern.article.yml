@@ -1,8 +1,11 @@
+uuid: 1863a8d8-eb7c-4566-96cf-26668015e76b
 langcode: en
 status: true
 dependencies:
   module:
     - node
+_core:
+  default_config_hash: FmX2dtG78hVwEZg6uOuhcdyG9oZ2dBqq-zSPvcs_m4g
 id: article
 label: Article
 type: 'canonical_entities:node'
@@ -11,6 +14,7 @@ selection_criteria:
   4f4fb9f8-3876-4755-8a77-9112e5098679:
     id: 'entity_bundle:node'
     negate: false
+    uuid: 4f4fb9f8-3876-4755-8a77-9112e5098679
     context_mapping:
       node: node
     bundles:

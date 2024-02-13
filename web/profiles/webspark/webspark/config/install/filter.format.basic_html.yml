@@ -1,3 +1,4 @@
+uuid: 4e6d0cd0-3b80-4e85-8b59-e1979479873d
 langcode: en
 status: true
 dependencies:
@@ -9,10 +10,36 @@ dependencies:
     - editor
     - linkit
     - media
+_core:
+  default_config_hash: xacd2K7tx_5069aRdAzTPUAkHpYKVfbU2pemROWMk2Y
 name: 'Basic HTML'
 format: basic_html
 weight: 0
 filters:
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
+    status: true
+    weight: -45
+    settings: {  }
+  filter_align:
+    id: filter_align
+    provider: filter
+    status: true
+    weight: -48
+    settings: {  }
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: false
+    weight: -41
+    settings: {  }
+  filter_caption:
+    id: filter_caption
+    provider: filter
+    status: true
+    weight: -47
+    settings: {  }
   filter_html:
     id: filter_html
     provider: filter
@@ -22,17 +49,11 @@ filters:
       allowed_html: '<br> <p class="lead"> <h1> <h2 id> <h3 id> <h4 id> <h5 id> <dl> <dt> <dd> <mark> <cite class> <blockquote cite class> <svg title role viewbox class> <path d fill> <button class="uds-tooltip"> <ol class> <drupal-media data-spacing-top data-spacing-bottom data-spacing-left data-spacing-right data-round title data-entity-type data-entity-uuid alt data-view-mode data-caption data-align> <img class src alt height width data-entity-uuid data-entity-type data-caption data-align> <ul class> <strong> <em> <a href title class id target data-entity-type data-entity-uuid data-entity-substitution role name hreflang> <li> <hr class="copy-divider"> <div class> <i class data-fa-transform> <span class data-fa-transform> <section class="simple-box"> <table> <tr rowspan colspan> <td rowspan colspan> <th rowspan colspan class="normal indent"> <thead> <tbody> <tfoot> <caption>'
       filter_html_help: false
       filter_html_nofollow: false
-  filter_align:
-    id: filter_align
+  filter_html_escape:
+    id: filter_html_escape
     provider: filter
-    status: true
-    weight: -48
-    settings: {  }
-  filter_caption:
-    id: filter_caption
-    provider: filter
-    status: true
-    weight: -47
+    status: false
+    weight: -42
     settings: {  }
   filter_html_image_secure:
     id: filter_html_image_secure
@@ -40,12 +61,25 @@ filters:
     status: true
     weight: -46
     settings: {  }
-  editor_file_reference:
-    id: editor_file_reference
-    provider: editor
-    status: true
-    weight: -45
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: false
+    weight: -43
     settings: {  }
+  filter_image_lazy_load:
+    id: filter_image_lazy_load
+    provider: filter
+    status: true
+    weight: -44
+    settings: {  }
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: false
+    weight: -40
+    settings:
+      filter_url_length: 72
   linkit:
     id: linkit
     provider: linkit
@@ -72,34 +106,3 @@ filters:
         image: image
         image_block_images: image_block_images
         remote_video: remote_video
-  filter_autop:
-    id: filter_autop
-    provider: filter
-    status: false
-    weight: -41
-    settings: {  }
-  filter_htmlcorrector:
-    id: filter_htmlcorrector
-    provider: filter
-    status: false
-    weight: -43
-    settings: {  }
-  filter_html_escape:
-    id: filter_html_escape
-    provider: filter
-    status: false
-    weight: -42
-    settings: {  }
-  filter_url:
-    id: filter_url
-    provider: filter
-    status: false
-    weight: -40
-    settings:
-      filter_url_length: 72
-  filter_image_lazy_load:
-    id: filter_image_lazy_load
-    provider: filter
-    status: true
-    weight: -44
-    settings: {  }
