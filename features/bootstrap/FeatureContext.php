@@ -361,8 +361,9 @@ JS;
    */
   public function iPerformActionsAndChecksForMenuItem($menuItem) {
     $session = $this->getSession();
+    print("Start item\n");
     $session->getPage()->clickLink("Add block");
-
+    print("Click Add block \n");
     $start = microtime(true);
     $end = $start + 5;
     $continue = true;
@@ -370,14 +371,20 @@ JS;
       if ($this->getSession()->getPage()->hasLink("Create content block")) {
         $this->getSession()->getPage()->clickLink("Create content block");
         $continue = false;
+        print("Click Create content block\n");
       }
       usleep(500000);
     }
     $continue = true;
     while ($continue && (microtime(true) < $end)) {
-      if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
-        $session->getPage()->clickLink(str_replace('\\"', '"', $menuItem));
-        $continue = false;
+      try {
+        if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
+            $session->getPage()->clickLink(str_replace('\\"', '"', $menuItem));
+            $continue = false;
+            print('Click ' . $menuItem . "\n");
+        }
+      } catch (Exception $e) {
+
       }
       usleep(500000);
     }
@@ -394,6 +401,7 @@ JS;
         $this->iClickTheElement('summary[aria-controls*=group-appearance-settings]');
         $this->scrollIntoView('summary[aria-controls*=group-appearance-settings]');
         $continue = false;
+        print("Click Appearence settings details\n");
       }
       usleep(500000);
     }
@@ -402,6 +410,7 @@ JS;
     $this->xNumberElementsExist(2,'select[data-drupal-selector*=edit-settings-block-form-field-spacing]');
     $this->iClickTheElement('.ui-dialog-titlebar-close');
     $this->wait(2);
+    print("End item");
   }
 
 }

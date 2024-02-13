@@ -69,6 +69,7 @@ Feature: Layout Builder Custom Blocks Check
     Then I perform actions and checks for menu item "Sidebar Menu"
     Then I perform actions and checks for menu item "Tabbed Content"
     Then I perform actions and checks for menu item "Testimonial"
+    Then I wait for 5 seconds
     Then I perform actions and checks for menu item "Testimonial Carousel"
     Then I perform actions and checks for menu item "Testimonial On Image Background"
     Then I perform actions and checks for menu item "Text Content"
