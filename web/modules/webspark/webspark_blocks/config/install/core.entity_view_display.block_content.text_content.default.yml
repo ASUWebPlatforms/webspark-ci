@@ -1,3 +1,4 @@
+uuid: 53d784f7-dcff-49d4-8b1a-d34231efa0a3
 langcode: en
 status: true
 dependencies:
@@ -12,6 +13,8 @@ dependencies:
   module:
     - entity_reference_revisions
     - text
+_core:
+  default_config_hash: vktHt2yI2sHifYPnFzOcatjR0aChzqWCHxGww2mGwlk
 id: block_content.text_content.default
 targetEntityType: block_content
 bundle: text_content
@@ -19,28 +22,28 @@ mode: default
 content:
   field_anchor_menu_settings:
     type: entity_reference_revisions_entity_view
-    weight: 0
-    region: content
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_formatted_text:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_tooltip:
-    weight: 2
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 2
     region: content
 hidden:
   field_spacing_bottom: true

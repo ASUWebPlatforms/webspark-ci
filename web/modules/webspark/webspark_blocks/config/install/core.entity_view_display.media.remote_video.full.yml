@@ -1,3 +1,4 @@
+uuid: 36260b52-6fe1-4430-863e-f863cfb86001
 langcode: en
 status: true
 dependencies:
@@ -10,21 +11,25 @@ dependencies:
     - media
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: 81_cQAdUifpy07hU9mE_euaJ06J3POdpzUZDoviS6jI
 id: media.remote_video.full
 targetEntityType: media
 bundle: remote_video
 mode: full
 content:
   field_media_oembed_video:
-    weight: 0
+    type: oembed
     label: hidden
     settings:
       max_width: 640
       max_height: 360
+      loading:
+        attribute: eager
     third_party_settings: {  }
-    type: oembed
+    weight: 0
     region: content
 hidden:
   created: true

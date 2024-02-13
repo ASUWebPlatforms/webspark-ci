@@ -1,16 +1,19 @@
+uuid: ce0acc25-e579-4919-9e54-18da854b8fad
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
+_core:
+  default_config_hash: a3exUBfeWHNNaVT7J-wTTCwythLPVwM0IgDmZ8oCZYw
 id: block_content.field_feed_taxonomy_term
 field_name: field_feed_taxonomy_term
 entity_type: block_content
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

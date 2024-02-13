@@ -1,3 +1,4 @@
+uuid: 860dc1e2-8c26-43e4-881a-47a0ec583a33
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.card_story
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: VYKA6ovVf3eXlehREkdmXilMH35bu3MCBC2aRyqW4yE
 id: paragraph.card_group_story.field_cards
 field_name: field_cards
 entity_type: paragraph
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       card_story: card_story
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 39
@@ -52,8 +55,8 @@ settings:
         weight: 47
         enabled: false
       card_story:
-        enabled: true
         weight: 48
+        enabled: true
       cta:
         weight: 49
         enabled: false

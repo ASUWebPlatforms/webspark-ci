@@ -1,3 +1,4 @@
+uuid: 7a5df353-69b7-4328-9f55-cf60ae386dda
 langcode: en
 status: true
 dependencies:
@@ -26,6 +27,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: 2Hu6lguoypfR2SDF-TugbQd1aWSb6Zm7HtPY75M5TWc
 id: paragraph.card_degree.landscape
 targetEntityType: paragraph
 bundle: card_degree

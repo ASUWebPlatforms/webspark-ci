@@ -1,3 +1,4 @@
+uuid: 0ebe3c9c-df60-4ed5-98e2-261e4b5e2aa2
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.cropped_image_wide
     - media.type.image
     - media.type.image_block_images
+_core:
+  default_config_hash: '-aqNkRIghONwkR6lxw8u78ICF_o06V6rKqL_89qwwfI'
 id: block_content.image_and_text_block.field_media
 field_name: field_media
 entity_type: block_content

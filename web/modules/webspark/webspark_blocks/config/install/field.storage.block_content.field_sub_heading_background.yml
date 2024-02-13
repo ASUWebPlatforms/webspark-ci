@@ -1,9 +1,12 @@
+uuid: f1803e03-1890-46c0-a457-479f157309e6
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: 2QYa2JR1_wTfC8vfRChEZLHfIdb1zjPWD4H-OXWGYWA
 id: block_content.field_sub_heading_background
 field_name: field_sub_heading_background
 entity_type: block_content

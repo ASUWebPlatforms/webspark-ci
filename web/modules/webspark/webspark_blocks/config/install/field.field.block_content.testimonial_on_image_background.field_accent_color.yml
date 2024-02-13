@@ -1,3 +1,4 @@
+uuid: 9484f41d-994f-4626-b12d-e63f44978fdd
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_accent_color
   module:
     - options
+_core:
+  default_config_hash: bSEhts9MH1BJVBC3XATSrWbmGrZhUnyAl77-TqN3jDk
 id: block_content.testimonial_on_image_background.field_accent_color
 field_name: field_accent_color
 entity_type: block_content
@@ -16,7 +19,7 @@ required: false
 translatable: true
 default_value:
   -
-    value: ''''''
+    value: "''"
 default_value_callback: ''
 settings: {  }
 field_type: list_string

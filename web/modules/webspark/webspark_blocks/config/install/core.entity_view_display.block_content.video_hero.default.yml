@@ -1,3 +1,4 @@
+uuid: 35ff7def-fe9e-43a3-bcbb-f53b04f3ecf2
 langcode: en
 status: true
 dependencies:
@@ -16,6 +17,8 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
+_core:
+  default_config_hash: 8KAYqj-ns9_Qo7rC55lIaC22JnJyd7SOknX9qwG3Dms
 id: block_content.video_hero.default
 targetEntityType: block_content
 bundle: video_hero

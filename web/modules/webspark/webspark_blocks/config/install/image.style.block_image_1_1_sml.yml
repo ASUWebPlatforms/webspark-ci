@@ -1,3 +1,4 @@
+uuid: c6373396-7dae-4ba2-b3b4-50504ff28124
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - crop.type.1_1
   module:
     - crop
+_core:
+  default_config_hash: 6bdZIwtgehRw2-DWrcNnLlpysBotWzkzRpsIHnCKvrM
 name: block_image_1_1_sml
 label: 'Block Image 1:1 SML'
 effects:

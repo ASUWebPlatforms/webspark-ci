@@ -1,9 +1,12 @@
+uuid: 0c2cec18-9f60-4bff-8223-84cd95315ea8
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_form_mode.paragraph.carousel_card
     - field.field.paragraph.card.field_body
+    - field.field.paragraph.card.field_card_link
+    - field.field.paragraph.card.field_clickable
     - field.field.paragraph.card.field_cta
     - field.field.paragraph.card.field_cta_secondary
     - field.field.paragraph.card.field_heading
@@ -22,6 +25,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: HcvHJ9DEXTO38-ioBxV-lV1eBgiz5JrRN_WVQ4ypBLI
 id: paragraph.card.carousel_card
 targetEntityType: paragraph
 bundle: card
@@ -99,5 +104,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_card_link: true
+  field_clickable: true
   field_tags: true
   status: true

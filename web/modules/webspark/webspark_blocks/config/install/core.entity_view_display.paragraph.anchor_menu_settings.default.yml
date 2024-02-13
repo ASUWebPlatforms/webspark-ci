@@ -1,3 +1,4 @@
+uuid: 4f225683-f622-4027-86d4-1ef785dce182
 langcode: en
 status: true
 dependencies:
@@ -7,25 +8,27 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - fontawesome
+_core:
+  default_config_hash: BnVPvgljFsPz5WPk9Sagii6NbGN9vgfjEGuNehLXDEM
 id: paragraph.anchor_menu_settings.default
 targetEntityType: paragraph
 bundle: anchor_menu_settings
 mode: default
 content:
   field_icon:
-    weight: 0
+    type: fontawesome_icon_formatter
     label: above
     settings:
       layers: false
     third_party_settings: {  }
-    type: fontawesome_icon_formatter
+    weight: 0
     region: content
   field_title:
-    weight: 1
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
 hidden: {  }

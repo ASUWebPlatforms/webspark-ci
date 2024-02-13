@@ -1,8 +1,11 @@
+uuid: f20794b8-0000-40aa-a49c-1338352ff1cf
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
+_core:
+  default_config_hash: yCA2P7G94b4MHarvDc2PqV-qyjX1lQkwVQmltnkESSk
 id: paragraph.field_clickable
 field_name: field_clickable
 entity_type: paragraph

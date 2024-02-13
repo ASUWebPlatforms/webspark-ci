@@ -1,3 +1,4 @@
+uuid: 8e6c8c6b-a149-45f7-9783-83e407fd944a
 langcode: en
 status: true
 dependencies:
@@ -8,13 +9,15 @@ dependencies:
   module:
     - fontawesome
     - link
+_core:
+  default_config_hash: 65Ttd1s3eRtC9XcFFifUSIXwjI1fTCJ9g2EXnY_Rh_Y
 id: paragraph.cta.default
 targetEntityType: paragraph
 bundle: cta
 mode: default
 content:
   field_cta_link:
-    weight: 2
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -23,14 +26,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 2
     region: content
   field_icon:
-    weight: 1
+    type: fontawesome_icon_formatter
     label: hidden
     settings:
       layers: false
     third_party_settings: {  }
-    type: fontawesome_icon_formatter
+    weight: 1
     region: content
 hidden: {  }

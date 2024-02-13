@@ -1,3 +1,4 @@
+uuid: b17461f1-deab-43a0-bcd6-10b02d9a6357
 langcode: en
 status: true
 dependencies:
@@ -19,49 +20,51 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: SZ8jxMfu_IQ-b2iJnlvzbPgy_xLLEwizwO_Sr3on0MA
 id: block_content.banner.default
 targetEntityType: block_content
 bundle: banner
 mode: default
 content:
   field_banner_background_color:
-    weight: 4
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 4
     region: content
   field_banner_text:
-    weight: 0
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 0
     region: content
   field_ctas:
     type: entity_reference_revisions_entity_view
-    weight: 3
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 3
     region: content
   field_heading:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_icon:
-    weight: 2
+    type: fontawesome_icon_formatter
     label: hidden
     settings:
       layers: false
     third_party_settings: {  }
-    type: fontawesome_icon_formatter
+    weight: 2
     region: content
 hidden:
   field_anchor: true

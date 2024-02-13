@@ -1,3 +1,4 @@
+uuid: caad7fdb-65dc-46a5-8fde-74328f7d5b88
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.image_block_images
   module:
     - image
+_core:
+  default_config_hash: CfP6DTcK_wWNJhld0kt_THkYF1Ted5drLXkPVu51W3A
 id: media.image_block_images.media_library
 targetEntityType: media
 bundle: image_block_images
@@ -17,12 +20,12 @@ content:
     type: image
     label: hidden
     settings:
-      image_style: block_image_sml
       image_link: ''
+      image_style: block_image_sml
       image_loading:
         attribute: lazy
-    weight: 0
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

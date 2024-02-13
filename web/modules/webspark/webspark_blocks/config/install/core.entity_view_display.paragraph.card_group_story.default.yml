@@ -1,3 +1,4 @@
+uuid: f8a4d9d3-6c72-4c46-bf76-bf85cdba875c
 langcode: en
 status: true
 dependencies:
@@ -6,18 +7,20 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_story
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: Y1XsOg2aMsPDwP36tA4DJNb3J5WZcJHX4ZCQW6GIMMk
 id: paragraph.card_group_story.default
 targetEntityType: paragraph
 bundle: card_group_story
 mode: default
 content:
   field_cards:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: portrait
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden: {  }

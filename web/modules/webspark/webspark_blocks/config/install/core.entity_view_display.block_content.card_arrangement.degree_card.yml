@@ -1,3 +1,4 @@
+uuid: 9b3f318d-63ef-469c-abf5-03a2ab391d4a
 langcode: en
 status: false
 dependencies:
@@ -21,6 +22,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: c4ClOgo78McjEC5f6m9oWRNcIB9GtbBhDrp9m0jDeCc
 id: block_content.card_arrangement.degree_card
 targetEntityType: block_content
 bundle: card_arrangement

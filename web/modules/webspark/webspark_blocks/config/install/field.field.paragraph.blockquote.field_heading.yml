@@ -1,9 +1,12 @@
+uuid: 6d26b8e1-4767-49b9-9018-d259bfa33abc
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_heading
     - paragraphs.paragraphs_type.blockquote
+_core:
+  default_config_hash: yeXEW4-CjZQMXhnI6ha6Vm40i5t8x6OWm7-HkmY_oAk
 id: paragraph.blockquote.field_heading
 field_name: field_heading
 entity_type: paragraph

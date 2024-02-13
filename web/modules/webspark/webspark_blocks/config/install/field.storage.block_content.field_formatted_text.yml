@@ -1,9 +1,12 @@
+uuid: 9cb47bfa-418b-4279-9444-831a1b6670c4
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - text
+_core:
+  default_config_hash: 2969ipJLJC03FM8PC59Xc66yZME8adlLyStOQsQ2t70
 id: block_content.field_formatted_text
 field_name: field_formatted_text
 entity_type: block_content

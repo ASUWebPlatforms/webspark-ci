@@ -1,3 +1,4 @@
+uuid: 7440329a-3ef7-45e5-a154-6592c99d2146
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.accordion_panel
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: Yif_vG5FASoV_cXRcBF4aV_m_q6-Zn1zGQXR_oz0kC4
 id: block_content.accordion.field_paragraph
 field_name: field_paragraph
 entity_type: block_content
@@ -20,13 +23,13 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       accordion_panel: accordion_panel
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
-        enabled: true
         weight: 7
+        enabled: true
       card:
         weight: 8
         enabled: false

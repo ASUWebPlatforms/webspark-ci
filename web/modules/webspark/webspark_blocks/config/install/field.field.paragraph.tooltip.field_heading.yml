@@ -1,9 +1,12 @@
+uuid: 877797cd-d7bc-4cc6-bbf9-9ee93d254293
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_heading
     - paragraphs.paragraphs_type.tooltip
+_core:
+  default_config_hash: nq4ppaIwg7Y3C_Tc3mf8kHk603azNVLXwP1Q9Ece5fY
 id: paragraph.tooltip.field_heading
 field_name: field_heading
 entity_type: paragraph

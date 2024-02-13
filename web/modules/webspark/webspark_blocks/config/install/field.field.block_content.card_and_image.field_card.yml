@@ -1,3 +1,4 @@
+uuid: ba7c3029-b018-4991-bf83-4f98ea9e21b0
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.card_with_icon
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: TbH6bJal8jstUSePhZmJGqVSwKdY2kH50t5EYEIEEoE
 id: block_content.card_and_image.field_card
 field_name: field_card
 entity_type: block_content
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       card_with_icon: card_with_icon
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 19
@@ -61,8 +64,8 @@ settings:
         weight: 30
         enabled: false
       card_with_icon:
-        enabled: true
         weight: 31
+        enabled: true
       cta:
         weight: 32
         enabled: false

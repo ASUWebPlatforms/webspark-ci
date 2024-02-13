@@ -1,3 +1,4 @@
+uuid: af5b0a83-9ad0-4af5-bd67-333c33f34ed9
 langcode: en
 status: false
 dependencies:
@@ -10,20 +11,22 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: I-JcixmhTuAdA3Wf2RdJi-qxeTS8QK95YxmLMktniNg
 id: paragraph.card_group_story.portrait
 targetEntityType: paragraph
 bundle: card_group_story
 mode: portrait
 content:
   field_cards:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: portrait
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden: {  }

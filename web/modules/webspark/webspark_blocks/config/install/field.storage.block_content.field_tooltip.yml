@@ -1,3 +1,4 @@
+uuid: 3c5ed884-b505-403f-a88c-ee8ff91d1617
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: F7-1Tu_8kzX8-uK8TugGhoCAe9ghT5D2i9Io608MHhI
 id: block_content.field_tooltip
 field_name: field_tooltip
 entity_type: block_content

@@ -1,3 +1,4 @@
+uuid: 962b7409-1b43-475f-9026-05802e9d13b9
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: e354OTrxSHbQWAfnIu6533cL7RFIplClyNa6ZMUirR4
 id: block_content.field_testimonial
 field_name: field_testimonial
 entity_type: block_content

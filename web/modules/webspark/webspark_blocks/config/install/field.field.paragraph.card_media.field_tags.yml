@@ -1,3 +1,4 @@
+uuid: 0780ccc5-fd0e-46ca-b601-a2447a7f6e15
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - field.storage.paragraph.field_tags
     - paragraphs.paragraphs_type.card_media
     - taxonomy.vocabulary.tags
+_core:
+  default_config_hash: 3DozkUX4guyD4DIjG0atrdE49JMVnlsIAgo_rvvlRyA
 id: paragraph.card_media.field_tags
 field_name: field_tags
 entity_type: paragraph

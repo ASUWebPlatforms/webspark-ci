@@ -1,9 +1,12 @@
+uuid: 12faf15f-d598-40ba-928b-9fc9b6dffff9
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_heading
     - paragraphs.paragraphs_type.card_with_icon
+_core:
+  default_config_hash: CRocuwsRBDJjbiBFrEkr4_IHem-eGiIiDjBy0zFMTqo
 id: paragraph.card_with_icon.field_heading
 field_name: field_heading
 entity_type: paragraph

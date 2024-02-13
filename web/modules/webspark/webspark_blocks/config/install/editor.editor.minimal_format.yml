@@ -1,3 +1,4 @@
+uuid: 1a1c401a-72d5-4615-80f9-8bf0a8577568
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - filter.format.minimal_format
   module:
     - ckeditor5
+_core:
+  default_config_hash: KkJZnROzM2fQuKTSVi-n5GzQizvMKVku7LPDJeVDwRQ
 format: minimal_format
 editor: ckeditor5
 settings:
@@ -25,8 +28,13 @@ settings:
         - heading5
         - heading6
     ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<a hreflang>'
+      allowed_tags: {  }
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
+        - id
+        - target
+        - title
     linkit_extension:
       linkit_enabled: false
 image_upload:

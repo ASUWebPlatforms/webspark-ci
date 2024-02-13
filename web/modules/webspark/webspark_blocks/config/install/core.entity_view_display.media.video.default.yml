@@ -1,3 +1,4 @@
+uuid: 959f9f7e-0162-4429-8441-adac411f992f
 langcode: en
 status: true
 dependencies:
@@ -9,46 +10,57 @@ dependencies:
     - file
     - image
     - user
+_core:
+  default_config_hash: eQkA9Fqm2EFs1PTM42UjBFSOgmGWJs_9QVBOEdFeHGo
 id: media.video.default
 targetEntityType: media
 bundle: video
 mode: default
 content:
   created:
-    label: hidden
     type: timestamp
-    weight: 0
-    region: content
+    label: hidden
     settings:
       date_format: medium
       custom_date_format: ''
       timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_media_video_file:
-    weight: 6
+    type: file_default
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    type: file_default
+    weight: 6
     region: content
   thumbnail:
     type: image
-    weight: 5
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
       image_loading:
         attribute: lazy
-    region: content
     third_party_settings: {  }
-  uid:
-    label: hidden
-    type: author
-    weight: 0
+    weight: 5
     region: content
+  uid:
+    type: author
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   name: true

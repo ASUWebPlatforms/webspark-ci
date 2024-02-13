@@ -1,3 +1,4 @@
+uuid: 31f97574-0bf4-4ccd-b265-f60482b25974
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.cropped_image_wide
   module:
     - image
+_core:
+  default_config_hash: UnTQ0R_brxdr-bQ7GCqeP90Jp4_2HlMQTVyEFeQcIKg
 id: media.cropped_image_wide.media_library
 targetEntityType: media
 bundle: cropped_image_wide
@@ -17,12 +20,12 @@ content:
     type: image
     label: hidden
     settings:
-      image_style: block_image_16_9_sml
       image_link: ''
+      image_style: block_image_16_9_sml
       image_loading:
         attribute: lazy
-    weight: 0
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

@@ -1,3 +1,4 @@
+uuid: bd7a6f4c-75de-498c-9632-43dfed1cf801
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: XhMhqtssjR5dXOnWtlcMzLTFgD8qTeO0yVM7e3qlDM8
 id: block_content.image_background_with_cta.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content
@@ -20,16 +23,16 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       anchor_menu_settings: anchor_menu_settings
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 20
         enabled: false
       anchor_menu_settings:
-        enabled: true
         weight: 21
+        enabled: true
       blockquote:
         weight: 22
         enabled: false

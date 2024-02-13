@@ -1,3 +1,4 @@
+uuid: c65f9ba2-3858-4c79-9772-894d25ba423c
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_spacing_top
   module:
     - options
+_core:
+  default_config_hash: 538APxYKUVnzzQl8dWGN1mLQJhSlYPC-jyArsibIlC0
 id: block_content.testimonial_on_image_background.field_spacing_top
 field_name: field_spacing_top
 entity_type: block_content

@@ -1,3 +1,4 @@
+uuid: ba5d0305-2408-4556-9fc6-677e0619ed2a
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_heading_highlight
   module:
     - options
+_core:
+  default_config_hash: 6fHaKFwtYCzwvp2X65csDIwRZglEqaqVUTxWyKy_rnY
 id: block_content.testimonial_on_image_background.field_heading_highlight
 field_name: field_heading_highlight
 entity_type: block_content

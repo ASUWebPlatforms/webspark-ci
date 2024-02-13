@@ -1,3 +1,4 @@
+uuid: a22bb105-0e41-4385-b784-eeeb320b8db2
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_image_size
   module:
     - options
+_core:
+  default_config_hash: qG7sB9llCrXPhkKJb29pXV7E544HOSlB71lUiQuxCIo
 id: block_content.image.field_image_size
 field_name: field_image_size
 entity_type: block_content

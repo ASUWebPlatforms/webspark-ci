@@ -1,9 +1,13 @@
+uuid: eba00c6d-68a8-4567-89db-ee6e6cdce5b6
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
+_core:
+  default_config_hash: AuHj440cEMHLE3SCQSwjPCZ_libzOK-b9xbKpckcFKI
 id: block_content.media_card
 label: 'Media Card'
+description: ''
 targetEntityType: block_content
 cache: true

@@ -1,3 +1,4 @@
+uuid: 573251fd-3f18-41a6-9e8e-e48ba1da5379
 langcode: en
 status: true
 dependencies:
@@ -9,36 +10,38 @@ dependencies:
   module:
     - block_field
     - text
+_core:
+  default_config_hash: qhlIVpBzlNWaDkSdq1jsxshexYG04CrF4m_yHtIPEtU
 id: paragraph.tab_content.default
 targetEntityType: paragraph
 bundle: tab_content
 mode: default
 content:
   field_blocks:
+    type: block_field_default
     weight: 2
+    region: content
     settings:
       plugin_id: ''
       settings: {  }
       configuration_form: full
     third_party_settings: {  }
-    type: block_field_default
-    region: content
   field_body:
+    type: text_textarea
     weight: 1
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_heading:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
 hidden:
   created: true
   status: true

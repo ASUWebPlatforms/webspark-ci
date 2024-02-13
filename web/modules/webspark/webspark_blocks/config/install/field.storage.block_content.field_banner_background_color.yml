@@ -1,9 +1,12 @@
+uuid: f4d3cc73-e9a8-4c82-b9a2-de373cf266ba
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: XQDiPl2d7ut0pKO0kUbByTVJM2idu1MY6bjWVII6Py8
 id: block_content.field_banner_background_color
 field_name: field_banner_background_color
 entity_type: block_content

@@ -1,8 +1,11 @@
+uuid: 91a616c6-8b61-4a99-970e-31f3f8207137
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
+_core:
+  default_config_hash: _GdkNoEplOWPHiHCsk-saN_ksVk303S20UVsna21AL8
 id: block_content.field_hero_unformatted_text
 field_name: field_hero_unformatted_text
 entity_type: block_content

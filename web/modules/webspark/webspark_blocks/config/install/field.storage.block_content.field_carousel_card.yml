@@ -1,3 +1,4 @@
+uuid: 0472a05d-a2f0-4ef9-b196-6ad37a063cc5
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: BM5kbI_E99yYNX-cegZyB71qxSPQoYJvWxoBy664pNQ
 id: block_content.field_carousel_card
 field_name: field_carousel_card
 entity_type: block_content

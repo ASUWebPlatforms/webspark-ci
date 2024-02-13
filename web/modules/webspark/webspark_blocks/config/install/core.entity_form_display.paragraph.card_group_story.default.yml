@@ -1,3 +1,4 @@
+uuid: a64601c1-6511-4192-85f4-33ea90a19e01
 langcode: en
 status: true
 dependencies:
@@ -6,13 +7,17 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_story
   module:
     - paragraphs
+_core:
+  default_config_hash: kastPMxOJ6BaA0QxE45roDoi7ukxFzfyGuOn7NQ3lHg
 id: paragraph.card_group_story.default
 targetEntityType: paragraph
 bundle: card_group_story
 mode: default
 content:
   field_cards:
+    type: entity_reference_paragraphs
     weight: 0
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -21,8 +26,6 @@ content:
       form_display_mode: carousel_card
       default_paragraph_type: card_story
     third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
 hidden:
   created: true
   status: true

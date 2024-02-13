@@ -1,3 +1,4 @@
+uuid: e2249b0b-bc4e-428c-bf03-39ac794a8496
 langcode: en
 status: true
 dependencies:
@@ -14,51 +15,53 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
+_core:
+  default_config_hash: 4PHdrJpDgUoCMXP5xWwYYEeFMnWmUN4Y6WA0nxajlG8
 id: block_content.testimonial.default
 targetEntityType: block_content
 bundle: testimonial
 mode: default
 content:
   field_accent_color:
-    weight: 4
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 4
     region: content
   field_anchor_menu_settings:
-    weight: 1
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 1
     region: content
   field_heading_highlight:
-    weight: 3
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 3
     region: content
   field_testimonial_component:
     type: entity_reference_revisions_entity_view
-    weight: 2
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 2
     region: content
   field_tooltip:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden:
   field_spacing_bottom: true

@@ -1,8 +1,11 @@
+uuid: ecb85b3a-6903-4407-9c2f-a052c9fc43c0
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
+_core:
+  default_config_hash: bGm_V2qOlFs6RUNfdURNM84egEkAoN4XD9jSLLdC4uk
 id: block_content.field_card_orientation
 field_name: field_card_orientation
 entity_type: block_content

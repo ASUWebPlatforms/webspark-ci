@@ -1,9 +1,12 @@
+uuid: 2457b596-41f7-40ef-82e9-987bf24f83aa
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: GatS17UOeNCHLsupFwk2gO9mH4gNma1l-az2fDSp0kk
 id: card
 label: Card
 icon_uuid: null

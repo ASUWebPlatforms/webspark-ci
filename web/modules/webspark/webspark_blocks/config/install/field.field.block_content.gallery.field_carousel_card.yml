@@ -1,3 +1,4 @@
+uuid: 07f4979e-c416-4f48-b8db-6a5183f3fcaa
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.gallery_image
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: fB2vF0V6nUJq4peDA_7auvZmUv_F19AYlBH0zzBF_P0
 id: block_content.gallery.field_carousel_card
 field_name: field_carousel_card
 entity_type: block_content
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       gallery_image: gallery_image
+    negate: 0
     target_bundles_drag_drop:
       card:
         weight: 6
@@ -37,6 +40,6 @@ settings:
         weight: 9
         enabled: false
       gallery_image:
-        enabled: true
         weight: 10
+        enabled: true
 field_type: entity_reference_revisions

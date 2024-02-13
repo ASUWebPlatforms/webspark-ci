@@ -1,3 +1,4 @@
+uuid: 1b15b576-5b55-4e1c-ac23-f1bf7a68d19e
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.testimonial
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: PmI_nPdAARgmssD9yTaAuXw4d-ijFFL1Y714F6o35ZQ
 id: block_content.testimonial_carousel.field_testimonial
 field_name: field_testimonial
 entity_type: block_content
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       testimonial: testimonial
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 11
@@ -52,6 +55,6 @@ settings:
         weight: 19
         enabled: false
       testimonial:
-        enabled: true
         weight: 20
+        enabled: true
 field_type: entity_reference_revisions

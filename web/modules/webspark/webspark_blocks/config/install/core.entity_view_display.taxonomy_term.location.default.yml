@@ -1,3 +1,4 @@
+uuid: 91e759da-d8aa-40aa-a82e-16526e7ab64f
 langcode: en
 status: true
 dependencies:
@@ -5,16 +6,18 @@ dependencies:
     - taxonomy.vocabulary.location
   module:
     - text
+_core:
+  default_config_hash: byML2-DqrL51c_VckRXpTfNTn547316fM9qXPlf72HI
 id: taxonomy_term.location.default
 targetEntityType: taxonomy_term
 bundle: location
 mode: default
 content:
   description:
-    label: hidden
     type: text_default
-    weight: 0
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden: {  }

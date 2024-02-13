@@ -1,3 +1,4 @@
+uuid: 5d76725c-f75c-4e27-879b-8b3607716e44
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_grid_links_display
   module:
     - options
+_core:
+  default_config_hash: j2kptwDlYHwhb2L7Sf4x1h7g572tRRMGZ6EH-lD0Rnw
 id: block_content.grid_links.field_grid_links_display
 field_name: field_grid_links_display
 entity_type: block_content

@@ -1,3 +1,4 @@
+uuid: 337f8fe4-3cb1-42f2-b3bc-f9a1cb01d807
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
 third_party_settings:
   crop:
     image_field: _none
+_core:
+  default_config_hash: 38lHRLua8mWSy_oxquuZgmZc7JwWdhv_upXOXtJMi08
 id: cropped_image_wide
 label: 'Cropped image wide (16:9)'
 description: 'Used for image block and ckeditor media.'

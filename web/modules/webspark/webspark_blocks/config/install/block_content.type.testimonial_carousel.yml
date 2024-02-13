@@ -1,6 +1,9 @@
+uuid: e22e372c-6482-4127-b2f1-66e9abdd33c0
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: Lityco5lNPko4upBwvv1tyxp8TbrCS3PbjvXV1wjzU8
 id: testimonial_carousel
 label: 'Testimonial Carousel'
 revision: 0

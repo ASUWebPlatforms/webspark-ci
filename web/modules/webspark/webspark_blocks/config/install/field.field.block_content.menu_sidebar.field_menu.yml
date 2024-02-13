@@ -1,3 +1,4 @@
+uuid: 0ec260bd-1af5-4e0e-8f13-0a48d2af06ed
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_menu
   module:
     - field_menu
+_core:
+  default_config_hash: LyUa5FwwKN31XBvyloRxyf5FcGAhNa2Z5Qa8EiBJ0Hc
 id: block_content.menu_sidebar.field_menu
 field_name: field_menu
 entity_type: block_content
@@ -16,5 +19,7 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  menu_type_checkbox: {  }
+  menu_type_checkbox_negate: false
 field_type: field_menu

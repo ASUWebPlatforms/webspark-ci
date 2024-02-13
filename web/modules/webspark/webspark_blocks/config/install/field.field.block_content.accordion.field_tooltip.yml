@@ -1,3 +1,4 @@
+uuid: f35941e7-9a1e-441a-b35f-515950a518f5
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.tooltip
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: G2mYeNQLJUSe_nkipCSBiDehgxueh3MX7xA5fNPcs2E
 id: block_content.accordion.field_tooltip
 field_name: field_tooltip
 entity_type: block_content
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       tooltip: tooltip
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 36
@@ -127,6 +130,6 @@ settings:
         weight: 69
         enabled: false
       tooltip:
-        enabled: true
         weight: 70
+        enabled: true
 field_type: entity_reference_revisions

@@ -1,3 +1,4 @@
+uuid: 489d05dd-0c1a-4e5a-bf71-188784db1c4d
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_default
   module:
     - paragraphs
+_core:
+  default_config_hash: yGqgOpx3A1j-To3Y1qVj4vIYSSeuQWW3RhM4KwIOzd8
 id: paragraph.card_group_default.default
 targetEntityType: paragraph
 bundle: card_group_default
@@ -14,6 +17,7 @@ content:
   field_cards:
     type: entity_reference_paragraphs
     weight: 0
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -22,7 +26,6 @@ content:
       form_display_mode: carousel_card
       default_paragraph_type: card
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   status: true

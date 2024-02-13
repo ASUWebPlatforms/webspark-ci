@@ -1,3 +1,4 @@
+uuid: 39b94f54-f4bc-45a5-89c3-518caedc60fd
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: VK4TtZ5QGT9A99PElS8vxbMHmzhamzcbG8HRA3IS4YM
 id: paragraph.card_with_icon.field_cta
 field_name: field_cta
 entity_type: paragraph
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       cta: cta
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 44
@@ -67,8 +70,8 @@ settings:
         weight: 43
         enabled: false
       cta:
-        enabled: true
         weight: 57
+        enabled: true
       display_list:
         weight: 58
         enabled: false

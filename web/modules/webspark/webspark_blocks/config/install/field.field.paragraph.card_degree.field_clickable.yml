@@ -1,9 +1,12 @@
+uuid: f38c3a13-bf6a-4282-9c58-b16b481a60d4
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_clickable
     - paragraphs.paragraphs_type.card_degree
+_core:
+  default_config_hash: rGO8bxvp0wUnOI8iwyB9QpEN1k6HREqnScS9gFwIGSk
 id: paragraph.card_degree.field_clickable
 field_name: field_clickable
 entity_type: paragraph

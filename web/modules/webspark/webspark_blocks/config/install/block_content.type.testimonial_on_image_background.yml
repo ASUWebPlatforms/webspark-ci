@@ -1,6 +1,9 @@
+uuid: eb57afc5-d0e9-45c4-ba94-dee335f9e470
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: 9m-Sb_UjJfAKUS852CFJy-EaQLcMQrkPOvDtwbGVUsY
 id: testimonial_on_image_background
 label: 'Testimonial On Image Background'
 revision: 0

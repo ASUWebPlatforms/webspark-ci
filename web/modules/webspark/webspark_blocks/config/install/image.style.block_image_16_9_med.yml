@@ -1,3 +1,4 @@
+uuid: 21a41b89-1dc0-449e-ab8e-d29aee538f9f
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
+_core:
+  default_config_hash: aDjcCPLVYd5pHz222uIsfk-BdArIvONknboXb_Ut6l4
 name: block_image_16_9_med
 label: 'Block Image 16:9 MED'
 effects:

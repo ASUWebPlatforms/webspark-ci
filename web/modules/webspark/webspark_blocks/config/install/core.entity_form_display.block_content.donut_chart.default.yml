@@ -1,3 +1,4 @@
+uuid: 3f6bf095-6406-4581-86f9-da3474c6de29
 langcode: en
 status: true
 dependencies:
@@ -6,32 +7,34 @@ dependencies:
     - field.field.block_content.donut_chart.field_heading
     - field.field.block_content.donut_chart.field_number
     - field.field.block_content.donut_chart.field_text_color
+_core:
+  default_config_hash: O3wr4uQmbUN6xciVPXcgXAIY4DXOeAKZ6f6m_g6UY80
 id: block_content.donut_chart.default
 targetEntityType: block_content
 bundle: donut_chart
 mode: default
 content:
   field_heading:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_number:
+    type: number
     weight: 1
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_text_color:
+    type: options_select
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   info:
     type: string_textfield
     weight: 0

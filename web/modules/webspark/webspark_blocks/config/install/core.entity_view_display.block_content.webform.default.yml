@@ -1,3 +1,4 @@
+uuid: 94af131a-8c1b-4939-8df2-77014a9740d4
 langcode: en
 status: true
 dependencies:
@@ -10,27 +11,29 @@ dependencies:
   module:
     - entity_reference_revisions
     - webform
+_core:
+  default_config_hash: j2I5wyqNnFqhg0qRlBlUr0U3yti3Jtb-A8ad05tL5QU
 id: block_content.webform.default
 targetEntityType: block_content
 bundle: webform
 mode: default
 content:
   field_anchor_menu_settings:
-    weight: 1
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 1
     region: content
   field_webform:
-    weight: 0
+    type: webform_entity_reference_entity_view
     label: hidden
     settings:
       source_entity: true
     third_party_settings: {  }
-    type: webform_entity_reference_entity_view
+    weight: 0
     region: content
 hidden:
   field_spacing_bottom: true

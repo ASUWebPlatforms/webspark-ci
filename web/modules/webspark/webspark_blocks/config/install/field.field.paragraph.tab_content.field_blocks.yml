@@ -1,3 +1,4 @@
+uuid: 51bcc410-4f59-4063-b546-3d61cceb4be0
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.tab_content
   module:
     - block_field
+_core:
+  default_config_hash: nFqB6_LOvoTs2uIatBgei4-59GJC4NUBW83Q4oY8obA
 id: paragraph.tab_content.field_blocks
 field_name: field_blocks
 entity_type: paragraph

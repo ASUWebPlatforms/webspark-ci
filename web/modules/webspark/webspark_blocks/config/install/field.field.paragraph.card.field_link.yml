@@ -1,3 +1,4 @@
+uuid: 1bd720f7-c19d-4fc5-8657-3ac788214e07
 langcode: en
 status: true
 dependencies:
@@ -9,6 +10,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: wZTpkTl8FRsY9JKBlYLDgPolkuqqbltxPXz5OVdGI0Y
 id: paragraph.card.field_link
 field_name: field_link
 entity_type: paragraph
@@ -20,6 +23,6 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 17
   title: 1
+  link_type: 17
 field_type: link

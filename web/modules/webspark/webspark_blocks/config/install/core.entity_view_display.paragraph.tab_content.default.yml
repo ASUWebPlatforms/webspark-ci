@@ -1,3 +1,4 @@
+uuid: 0573c93f-fb2d-4839-99a8-4ad49e185088
 langcode: en
 status: true
 dependencies:
@@ -9,31 +10,33 @@ dependencies:
   module:
     - block_field
     - text
+_core:
+  default_config_hash: zCOpf9RVF2g1CmjxIj3fHyvPfn-LS0mTZwmpnhStvME
 id: paragraph.tab_content.default
 targetEntityType: paragraph
 bundle: tab_content
 mode: default
 content:
   field_blocks:
-    weight: 2
+    type: block_field
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: block_field
+    weight: 2
     region: content
   field_body:
-    weight: 1
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_heading:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
 hidden: {  }

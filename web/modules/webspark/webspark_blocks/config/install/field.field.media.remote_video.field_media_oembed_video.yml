@@ -1,9 +1,12 @@
+uuid: 5fef9ede-7c87-43d5-adbe-9cbf18dbdb69
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.media.field_media_oembed_video
     - media.type.remote_video
+_core:
+  default_config_hash: JwbFmZJsibHe5ZP4s_yajh759DWfYSUzi8ELqLHx5qc
 id: media.remote_video.field_media_oembed_video
 field_name: field_media_oembed_video
 entity_type: media

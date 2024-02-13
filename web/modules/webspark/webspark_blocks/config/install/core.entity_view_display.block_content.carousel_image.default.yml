@@ -1,3 +1,4 @@
+uuid: ecf96b24-ebe2-4bfb-b623-2fa1aafe6a4d
 langcode: en
 status: true
 dependencies:
@@ -10,37 +11,39 @@ dependencies:
     - field.field.block_content.carousel_image.field_tooltip
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: UmcWMwYAB1nV2DLWPYybp54RPg9_u-Gxtw36E_ppd8Q
 id: block_content.carousel_image.default
 targetEntityType: block_content
 bundle: carousel_image
 mode: default
 content:
   field_anchor_menu_settings:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
   field_carousel_card:
-    weight: 1
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 1
     region: content
   field_tooltip:
-    weight: 2
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 2
     region: content
 hidden:
   field_spacing_bottom: true

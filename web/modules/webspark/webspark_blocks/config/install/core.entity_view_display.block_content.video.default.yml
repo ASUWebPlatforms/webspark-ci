@@ -1,3 +1,4 @@
+uuid: 79193040-f7ed-4291-aeae-75b4640748ae
 langcode: en
 status: true
 dependencies:
@@ -13,44 +14,46 @@ dependencies:
     - field.field.block_content.video.field_tooltip
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: 8ML_7OCkSsAvIiYclNlUVtZ03oDSR6yp4NdFF10iKxc
 id: block_content.video.default
 targetEntityType: block_content
 bundle: video
 mode: default
 content:
   field_anchor_menu_settings:
-    weight: 3
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 3
     region: content
   field_image_caption:
-    weight: 1
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 1
     region: content
   field_media:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: full
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 0
     region: content
   field_tooltip:
-    weight: 2
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 2
     region: content
 hidden:
   field_add_drop_shadow: true

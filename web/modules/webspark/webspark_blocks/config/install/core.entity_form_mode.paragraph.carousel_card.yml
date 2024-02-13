@@ -1,9 +1,13 @@
+uuid: eff57d56-2d46-425e-b230-6a00b70de753
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
+_core:
+  default_config_hash: 0EU1tevtwNokww4bs-hj8ntfLlqvx6vzXKgHqpe78_c
 id: paragraph.carousel_card
 label: 'Carousel Card'
+description: ''
 targetEntityType: paragraph
 cache: true

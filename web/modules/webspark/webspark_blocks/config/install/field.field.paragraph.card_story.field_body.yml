@@ -1,3 +1,4 @@
+uuid: eb602cfc-c1fc-4d30-b0b3-3fdf4551aa87
 langcode: en
 status: true
 dependencies:
@@ -17,6 +18,8 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
+_core:
+  default_config_hash: w4SYDiUoRGiStIOAKyTK3dF4z_zRjgpakeanNV3klAc
 id: paragraph.card_story.field_body
 field_name: field_body
 entity_type: paragraph
@@ -27,5 +30,6 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

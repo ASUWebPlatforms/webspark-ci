@@ -1,9 +1,12 @@
+uuid: 4dcae30e-4ceb-4b96-adad-a0fb4117aded
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: G_H2kL3OXtIBbqMCzpeoON-NMiUyXym0XrMwUoG6xko
 id: block_content.field_color
 field_name: field_color
 entity_type: block_content

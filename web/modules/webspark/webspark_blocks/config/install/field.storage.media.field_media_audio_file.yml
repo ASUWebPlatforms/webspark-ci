@@ -1,3 +1,4 @@
+uuid: 2c8e5eb8-8499-4166-b09f-76d8dce44282
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: iWqJBOgLknP7qt1bK3ZrvCWrKd6PKKuWvVnIiFbNb7c
 id: media.field_media_audio_file
 field_name: field_media_audio_file
 entity_type: media

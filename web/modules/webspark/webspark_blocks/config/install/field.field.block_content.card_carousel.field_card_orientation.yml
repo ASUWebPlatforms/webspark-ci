@@ -1,9 +1,12 @@
+uuid: 285bcf68-8f18-4501-ad8e-7b1ae78e5aa2
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.card_carousel
     - field.storage.block_content.field_card_orientation
+_core:
+  default_config_hash: 8wMKoh8IrQVWQfGE5Gl47hsDUz9VfHR3NGgnvS4YtfQ
 id: block_content.card_carousel.field_card_orientation
 field_name: field_card_orientation
 entity_type: block_content

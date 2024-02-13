@@ -1,16 +1,19 @@
+uuid: 0096ce3c-73b7-43f7-95b5-6fd846c986e2
 langcode: en
 status: true
 dependencies:
   module:
     - media
+_core:
+  default_config_hash: A3AGbA_c3Db9fweLnn_e3dhiH-qstvnPhMQKRoJyA40
 id: media.field_image_caption
 field_name: field_image_caption
 entity_type: media
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

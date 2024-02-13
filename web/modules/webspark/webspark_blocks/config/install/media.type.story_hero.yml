@@ -1,3 +1,4 @@
+uuid: 415ebe14-3d86-4d48-8743-f0536df69e14
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
 third_party_settings:
   crop:
     image_field: _none
+_core:
+  default_config_hash: cvB5En0hTkPTjw--pZdxRTwMbZ0at6VRLvZWAx4wXMY
 id: story_hero
 label: 'Story Hero'
 description: 'Used for article pages.'

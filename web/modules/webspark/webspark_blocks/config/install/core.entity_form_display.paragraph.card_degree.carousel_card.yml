@@ -1,9 +1,12 @@
+uuid: d5dd4585-0f9e-4613-9c19-764c8bd887a3
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_form_mode.paragraph.carousel_card
     - field.field.paragraph.card_degree.field_body
+    - field.field.paragraph.card_degree.field_card_link
+    - field.field.paragraph.card_degree.field_clickable
     - field.field.paragraph.card_degree.field_cta
     - field.field.paragraph.card_degree.field_cta_secondary
     - field.field.paragraph.card_degree.field_heading
@@ -22,6 +25,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: 5adVQDO8rAAKNbf7pTdYj-Ga9VaciiGrXWW9ye19FfU
 id: paragraph.card_degree.carousel_card
 targetEntityType: paragraph
 bundle: card_degree
@@ -99,5 +104,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_card_link: true
+  field_clickable: true
   field_tags: true
   status: true

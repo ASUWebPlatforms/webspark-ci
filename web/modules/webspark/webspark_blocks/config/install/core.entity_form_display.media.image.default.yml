@@ -1,3 +1,4 @@
+uuid: d9bc84c2-8815-4d47-9a9d-cbc4dc8dfca4
 langcode: en
 status: true
 dependencies:
@@ -10,26 +11,28 @@ dependencies:
   module:
     - decorative_image_widget
     - image
+_core:
+  default_config_hash: 1HlUbmuIu_DZckegi3m2m6Q8jbQfxhPa1c-VA3hCacI
 id: media.image.default
 targetEntityType: media
 bundle: image
 mode: default
 content:
   field_caption:
+    type: string_textfield
     weight: 26
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_media_image:
     type: image_image
     weight: 1
     region: content
     settings:
-      preview_image_style: thumbnail
       progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings:
       decorative_image_widget:
         use_decorative_checkbox: true

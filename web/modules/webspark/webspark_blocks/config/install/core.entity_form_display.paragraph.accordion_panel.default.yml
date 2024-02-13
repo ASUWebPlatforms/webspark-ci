@@ -1,3 +1,4 @@
+uuid: e2a1456e-5636-4fda-a505-7abb4ef5fb49
 langcode: en
 status: true
 dependencies:
@@ -10,33 +11,35 @@ dependencies:
   module:
     - fontawesome_iconpicker_widget
     - text
+_core:
+  default_config_hash: k5IqCiwKkcpoHdEzjZqS2ANtIZdpOIBRsfWlATnX1x8
 id: paragraph.accordion_panel.default
 targetEntityType: paragraph
 bundle: accordion_panel
 mode: default
 content:
   field_color_options:
+    type: options_select
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_formatted_text:
+    type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_heading:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_icon:
     type: fontawesome_iconpicker_widget
     weight: 1

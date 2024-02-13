@@ -1,3 +1,4 @@
+uuid: 4326e8d0-c6fb-4454-93e9-6524d96e6ac7
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: rKFEl77Hmt-fIpEfSl8HIqQqMD0eDQpVeqP_x_eGUX0
 id: block_content.tabbed_content.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content
@@ -20,16 +23,16 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       anchor_menu_settings: anchor_menu_settings
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 41
         enabled: false
       anchor_menu_settings:
-        enabled: true
         weight: 42
+        enabled: true
       basic_list:
         weight: 43
         enabled: false

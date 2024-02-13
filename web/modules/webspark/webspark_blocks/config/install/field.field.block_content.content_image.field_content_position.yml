@@ -1,3 +1,4 @@
+uuid: 43ceeb2b-606e-4c04-9a9f-4a4142b288cc
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_content_position
   module:
     - options
+_core:
+  default_config_hash: KYz9snTIBxReWO8_u4vHgjwKfubcTec8Zn3ulpxHNZM
 id: block_content.content_image.field_content_position
 field_name: field_content_position
 entity_type: block_content

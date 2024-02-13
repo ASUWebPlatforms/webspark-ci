@@ -1,3 +1,4 @@
+uuid: cfd575b4-ad79-4f3a-9ce8-21e57a1fbdc3
 langcode: en
 status: true
 dependencies:
@@ -23,6 +24,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: R7oaFm0hZdGSB2wlwjXJY79qSbPfXKixDUlIcu_05nU
 id: paragraph.card_story.default
 targetEntityType: paragraph
 bundle: card_story

@@ -1,3 +1,4 @@
+uuid: 1475615d-7e0f-4e59-803a-3278a48e480e
 langcode: en
 status: true
 dependencies:
@@ -11,45 +12,47 @@ dependencies:
     - field.field.block_content.image_background_with_cta.field_spacing_top
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: Pml5K3mAGTclzwExfy76jFdc5bZzq3z9_Qazbmajrhg
 id: block_content.image_background_with_cta.default
 targetEntityType: block_content
 bundle: image_background_with_cta
 mode: default
 content:
   field_anchor_menu_settings:
-    weight: 3
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 3
     region: content
   field_cta:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
   field_heading:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_media:
-    weight: 2
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 2
     region: content
 hidden:
   field_spacing_bottom: true

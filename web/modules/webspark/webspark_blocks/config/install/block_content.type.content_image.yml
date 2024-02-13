@@ -1,6 +1,9 @@
+uuid: d9269ca7-843a-4f8c-b037-1faa4ccb6f42
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: hPxt0RF-HGWjWZtGn-XYp5nxpF_s2Xq6NZC9I1jOj54
 id: content_image
 label: 'Content image overlap'
 revision: 0

@@ -1,3 +1,4 @@
+uuid: 49754d14-8af0-4d2b-8751-8c3eba000739
 langcode: en
 status: true
 dependencies:
@@ -12,44 +13,46 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
+_core:
+  default_config_hash: 8lhtODRhqZ3XMvHQz24E0noL9Nm005lcmsv_rF8Vzn4
 id: block_content.accordion.default
 targetEntityType: block_content
 bundle: accordion
 mode: default
 content:
   field_anchor_menu_settings:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
   field_color:
-    weight: 2
+    type: list_key
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 2
     region: content
   field_paragraph:
     type: entity_reference_revisions_entity_view
-    weight: 1
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 1
     region: content
   field_tooltip:
-    weight: 3
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 3
     region: content
 hidden:
   field_spacing_bottom: true

@@ -1,3 +1,4 @@
+uuid: f622b2c3-fc5c-44f0-86e3-d98574dc19bc
 langcode: en
 status: true
 dependencies:
@@ -18,24 +19,28 @@ third_party_settings:
         - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
+      label: 'Appearance Settings'
+      region: content
       parent_name: ''
       weight: 9
       format_type: tab
-      region: content
       format_settings:
-        id: ''
         classes: ''
-        description: ''
+        id: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: 'Appearance Settings'
+_core:
+  default_config_hash: _QkLRyY8H-t6z0RWXH60iW7Hk6OgfHTsRBK0HfV1JgE
 id: block_content.blockquote.default
 targetEntityType: block_content
 bundle: blockquote
 mode: default
 content:
   field_anchor_menu_settings:
+    type: entity_reference_paragraphs
     weight: 26
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -44,11 +49,10 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
   field_blockquote:
     type: entity_reference_paragraphs
     weight: 1
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -57,21 +61,22 @@ content:
       form_display_mode: default
       default_paragraph_type: blockquote
     third_party_settings: {  }
-    region: content
   field_spacing_bottom:
+    type: options_select
     weight: 28
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_spacing_top:
+    type: options_select
     weight: 27
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_tooltip:
+    type: entity_reference_paragraphs
     weight: 8
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -80,8 +85,6 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
   info:
     type: string_textfield
     weight: 0

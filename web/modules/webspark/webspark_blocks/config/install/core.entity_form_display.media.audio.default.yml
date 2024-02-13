@@ -1,3 +1,4 @@
+uuid: 38e3d47d-6f96-41ca-ab0d-2b0bc1e3cdca
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   module:
     - file
     - path
+_core:
+  default_config_hash: MpPZpk2tQG6D-lF31V-ab8FfN2IdIb_kg1gRv3V6rYk
 id: media.audio.default
 targetEntityType: media
 bundle: audio
@@ -41,19 +44,19 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden: {  }

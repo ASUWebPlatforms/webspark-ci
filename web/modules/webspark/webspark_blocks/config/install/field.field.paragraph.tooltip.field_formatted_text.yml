@@ -1,3 +1,4 @@
+uuid: d33a1908-7112-4589-b568-4974f3c0c896
 langcode: en
 status: true
 dependencies:
@@ -13,6 +14,8 @@ third_party_settings:
     basic_html: '0'
     restricted_html: '0'
     full_html: '0'
+_core:
+  default_config_hash: Dz0A3hh9cP6p5ZczayXvooABjP2_2jSvazXKEAW2iCI
 id: paragraph.tooltip.field_formatted_text
 field_name: field_formatted_text
 entity_type: paragraph
@@ -23,5 +26,6 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

@@ -1,3 +1,4 @@
+uuid: d41d9e24-137d-49fc-a915-685b52226a04
 langcode: en
 status: true
 dependencies:
@@ -17,6 +18,8 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
+_core:
+  default_config_hash: KjyDqg3NUSi7r-8ShHwEMARnAVADvl8fvq-PrUGM8pk
 id: block_content.card_arrangement.default
 targetEntityType: block_content
 bundle: card_arrangement

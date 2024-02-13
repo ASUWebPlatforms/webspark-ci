@@ -1,3 +1,4 @@
+uuid: 3c0a7564-9970-458f-9fae-17906f2048ae
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - crop.type.1_1
   module:
     - crop
+_core:
+  default_config_hash: cDdAVcR1eheRnACjLlHTgMgnkoB3Oxe18R_S2FEHjj0
 name: block_image_1_1_lge
 label: 'Block Image 1:1 LGE'
 effects:

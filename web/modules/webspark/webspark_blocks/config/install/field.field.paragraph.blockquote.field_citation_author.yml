@@ -1,9 +1,12 @@
+uuid: 00dbecf4-0a21-4daa-a00b-2f4d93fecf8d
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_citation_author
     - paragraphs.paragraphs_type.blockquote
+_core:
+  default_config_hash: 2rLYdG99EkWq204WZLbNnqTtMMDd-5nHpMwO4yrXkX0
 id: paragraph.blockquote.field_citation_author
 field_name: field_citation_author
 entity_type: paragraph

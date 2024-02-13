@@ -1,6 +1,9 @@
+uuid: 3cc2ff63-05a3-45eb-94bc-f720cba54abe
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: NyKRiMBUy6wEaIKg7FV0M4l61dFT7fK7O5ZiHuFZh2U
 id: donut_chart
 label: 'Donut Chart'
 revision: 1

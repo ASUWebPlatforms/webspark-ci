@@ -1,3 +1,4 @@
+uuid: df53ce8e-efd0-4309-b829-d775ecb17217
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: pCk3EY1WM8VkVYxITMis35w_xYKmLurlGj79gmTLzcw
 id: block_content.hero.field_two_cta
 field_name: field_two_cta
 entity_type: block_content
@@ -20,9 +23,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       cta: cta
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 19
@@ -64,8 +67,8 @@ settings:
         weight: 31
         enabled: false
       cta:
-        enabled: true
         weight: 32
+        enabled: true
       gallery_image:
         weight: 33
         enabled: false

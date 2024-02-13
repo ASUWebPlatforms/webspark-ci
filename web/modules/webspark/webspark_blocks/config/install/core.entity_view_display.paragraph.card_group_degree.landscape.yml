@@ -1,3 +1,4 @@
+uuid: eb739269-2477-4082-81d8-7ddbfda3e9ce
 langcode: en
 status: true
 dependencies:
@@ -10,20 +11,22 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: HU-_zXoadAeQnzWfvqRa2RfYbyP-WnQTtN_PHjsv92M
 id: paragraph.card_group_degree.landscape
 targetEntityType: paragraph
 bundle: card_group_degree
 mode: landscape
 content:
   field_cards:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: landscape
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden: {  }

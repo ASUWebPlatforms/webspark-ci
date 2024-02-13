@@ -1,3 +1,4 @@
+uuid: eb61f9ec-bd46-454b-b624-1af9d2bc8b98
 langcode: en
 status: true
 dependencies:
@@ -17,6 +18,8 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
+_core:
+  default_config_hash: BzDjawj4HIcAbEKKEUwMoYS8XocBeVNOQ-EKaIk8ycw
 id: paragraph.card_degree.field_body
 field_name: field_body
 entity_type: paragraph
@@ -27,5 +30,6 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

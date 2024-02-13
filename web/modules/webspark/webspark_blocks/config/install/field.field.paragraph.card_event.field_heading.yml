@@ -1,3 +1,4 @@
+uuid: 8decf164-5bdf-42a4-8993-f892ec7d4917
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: yZDixt7Z3Z3G68zglEErR_iNuflPsveKPmR41RltE48
 id: paragraph.card_event.field_heading
 field_name: field_heading
 entity_type: paragraph

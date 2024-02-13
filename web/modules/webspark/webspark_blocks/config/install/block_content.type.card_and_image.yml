@@ -1,6 +1,9 @@
+uuid: 3c14a6b5-bbfd-465f-a195-3bb0ec011465
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: i1cFKtgGCaW1C1EiLXk0-rAvUcSciQGJ8Rop3zLlVFc
 id: card_and_image
 label: 'Card and Image'
 revision: 0

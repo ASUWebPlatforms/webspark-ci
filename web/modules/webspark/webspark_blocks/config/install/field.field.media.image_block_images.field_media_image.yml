@@ -1,3 +1,4 @@
+uuid: ac35814f-8385-44ba-9d67-1a56b05b75fc
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - media.type.image_block_images
   module:
     - image
+_core:
+  default_config_hash: oV9AW-MhEZPIh6YoNFxJIeTzakjn823-bSsVEaUl-F0
 id: media.image_block_images.field_media_image
 field_name: field_media_image
 entity_type: media
@@ -17,6 +20,8 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
+  handler: 'default:file'
+  handler_settings: {  }
   file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
@@ -32,6 +37,4 @@ settings:
     title: ''
     width: null
     height: null
-  handler: 'default:file'
-  handler_settings: {  }
 field_type: image

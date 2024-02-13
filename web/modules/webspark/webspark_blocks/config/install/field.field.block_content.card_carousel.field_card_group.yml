@@ -1,3 +1,4 @@
+uuid: 502a7e01-497e-4b5d-8b18-059e47c70bfb
 langcode: en
 status: true
 dependencies:
@@ -9,6 +10,8 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_story
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: ozt_SL1WqBfw3P44xrejvJBw2gTWRu5WkolCnRezeOI
 id: block_content.card_carousel.field_card_group
 field_name: field_card_group
 entity_type: block_content
@@ -22,11 +25,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       card_group_default: card_group_default
       card_group_degree: card_group_degree
       card_group_story: card_group_story
+    negate: 0
     target_bundles_drag_drop:
       accordion_panel:
         weight: 39
@@ -44,14 +47,14 @@ settings:
         weight: 43
         enabled: false
       card_group_default:
-        enabled: true
         weight: 44
+        enabled: true
       card_group_degree:
-        enabled: true
         weight: 45
-      card_group_story:
         enabled: true
+      card_group_story:
         weight: 46
+        enabled: true
       card_media:
         weight: 47
         enabled: false

@@ -1,8 +1,11 @@
+uuid: 70fd205e-ac60-43de-8998-b5dadc956267
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.paragraph.card.field_body
+    - field.field.paragraph.card.field_card_link
+    - field.field.paragraph.card.field_clickable
     - field.field.paragraph.card.field_cta
     - field.field.paragraph.card.field_cta_secondary
     - field.field.paragraph.card.field_heading
@@ -21,6 +24,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: 9Ot5yWtWRhBqjcZUdX82yUvJvQpnJYHF4NeKy_iZRsg
 id: paragraph.card.default
 targetEntityType: paragraph
 bundle: card
@@ -98,5 +103,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_card_link: true
+  field_clickable: true
   field_tags: true
   status: true

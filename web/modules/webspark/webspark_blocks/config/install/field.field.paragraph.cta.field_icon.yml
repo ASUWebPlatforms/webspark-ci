@@ -1,3 +1,4 @@
+uuid: 2a8ec0f4-87ec-4ce8-970b-8f86944f57c6
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - fontawesome
+_core:
+  default_config_hash: Q5-C_WSXLc8_piqx0OpzlrTwegTEXwlMQ1sFGVXSY3g
 id: paragraph.cta.field_icon
 field_name: field_icon
 entity_type: paragraph

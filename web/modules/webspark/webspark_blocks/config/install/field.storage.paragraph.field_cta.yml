@@ -1,9 +1,12 @@
+uuid: cf6887ec-06e9-4753-86b2-f302038e6738
 langcode: en
 status: true
 dependencies:
   module:
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: NfyCe6l9VsxjM2k8tFiWxLnHV6iyCmeJJv4AsInb0w0
 id: paragraph.field_cta
 field_name: field_cta
 entity_type: paragraph

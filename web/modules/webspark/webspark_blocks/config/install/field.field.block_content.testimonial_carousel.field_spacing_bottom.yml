@@ -1,3 +1,4 @@
+uuid: de45c2e2-2a63-4304-84d9-9e7fb76169e5
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_spacing_bottom
   module:
     - options
+_core:
+  default_config_hash: 2I_HqkB4j7cbCFdccGuZjXnqlIu1E0AQN1bolJNlsu4
 id: block_content.testimonial_carousel.field_spacing_bottom
 field_name: field_spacing_bottom
 entity_type: block_content

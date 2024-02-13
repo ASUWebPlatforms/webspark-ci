@@ -1,16 +1,19 @@
+uuid: b3a8682c-f97d-47e0-a5a9-6a366824b39d
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
+_core:
+  default_config_hash: nTNWQQZxzZ0bSsR8FI_nPoTo1DdkWOYod5HgSsNGHSU
 id: paragraph.field_citation_title
 field_name: field_citation_title
 entity_type: paragraph
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

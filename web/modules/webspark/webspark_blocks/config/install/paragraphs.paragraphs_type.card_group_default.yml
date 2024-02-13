@@ -1,6 +1,9 @@
+uuid: da9b2d65-0508-4871-b7ef-6e05656f2eb2
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: 0fQjPwsOYTtlx9mcPNevJrIExBMpF9RZV2ih3qm6rHo
 id: card_group_default
 label: 'Card Group Default'
 icon_uuid: null

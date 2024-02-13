@@ -1,3 +1,4 @@
+uuid: a02c45a7-1c58-4d1f-a274-1df6c211f051
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.image
   module:
     - image
+_core:
+  default_config_hash: 7iQPtqwifpyyE8v9VmSHhB8Gcz6rtFG4kyqJXYElIvs
 id: media.image.default
 targetEntityType: media
 bundle: image
@@ -15,15 +18,15 @@ mode: default
 content:
   field_media_image:
     type: image
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   created: true
   field_caption: true

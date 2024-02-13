@@ -1,9 +1,13 @@
+uuid: db91d424-09b0-4d0e-93fd-8a53319b3328
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
+_core:
+  default_config_hash: SNSOOFwT2DsX5AnLY_Vd4SZiIPd5iKLfmhIhqB7rfLk
 id: paragraph.with_icon
 label: 'With Icon'
+description: ''
 targetEntityType: paragraph
 cache: true

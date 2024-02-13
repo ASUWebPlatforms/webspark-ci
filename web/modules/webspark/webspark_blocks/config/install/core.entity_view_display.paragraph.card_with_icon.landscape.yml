@@ -1,9 +1,12 @@
+uuid: 6fd0346c-d463-4ff7-8940-8e715967ad1d
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.landscape
     - field.field.paragraph.card_with_icon.field_body
+    - field.field.paragraph.card_with_icon.field_card_link
+    - field.field.paragraph.card_with_icon.field_clickable
     - field.field.paragraph.card_with_icon.field_cta
     - field.field.paragraph.card_with_icon.field_heading
     - field.field.paragraph.card_with_icon.field_icon
@@ -18,6 +21,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: zDt7kkZZJzJDNp0arn2hDuRQSQoNzgqZS7r8GmTquWU
 id: paragraph.card_with_icon.landscape
 targetEntityType: paragraph
 bundle: card_with_icon
@@ -56,4 +61,6 @@ content:
     weight: 3
     region: content
 hidden:
+  field_card_link: true
+  field_clickable: true
   field_show_borders: true

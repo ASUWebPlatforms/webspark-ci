@@ -1,3 +1,4 @@
+uuid: e079232b-3cef-4400-b771-43b22ca2a051
 langcode: en
 status: true
 dependencies:
@@ -12,42 +13,44 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
+_core:
+  default_config_hash: keOJ4LGi11xai-phUUFRMMObhfF1SVPH8qI1Q8XrkW0
 id: block_content.grid_links.default
 targetEntityType: block_content
 bundle: grid_links
 mode: default
 content:
   field_grid_links_display:
-    weight: 3
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 3
     region: content
   field_links:
     type: entity_reference_revisions_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: link
       link: ''
     third_party_settings: {  }
+    weight: 0
     region: content
   field_links_color:
-    weight: 4
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 4
     region: content
   field_tooltip:
-    weight: 2
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 2
     region: content
 hidden:
   field_spacing_bottom: true

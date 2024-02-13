@@ -1,3 +1,4 @@
+uuid: 884f3b2d-1830-48d5-9555-99954f926a5e
 langcode: en
 status: true
 dependencies:
@@ -11,23 +12,25 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: YxPHt1nDnxYt_sUZ4cMcfE8LEoJJRtscKdmdivmZ0N4
 id: media.cropped_image_sqare.large
 targetEntityType: media
 bundle: cropped_image_sqare
 mode: large
 content:
   field_media_image:
+    type: image
     label: visually_hidden
-    weight: 0
     settings:
-      image_style: block_image_1_1_lge
       image_link: ''
+      image_style: block_image_1_1_lge
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 0
     region: content
 hidden:
   created: true

@@ -1,3 +1,4 @@
+uuid: 0167a7d2-d836-44c0-bacd-b2bf387e2326
 langcode: en
 status: false
 dependencies:
@@ -21,6 +22,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: aDWye1mbty7WvpbbRIQiFBJDWdkANrzwD5Yd3AYjNjw
 id: block_content.card_arrangement.media_card
 targetEntityType: block_content
 bundle: card_arrangement

@@ -1,3 +1,4 @@
+uuid: a53b8c28-8476-4404-b278-faaae1739412
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - crop.type.mobile_video_poster
   module:
     - crop
+_core:
+  default_config_hash: FfwhPYY1L14WOZtREUy7tAuRfSCTba1X3xczTbj93I4
 name: video_poster_image
 label: 'Video Poster Image'
 effects:

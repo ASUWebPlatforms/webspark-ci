@@ -1,9 +1,12 @@
+uuid: cd07aa11-cf3d-4918-b8f8-f55bf909ab6b
 langcode: en
 status: true
 dependencies:
   module:
     - block_field
     - paragraphs
+_core:
+  default_config_hash: nYTESWaDnr9LVXtntWCUZ0R98lC287r0Cgdhjyc775c
 id: paragraph.field_blocks
 field_name: field_blocks
 entity_type: paragraph

@@ -1,3 +1,4 @@
+uuid: 5e229b85-ae8b-4e4d-a7af-1556d8dbe848
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.image
     - media.type.image_block_images
     - paragraphs.paragraphs_type.testimonial
+_core:
+  default_config_hash: qBOn2lrhlSfbx5-HTkAQRW3h4NBBExA5b2A8HZB0P8o
 id: paragraph.testimonial.field_media
 field_name: field_media
 entity_type: paragraph

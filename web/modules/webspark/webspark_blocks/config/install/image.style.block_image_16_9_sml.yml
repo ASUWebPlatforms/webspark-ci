@@ -1,3 +1,4 @@
+uuid: 60b1f9b1-d32f-4cc5-ad19-77692c4a16f1
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - crop.type.16_9
   module:
     - crop
+_core:
+  default_config_hash: 52PalyXnG0m6vyNyfJ6CL2C1FQ2IyRIaqWxkqpK1ZOw
 name: block_image_16_9_sml
 label: 'Block Image 16:9 SML'
 effects:

@@ -1,3 +1,4 @@
+uuid: ebb1dde7-4dbd-4554-a1b0-0cfef6d69397
 langcode: en
 status: true
 dependencies:
@@ -9,31 +10,33 @@ dependencies:
   module:
     - options
     - text
+_core:
+  default_config_hash: YgQArDHMP5ZPIXtI5UYIBuO4p4OTGCB18Gh4Qg-nBO8
 id: paragraph.tooltip.default
 targetEntityType: paragraph
 bundle: tooltip
 mode: default
 content:
   field_formatted_text:
-    weight: 0
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 0
     region: content
   field_heading:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_tooltip_background:
-    weight: 2
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 2
     region: content
 hidden: {  }

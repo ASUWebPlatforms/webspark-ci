@@ -1,3 +1,4 @@
+uuid: 859629fc-7201-4f56-8e73-83926639e953
 langcode: en
 status: false
 dependencies:
@@ -21,6 +22,8 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
+  default_config_hash: WOLAj-YMQLU_fliiT6XynL-aqPYOJg6X-yFUDV0xJKk
 id: block_content.card_arrangement.card_arrangement_vertical
 targetEntityType: block_content
 bundle: card_arrangement

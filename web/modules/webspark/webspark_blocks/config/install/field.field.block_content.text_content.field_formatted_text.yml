@@ -1,3 +1,4 @@
+uuid: 4ae992e3-01e4-4498-8b0a-89b135fe5402
 langcode: en
 status: true
 dependencies:
@@ -14,6 +15,8 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
+_core:
+  default_config_hash: 0Tnx1RVj3a1qWo5MDgltyzthhX3J56_BQ3RD9JW0gqY
 id: block_content.text_content.field_formatted_text
 field_name: field_formatted_text
 entity_type: block_content
@@ -24,5 +27,6 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

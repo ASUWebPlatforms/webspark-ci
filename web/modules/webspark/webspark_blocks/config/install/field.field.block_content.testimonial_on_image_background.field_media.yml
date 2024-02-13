@@ -1,3 +1,4 @@
+uuid: e1f324c9-31af-4bfd-8796-17be39b2f44c
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.cropped_image_wide
     - media.type.image
     - media.type.image_block_images
+_core:
+  default_config_hash: 8nEgfwM-YQYClWtEmJULTfzk0yrG0xQRKVBXwp-96KA
 id: block_content.testimonial_on_image_background.field_media
 field_name: field_media
 entity_type: block_content

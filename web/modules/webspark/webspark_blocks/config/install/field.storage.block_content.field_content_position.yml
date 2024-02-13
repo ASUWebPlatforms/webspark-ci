@@ -1,9 +1,12 @@
+uuid: 8fafde19-7739-4742-9e87-1b8fc9c25064
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: USZKn7ncURJK2w1G3IvjHx1jKclaWQ0IC9FwQgqQg6w
 id: block_content.field_content_position
 field_name: field_content_position
 entity_type: block_content

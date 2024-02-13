@@ -1,3 +1,4 @@
+uuid: baf402ee-f587-46c9-87b5-a04707b4707d
 langcode: en
 status: true
 dependencies:
@@ -12,15 +13,17 @@ dependencies:
     - link
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: Q8-oO5p5kriPvBOZb7fTaVIPOYZ-B7OkrFoAE8W0o6c
 id: paragraph.cta.small
 targetEntityType: paragraph
 bundle: cta
 mode: small
 content:
   field_cta_link:
-    weight: 2
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -29,14 +32,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 2
     region: content
   field_icon:
-    weight: 1
+    type: fontawesome_icon_formatter
     label: hidden
     settings:
       layers: false
     third_party_settings: {  }
-    type: fontawesome_icon_formatter
+    weight: 1
     region: content
 hidden: {  }

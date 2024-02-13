@@ -1,9 +1,12 @@
+uuid: 15863bdd-5988-4f3a-8187-0fd8136d71cb
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: qoiajeoNb-ZztKjCWgHW5yAUyTR4vWKn3bZ-MlEFn_I
 id: block_content.field_spacing_top
 field_name: field_spacing_top
 entity_type: block_content

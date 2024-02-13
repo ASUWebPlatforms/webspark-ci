@@ -1,6 +1,9 @@
+uuid: dd698f94-2769-4912-a813-7a4617906d87
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: Ov-bC93nMyTn4H-AY-QO5zjy1r8W8zSXTPqKg5ADDtM
 id: menu_sidebar
 label: 'Sidebar Menu'
 revision: 0

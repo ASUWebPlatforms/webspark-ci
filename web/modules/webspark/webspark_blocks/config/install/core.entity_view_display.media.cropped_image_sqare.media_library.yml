@@ -1,3 +1,4 @@
+uuid: 17302275-9bc5-4477-9259-5b93ce203e3e
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - media.type.cropped_image_sqare
   module:
     - image
+_core:
+  default_config_hash: _UBzgCGiN9SFGLEzO7Xvy5FUmYwVGetGuAuHnoJ9uY0
 id: media.cropped_image_sqare.media_library
 targetEntityType: media
 bundle: cropped_image_sqare
@@ -17,12 +20,12 @@ content:
     type: image
     label: hidden
     settings:
-      image_style: block_image_1_1_sml
       image_link: ''
+      image_style: block_image_1_1_sml
       image_loading:
         attribute: lazy
-    weight: 0
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

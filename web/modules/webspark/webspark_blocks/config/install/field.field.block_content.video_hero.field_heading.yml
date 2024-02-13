@@ -1,9 +1,12 @@
+uuid: 499613c8-aa04-4424-8bec-32a296c81000
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.video_hero
     - field.storage.block_content.field_heading
+_core:
+  default_config_hash: 6VW_G9KqngnPPVtfq6f_T_ENTx0mBgpdLcFr8svM5Yg
 id: block_content.video_hero.field_heading
 field_name: field_heading
 entity_type: block_content

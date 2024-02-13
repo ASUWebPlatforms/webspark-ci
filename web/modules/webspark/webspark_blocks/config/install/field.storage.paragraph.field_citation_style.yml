@@ -1,9 +1,12 @@
+uuid: d637924d-9937-408c-8e4e-e92a1650d7b2
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - paragraphs
+_core:
+  default_config_hash: rqtSUpuccXhfxIwxN5ixvqD3pun-tVHJentYwy67Cwg
 id: paragraph.field_citation_style
 field_name: field_citation_style
 entity_type: paragraph
@@ -11,7 +14,7 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: ''''''
+      value: "''"
       label: Default
     -
       value: alt-citation

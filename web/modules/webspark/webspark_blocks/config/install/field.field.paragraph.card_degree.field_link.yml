@@ -1,3 +1,4 @@
+uuid: acf114df-87a5-4a4a-b1c2-a713d94b167b
 langcode: en
 status: true
 dependencies:
@@ -9,6 +10,8 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
+_core:
+  default_config_hash: OTHJs1e97qcTKmuNd8fN1-urkbV4QZ4jiiTN_0sQZ_Y
 id: paragraph.card_degree.field_link
 field_name: field_link
 entity_type: paragraph
@@ -20,6 +23,6 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 17
   title: 1
+  link_type: 17
 field_type: link

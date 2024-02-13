@@ -1,3 +1,4 @@
+uuid: 695110dc-2c76-4da7-a7d4-7e154488549b
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
   module:
     - file
     - path
+_core:
+  default_config_hash: uLgKzXZ66GB5_X9hXLlEpE9nRVKYKev_x756VTLOsf0
 id: media.document.default
 targetEntityType: media
 bundle: document
@@ -41,19 +44,19 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden: {  }

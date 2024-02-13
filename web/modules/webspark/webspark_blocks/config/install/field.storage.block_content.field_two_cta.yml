@@ -1,3 +1,4 @@
+uuid: 0e0853f1-ace4-4c41-8c8f-258aa1f7ee9b
 langcode: en
 status: true
 dependencies:
@@ -5,6 +6,8 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
+_core:
+  default_config_hash: w38w-hMue1flH_dLB2glfEZ7WZhCFPvfYGmQzeVbM0g
 id: block_content.field_two_cta
 field_name: field_two_cta
 entity_type: block_content

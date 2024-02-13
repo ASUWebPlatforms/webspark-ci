@@ -1,3 +1,4 @@
+uuid: 09d7853a-0997-47e3-8803-2315a48f1a6b
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_spacing_top
   module:
     - options
+_core:
+  default_config_hash: fAAqBGfROO3qT8c2AcHoKP13Oww10xiKDskPreuAtkY
 id: block_content.text_content.field_spacing_top
 field_name: field_spacing_top
 entity_type: block_content

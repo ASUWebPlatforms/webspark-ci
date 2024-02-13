@@ -1,3 +1,4 @@
+uuid: 28c661be-2fdd-4206-be8a-cffd747747ea
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,8 @@ dependencies:
     - field.storage.block_content.field_links_color
   module:
     - options
+_core:
+  default_config_hash: pzkBu-x1XkSmj4SH_nzZ9SOjx8JORABKzAOwIP9wXMc
 id: block_content.grid_links.field_links_color
 field_name: field_links_color
 entity_type: block_content
@@ -16,7 +19,7 @@ required: true
 translatable: false
 default_value:
   -
-    value: ''' '''
+    value: "' '"
 default_value_callback: ''
 settings: {  }
 field_type: list_string

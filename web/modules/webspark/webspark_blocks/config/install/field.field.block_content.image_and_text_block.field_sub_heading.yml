@@ -1,9 +1,12 @@
+uuid: 25ff72fa-3bdd-4a96-b24f-50e0e2d07d4d
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.image_and_text_block
     - field.storage.block_content.field_sub_heading
+_core:
+  default_config_hash: rogCh1AO80UeFC2l0NpyJJF3G7mCuPnN3wpFwT7kF0I
 id: block_content.image_and_text_block.field_sub_heading
 field_name: field_sub_heading
 entity_type: block_content

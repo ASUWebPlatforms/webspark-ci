@@ -1,3 +1,4 @@
+uuid: 2c7016ba-6112-4519-81c0-f96ab6149b4d
 langcode: en
 status: true
 dependencies:
@@ -6,18 +7,20 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_degree
   module:
     - entity_reference_revisions
+_core:
+  default_config_hash: Px26N-Y2ZdKrPUOdWA7kXctWjeiUCmxoOAarQ5oUGjA
 id: paragraph.card_group_degree.default
 targetEntityType: paragraph
 bundle: card_group_degree
 mode: default
 content:
   field_cards:
-    weight: 0
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: portrait
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
 hidden: {  }
