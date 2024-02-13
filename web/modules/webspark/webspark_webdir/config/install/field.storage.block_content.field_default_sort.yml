@@ -1,9 +1,12 @@
+uuid: d1af671b-e3cd-4361-a4f1-54524104073b
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
+_core:
+  default_config_hash: YyorXtBfi2Cau8Aa1LCoWC1Ol_xJUByl0iQtS21Lfw8
 id: block_content.field_default_sort
 field_name: field_default_sort
 entity_type: block_content

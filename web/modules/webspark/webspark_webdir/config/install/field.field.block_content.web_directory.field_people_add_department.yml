@@ -1,9 +1,12 @@
+uuid: 6ea177b8-eaea-405b-a6db-c547ce9d1cc4
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.web_directory
     - field.storage.block_content.field_people_add_department
+_core:
+  default_config_hash: Jx3M14vU0vV4k_EJJGD5UcTuNLD8yxavZaX1byRwZlI
 id: block_content.web_directory.field_people_add_department
 field_name: field_people_add_department
 entity_type: block_content

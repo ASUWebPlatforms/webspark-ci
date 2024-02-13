@@ -1,3 +1,4 @@
+uuid: 86ec8e3c-da0f-4e3b-8d4e-4eb219c10fc3
 langcode: en
 status: true
 dependencies:
@@ -22,6 +23,8 @@ dependencies:
     - field.field.block_content.web_directory.field_webdir_exclude_profiles
     - field.field.block_content.web_directory.field_webdir_items_to_display
     - field.field.block_content.web_directory.field_webdir_use_pager
+_core:
+  default_config_hash: CKhP92eJoG5Nf6ay9hZg76As99nn7aS-qpBs8vXGvAo
 id: block_content.web_directory.default
 targetEntityType: block_content
 bundle: web_directory

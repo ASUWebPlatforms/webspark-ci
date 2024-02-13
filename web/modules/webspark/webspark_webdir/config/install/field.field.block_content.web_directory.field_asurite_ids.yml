@@ -1,9 +1,12 @@
+uuid: ec7df804-a46a-47c8-9a0b-6a41a139b7dd
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.web_directory
     - field.storage.block_content.field_asurite_ids
+_core:
+  default_config_hash: Y2IrsD8MYDdANt4ukpV5YXqWtRU6cuE94g1Y__OphRM
 id: block_content.web_directory.field_asurite_ids
 field_name: field_asurite_ids
 entity_type: block_content

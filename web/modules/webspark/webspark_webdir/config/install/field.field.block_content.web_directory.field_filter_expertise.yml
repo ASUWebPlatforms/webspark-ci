@@ -1,9 +1,12 @@
+uuid: 24224532-8c29-4c5c-a946-3a74993ca786
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.web_directory
     - field.storage.block_content.field_filter_expertise
+_core:
+  default_config_hash: 1tMeNrtcfkBK90vOt98LZ6HhqORfDOFJAzwdaN9zn-U
 id: block_content.web_directory.field_filter_expertise
 field_name: field_filter_expertise
 entity_type: block_content
