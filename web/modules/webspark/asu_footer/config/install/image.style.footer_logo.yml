@@ -1,6 +1,9 @@
+uuid: bf71b6ff-3ef0-4729-b381-42fad0fe0b7b
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: KOTDi41lrDJSYvfLR6auTYS6DIrVicp3Y6WkuTeURs4
 name: footer_logo
 label: 'Footer Logo'
 effects:
