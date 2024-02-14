@@ -1,4 +1,3 @@
-uuid: 36216c0e-ed4b-486c-a336-d604925e28f7
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ dependencies:
   module:
     - media_library
     - text
-_core:
-  default_config_hash: d_u8-IWlgLRL1DLAYy-MAOfAdBXyrqlZFhopHXzw50U
 id: paragraph.blockquote.default
 targetEntityType: paragraph
 bundle: blockquote

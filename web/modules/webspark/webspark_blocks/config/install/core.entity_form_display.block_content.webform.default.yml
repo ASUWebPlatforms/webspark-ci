@@ -1,4 +1,3 @@
-uuid: d36ea0ab-d338-4201-a6d1-14b89369c861
 langcode: en
 status: true
 dependencies:
@@ -30,8 +29,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: e6Sz6srO0izjh1VoIWwgqRwKDg5ljHWc7F3G9X82GRQ
 id: block_content.webform.default
 targetEntityType: block_content
 bundle: webform

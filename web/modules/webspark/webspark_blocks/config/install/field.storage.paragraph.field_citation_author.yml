@@ -1,11 +1,8 @@
-uuid: 7400ac3e-8f44-4435-82d8-d3ddc666ead5
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-_core:
-  default_config_hash: gvCoOsfEoS52UA9GTSb34jDQRyTV77wpfvYCWIgMlRs
 id: paragraph.field_citation_author
 field_name: field_citation_author
 entity_type: paragraph

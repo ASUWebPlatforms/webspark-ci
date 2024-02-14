@@ -1,4 +1,3 @@
-uuid: 3bf2b033-46a7-4a88-b13b-7992e825488e
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_header_cta_color
   module:
     - options
-_core:
-  default_config_hash: diZNlSa2jZABifHPLKf3i6Ay7J1MituOXOXO1ywVT1k
 id: block_content.news.field_header_cta_color
 field_name: field_header_cta_color
 entity_type: block_content

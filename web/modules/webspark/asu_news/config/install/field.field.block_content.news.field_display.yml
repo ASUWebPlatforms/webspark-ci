@@ -1,4 +1,3 @@
-uuid: d3fa1aa0-13f2-4cf1-881b-efe2ae056dad
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_display
   module:
     - options
-_core:
-  default_config_hash: RRQSNdH11MEP5s9MmtWW-SHsCyr6rMPsXfPia0PBKLY
 id: block_content.news.field_display
 field_name: field_display
 entity_type: block_content

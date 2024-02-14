@@ -1,4 +1,3 @@
-uuid: dacbc7e8-8fd9-419e-8a15-7cf1f3de7cf0
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - crop.type.images_block
   module:
     - crop
-_core:
-  default_config_hash: TH5zsRw8JOqu_KBPeWW7SxCgw7UDWKlxsU_gGY0jRKI
 name: image_block
 label: 'Image Block'
 effects:

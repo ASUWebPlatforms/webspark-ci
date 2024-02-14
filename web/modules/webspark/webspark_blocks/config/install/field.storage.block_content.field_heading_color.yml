@@ -1,12 +1,9 @@
-uuid: 15dfb64f-1efc-44ac-aa7c-2675b52e2625
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
-_core:
-  default_config_hash: TK_jcOlvg3JDVcheOkB9txnJwRc91RrAWULZh1L9am8
 id: block_content.field_heading_color
 field_name: field_heading_color
 entity_type: block_content

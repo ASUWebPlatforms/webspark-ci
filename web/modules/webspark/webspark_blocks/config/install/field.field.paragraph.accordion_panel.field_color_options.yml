@@ -1,4 +1,3 @@
-uuid: dc9c34ea-d5cb-452e-b86d-04aac9740e8e
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.accordion_panel
   module:
     - options
-_core:
-  default_config_hash: gMsKfH6DEm_xApsZYsUaPR6YNz2KoqNWFA4eusTlqog
 id: paragraph.accordion_panel.field_color_options
 field_name: field_color_options
 entity_type: paragraph

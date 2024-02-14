@@ -1,4 +1,3 @@
-uuid: 746cb800-8b44-424b-9678-3eb25d567c85
 langcode: en
 status: true
 dependencies:
@@ -27,8 +26,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: WVVjnSK5OhOqAMmzdxzDuEpgy3c451bSMg0YHp3ZOMA
 id: paragraph.card_degree.portrait
 targetEntityType: paragraph
 bundle: card_degree

@@ -1,4 +1,3 @@
-uuid: 8dab9abb-eaa8-4899-9080-0e6c32f71312
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_degree
   module:
     - paragraphs
-_core:
-  default_config_hash: ZTlaDLDG8lcIPJ694nRJTiOIErbKFo--BQErjRek_9A
 id: paragraph.card_group_degree.default
 targetEntityType: paragraph
 bundle: card_group_degree

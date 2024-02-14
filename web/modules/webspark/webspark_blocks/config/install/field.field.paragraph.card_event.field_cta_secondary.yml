@@ -1,4 +1,3 @@
-uuid: bdab5dcc-6c57-42aa-bb37-8714afdf2688
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: VS6-o5Ia1dL6V0KTo061AuZAetDeJ4IHwpCNTKR0hHY
 id: paragraph.card_event.field_cta_secondary
 field_name: field_cta_secondary
 entity_type: paragraph

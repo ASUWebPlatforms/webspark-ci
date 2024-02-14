@@ -1,9 +1,6 @@
-uuid: 094aa74d-6374-4166-a876-b920726e9a51
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: fF870ymmwkuQMpL_bXOOT0la_YsZ86x6Pa0BNZdU3ts
 id: tooltip
 label: Tooltip
 icon_uuid: null

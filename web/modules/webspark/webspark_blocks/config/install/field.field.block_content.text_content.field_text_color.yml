@@ -1,4 +1,3 @@
-uuid: 8de96104-5dad-4490-ab2c-c5037bcf105c
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_text_color
   module:
     - options
-_core:
-  default_config_hash: 7hYj5XvFJuMUfxZnbNoF9V_xuIpcTxqLZZsYiQAD0V4
 id: block_content.text_content.field_text_color
 field_name: field_text_color
 entity_type: block_content

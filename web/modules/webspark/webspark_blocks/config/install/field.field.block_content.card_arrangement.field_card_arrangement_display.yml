@@ -1,4 +1,3 @@
-uuid: 54b8acb2-eccc-4e14-8d70-93d7dc4c3de5
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_card_arrangement_display
   module:
     - options
-_core:
-  default_config_hash: jHf_3Tlhp0dpnz-WGYixjmRaCtIQiyJI1td76fSOEPk
 id: block_content.card_arrangement.field_card_arrangement_display
 field_name: field_card_arrangement_display
 entity_type: block_content

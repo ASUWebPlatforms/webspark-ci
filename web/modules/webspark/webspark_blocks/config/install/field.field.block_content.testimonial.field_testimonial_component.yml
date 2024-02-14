@@ -1,4 +1,3 @@
-uuid: 24a9701c-cf3b-40cb-b3fa-faf2ac375a01
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.testimonial
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: '-84Ya1zw4evsR5Lh426RZMSQG0b2pWVilhuz5zsFaK8'
 id: block_content.testimonial.field_testimonial_component
 field_name: field_testimonial_component
 entity_type: block_content

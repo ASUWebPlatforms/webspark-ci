@@ -1,4 +1,3 @@
-uuid: f622b2c3-fc5c-44f0-86e3-d98574dc19bc
 langcode: en
 status: true
 dependencies:
@@ -30,8 +29,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: _QkLRyY8H-t6z0RWXH60iW7Hk6OgfHTsRBK0HfV1JgE
 id: block_content.blockquote.default
 targetEntityType: block_content
 bundle: blockquote

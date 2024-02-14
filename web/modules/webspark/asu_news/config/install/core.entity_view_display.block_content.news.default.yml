@@ -1,4 +1,3 @@
-uuid: 6b233254-3a18-4769-8213-92370042f03a
 langcode: en
 status: true
 dependencies:
@@ -20,8 +19,6 @@ dependencies:
     - entity_reference_revisions
     - link
     - options
-_core:
-  default_config_hash: 3Ci9Zk7TEHkaKY6XajiYgEC9q6iw8rwQU4jhdnuSrN4
 id: block_content.news.default
 targetEntityType: block_content
 bundle: news

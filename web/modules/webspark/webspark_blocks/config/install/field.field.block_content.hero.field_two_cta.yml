@@ -1,4 +1,3 @@
-uuid: df53ce8e-efd0-4309-b829-d775ecb17217
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: pCk3EY1WM8VkVYxITMis35w_xYKmLurlGj79gmTLzcw
 id: block_content.hero.field_two_cta
 field_name: field_two_cta
 entity_type: block_content

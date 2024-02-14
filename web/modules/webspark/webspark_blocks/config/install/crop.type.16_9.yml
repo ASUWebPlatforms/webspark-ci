@@ -1,9 +1,6 @@
-uuid: c26948a7-79d1-40a4-b625-480cb374ee13
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: x90DU64RmDs_Pb-tMzyeq9KEmjBaWBgSRN5raHApdHg
 label: '16:9'
 id: '16_9'
 description: ''

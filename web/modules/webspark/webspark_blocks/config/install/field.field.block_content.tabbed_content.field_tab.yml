@@ -1,4 +1,3 @@
-uuid: b54f8581-e998-4880-8fcc-fac7c0f65caa
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.tab_content
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: Yjr94a5JoAy-OTjxtHUE2CtaBMoMQlNJ8UbAjFq1Q8I
 id: block_content.tabbed_content.field_tab
 field_name: field_tab
 entity_type: block_content

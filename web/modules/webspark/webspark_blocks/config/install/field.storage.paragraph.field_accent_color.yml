@@ -1,12 +1,9 @@
-uuid: 904f287e-d6c2-46f4-8cb8-fa32760bfef4
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - paragraphs
-_core:
-  default_config_hash: mFSJfIOQ9HPpTfC0rtfj4rtgLiIvAB063mkdkifTkGg
 id: paragraph.field_accent_color
 field_name: field_accent_color
 entity_type: paragraph

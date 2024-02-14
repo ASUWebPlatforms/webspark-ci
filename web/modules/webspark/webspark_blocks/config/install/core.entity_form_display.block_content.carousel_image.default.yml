@@ -1,4 +1,3 @@
-uuid: de411bf1-8817-4fe2-a98f-5041b56a6608
 langcode: en
 status: true
 dependencies:
@@ -30,8 +29,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: cZWvkFw7_tqHdSwLKTSQ0sH4FQL0v69_50gUjSQaRXk
 id: block_content.carousel_image.default
 targetEntityType: block_content
 bundle: carousel_image

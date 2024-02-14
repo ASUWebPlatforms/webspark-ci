@@ -1,4 +1,3 @@
-uuid: 36a3fe4b-5c03-4fee-8281-dd65961f84bb
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: prp5BxhCoWZ2Gw2XicCwmAR0Onmnj1anFiIf6UjnEcw
 id: block_content.image.default
 targetEntityType: block_content
 bundle: image

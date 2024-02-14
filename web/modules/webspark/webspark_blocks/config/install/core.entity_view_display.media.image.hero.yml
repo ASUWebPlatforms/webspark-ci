@@ -1,4 +1,3 @@
-uuid: c983770f-55a5-4c07-be6d-e1c734d35794
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: hRFrhKiK2StSx5wwlzfYlAY_3d9weWTR9dfb7o-cHwY
 id: media.image.hero
 targetEntityType: media
 bundle: image

@@ -1,4 +1,3 @@
-uuid: e079232b-3cef-4400-b771-43b22ca2a051
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: keOJ4LGi11xai-phUUFRMMObhfF1SVPH8qI1Q8XrkW0
 id: block_content.grid_links.default
 targetEntityType: block_content
 bundle: grid_links

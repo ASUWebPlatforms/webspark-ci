@@ -1,4 +1,3 @@
-uuid: 9c41dc53-e424-47f1-8faf-5809ef3fc4ee
 langcode: en
 status: true
 dependencies:
@@ -49,8 +48,6 @@ third_party_settings:
         effect: none
         speed: fast
         required_fields: true
-_core:
-  default_config_hash: VqkAmmlBl-RpF3ek-oztG2IxaH2fKeVXgE54Xy1dC3E
 id: block_content.gallery.default
 targetEntityType: block_content
 bundle: gallery

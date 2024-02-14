@@ -1,11 +1,8 @@
-uuid: fe5a0e10-57e1-42c4-8186-0187069ef353
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
-_core:
-  default_config_hash: J1eAC53Pzxk8053y1lF1BY-pHEcwYHMQ80GxAAXTYwQ
 id: block_content.field_filter_expertise
 field_name: field_filter_expertise
 entity_type: block_content

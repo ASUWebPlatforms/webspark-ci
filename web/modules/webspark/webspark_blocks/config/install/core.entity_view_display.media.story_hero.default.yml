@@ -1,4 +1,3 @@
-uuid: eb25c38e-4a10-4ad0-9a1e-b783b9eada83
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - media.type.story_hero
   module:
     - image
-_core:
-  default_config_hash: Y-UIlWjJB1M0eEULrfvaUL2eA8s-k2e490BB8Mgpqp8
 id: media.story_hero.default
 targetEntityType: media
 bundle: story_hero

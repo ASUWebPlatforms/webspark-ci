@@ -1,4 +1,3 @@
-uuid: 512787b9-ec4b-426c-90d2-8bba88348487
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_news_link
   module:
     - link
-_core:
-  default_config_hash: hPOYmqvTvznzmfm3znvmbsgzlY5UbGA66fk6bybmKgc
 id: block_content.news.field_news_link
 field_name: field_news_link
 entity_type: block_content

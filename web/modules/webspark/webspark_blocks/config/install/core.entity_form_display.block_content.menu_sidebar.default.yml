@@ -1,4 +1,3 @@
-uuid: fa785d83-cfdb-4ed3-a31e-8f076aa837ff
 langcode: en
 status: true
 dependencies:
@@ -27,8 +26,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: d5I2CEAwHlt5aSFhjve7RYcP5ubho7PXEc5Kv5LCqiw
 id: block_content.menu_sidebar.default
 targetEntityType: block_content
 bundle: menu_sidebar

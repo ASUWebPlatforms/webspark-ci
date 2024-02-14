@@ -1,4 +1,3 @@
-uuid: 37d36f06-6de9-45f2-bceb-0240ab1bdea8
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - link
-_core:
-  default_config_hash: wxPVqO6ipJw2UcFdCdQAK3WwPsEY0V-pZ3KPchj_lXc
 id: paragraph.cta.default
 targetEntityType: paragraph
 bundle: cta

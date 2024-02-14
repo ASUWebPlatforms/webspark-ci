@@ -1,4 +1,3 @@
-uuid: 1ef2e51c-8609-45e2-9ea7-a6a6c8b31a3b
 langcode: en
 status: true
 dependencies:
@@ -32,8 +31,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: E2zMi1AWwV_6J6FzpoqeIhza4CPyAvR7OZMr8m1R858
 id: block_content.testimonial_carousel.default
 targetEntityType: block_content
 bundle: testimonial_carousel

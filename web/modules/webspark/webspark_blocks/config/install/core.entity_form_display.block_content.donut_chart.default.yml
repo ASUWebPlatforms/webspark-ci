@@ -1,4 +1,3 @@
-uuid: 3f6bf095-6406-4581-86f9-da3474c6de29
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.field.block_content.donut_chart.field_heading
     - field.field.block_content.donut_chart.field_number
     - field.field.block_content.donut_chart.field_text_color
-_core:
-  default_config_hash: O3wr4uQmbUN6xciVPXcgXAIY4DXOeAKZ6f6m_g6UY80
 id: block_content.donut_chart.default
 targetEntityType: block_content
 bundle: donut_chart

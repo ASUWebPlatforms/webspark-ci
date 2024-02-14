@@ -1,4 +1,3 @@
-uuid: b17461f1-deab-43a0-bcd6-10b02d9a6357
 langcode: en
 status: true
 dependencies:
@@ -20,8 +19,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: SZ8jxMfu_IQ-b2iJnlvzbPgy_xLLEwizwO_Sr3on0MA
 id: block_content.banner.default
 targetEntityType: block_content
 bundle: banner

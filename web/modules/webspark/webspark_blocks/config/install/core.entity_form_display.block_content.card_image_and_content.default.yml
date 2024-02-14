@@ -1,4 +1,3 @@
-uuid: 287758b7-a12f-44e7-875a-4153dea8473e
 langcode: en
 status: true
 dependencies:
@@ -36,8 +35,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: ImLPFQK4RFM3-BMF__cnKZweUvVH_eb6vaSrV6wOmMg
 id: block_content.card_image_and_content.default
 targetEntityType: block_content
 bundle: card_image_and_content

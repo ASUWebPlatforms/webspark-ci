@@ -1,4 +1,3 @@
-uuid: 6fd0346c-d463-4ff7-8940-8e715967ad1d
 langcode: en
 status: true
 dependencies:
@@ -21,8 +20,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: zDt7kkZZJzJDNp0arn2hDuRQSQoNzgqZS7r8GmTquWU
 id: paragraph.card_with_icon.landscape
 targetEntityType: paragraph
 bundle: card_with_icon

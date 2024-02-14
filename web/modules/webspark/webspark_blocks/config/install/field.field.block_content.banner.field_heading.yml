@@ -1,4 +1,3 @@
-uuid: 67a2f87d-88d0-47e6-a104-14ee82ae4df6
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: m-px1PRzvgRT-ALB0Pee2vqQDJXhF73zjLrf1ZPZXBQ
 id: block_content.banner.field_heading
 field_name: field_heading
 entity_type: block_content

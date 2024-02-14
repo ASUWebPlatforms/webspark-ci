@@ -1,4 +1,3 @@
-uuid: 756019ce-535d-4745-af73-30fa1024cc6d
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
-_core:
-  default_config_hash: tC2oVQ__T9f97E3NC5tZHl6P4Wc0eBFexjmJyVKc0Sg
 id: block_content.card_image_and_content.field_formatted_text
 field_name: field_formatted_text
 entity_type: block_content

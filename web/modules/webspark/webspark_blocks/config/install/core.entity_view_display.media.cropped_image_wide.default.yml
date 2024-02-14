@@ -1,4 +1,3 @@
-uuid: 72174480-aea8-4ff0-98e5-9741cc4afd52
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - media.type.cropped_image_wide
   module:
     - image
-_core:
-  default_config_hash: PeuVdhRagD0d0ni1yoJHtMCoKrrs5uE7mzRyei3OWKE
 id: media.cropped_image_wide.default
 targetEntityType: media
 bundle: cropped_image_wide

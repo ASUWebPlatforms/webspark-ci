@@ -1,4 +1,3 @@
-uuid: 27acb163-35b2-48e8-9587-81e205f40193
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - field.field.paragraph.testimonial.field_heading
     - field.field.paragraph.testimonial.field_media
     - paragraphs.paragraphs_type.testimonial
-_core:
-  default_config_hash: asXXbnsNdAHSiUzpFZzfDz0Q8rVfM8qCO1cJ6BFLvZA
 id: paragraph.testimonial.default
 targetEntityType: paragraph
 bundle: testimonial

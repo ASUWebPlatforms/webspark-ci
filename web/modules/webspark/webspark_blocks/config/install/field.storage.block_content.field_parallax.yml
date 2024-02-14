@@ -1,11 +1,8 @@
-uuid: 493aaee5-5ef9-4681-8abe-5a4a021e7821
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
-_core:
-  default_config_hash: oNpc5soUh-nGh-L-PgMbJU3BLlgGvWqP9jpvXmPl4y0
 id: block_content.field_parallax
 field_name: field_parallax
 entity_type: block_content

@@ -1,4 +1,3 @@
-uuid: aa41e6c4-0906-4316-9e7a-cdb4e51a09a5
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: u_zH2oC8kPBpoQFYLgxUEIaPk_DQYzbUfvgSC86rfGo
 id: paragraph.card_event.field_link
 field_name: field_link
 entity_type: paragraph

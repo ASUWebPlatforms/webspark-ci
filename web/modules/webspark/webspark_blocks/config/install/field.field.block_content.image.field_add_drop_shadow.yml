@@ -1,12 +1,9 @@
-uuid: 1b3d4543-4aae-4dda-8256-b4553fb10ea4
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.image
     - field.storage.block_content.field_add_drop_shadow
-_core:
-  default_config_hash: KmarpuxANDgsN4ynczK8yvj51gO03eBTYf9hD606NdA
 id: block_content.image.field_add_drop_shadow
 field_name: field_add_drop_shadow
 entity_type: block_content

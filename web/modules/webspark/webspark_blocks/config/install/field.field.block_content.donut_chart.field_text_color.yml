@@ -1,4 +1,3 @@
-uuid: 23eb3f08-9fd8-42ed-8c30-77b66da61812
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_text_color
   module:
     - options
-_core:
-  default_config_hash: ZXrMkK94pbV1oobrp71njzIFPpuBebwGUpLyDXYfqmA
 id: block_content.donut_chart.field_text_color
 field_name: field_text_color
 entity_type: block_content

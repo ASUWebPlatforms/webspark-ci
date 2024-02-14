@@ -1,4 +1,3 @@
-uuid: 74a9483d-a69e-4494-8b77-619b79e72fb7
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - block_content.type.video_hero
     - field.storage.block_content.field_media
     - media.type.video
-_core:
-  default_config_hash: Nz9AxDdO9DQ9EpItVT4LnUhxidfQ_vH4jnzs4Eknacw
 id: block_content.video_hero.field_media
 field_name: field_media
 entity_type: block_content

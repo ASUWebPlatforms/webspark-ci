@@ -1,4 +1,3 @@
-uuid: 24aa306f-e5a1-40f6-a1fb-0a8eee4b580a
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_webform
   module:
     - webform
-_core:
-  default_config_hash: ckj9HDpBGnumstXlL4a8YJScpDuN3Jc-6ESnNL14pO8
 id: block_content.webform.field_webform
 field_name: field_webform
 entity_type: block_content

@@ -1,12 +1,9 @@
-uuid: 90548488-2108-4ffa-be0a-681f1bb632ba
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.web_directory
     - field.storage.block_content.field_filter_campus
-_core:
-  default_config_hash: O1r25yPcDNspqF0JSy8MHHLBxY8RL01XU6e7wOqi7Oc
 id: block_content.web_directory.field_filter_campus
 field_name: field_filter_campus
 entity_type: block_content

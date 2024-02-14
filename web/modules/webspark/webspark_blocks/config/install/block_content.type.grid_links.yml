@@ -1,9 +1,6 @@
-uuid: b6550833-e665-488e-9977-bf53da9bed1d
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: fR3ByTvhghkE3StJ-2V9P6kKziypjbhvbIi6AcU8GuA
 id: grid_links
 label: 'Grid Links'
 revision: 0

@@ -1,12 +1,9 @@
-uuid: 510b7d61-c7cf-429a-92a2-9c4259e2e374
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.image_and_text_block
     - field.storage.block_content.field_heading
-_core:
-  default_config_hash: gbs47aFa-PEzlHSt9biSpKvhGCUJth4VlSu5bv5VYFI
 id: block_content.image_and_text_block.field_heading
 field_name: field_heading
 entity_type: block_content

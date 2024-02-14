@@ -1,4 +1,3 @@
-uuid: b9e8cc90-42bf-4197-a0b4-78f952cf7d60
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ third_party_settings:
     basic_html: '0'
     restricted_html: '0'
     full_html: '0'
-_core:
-  default_config_hash: rOinT--eYq05MyPiYYedshN7BWr0K0wN6i1mSMeSCkw
 id: paragraph.card.field_body
 field_name: field_body
 entity_type: paragraph

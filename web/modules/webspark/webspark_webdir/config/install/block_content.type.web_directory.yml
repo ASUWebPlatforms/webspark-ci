@@ -1,9 +1,6 @@
-uuid: 0234f774-89a2-42d2-9afc-465baec1575b
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: FwV1XU4WwMa9kmJv5bRI3HeeNXnZoTFLEYEMWp8MbxA
 id: web_directory
 label: 'Web Directory'
 revision: 0

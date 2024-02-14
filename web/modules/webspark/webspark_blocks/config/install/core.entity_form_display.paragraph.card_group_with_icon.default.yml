@@ -1,4 +1,3 @@
-uuid: 3d13c423-f176-45d7-917d-bc3ffff1d7b2
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_with_icon
   module:
     - paragraphs
-_core:
-  default_config_hash: RdTA5KnXcbA-bmmVGPYIosFk3gTKsCmO8GWUOqZKa_8
 id: paragraph.card_group_with_icon.default
 targetEntityType: paragraph
 bundle: card_group_with_icon

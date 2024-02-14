@@ -1,4 +1,3 @@
-uuid: 79193040-f7ed-4291-aeae-75b4640748ae
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ dependencies:
     - field.field.block_content.video.field_tooltip
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: 8ML_7OCkSsAvIiYclNlUVtZ03oDSR6yp4NdFF10iKxc
 id: block_content.video.default
 targetEntityType: block_content
 bundle: video

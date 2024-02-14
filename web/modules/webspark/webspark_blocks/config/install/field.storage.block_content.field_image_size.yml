@@ -1,12 +1,9 @@
-uuid: 4be21c83-585f-4791-8401-14b075163ef9
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
-_core:
-  default_config_hash: lGG2CDgr0Man_qJj_qxvVf2T-pQXOjnmd4DSizJ83I4
 id: block_content.field_image_size
 field_name: field_image_size
 entity_type: block_content

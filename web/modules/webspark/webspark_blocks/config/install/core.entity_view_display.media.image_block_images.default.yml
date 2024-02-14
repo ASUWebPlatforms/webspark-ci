@@ -1,4 +1,3 @@
-uuid: 09b17df6-6531-42de-b178-501439e53a53
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - media.type.image_block_images
   module:
     - image
-_core:
-  default_config_hash: EO3JYm9AslDaipkZJXOQW7ypqzFSfPx0EOqwbPHLsUQ
 id: media.image_block_images.default
 targetEntityType: media
 bundle: image_block_images

@@ -1,4 +1,3 @@
-uuid: ba7c3029-b018-4991-bf83-4f98ea9e21b0
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_with_icon
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: TbH6bJal8jstUSePhZmJGqVSwKdY2kH50t5EYEIEEoE
 id: block_content.card_and_image.field_card
 field_name: field_card
 entity_type: block_content

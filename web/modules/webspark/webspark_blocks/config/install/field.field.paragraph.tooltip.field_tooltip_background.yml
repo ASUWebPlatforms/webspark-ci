@@ -1,4 +1,3 @@
-uuid: bd6b66d2-bcdd-4f94-8f81-13fdd4563587
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.tooltip
   module:
     - options
-_core:
-  default_config_hash: JdKNM-oqRyzyorrbLcTUaLqvmsp7uqTSVGQqciqNV_w
 id: paragraph.tooltip.field_tooltip_background
 field_name: field_tooltip_background
 entity_type: paragraph

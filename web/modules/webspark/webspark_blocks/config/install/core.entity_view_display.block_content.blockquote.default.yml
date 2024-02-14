@@ -1,4 +1,3 @@
-uuid: ef3f92db-8d3d-4799-a901-d816567775b4
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
     - field.field.block_content.blockquote.field_tooltip
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: A_Tt5cvbYs10NTyvyiicXexJ4JF89iYyPy8oIfn2tV4
 id: block_content.blockquote.default
 targetEntityType: block_content
 bundle: blockquote

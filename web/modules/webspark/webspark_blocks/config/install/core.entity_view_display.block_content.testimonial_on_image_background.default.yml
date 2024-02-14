@@ -1,4 +1,3 @@
-uuid: dc1f86be-9d7a-490b-b54c-076b2d1c6a43
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: rTmKbqWWq02vkVj4OD9ky3dmf6RYPSChKPZmCH6FLpw
 id: block_content.testimonial_on_image_background.default
 targetEntityType: block_content
 bundle: testimonial_on_image_background

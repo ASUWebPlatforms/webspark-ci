@@ -1,12 +1,9 @@
-uuid: 24d4de27-e9fc-4d99-b8ee-bb5652b39c98
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.news
     - field.storage.block_content.field_news_feed_filter
-_core:
-  default_config_hash: AkuqE8zJtPfmrDfiaH_KvHMuuehVHRjmgo3UPvXXrMU
 id: block_content.news.field_news_feed_filter
 field_name: field_news_feed_filter
 entity_type: block_content

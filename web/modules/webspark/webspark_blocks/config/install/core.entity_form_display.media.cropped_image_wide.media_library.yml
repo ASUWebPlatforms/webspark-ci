@@ -1,4 +1,3 @@
-uuid: 1dc13813-d253-42dc-9d07-5a30cf0383ed
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
   module:
     - decorative_image_widget
     - image_widget_crop
-_core:
-  default_config_hash: _uUnXbSQm86PEypNqs8Dcoe38fwVimoOCi-eLr_Ltxw
 id: media.cropped_image_wide.media_library
 targetEntityType: media
 bundle: cropped_image_wide

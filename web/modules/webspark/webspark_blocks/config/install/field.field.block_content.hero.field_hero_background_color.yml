@@ -1,4 +1,3 @@
-uuid: 6e63d6a6-5bc7-4adb-8c95-c36ab822d0c5
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_hero_background_color
   module:
     - options
-_core:
-  default_config_hash: Abs6yOD8ltaT3pzwlFGA-7rKwnSQnzdj9NTP68o1Ods
 id: block_content.hero.field_hero_background_color
 field_name: field_hero_background_color
 entity_type: block_content

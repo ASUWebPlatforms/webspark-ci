@@ -1,4 +1,3 @@
-uuid: 502a7e01-497e-4b5d-8b18-059e47c70bfb
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_group_story
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: ozt_SL1WqBfw3P44xrejvJBw2gTWRu5WkolCnRezeOI
 id: block_content.card_carousel.field_card_group
 field_name: field_card_group
 entity_type: block_content

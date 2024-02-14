@@ -1,4 +1,3 @@
-uuid: 182a51e0-5883-4666-a4f7-1f94ad14a180
 langcode: en
 status: true
 dependencies:
@@ -37,8 +36,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: utGzlgneMek49XtaTmsO_-lAz91mY_GNXy1Ml-1IYqg
 id: block_content.image_and_text_block.default
 targetEntityType: block_content
 bundle: image_and_text_block

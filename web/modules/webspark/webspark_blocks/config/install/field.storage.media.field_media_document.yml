@@ -1,4 +1,3 @@
-uuid: de0c78c3-3579-4998-89eb-049e23f123df
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
   enforced:
     - media
     - webspark_blocks
-_core:
-  default_config_hash: YKOQv5XcCXISZqty1Hpj1cnXOmxjA26JgzBQ6gy5HsQ
 id: media.field_media_document
 field_name: field_media_document
 entity_type: media

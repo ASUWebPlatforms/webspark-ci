@@ -1,4 +1,3 @@
-uuid: 6d772cfd-b186-4f90-b94a-5c1e70770358
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
-_core:
-  default_config_hash: ZVTBEPW8GcAhJ6PQIZF23mvuABJLanjVetci5vEIpsQ
 id: node.field_deg_dtl_intro_hide_market
 field_name: field_deg_dtl_intro_hide_market
 entity_type: node

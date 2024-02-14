@@ -1,9 +1,6 @@
-uuid: 35c35ccc-95e7-4b18-9d3e-68d10ed24914
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: ryjW_IG1Ohca33LI8smWcHWxC_3bP1pINfXMJ6xqr70
 label: 'Mobile Video Poster'
 id: mobile_video_poster
 description: 'Used for video poster images in mobile devices.'

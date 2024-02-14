@@ -1,4 +1,3 @@
-uuid: e709ddb9-9df8-4308-9436-f760a0df1020
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
 third_party_settings:
   crop:
     image_field: _none
-_core:
-  default_config_hash: BIeuyp3KQpW4h_Mo0zgmftImChPYtx17qHpzFTOpzMM
 id: video
 label: Video
 description: 'A locally hosted video file.'

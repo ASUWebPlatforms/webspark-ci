@@ -1,4 +1,3 @@
-uuid: fa945c93-65f0-44ba-81d9-a2c7a5cb15fa
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
-_core:
-  default_config_hash: IRcOEdn5KVzXZUXweuK3B7_Ld9GB2utxirtXCWm-37Q
 id: node.field_deg_dtl_intro_hide_pgmdesc
 field_name: field_deg_dtl_intro_hide_pgmdesc
 entity_type: node

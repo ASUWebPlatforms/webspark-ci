@@ -1,4 +1,3 @@
-uuid: caefd292-98ec-455b-af58-4b31f99b5a62
 langcode: en
 status: false
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: Zk5GZhp5TIaUJfedNXRmSobgJLADliotbHDq55c5nVA
 id: block_content.card_arrangement.card_arrangement_horizontal
 targetEntityType: block_content
 bundle: card_arrangement

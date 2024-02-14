@@ -1,4 +1,3 @@
-uuid: 1d4b7144-3026-47b8-99af-91f079d82e91
 langcode: en
 status: true
 dependencies:
@@ -28,8 +27,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: 7MYEDk-wwFXvG0qSPLti5ylcKqBVAmJFMq9A4Bce-Kc
 id: paragraph.card_event.portrait
 targetEntityType: paragraph
 bundle: card_event

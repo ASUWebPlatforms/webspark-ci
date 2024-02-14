@@ -1,4 +1,3 @@
-uuid: cc684705-f318-44f1-b9d0-9d9ebb3abda0
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_image_size
   module:
     - options
-_core:
-  default_config_hash: 5If_xWANc9lth1IQx-B0uDMqxm_HB9GA5iTPMQa8LrY
 id: block_content.video.field_image_size
 field_name: field_image_size
 entity_type: block_content

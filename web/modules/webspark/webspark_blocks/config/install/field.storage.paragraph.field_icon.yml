@@ -1,12 +1,9 @@
-uuid: 2eb3419c-9965-49dc-ba6b-41493661d64e
 langcode: en
 status: true
 dependencies:
   module:
     - fontawesome
     - paragraphs
-_core:
-  default_config_hash: nAxZSa0VY6ipssus_rE5q9CD9oKbWIxosD79vNfwWFs
 id: paragraph.field_icon
 field_name: field_icon
 entity_type: paragraph

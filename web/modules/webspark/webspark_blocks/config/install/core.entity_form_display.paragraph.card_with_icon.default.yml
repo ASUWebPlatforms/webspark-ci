@@ -1,4 +1,3 @@
-uuid: b2394fc8-b4db-4585-b69c-8c2ea8a61d36
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ dependencies:
     - maxlength
     - paragraphs
     - text
-_core:
-  default_config_hash: 0KD8qMGm3Phps2U5MvBKmIKMovRJlsZNgS3qGmlhJc0
 id: paragraph.card_with_icon.default
 targetEntityType: paragraph
 bundle: card_with_icon

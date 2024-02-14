@@ -1,4 +1,3 @@
-uuid: 1fc05169-2920-4ccd-bae4-acab34128784
 langcode: en
 status: true
 dependencies:
@@ -34,8 +33,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: Tx906mY9uVLsLiq-7BYdPl6DBoVqa7bOD5oIONF8teY
 id: block_content.testimonial_on_image_background.default
 targetEntityType: block_content
 bundle: testimonial_on_image_background

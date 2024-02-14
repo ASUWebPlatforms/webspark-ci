@@ -1,4 +1,3 @@
-uuid: f43936bd-cfc1-4561-b3c5-3cec8e082730
 langcode: en
 status: true
 dependencies:
@@ -19,8 +18,6 @@ dependencies:
     - entity_reference_revisions
     - link
     - options
-_core:
-  default_config_hash: UwVi22EEMnGxjIA_zyaYXzD4rmjdzaDJlvB_epE0zRk
 id: block_content.events.default
 targetEntityType: block_content
 bundle: events

@@ -1,4 +1,3 @@
-uuid: 1775d6f9-ca45-4731-83d5-d91752c1062c
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: BEJDBNcgEXIN9eoWNmylaTvN4sWl-jyKHdpomtfvOzc
 id: block_content.image_background_with_cta.field_cta
 field_name: field_cta
 entity_type: block_content

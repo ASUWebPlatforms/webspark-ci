@@ -1,12 +1,9 @@
-uuid: c2a34782-c1c8-4297-83e2-84cc193bdce5
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_title
     - paragraphs.paragraphs_type.gallery_image
-_core:
-  default_config_hash: SbHJdGmCkF5Z7_mfoqRVw_SyiejiQqRyhiyRJh6vMRk
 id: paragraph.gallery_image.field_title
 field_name: field_title
 entity_type: paragraph

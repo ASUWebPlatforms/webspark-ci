@@ -1,4 +1,3 @@
-uuid: 8be260aa-8e56-4efa-953e-70048df5c54c
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_sub_heading_background
   module:
     - options
-_core:
-  default_config_hash: nzWQJj_92XwbSeLQ85-jtKBl4i2WNoVZy2PKJPbvJJ8
 id: block_content.hero.field_sub_heading_background
 field_name: field_sub_heading_background
 entity_type: block_content

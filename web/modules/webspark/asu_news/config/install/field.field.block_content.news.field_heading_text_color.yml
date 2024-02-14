@@ -1,4 +1,3 @@
-uuid: 02c03341-31cc-4c4d-a97d-0d4334594fd7
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_heading_text_color
   module:
     - options
-_core:
-  default_config_hash: 6wIfogMe2v8eJ8_nLV1n8eSLId2SGxhutCpDPdbW1kY
 id: block_content.news.field_heading_text_color
 field_name: field_heading_text_color
 entity_type: block_content

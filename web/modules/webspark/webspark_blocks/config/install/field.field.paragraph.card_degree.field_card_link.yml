@@ -1,4 +1,3 @@
-uuid: 3994daa3-35ce-49b2-9a03-1e8b1ed6ec1f
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_degree
   module:
     - link
-_core:
-  default_config_hash: VNN8a7DmLc-dZbXgz98PljuQbDgyBD5_d_QURAcV69A
 id: paragraph.card_degree.field_card_link
 field_name: field_card_link
 entity_type: paragraph

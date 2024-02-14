@@ -1,4 +1,3 @@
-uuid: 0aa3afda-45ab-43f3-bf0f-e0302b218d09
 langcode: en
 status: true
 dependencies:
@@ -37,8 +36,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: N030IYMXfVebmWAf8zVogrXuVS1B1LhR1gqr81ZFKmc
 id: block_content.banner.default
 targetEntityType: block_content
 bundle: banner

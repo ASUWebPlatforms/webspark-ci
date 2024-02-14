@@ -1,4 +1,3 @@
-uuid: 17302275-9bc5-4477-9259-5b93ce203e3e
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - media.type.cropped_image_sqare
   module:
     - image
-_core:
-  default_config_hash: _UBzgCGiN9SFGLEzO7Xvy5FUmYwVGetGuAuHnoJ9uY0
 id: media.cropped_image_sqare.media_library
 targetEntityType: media
 bundle: cropped_image_sqare

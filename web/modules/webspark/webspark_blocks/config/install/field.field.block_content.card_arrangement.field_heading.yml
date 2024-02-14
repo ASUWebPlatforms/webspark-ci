@@ -1,12 +1,9 @@
-uuid: 5cd47c8b-bfe9-4773-ae55-c6a4588c89f8
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.card_arrangement
     - field.storage.block_content.field_heading
-_core:
-  default_config_hash: jGo27mmGEuEH37rfRUosOqY6ixPVolWDMH5U63PoEAk
 id: block_content.card_arrangement.field_heading
 field_name: field_heading
 entity_type: block_content

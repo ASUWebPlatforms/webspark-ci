@@ -1,4 +1,3 @@
-uuid: b2120f68-378a-4a14-93fb-bb68f0976ef1
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_story
   module:
     - link
-_core:
-  default_config_hash: pw0yfCPHmpZSpQnnAgm24cOtYqWoroOMjHUAsJ0SMzs
 id: paragraph.card_story.field_card_link
 field_name: field_card_link
 entity_type: paragraph

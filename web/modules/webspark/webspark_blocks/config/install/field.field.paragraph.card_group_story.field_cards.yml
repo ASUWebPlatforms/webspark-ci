@@ -1,4 +1,3 @@
-uuid: 860dc1e2-8c26-43e4-881a-47a0ec583a33
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_story
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: VYKA6ovVf3eXlehREkdmXilMH35bu3MCBC2aRyqW4yE
 id: paragraph.card_group_story.field_cards
 field_name: field_cards
 entity_type: paragraph

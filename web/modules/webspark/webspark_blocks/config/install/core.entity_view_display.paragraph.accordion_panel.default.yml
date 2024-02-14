@@ -1,4 +1,3 @@
-uuid: 0b6a2327-96aa-4ab6-b2d8-2670d7fa332a
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,6 @@ dependencies:
     - fontawesome
     - options
     - text
-_core:
-  default_config_hash: fDLFKfdUYVk6yaVP4yiv25X4YdIfjuUsJCenlyfYseI
 id: paragraph.accordion_panel.default
 targetEntityType: paragraph
 bundle: accordion_panel

@@ -1,4 +1,3 @@
-uuid: 49754d14-8af0-4d2b-8751-8c3eba000739
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: 8lhtODRhqZ3XMvHQz24E0noL9Nm005lcmsv_rF8Vzn4
 id: block_content.accordion.default
 targetEntityType: block_content
 bundle: accordion

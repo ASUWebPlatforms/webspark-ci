@@ -1,4 +1,3 @@
-uuid: 854f22a5-d778-4346-82e2-396d11c2b3c6
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
     - entity_reference_revisions
     - options
     - text
-_core:
-  default_config_hash: Rnuv_ha0leulLvPHebQ3JvPOyiBIkho449sAa4OMbqY
 id: block_content.content_image.default
 targetEntityType: block_content
 bundle: content_image

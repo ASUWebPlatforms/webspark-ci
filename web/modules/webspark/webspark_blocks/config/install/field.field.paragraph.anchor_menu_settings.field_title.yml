@@ -1,12 +1,9 @@
-uuid: 55284958-0fd1-4201-8f97-aba1edfd56a3
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_title
     - paragraphs.paragraphs_type.anchor_menu_settings
-_core:
-  default_config_hash: dIM3o46pz6vTv5WYoHnL5MlQ-rB0fHk0IlusVNXzF_c
 id: paragraph.anchor_menu_settings.field_title
 field_name: field_title
 entity_type: paragraph

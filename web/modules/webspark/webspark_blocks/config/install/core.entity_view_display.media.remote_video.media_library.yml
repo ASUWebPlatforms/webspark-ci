@@ -1,4 +1,3 @@
-uuid: ab05f5a3-4e59-41fb-ac43-97d5a8b25ac6
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: tP4pUMIGRDarFmsjTWabxy2hh__Kcwsfp7skbFwQBN8
 id: media.remote_video.media_library
 targetEntityType: media
 bundle: remote_video

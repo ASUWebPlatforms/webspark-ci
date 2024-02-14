@@ -1,4 +1,3 @@
-uuid: eefa7c36-6d5b-4876-8612-96cbda020362
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - block_content.type.video
     - field.storage.block_content.field_media
     - media.type.remote_video
-_core:
-  default_config_hash: 1jAZlmq2-hF9nmgUuaxDdeS88giEpLaecDr1OFteP3k
 id: block_content.video.field_media
 field_name: field_media
 entity_type: block_content

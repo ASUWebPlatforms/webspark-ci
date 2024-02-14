@@ -1,9 +1,6 @@
-uuid: 8101c60f-cabc-4116-bbf8-3c64888a91af
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: tpr8uDEighBZm4IKmcYKyc4cxSO0qblNix8T1iZwh68
 name: story_hero
 label: 'Story Hero'
 effects:

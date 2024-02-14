@@ -1,4 +1,3 @@
-uuid: dbc91839-a67a-42cf-bb4b-4947d516eea5
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
-_core:
-  default_config_hash: ogZn-NUAxd_14zjj-AF53IOoJxnSOnNmCwlEUvTsjnM
 id: node.degree_detail_page.field_degree_dtl_intro_content
 field_name: field_degree_dtl_intro_content
 entity_type: node

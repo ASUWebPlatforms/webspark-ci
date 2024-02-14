@@ -1,4 +1,3 @@
-uuid: a4b148a4-7185-4efb-9835-75507e6c402b
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
 third_party_settings:
   crop:
     image_field: _none
-_core:
-  default_config_hash: 98pOe9qOpBLoFMiqA3pa1TKco5nejMaX5hBnLAJlG3s
 id: cropped_image_sqare
 label: 'Cropped image square (1:1)'
 description: 'Used for image block and ckeditor media.'

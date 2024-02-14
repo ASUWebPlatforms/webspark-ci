@@ -1,4 +1,3 @@
-uuid: 1475615d-7e0f-4e59-803a-3278a48e480e
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,6 @@ dependencies:
     - field.field.block_content.image_background_with_cta.field_spacing_top
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: Pml5K3mAGTclzwExfy76jFdc5bZzq3z9_Qazbmajrhg
 id: block_content.image_background_with_cta.default
 targetEntityType: block_content
 bundle: image_background_with_cta

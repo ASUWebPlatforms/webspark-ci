@@ -1,4 +1,3 @@
-uuid: f4501fbc-e28f-45f0-b7c3-6d135cd1785c
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
-_core:
-  default_config_hash: E_KgL36WXreCFUL-1wntDg2FYmtrNUxuT-PojC-GEyM
 id: block_content.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content

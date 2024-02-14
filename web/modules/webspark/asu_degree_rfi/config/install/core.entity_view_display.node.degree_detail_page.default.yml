@@ -1,4 +1,3 @@
-uuid: cab04b4c-9a2c-4993-aff3-871fafe07061
 langcode: en
 status: true
 dependencies:
@@ -118,8 +117,6 @@ third_party_settings:
       denylisted_blocks: {  }
       allowlisted_blocks: {  }
       restricted_categories: {  }
-_core:
-  default_config_hash: 6pME_gd6gl3AtTbLDTaij43IoJvKHgt2UGjnBbBZDME
 id: node.degree_detail_page.default
 targetEntityType: node
 bundle: degree_detail_page

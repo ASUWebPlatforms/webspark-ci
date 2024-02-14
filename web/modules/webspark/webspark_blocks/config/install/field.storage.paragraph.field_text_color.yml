@@ -1,12 +1,9 @@
-uuid: 47214568-5679-4c29-ac0e-b8ee87bafdba
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - paragraphs
-_core:
-  default_config_hash: GnS4_95_YV8O4Yom1d0XX85yE5cmUJd_rO6pLTW0nnc
 id: paragraph.field_text_color
 field_name: field_text_color
 entity_type: paragraph

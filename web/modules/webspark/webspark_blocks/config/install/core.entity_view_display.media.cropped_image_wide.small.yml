@@ -1,4 +1,3 @@
-uuid: 3b08af1c-9cda-4532-9d67-d194137d2502
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: gfXy4YbqH7zCtzDav_XtyHOTGoQH94vDx87di-05K6g
 id: media.cropped_image_wide.small
 targetEntityType: media
 bundle: cropped_image_wide

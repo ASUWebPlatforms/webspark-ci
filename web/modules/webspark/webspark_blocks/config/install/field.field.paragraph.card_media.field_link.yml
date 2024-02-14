@@ -1,4 +1,3 @@
-uuid: df58ea40-5b51-4dfb-ab52-e24a0e4d9cc2
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_media
   module:
     - link
-_core:
-  default_config_hash: CNjWAd19Ozage-UqSyIsRnY6ZCUBWkG4jGvmZ33DTJQ
 id: paragraph.card_media.field_link
 field_name: field_link
 entity_type: paragraph

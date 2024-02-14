@@ -1,11 +1,8 @@
-uuid: 964b28b0-c958-4146-881f-29c76715b2ed
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-_core:
-  default_config_hash: r0PNvXGqP3TxU7mJ_uAUCB0EEO_Dc9YeHklCyfrChfU
 id: paragraph.card_and_image
 label: 'Card and Image'
 description: ''

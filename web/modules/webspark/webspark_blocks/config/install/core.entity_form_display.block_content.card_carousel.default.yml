@@ -1,4 +1,3 @@
-uuid: a34487ac-76a8-47bc-ad46-3f3618882551
 langcode: en
 status: true
 dependencies:
@@ -32,8 +31,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: wRjNLO4KoBULJumrwd0_B7P3n1unmRIWfRfKB6oceso
 id: block_content.card_carousel.default
 targetEntityType: block_content
 bundle: card_carousel

@@ -1,4 +1,3 @@
-uuid: d967d9d8-bbd3-469c-81fe-4ee331ffb1df
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_with_icon
   module:
     - fontawesome
-_core:
-  default_config_hash: zmvYMD81If6Q-FTfVCq7qAfF6cDy19QHPuChtzWjsuo
 id: paragraph.card_with_icon.field_icon
 field_name: field_icon
 entity_type: paragraph

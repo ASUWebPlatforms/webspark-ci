@@ -1,4 +1,3 @@
-uuid: 1f117179-4531-4f14-afc6-6f7f6f414f3e
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.accordion_panel
   module:
     - fontawesome
-_core:
-  default_config_hash: nwSRlZ046ScEi1BQPfRw6KXN4zTexBNGiFWKSAJSa_c
 id: paragraph.accordion_panel.field_icon
 field_name: field_icon
 entity_type: paragraph

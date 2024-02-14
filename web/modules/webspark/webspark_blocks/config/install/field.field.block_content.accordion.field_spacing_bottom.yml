@@ -1,4 +1,3 @@
-uuid: f2d8ae52-e11e-4744-b503-a33f596401eb
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_spacing_bottom
   module:
     - options
-_core:
-  default_config_hash: Yay3shTYGreFAXDhzlv7zpUccFTYpFBXH-2PrqVTYcQ
 id: block_content.accordion.field_spacing_bottom
 field_name: field_spacing_bottom
 entity_type: block_content

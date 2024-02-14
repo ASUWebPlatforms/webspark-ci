@@ -1,4 +1,3 @@
-uuid: 4c69b079-1641-4438-86ff-d5816fe63c99
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.accordion_panel
   module:
     - text
-_core:
-  default_config_hash: ziBKOrFNSa1rbxhyyHnFjJHK7rx3jsVOFsYKs8yAiWU
 id: paragraph.accordion_panel.field_formatted_text
 field_name: field_formatted_text
 entity_type: paragraph

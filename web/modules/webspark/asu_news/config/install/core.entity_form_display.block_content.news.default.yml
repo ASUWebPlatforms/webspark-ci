@@ -1,4 +1,3 @@
-uuid: 6f3397d6-f4ba-418b-a74a-c8fbdeb74997
 langcode: en
 status: true
 dependencies:
@@ -38,8 +37,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: 6UPA0nuxhPkH6aRkBtGgkA9NwKKqgObonp2aaeMK-ww
 id: block_content.news.default
 targetEntityType: block_content
 bundle: news

@@ -1,11 +1,8 @@
-uuid: b29e326e-4030-4eb8-8fdb-33adefb9c4ff
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
-_core:
-  default_config_hash: kXc78zi9IHloIRvJtHTHHi5hWz2BuBUdXNAI-b9nm68
 id: block_content.card_arrangement_horizontal
 label: 'Card Arrangement Horizontal'
 description: ''

@@ -1,4 +1,3 @@
-uuid: 62b6359c-9e09-4dff-8d85-aec936e40540
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
     - decorative_image_widget
     - image_widget_crop
     - path
-_core:
-  default_config_hash: TYbY3eVGHVBQ8ayuPd0LQVwF1UV2EM2Ep0-LFGoTE6k
 id: media.image_block_images.default
 targetEntityType: media
 bundle: image_block_images

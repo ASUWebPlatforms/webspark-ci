@@ -1,4 +1,3 @@
-uuid: 29efa019-29d6-4466-9045-9f97450699e7
 langcode: en
 status: true
 dependencies:
@@ -204,8 +203,6 @@ third_party_settings:
         id: ''
         description: 'Override the default Next Steps.'
         required_fields: true
-_core:
-  default_config_hash: LeDQ7g60A_DPEadFw2TO0uYw680oktltenN-6DDVwAM
 id: node.degree_detail_page.default
 targetEntityType: node
 bundle: degree_detail_page

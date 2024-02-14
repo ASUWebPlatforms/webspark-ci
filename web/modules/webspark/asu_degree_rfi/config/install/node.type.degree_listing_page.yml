@@ -1,4 +1,3 @@
-uuid: b2a11ece-1bfb-45ca-9f35-1c2f065dca3d
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,6 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-_core:
-  default_config_hash: N24jNJj0spWwpCAypSd0Ss6hyrVvAc1ZY6K3Ah9ZUk0
 name: 'Degree listing page'
 type: degree_listing_page
 description: 'A degree listing page displays a search and filter interface allowing your users to find degree programs within your college or department'

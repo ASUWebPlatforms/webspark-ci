@@ -1,12 +1,9 @@
-uuid: 0d57f7fa-a164-4798-b302-161054749bac
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.web_directory
     - field.storage.block_content.field_filter_title
-_core:
-  default_config_hash: 8tnzxAh6Gx8JPmELG50EtKgGoR8Mz8zKafEvSh6BZlk
 id: block_content.web_directory.field_filter_title
 field_name: field_filter_title
 entity_type: block_content

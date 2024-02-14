@@ -1,4 +1,3 @@
-uuid: 6499b13b-9cb7-41f0-8806-63e508701f53
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ third_party_settings:
     restricted_html: '0'
     full_html: '0'
     plain_text: '0'
-_core:
-  default_config_hash: 5A0C9dHppam7mZ2doZAE1fYR_wHEigRBx2oMfp0vOs8
 id: paragraph.card_with_icon.field_body
 field_name: field_body
 entity_type: paragraph

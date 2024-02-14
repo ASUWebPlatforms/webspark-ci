@@ -1,4 +1,3 @@
-uuid: fcd32799-8d0a-4aeb-94cf-bff5f0108059
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: czigm7wBBGepllkO1Z_RPbVuabzqXNWWa88-KnnJKAY
 id: block_content.testimonial_carousel.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content

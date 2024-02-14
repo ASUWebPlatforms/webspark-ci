@@ -1,12 +1,9 @@
-uuid: 4150f015-55b6-45b3-ace3-a56952bc490c
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
-_core:
-  default_config_hash: dmAMJ-dmPEKnPbGMoyDJfAPBFICy45Z3ErUD7nlUC5A
 id: block_content.field_divider_type
 field_name: field_divider_type
 entity_type: block_content

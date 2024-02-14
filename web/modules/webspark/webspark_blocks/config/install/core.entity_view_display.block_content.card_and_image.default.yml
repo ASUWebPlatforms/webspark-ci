@@ -1,4 +1,3 @@
-uuid: 91d4cb43-29c1-4043-a5ec-955548106264
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: srGpVSQSJ_6vHy0Z7vLeVKZ2jQNyH_0A00DCL7orbNM
 id: block_content.card_and_image.default
 targetEntityType: block_content
 bundle: card_and_image

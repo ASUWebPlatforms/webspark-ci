@@ -1,4 +1,3 @@
-uuid: 45418a12-bf87-4f4f-b625-1ae72132680f
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_heading_highlight
   module:
     - options
-_core:
-  default_config_hash: dpG0sspqNkaRHFinL3099lrd2ruxwyK06icbX188Xu4
 id: block_content.testimonial_carousel.field_heading_highlight
 field_name: field_heading_highlight
 entity_type: block_content

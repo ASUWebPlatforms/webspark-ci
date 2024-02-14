@@ -1,9 +1,6 @@
-uuid: 84d26589-1e6d-4e40-8963-394bac026934
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: LkXXuObmOFcuMkAMVymHGis-xtfBT2zwNyx1gKbwxyc
 id: card_arrangement
 label: 'Card Arrangement'
 revision: 0

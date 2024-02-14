@@ -1,4 +1,3 @@
-uuid: 74fa0c6e-a67e-4081-8acf-8bda9866e329
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,6 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-_core:
-  default_config_hash: FCjdTvt_K6goSsA3fwO1r9oIuiDquCHYH6LlE54JHbM
 name: 'Degree detail page'
 type: degree_detail_page
 description: 'IMPORTANT NOTE: Degree detail pages are created on-demand when first accessed through their link on a Degree listing page. You shouldn''t need to add them through the "Add content" interface. After they have been created on-demand, customize individual degree pages by overriding parts of their content on the page''s edit tab.'

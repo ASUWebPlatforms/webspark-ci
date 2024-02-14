@@ -1,4 +1,3 @@
-uuid: 1f2d06ca-eb8e-48dd-a9b3-8bfeb4e8e4f7
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: nCT2WNlv4TiTNG0NHb6w56SbRMURnEcWXgUGw0hklE4
 id: block_content.grid_links.field_links
 field_name: field_links
 entity_type: block_content

@@ -1,12 +1,9 @@
-uuid: 000d7438-f5da-4338-809c-9136eb4c5d30
 langcode: en
 status: true
 dependencies:
   module:
     - media
     - node
-_core:
-  default_config_hash: iiV9QL1WZuthAp4RJihPs9HDwvHH9Hdp8OgpkFoSP4s
 id: node.field_degree_list_card_image
 field_name: field_degree_list_card_image
 entity_type: node

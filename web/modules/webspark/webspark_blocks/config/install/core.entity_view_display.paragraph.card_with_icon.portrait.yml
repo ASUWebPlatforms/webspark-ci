@@ -1,4 +1,3 @@
-uuid: 1dae9ac5-c0d8-4daa-9374-0a582cfe6584
 langcode: en
 status: true
 dependencies:
@@ -21,8 +20,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: uKp002X1EtNpvXAJbQiOhBtLXPdZVYYebgFPIeeOD_Q
 id: paragraph.card_with_icon.portrait
 targetEntityType: paragraph
 bundle: card_with_icon

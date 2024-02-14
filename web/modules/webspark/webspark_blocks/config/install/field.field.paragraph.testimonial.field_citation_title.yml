@@ -1,12 +1,9 @@
-uuid: 4e480f25-8d4c-484f-ad3e-9aabe08b5ef2
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_citation_title
     - paragraphs.paragraphs_type.testimonial
-_core:
-  default_config_hash: shwjWh4w9Mq0OUiW2Q28Ytro3IUcSYQqw2ORCbV8S-k
 id: paragraph.testimonial.field_citation_title
 field_name: field_citation_title
 entity_type: paragraph

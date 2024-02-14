@@ -1,4 +1,3 @@
-uuid: 312d230d-f814-43f6-b534-e972b075f765
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_divider_type
   module:
     - options
-_core:
-  default_config_hash: YEkFsQ9wTgiXfkfjr4R37sbA5Hs_LUGHZLhLNeeoHQ4
 id: block_content.divider.field_divider_type
 field_name: field_divider_type
 entity_type: block_content

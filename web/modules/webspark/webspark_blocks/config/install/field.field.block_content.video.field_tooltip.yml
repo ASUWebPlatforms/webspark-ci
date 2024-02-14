@@ -1,4 +1,3 @@
-uuid: 42a6ecbd-cafe-46b1-8f13-4d302d0d406c
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.tooltip
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: k7e9BDk1ybAYNYCwx1z5RcJQqGikgvaOvrcnSOuZA9w
 id: block_content.video.field_tooltip
 field_name: field_tooltip
 entity_type: block_content

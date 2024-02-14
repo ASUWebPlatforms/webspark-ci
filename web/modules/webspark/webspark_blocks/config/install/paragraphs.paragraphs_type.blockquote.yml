@@ -1,9 +1,6 @@
-uuid: 4067c1e7-4ba4-40d7-92db-f16be42a56b7
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: HuDwqnjX6gh6fMhpT_GeRC67ywAPocf6HAXDD91bstA
 id: blockquote
 label: Blockquote
 icon_uuid: null

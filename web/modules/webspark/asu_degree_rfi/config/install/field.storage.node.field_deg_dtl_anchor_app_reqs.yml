@@ -1,4 +1,3 @@
-uuid: 962eeca6-4e91-4a3c-b887-6dcc302bc5e8
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
-_core:
-  default_config_hash: 4XCD9U2n2ao-9gs75aj3HL8lbQpGJzms3gB_itwchoc
 id: node.field_deg_dtl_anchor_app_reqs
 field_name: field_deg_dtl_anchor_app_reqs
 entity_type: node

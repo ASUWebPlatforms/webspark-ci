@@ -1,4 +1,3 @@
-uuid: b9c63572-2857-4815-9e8e-fb9f07859d59
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ third_party_settings:
     basic_html: '0'
     restricted_html: '0'
     full_html: '0'
-_core:
-  default_config_hash: zPE345I5qbdFVrKw0vh7FFob8jMHjUpy7tme4vt6fP0
 id: block_content.image_and_text_block.field_formatted_text
 field_name: field_formatted_text
 entity_type: block_content

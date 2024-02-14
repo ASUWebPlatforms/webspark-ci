@@ -1,4 +1,3 @@
-uuid: 9cbcfd01-6141-49e3-90e2-193cabb0fc9f
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: sM_K8n8dU6T2X7v1BvcbcCoP7VzD4TfHfooO5EjmPmo
 id: block_content.testimonial.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content

@@ -1,4 +1,3 @@
-uuid: ea537288-f670-4db2-a5d6-bedaa399f3a1
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - fontawesome_iconpicker_widget
-_core:
-  default_config_hash: NCvF_uxZ5OaFGF9Ym8TkcQrkNCsEI8CzsDpowir93eQ
 id: paragraph.anchor_menu_settings.default
 targetEntityType: paragraph
 bundle: anchor_menu_settings

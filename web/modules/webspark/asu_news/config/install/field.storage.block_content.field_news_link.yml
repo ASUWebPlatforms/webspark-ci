@@ -1,12 +1,9 @@
-uuid: 01b920d4-1537-4e2c-9808-69b9abbc3a8d
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - link
-_core:
-  default_config_hash: D3isg-C6op5v155veTHCh1ToOe5nxUjEXyNYdD8orHY
 id: block_content.field_news_link
 field_name: field_news_link
 entity_type: block_content

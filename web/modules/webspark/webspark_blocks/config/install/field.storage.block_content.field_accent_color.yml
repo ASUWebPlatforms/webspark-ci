@@ -1,12 +1,9 @@
-uuid: 4b5a1717-9f2c-40dc-aadc-0a01f5029abb
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
     - options
-_core:
-  default_config_hash: ojnpQ9IqFOs4iDZ_MUL0QZMqgkRYoS5yRlyGFcHAFq8
 id: block_content.field_accent_color
 field_name: field_accent_color
 entity_type: block_content

@@ -1,4 +1,3 @@
-uuid: 0a97bdee-b4fd-4bd8-8c28-df9e351580bc
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_event
   module:
     - datetime_range
-_core:
-  default_config_hash: 0F_IeLfjJrtYDcO55ernVN6ZODSC2V-RX_VEJ7vM9eg
 id: paragraph.card_event.field_date_event
 field_name: field_date_event
 entity_type: paragraph

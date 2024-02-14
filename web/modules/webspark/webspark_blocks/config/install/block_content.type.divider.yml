@@ -1,9 +1,6 @@
-uuid: 0f4ee879-d816-4943-93e0-7d69dcc70715
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: pModceJpAmDtH-GntH-CqC7RaoHyzztRSlXaC2pbhck
 id: divider
 label: Divider
 revision: 0

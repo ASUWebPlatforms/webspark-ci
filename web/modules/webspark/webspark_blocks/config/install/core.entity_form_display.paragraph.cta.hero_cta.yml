@@ -1,4 +1,3 @@
-uuid: 220b6b52-ef6e-4d5f-b7ec-4d5ce916988a
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.cta
   module:
     - webspark_utility
-_core:
-  default_config_hash: MubjWGRdujNLaHqYiCgtciXl9FfKqaMTaxEOEbTu1EE
 id: paragraph.cta.hero_cta
 targetEntityType: paragraph
 bundle: cta

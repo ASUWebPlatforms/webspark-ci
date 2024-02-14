@@ -1,12 +1,9 @@
-uuid: d678aa49-de90-40be-9662-d5bd5e2f2ef3
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: z5yjVKBO0t1Qg0G3qpPF_23yBZYtmDRUxw5G1GH6kwA
 id: banner
 label: 'Notification Banner'
 revision: 0

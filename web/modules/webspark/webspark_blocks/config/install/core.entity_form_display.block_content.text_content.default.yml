@@ -1,4 +1,3 @@
-uuid: 62018c07-c4be-4fd1-a9db-db538e23943b
 langcode: en
 status: true
 dependencies:
@@ -32,8 +31,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: VkyGZlIBmJYDfefjUK4qDFtrNWaxZy-ZeEk4U7lzZK4
 id: block_content.text_content.default
 targetEntityType: block_content
 bundle: text_content

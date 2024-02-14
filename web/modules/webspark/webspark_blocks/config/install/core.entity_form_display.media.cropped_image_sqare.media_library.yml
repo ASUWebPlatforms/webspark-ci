@@ -1,4 +1,3 @@
-uuid: 5b20e632-ab9b-4076-8eb9-07df07d249fc
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
   module:
     - decorative_image_widget
     - image_widget_crop
-_core:
-  default_config_hash: iuw2h_M4g9CVuJtFz04fG-7k2N1NOEgNc8qyMTCEmJA
 id: media.cropped_image_sqare.media_library
 targetEntityType: media
 bundle: cropped_image_sqare

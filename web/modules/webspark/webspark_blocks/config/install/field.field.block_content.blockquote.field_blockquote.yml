@@ -1,4 +1,3 @@
-uuid: d31b1966-219f-4d53-a828-77566576cd12
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.blockquote
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: sZiikTtQ85WWkAa9E5N4X3k_i4XtJbEMCg-2STegGQs
 id: block_content.blockquote.field_blockquote
 field_name: field_blockquote
 entity_type: block_content

@@ -1,4 +1,3 @@
-uuid: 2604354c-1e44-415a-b3d1-26befee621a3
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.storage.block_content.field_events_cta
   module:
     - link
-_core:
-  default_config_hash: UVqaUTfnPrmlPaTgthdtvWpgGEfkf3KZGdA5PxWs1-I
 id: block_content.events.field_events_cta
 field_name: field_events_cta
 entity_type: block_content

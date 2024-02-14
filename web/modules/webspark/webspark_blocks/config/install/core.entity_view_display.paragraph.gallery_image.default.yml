@@ -1,4 +1,3 @@
-uuid: 01b57365-513d-4373-bec0-7b6baa55a008
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - field.field.paragraph.gallery_image.field_media
     - field.field.paragraph.gallery_image.field_title
     - paragraphs.paragraphs_type.gallery_image
-_core:
-  default_config_hash: Nv5ubG6JAkjQWOk84ZsERm9CRjuk9VKhNOVsoWKACBU
 id: paragraph.gallery_image.default
 targetEntityType: paragraph
 bundle: gallery_image

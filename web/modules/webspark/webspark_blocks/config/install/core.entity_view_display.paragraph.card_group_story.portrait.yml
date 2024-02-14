@@ -1,4 +1,3 @@
-uuid: af5b0a83-9ad0-4af5-bd67-333c33f34ed9
 langcode: en
 status: false
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: I-JcixmhTuAdA3Wf2RdJi-qxeTS8QK95YxmLMktniNg
 id: paragraph.card_group_story.portrait
 targetEntityType: paragraph
 bundle: card_group_story

@@ -1,4 +1,3 @@
-uuid: e2a1456e-5636-4fda-a505-7abb4ef5fb49
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
   module:
     - fontawesome_iconpicker_widget
     - text
-_core:
-  default_config_hash: k5IqCiwKkcpoHdEzjZqS2ANtIZdpOIBRsfWlATnX1x8
 id: paragraph.accordion_panel.default
 targetEntityType: paragraph
 bundle: accordion_panel

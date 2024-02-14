@@ -1,4 +1,3 @@
-uuid: cb7601b7-c1fd-4652-8d5c-bfe660364281
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ dependencies:
     - field.field.paragraph.card_with_icon.field_icon
     - field.field.paragraph.card_with_icon.field_show_borders
     - paragraphs.paragraphs_type.card_with_icon
-_core:
-  default_config_hash: kOkrt3ryyhXXjxkCUdpML3Zl-o9A292nr39dLRdqTpY
 id: paragraph.card_with_icon.default
 targetEntityType: paragraph
 bundle: card_with_icon

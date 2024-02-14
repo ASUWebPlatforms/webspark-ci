@@ -1,4 +1,3 @@
-uuid: 8c8102f1-2a97-4e12-97a1-c0d4fe80d397
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - media.type.image
     - media.type.image_block_images
     - paragraphs.paragraphs_type.card_event
-_core:
-  default_config_hash: BkZN9nePgnsUvTbV__mvCbe52ZiZGpdd-h1miwOf1W4
 id: paragraph.card_event.field_media
 field_name: field_media
 entity_type: paragraph

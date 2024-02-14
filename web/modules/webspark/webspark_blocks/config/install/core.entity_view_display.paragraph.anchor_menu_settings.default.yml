@@ -1,4 +1,3 @@
-uuid: 4f225683-f622-4027-86d4-1ef785dce182
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - fontawesome
-_core:
-  default_config_hash: BnVPvgljFsPz5WPk9Sagii6NbGN9vgfjEGuNehLXDEM
 id: paragraph.anchor_menu_settings.default
 targetEntityType: paragraph
 bundle: anchor_menu_settings

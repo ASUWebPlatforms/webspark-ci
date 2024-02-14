@@ -1,4 +1,3 @@
-uuid: 4465bc0a-d676-43f9-8dde-ee9847c07e87
 langcode: en
 status: true
 dependencies:
@@ -14,8 +13,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: p0c-usuwRJHwLUt38smUOfIyIC7taI0vo8jvAJCUVmk
 id: media.image_block_images.small
 targetEntityType: media
 bundle: image_block_images

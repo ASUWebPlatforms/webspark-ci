@@ -1,4 +1,3 @@
-uuid: 7bc9cfaf-4940-4964-8e11-fa8c23edb956
 langcode: en
 status: true
 dependencies:
@@ -25,8 +24,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: 4g6WECUE-J4tmmDrjzQD4uKWFnOSZ3uF9jMIa1SYlTE
 id: paragraph.card_story.carousel_card
 targetEntityType: paragraph
 bundle: card_story

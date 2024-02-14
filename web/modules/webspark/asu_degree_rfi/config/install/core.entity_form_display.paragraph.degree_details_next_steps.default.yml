@@ -1,4 +1,3 @@
-uuid: a4487ab0-a8ed-4961-ae81-dfa2e07c6174
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
-_core:
-  default_config_hash: lfnBNb6MIuE6_TpA9bpNMWXuhI_e38zmckEzLx98uIM
 id: paragraph.degree_details_next_steps.default
 targetEntityType: paragraph
 bundle: degree_details_next_steps

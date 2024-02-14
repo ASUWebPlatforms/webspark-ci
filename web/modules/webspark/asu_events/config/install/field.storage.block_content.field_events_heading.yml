@@ -1,11 +1,8 @@
-uuid: 09dd94cd-aac2-4f83-8a5b-b3264bde10b7
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
-_core:
-  default_config_hash: n9zI5T58i_UgJUXrud7XKXe6CoiGjkkrbwBOR70pV-k
 id: block_content.field_events_heading
 field_name: field_events_heading
 entity_type: block_content

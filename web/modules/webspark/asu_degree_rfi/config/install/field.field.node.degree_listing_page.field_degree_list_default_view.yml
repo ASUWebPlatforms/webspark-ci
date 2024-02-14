@@ -1,4 +1,3 @@
-uuid: f081b77b-da06-4a9b-ba3e-517295ef9372
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - node.type.degree_listing_page
   module:
     - options
-_core:
-  default_config_hash: llch4H3g9W2OZC5hnkT24Q2uw2pdNOZUh7348Ku4NkQ
 id: node.degree_listing_page.field_degree_list_default_view
 field_name: field_degree_list_default_view
 entity_type: node

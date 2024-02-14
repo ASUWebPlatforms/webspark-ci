@@ -1,4 +1,3 @@
-uuid: 07f4979e-c416-4f48-b8db-6a5183f3fcaa
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.gallery_image
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: fB2vF0V6nUJq4peDA_7auvZmUv_F19AYlBH0zzBF_P0
 id: block_content.gallery.field_carousel_card
 field_name: field_carousel_card
 entity_type: block_content

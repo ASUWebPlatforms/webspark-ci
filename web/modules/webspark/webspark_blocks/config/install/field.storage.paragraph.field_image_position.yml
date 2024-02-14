@@ -1,12 +1,9 @@
-uuid: c567ac83-1fc9-48b9-8b3d-0fbfe7c8b9ab
 langcode: en
 status: true
 dependencies:
   module:
     - options
     - paragraphs
-_core:
-  default_config_hash: zKRRK4J_YN_2njnWbF6GI8CNMjimdRReTVxoG3bR_nY
 id: paragraph.field_image_position
 field_name: field_image_position
 entity_type: paragraph

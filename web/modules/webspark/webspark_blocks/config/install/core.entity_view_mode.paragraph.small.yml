@@ -1,11 +1,8 @@
-uuid: c6f0b73d-cca4-42c8-80f4-ea4e38633081
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-_core:
-  default_config_hash: Z07GjdxuXaedOi3aULDeqBmyS7HX5LmUoSxe7tkWijw
 id: paragraph.small
 label: Small
 description: ''

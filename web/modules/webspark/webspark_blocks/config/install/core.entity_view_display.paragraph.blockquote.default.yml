@@ -1,4 +1,3 @@
-uuid: dbfce123-405a-4421-8e78-c70c65b3f209
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ dependencies:
   module:
     - options
     - text
-_core:
-  default_config_hash: NF6FvOYDf5Re5S3Z58QV7L5HoDH2q4t1jZuqsbPDqJ4
 id: paragraph.blockquote.default
 targetEntityType: paragraph
 bundle: blockquote

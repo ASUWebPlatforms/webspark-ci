@@ -1,4 +1,3 @@
-uuid: 18ea7ff1-004b-4ea5-9141-3b074e1b9797
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - media.type.video_poster_image_73_100
   module:
     - image
-_core:
-  default_config_hash: y6jQXpkzTRJfxJHxNIl6R9UxMd3KtsCdFEm13T1hruM
 id: media.video_poster_image_73_100.field_media_image
 field_name: field_media_image
 entity_type: media

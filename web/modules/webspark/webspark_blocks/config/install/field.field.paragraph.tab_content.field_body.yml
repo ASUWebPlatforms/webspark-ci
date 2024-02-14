@@ -1,4 +1,3 @@
-uuid: f161ebb2-b0b3-45f9-81b9-6f540492a802
 langcode: en
 status: true
 dependencies:
@@ -12,8 +11,6 @@ dependencies:
     - paragraphs.paragraphs_type.tab_content
   module:
     - text
-_core:
-  default_config_hash: WLX5XvG3RqmgRHC0GtUc-M0WOtxmPJ7TUejlcrRBlG4
 id: paragraph.tab_content.field_body
 field_name: field_body
 entity_type: paragraph

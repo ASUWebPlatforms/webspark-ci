@@ -1,4 +1,3 @@
-uuid: 57bb87cc-2b9a-47b1-824e-44a359e7c2c9
 langcode: en
 status: true
 dependencies:
@@ -23,8 +22,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: Iv1VhwdhwNQJKBN-lNnE2ncOZXJ8QinrhvHJMd1Mh1k
 id: paragraph.card_event.default
 targetEntityType: paragraph
 bundle: card_event

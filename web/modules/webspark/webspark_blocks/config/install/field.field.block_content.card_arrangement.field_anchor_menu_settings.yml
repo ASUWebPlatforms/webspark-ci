@@ -1,4 +1,3 @@
-uuid: 4075803f-f7f0-4c0f-82f0-b3282abbca38
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: cUwI8I2Y2oAosWvFwJAbC8ackxWy5gDe8goB5FVB5fg
 id: block_content.card_arrangement.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content

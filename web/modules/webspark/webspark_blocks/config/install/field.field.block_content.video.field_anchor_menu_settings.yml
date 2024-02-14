@@ -1,4 +1,3 @@
-uuid: fd174c36-6bb9-43a0-a597-ccd7339f7344
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.anchor_menu_settings
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: EyCZELnpV7ue865wagfyZTi3aJykeUNGP0WLjpOUn2w
 id: block_content.video.field_anchor_menu_settings
 field_name: field_anchor_menu_settings
 entity_type: block_content

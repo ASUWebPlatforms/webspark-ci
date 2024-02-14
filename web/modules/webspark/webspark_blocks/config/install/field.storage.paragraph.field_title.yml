@@ -1,4 +1,3 @@
-uuid: 8f9ff429-91f5-4748-888e-f9ceee69c747
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: G_-cWbsXWl0x-83OVxLD_U23EcG36szVaHiP-TKLams
 id: paragraph.field_title
 field_name: field_title
 entity_type: paragraph

@@ -1,4 +1,3 @@
-uuid: 027c7957-1c69-4007-95e5-5d5d73b85a36
 langcode: en
 status: true
 dependencies:
@@ -72,8 +71,6 @@ third_party_settings:
         open: false
         description: ''
         required_fields: true
-_core:
-  default_config_hash: EefNZZ2oICBM0kO3EvQcS-d7IpA2pmGZ7kZ-Cfw0OH0
 id: block_content.card_arrangement.default
 targetEntityType: block_content
 bundle: card_arrangement

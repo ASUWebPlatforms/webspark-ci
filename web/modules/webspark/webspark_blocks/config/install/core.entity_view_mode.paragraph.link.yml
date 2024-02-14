@@ -1,11 +1,8 @@
-uuid: 8098ff8d-563f-4152-8a88-3e2737488c39
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-_core:
-  default_config_hash: b0gFqB7E97zlK_5QVKxk5evwWZtSEwj3LpHq4dEL2S8
 id: paragraph.link
 label: Link
 description: ''

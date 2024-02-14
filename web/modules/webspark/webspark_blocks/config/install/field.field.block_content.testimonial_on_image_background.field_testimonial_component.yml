@@ -1,4 +1,3 @@
-uuid: 205a23bf-2f16-490e-8cd7-9233e3e0b52a
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.testimonial
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: mWivej8Siq2rkRlCcenqPnIASSPIdCs725lXWgz68YE
 id: block_content.testimonial_on_image_background.field_testimonial_component
 field_name: field_testimonial_component
 entity_type: block_content

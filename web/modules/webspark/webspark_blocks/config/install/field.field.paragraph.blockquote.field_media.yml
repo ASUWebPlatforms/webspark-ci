@@ -1,4 +1,3 @@
-uuid: e31f6e54-e682-4309-afc0-835821f933db
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - media.type.image
     - media.type.image_block_images
     - paragraphs.paragraphs_type.blockquote
-_core:
-  default_config_hash: Oqzv77_1HeNnPg5EV_MFol8m-xSkf6ddqFJUmmcJM2k
 id: paragraph.blockquote.field_media
 field_name: field_media
 entity_type: paragraph

@@ -1,4 +1,3 @@
-uuid: 599febf4-62ad-4a3c-b10c-50b6da83597d
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: qecIL8pmhLgabbuaMW-gw9QlLEIi-Z0MSX8mK1xZpUI
 id: block_content.hero.default
 targetEntityType: block_content
 bundle: hero

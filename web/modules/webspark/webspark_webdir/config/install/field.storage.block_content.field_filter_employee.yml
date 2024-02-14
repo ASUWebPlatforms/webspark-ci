@@ -1,11 +1,8 @@
-uuid: d9cc7fe8-7fe9-40c4-9f27-4e607943c051
 langcode: en
 status: true
 dependencies:
   module:
     - block_content
-_core:
-  default_config_hash: VB2Xbn01d2hdDreAHhEKLnmglwxIzTyf-qM4yCzlXuA
 id: block_content.field_filter_employee
 field_name: field_filter_employee
 entity_type: block_content

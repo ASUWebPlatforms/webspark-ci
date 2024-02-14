@@ -1,4 +1,3 @@
-uuid: fc280bdc-e819-4c1f-a425-5800c2df2c39
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - media.type.story_hero
   module:
     - image
-_core:
-  default_config_hash: loa-qZpc2m-Nf-X-9tSXIiBXZSYOSotwTVR_SMCrvWw
 id: media.story_hero.field_media_image
 field_name: field_media_image
 entity_type: media

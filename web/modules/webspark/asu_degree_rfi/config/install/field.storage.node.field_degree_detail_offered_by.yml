@@ -1,4 +1,3 @@
-uuid: c9670998-1a2a-4b96-961a-f8df1ea40fa5
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
   enforced:
     module:
       - asu_degree_rfi
-_core:
-  default_config_hash: N7QYg4sChN4IrtOIaiM_zFMoUc0kENJQA3wujgqpDp0
 id: node.field_degree_detail_offered_by
 field_name: field_degree_detail_offered_by
 entity_type: node

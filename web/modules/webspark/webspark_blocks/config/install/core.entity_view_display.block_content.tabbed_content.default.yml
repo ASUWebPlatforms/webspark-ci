@@ -1,4 +1,3 @@
-uuid: fbab7577-852a-4abc-a856-823c975a4fd5
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: oI-4125eM4-hivbgzymQ6jnG03rt242A2oXLTSHHM7c
 id: block_content.tabbed_content.default
 targetEntityType: block_content
 bundle: tabbed_content

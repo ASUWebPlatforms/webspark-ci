@@ -1,4 +1,3 @@
-uuid: 7b1980e8-3d54-4725-a96f-79d63936caa4
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   enforced:
     module:
       - webspark_blocks
-_core:
-  default_config_hash: c7C72b7QBzilcK1Qg-d9VbAWAREwrgDnrkT4f6pEMiY
 id: media.field_media_oembed_video
 field_name: field_media_oembed_video
 entity_type: media

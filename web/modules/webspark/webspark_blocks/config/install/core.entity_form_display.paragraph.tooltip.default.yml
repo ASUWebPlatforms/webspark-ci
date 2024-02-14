@@ -1,4 +1,3 @@
-uuid: bcd5c04c-d179-4e71-a3bf-119add307336
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.tooltip
   module:
     - text
-_core:
-  default_config_hash: d7hgqop4OB55JGz_eUaQecW59taPiNT59ZCxAyt2Z4g
 id: paragraph.tooltip.default
 targetEntityType: paragraph
 bundle: tooltip

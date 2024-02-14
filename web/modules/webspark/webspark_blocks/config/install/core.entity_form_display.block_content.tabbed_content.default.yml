@@ -1,4 +1,3 @@
-uuid: 77e0169a-4bc5-4590-b940-f0fb62897081
 langcode: en
 status: true
 dependencies:
@@ -31,8 +30,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: SyxjVEvRDKMEsAagJlYOmXzaL5rhdVYcuve9Ra0UBcU
 id: block_content.tabbed_content.default
 targetEntityType: block_content
 bundle: tabbed_content

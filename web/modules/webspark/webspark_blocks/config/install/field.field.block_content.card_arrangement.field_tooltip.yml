@@ -1,4 +1,3 @@
-uuid: d2b78ace-fed9-4b37-8d7e-bc7c3a349f48
 langcode: en
 status: true
 dependencies:
@@ -8,8 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.tooltip
   module:
     - entity_reference_revisions
-_core:
-  default_config_hash: 9PJUnVqV_uJ32EGomVb9MIoefNeoKyawZ3Ro_CWO1H4
 id: block_content.card_arrangement.field_tooltip
 field_name: field_tooltip
 entity_type: block_content

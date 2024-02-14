@@ -1,4 +1,3 @@
-uuid: e2249b0b-bc4e-428c-bf03-39ac794a8496
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
   module:
     - entity_reference_revisions
     - options
-_core:
-  default_config_hash: 4PHdrJpDgUoCMXP5xWwYYEeFMnWmUN4Y6WA0nxajlG8
 id: block_content.testimonial.default
 targetEntityType: block_content
 bundle: testimonial

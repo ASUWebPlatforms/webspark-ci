@@ -1,4 +1,3 @@
-uuid: ee7dd666-4d49-43dd-ab16-b2b12171f16b
 langcode: en
 status: true
 dependencies:
@@ -31,8 +30,6 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-_core:
-  default_config_hash: dOvr-_8KIAxu-0Ywd6efJuVCLKUSN_Z6VfgAwpBBo5I
 id: block_content.inset_box.default
 targetEntityType: block_content
 bundle: inset_box
