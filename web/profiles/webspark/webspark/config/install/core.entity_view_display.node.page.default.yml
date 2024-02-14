@@ -67,13 +67,8 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts:
-        - layout_onecol
-        - layout_twocol_section
-        - layout_threecol_section
-        - layout_fourcol_section
         - onecol_full_width_section
         - onecol_fixed_width_section
-        - onecol_article_hero_section
         - layout_twocol_bootstrap_section
         - threecol_fixed_width_section
         - fourcol_fixed_width_section
@@ -84,11 +79,7 @@ third_party_settings:
           - asu_footer
         'Custom blocks':
           - webspark_blocks_back_to_top
-      allowlisted_blocks:
-        'Content fields': {  }
-        System: {  }
-        core: {  }
-      restricted_categories: {  }
+      allowlisted_blocks: {  }
 _core:
   default_config_hash: jsKg4nDiCsRxioB65-CodhT4ObZhgArE7HwQCyDerXI
 id: node.page.default
