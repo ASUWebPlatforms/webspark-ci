@@ -6,18 +6,9 @@ namespace Drupal\webspark_view_modes\Plugin\views\style;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
-
-
-//FIXME: Figure out how to properly use the ColorType.php file that I have already made instead of pasting the Enum here.  <grumble>
-//use ColorType;  //require_once? //include? //require? //use?
-
-enum ColorType: String {
-  case Default = 'Default';
-  case White = 'White';
-  case Grey_7 = 'Grey 7';
-  case Grey_2 = 'Grey 2';
-  case Maroon = 'Maroon';
-}
+//TODO:  Is this the correct way to import the Enum? Seems awkward.
+require_once('ColorType.php');
+use ColorType;
 
 /**
  * Style plugin to render each item in an ordered or unordered list.
