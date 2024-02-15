@@ -69,11 +69,10 @@ Feature: Layout Builder Custom Blocks Check
     Then I perform actions and checks for menu item "Sidebar Menu"
     Then I perform actions and checks for menu item "Tabbed Content"
     Then I perform actions and checks for menu item "Testimonial"
-    Then I wait for 5 seconds
     Then I perform actions and checks for menu item "Testimonial Carousel"
     Then I perform actions and checks for menu item "Testimonial On Image Background"
     Then I perform actions and checks for menu item "Text Content"
     Then I perform actions and checks for menu item "Video"
     Then I perform actions and checks for menu item "Video hero"
-#    Then I should see that the "#drupal-off-canvas > div > ul > li:nth-child(29) > a" element exists
+    Then I perform actions and checks for menu item "Web Directory"
     Then I perform actions and checks for menu item "Webform"

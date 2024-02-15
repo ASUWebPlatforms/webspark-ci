@@ -362,6 +362,12 @@ JS;
   public function iPerformActionsAndChecksForMenuItem($menuItem) {
     $session = $this->getSession();
     print("Start item\n");
+    try {
+      $this->iClickTheElement(".accept-btn");
+    } catch (Exception $e) {
+
+    }
+
     $session->getPage()->clickLink("Add block");
     print("Click Add block \n");
     $start = microtime(true);
@@ -375,20 +381,29 @@ JS;
       }
       usleep(500000);
     }
+    $start = microtime(true);
+    $end = $start + 5;
     $continue = true;
-    while ($continue && (microtime(true) < $end)) {
-      try {
-        if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
+    if(str_contains($menuItem, "Web Directory")) {
+      # The Web Directory link was giving problems, so I'm accessing it this way
+      $this->iClickTheElement("#drupal-off-canvas > div > ul > li:nth-child(29) > a");
+    } else {
+      while ($continue && (microtime(true) < $end)) {
+        try {
+          if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
             $session->getPage()->clickLink(str_replace('\\"', '"', $menuItem));
             $continue = false;
             print('Click ' . $menuItem . "\n");
-        }
-      } catch (Exception $e) {
+          }
+        } catch (Exception $e) {
 
+        }
+        usleep(500000);
       }
-      usleep(500000);
     }
 
+    $start = microtime(true);
+    $end = $start + 5;
     $continue = true;
     $functionCheckAppearanceDetail = <<<JS
 (function(){
@@ -408,7 +423,6 @@ JS;
 
 //    $this->singleElementExists('table[id*=field-anchor-menu-settings-values]');
     $this->xNumberElementsExist(2,'select[data-drupal-selector*=edit-settings-block-form-field-spacing]');
-    $this->iClickTheElement('.ui-dialog-titlebar-close');
     $this->wait(2);
     print("End item");
   }
