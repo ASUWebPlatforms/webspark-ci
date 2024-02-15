@@ -1,11 +1,8 @@
-uuid: edb2e1b4-de37-4906-a90e-15fa340fa3fb
 langcode: en
 status: true
 dependencies:
   module:
     - media
-_core:
-  default_config_hash: dkvZqPb2Ga_OKWcq00EX-Q3Ac74ue3j9r-oNPWP_Znw
 name: 'Plain text'
 format: plain_text
 weight: 10

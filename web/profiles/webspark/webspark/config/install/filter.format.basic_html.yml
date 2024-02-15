@@ -1,4 +1,3 @@
-uuid: 4e6d0cd0-3b80-4e85-8b59-e1979479873d
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,6 @@ dependencies:
     - editor
     - linkit
     - media
-_core:
-  default_config_hash: xacd2K7tx_5069aRdAzTPUAkHpYKVfbU2pemROWMk2Y
 name: 'Basic HTML'
 format: basic_html
 weight: 0

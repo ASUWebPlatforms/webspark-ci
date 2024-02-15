@@ -1,11 +1,8 @@
-uuid: 1863a8d8-eb7c-4566-96cf-26668015e76b
 langcode: en
 status: true
 dependencies:
   module:
     - node
-_core:
-  default_config_hash: FmX2dtG78hVwEZg6uOuhcdyG9oZ2dBqq-zSPvcs_m4g
 id: article
 label: Article
 type: 'canonical_entities:node'

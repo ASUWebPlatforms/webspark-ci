@@ -1,5 +1,3 @@
-_core:
-  default_config_hash: mIM3DUzLaljKZwVe-vONZjbIvY0Eq0SyH3oEPYkLZHw
 seckit_xss:
   csp:
     checkbox: false

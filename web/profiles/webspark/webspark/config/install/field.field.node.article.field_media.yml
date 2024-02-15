@@ -1,4 +1,3 @@
-uuid: 742732a8-b465-4caf-a85d-cadab61b3b20
 langcode: en
 status: true
 dependencies:
@@ -6,8 +5,6 @@ dependencies:
     - field.storage.node.field_media
     - media.type.story_hero
     - node.type.article
-_core:
-  default_config_hash: ghP-l5NAY5GQD1xI8MN4YcI_pPrB0JueaYfQrGgv6rA
 id: node.article.field_media
 field_name: field_media
 entity_type: node

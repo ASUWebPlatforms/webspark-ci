@@ -1,4 +1,3 @@
-uuid: 5f7893c2-a609-4dff-a9a0-7e7cbb918237
 langcode: en
 status: true
 dependencies:
@@ -9,8 +8,6 @@ dependencies:
     - image.style.image_block
   theme:
     - renovation
-_core:
-  default_config_hash: Yq5xyjPvsOi9DljXJUMdqdZPSOA47iRO9SrVSoaGpzA
 id: image_blocks
 label: 'Image Blocks'
 image_style_mappings:

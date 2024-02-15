@@ -1,4 +1,3 @@
-uuid: cb8ff8b7-6059-44a8-8940-c274f079ae16
 langcode: en
 status: true
 dependencies:
@@ -80,8 +79,6 @@ third_party_settings:
         'Custom blocks':
           - webspark_blocks_back_to_top
       allowlisted_blocks: {  }
-_core:
-  default_config_hash: jsKg4nDiCsRxioB65-CodhT4ObZhgArE7HwQCyDerXI
 id: node.page.default
 targetEntityType: node
 bundle: page

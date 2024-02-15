@@ -1,7 +1,4 @@
-_core:
-  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
 langcode: en
-uuid: b7f50f63-3feb-406a-a1f6-c03900335c81
 name: 'Webspark CI'
 mail: mlsamuel@asu.edu
 slogan: ''

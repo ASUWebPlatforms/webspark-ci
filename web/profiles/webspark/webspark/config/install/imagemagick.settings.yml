@@ -1,5 +1,3 @@
-_core:
-  default_config_hash: 7HE6uUm5IO-LGOPyYZvzu5NsfDBpaen6SJ4VL4Q1opc
 quality: 75
 binaries: imagemagick
 path_to_binaries: ''
