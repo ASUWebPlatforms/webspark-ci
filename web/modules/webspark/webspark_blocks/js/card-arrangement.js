@@ -52,7 +52,6 @@
             }
           });
         }
-        selectCountColumn.value = "''"; // Reset selected value
       }
 
       // Function to show or hide Display orientation select
