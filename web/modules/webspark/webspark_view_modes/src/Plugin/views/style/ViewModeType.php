@@ -2,6 +2,6 @@
 
 // View Mode Types available
 enum ViewModeType: String {
-  case Default = "Default";
-  case Vertical = "Vertical";
+  case Default = 'Default';
+  case Vertical = 'Vertical';
 }

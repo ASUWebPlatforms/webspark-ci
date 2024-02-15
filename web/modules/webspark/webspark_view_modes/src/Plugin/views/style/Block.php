@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require 'ColorType.php';
+//Importing Enums to use for properties that have limited options to choose from
 require 'CardGroupType.php';
 require 'ViewModeType.php';
 require 'ColumnType.php';
@@ -48,16 +48,3 @@ class Block {
 
   }
 }
-
-
-
-//TODO:  Remove this test when complete.
-// Before block is created, check if uid exists.  If exists, fill in fields, else generate new uid.
-$test_existing_block = new Block(uid: "12345", block_title: "Title of the Block", block_heading: "heading text", block_body:"body", block_isDisplaying_title: true);
-$test_new_block = new Block();
-
-echo "Printing test to the Debug Console from Block.php";
-var_dump($test_existing_block);
-var_dump($test_new_block);
-
-
