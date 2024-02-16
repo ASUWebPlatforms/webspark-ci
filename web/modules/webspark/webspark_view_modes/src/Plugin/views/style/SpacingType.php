@@ -19,4 +19,12 @@ enum SpacingType: String {
   case NegativeFortyEight = '-48px';
   case NegativeSeventyTwo = '-72px';
   case NegativeNinetySix = '-96px';
+
+  public static function allOptions(): array {
+    $options = [];
+    foreach (self::cases() as $case) {
+        $options[$case->name] = $case->value;
+    }
+    return $options;
+  }
 }

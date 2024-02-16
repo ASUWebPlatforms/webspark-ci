@@ -10,4 +10,12 @@ enum ColorType: String {
   case Grey7 = 'Grey 7';
   case Grey2 = 'Grey 2';
   case Maroon = 'Maroon';
+
+  public static function allOptions(): array {
+    $options = [];
+    foreach (self::cases() as $case) {
+        $options[$case->name] = $case->value;
+    }
+    return $options;
+  }
 }

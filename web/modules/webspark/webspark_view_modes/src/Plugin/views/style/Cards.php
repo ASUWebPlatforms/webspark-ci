@@ -19,6 +19,9 @@ use TargetType;
 require_once('SpacingType.php');
 use SpacingType;
 
+require_once('ViewModeType.php');
+use ViewModeType;
+
 /**
    * Style plugin to render each item in an ordered or unordered list.
    *
@@ -124,13 +127,7 @@ use SpacingType;
       //CTA target type
       $form['cta_target'] = [
         '#title' => $this->t('Select a target'),
-        '#options' => [
-          TargetType::None->name => TargetType::None->value,
-          TargetType::Current->name => TargetType::Current->value,
-          TargetType::New->name => TargetType::New->value,
-          TargetType::Parent->name => TargetType::Parent->value,
-          TargetType::Topmost->name => TargetType::Topmost->value
-        ],
+        '#options' => TargetType::allOptions(),
         '#type' => 'select',
         '#default_value' => TargetType::None->name,
       ];
@@ -150,25 +147,10 @@ use SpacingType;
       //ANCHOR STUFF?
 
       //Spacing top
+
       $form['spacing_top'] = [
         '#title' => $this->t('Spacing Top'),
-        '#options' => [
-          SpacingType::None->name => SpacingType::None->value,
-          SpacingType::Eight->name => SpacingType::Eight->value,
-          SpacingType::Sixteen->name => SpacingType::Sixteen->value,
-          SpacingType::ThirtyTwo->name => SpacingType::ThirtyTwo->value,
-          SpacingType::Forty->name => SpacingType::Forty->value,
-          SpacingType::FortyEight->name => SpacingType::FortyEight->value,
-          SpacingType::SeventyTwo->name => SpacingType::SeventyTwo->value,
-          SpacingType::NinetySix->name => SpacingType::NinetySix->value,
-          SpacingType::NegativeEight->name => SpacingType::NegativeEight->value,
-          SpacingType::NegativeSixteen->name => SpacingType::NegativeSixteen->value,
-          SpacingType::NegativeThirtyTwo->name => SpacingType::NegativeThirtyTwo->value,
-          SpacingType::NegativeForty->name => SpacingType::NegativeForty->value,
-          SpacingType::NegativeFortyEight->name => SpacingType::NegativeFortyEight->value,
-          SpacingType::NegativeSeventyTwo->name => SpacingType::NegativeSeventyTwo->value,
-          SpacingType::NegativeNinetySix->name => SpacingType::NegativeNinetySix->value
-        ],
+        '#options' => SpacingType::allOptions(),
         '#type' => 'select',
         '#default_value' => SpacingType::None->name,
       ];
@@ -176,23 +158,7 @@ use SpacingType;
       //Spacing bottom
       $form['spacing_bottom'] = [
         '#title' => $this->t('Spacing Bottom'),
-        '#options' => [
-          SpacingType::None->name => SpacingType::None->value,
-          SpacingType::Eight->name => SpacingType::Eight->value,
-          SpacingType::Sixteen->name => SpacingType::Sixteen->value,
-          SpacingType::ThirtyTwo->name => SpacingType::ThirtyTwo->value,
-          SpacingType::Forty->name => SpacingType::Forty->value,
-          SpacingType::FortyEight->name => SpacingType::FortyEight->value,
-          SpacingType::SeventyTwo->name => SpacingType::SeventyTwo->value,
-          SpacingType::NinetySix->name => SpacingType::NinetySix->value,
-          SpacingType::NegativeEight->name => SpacingType::NegativeEight->value,
-          SpacingType::NegativeSixteen->name => SpacingType::NegativeSixteen->value,
-          SpacingType::NegativeThirtyTwo->name => SpacingType::NegativeThirtyTwo->value,
-          SpacingType::NegativeForty->name => SpacingType::NegativeForty->value,
-          SpacingType::NegativeFortyEight->name => SpacingType::NegativeFortyEight->value,
-          SpacingType::NegativeSeventyTwo->name => SpacingType::NegativeSeventyTwo->value,
-          SpacingType::NegativeNinetySix->name => SpacingType::NegativeNinetySix->value
-        ],
+        '#options' => SpacingType::allOptions(),
         '#type' => 'select',
         '#default_value' => SpacingType::None->name,
       ];
@@ -201,12 +167,7 @@ use SpacingType;
       $form['columns_to_display'] = [
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
-        '#options' => [
-          ColumnType::Select->name => ColumnType::Select->value,
-          ColumnType::Two->name => ColumnType::Two->value,
-          ColumnType::Three->name => ColumnType::Three->value,
-          ColumnType::Four->name => ColumnType::Four->value
-        ],
+        '#options' => ColumnType::allOptions(),
         '#default_value' => ColumnType::Select->name, //$this->options['type'],
       ];
 
@@ -215,7 +176,7 @@ use SpacingType;
         '#type' => 'select',
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
-        '#options' => ['default' => $this->t('Default'), 'landscape' => $this->t('Landscape')],
+        '#options' => ViewModeType::allOptions(),
         '#default_value' => 'default',
       ];
 
