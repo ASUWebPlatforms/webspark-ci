@@ -16,24 +16,17 @@ settings:
   label: 'ASU brand header'
   label_display: ''
   provider: asu_brand
-  asu_brand_header_block_title: 'Webspark CI'
-  asu_brand_header_block_parent_org: 'Parent unit'
-  asu_brand_header_block_parent_org_url: '#'
+  asu_brand_header_block_title: ''
+  asu_brand_header_block_parent_org: ''
+  asu_brand_header_block_parent_org_url: ''
   asu_brand_header_block_sync_session: 1
   asu_brand_header_block_menu_enabled: 1
   asu_brand_header_block_menu_name: main
   asu_brand_header_block_login_path: /caslogin
   asu_brand_header_block_logout_path: /caslogout
-  asu_brand_header_block_cta1_label: 'CTA Button'
-  asu_brand_header_block_cta1_url: '#'
-  asu_brand_header_block_cta2_label: 'CTA Button'
-  asu_brand_header_block_cta2_url: '#'
+  asu_brand_header_block_cta1_label: ''
+  asu_brand_header_block_cta1_url: ''
+  asu_brand_header_block_cta2_label: ''
+  asu_brand_header_block_cta2_url: ''
   asu_brand_header_block_expand_on_hover: 0
-  asu_brand_header_block_base_url: 'https://dev-webspark-ci.ws.asu.edu'
-  asu_brand_header_block_partner_enabled: 0
-  asu_brand_header_block_partner_url: ''
-  asu_brand_header_block_partner_logo_url: ''
-  asu_brand_header_block_partner_logo_alt: ''
-  asu_brand_header_block_cta1_style: gold
-  asu_brand_header_block_cta2_style: maroon
 visibility: {  }

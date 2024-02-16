@@ -1,11 +1,11 @@
-langcode: en
-name: 'Webspark CI'
-mail: mlsamuel@asu.edu
+name: ''
+mail: ''
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /sitemap
+  front: /node
 admin_compact_mode: false
 weight_select_max: 100
+langcode: en
 default_langcode: en
