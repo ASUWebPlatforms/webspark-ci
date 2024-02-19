@@ -13,3 +13,21 @@ Feature: Anonymous user
     # Because Behat users won't have CAS sessions...
     Then I should see the heading "Application Not Authorized to Use CAS"
     And print current URL
+
+  @api @javascript @search_page
+  Scenario: Verify Anonymous users can see and use search page
+    Given I am an anonymous user
+    When I go to the homepage
+    When I click the element ".search-button"
+    Given for "q" I enter "test"
+    Then I submit the "[name='gs']" form
+    Then the url should match "^\/\#gsc\.tab\=0\&gsc\.q=test.*?$"
+    And I should see the heading "Search"
+    Then I wait for 5 seconds
+
+  @api @javascript @404_page
+  Scenario: Verify Anonymous users can check 404 page
+    Given I am an anonymous user
+    When I am at '/searc'
+    Then I should see that the ".container-page-404" element exists
+    Then I wait for 5 seconds
