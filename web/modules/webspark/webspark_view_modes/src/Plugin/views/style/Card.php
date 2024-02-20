@@ -22,8 +22,3 @@ class Card {
   public ColorType $card_cta_style;
   public TargetType $card_target_type;
 }
-
-  //[card] (array of Card.php)
-  //cta_style (ColorType.php only [gold, maroon, grey_2, grey_7])
-  //target (TargetType.php)
-  //vertical_alignment_text?

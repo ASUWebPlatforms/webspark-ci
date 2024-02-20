@@ -32,7 +32,7 @@ class Block {
 
 
   // When constructing a Block if arguments are not passed in, generate a new one with the default paramaters as defined in the constructor argument.
-  public function __construct($uid = "", $block_title = "", $block_heading = "", $block_body = "", $block_isDisplaying_title = false, $block_text_color = ColorType::Default, $block_card_group_type = CardGroupType::Default, $spacing_bottom = SpacingType::Default, $spacing_top = SpacingType::Default, $view_mode_type = ViewModeType::Default, $column_type = ColumnType::Default) {
+  public function __construct($uid = "", $block_title = "", $block_heading = "", $block_body = "", $block_isDisplaying_title = false, $block_text_color = ColorType::Default, $block_card_group_type = CardGroupType::Default, $spacing_bottom = SpacingType::None, $spacing_top = SpacingType::None, $view_mode_type = ViewModeType::Default, $column_type = ColumnType::Select) {
 
     $this->uid = $uid ? $uid : uniqid(); //if there is no existing uid: generate one.
     $this->block_title = $block_title;

@@ -142,8 +142,8 @@ use ViewModeType;
 
       //TEXT FORMAT
       //TOOLTIP
-      //CARDS
-      //--CARD DETAILS
+      //TODO: CARDS
+      //TODO: --CARD DETAILS
       //ANCHOR STUFF?
 
       //Spacing top
