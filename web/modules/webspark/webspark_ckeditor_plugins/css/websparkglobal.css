@@ -59,24 +59,24 @@ span.highlight-black.ck-editor__nested-editable_focused {
   background-size: cover;
 }
 
-.uds-blockquote .citation {
-  display: flex;
-  flex-direction: column;
-}
+/*.uds-blockquote .citation {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
 
-.uds-blockquote .citation:before {
-  content: " " !important;
-}
+/*.uds-blockquote .citation:before {*/
+/*  content: " " !important;*/
+/*}*/
 
-.uds-blockquote .citation .name:before {
-  content: "—";
-  width: 30px;
-  display: inline-flex;
-  font-size: 20px;
-}
+/*.uds-blockquote .citation .name:before {*/
+/*  content: "—";*/
+/*  width: 30px;*/
+/*  display: inline-flex;*/
+/*  font-size: 20px;*/
+/*}*/
 
-.uds-blockquote .citation .description:before {
-  content: " ";
-  width: 30px;
-  display: inline-flex;
-}
+/*.uds-blockquote .citation .description:before {*/
+/*  content: " ";*/
+/*  width: 30px;*/
+/*  display: inline-flex;*/
+/*}*/
