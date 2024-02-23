@@ -74,7 +74,7 @@ export default class WebsparkBlockquoteEditing extends Plugin {
     schema.register("websparkBlockquoteCitation", {
       isLimit: true,
       allowIn: "websparkBlockQuoteContainer",
-      allowContentOf: "$block",
+      allowContentOf: "$text",
     });
 
     schema.register("websparkBlockquoteCitationName", {
@@ -159,23 +159,32 @@ export default class WebsparkBlockquoteEditing extends Plugin {
       },
     });
 
-    conversion.for("dataDowncast").elementToElement({
+    conversion.for("dataDowncast").elementToStructure({
       model: "websparkBlockquoteCitation",
-      view: {
-        name: "div",
-        classes: "citation",
-      },
+      view: ( modelElement, conversionApi ) => {
+        const { writer } = conversionApi;
+        const divViewElement = writer.createContainerElement( 'div', { class: 'citation-content' }, [
+          writer.createSlot()
+        ] );
+
+        return writer.createContainerElement( 'div', { class: 'citation' }, [
+          divViewElement
+        ] );
+      }
     });
 
-    conversion.for("editingDowncast").elementToElement({
+    conversion.for("editingDowncast").elementToStructure({
       model: "websparkBlockquoteCitation",
-      view: (_modelElement, { writer }) => {
-        const div = writer.createEditableElement("div", {
-          class: "citation",
-        });
+      view: ( modelElement, conversionApi ) => {
+        const { writer } = conversionApi;
+        const divViewElement = writer.createContainerElement( 'div', { class: 'citation-content' }, [
+          writer.createSlot()
+        ] );
 
-        return toWidgetEditable(div, writer);
-      },
+        return writer.createContainerElement( 'div', { class: 'citation' }, [
+          divViewElement
+        ] );
+      }
     });
 
     conversion.for("upcast").elementToElement({
