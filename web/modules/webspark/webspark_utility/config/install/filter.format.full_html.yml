@@ -1,14 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - core.entity_view_mode.media.large
-    - core.entity_view_mode.media.medium
-    - core.entity_view_mode.media.small
-  module:
-    - editor
-    - linkit
-    - media
+dependencies: {  }
 name: 'Full HTML'
 format: full_html
 weight: 2

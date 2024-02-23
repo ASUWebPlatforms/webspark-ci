@@ -9,7 +9,7 @@ dependencies:
   - drupal:paragraphs
   - drupal:media
   - drupal:media_library
-  - asuwebplatforms:webspark_utility
+  - webspark_utility
   - drupal:fontawesome
   - drupal:fontawesome_iconpicker_widget
   - drupal:responsive_image
@@ -22,3 +22,4 @@ dependencies:
   - drupal:allowed_formats
   - drupal:crop
   - drupal:block_field
+  - drupal:filter
