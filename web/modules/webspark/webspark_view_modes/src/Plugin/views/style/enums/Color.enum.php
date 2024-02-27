@@ -10,6 +10,7 @@ enum ColorEnum: String {
   case GREY7 = 'Grey 7';
   case GREY2 = 'Grey 2';
   case MAROON = 'Maroon';
+  case GOLD = 'Gold';
 
   public static function allOptions(): array {
     $options = [];
