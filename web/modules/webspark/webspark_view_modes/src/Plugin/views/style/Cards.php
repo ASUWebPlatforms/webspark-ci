@@ -56,6 +56,27 @@ use ViewModeEnum;
      */
     protected function defineOptions() {
       $options = parent::defineOptions();
+
+      //pasted from table
+      $options['assignments'] = ['default' => []];
+      $options['default'] = ['default' => ''];
+      $options['info'] = ['default' => []];
+      $options['override'] = ['default' => TRUE];
+      $options['sticky'] = ['default' => FALSE];
+      $options['order'] = ['default' => 'asc'];
+      $options['caption'] = ['default' => ''];
+      $options['summary'] = ['default' => ''];
+      $options['description'] = ['default' => ''];
+      $options['empty_table'] = ['default' => FALSE];
+      //end paste
+
+      $options['summary'] = ['default' => ''];
+
+
+
+
+
+
       $options['type'] = ['default' => 'ul'];
       $options['class'] = ['default' => ''];
       $options['wrapper_class'] = ['default' => 'item-list'];
@@ -70,6 +91,60 @@ use ViewModeEnum;
     public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
       parent::buildOptionsForm($form, $form_state);
+
+
+
+    //START OF DL EXPERIMENT TO PULL IN DATA
+    //Note: views UI registers this theme handler on our behalf. Your module
+    //will have to register your theme handlers if you do stuff like this.
+    //TODO: Figure out how to register the theme handlers here for the column design to work.
+    //$form['#theme'] = 'views_ui_style_plugin_table';
+
+    $assignments = $this->sanitizeColumns($this->options['assignments']);
+
+    //Create an array of allowed assignments from the data we know:
+    $field_names = $this->displayHandler->getFieldLabels();
+
+    if (isset($this->options['default'])) {
+      $default = $this->options['default'];
+      if (!isset($assignments[$default])) {
+        $default = -1;
+      }
+    }
+    else {
+      $default = -1;
+    }
+
+    foreach ($assignments as $field => $column) {
+      $column_selector = ':input[name="style_options[assignments][' . $field . ']"]';
+
+      $form['assignments'][$field] = [
+        '#title' => $this->t('Assignment for @field', ['@field' => $field]),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $column,
+      ];
+    }
+
+
+
+    // foreach ($assignments as $field => $column) {
+
+    //   //Won't persist
+    // $form['assigned_media'][$field] = [
+    //   '#title' => $this->t('Assign Media'),
+    //   //'#description' => $this->t('The heading text to display.'),
+    //   '#type' => 'select',
+    //   '#options' => $field_names,
+    //   '#default_value' => $column,
+    // ];
+
+    // }
+
+
+//END OF DL EXPERIMENT
+
+
 
       //Title text
       // $form['title'] = [
@@ -94,7 +169,7 @@ use ViewModeEnum;
         //'#description' => $this->t('The heading text to display.'),
         '#type' => 'textfield',
         '#size' => '30',
-        '#default_value' => '',
+        '#default_value' => !empty($this->options['heading']),
       ];
 
       //Color of Heading Text
@@ -165,8 +240,8 @@ use ViewModeEnum;
         '#default_value' => SpacingEnum::NONE->name,
       ];
 
-      //Number of columns to display
-      $form['columns_to_display'] = [
+      //Number of assignments to display
+      $form['assignments_to_display'] = [
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
         '#options' => ColumnEnum::allOptions(),
@@ -213,6 +288,73 @@ use ViewModeEnum;
       //   '#default_value' => $this->options['class'],
       // ];
     }
+
+
+
+
+//EXPERIMENTAL PASTE FROM TABLE VIEW
+
+
+
+
+  /**
+   * Sanitizes the assignments.
+   *
+   * Normalize a list of assignments based upon the fields that are
+   * available. This compares the fields stored in the style handler
+   * to the list of fields actually in the view, removing fields that
+   * have been removed and adding new fields in their own column.
+   *
+   * - Each field must be in a column.
+   * - Each column must be based upon a field, and that field
+   *   is somewhere in the column.
+   * - Any fields not currently represented must be added.
+   * - Columns must be re-ordered to match the fields.
+   *
+   * @param $assignments
+   *   An array of all fields; the key is the id of the field and the
+   *   value is the id of the column the field should be in.
+   * @param $fields
+   *   The fields to use for the assignments. If not provided, they will
+   *   be requested from the current display. The running render should
+   *   send the fields through, as they may be different than what the
+   *   display has listed due to access control or other changes.
+   *
+   * @return array
+   *   An array of all the sanitized assignments.
+   */
+public function sanitizeColumns($assignments, $fields = NULL) {
+  $sanitized = [];
+  if ($fields === NULL) {
+    $fields = $this->displayHandler->getOption('fields');
+  }
+  // Preconfigure the sanitized array so that the order is retained.
+  foreach ($fields as $field => $info) {
+    // Set to itself so that if it isn't touched, it gets column
+    // status automatically.
+    $sanitized[$field] = $field;
+  }
+
+  foreach ($assignments as $field => $column) {
+    // first, make sure the field still exists.
+    if (!isset($sanitized[$field])) {
+      continue;
+    }
+
+    // If the field is the column, mark it so, or the column
+    // it's set to is a column, that's ok
+    if ($field == $column || $assignments[$column] == $column && !empty($sanitized[$column])) {
+      $sanitized[$field] = $column;
+    }
+    // Since we set the field to itself initially, ignoring
+    // the condition is ok; the field will get its column
+    // status back.
+  }
+
+  return $sanitized;
+}
+//END EXPERIMENT
+
   }
 
 

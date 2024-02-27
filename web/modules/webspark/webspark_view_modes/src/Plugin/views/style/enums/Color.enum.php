@@ -19,4 +19,14 @@ enum ColorEnum: String {
     }
     return $options;
   }
+
+  public static function cardArrangementOptions(): array {
+    $options = [];
+    $options[self::GOLD->name] = self::GOLD->value;
+    $options[self::MAROON->name] = self::MAROON->value;
+    $options[self::GREY2->name] = self::GREY2->value;
+    $options[self::GREY7->name] = self::GREY7->value;
+    return $options;
+  }
+
 }
