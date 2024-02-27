@@ -6,21 +6,23 @@ namespace Drupal\webspark_view_modes\Plugin\views\style;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
+
+
 //TODO:  Is this the correct way to import the Enums? Seems awkward.
-require_once('ColorType.php');
-use ColorType;
+require_once('enums/Color.enum.php');
+use ColorEnum;
 
-require_once('ColumnType.php');
-use ColumnType;
+require_once('enums/Column.enum.php');
+use ColumnEnum;
 
-require_once('TargetType.php');
-use TargetType;
+require_once('enums/TargetWindow.enum.php');
+use TargetWindowEnum;
 
-require_once('SpacingType.php');
-use SpacingType;
+require_once('enums/Spacing.enum.php');
+use SpacingEnum;
 
-require_once('ViewModeType.php');
-use ViewModeType;
+require_once('enums/ViewMode.enum.php');
+use ViewModeEnum;
 
 /**
    * Style plugin to render each item in an ordered or unordered list.
@@ -70,21 +72,21 @@ use ViewModeType;
       parent::buildOptionsForm($form, $form_state);
 
       //Title text
-      $form['title'] = [
-        '#title' => $this->t('Block admin title'),
-        '#description' => $this->t('The title of the block as shown to the user.'),
-        '#type' => 'textfield',
-        '#size' => '30',
-        '#required' => TRUE,
-        '#default_value' => '',
-      ];
+      // $form['title'] = [
+      //   '#title' => $this->t('Block admin title'),
+      //   '#description' => $this->t('The title of the block as shown to the user.'),
+      //   '#type' => 'textfield',
+      //   '#size' => '30',
+      //   '#required' => TRUE,
+      //   '#default_value' => '',
+      // ];
 
-      //Is title displayed?
-      $form['display_title'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Display Title'),
-        '#default_value' => 0,
-      ];
+      // //Is title displayed?
+      // $form['display_title'] = [
+      //   '#type' => 'checkbox',
+      //   '#title' => $this->t('Display Title'),
+      //   '#default_value' => 0,
+      // ];
 
       //Heading text
       $form['heading'] = [
@@ -99,46 +101,46 @@ use ViewModeType;
       $form['heading_color'] = [
         '#title' => $this->t('Text Color'),
         '#options' => [
-          ColorType::Grey7->name => ColorType::Grey7->value,
-          ColorType::White->name => ColorType::White->value
+          ColorEnum::GREY7->name => ColorEnum::GREY7->value,
+          ColorEnum::WHITE->name => ColorEnum::WHITE->value
         ],
         '#type' => 'select',
-        '#default_value' => ColorType::Grey7->name,
+        '#default_value' => ColorEnum::GREY7->name,
       ];
 
       //CTA url
-      $form['cta_url'] = [
-        '#title' => $this->t('CTA URL'),
-        //'#description' => $this->t('The call to action link.'),
-        '#type' => 'textfield',
-        '#size' => '30',
-        '#default_value' => '',
-      ];
+      // $form['cta_url'] = [
+      //   '#title' => $this->t('CTA URL'),
+      //   //'#description' => $this->t('The call to action link.'),
+      //   '#type' => 'textfield',
+      //   '#size' => '30',
+      //   '#default_value' => '',
+      // ];
 
       //CTA text
-      $form['cta_text'] = [
-        '#title' => $this->t('CTA Link Text'),
-        //'#description' => $this->t('The heading text to display.'),
-        '#type' => 'textfield',
-        '#size' => '30',
-        '#default_value' => '',
-      ];
+      // $form['cta_text'] = [
+      //   '#title' => $this->t('CTA Link Text'),
+      //   //'#description' => $this->t('The heading text to display.'),
+      //   '#type' => 'textfield',
+      //   '#size' => '30',
+      //   '#default_value' => '',
+      // ];
 
-      //CTA target type
-      $form['cta_target'] = [
-        '#title' => $this->t('Select a target'),
-        '#options' => TargetType::allOptions(),
-        '#type' => 'select',
-        '#default_value' => TargetType::None->name,
-      ];
+      // //CTA target type
+      // $form['cta_target'] = [
+      //   '#title' => $this->t('Select a target'),
+      //   '#options' => TargetType::allOptions(),
+      //   '#type' => 'select',
+      //   '#default_value' => TargetType::None->name,
+      // ];
 
-      //TEXT AREA
-      //TODO: Can we add the wysiwyg toolbar to this text area?
-      $form['formatted_text'] = [
-        '#title' => $this->t('Formatted Text (Only for Card Vertical Arrangements)'),
-        '#type' => 'textarea',
-        '#default_value' => '',
-      ];
+      // //TEXT AREA
+      // //TODO: Can we add the wysiwyg toolbar to this text area?
+      // $form['formatted_text'] = [
+      //   '#title' => $this->t('Formatted Text (Only for Card Vertical Arrangements)'),
+      //   '#type' => 'textarea',
+      //   '#default_value' => '',
+      // ];
 
       //TEXT FORMAT
       //TOOLTIP
@@ -150,25 +152,25 @@ use ViewModeType;
 
       $form['spacing_top'] = [
         '#title' => $this->t('Spacing Top'),
-        '#options' => SpacingType::allOptions(),
+        '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => SpacingType::None->name,
+        '#default_value' => SpacingEnum::NONE->name,
       ];
 
       //Spacing bottom
       $form['spacing_bottom'] = [
         '#title' => $this->t('Spacing Bottom'),
-        '#options' => SpacingType::allOptions(),
+        '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => SpacingType::None->name,
+        '#default_value' => SpacingEnum::NONE->name,
       ];
 
       //Number of columns to display
       $form['columns_to_display'] = [
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
-        '#options' => ColumnType::allOptions(),
-        '#default_value' => ColumnType::Select->name, //$this->options['type'],
+        '#options' => ColumnEnum::allOptions(),
+        '#default_value' => ColumnEnum::SELECT->name, //$this->options['type'],
       ];
 
       //Default or Landscape view mode
@@ -176,7 +178,7 @@ use ViewModeType;
         '#type' => 'select',
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
-        '#options' => ViewModeType::allOptions(),
+        '#options' => ViewModeEnum::allOptions(),
         '#default_value' => 'default',
       ];
 

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require 'ColorType.php';
-require 'TargetType.php';
+require 'enums/Color.enum.php';
+require 'enums/TargetWindow.enum.php';
 
 class Card {
   public string $uid;
@@ -19,6 +19,6 @@ class Card {
   public string $card_cta_second_text;
   public bool $card_is_border_showing;
 
-  public ColorType $card_cta_style;
-  public TargetType $card_target_type;
+  public ColorEnum $card_cta_style;
+  public TargetWindowEnum $card_target_type;
 }

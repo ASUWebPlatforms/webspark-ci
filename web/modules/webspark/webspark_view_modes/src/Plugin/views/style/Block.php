@@ -18,12 +18,12 @@ class Block {
   public bool $block_isDisplaying_title;
 
   //Certain properties have a limited number of options, which lends itself to custom Enums
-  public ColorType $block_text_color;
-  public CardGroupType $block_card_group_type;
-  public SpacingType $spacing_bottom;
-  public SpacingType $spacing_top;
-  public ViewModeType $view_mode_type;
-  public ColumnType $column_type;
+  public ColorEnum $block_text_color;
+  public CardGroupEnum $block_card_group_type;
+  public SpacingEnum $spacing_bottom;
+  public SpacingEnum $spacing_top;
+  public ViewModeEnum $view_mode_type;
+  public ColumnEnum $column_type;
 
   //Each block will have an ordered array of cards (Card.php)
   //TODO:  Discuss the option to associate cards by using a collection of Card UIDs instead of Card objects.
@@ -32,7 +32,7 @@ class Block {
 
 
   // When constructing a Block if arguments are not passed in, generate a new one with the default paramaters as defined in the constructor argument.
-  public function __construct($uid = "", $block_title = "", $block_heading = "", $block_body = "", $block_isDisplaying_title = false, $block_text_color = ColorType::Default, $block_card_group_type = CardGroupType::Default, $spacing_bottom = SpacingType::None, $spacing_top = SpacingType::None, $view_mode_type = ViewModeType::Default, $column_type = ColumnType::Select) {
+  public function __construct($uid = "", $block_title = "", $block_heading = "", $block_body = "", $block_isDisplaying_title = false, $block_text_color = ColorEnum::DEFAULT, $block_card_group_type = CardGroupEnum::DEFAULT, $spacing_bottom = SpacingEnum::NONE, $spacing_top = SpacingEnum::NONE, $view_mode_type = ViewModeEnum::DEFAULT, $column_type = ColumnEnum::SELECT) {
 
     $this->uid = $uid ? $uid : uniqid(); //if there is no existing uid: generate one.
     $this->block_title = $block_title;

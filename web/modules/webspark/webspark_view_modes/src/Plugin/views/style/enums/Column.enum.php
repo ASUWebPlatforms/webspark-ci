@@ -1,11 +1,11 @@
 <?php
 
 // Column Types available
-enum ColumnType: String {
-  case Select = '- Select a value -';
-  case Two = 'Two Columns';
-  case Three = 'Three Columns';
-  case Four = 'Four Columns';
+enum ColumnEnum: String {
+  case SELECT = '- Select a value -';
+  case TWO = 'Two Columns';
+  case THREE = 'Three Columns';
+  case FOUR = 'Four Columns';
 
   public static function allOptions(): array {
     $options = [];

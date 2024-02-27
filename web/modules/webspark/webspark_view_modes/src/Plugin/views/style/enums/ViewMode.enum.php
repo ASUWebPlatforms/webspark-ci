@@ -1,9 +1,9 @@
 <?php
 
 // View Mode Types available
-enum ViewModeType: String {
-  case Default = 'Default';
-  case Vertical = 'Vertical';
+enum ViewModeEnum: String {
+  case DEFAULT = 'Default';
+  case VERTICAL = 'Vertical';
 
   public static function allOptions(): array {
     $options = [];
