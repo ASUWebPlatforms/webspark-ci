@@ -135,13 +135,20 @@ use ArrangementStyleEnum;
 
       //Select which Arrangment type you want
     $form['custom_arrangement_style'] = [
-      '#title' => $this->t('Card Arrangement Style currently set is ' . $this->options['custom_arrangement_style']),
+      '#title' => $this->t('Card Arrangement Style'),
       '#options' => ArrangementStyleEnum::allOptions(),
       '#type' => 'select',
-      '#default_value' => !empty($this->options['custom_arrangement_style']),
+      '#default_value' => $this->options['custom_arrangement_style'],
     ];
 
 
+
+
+
+
+
+
+    //HIDDEN STUFF
     //TODO: Eventually use which card arrangement style is selected to display or hide views
     //if ($this->options['arrangement_style'] == ArrangementStyleEnum::RANKING){
     if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::DEFAULT->value){
@@ -150,6 +157,7 @@ use ArrangementStyleEnum;
       '#options' => SpacingEnum::allOptions(),
       '#type' => 'select',
       '#default_value' => !empty($this->options['test']),
+      //'#default_value' => !empty($this->options['test']),
     ];
   }
 
