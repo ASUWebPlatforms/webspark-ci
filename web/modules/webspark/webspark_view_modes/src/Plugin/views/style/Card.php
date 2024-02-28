@@ -32,7 +32,7 @@ class Card {
 
   public ColorEnum $card_cta_style;
   public TargetWindowEnum $card_target_type;
-  public CardGroupEnum $card_group_type;
+  public ArrangementStyleEnum $card_group_type;
 
   //Construct a Block with key/value arguments, or else use default values defined in the Ternary operators below (??)
   public function __construct($args=[]) {
@@ -60,7 +60,7 @@ class Card {
 
     $this->card_cta_style = $args['card_cta_style'] ?? ColorEnum::GOLD;
     $this->card_target_type = $args['card_target_type'] ?? TargetWindowEnum::NONE;
-    $this->card_group_type = $args['card_group_type'] ?? CardGroupEnum::DEFAULT;
+    $this->card_group_type = $args['card_group_type'] ?? ArrangementStyleEnum::DEFAULT;
 
   }
 

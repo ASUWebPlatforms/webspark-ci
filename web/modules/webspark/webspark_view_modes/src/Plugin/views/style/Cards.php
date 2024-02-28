@@ -24,6 +24,9 @@ use SpacingEnum;
 require_once('enums/ViewMode.enum.php');
 use ViewModeEnum;
 
+require_once('enums/ArrangementStyle.enum.php');
+use ArrangementStyleEnum;
+
 /**
    * Style plugin to render each item in an ordered or unordered list.
    *
@@ -70,6 +73,7 @@ use ViewModeEnum;
       $options['empty_table'] = ['default' => FALSE];
       //end paste
 
+      $options['arrangement_style'] = ['default' => ''];
       $options['summary'] = ['default' => ''];
       $options['heading'] = ['default' => ''];
       $options['heading_color'] = ['default' => ''];
@@ -96,29 +100,40 @@ use ViewModeEnum;
 
     public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
-      parent::buildOptionsForm($form, $form_state);
+    parent::buildOptionsForm($form, $form_state);
 
 
 
 
 //TODO: START DL EXPERIMENT 1/2
 
+
+
     //Note: views UI registers this theme handler on our behalf. Your module
     //will have to register your theme handlers if you do stuff like this.
 
+      //Select which Arrangment type you want
+    $form['arrangement_style'] = [
+      '#title' => $this->t('Card Group Arrangement Style'),
+      '#options' => ArrangementStyleEnum::allOptions(),
+      '#type' => 'select',
+      '#default_value' => !empty($this->options['arrangement_style']),
+    ];
 
-    //TODO: Figure out how to register the theme handlers here for the column design to work.
+
+    //Themeing fluff
     //$form['#theme'] = 'views_ui_style_plugin_table';
-
-    //TODO: I need to better understand where the data is persisted and fetched to allow for the selections to be made and persisted.
+    //Table view way of defining the columns
     //$assignments = $this->sanitizeColumns($this->options['assignments']);
-
-    // Here is where we are currently forcing the assignemnts of required assignment selection.  Move this later.
-    $assignments = ['Heading' => 0, 'Image' => 1, 'Stuff and things' => 2];
-
 
     //Create an array of allowed assignments from the data we know:
     $field_names = $this->displayHandler->getFieldLabels();
+
+
+    // Here is where we are currently forcing the assignemnts of required assignment selection.  Move this later.
+    //TODO: Should change depending on card arrangement style selected
+
+    $assignments = ['Heading' => 0, 'Image' => 1, 'Stuff and things' => 2];
 
     if (isset($this->options['default'])) {
       $default = $this->options['default'];
@@ -131,7 +146,7 @@ use ViewModeEnum;
     }
 
     foreach ($assignments as $field => $assignment) {
-      $column_selector = ':input[name="style_options[assignments][' . $field . ']"]';
+      //$column_selector = ':input[name="style_options[assignments][' . $field . ']"]';
 
       $form['assignments'][$field] = [
         '#title' => $this->t('Assignment for @field', ['@field' => $field]),
@@ -160,6 +175,7 @@ use ViewModeEnum;
 //TODO: END OF DL EXPERIMENT 1/2
 
 
+
       //Heading text
       $form['heading'] = [
         '#title' => $this->t('Heading'),
@@ -179,7 +195,6 @@ use ViewModeEnum;
         '#type' => 'select',
         '#default_value' => !empty($this->options['heading_color']),
       ];
-
 
       //TEXT FORMAT
       //TOOLTIP

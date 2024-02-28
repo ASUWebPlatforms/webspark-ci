@@ -1,12 +1,12 @@
 <?php
 
 // Card Group Types available with cooresponding text to present in UI
-enum CardGroupEnum: String {
-  case RANKING = 'Add Card Group Ranking';
-  case DEFAULT = 'Add Card Group Default';
-  case DEGREE = 'Add Card Group Degree';
-  case STORY = 'Add Card Group Story';
-  case ICON = 'Add Card Group with Icon';
+enum ArrangementStyleEnum: String {
+  case DEFAULT = 'Card Group Default style';
+  case RANKING = 'Card Group Ranking style';
+  case DEGREE = 'Card Group Degree style';
+  case STORY = 'Card Group Story style';
+  case ICON = 'Card Group with Icon style';
 
 
   public static function allOptions(): array {
