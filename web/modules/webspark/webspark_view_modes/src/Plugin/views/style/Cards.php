@@ -54,6 +54,7 @@ use ArrangementStyleEnum;
      */
     protected $usesRowClass = TRUE;
 
+
     /**
      * Set default options.
      */
@@ -73,7 +74,7 @@ use ArrangementStyleEnum;
       $options['empty_table'] = ['default' => FALSE];
       //end paste
 
-      $options['arrangement_style'] = ['default' => ''];
+      $options['custom_arrangement_style'] = ['default' => ''];
       $options['summary'] = ['default' => ''];
       $options['heading'] = ['default' => ''];
       $options['heading_color'] = ['default' => ''];
@@ -102,23 +103,55 @@ use ArrangementStyleEnum;
 
     parent::buildOptionsForm($form, $form_state);
 
-
-
+    //TODO: Eventually remove this and use which card arrangement style is selected to display or hide views
+    $is_ranking_selected = FALSE;
 
 //TODO: START DL EXPERIMENT 1/2
+      //Heading text
+      $form['heading'] = [
+        '#title' => $this->t('Block Heading'),
+        //'#description' => $this->t('The heading text to display.'),
+        '#type' => 'textfield',
+        '#size' => '30',
+        '#default_value' => !empty($this->options['heading']),
+      ];
 
+      //Color of Heading Text
+      $form['heading_color'] = [
+        '#title' => $this->t('Block Text Color'),
+        '#options' => [
+          ColorEnum::GREY7->name => ColorEnum::GREY7->value,
+          ColorEnum::WHITE->name => ColorEnum::WHITE->value
+        ],
+        '#type' => 'select',
+        '#default_value' => !empty($this->options['heading_color']),
+      ];
 
 
     //Note: views UI registers this theme handler on our behalf. Your module
     //will have to register your theme handlers if you do stuff like this.
+    //echo $this->options['custom_arrangement_style'];
+    //echo $this->t($this->options['custom_arrangement_style']);
 
       //Select which Arrangment type you want
-    $form['arrangement_style'] = [
-      '#title' => $this->t('Card Group Arrangement Style'),
+    $form['custom_arrangement_style'] = [
+      '#title' => $this->t('Card Arrangement Style currently set is ' . $this->options['custom_arrangement_style']),
       '#options' => ArrangementStyleEnum::allOptions(),
       '#type' => 'select',
-      '#default_value' => !empty($this->options['arrangement_style']),
+      '#default_value' => !empty($this->options['custom_arrangement_style']),
     ];
+
+
+    //TODO: Eventually use which card arrangement style is selected to display or hide views
+    //if ($this->options['arrangement_style'] == ArrangementStyleEnum::RANKING){
+    if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::DEFAULT->value){
+      $form['test'] = [
+      '#title' => $this->t('** TEST ** '),
+      '#options' => SpacingEnum::allOptions(),
+      '#type' => 'select',
+      '#default_value' => !empty($this->options['test']),
+    ];
+  }
 
 
     //Themeing fluff
@@ -131,10 +164,23 @@ use ArrangementStyleEnum;
 
 
     // Here is where we are currently forcing the assignemnts of required assignment selection.  Move this later.
-    //TODO: Should change depending on card arrangement style selected
+    //TODO: The value for each assignement might need to be more carefully assigned based on persistance attributes
+    $assignments = ['Card Media' => 0, 'Card Heading' => 1, 'Card Body' => 2, 'Card Link' => 3];
 
-    $assignments = ['Heading' => 0, 'Image' => 1, 'Stuff and things' => 2];
 
+    // Which of these are "Assignements" to make VS which are options to adjust in this "Format Settings" page ?
+    // 'Card Media'  = ASSIGN ME
+    // 'Card Heading' = ASSIGN ME
+    // 'Card Body'  = ASSIGN ME
+    // 'Card Link' = ASSIGN ME
+
+    // 'Card Ranking Image Size'
+    // 'Card Icon'
+    // 'Card Show Borders'
+
+
+
+  //TODO:  What's up with this code?
     if (isset($this->options['default'])) {
       $default = $this->options['default'];
       if (!isset($assignments[$default])) {
@@ -157,6 +203,8 @@ use ArrangementStyleEnum;
     }
 
 
+
+
     // Not working yet
     // foreach ($assignments as $field => $column) {
 
@@ -175,26 +223,6 @@ use ArrangementStyleEnum;
 //TODO: END OF DL EXPERIMENT 1/2
 
 
-
-      //Heading text
-      $form['heading'] = [
-        '#title' => $this->t('Heading'),
-        //'#description' => $this->t('The heading text to display.'),
-        '#type' => 'textfield',
-        '#size' => '30',
-        '#default_value' => !empty($this->options['heading']),
-      ];
-
-      //Color of Heading Text
-      $form['heading_color'] = [
-        '#title' => $this->t('Text Color'),
-        '#options' => [
-          ColorEnum::GREY7->name => ColorEnum::GREY7->value,
-          ColorEnum::WHITE->name => ColorEnum::WHITE->value
-        ],
-        '#type' => 'select',
-        '#default_value' => !empty($this->options['heading_color']),
-      ];
 
       //TEXT FORMAT
       //TOOLTIP
@@ -299,36 +327,36 @@ use ArrangementStyleEnum;
    * @return array
    *   An array of all the sanitized assignments.
    */
-public function sanitizeColumns($assignments, $fields = NULL) {
-  $sanitized = [];
-  if ($fields === NULL) {
-    $fields = $this->displayHandler->getOption('fields');
-  }
-  // Preconfigure the sanitized array so that the order is retained.
-  foreach ($fields as $field => $info) {
-    // Set to itself so that if it isn't touched, it gets column
-    // status automatically.
-    $sanitized[$field] = $field;
-  }
+// public function sanitizeColumns($assignments, $fields = NULL) {
+//   $sanitized = [];
+//   if ($fields === NULL) {
+//     $fields = $this->displayHandler->getOption('fields');
+//   }
+//   // Preconfigure the sanitized array so that the order is retained.
+//   foreach ($fields as $field => $info) {
+//     // Set to itself so that if it isn't touched, it gets column
+//     // status automatically.
+//     $sanitized[$field] = $field;
+//   }
 
-  foreach ($assignments as $field => $column) {
-    // first, make sure the field still exists.
-    if (!isset($sanitized[$field])) {
-      continue;
-    }
+//   foreach ($assignments as $field => $column) {
+//     // first, make sure the field still exists.
+//     if (!isset($sanitized[$field])) {
+//       continue;
+//     }
 
-    // If the field is the column, mark it so, or the column
-    // it's set to is a column, that's ok
-    if ($field == $column || $assignments[$column] == $column && !empty($sanitized[$column])) {
-      $sanitized[$field] = $column;
-    }
-    // Since we set the field to itself initially, ignoring
-    // the condition is ok; the field will get its column
-    // status back.
-  }
+//     // If the field is the column, mark it so, or the column
+//     // it's set to is a column, that's ok
+//     if ($field == $column || $assignments[$column] == $column && !empty($sanitized[$column])) {
+//       $sanitized[$field] = $column;
+//     }
+//     // Since we set the field to itself initially, ignoring
+//     // the condition is ok; the field will get its column
+//     // status back.
+//   }
 
-  return $sanitized;
-}
+//   return $sanitized;
+// }
 //TODO: END EXPERIMENT 2/2
 
   }
