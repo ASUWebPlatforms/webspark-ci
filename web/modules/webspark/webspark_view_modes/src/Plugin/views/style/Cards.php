@@ -82,6 +82,9 @@ use ArrangementStyleEnum;
       $options['spacing_bottom'] = ['default' => ''];
       $options['assignments_to_display'] = ['default' => ''];
       $options['view_mode'] = ['default' => ''];
+      $options['card_ranking_image_size'] = ['default' => ''];
+      $options['card_icon'] = ['default' => ''];
+      $options['card_is_border_showing'] = ['default' => ''];
 
 
 
@@ -113,7 +116,7 @@ use ArrangementStyleEnum;
         //'#description' => $this->t('The heading text to display.'),
         '#type' => 'textfield',
         '#size' => '30',
-        '#default_value' => !empty($this->options['heading']),
+        '#default_value' => $this->options['heading'],
       ];
 
       //Color of Heading Text
@@ -124,16 +127,17 @@ use ArrangementStyleEnum;
           ColorEnum::WHITE->name => ColorEnum::WHITE->value
         ],
         '#type' => 'select',
-        '#default_value' => !empty($this->options['heading_color']),
+        '#default_value' => $this->options['heading_color'],
       ];
 
 
     //Note: views UI registers this theme handler on our behalf. Your module
     //will have to register your theme handlers if you do stuff like this.
-    //echo $this->options['custom_arrangement_style'];
-    //echo $this->t($this->options['custom_arrangement_style']);
 
-      //Select which Arrangment type you want
+      //Select which Arrangment style you want (Default, Ranking, Icon, etc.)
+      //TODO: Can I make this effectively APPLY when the selection is changed, but not dismiss the view?
+      //    : So I can have a responsive way to hide/unhide custom fields below?
+      //    : I might need to revisit this.
     $form['custom_arrangement_style'] = [
       '#title' => $this->t('Card Arrangement Style'),
       '#options' => ArrangementStyleEnum::allOptions(),
@@ -142,23 +146,33 @@ use ArrangementStyleEnum;
     ];
 
 
+    //HIDDEN STUFF  (eventually maybe build this into an Arrangement Style Class as hidden options that can be returned, instead of hard coding them here.)
 
-
-
-
-
-
-    //HIDDEN STUFF
-    //TODO: Eventually use which card arrangement style is selected to display or hide views
-    //if ($this->options['arrangement_style'] == ArrangementStyleEnum::RANKING){
-    if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::DEFAULT->value){
-      $form['test'] = [
-      '#title' => $this->t('** TEST ** '),
+  if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::RANKING->name){
+    //CUSTOM RANKING STYLE OPTIONS
+    $form['card_ranking_image_size'] = [
+      '#title' => $this->t('Card Ranking Image Size'),
       '#options' => SpacingEnum::allOptions(),
       '#type' => 'select',
-      '#default_value' => !empty($this->options['test']),
-      //'#default_value' => !empty($this->options['test']),
+      '#default_value' => $this->options['card_ranking_image_size'],
     ];
+  }
+
+  if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::ICON->name){
+    //CUSTOM ICON STYLE OPTIONS
+    $form[''] = [
+      '#title' => $this->t('Card Icon'),
+      '#options' => SpacingEnum::allOptions(),
+      '#type' => 'select',
+      '#default_value' => $this->options['card_icon'],
+    ];
+
+    $form['card_is_border_showing'] = [
+      '#title' => $this->t('Show Card Border'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->options['card_is_border_showing'],
+    ];
+
   }
 
 
@@ -206,7 +220,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Assignment for @field', ['@field' => $field]),
         '#type' => 'select',
         '#options' => $field_names,
-        '#default_value' => $assignment,
+        '#default_value' => $assignment, //TODO: Fix this.   The way assignment is unpacked seems to be incorrect.
       ];
     }
 
@@ -242,7 +256,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Spacing Top'),
         '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => !empty($this->options['spacing_top']),
+        '#default_value' => $this->options['spacing_top'],
       ];
 
       //Spacing bottom
@@ -250,7 +264,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Spacing Bottom'),
         '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => !empty($this->options['spacing_bottom']),
+        '#default_value' => $this->options['spacing_bottom'],
       ];
 
       //Number of assignments to display
@@ -258,7 +272,7 @@ use ArrangementStyleEnum;
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
         '#options' => ColumnEnum::allOptions(),
-        '#default_value' => !empty($this->options['assignments_to_display']),
+        '#default_value' => $this->options['assignments_to_display'],
       ];
 
       //Default or Landscape view mode
@@ -267,7 +281,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
         '#options' => ViewModeEnum::allOptions(),
-        '#default_value' =>  !empty($this->options['view_mode']),
+        '#default_value' =>  $this->options['view_mode'],
       ];
 
       // Previously existing options
