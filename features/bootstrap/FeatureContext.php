@@ -85,7 +85,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementById("$selector");
-  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -95,7 +95,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementsByClassName("$selector");
-  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -104,7 +104,7 @@ JS;
         $function = <<<JS
 (function(){
   let elems = document.querySelectorAll("$locator");
-  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "start" });
 })()
 JS;
         break;
