@@ -71,6 +71,12 @@ use ViewModeEnum;
       //end paste
 
       $options['summary'] = ['default' => ''];
+      $options['heading'] = ['default' => ''];
+      $options['heading_color'] = ['default' => ''];
+      $options['spacing_top'] = ['default' => ''];
+      $options['spacing_bottom'] = ['default' => ''];
+      $options['assignments_to_display'] = ['default' => ''];
+      $options['view_mode'] = ['default' => ''];
 
 
 
@@ -94,12 +100,15 @@ use ViewModeEnum;
 
 
 
-    //START OF DL EXPERIMENT TO PULL IN DATA
+
+//TODO: START DL EXPERIMENT 1/2
+
     //Note: views UI registers this theme handler on our behalf. Your module
     //will have to register your theme handlers if you do stuff like this.
     //TODO: Figure out how to register the theme handlers here for the column design to work.
     //$form['#theme'] = 'views_ui_style_plugin_table';
 
+    //TODO: I need to better understand where the data is persisted and fetched to allow for the selections to be made and persisted.
     $assignments = $this->sanitizeColumns($this->options['assignments']);
 
     //Create an array of allowed assignments from the data we know:
@@ -127,7 +136,7 @@ use ViewModeEnum;
     }
 
 
-
+    // Not working yet
     // foreach ($assignments as $field => $column) {
 
     //   //Won't persist
@@ -142,26 +151,8 @@ use ViewModeEnum;
     // }
 
 
-//END OF DL EXPERIMENT
+//TODO: END OF DL EXPERIMENT 1/2
 
-
-
-      //Title text
-      // $form['title'] = [
-      //   '#title' => $this->t('Block admin title'),
-      //   '#description' => $this->t('The title of the block as shown to the user.'),
-      //   '#type' => 'textfield',
-      //   '#size' => '30',
-      //   '#required' => TRUE,
-      //   '#default_value' => '',
-      // ];
-
-      // //Is title displayed?
-      // $form['display_title'] = [
-      //   '#type' => 'checkbox',
-      //   '#title' => $this->t('Display Title'),
-      //   '#default_value' => 0,
-      // ];
 
       //Heading text
       $form['heading'] = [
@@ -180,48 +171,13 @@ use ViewModeEnum;
           ColorEnum::WHITE->name => ColorEnum::WHITE->value
         ],
         '#type' => 'select',
-        '#default_value' => ColorEnum::GREY7->name,
+        '#default_value' => !empty($this->options['heading_color']),
       ];
 
-      //CTA url
-      // $form['cta_url'] = [
-      //   '#title' => $this->t('CTA URL'),
-      //   //'#description' => $this->t('The call to action link.'),
-      //   '#type' => 'textfield',
-      //   '#size' => '30',
-      //   '#default_value' => '',
-      // ];
-
-      //CTA text
-      // $form['cta_text'] = [
-      //   '#title' => $this->t('CTA Link Text'),
-      //   //'#description' => $this->t('The heading text to display.'),
-      //   '#type' => 'textfield',
-      //   '#size' => '30',
-      //   '#default_value' => '',
-      // ];
-
-      // //CTA target type
-      // $form['cta_target'] = [
-      //   '#title' => $this->t('Select a target'),
-      //   '#options' => TargetType::allOptions(),
-      //   '#type' => 'select',
-      //   '#default_value' => TargetType::None->name,
-      // ];
-
-      // //TEXT AREA
-      // //TODO: Can we add the wysiwyg toolbar to this text area?
-      // $form['formatted_text'] = [
-      //   '#title' => $this->t('Formatted Text (Only for Card Vertical Arrangements)'),
-      //   '#type' => 'textarea',
-      //   '#default_value' => '',
-      // ];
 
       //TEXT FORMAT
       //TOOLTIP
-      //TODO: CARDS
-      //TODO: --CARD DETAILS
-      //ANCHOR STUFF?
+      //ANCHOR STUFF
 
       //Spacing top
 
@@ -229,7 +185,7 @@ use ViewModeEnum;
         '#title' => $this->t('Spacing Top'),
         '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => SpacingEnum::NONE->name,
+        '#default_value' => !empty($this->options['spacing_top']),
       ];
 
       //Spacing bottom
@@ -237,7 +193,7 @@ use ViewModeEnum;
         '#title' => $this->t('Spacing Bottom'),
         '#options' => SpacingEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => SpacingEnum::NONE->name,
+        '#default_value' => !empty($this->options['spacing_bottom']),
       ];
 
       //Number of assignments to display
@@ -245,7 +201,7 @@ use ViewModeEnum;
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
         '#options' => ColumnEnum::allOptions(),
-        '#default_value' => ColumnEnum::SELECT->name, //$this->options['type'],
+        '#default_value' => !empty($this->options['assignments_to_display']),
       ];
 
       //Default or Landscape view mode
@@ -254,10 +210,10 @@ use ViewModeEnum;
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
         '#options' => ViewModeEnum::allOptions(),
-        '#default_value' => 'default',
+        '#default_value' =>  !empty($this->options['view_mode']),
       ];
 
-      //Previously existing options
+      // Previously existing options
       // $options = [
       //   ''  => $this->t('- None -'),
       //   '.' => $this->t('Decimal point'),
@@ -292,9 +248,8 @@ use ViewModeEnum;
 
 
 
-//EXPERIMENTAL PASTE FROM TABLE VIEW
-
-
+//TODO: START DL EXPERIMENT 2/2
+// Copied from Table to support experiment above
 
 
   /**
@@ -353,7 +308,7 @@ public function sanitizeColumns($assignments, $fields = NULL) {
 
   return $sanitized;
 }
-//END EXPERIMENT
+//TODO: END EXPERIMENT 2/2
 
   }
 
