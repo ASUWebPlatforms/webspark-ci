@@ -105,11 +105,17 @@ use ViewModeEnum;
 
     //Note: views UI registers this theme handler on our behalf. Your module
     //will have to register your theme handlers if you do stuff like this.
+
+
     //TODO: Figure out how to register the theme handlers here for the column design to work.
     //$form['#theme'] = 'views_ui_style_plugin_table';
 
     //TODO: I need to better understand where the data is persisted and fetched to allow for the selections to be made and persisted.
-    $assignments = $this->sanitizeColumns($this->options['assignments']);
+    //$assignments = $this->sanitizeColumns($this->options['assignments']);
+
+    // Here is where we are currently forcing the assignemnts of required assignment selection.  Move this later.
+    $assignments = ['Heading' => 0, 'Image' => 1, 'Stuff and things' => 2];
+
 
     //Create an array of allowed assignments from the data we know:
     $field_names = $this->displayHandler->getFieldLabels();
@@ -124,14 +130,14 @@ use ViewModeEnum;
       $default = -1;
     }
 
-    foreach ($assignments as $field => $column) {
+    foreach ($assignments as $field => $assignment) {
       $column_selector = ':input[name="style_options[assignments][' . $field . ']"]';
 
       $form['assignments'][$field] = [
         '#title' => $this->t('Assignment for @field', ['@field' => $field]),
         '#type' => 'select',
         '#options' => $field_names,
-        '#default_value' => $column,
+        '#default_value' => $assignment,
       ];
     }
 
