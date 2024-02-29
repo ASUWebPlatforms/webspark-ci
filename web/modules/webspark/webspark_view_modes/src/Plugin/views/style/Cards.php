@@ -56,15 +56,15 @@ use ArrangementStyleEnum;
       $options['card_media'] = ['default' => []];
       $options['card_heading'] = ['default' => []];
       $options['card_body'] = ['default' => []];
+      $options['card_cta'] = ['default' => []];
       $options['custom_arrangement_style'] = ['default' => ''];
-      $options['summary'] = ['default' => ''];
       $options['heading'] = ['default' => ''];
       $options['heading_color'] = ['default' => ''];
       $options['spacing_top'] = ['default' => ''];
       $options['spacing_bottom'] = ['default' => ''];
       $options['columns_to_display'] = ['default' => ''];
       $options['view_mode'] = ['default' => ''];
-      $options['card_ranking_image_size'] = ['default' => ''];
+      $options['card_ranking'] = ['default' => ''];
       $options['card_icon'] = ['default' => ''];
       $options['card_is_border_showing'] = ['default' => ''];
 
@@ -79,20 +79,19 @@ use ArrangementStyleEnum;
 
     parent::buildOptionsForm($form, $form_state);
 
+    //Here's the magic where we pull in all of the Fields to select from when assigning the items below.
+    $field_names = $this->displayHandler->getFieldLabels();
+
     $form['heading'] = [
-      '#title' => $this->t('Block Heading'),
-      //'#description' => $this->t('The heading text to display.'),
+      '#title' => $this->t('Heading'),
       '#type' => 'textfield',
       '#size' => '30',
       '#default_value' => $this->options['heading'],
     ];
 
     $form['heading_color'] = [
-      '#title' => $this->t('Block Text Color'),
-      '#options' => [
-        ColorEnum::GREY7->name => ColorEnum::GREY7->value,
-        ColorEnum::WHITE->name => ColorEnum::WHITE->value
-      ],
+      '#title' => $this->t('Text Color'),
+      '#options' => ColorEnum::mainContentTextOptions(),
       '#type' => 'select',
       '#default_value' => $this->options['heading_color'],
     ];
@@ -100,7 +99,7 @@ use ArrangementStyleEnum;
     //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
     //TODO: Can I make this effectively APPLY when the selection is changed, but not dismiss the view?
     $form['custom_arrangement_style'] = [
-      '#title' => $this->t('Select Card Style'),
+      '#title' => $this->t('Card Arrangement Style'),
       '#options' => ArrangementStyleEnum::allOptions(),
       '#type' => 'select',
       '#default_value' => $this->options['custom_arrangement_style'],
@@ -108,21 +107,22 @@ use ArrangementStyleEnum;
 
   //HIDDEN RANKING OPTION
   if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::RANKING->name){
-    //CUSTOM RANKING STYLE OPTIONS
-    $form['card_ranking_image_size'] = [
-      '#title' => $this->t('Card Ranking Image Size'),
-      '#options' => SpacingEnum::allOptions(), //TODO: Add in appropriate Card Rank Image Size options
+
+    $form['card_ranking'] = [
+      '#title' => $this->t('Card Ranking'),
       '#type' => 'select',
-      '#default_value' => $this->options['card_ranking_image_size'],
+      '#options' => $field_names,
+      '#default_value' => $this->options['card_ranking'],
     ];
+
   }
 
   //HIDDEN ICON OPTIONS
   if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::ICON->name){
 
-    $form[''] = [
+    $form['card_icon'] = [
       '#title' => $this->t('Card Icon'),
-      '#options' => SpacingEnum::allOptions(), //TODO: Add in appropriate Card Icon options
+      '#options' => $field_names,
       '#type' => 'select',
       '#default_value' => $this->options['card_icon'],
     ];
@@ -135,28 +135,32 @@ use ArrangementStyleEnum;
 
   }
 
-  //Here's the magic where we pull in all of the Fields to select from when assigning the items below.
-  $field_names = $this->displayHandler->getFieldLabels();
-
     $form['card_media'] = [
-      '#title' => $this->t('Select Card Media'),
+      '#title' => $this->t('Card Media'),
       '#type' => 'select',
       '#options' => $field_names,
       '#default_value' => $this->options['card_media'],
     ];
 
     $form['card_heading'] = [
-      '#title' => $this->t('Select Card Heading'),
+      '#title' => $this->t('Card Heading'),
       '#type' => 'select',
       '#options' => $field_names,
       '#default_value' => $this->options['card_heading'],
     ];
 
     $form['card_body'] = [
-      '#title' => $this->t('Select Card Body'),
+      '#title' => $this->t('Card Body'),
       '#type' => 'select',
       '#options' => $field_names,
       '#default_value' => $this->options['card_body'],
+    ];
+
+    $form['card_cta'] = [
+      '#title' => $this->t('Card CTA'),
+      '#type' => 'select',
+      '#options' => $field_names,
+      '#default_value' => $this->options['card_cta'],
     ];
 
     //Some additional Block Settings

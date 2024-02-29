@@ -29,4 +29,10 @@ enum ColorEnum: String {
     return $options;
   }
 
+  public static function mainContentTextOptions(): array {
+    $options = [];
+    $options[self::GREY7->name] = self::GREY7->value;
+    $options[self::WHITE->name] = self::WHITE->value;
+    return $options;
+  }
 }
