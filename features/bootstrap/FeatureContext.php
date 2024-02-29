@@ -427,4 +427,37 @@ JS;
     print("End item");
   }
 
+
+  /**
+   * Check if X class have X style with X value.
+   *
+   * @param string $selector
+   * @param string $style
+   * @param string $value
+   *
+   * @return null
+   * @throws Exception
+   * @Then I should see that :style with :value is in :selector class
+   */
+  public function cssStyleExists(string $selector, string $style, string $value) {
+    $function = <<<JS
+(function(){
+var accordionItem = document.querySelector('$selector');
+var styles = window.getComputedStyle(accordionItem);
+var styleValue = styles.getPropertyValue('$style');
+if (styleValue.trim() === '$value') {
+    return true;
+} else {
+    return false;
+}
+})()
+JS;
+    try {
+      return $this->getSession()->executeScript($function);
+    }
+    catch (Exception $e) {
+      throw new \Exception(__METHOD__ . ' failed');
+    }
+  }
+
 }

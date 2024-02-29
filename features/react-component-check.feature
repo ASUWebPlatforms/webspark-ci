@@ -84,3 +84,27 @@ Feature: React Component Check
     Then I should see that the "[data-search-type='people']" element exists
     Then I should see that the "[data-search-type='people_departments']" element exists
     Then I should see that the "[data-search-type='departments']" element exists
+
+  @api @javascript @accordions_test
+  Scenario: Verify Accordions (component-accordion)
+    Given I am an anonymous user
+    When I am at '/accordion'
+    Then I should see the heading "Accordion"
+    #Icons appear
+    Then I should see the heading "Accordion with Icons"
+    And I should see that the ".accordion-icon" element exists
+    #Colors appear
+    Then I should see the heading "Accordion Colors"
+    And I should see that "border-left" with ".5rem solid #ffc627" is in ".accordion-item" class
+    And I should see that "border-left-color" with "#8c1d40" is in ".accordion-item-maroon" class
+    And I should see that "border-left-color" with "#bfbfbf" is in ".accordion-item-gray" class
+    And I should see that "border-left-color" with "#191919" is in ".accordion-item-dark" class
+    #Open and close test
+    Then I click "accordion-header-2"
+    Then I wait for 1 seconds
+    And I should see that the "#accordion-content-2.accordion-body.collapse.show" element exists
+    Then I click "accordion-header-2"
+    Then I wait for 1 seconds
+    And I should see that the "#accordion-content-2.accordion-body.collapse" element exists
+
+
