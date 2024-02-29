@@ -85,7 +85,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementById("$selector");
-  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -95,7 +95,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementsByClassName("$selector");
-  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -104,7 +104,7 @@ JS;
         $function = <<<JS
 (function(){
   let elems = document.querySelectorAll("$locator");
-  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "start" });
 })()
 JS;
         break;
@@ -127,7 +127,7 @@ JS;
    * @param int $number
    *   Allowed selectors: positive and negative numbers
    *
-   * @Then I scroll vertically by :number pixels
+   * @Then /^I scroll vertically by (-?\d+) pixels$/
    *
    * @throws \Exception
    */
@@ -143,7 +143,7 @@ JS;
   /**
    * Hover over an element
    *
-   * @When /^I hover over the element "([^"]*)"$/
+   * @When /^I hover over the element "((\\\")?.*)"$/
    *
    *  @param string $locator
    *
@@ -168,7 +168,7 @@ JS;
    *
    * @param string $locator
    *
-   * @When /^I click the element "([^"]*)"$/
+   * @When /^I click the element "((\\\")?.*)"$/
    */
   public function iClickTheElement($locator)
   {
