@@ -58,7 +58,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
     $form['links_fieldset'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('404 Links'),
-      '#markup' => '<p>When adding links, both the url and title are required.</p>',
+      '#markup' => t('When adding links, both the url and title are required.'),
       '#prefix' => '<div id="names-fieldset-wrapper">',
       '#suffix' => '</div>',
     ];
