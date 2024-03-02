@@ -44,9 +44,10 @@ final class WebsparkUtilityCommands extends DrushCommands {
     $this->io()->writeln(' // Fetching latest database from the Webspark Release Stable site in Pantheon.' . PHP_EOL);
     $date = new \DateTime();
     $now = $date->getTimestamp();
-    $backupDate = unserialize(shell_exec('terminus backup:info webspark-release-stable.dev --element=db --format=php'), ['allowed_classes' => true])['date'];
-    if ($backupDate < ($now - 86400)) {
-      // Create new backup if latest is older than 24 hours.
+    $getBackupDate = shell_exec('terminus backup:info webspark-release-stable.dev --element=db --format=php');
+    $backupDate = $getBackupDate ? unserialize($getBackupDate, ['allowed_classes' => TRUE])['date'] : NULL;
+    if (empty($backupDate) || ($backupDate < ($now - 86400))) {
+      // Create new backup if it doesn't exist or latest is older than 24 hours.
       shell_exec('terminus backup:create webspark-release-stable.dev --element=db');
     }
     // Get latest backup.
