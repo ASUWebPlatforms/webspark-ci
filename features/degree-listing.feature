@@ -8,7 +8,7 @@ Feature: Degree Listing page verification
     Given I am an anonymous user
     When I am at '/degree-listing-page'
     Then I should see that the "#search-field" element exists
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#search-field" into view
     Then I wait for 1 second
     Given for "search-field" I enter "Applied Science"
@@ -25,7 +25,7 @@ Feature: Degree Listing page verification
     Given I am an anonymous user
     When I am at '/degree-listing-page'
     Then I should see that the "#locations" element exists
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#locations" into view
     Then I wait for 1 second
     Then I select "Downtown Phoenix campus" from "locations"
@@ -42,7 +42,7 @@ Feature: Degree Listing page verification
     Given I am an anonymous user
     When I am at '/degree-listing-page'
     Then I should see that the "#asuLocals" element exists
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#asuLocals" into view
     Then I wait for 1 second
     Then I select "ASU at Cochise" from "asuLocals"
@@ -59,7 +59,7 @@ Feature: Degree Listing page verification
     Given I am an anonymous user
     When I am at '/degree-listing-page'
     Then I should see that the "#acceleratedConcurrent" element exists
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#acceleratedConcurrent" into view
     Then I wait for 1 second
     Then I select "Accelerated" from "acceleratedConcurrent"
@@ -76,7 +76,7 @@ Feature: Degree Listing page verification
     Given I am an anonymous user
     When I am at '/degree-listing-page'
     Then I should see that the "#acceleratedConcurrent" element exists
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#acceleratedConcurrent" into view
     Then I wait for 1 second
     Then I select "Accelerated" from "acceleratedConcurrent"
@@ -97,7 +97,7 @@ Feature: Degree Listing page verification
   Scenario: Verify collapsible functionality
     Given I am an anonymous user
     When I am at '/degree-listing-page'
-    Then I wait for 5 seconds
+    Then I wait for 7 seconds
     Then I scroll "#degree-list-programs" into view
     Then I wait for 1 second
     Then I should see that the "[aria-controls='row-info-0']" element exists
