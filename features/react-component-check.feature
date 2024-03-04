@@ -84,3 +84,20 @@ Feature: React Component Check
     Then I should see that the "[data-search-type='people']" element exists
     Then I should see that the "[data-search-type='people_departments']" element exists
     Then I should see that the "[data-search-type='departments']" element exists
+
+  @api @javascript @anchor_menu__test
+  Scenario: Verify Anchor menu component (components-core)
+    Given I am an anonymous user
+    When I am at '/anchor-menu'
+    Then I wait for 2 seconds
+    #Check "On this page" appear
+    Then I should see that the ".uds-anchor-menu-wrapper" element exists
+    And I should see the heading "On This Page:"
+    #Check “current” item highlighted
+    Then I click "Block B"
+    And I wait for 1 seconds
+    And I scroll "#webspark-anchor-link--152" into view
+    And I wait for 1 seconds
+    And I should see that the "a.nav-link.active[data-ga-text='block b']" element exists
+    #Check sticky Anchor menu
+    Then I should see that the ".uds-anchor-menu-attached" element exists
