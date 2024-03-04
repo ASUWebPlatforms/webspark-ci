@@ -20,7 +20,7 @@ final class WebsparkUtilityCommands extends DrushCommands {
     // Turn on output buffering.
     ob_start();
     if (!(is_dir('../.ddev') && is_file('../.ddev/providers/pantheon.yaml'))) {
-      $this->logger()->error('Please install and configure DDEV before running this command.');
+      $this->logger()->error('This command is intended for local use with DDEV only. Please install and configure DDEV locally and try again.');
       return;
     }
     // Only allow on webspark-ci and webspark-release-* repositories.
