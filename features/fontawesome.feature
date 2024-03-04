@@ -37,4 +37,34 @@ Feature: Anonymous user
     # See "pitchfork" icon in first position
     Then I should see that the ".fip-icons-container > span:nth-of-type(2)[data-fip-value='fa-solid fa-E_hand_pitchfork_solid']" element exists
 
+  @api @javascript
+  Scenario: Verify FontAwesome icons in WYSIWYG
+    Given I am logged in as a user with the "administrator" role
+    When I go to "/text-content-lists"
+    Then I should see that the "svg.fa-rocket path" element exists
+    Then I should see that the "svg.fa-bus path" element exists
+    Then I should see that the "svg.fa-car path" element exists
+    Then I should see that the "svg.fa-bicycle path" element exists
+    Given I go to "/node/60/edit"
+    Then I should see that the "svg.fa-rocket path" element exists
+    Then I should see that the "svg.fa-bus path" element exists
+    Then I should see that the "svg.fa-car path" element exists
+    Then I should see that the "svg.fa-bicycle path" element exists
+    Then I should see that the "[data-cke-tooltip-text='Insert Fontawesome Icon']" element exists
+    Given I click the element "button[data-cke-tooltip-text='Insert Fontawesome Icon']"
+    Then I should see that the "#drupal-modal .fontawesome-icon-dialog" element exists
+    Given I enter "square-x-twitter" for "icon_name"
+    And I click the element "#drupal-modal + .ui-dialog-buttonpane button.form-submit"
+    Then I should see that the "ul.uds-list li svg.fa-square-x-twitter path" element exists
+    Then I scroll "input#edit-submit" into view
+    Then I wait for 1 second
+    Given I click the element "input#edit-submit"
+    Then the url should match "text-content-lists"
+    Then I should see that the "ul.uds-list li svg.fa-square-x-twitter path" element exists
+
+
+
+
+
+
 
