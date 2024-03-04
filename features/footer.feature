@@ -3,7 +3,7 @@ Feature: Visibility of the footer
   As anonymous user
   I want to verify that I can see the footer.
 
-  @api @javascript @footer_test
+  @api @javascript @footer-test
   Scenario: Verify the homepage
     When I am on the homepage
     Then I scroll "#wrapper-endorsed-footer" into view
