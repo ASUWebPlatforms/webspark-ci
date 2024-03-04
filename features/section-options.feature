@@ -3,7 +3,7 @@ Feature: Layout Builder Section Options Check
   As an administrative user
   I want to verify that each layout option is included.
 
-  @api @javascript @test
+  @api @javascript
   Scenario: Verify Layout Builder Section Options
     Given I am logged in as user "admin"
     When I am at '/node/2/layout'
