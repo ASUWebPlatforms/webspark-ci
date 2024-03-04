@@ -44,11 +44,16 @@ final class WebsparkUtilityCommands extends DrushCommands {
     $this->io()->writeln(' // Fetching latest database from the Webspark Release Stable site in Pantheon.' . PHP_EOL);
     $date = new \DateTime();
     $now = $date->getTimestamp();
-    $getBackupDate = shell_exec('terminus backup:info webspark-release-stable.dev --element=db --format=php');
+    $getBackupDate = exec('terminus backup:info webspark-release-stable.dev --element=db --format=php 2>&1', $backupOutput);
+    if (in_array('[37;41m  You are not logged in. Run `auth:login` to authenticate or `help auth:login` for more info.  [39;49m', $backupOutput)) {
+      $this->logger()->error('Your DDEV instance is currently not logged in to Pantheon via terminus.' . PHP_EOL .
+        '  Please run `ddev ssh` and then run `terminus auth:login --machine-token=$TERMINUS_MACHINE_TOKEN; exit` to authenticate.');
+      return;
+    }
     $backupDate = $getBackupDate ? unserialize($getBackupDate, ['allowed_classes' => TRUE])['date'] : NULL;
     if (empty($backupDate) || ($backupDate < ($now - 86400))) {
       // Create new backup if it doesn't exist or latest is older than 24 hours.
-      shell_exec('terminus backup:create webspark-release-stable.dev --element=db');
+      $result = shell_exec('terminus backup:create webspark-release-stable.dev --element=db');
     }
     // Get latest backup.
     shell_exec('terminus backup:get webspark-release-stable.dev --element=db --to=../webspark-db-backup.sql.gz');
