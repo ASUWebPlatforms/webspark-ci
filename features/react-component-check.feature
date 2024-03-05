@@ -84,3 +84,29 @@ Feature: React Component Check
     Then I should see that the "[data-search-type='people']" element exists
     Then I should see that the "[data-search-type='people_departments']" element exists
     Then I should see that the "[data-search-type='departments']" element exists
+
+  @api @javascript @image_gallery-test
+  Scenario: Verify Image Gallery (components-core)
+    Given I am an anonymous user
+    When I am at '/image-gallery'
+    Then I should see the heading "Image Gallery"
+    Then I wait for 2 seconds
+    #Main image appear
+    Then I should see that the "li.glide__slide.slider.glide__slide--active > div.uds-img > img.uds-img.figure-img.img-fluid" element exists
+    Then I wait for 1 seconds
+    #Thumbnails appers
+    Then I should see that multiple "img.glide__bullet.bullet-image" elements exist
+    #Chevron buttons appear and work
+    Then I should see that 2 of "button.glide__arrow" elements exist
+    And I click the element "button.glide__arrow.glide__arrow--next"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--next"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--prev"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--prev"
+    Then I wait for 1 seconds
+    #Text for image apper
+    Then I should see that the "#caption > .uds-caption-text > div > p" element exists
+    Then I wait for 1 seconds
+    
