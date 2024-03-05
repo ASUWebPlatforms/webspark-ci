@@ -47,8 +47,10 @@ settings:
     ckeditor5_imageResize:
       allow_resize: true
     ckeditor5_list:
-      reversed: false
-      startIndex: false
+      properties:
+        reversed: false
+        startIndex: false
+      multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<dl>'
@@ -57,7 +59,7 @@ settings:
         - '<mark>'
         - '<cite class>'
         - '<blockquote cite class>'
-        - '<svg title role viewbox class>'
+        - '<svg title role viewBox class>'
         - '<path d fill>'
         - '<button class="uds-tooltip">'
         - '<ol class>'
