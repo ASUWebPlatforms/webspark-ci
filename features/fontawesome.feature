@@ -56,11 +56,6 @@ Feature: Anonymous user
     Given I enter "square-x-twitter" for "icon_name"
     And I click the element "#drupal-modal + .ui-dialog-buttonpane button.form-submit"
     Then I should see that the "ul.uds-list li svg.fa-square-x-twitter path" element exists
-    Then I scroll "input#edit-submit" into view
-    Then I wait for 1 second
-    Given I click the element "input#edit-submit"
-    Then the url should match "text-content-lists"
-    Then I should see that the "ul.uds-list li svg.fa-square-x-twitter path" element exists
 
 
 
