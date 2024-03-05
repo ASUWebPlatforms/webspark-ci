@@ -85,7 +85,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementById("$selector");
-  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem.scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -95,7 +95,7 @@ JS;
         $function = <<<JS
 (function(){
   var elem = document.getElementsByClassName("$selector");
-  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "nearest" });
+  elem[0].scrollIntoView({ behavior: "instant", block: "center", inline: "start" });
 })()
 JS;
         break;
@@ -104,7 +104,7 @@ JS;
         $function = <<<JS
 (function(){
   let elems = document.querySelectorAll("$locator");
-  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+  elems[0].scrollIntoView({ behavior: "instant", block: "start", inline: "start" });
 })()
 JS;
         break;
@@ -127,7 +127,7 @@ JS;
    * @param int $number
    *   Allowed selectors: positive and negative numbers
    *
-   * @Then I scroll vertically by :number pixels
+   * @Then /^I scroll vertically by (-?\d+) pixels$/
    *
    * @throws \Exception
    */
@@ -143,7 +143,7 @@ JS;
   /**
    * Hover over an element
    *
-   * @When /^I hover over the element "([^"]*)"$/
+   * @When /^I hover over the element "((\\\")?.*)"$/
    *
    *  @param string $locator
    *
@@ -168,7 +168,7 @@ JS;
    *
    * @param string $locator
    *
-   * @When /^I click the element "([^"]*)"$/
+   * @When /^I click the element "((\\\")?.*)"$/
    */
   public function iClickTheElement($locator)
   {
@@ -354,6 +354,77 @@ JS;
     catch (Exception $e) {
       throw new \Exception(__METHOD__ . ' failed');
     }
+  }
+
+  /**
+   * @Given I perform actions and checks for menu item :menuItem
+   */
+  public function iPerformActionsAndChecksForMenuItem($menuItem) {
+    $session = $this->getSession();
+    print("Start item\n");
+    try {
+      $this->iClickTheElement(".accept-btn");
+    } catch (Exception $e) {
+
+    }
+
+    $session->getPage()->clickLink("Add block");
+    print("Click Add block \n");
+    $start = microtime(true);
+    $end = $start + 5;
+    $continue = true;
+    while ($continue && (microtime(true) < $end)) {
+      if ($this->getSession()->getPage()->hasLink("Create content block")) {
+        $this->getSession()->getPage()->clickLink("Create content block");
+        $continue = false;
+        print("Click Create content block\n");
+      }
+      usleep(500000);
+    }
+    $start = microtime(true);
+    $end = $start + 5;
+    $continue = true;
+    if(str_contains($menuItem, "Web Directory")) {
+      # The Web Directory link was giving problems, so I'm accessing it this way
+      $this->iClickTheElement("#drupal-off-canvas > div > ul > li:nth-child(29) > a");
+    } else {
+      while ($continue && (microtime(true) < $end)) {
+        try {
+          if ($this->getSession()->getPage()->hasLink(str_replace('\\"', '"', $menuItem))) {
+            $session->getPage()->clickLink(str_replace('\\"', '"', $menuItem));
+            $continue = false;
+            print('Click ' . $menuItem . "\n");
+          }
+        } catch (Exception $e) {
+
+        }
+        usleep(500000);
+      }
+    }
+
+    $start = microtime(true);
+    $end = $start + 5;
+    $continue = true;
+    $functionCheckAppearanceDetail = <<<JS
+(function(){
+  var elem = document.querySelector("summary[aria-controls*=group-appearance-settings]");
+  return elem !== null && elem !== undefined;
+})()
+JS;
+    while ($continue && (microtime(true) < $end)) {
+      if ($this->getSession()->evaluateScript($functionCheckAppearanceDetail)) {
+        $this->iClickTheElement('summary[aria-controls*=group-appearance-settings]');
+        $this->scrollIntoView('summary[aria-controls*=group-appearance-settings]');
+        $continue = false;
+        print("Click Appearence settings details\n");
+      }
+      usleep(500000);
+    }
+
+//    $this->singleElementExists('table[id*=field-anchor-menu-settings-values]');
+    $this->xNumberElementsExist(2,'select[data-drupal-selector*=edit-settings-block-form-field-spacing]');
+    $this->wait(2);
+    print("End item");
   }
 
 }

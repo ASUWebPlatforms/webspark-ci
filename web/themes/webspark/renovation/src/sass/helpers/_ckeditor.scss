@@ -75,3 +75,15 @@ hr.copy-divider {
   background-color: #ffc627 !important;
   max-width: 16rem !important;
 }
+
+a.btn-gold, a.btn-gray {
+  span{
+    color: $uds-color-font-dark-base !important;
+  }
+}
+
+a.btn-maroon, a.btn-dark {
+  span{
+    color: $uds-color-font-light-base !important;
+  }
+}
