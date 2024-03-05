@@ -85,7 +85,7 @@ Feature: React Component Check
     Then I should see that the "[data-search-type='people_departments']" element exists
     Then I should see that the "[data-search-type='departments']" element exists
 
-  @api @javascript @accordions_test
+  @api @javascript @accordions-test
   Scenario: Verify Accordions (component-accordion)
     Given I am an anonymous user
     When I am at '/accordion'

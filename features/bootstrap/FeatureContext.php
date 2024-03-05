@@ -442,8 +442,8 @@ JS;
   public function cssStyleExists(string $selector, string $style, string $value) {
     $function = <<<JS
 (function(){
-var accordionItem = document.querySelector('$selector');
-var styles = window.getComputedStyle(accordionItem);
+var item = document.querySelector('$selector');
+var styles = window.getComputedStyle(item);
 var styleValue = styles.getPropertyValue('$style');
 if (styleValue.trim() === '$value') {
     return true;
