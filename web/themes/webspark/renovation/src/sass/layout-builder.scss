@@ -3,7 +3,7 @@
 @import "base/mixins";
 
 #drupal-off-canvas-wrapper  {
-  z-index: 1500;
+  z-index: 1260;
   .form-text,
   .form-tel,
   .form-email,
@@ -25,10 +25,11 @@
       padding-left: 0;
     }
   }
+
   .js-hide {
-   /* Temporarily hide the js-hide class.
-    * See https://www.drupal.org/project/drupal/issues/3121239.
-    */
+    /* Temporarily hide the js-hide class.
+     * See https://www.drupal.org/project/drupal/issues/3121239.
+     */
     display: none;
   }
 
@@ -175,24 +176,30 @@
     .fip-icon-block:before {
       color: #f54848;
     }
+
     .selector-search {
       i {
         color: #999;
         top: 3px;
       }
+
       .icons-search-input::placeholder {
         color: #999 !important;
       }
     }
+
     .fip-box {
       color: #333;
     }
+
     .fip-box:hover {
       color: #000;
     }
+
     .selector-pages, .selector-arrows i {
       color: #999;
     }
+
     .selected-icon {
       color: #000;
       display: flex;
@@ -220,7 +227,7 @@
     font-size: 12px;
   }
 
-  .webform-element-more .cm-s-default *{
+  .webform-element-more .cm-s-default * {
     color: #ddd;
   }
 
