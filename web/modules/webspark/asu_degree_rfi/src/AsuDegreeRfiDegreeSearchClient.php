@@ -19,18 +19,38 @@ class AsuDegreeRfiDegreeSearchClient {
    */
   public function __construct($http_client_factory) {
     $this->client = $http_client_factory->fromOptions([
-      'base_uri' => 'https://degreesearch-proxy.apps.asu.edu/',
+      'base_uri' => 'https://api.myasuplat-dpl.asu.edu/',
     ]);
   }
 
   /**
    * Get Degree Search response data for user supplied fields.
    *
+   * TODO
    * Fields reference:
    *   https://docs.google.com/spreadsheets/d/18_0EuMOTdrJHhIFgVsl9o8QSpuCPjIF823D1B91MzgU/edit#gid=0
    *
+   * TODO
    * Methods: findAllDegrees, findDegreeByAcadPlan, findDegreeByCollege
    *   Note: not all methods have been tested. degreeQuery() may require work.
+   *
+   * Data Potluck Academic Plan Codeset Docs
+   *   https://asudev.jira.com/wiki/spaces/DPL/pages/2796192305/Academic+Plan+codeset
+   *
+   * Data Potluck API
+   *   https://api.myasuplat-dpl.asu.edu/
+   *
+   * Notes from the DPL transition document
+   *   https://docs.google.com/document/d/1mYxkthy1FreLszg1_gXotmtL6pcUX_rqz624EqtJKwI/edit
+   *
+   * Academic Plans (multiple)
+   *   https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plans
+   *   https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plans[?ownedByCollege={acadOrg}...][&ownedByDepartment={acadOrg}...][&acadPlanType={acadPlanTypeCode}...][&degreeType={UG|UGCM|GR|OTHR}...][&include=detail][&include=*][&include={fieldName}][&filter=activeInDegreeSearch]
+   *
+   * Academic Plan
+   *   https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plan
+   *   https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plan/{acadPlanCode}[?include=detail][&include=*][&include={fieldName}]
+   *
    *
    * @param array $params
    *
@@ -40,7 +60,7 @@ class AsuDegreeRfiDegreeSearchClient {
 
     $output = null;
     try {
-      $response = $this->client->get('degreesearch/', [
+      $response = $this->client->get('api/codeset/', [
         'query' => $params // array of params including method and fields
       ]);
       $output = Json::decode($response->getBody());

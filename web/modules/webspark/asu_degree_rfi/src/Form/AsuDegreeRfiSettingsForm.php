@@ -91,13 +91,19 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Because you will often be syncing
         configurations between environments, to avoid overwriting
         an environment\'s unique RFI Source ID and submission URL, it is
-        recommended you add code to your site\'s settings.php to detect 
-        the environment and set its unique values. 
+        recommended you add code to your site\'s settings.php to detect
+        the environment and set its unique values.
         <a href="https://github.com/ASUWebPlatforms/webspark-module-asu_degree_rfi#readme">
-        Example code can be found in the ASU Degree RFI module\'s README.md 
+        Example code can be found in the ASU Degree RFI module\'s README.md
         file</a>. These overrides also include system timeout settings you
         should apply to avoid unnecessary false-positive error emails.'),
     ];
+
+// TODO WS2-1621 endpoint values represent what the components expect...
+// maybe we leave the paths on these as they are, and only use these
+// for the components.
+// The `webspark_data_potluck` module can provide its own configurability and
+// defaults.
 
     // RFI
     $form['asu_degree_rfi']['rfi'] = array(
@@ -125,7 +131,7 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('RFI Degree Search data source URL'),
       '#default_value' => $config->get('asu_degree_rfi.rfi_degree_search_datasource_endpoint'),
-      '#description' => $this->t("Recommended to be left blank to use default data source (https://degreesearch-proxy.apps.asu.edu/degreesearch/) defined internally by the RFI component."),
+      '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/codeset) defined internally by the RFI component."),
     ];
     $form['asu_degree_rfi']['rfi']['rfi_asuonline_datasource_endpoint'] = [
       '#type' => 'textfield',
@@ -149,7 +155,7 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Degree list data source URL'),
       '#default_value' => $config->get('asu_degree_rfi.program_list_datasource_endpoint'),
-      '#description' => $this->t("Recommended to be left blank to use default data source (https://degreesearch-proxy.apps.asu.edu/degreesearch/) defined internally by the degree list component."),
+      '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plans) defined internally by the degree list component."),
     ];
     $form['asu_degree_rfi']['degree']['program_list_datasource_method'] = [
       '#type' => 'textfield',
@@ -167,7 +173,7 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Degree detail data source URL'),
       '#default_value' => $config->get('asu_degree_rfi.program_detail_datasource_endpoint'),
-      '#description' => $this->t("Recommended to be left blank to use default data source (https://degreesearch-proxy.apps.asu.edu/degreesearch/) defined internally by the degree list component."),
+      '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plan) defined internally by the degree list component."),
     ];
     $form['asu_degree_rfi']['degree']['program_detail_datasource_method'] = [
       '#type' => 'textfield',
