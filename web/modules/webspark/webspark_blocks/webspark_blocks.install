@@ -302,7 +302,7 @@ function webspark_blocks_update_9028(&$sandbox) {
  */
 function webspark_blocks_update_9029(&$sandbox) {
   $configs = [
-    'editor.editor.basic_html ',
+    'editor.editor.basic_html',
     'filter.format.basic_html'
   ];
   _webspark_blocks_update_module_config_list($configs);
