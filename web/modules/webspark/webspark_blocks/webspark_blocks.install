@@ -300,7 +300,7 @@ function webspark_blocks_update_9028(&$sandbox) {
 /**
  * WS2-1565 - CK Editor - Remove H1 capabilities for non hero blocks.
  */
-function webspark_blocks_update_9029(&$sandbox) {
+function webspark_blocks_update_10100(&$sandbox) {
   $configs = [
     'editor.editor.basic_html',
     'filter.format.basic_html'
