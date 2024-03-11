@@ -447,3 +447,13 @@ function webspark_update_10001(&$sandbox) {
     Drupal::service('module_installer')->install(['layout_builder_usage_reports']);
   }
 }
+
+/**
+ * WS2-1565 - CK Editor - Remove H1 capabilities for non hero blocks.
+ */
+function webspark_update_10002(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('editor.editor.basic_html');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('filter.format.basic_html');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
