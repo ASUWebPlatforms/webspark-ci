@@ -159,4 +159,6 @@ Feature: React Component Check
     #Close button funtions
     Then I should see that the "div.banner-close" element exists
     And I click the element "button[data-ga-action='close']"
+    Then I wait for 1 seconds
+    Then I should see that the ".div.banner[role='banner']" element does not exist
     Then I wait for 2 seconds
