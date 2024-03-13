@@ -31,3 +31,12 @@ Feature: Anonymous user
     When I am at '/searc'
     Then I should see that the ".container-page-404" element exists
     Then I wait for 5 seconds
+
+  @api @javascript @404_page_search-test
+  Scenario: Verify Anonymous users can search in 404 page
+    Given I am an anonymous user
+    When I am at '/searc'
+    Given for "search" I enter "test"
+    Then I submit the "#webspark-blocks-asu-search-form" form
+    Then I should see the heading "Search"
+    Then I wait for 5 seconds
