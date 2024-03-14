@@ -85,6 +85,53 @@ Feature: React Component Check
     Then I should see that the "[data-search-type='people_departments']" element exists
     Then I should see that the "[data-search-type='departments']" element exists
 
+  @api @javascript @accordions-test
+  Scenario: Verify Accordions (component-accordion)
+    Given I am an anonymous user
+    When I am at '/accordion'
+    Then I should see the heading "Accordion"
+    #Icons appear
+    Then I should see the heading "Accordion with Icons"
+    And I should see that the ".accordion-icon" element exists
+    #Colors appear
+    Then I should see the heading "Accordion Colors"
+    And I should see that "border-left" with ".5rem solid #ffc627" is in ".accordion-item" class
+    And I should see that "border-left-color" with "#8c1d40" is in ".accordion-item-maroon" class
+    And I should see that "border-left-color" with "#bfbfbf" is in ".accordion-item-gray" class
+    And I should see that "border-left-color" with "#191919" is in ".accordion-item-dark" class
+    #Open and close test
+    Then I click "accordion-header-2"
+    Then I wait for 1 seconds
+    And I should see that the "#accordion-content-2.accordion-body.collapse.show" element exists
+    Then I click "accordion-header-2"
+    Then I wait for 1 seconds
+    And I should see that the "#accordion-content-2.accordion-body.collapse" element exists
+
+  @api @javascript @image_gallery-test
+  Scenario: Verify Image Gallery (components-core)
+    Given I am an anonymous user
+    When I am at '/image-gallery'
+    Then I should see the heading "Image Gallery"
+    Then I wait for 2 seconds
+    #Main image appear
+    Then I should see that the "li.glide__slide.slider.glide__slide--active > div.uds-img > img.uds-img.figure-img.img-fluid" element exists
+    Then I wait for 1 seconds
+    #Thumbnails appers
+    Then I should see that multiple "img.glide__bullet.bullet-image" elements exist
+    #Chevron buttons appear and work
+    Then I should see that 2 of "button.glide__arrow" elements exist
+    And I click the element "button.glide__arrow.glide__arrow--next"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--next"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--prev"
+    Then I wait for 1 seconds
+    And I click the element "button.glide__arrow.glide__arrow--prev"
+    Then I wait for 1 seconds
+    #Text for image apper
+    Then I should see that the "#caption > .uds-caption-text > div > p" element exists
+    Then I wait for 1 seconds
+    
   @api @javascript @anchor_menu__test
   Scenario: Verify Anchor menu component (components-core)
     Given I am an anonymous user
@@ -101,3 +148,17 @@ Feature: React Component Check
     And I should see that the "a.nav-link.active[data-ga-text='block b']" element exists
     #Check sticky Anchor menu
     Then I should see that the ".uds-anchor-menu-attached" element exists
+
+  @api @javascript @notification_banner-test
+  Scenario: Verify Notification banner component
+    Given I am an anonymous user
+    When I am at '/notification-banner'
+    #Banner disploy
+    Then I should see that the "div.banner[role='banner']" element exists
+    Then I wait for 2 seconds
+    #Close button funtions
+    Then I should see that the "div.banner-close" element exists
+    And I click the element "button[data-ga-action='close']"
+    Then I wait for 1 seconds
+    Then I should see that the ".div.banner[role='banner']" element does not exist
+    Then I wait for 2 seconds
