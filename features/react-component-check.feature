@@ -148,3 +148,17 @@ Feature: React Component Check
     And I should see that the "a.nav-link.active[data-ga-text='block b']" element exists
     #Check sticky Anchor menu
     Then I should see that the ".uds-anchor-menu-attached" element exists
+
+  @api @javascript @notification_banner-test
+  Scenario: Verify Notification banner component
+    Given I am an anonymous user
+    When I am at '/notification-banner'
+    #Banner disploy
+    Then I should see that the "div.banner[role='banner']" element exists
+    Then I wait for 2 seconds
+    #Close button funtions
+    Then I should see that the "div.banner-close" element exists
+    And I click the element "button[data-ga-action='close']"
+    Then I wait for 1 seconds
+    Then I should see that the ".div.banner[role='banner']" element does not exist
+    Then I wait for 2 seconds
