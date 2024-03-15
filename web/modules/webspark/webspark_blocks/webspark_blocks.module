@@ -155,16 +155,30 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
   ];
 
 
-  // Get the links.
+  // Get the links, if they exist
   $config = \Drupal::config('webspark_blocks.settings');
   $links = $config->get('webspark_utility_links');
-  $wrapper['links'] = [
-    '#theme' => 'webspark_blocks__links',
-    '#title' => t('Here are some links you may find helpful'),
-    '#links' => $links,
-  ];
+
+  // loop through $links to find any non-empty values
+  // if we find any, we'll display the links  
+  // if we don't find any, we'll skip displaying the links
+  
+  foreach ($links as $link) {
+    if (!empty($link['link_url']) && !empty($link['link_title'])) {
+      $has_links = TRUE;
+        if ($has_links) {
+          $wrapper['links'] = [
+            '#theme' => 'webspark_blocks__links',
+            '#title' => t('Here are some links you may find helpful'),
+            '#links' => $links,
+          ];
+        }
+      break;
+    }
+  }
 
   $variables['page']['content']['page_404_content'] = $wrapper;
+  
 }
 
 /**
