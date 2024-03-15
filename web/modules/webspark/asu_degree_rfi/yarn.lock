@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@asu/app-degree-pages@2.4.0":
-  version "2.4.0"
-  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.4.0/7b8c7e090618c7a3205021c98c0717408bfa8952#7b8c7e090618c7a3205021c98c0717408bfa8952"
-  integrity sha512-3OlMYBNx2moJNCBvymR92M7JtMPhEvGcoqYrHjDEw3P5IKyE1AKo4Y8K+S0AhDGHq8ducu9G5Zac0l4IfBy12w==
+"@asu/app-degree-pages@2.5.0":
+  version "2.5.0"
+  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.5.0/a9f3152b668096d7756cab545ba1e13a7418db90#a9f3152b668096d7756cab545ba1e13a7418db90"
+  integrity sha512-JUJ8VLfs5Pno9ZXXLxPwZdPgYqwM/mIIxnbv7hXB5vGNM/uyUuBw5OhgT153GcgEtRcvN7FySdkNIzDRz6HMzA==
   dependencies:
-    "@asu/components-core" "^2.1.0"
+    "@asu/components-core" "^3.1.0"
     "@popperjs/core" "^2.9.2"
     classnames "^2.3.1"
     prop-types "^15.7.2"
@@ -41,6 +41,18 @@
     classnames "^2.2.6"
     date-fns "^2.19.0"
     dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
+"@asu/components-core@^3.1.0":
+  version "3.3.4"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.4/98bd47a5716ddfc31e10ea196eba090596e0b192#98bd47a5716ddfc31e10ea196eba090596e0b192"
+  integrity sha512-cjpRRpwXNPOOid4sMsos2SS4nksp3WQ8n9gkIAP8f6oh9e0wysJbO3NGpnuPRZHfed/OjxyrQGvwwcdOQRgI+g==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
     phone-fns "^3.2.3"
     prop-types "^15.7.2"
     styled-components "^5.3.0"
