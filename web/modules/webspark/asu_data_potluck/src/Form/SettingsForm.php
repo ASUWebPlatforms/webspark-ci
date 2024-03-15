@@ -37,8 +37,6 @@ final class SettingsForm extends ConfigFormBase {
     // Loads admin settings for this form/module.
     $config = $this->config('asu_data_potluck.settings');
 
-    // Note: asu_brand module provides both global and per-block configs.
-    // Global configs.
     $form['asu_data_potluck']['asu_data_potluck_instructions'] = [
       '#type' => 'item',
       '#title' => $this->t("About the ASU Data Potluck module"),

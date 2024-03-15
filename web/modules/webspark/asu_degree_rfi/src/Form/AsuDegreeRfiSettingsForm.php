@@ -92,11 +92,6 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
         should apply to avoid unnecessary false-positive error emails.'),
     ];
 
-    // @todo WS2-1621 endpoint values represent what the components expect...
-    // maybe we leave the paths on these as they are, and only use these
-    // for the components.
-    // The `webspark_data_potluck` module can provide its own configurability
-    // and defaults.
     // RFI.
     $form['asu_degree_rfi']['rfi'] = [
       '#type' => 'fieldset',
