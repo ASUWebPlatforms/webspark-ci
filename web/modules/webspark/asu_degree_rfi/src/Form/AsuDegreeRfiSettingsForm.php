@@ -144,23 +144,11 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('asu_degree_rfi.program_list_datasource_endpoint'),
       '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plans) defined internally by the degree list component."),
     ];
-    $form['asu_degree_rfi']['degree']['program_list_datasource_method'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Degree list data source method'),
-      '#default_value' => $config->get('asu_degree_rfi.program_list_datasource_method'),
-      '#description' => $this->t("Recommended to be left blank to use default data source method (findAllDegrees) defined internally by the degree list component."),
-    ];
     $form['asu_degree_rfi']['degree']['program_detail_datasource_endpoint'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Degree detail data source URL'),
       '#default_value' => $config->get('asu_degree_rfi.program_detail_datasource_endpoint'),
       '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/codeset/acad-plan) defined internally by the degree list component."),
-    ];
-    $form['asu_degree_rfi']['degree']['program_detail_datasource_method'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Degree detail data source method'),
-      '#default_value' => $config->get('asu_degree_rfi.program_detail_datasource_method'),
-      '#description' => $this->t("Recommended to be left blank to use default data source method (findDegreeByAcadPlan) defined internally by the degree list component."),
     ];
 
     return parent::buildForm($form, $form_state);

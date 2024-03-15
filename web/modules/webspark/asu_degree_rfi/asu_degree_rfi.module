@@ -167,10 +167,6 @@ function asu_degree_rfi_dept_code_allowed_values(FieldStorageConfig $definition,
   // Pull in service client for Degree Search.
   $dataPotluckClient = \Drupal::getContainer()->get('asu_degree_rfi_data_potluck_client');
 
-  // TODO Would be better if we could get from dedicated service or DPL.
-  // TODO Improve: some duplication of code between
-  // AsuDegreeRfiRfiBlock blockForm() method and the code below.
-
   // Get Department options. Get from, or set cache.
   $cid = 'asu_degree_rfi:dept_options';
   $dept_options = [];

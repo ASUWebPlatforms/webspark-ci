@@ -2,6 +2,4 @@ name: 'asu_data_potluck'
 type: module
 description: 'Provides connection to the ASU Data Potluck'
 package: ASU
-core_version_requirement: ^10
-dependencies:
-  - asu_degree_rfi:asu_degree_rfi
+core_version_requirement: ^9 || ^10

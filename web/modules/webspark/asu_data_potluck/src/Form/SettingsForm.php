@@ -49,7 +49,7 @@ final class SettingsForm extends ConfigFormBase {
       '#title' => $this->t('ASU Data Potluck settings'),
     ];
     $form['asu_data_potluck']['potluck']['datasource_endpoint'] = [
-      '#type' => 'textfield',
+      '#type' => 'url',
       '#title' => $this->t('ASU Data Potluck data source URL'),
       '#default_value' => $config->get('asu_data_potluck.datasource_endpoint') === self::DEFAULT_ENDPOINT ? NULL : $config->get('asu_data_potluck.datasource_endpoint'),
       '#description' => $this->t("Recommended to be left blank to use default data source (https://api.myasuplat-dpl.asu.edu/api/)."),
