@@ -454,9 +454,9 @@ function webspark_update_10001(&$sandbox) {
 function webspark_update_10002(&$sandbox) {
   \Drupal::state()->set('configuration_locked', FALSE);
   $config_factory = \Drupal::service('config.factory');
-  $editor_cofigs = $config_factory->listAll($prefix = 'editor.editor');
-  $editor_cofigs = [...$editor_cofigs, ...$config_factory->listAll($prefix = 'filter.format')];
-  foreach ($editor_cofigs as $value) {
+  $editor_configs = $config_factory->listAll($prefix = 'editor.editor');
+  $editor_configs = [...$editor_configs, ...$config_factory->listAll($prefix = 'filter.format')];
+  foreach ($editor_configs as $value) {
     $config = \Drupal::config($value);
     if ($config) {
       $data = $config->getRawData();
