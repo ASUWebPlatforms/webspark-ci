@@ -25,8 +25,13 @@ settings:
         - heading5
         - heading6
     ckeditor5_sourceEditing:
-      allowed_tags:
-        - '<a hreflang>'
+      allowed_tags: {  }
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
+        - id
+        - target
+        - title
     linkit_extension:
       linkit_enabled: false
 image_upload:
