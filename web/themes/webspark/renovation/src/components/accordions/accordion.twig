@@ -6,7 +6,11 @@
   <div class="accordion-header {{ is_icon ? 'accordion-header-icon' }}">
     <h3>
       <a id="accordion-header-{{ link_id|lower }}"
-         class=""
+        {% if expanded is same as('On') %}
+          class=""
+        {% else %}
+          class="collapsed"
+        {% endif %}
          href="#accordion-content-{{ link_id|lower }}"
          data-bs-toggle="collapse"
          role="button"
