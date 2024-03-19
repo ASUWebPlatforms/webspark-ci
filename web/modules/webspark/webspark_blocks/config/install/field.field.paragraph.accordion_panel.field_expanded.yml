@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.accordion
-    - field.storage.block_content.field_expanded
-id: block_content.accordion.field_expanded
+    - field.storage.paragraph.field_expanded
+    - paragraphs.paragraphs_type.accordion_panel
+id: paragraph.accordion_panel.field_expanded
 field_name: field_expanded
-entity_type: block_content
-bundle: accordion
-label: 'Expand first accordion panel'
+entity_type: paragraph
+bundle: accordion_panel
+label: 'Initially Expanded'
 description: ''
 required: false
 translatable: false
