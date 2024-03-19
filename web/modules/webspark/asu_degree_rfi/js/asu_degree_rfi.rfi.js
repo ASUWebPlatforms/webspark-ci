@@ -17,7 +17,7 @@
   // Initialize the RFI form with provided props.
   AsuRfi.initRfi({
     targetSelector: "#rfi-container",
-    props: props
+    props: props,
     // props: {
     //   campus: "NOPREF", // ONLNE, GROUND, NOPREF
     //   college: undefined, // e.g. CES
@@ -31,7 +31,7 @@
     //   stateProvince: "Wyoming", // Only US states or CA provinces
     //   successMsg: "Success. <strong>You made it.</strong>",
     //   test: false,
-    //   dataSourceDegreeSearch: undefined, // "https://degreesearch-proxy.apps.asu.edu/degreesearch/",
+    //   dataSourceDegreeSearch: undefined, // "https://api.myasuplat-dpl.asu.edu/api/codeset",
     //   dataSourceAsuOnline: undefined, // "https://asuonline.asu.edu/lead-submissions-v3.3/programs",
     //   dataSourceCountriesStates: undefined, // "https://api.myasuplat-dpl.asu.edu/api/codeset/countries",
     //   submissionUrl: "https://httpbin.org/post", // Test endpoint
