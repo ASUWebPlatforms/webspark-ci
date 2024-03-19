@@ -33,7 +33,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     // Config for this instance.
     $config = \Drupal::config('webspark_blocks.settings');
@@ -58,6 +58,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
     $form['links_fieldset'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('404 Links'),
+      '#markup' => t('When adding links, both the url and title are required.'),
       '#prefix' => '<div id="names-fieldset-wrapper">',
       '#suffix' => '</div>',
     ];
@@ -66,17 +67,26 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
       $form['links_fieldset']['link_fieldset'. $i] = [
         '#type' => 'fieldset',
         '#title' => $this->t('Link'),
-         ''
       ];
       $form['links_fieldset']['link_fieldset'. $i]['link_url'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Url'),
-        '#default_value' => $links[$i]['link_url'],
+        '#default_value' => isset($links[$i]['link_url']) ? $links[$i]['link_url'] : '',
+        '#states' => [
+          'required' => [
+            ':input[name="links_fieldset[link_fieldset'. $i .'][link_title]"]' => ['filled' => TRUE],
+          ],
+        ]
       ];
       $form['links_fieldset']['link_fieldset'. $i]['link_title'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Link Title'),
-        '#default_value' => $links[$i]['link_title'],
+        '#default_value' => isset($links[$i]['link_title']) ? $links[$i]['link_title'] : '',
+        '#states' => [
+          'required' => [
+            ':input[name="links_fieldset[link_fieldset'. $i .'][link_url]"]' => ['filled' => TRUE],
+          ],
+        ]
       ];
 
     }
@@ -112,7 +122,7 @@ class WebsparkBlocksAdminSettings extends ConfigFormBase {
   }
 
 
-   /**
+  /**
    * Callback for both ajax-enabled buttons.
    *
    * Selects and returns the fieldset with the names in it.

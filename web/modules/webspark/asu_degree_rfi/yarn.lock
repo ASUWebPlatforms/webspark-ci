@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@asu/app-degree-pages@2.1.5":
-  version "2.1.5"
-  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.1.5/dcc6524a435b2b0f57fa7e501d70e370eb560c30#dcc6524a435b2b0f57fa7e501d70e370eb560c30"
-  integrity sha512-iA3iRj4kLo6YDiCtwdcIm7sbi8rnR0LGbA/hRJiaEYC3evPc0E+MZfWoUIP3sXxs74BTkPGAycD7hPvZO8isQQ==
+"@asu/app-degree-pages@2.5.0":
+  version "2.5.0"
+  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.5.0/a9f3152b668096d7756cab545ba1e13a7418db90#a9f3152b668096d7756cab545ba1e13a7418db90"
+  integrity sha512-JUJ8VLfs5Pno9ZXXLxPwZdPgYqwM/mIIxnbv7hXB5vGNM/uyUuBw5OhgT153GcgEtRcvN7FySdkNIzDRz6HMzA==
   dependencies:
-    "@asu/components-core" "^2.1.0"
+    "@asu/components-core" "^3.1.0"
     "@popperjs/core" "^2.9.2"
     classnames "^2.3.1"
     prop-types "^15.7.2"
@@ -17,10 +17,10 @@
     react-tooltip "^4.2.21"
     styled-components "^5.3.0"
 
-"@asu/app-rfi@2.0.3":
-  version "2.0.3"
-  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.0.3/769aed0b0b69f6753c66d01b0b321e6f5ca43129#769aed0b0b69f6753c66d01b0b321e6f5ca43129"
-  integrity sha512-1kQHpavQT400kiAEcuAu6pYA8YbWj4c8X/A0iAFZ1PhXZDCp8yJt5w83SpujhXAG1q8hNx27EazMo+fmhE3caw==
+"@asu/app-rfi@2.2.0":
+  version "2.2.0"
+  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.2.0/d3e528b7ae5382521b2333636baa3381dc1e831b#d3e528b7ae5382521b2333636baa3381dc1e831b"
+  integrity sha512-NhlN+Sre3ERxlJ9FEjEzHcOPaRzRQdoQH77kPK63UzVCRa0AkKsTuFv9B02PQwHkBAaWPNL9kKypwNzsmweqeQ==
   dependencies:
     "@asu/components-core" "^2.1.0"
     formik "^2.1.4"
@@ -41,6 +41,18 @@
     classnames "^2.2.6"
     date-fns "^2.19.0"
     dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
+"@asu/components-core@^3.1.0":
+  version "3.3.4"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.4/98bd47a5716ddfc31e10ea196eba090596e0b192#98bd47a5716ddfc31e10ea196eba090596e0b192"
+  integrity sha512-cjpRRpwXNPOOid4sMsos2SS4nksp3WQ8n9gkIAP8f6oh9e0wysJbO3NGpnuPRZHfed/OjxyrQGvwwcdOQRgI+g==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
     phone-fns "^3.2.3"
     prop-types "^15.7.2"
     styled-components "^5.3.0"

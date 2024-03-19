@@ -31,11 +31,19 @@ export default class InsertWebsparkListStyleCommand extends Command {
       _getSibling(currentNode, elementsBelow, "forward");
       elementsBelow.forEach((element) => {
         if (element.getAttribute("listIndent") == 0) {
-          writer.setAttribute(
-            "htmlListAttributes",
-            { classes: listTypeClasses },
-            element
-          );
+          if (element.getAttribute("listType") === 'bulleted') {
+            writer.setAttribute(
+              "htmlUlAttributes",
+              {classes: listTypeClasses},
+              element
+            );
+          } else if (element.getAttribute("listType") === 'numbered') {
+            writer.setAttribute(
+              "htmlOlAttributes",
+              {classes: listTypeClasses},
+              element
+            );
+          }
         }
       });
     });

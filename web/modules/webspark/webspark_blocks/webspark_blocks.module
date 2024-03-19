@@ -73,6 +73,22 @@ function webspark_blocks_form_alter(&$form, FormStateInterface $form_state, $for
   }
 
   $form['settings']['block_form']['#process'][] = '_webspark_blocks_hero_block_form_alter';
+
+  if ($form_id == 'layout_builder_add_block' || $form_id == 'layout_builder_update_block') {
+    if(isset($form['settings']['block_form']['#block']) && $form['settings']['block_form']['#block']->get('type')->getValue()[0]['target_id'] ==  'card_arrangement') {
+      $field_definition = \Drupal::service('entity_field.manager')->getfieldDefinitions('block_content', 'card_arrangement')['field_card_arrangement_display'];
+      if ($field_definition) {
+        $column_values = [];
+        foreach ($field_definition->getSetting('allowed_values') as $key => $value) {
+          //Comparing against Two columns option
+          if ($key != "''") {
+            $column_values[] = [$key => $value];
+          }
+        }
+        $form['#attached']['drupalSettings']['columns_values'] = $column_values;
+      }
+    }
+  }
 }
 
 /**
@@ -139,16 +155,30 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
   ];
 
 
-  // Get the links.
+  // Get the links, if they exist
   $config = \Drupal::config('webspark_blocks.settings');
   $links = $config->get('webspark_utility_links');
-  $wrapper['links'] = [
-    '#theme' => 'webspark_blocks__links',
-    '#title' => t('Here are some links you may find helpful'),
-    '#links' => $links,
-  ];
+
+  // loop through $links to find any non-empty values
+  // if we find any, we'll display the links  
+  // if we don't find any, we'll skip displaying the links
+  
+  foreach ($links as $link) {
+    if (!empty($link['link_url']) && !empty($link['link_title'])) {
+      $has_links = TRUE;
+        if ($has_links) {
+          $wrapper['links'] = [
+            '#theme' => 'webspark_blocks__links',
+            '#title' => t('Here are some links you may find helpful'),
+            '#links' => $links,
+          ];
+        }
+      break;
+    }
+  }
 
   $variables['page']['content']['page_404_content'] = $wrapper;
+  
 }
 
 /**

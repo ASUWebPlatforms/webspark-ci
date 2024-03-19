@@ -1,5 +1,5 @@
-import { Plugin } from "ckeditor5/src/core";
-import { Widget, toWidget, toWidgetEditable } from "ckeditor5/src/widget";
+import {Plugin} from "ckeditor5/src/core";
+import {toWidget, toWidgetEditable, Widget} from "ckeditor5/src/widget";
 import InsertWebsparkBlockquoteCommand from "./insertwebsparkblockquotecommand";
 
 /**
@@ -56,7 +56,7 @@ export default class WebsparkBlockquoteEditing extends Plugin {
       isObject: true,
       allowIn: "websparkBlockquote",
       allowContentOf: "$block",
-      allowAttributes: ["role", "title", "viewbox"],
+      allowAttributes: ["role", "title", "viewBox", "xmlns"],
     });
 
     schema.register("websparkBlockQuoteContainer", {
@@ -74,7 +74,7 @@ export default class WebsparkBlockquoteEditing extends Plugin {
     schema.register("websparkBlockquoteCitation", {
       isLimit: true,
       allowIn: "websparkBlockQuoteContainer",
-      allowContentOf: "$block",
+      allowContentOf: "$text",
     });
 
     schema.register("websparkBlockquoteCitationName", {
@@ -159,23 +159,32 @@ export default class WebsparkBlockquoteEditing extends Plugin {
       },
     });
 
-    conversion.for("dataDowncast").elementToElement({
+    conversion.for("dataDowncast").elementToStructure({
       model: "websparkBlockquoteCitation",
-      view: {
-        name: "div",
-        classes: "citation",
-      },
+      view: ( modelElement, conversionApi ) => {
+        const { writer } = conversionApi;
+        const divViewElement = writer.createContainerElement( 'div', { class: 'citation-content' }, [
+          writer.createSlot()
+        ] );
+
+        return writer.createContainerElement( 'div', { class: 'citation' }, [
+          divViewElement
+        ] );
+      }
     });
 
-    conversion.for("editingDowncast").elementToElement({
+    conversion.for("editingDowncast").elementToStructure({
       model: "websparkBlockquoteCitation",
-      view: (_modelElement, { writer }) => {
-        const div = writer.createEditableElement("div", {
-          class: "citation",
-        });
+      view: ( modelElement, conversionApi ) => {
+        const { writer } = conversionApi;
+        const divViewElement = writer.createContainerElement( 'div', { class: 'citation-content' }, [
+          writer.createSlot()
+        ] );
 
-        return toWidgetEditable(div, writer);
-      },
+        return writer.createContainerElement( 'div', { class: 'citation' }, [
+          divViewElement
+        ] );
+      }
     });
 
     conversion.for("upcast").elementToElement({
@@ -226,6 +235,23 @@ export default class WebsparkBlockquoteEditing extends Plugin {
 
     conversion.for("upcast").elementToElement({
       view: {
+        name: "div",
+        attributes: {
+          class: "open-quote",
+        },
+      },
+      model: (viewElement, { writer }) => {
+        return writer.createElement("websparkBlockQuoteSvg", {
+          role: "presentation",
+          title: "Open quote",
+          viewBox: "0 0 302.87 245.82",
+          xmlns: "http://www.w3.org/2000/svg",
+        });
+      },
+    });
+
+    conversion.for("upcast").elementToElement({
+      view: {
         name: "svg",
         attributes: {
           role: "presentation",
@@ -236,28 +262,21 @@ export default class WebsparkBlockquoteEditing extends Plugin {
         return writer.createElement("websparkBlockQuoteSvg", {
           role: "presentation",
           title: "Open quote",
-          viewbox: "0 0 302.87 245.82",
+          viewBox: "0 0 302.87 245.82",
+          xmlns: "http://www.w3.org/2000/svg",
         });
       },
-      converterPriority: "high",
     });
 
     conversion.for("downcast").elementToElement({
       model: "websparkBlockQuoteSvg",
       view: (modelElement, { writer: viewWriter }) => {
-        const element = viewWriter.createRawElement(
-          "svg",
+        return viewWriter.createContainerElement(
+          "div",
           {
-            role: "presentation",
-            title: "Open quote",
-            viewbox: "0 0 302.87 245.82",
-          },
-          function (domElement) {
-            domElement.innerHTML = `<path d="M113.61,245.82H0V164.56q0-49.34,8.69-77.83T40.84,35.58Q64.29,12.95,100.67,0l22.24,46.9q-34,11.33-48.72,31.54T58.63,132.21h55Zm180,0H180V164.56q0-49.74,8.7-78T221,35.58Q244.65,12.95,280.63,0l22.24,46.9q-34,11.33-48.72,31.54t-15.57,53.77h55Z"/>`;
+            class: "open-quote"
           }
         );
-
-        return element;
       },
     });
 

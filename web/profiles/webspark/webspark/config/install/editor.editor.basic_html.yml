@@ -39,11 +39,17 @@ settings:
   plugins:
     ckeditor5_heading:
       enabled_headings:
-        - heading1
         - heading2
         - heading3
         - heading4
         - heading5
+    ckeditor5_imageResize:
+      allow_resize: true
+    ckeditor5_list:
+      properties:
+        reversed: false
+        startIndex: false
+      multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<dl>'
@@ -52,7 +58,7 @@ settings:
         - '<mark>'
         - '<cite class>'
         - '<blockquote cite class>'
-        - '<svg title role viewbox class>'
+        - '<svg title role viewBox class>'
         - '<path d fill>'
         - '<button class="uds-tooltip">'
         - '<ol class>'
@@ -63,17 +69,17 @@ settings:
         - '<h2 id>'
         - '<img class>'
         - '<ul class>'
-        - '<svg title role viewBox class>'
-    ckeditor5_list:
-      reversed: false
-      startIndex: false
-    ckeditor5_imageResize:
-      allow_resize: true
-    media_media:
-      allow_view_mode_override: true
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
+        - id
+        - target
+        - title
     linkit_extension:
       linkit_enabled: true
       linkit_profile: default
+    media_media:
+      allow_view_mode_override: true
 image_upload:
   status: true
   scheme: public
