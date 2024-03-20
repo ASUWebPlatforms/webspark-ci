@@ -1,5 +1,5 @@
 //  Move to UDS
-form.uds-form {
+form {
   .form-check {
     .tableselect.form-check-input {
       opacity: 1;
@@ -8,19 +8,46 @@ form.uds-form {
 }
 
 //  Move to UDS
-form.uds-form {
-  input {
+form {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), {
     padding-left: $uds-size-spacing-4 !important;
   }
 }
 
 // Override BS styles applying on admin forms
 .was-validated .form-control:invalid, .was-validated .form-control.is-invalid {
-  border-color: #b72a2a;
+  border-color: #b72a2a !important;
 }
-.was-validated .form-check:valid, .was-validated .form-check:invalid {
-  border-color: var(--bs-gray-5)
+
+.was-validated .form-control:valid,.was-validated .form-check:valid {
+  border: 1px solid #446d12 !important;
+  border-bottom: 8px solid #446d12 !important;
 }
 .was-validated .form-check-input:valid ~ .form-check-label {
   color: var(--bs-secondary-color);
+}
+
+svg.uds-field-required {
+  font-size: .5rem;
+  margin-right: .25rem;
+  margin-bottom: .125rem;
+  color: #8c1d40;
+}
+
+form .is-invalid:enabled {
+  border-bottom: 8px solid #b72a2a !important;
+}
+
+form.layout-builder-update-block .invalid-feedback {
+  display: block !important;
+  margin-top: .25rem !important;
+  font-size: 0.875em !important;
+  color: rgb(227, 144, 144) !important;
+}
+
+form .invalid-feedback {
+  display: block !important;
+  margin-top: .25rem !important;
+  font-size: 0.875em !important;
+  color: #b72a2a !important;
 }
