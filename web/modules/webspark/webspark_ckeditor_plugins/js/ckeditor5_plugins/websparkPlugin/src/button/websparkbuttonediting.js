@@ -74,7 +74,7 @@ export default class WebsparkButtonEditing extends Plugin {
     conversion.for("upcast").elementToElement({
       view: {
         name: "a",
-        classes: ["btn", /^btn-(gold|maroon|gray|dark)$/],
+        classes: ["btn", /^btn-(gold|maroon|gray|dark|md|sm)$/],
         attributes: true,
       },
       model: (viewElement, { writer }) => {
