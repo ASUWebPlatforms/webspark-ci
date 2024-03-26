@@ -3,6 +3,7 @@
 
   <div{{ attributes.addClass(classes) }}>
     {{ title_suffix.contextual_links }}
-    {{ content }}
+    <div class="{{ 'rounded' in content.field_media_image['#bundle']  ? 'img-rounded' : '' }}">
+      {{ content }}
+    </div>
   </div>
-
