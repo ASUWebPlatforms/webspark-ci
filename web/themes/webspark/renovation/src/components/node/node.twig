@@ -10,12 +10,12 @@
   'node',
   node.isPromoted() ? 'node--promoted',
   node.isSticky() ? 'node--sticky',
-  not node.isPublished() ? 'node--unpublished',
   node.bundle|clean_class,
   node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
 ]
 %}
-
+{% block meta_additions %}
+{% endblock %}
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {{ title_suffix }}
@@ -23,3 +23,4 @@
     {{ content }}
   {% endblock %}
 </article>
+

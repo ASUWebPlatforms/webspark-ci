@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Template for a Node.
+ */
+#}
+{% extends "@renovation/node/node.twig" %}
+
+{% block meta_additions %}
+  {% set bg = settings['additional']['classes']['style'] %}
+  {% set bgcolor = bg|length > 0 ? bg|first : 'bg bg-white' %}
+  {% set more_classes = [
+    bgcolor,
+  ] %}
+  {% set classes = classes|merge([more_classes]) %}
+{% endblock %}
