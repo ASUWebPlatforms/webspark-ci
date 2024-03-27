@@ -69,6 +69,7 @@ settings:
         - '<h2 id>'
         - '<img class>'
         - '<ul class>'
+        - '<div class>'
     editor_advanced_link_link:
       enabled_attributes:
         - class
