@@ -125,7 +125,6 @@ export default class WebsparkButtonEditing extends Plugin {
       model: "websparkButton",
       view: (modelElement, { writer }) => {
         let classes = `btn btn-${modelElement.getAttribute("styles")}`;
-
         const size = modelElement.getAttribute("size");
 
         if (size !== "default") {
@@ -134,6 +133,7 @@ export default class WebsparkButtonEditing extends Plugin {
 
         const a = writer.createContainerElement("a", {
           class: classes,
+
         });
         return toWidget(a, writer, { label: "Webspark button" });
       },

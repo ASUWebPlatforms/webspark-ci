@@ -45,7 +45,11 @@ export default class InsertWebsparkButtonCommand extends Command {
     const selectedElement = selection.getSelectedElement();
 
     if (selectedElement?.name === "websparkButton") {
-      const text = selectedElement._attrs.get('text');
+      let text = selectedElement?.getChild?.(0)?.getChild?.(0)?._data;
+      if (text === undefined) {
+        text = selectedElement._attrs.get('text');
+      }
+
       this.value = {
         ...Object.fromEntries(selectedElement.getAttributes()),
         text,
