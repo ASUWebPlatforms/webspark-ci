@@ -22,7 +22,6 @@ export default class InsertWebsparkButtonCommand extends Command {
 
       writer.append(textNode, websparkButtonText);
       writer.append(websparkButtonText, websparkButton);
-
       model.insertContent(websparkButton);
     });
   }
@@ -46,8 +45,7 @@ export default class InsertWebsparkButtonCommand extends Command {
     const selectedElement = selection.getSelectedElement();
 
     if (selectedElement?.name === "websparkButton") {
-      const text = selectedElement?.getChild(0)?.getChild(0)?._data;
-
+      const text = selectedElement._attrs.get('text');
       this.value = {
         ...Object.fromEntries(selectedElement.getAttributes()),
         text,
