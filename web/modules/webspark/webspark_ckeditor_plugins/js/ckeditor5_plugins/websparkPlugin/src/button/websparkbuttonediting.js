@@ -133,7 +133,6 @@ export default class WebsparkButtonEditing extends Plugin {
 
         const a = writer.createContainerElement("a", {
           class: classes,
-
         });
         return toWidget(a, writer, { label: "Webspark button" });
       },
