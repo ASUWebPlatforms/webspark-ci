@@ -52,7 +52,7 @@ export default class WebsparkButtonEditing extends Plugin {
 
     schema.register("websparkButton", {
       isObject: true,
-      allowWhere: "$block",
+      allowWhere: "$inlineObject",
       allowAttributes: ["text", "href", "target", "styles", "role", "size"],
       allowContentOf: "$block",
     });
