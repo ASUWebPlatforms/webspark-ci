@@ -54,6 +54,7 @@ export default class WebsparkButtonEditing extends Plugin {
       isObject: true,
       allowWhere: "$block",
       allowAttributes: ["text", "href", "target", "styles", "role", "size"],
+      allowContentOf: "$block",
     });
 
     schema.register("websparkButtonText", {
@@ -79,9 +80,8 @@ export default class WebsparkButtonEditing extends Plugin {
       },
       model: (viewElement, { writer }) => {
         const classes = viewElement.getAttribute("class");
-
         return writer.createElement("websparkButton", {
-          text: viewElement.getAttribute("text"),
+          text: viewElement?._children[0]?._textData,
           href: viewElement.getAttribute("href"),
           styles: extractDataFromClasses(classes, {
             "btn-gold": "gold",
@@ -113,6 +113,7 @@ export default class WebsparkButtonEditing extends Plugin {
 
         return writer.createContainerElement("a", {
           class: classes,
+          text: modelElement.getAttribute("text"),
           href: modelElement.getAttribute("href"),
           role: "button",
           ...(target !== "unset" && { target }),
@@ -124,7 +125,6 @@ export default class WebsparkButtonEditing extends Plugin {
       model: "websparkButton",
       view: (modelElement, { writer }) => {
         let classes = `btn btn-${modelElement.getAttribute("styles")}`;
-
         const size = modelElement.getAttribute("size");
 
         if (size !== "default") {
@@ -134,7 +134,6 @@ export default class WebsparkButtonEditing extends Plugin {
         const a = writer.createContainerElement("a", {
           class: classes,
         });
-
         return toWidget(a, writer, { label: "Webspark button" });
       },
     });
