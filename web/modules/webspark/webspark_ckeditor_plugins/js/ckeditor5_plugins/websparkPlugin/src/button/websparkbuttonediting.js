@@ -81,7 +81,7 @@ export default class WebsparkButtonEditing extends Plugin {
       model: (viewElement, { writer }) => {
         const classes = viewElement.getAttribute("class");
         return writer.createElement("websparkButton", {
-          text: viewElement._children[0]._textData,
+          text: viewElement?._children[0]?._textData,
           href: viewElement.getAttribute("href"),
           styles: extractDataFromClasses(classes, {
             "btn-gold": "gold",
