@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "058a7230de4d0facb25ce433939aff73",
+    "content-hash": "33327694e24f9ff209699513cf969cdc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3714,6 +3714,69 @@
             }
         },
         {
+            "name": "drupal/imagick",
+            "version": "1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/imagick.git",
+                "reference": "8.x-1.11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/imagick-8.x-1.11.zip",
+                "reference": "8.x-1.11",
+                "shasum": "9d005502bd35422b63902119d6bb789230e876c8"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.11",
+                    "datestamp": "1710341619",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Brecht Ceyssens",
+                    "homepage": "https://www.drupal.org/user/172527",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "bceyssens",
+                    "homepage": "https://www.drupal.org/user/2743951"
+                },
+                {
+                    "name": "j_bekaert",
+                    "homepage": "https://www.drupal.org/user/3795219"
+                },
+                {
+                    "name": "stijndm",
+                    "homepage": "https://www.drupal.org/user/201482"
+                }
+            ],
+            "description": "Imagick toolkit for image manipulation within Drupal.",
+            "homepage": "https://www.drupal.org/project/imagick",
+            "keywords": [
+                "drupal",
+                "imagick",
+                "php"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/imagick",
+                "issues": "https://www.drupal.org/project/issues/imagick"
+            }
+        },
+        {
             "name": "drupal/layout_builder_component_attributes",
             "version": "2.1.1",
             "source": {
@@ -6465,11 +6528,11 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "2.12.0",
+            "version": "2.12.1",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "2740f18b0c34364426de704eccb116689f0aa96c"
+                "reference": "9b5225df5f0b612b701c8cfc45fca1f76683cbd1"
             },
             "require": {
                 "composer/installers": "v2.0.0",
