@@ -316,10 +316,8 @@ function webspark_blocks_update_10001(&$sandbox) {
     'core.entity_view_display.media.cropped_image_rounded_1_1.default',
     'core.entity_form_display.media.cropped_image_rounded_1_1.media_library',
     'core.entity_form_display.media.cropped_image_rounded_1_1.default',
-    'core.extension',
     'field.field.block_content.image_and_text_block.field_media',
     'field.field.block_content.image.field_media',
-    'system.image',
     'field.field.paragraph.card.field_media',
     'field.storage.media.field_media_image'
   ];
