@@ -11,7 +11,7 @@
 #}
 {% set unpublished = is_published is same as '0' ? 'node--unpublished' : '' %}
 {% set bg = settings['additional']['classes']['style'] %}
-{% set bgcolor = bg|length > 0 ? bg|first : 'bg-white' %}
+{% set bgcolor = bg|length > 0 ? bg|first is same as 'bg morse-code-white' ? 'bg-white' : bg|first : 'bg-white' %}
 {%
     set container_classes = [
     'clearfix',

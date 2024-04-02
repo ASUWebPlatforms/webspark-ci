@@ -4,14 +4,27 @@
  * Template for a Node.
  */
 #}
-{% extends "@renovation/node/node.twig" %}
 
-{% block meta_additions %}
-  {% set bg = settings['additional']['classes']['style'] %}
-  {% set bgcolor = bg|length > 0 ? bg|first : 'bg-white' %}
-  {% set more_classes = [
-    bgcolor,
-  ] %}
-  {% set classes = classes|merge([more_classes]) %}
-{% endblock %}
+{%
+  set classes = [
+  'node',
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  node.bundle|clean_class,
+  node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
+]
+%}
+{% set bg = settings['additional']['classes']['style'] %}
+{% set bgcolor = bg|length > 0 ? bg|first is same as 'bg morse-code-white' ? 'bg-white' : bg|first : 'bg-white' %}
+{% set more_classes = [
+  bgcolor,
+] %}
+{% set classes = classes|merge(more_classes) %}
+<article {{ attributes.addClass(classes) }} >
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</article>
 

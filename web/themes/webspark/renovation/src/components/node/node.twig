@@ -14,9 +14,7 @@
   node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
 ]
 %}
-{% block meta_additions %}
-{% endblock %}
-<article{{ attributes.addClass(classes) }}>
+<article {{ attributes.addClass(classes) }} >
   {{ title_prefix }}
   {{ title_suffix }}
   {% block content %}
