@@ -39,7 +39,6 @@ settings:
   plugins:
     ckeditor5_heading:
       enabled_headings:
-        - heading1
         - heading2
         - heading3
         - heading4
@@ -70,6 +69,7 @@ settings:
         - '<h2 id>'
         - '<img class>'
         - '<ul class>'
+        - '<div class>'
     editor_advanced_link_link:
       enabled_attributes:
         - class
