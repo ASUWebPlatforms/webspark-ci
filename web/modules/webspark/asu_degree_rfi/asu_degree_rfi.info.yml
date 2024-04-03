@@ -7,5 +7,6 @@ configure: asu_degree_rfi.asu_degree_rfi_settings
 dependencies:
   - paragraphs:paragraphs
   - field_group:field_group
-  - webspark_blocks
-  - pathauto
+  - webspark_blocks:webspark_blocks
+  - pathauto:pathauto
+  - asu_data_potluck:asu_data_potluck
