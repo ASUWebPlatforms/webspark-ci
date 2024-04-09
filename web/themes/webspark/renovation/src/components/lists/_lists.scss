@@ -1,16 +1,83 @@
-// TODO: Move this to UDS, like the maroon
-ul.uds-list {
+@mixin ck-uds-list {
+  // to be fixed in Unity:
+  //--list-padding-left: 3rem;
   &.fa-ul {
-    &.gold li svg {
-      color: $uds-color-base-gold;
+    // to be fixed in Unity:
+    //--list-padding-left: 3rem;
+    li {
+      .fontawesome-icon-inline {
+        position: absolute;
+        .fa-li {
+          left: -2.75rem;
+        }
+      }
+      .ck-widget {
+        display: flex;
+        width: 1.5rem;
+        height: 1.5rem;
+        position: absolute;
+        left: -2.5rem;
+        justify-content: center;
+
+        .fontawesome-icon-inline {
+          position: absolute;
+          display: inline-block;
+          left: .25rem;
+        }
+        .fa-li {
+          left: -.5rem;
+        }
+      }
     }
   }
 }
 
+.ck-content {
+  ul,ol {
+    margin-inline: unset;
+  }
+  ul.uds-list {
+    @include ck-uds-list;
+  }
+}
+
 ul.uds-list {
-  &.fa-ul {
-    &.maroon li svg {
-      color: $uds-color-base-maroon;
+  @include ck-uds-list;
+}
+
+#drupal-off-canvas [data-drupal-ck-style-fence] {
+  .ck-content {
+    ul.uds-list {
+      @include ck-uds-list;
+    }
+    ol.uds-list,
+    .uds-list ol {
+      &.uds-steplist {
+        li {
+          span.ck-list-bogus-paragraph {
+            font-weight: bold;
+          }
+          span {
+            font-weight: normal;
+          }
+        }
+      }
     }
   }
+}
+
+ol.uds-list,
+.uds-list ol {
+  &.uds-steplist {
+    li {
+      span.ck-list-bogus-paragraph {
+        font-weight: bold;
+      }
+      span {
+        font-weight: normal;
+      }
+    }
+  }
+  // to be fixed in Unity:
+  //--list-padding-left: 3rem;
 }
