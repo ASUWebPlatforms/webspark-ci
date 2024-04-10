@@ -298,6 +298,26 @@ function webspark_blocks_update_9028(&$sandbox) {
 }
 
 /**
+ * Add 'expanded' field to accordions.
+ */
+function webspark_blocks_update_10000(&$sandbox) {
+  $configs = [
+    'core.entity_form_display.block_content.accordion.default',
+    'core.entity_form_display.paragraph.accordion_panel.default',
+    'core.entity_view_display.paragraph.accordion_panel.default',
+    'field.field.paragraph.accordion_panel.field_expanded',
+    'field.storage.paragraph.field_expanded',
+  ];
+  // Unlock the configuration storage.
+  \Drupal::state()->set('configuration_locked', FALSE);
+  // Update or install configs.
+  _webspark_blocks_update_module_config_list($configs);
+  // Lock the configuration storage.
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ *
  * WS2-1834 - Media Library: Add cropped image round option.
  */
 function webspark_blocks_update_10001(&$sandbox) {
