@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Template for a Node component.
+ * Template for a Node.
  */
 #}
 
@@ -14,6 +14,12 @@
   node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
 ]
 %}
+{% set bg = settings['additional']['classes']['style'] %}
+{% set bgcolor = bg|length > 0 ? bg|first is same as 'bg morse-code-white' ? 'bg-white' : bg|first : 'bg-white' %}
+{% set more_classes = [
+  bgcolor,
+] %}
+{% set classes = classes|merge(more_classes) %}
 <article {{ attributes.addClass(classes) }} >
   {{ title_prefix }}
   {{ title_suffix }}
