@@ -365,5 +365,12 @@ function webspark_blocks_update_dependencies() {
     'webspark' => 9018,
   ];
 
+  // Indicate that the webspark_blocks_update_10001() function provided by this module
+  // must run after the webspark_update_10004() function provided by the
+  // 'webspark' profile.
+  $dependencies['webspark_blocks'][10001] = [
+    'webspark' => 10004,
+  ];
+
   return $dependencies;
 }
