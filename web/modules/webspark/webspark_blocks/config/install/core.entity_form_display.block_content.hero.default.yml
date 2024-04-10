@@ -1,3 +1,4 @@
+uuid: fefd7d4d-7079-4d25-b945-ff90b585df6d
 langcode: en
 status: true
 dependencies:
@@ -21,6 +22,7 @@ third_party_settings:
   field_group:
     group_appearance_settings:
       children:
+        - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
       label: 'Appearance Settings'
@@ -34,6 +36,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+_core:
+  default_config_hash: zhtOBtA-ZukZFNPNYIDsvSpYugUzwin7qVpl4Gtxddc
 id: block_content.hero.default
 targetEntityType: block_content
 bundle: hero
@@ -76,13 +80,13 @@ content:
     third_party_settings: {  }
   field_spacing_bottom:
     type: options_select
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_spacing_top:
     type: options_select
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

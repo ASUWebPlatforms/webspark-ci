@@ -1,3 +1,4 @@
+uuid: d8a5b812-ce40-468e-82e9-ab03ac8903c3
 langcode: en
 status: true
 dependencies:
@@ -18,6 +19,7 @@ third_party_settings:
   field_group:
     group_appearance_settings:
       children:
+        - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
       label: 'Appearance Settings'
@@ -31,6 +33,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+_core:
+  default_config_hash: 1hVQzJmE-g1aNUniGETZsfi61T-lEVTEk8YECBYgbyM
 id: block_content.image.default
 targetEntityType: block_content
 bundle: image
@@ -66,13 +70,13 @@ content:
     third_party_settings: {  }
   field_spacing_bottom:
     type: options_select
-    weight: 8
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_spacing_top:
     type: options_select
-    weight: 7
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

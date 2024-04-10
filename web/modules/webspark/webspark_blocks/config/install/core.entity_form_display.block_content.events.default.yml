@@ -1,24 +1,24 @@
-uuid: 182a51e0-5883-4666-a4f7-1f94ad14a180
+uuid: ccfd01db-f8c0-4bed-9354-35c7bc14d022
 langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.image_and_text_block
-    - field.field.block_content.image_and_text_block.field_anchor_menu_settings
-    - field.field.block_content.image_and_text_block.field_bg_color_content_sections
-    - field.field.block_content.image_and_text_block.field_content_position
-    - field.field.block_content.image_and_text_block.field_formatted_text
-    - field.field.block_content.image_and_text_block.field_heading
-    - field.field.block_content.image_and_text_block.field_media
-    - field.field.block_content.image_and_text_block.field_spacing_bottom
-    - field.field.block_content.image_and_text_block.field_spacing_top
-    - field.field.block_content.image_and_text_block.field_sub_heading
-    - field.field.block_content.image_and_text_block.field_two_cta
+    - block_content.type.events
+    - field.field.block_content.events.field_anchor_menu_settings
+    - field.field.block_content.events.field_events_cta
+    - field.field.block_content.events.field_events_cta_color
+    - field.field.block_content.events.field_events_feed_filter
+    - field.field.block_content.events.field_events_header_text_color
+    - field.field.block_content.events.field_events_heading
+    - field.field.block_content.events.field_events_items_to_display
+    - field.field.block_content.events.field_feed_taxonomy_term
+    - field.field.block_content.events.field_spacing_bottom
+    - field.field.block_content.events.field_spacing_top
+    - field.field.block_content.events.field_tooltip
   module:
     - field_group
-    - media_library
+    - link
     - paragraphs
-    - text
 third_party_settings:
   field_group:
     group_appearance_settings:
@@ -29,7 +29,7 @@ third_party_settings:
       label: 'Appearance Settings'
       region: content
       parent_name: ''
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         classes: ''
@@ -38,15 +38,15 @@ third_party_settings:
         description: ''
         required_fields: true
 _core:
-  default_config_hash: utGzlgneMek49XtaTmsO_-lAz91mY_GNXy1Ml-1IYqg
-id: block_content.image_and_text_block.default
+  default_config_hash: vfxG-4l2n-VsuiF-3ryHuDphBQmV0nYja5TVTtrQxbU
+id: block_content.events.default
 targetEntityType: block_content
-bundle: image_and_text_block
+bundle: events
 mode: default
 content:
   field_anchor_menu_settings:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 26
     region: content
     settings:
       title: Paragraph
@@ -56,54 +56,21 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-  field_bg_color_content_sections:
-    type: options_select
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_content_position:
-    type: options_select
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_formatted_text:
-    type: text_textarea
-    weight: 3
+  field_events_cta:
+    type: link_default
+    weight: 7
     region: content
     settings:
-      rows: 5
-      placeholder: ''
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
-  field_heading:
-    type: string_textfield
-    weight: 1
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_media:
-    type: media_library_widget
-    weight: 5
-    region: content
-    settings:
-      media_types: {  }
-    third_party_settings: {  }
-  field_spacing_bottom:
-    type: options_select
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_spacing_top:
+  field_events_cta_color:
     type: options_select
     weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_sub_heading:
+  field_events_feed_filter:
     type: string_textfield
     weight: 2
     region: content
@@ -111,17 +78,57 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_two_cta:
+  field_events_header_text_color:
+    type: options_select
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_events_heading:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_events_items_to_display:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_feed_taxonomy_term:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_spacing_bottom:
+    type: options_select
+    weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_spacing_top:
+    type: options_select
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tooltip:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 4
     region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: open
       add_mode: dropdown
-      form_display_mode: styled
-      default_paragraph_type: cta
+      form_display_mode: default
+      default_paragraph_type: _none
     third_party_settings: {  }
   info:
     type: string_textfield

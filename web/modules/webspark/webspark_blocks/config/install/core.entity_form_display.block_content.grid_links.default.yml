@@ -1,8 +1,10 @@
+uuid: 0a1bfef5-9b2a-4fda-9f58-7518f24f4629
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.grid_links
+    - field.field.block_content.grid_links.field_anchor_menu_settings
     - field.field.block_content.grid_links.field_grid_links_display
     - field.field.block_content.grid_links.field_links
     - field.field.block_content.grid_links.field_links_color
@@ -16,12 +18,13 @@ third_party_settings:
   field_group:
     group_appearance_settings:
       children:
+        - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
       label: 'Appearance Settings'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -29,11 +32,25 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+_core:
+  default_config_hash: WOw2hQVe6pHAmJGlx_T9rDhwC9I31nFdfk-JJ8yb6Iw
 id: block_content.grid_links.default
 targetEntityType: block_content
 bundle: grid_links
 mode: default
 content:
+  field_anchor_menu_settings:
+    type: entity_reference_paragraphs
+    weight: 8
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
   field_grid_links_display:
     type: options_select
     weight: 1
@@ -60,19 +77,19 @@ content:
     third_party_settings: {  }
   field_spacing_bottom:
     type: options_select
-    weight: 6
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_spacing_top:
     type: options_select
-    weight: 5
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_tooltip:
     type: entity_reference_paragraphs
-    weight: 5
+    weight: 4
     region: content
     settings:
       title: Paragraph

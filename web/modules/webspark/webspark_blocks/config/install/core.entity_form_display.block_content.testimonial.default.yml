@@ -1,3 +1,4 @@
+uuid: 53e1428b-52d4-4530-abb3-126eccd568e2
 langcode: en
 status: true
 dependencies:
@@ -18,9 +19,9 @@ third_party_settings:
   field_group:
     group_appearance_settings:
       children:
+        - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
-        - field_anchor_menu_settings
       label: 'Appearance Settings'
       region: content
       parent_name: ''
@@ -32,6 +33,8 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+_core:
+  default_config_hash: 3dxyzJtSAeKr8SsY8_9Dm_qREt5lNrYFW-6fAfE_QvA
 id: block_content.testimonial.default
 targetEntityType: block_content
 bundle: testimonial
@@ -63,13 +66,13 @@ content:
     third_party_settings: {  }
   field_spacing_bottom:
     type: options_select
-    weight: 3
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_spacing_top:
     type: options_select
-    weight: 2
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
