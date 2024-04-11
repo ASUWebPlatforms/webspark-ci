@@ -341,6 +341,34 @@ function webspark_blocks_update_10001(&$sandbox) {
 }
 
 /**
+ *
+ * WS2-1834 - Media Library: Add cropped image round option.
+ */
+function webspark_blocks_update_10002(&$sandbox) {
+  $configs = [
+    'crop.type.1_1_rounded',
+    'image.style.block_image_1_1_sml_rounded',
+    'image.style.block_image_1_1_med_rounded',
+    'image.style.block_image_1_1_lge_rounded',
+    'imagick.config',
+    'media.type.cropped_image_rounded_1_1',
+    'field.field.media.cropped_image_rounded_1_1.field_media_image',
+    'core.entity_view_display.media.cropped_image_rounded_1_1.small',
+    'core.entity_view_display.media.cropped_image_rounded_1_1.medium',
+    'core.entity_view_display.media.cropped_image_rounded_1_1.media_library',
+    'core.entity_view_display.media.cropped_image_rounded_1_1.large',
+    'core.entity_view_display.media.cropped_image_rounded_1_1.default',
+    'core.entity_form_display.media.cropped_image_rounded_1_1.media_library',
+    'core.entity_form_display.media.cropped_image_rounded_1_1.default',
+    'field.field.block_content.image_and_text_block.field_media',
+    'field.field.block_content.image.field_media',
+    'field.field.paragraph.card.field_media',
+    'field.storage.media.field_media_image'
+   ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
@@ -379,6 +407,13 @@ function webspark_blocks_update_dependencies() {
   // before it has been installed, and generate errors.
   $dependencies['webspark_blocks'][9024] = [
     'webspark' => 9018,
+  ];
+
+  // Indicate that the webspark_blocks_update_10002() function provided by this module
+  // must run after the webspark_update_10004() function provided by the
+  // 'webspark' profile.
+  $dependencies['webspark_blocks'][10002] = [
+    'webspark' => 10004,
   ];
 
   return $dependencies;

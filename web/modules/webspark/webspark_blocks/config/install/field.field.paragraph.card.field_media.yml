@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media
+    - media.type.cropped_image_rounded_1_1
     - media.type.cropped_image_sqare
     - media.type.cropped_image_wide
     - media.type.image
@@ -23,6 +24,7 @@ settings:
   handler_settings:
     target_bundles:
       image_block_images: image_block_images
+      cropped_image_rounded_1_1: cropped_image_rounded_1_1
       cropped_image_sqare: cropped_image_sqare
       cropped_image_wide: cropped_image_wide
       image: image
