@@ -28,7 +28,7 @@ third_party_settings:
       label: 'Appearance Settings'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 5
       format_type: details
       format_settings:
         classes: ''
@@ -90,7 +90,7 @@ content:
     third_party_settings: {  }
   field_card_arrangement_display:
     type: options_select
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -120,7 +120,7 @@ content:
     third_party_settings: {  }
   field_display_orientation:
     type: options_select
-    weight: 4
+    weight: 3
     region: content
     settings: {  }
     third_party_settings:

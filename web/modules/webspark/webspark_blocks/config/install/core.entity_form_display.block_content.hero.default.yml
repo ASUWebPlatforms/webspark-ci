@@ -21,6 +21,7 @@ third_party_settings:
   field_group:
     group_appearance_settings:
       children:
+        - field_anchor_menu_settings
         - field_spacing_top
         - field_spacing_bottom
       label: 'Appearance Settings'
@@ -76,13 +77,13 @@ content:
     third_party_settings: {  }
   field_spacing_bottom:
     type: options_select
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   field_spacing_top:
     type: options_select
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
