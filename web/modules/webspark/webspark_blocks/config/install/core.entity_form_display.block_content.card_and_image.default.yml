@@ -24,7 +24,7 @@ third_party_settings:
       label: 'Appearance Settings'
       region: content
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -63,7 +63,7 @@ content:
     third_party_settings: {  }
   field_content_position:
     type: options_select
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

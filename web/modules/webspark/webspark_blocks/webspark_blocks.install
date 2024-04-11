@@ -340,6 +340,30 @@ function webspark_blocks_update_10001(&$sandbox) {
     'field.field.block_content.image.field_media',
     'field.field.paragraph.card.field_media',
     'field.storage.media.field_media_image'
+   ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
+  * WS2-1661 - Custom block types - Organized Appearance Settings
+  */
+function webspark_blocks_update_10002(&$sandbox) {
+  $configs = [
+    'field.field.block_content.donut_chart.field_spacing_top',
+    'field.field.block_content.donut_chart.field_spacing_bottom',
+    'field.field.block_content.grid_links.field_anchor_menu_settings',
+    'field.field.block_content.donut_chart.field_anchor_menu_settings',
+    'core.entity_form_display.block_content.card_and_image.default',
+    'core.entity_form_display.block_content.testimonial.default',
+    'core.entity_form_display.block_content.image.default',
+    'core.entity_view_display.block_content.grid_links.default',
+    'core.entity_form_display.block_content.grid_links.default',
+    'core.entity_form_display.block_content.events.default',
+    'core.entity_form_display.block_content.image_and_text_block.default',
+    'core.entity_form_display.block_content.hero.default',
+    'core.entity_view_display.block_content.donut_chart.default',
+    'core.entity_form_display.block_content.donut_chart.default',
+    'core.entity_form_display.block_content.card_arrangement.default'
   ];
   _webspark_blocks_update_module_config_list($configs);
 }

@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - block_content.type.grid_links
+    - field.field.block_content.grid_links.field_anchor_menu_settings
     - field.field.block_content.grid_links.field_grid_links_display
     - field.field.block_content.grid_links.field_links
     - field.field.block_content.grid_links.field_links_color
@@ -17,6 +18,15 @@ targetEntityType: block_content
 bundle: grid_links
 mode: default
 content:
+  field_anchor_menu_settings:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
   field_grid_links_display:
     type: list_key
     label: hidden
