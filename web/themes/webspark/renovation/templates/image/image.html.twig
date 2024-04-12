@@ -4,6 +4,8 @@
  * Template for an image field.
  */
 #}
+{% set isRounded = ('rounded' in style_name) %}
 {% include '@renovation/image/image.twig' with {
   responsive: true,
+  rounded: isRounded,
 } %}
