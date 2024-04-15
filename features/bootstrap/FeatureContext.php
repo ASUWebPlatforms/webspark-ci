@@ -364,6 +364,38 @@ JS;
   }
 
   /**
+   * Check if pager has chevron.
+   *
+   * @Then I should see the chevron icon exists on the :selector pager item
+   *
+   * @throws \Exception
+   */
+  public function chevronExists($selector) {
+    $function = <<<JS
+(function(){
+  var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('content');
+  if (elem === 'none') {
+    var elem = window.getComputedStyle(document.querySelector("$selector"), "::before").getPropertyValue('content');
+  }
+
+  if (elem && elem !== 'none') {
+    switch (true) {
+      case elem === `url("data:image/svg+xml; utf8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' data-fa-i2svg=''><path fill='currentColor' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'></path></svg>")`:
+        return true;
+      default:
+        return false;
+    }
+  }
+  return false;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Drag selector item vertically by X pixels
    *
    * @Then I drag :selector vertically by :number pixels

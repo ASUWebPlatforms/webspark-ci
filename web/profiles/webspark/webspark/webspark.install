@@ -512,3 +512,15 @@ function webspark_update_10003(&$sandbox) {
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-1834: Install Imagick module
+ */
+function webspark_update_10004(&$sandbox) {
+  if (!Drupal::moduleHandler()->moduleExists('imagick')) {
+    Drupal::service('module_installer')->install(['imagick']);
+    \Drupal::state()->set('configuration_locked', FALSE);
+    \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
+    \Drupal::state()->set('configuration_locked', TRUE);
+  }
+}
