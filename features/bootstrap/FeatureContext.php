@@ -185,6 +185,31 @@ JS;
   }
 
   /**
+   * Click a specific CSS selector's element with JS
+   *
+   * @param string $selector
+   *
+   * @When /^I click the element "((\\\")?.*)" with JS$/
+   */
+  public function iClickTheElementJS($selector)
+  {
+    $function = <<<JS
+(function(){
+  let elem = document.querySelector("$selector");
+  if (!elem) {
+    return false;
+  }
+  elem.click();
+  return elem !== false && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Remove CSS class from selector
    *
    * @param string $class
@@ -323,7 +348,8 @@ JS;
     $function = <<<JS
 (function(){
   var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('background');
-  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box") {
+  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box" ||
+  elem === "rgb(255, 198, 39) none repeat scroll 0% 0% / auto padding-box border-box") {
     return elem;
   }
   else {
@@ -361,6 +387,63 @@ JS;
     }
   }
   return false;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Drag selector item vertically by X pixels
+   *
+   * @Then I drag :selector vertically by :number pixels
+   *
+   * @param $selector
+   * @param $number
+   *
+   * @return void
+   * @throws \Exception
+   */
+  public function dragVerticallyByXpx($selector, $number) {
+    $function = <<<JS
+(function(){
+  // We create 3 mouse events using MouseEvent interface,
+// one for mousedown to initiate the process,
+// one for mousemove to handle to movement
+// and one for mouseup to terminate the process
+
+let element = document.querySelector("$selector");
+
+const mouseDownEvent = new MouseEvent('mousedown', {
+  clientX: element.getBoundingClientRect().left,
+  clientY: element.getBoundingClientRect().top,
+  bubbles: true,
+  cancelable: true
+});
+
+const mouseMoveEvent = new MouseEvent('mousemove', {
+  clientX: element.getBoundingClientRect().left,
+  clientY: element.getBoundingClientRect().top $number,
+  bubbles: true,
+  cancelable: true
+});
+
+const mouseUpEvent = new MouseEvent('mouseup', {
+  bubbles: true,
+  cancelable: true
+});
+
+// Dispatch the mousedown event to the element that has the listener
+// For mousemove, the listener may be the parent or even the document
+// Dispatch mouseup to terminate the process
+if (element.dispatchEvent(mouseDownEvent) === false && element.dispatchEvent(mouseMoveEvent) === false && element.dispatchEvent(mouseUpEvent) === true) {
+  return true;
+}
+else {
+  return false;
+}
 })()
 JS;
     if ($this->getSession()->evaluateScript($function)) {
