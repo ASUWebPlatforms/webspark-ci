@@ -3,8 +3,10 @@
   margin-bottom: 1rem;
 }
 
-.uds-img {
-  img.rounded {
+.uds-img-rounded {
+  border-radius: 100%;
+
+  img {
     border: 0;
   }
 }
