@@ -4,7 +4,7 @@ namespace Drupal\webspark_utility\Drush\Commands;
 
 use Drush\Attributes as CLI;
 use Drush\Commands\DrushCommands;
-use Drush\Drush; 
+use Drush\Drush;
 
 /**
  * Webspark utility commands.
@@ -103,6 +103,23 @@ final class WebsparkUtilityCommands extends DrushCommands {
               'profiles/webspark/webspark/config/install/block.block.asubrandheader.yml',
               'profiles/webspark/webspark/config/install/block.block.asufooter.yml',
               'profiles/webspark/webspark/config/install/system.site.yml',
+              'modules/webspark/webspark_blocks/config/install/field.field.paragraph.card.field_card_link.yml',
+              'modules/webspark/webspark_blocks/config/install/field.field.paragraph.card.field_clickable.yml',
+              'modules/webspark/webspark_blocks/config/install/field.field.paragraph.card_with_icon.field_card_link.yml',
+              'modules/webspark/webspark_blocks/config/install/field.field.paragraph.card_with_icon.field_clickable.yml',
+              'modules/webspark/webspark_blocks/config/install/filter.format.basic_html.yml',
+              'modules/webspark/webspark_blocks/config/install/filter.format.full_html.yml',
+              'modules/webspark/webspark_blocks/config/install/filter.format.restricted_html.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card.field_card_link.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card.field_clickable.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_degree.field_card_link.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_degree.field_clickable.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_story.field_card_link.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_story.field_clickable.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_with_icon.field_card_link.yml',
+              'profiles/webspark/webspark/config/install/field.field.paragraph.card_with_icon.field_clickable.yml',
+              'profiles/webspark/webspark/config/install/field.storage.paragraph.field_card_link.yml',
+              'profiles/webspark/webspark/config/install/field.storage.paragraph.field_clickable.yml',
             ];
             if (in_array($filename, $filesToSkip, TRUE)) {
               // Reset file contents to original state.
