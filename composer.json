@@ -49,6 +49,7 @@
         }
     ],
     "require": {
+        "drupal/imagick": "^1.11",
         "pantheon-upstreams/upstream-configuration": "*",
         "webspark/custom-dependencies": "*"
     },

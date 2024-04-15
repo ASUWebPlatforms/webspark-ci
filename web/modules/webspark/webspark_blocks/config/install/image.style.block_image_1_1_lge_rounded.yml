@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.1_1_rounded
+  module:
+    - crop
+    - imagick
+name: block_image_1_1_lge_rounded
+label: 'Block Image 1:1 LGE (Rounded)'
+effects:
+  0c554874-262a-4ed5-9263-a98a849c41f2:
+    uuid: 0c554874-262a-4ed5-9263-a98a849c41f2
+    id: image_scale_and_crop
+    weight: -9
+    data:
+      width: 1200
+      height: 1200
+      anchor: center-center
+  eac30a32-54c6-4838-a8cd-8d586ae16e26:
+    uuid: eac30a32-54c6-4838-a8cd-8d586ae16e26
+    id: image_rounded_corners
+    weight: -8
+    data:
+      x_rounding: '1200'
+      y_rounding: '1200'
+      stroke_width: '10'
+      displace: '5'
+      size_correction: '-6'
+  6196711a-6c4c-4442-8a0f-cac70d5a11a7:
+    uuid: 6196711a-6c4c-4442-8a0f-cac70d5a11a7
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: 1_1_rounded
+      automatic_crop_provider: null
+  ab605aed-1f13-4e39-a3bf-35c5f64c4316:
+    uuid: ab605aed-1f13-4e39-a3bf-35c5f64c4316
+    id: image_transparent_background
+    weight: 4
+    data: {  }

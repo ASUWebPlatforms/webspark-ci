@@ -1,0 +1,4 @@
+jpeg_quality: 75
+resize_filter: 22
+optimize: true
+strip_metadata: true

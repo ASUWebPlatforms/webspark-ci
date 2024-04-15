@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.accordion_panel.field_color_options
+    - field.field.paragraph.accordion_panel.field_expanded
     - field.field.paragraph.accordion_panel.field_formatted_text
     - field.field.paragraph.accordion_panel.field_heading
     - field.field.paragraph.accordion_panel.field_icon
@@ -20,6 +21,13 @@ content:
     weight: 0
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_expanded:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_formatted_text:
     type: text_textarea

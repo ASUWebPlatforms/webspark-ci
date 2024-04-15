@@ -185,6 +185,31 @@ JS;
   }
 
   /**
+   * Click a specific CSS selector's element with JS
+   *
+   * @param string $selector
+   *
+   * @When /^I click the element "((\\\")?.*)" with JS$/
+   */
+  public function iClickTheElementJS($selector)
+  {
+    $function = <<<JS
+(function(){
+  let elem = document.querySelector("$selector");
+  if (!elem) {
+    return false;
+  }
+  elem.click();
+  return elem !== false && elem !== undefined;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
    * Remove CSS class from selector
    *
    * @param string $class
@@ -323,12 +348,102 @@ JS;
     $function = <<<JS
 (function(){
   var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('background');
-  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box") {
+  if (elem === "rgba(0, 0, 0, 0) linear-gradient(to right, rgba(0, 0, 0, 0) 0.5%, rgb(255, 198, 39) 0.5%) repeat scroll 0% 0% / auto padding-box border-box" ||
+  elem === "rgb(255, 198, 39) none repeat scroll 0% 0% / auto padding-box border-box") {
     return elem;
   }
   else {
-    return FALSE;
+    return false;
   }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if pager has chevron.
+   *
+   * @Then I should see the chevron icon exists on the :selector pager item
+   *
+   * @throws \Exception
+   */
+  public function chevronExists($selector) {
+    $function = <<<JS
+(function(){
+  var elem = window.getComputedStyle(document.querySelector("$selector"), "::after").getPropertyValue('content');
+  if (elem === 'none') {
+    var elem = window.getComputedStyle(document.querySelector("$selector"), "::before").getPropertyValue('content');
+  }
+
+  if (elem && elem !== 'none') {
+    switch (true) {
+      case elem === `url("data:image/svg+xml; utf8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' data-fa-i2svg=''><path fill='currentColor' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'></path></svg>")`:
+        return true;
+      default:
+        return false;
+    }
+  }
+  return false;
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Drag selector item vertically by X pixels
+   *
+   * @Then I drag :selector vertically by :number pixels
+   *
+   * @param $selector
+   * @param $number
+   *
+   * @return void
+   * @throws \Exception
+   */
+  public function dragVerticallyByXpx($selector, $number) {
+    $function = <<<JS
+(function(){
+  // We create 3 mouse events using MouseEvent interface,
+// one for mousedown to initiate the process,
+// one for mousemove to handle to movement
+// and one for mouseup to terminate the process
+
+let element = document.querySelector("$selector");
+
+const mouseDownEvent = new MouseEvent('mousedown', {
+  clientX: element.getBoundingClientRect().left,
+  clientY: element.getBoundingClientRect().top,
+  bubbles: true,
+  cancelable: true
+});
+
+const mouseMoveEvent = new MouseEvent('mousemove', {
+  clientX: element.getBoundingClientRect().left,
+  clientY: element.getBoundingClientRect().top $number,
+  bubbles: true,
+  cancelable: true
+});
+
+const mouseUpEvent = new MouseEvent('mouseup', {
+  bubbles: true,
+  cancelable: true
+});
+
+// Dispatch the mousedown event to the element that has the listener
+// For mousemove, the listener may be the parent or even the document
+// Dispatch mouseup to terminate the process
+if (element.dispatchEvent(mouseDownEvent) === false && element.dispatchEvent(mouseMoveEvent) === false && element.dispatchEvent(mouseUpEvent) === true) {
+  return true;
+}
+else {
+  return false;
+}
 })()
 JS;
     if ($this->getSession()->evaluateScript($function)) {

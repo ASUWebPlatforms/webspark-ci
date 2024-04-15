@@ -168,10 +168,10 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
   // loop through $links to find any non-empty values
   // if we find any, we'll display the links
   // if we don't find any, we'll skip displaying the links
-
-  foreach ($links as $link) {
-    if (!empty($link['link_url']) && !empty($link['link_title'])) {
-      $has_links = TRUE;
+  if (is_array($links)) {
+    foreach ($links as $link) {
+      if (!empty($link['link_url']) && !empty($link['link_title'])) {
+        $has_links = TRUE;
         if ($has_links) {
           $wrapper['links'] = [
             '#theme' => 'webspark_blocks__links',
@@ -179,7 +179,8 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
             '#links' => $links,
           ];
         }
-      break;
+        break;
+      }
     }
   }
 
