@@ -98,6 +98,7 @@ install:
   - imagemagick
   - layout_builder_usage_reports
   - editor_advanced_link
+  - imagick
 themes:
   - renovation
   - claro

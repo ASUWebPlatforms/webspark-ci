@@ -481,3 +481,46 @@ function webspark_update_10002(&$sandbox) {
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-1565 - CK Editor - Remove H1 capabilities for non hero blocks.
+ */
+function webspark_update_10003(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  $config_factory = \Drupal::service('config.factory');
+  $editor_configs = $config_factory->listAll($prefix = 'editor.editor');
+  $editor_configs = [...$editor_configs, ...$config_factory->listAll($prefix = 'filter.format')];
+  foreach ($editor_configs as $value) {
+    $config = \Drupal::config($value);
+    if ($config) {
+      $data = $config->getRawData();
+      if ($data && isset($data['settings']['plugins']['ckeditor5_heading']['enabled_headings'])) {
+        $headings = $data['settings']['plugins']['ckeditor5_heading']['enabled_headings'];
+        if ($headings) {
+          $heading1_key = array_search('heading1', $headings);
+          if ($heading1_key !== false) {
+            unset($headings[$heading1_key]);
+            $config_editable = $config_factory->getEditable($value);
+            $config_editable->set('settings.plugins.ckeditor5_heading.enabled_headings', $headings);
+            $config_editable->save();
+            \Drupal::service('messenger')
+              ->addMessage("CK Editor - Removed H1 capabilities for " . $config->getName());
+          }
+        }
+      }
+    }
+  }
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * WS2-1834: Install Imagick module
+ */
+function webspark_update_10004(&$sandbox) {
+  if (!Drupal::moduleHandler()->moduleExists('imagick')) {
+    Drupal::service('module_installer')->install(['imagick']);
+    \Drupal::state()->set('configuration_locked', FALSE);
+    \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
+    \Drupal::state()->set('configuration_locked', TRUE);
+  }
+}

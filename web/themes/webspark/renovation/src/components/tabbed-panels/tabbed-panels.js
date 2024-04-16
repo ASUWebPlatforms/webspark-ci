@@ -4,6 +4,12 @@
       setButtonsCompatibility(e);
     });
 
+    document.querySelectorAll(".nav-item").forEach( tabTitle => {
+      tabTitle.addEventListener("focus", (e) => {
+        tabTitle.scrollIntoView( {block: "nearest"} );
+      })
+    });
+
     document.querySelectorAll(".uds-tabbed-panels").forEach((item) => {
       const nav = item.querySelector(".nav-tabs");
 
