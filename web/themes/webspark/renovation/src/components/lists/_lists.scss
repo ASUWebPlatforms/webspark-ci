@@ -1,31 +1,45 @@
 @mixin ck-uds-list {
   // to be fixed in Unity:
   //--list-padding-left: 3rem;
-  &.fa-ul {
+  &.fa-ul.fa-li, &.fa-ul {
     // to be fixed in Unity:
     //--list-padding-left: 3rem;
+    left: 0;
+    position: relative;
+    text-align: left;
+    width: inherit;
+    padding-left: 2rem;
     li {
-      .fontawesome-icon-inline {
+      & > .fontawesome-icon-inline {
         position: absolute;
-        .fa-li {
-          left: -2.75rem;
+        left: -2.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        & > .svg-inline--fa {
+          position: unset;
+          left: unset;
+          height: 1em;
+          width: var(--fa-li-width, 2em);
         }
       }
       .ck-widget {
-        display: flex;
+        position: absolute;
+        left: -2.25rem;
         width: 1.5rem;
         height: 1.5rem;
-        position: absolute;
-        left: -2.5rem;
-        justify-content: center;
-
-        .fontawesome-icon-inline {
-          position: absolute;
-          display: inline-block;
-          left: .25rem;
-        }
-        .fa-li {
-          left: -.5rem;
+        & > .fontawesome-icon-inline {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          & > .svg-inline--fa {
+            position: unset;
+            left: unset;
+            height: 1em;
+            width: var(--fa-li-width, 2em);
+          }
         }
       }
     }
