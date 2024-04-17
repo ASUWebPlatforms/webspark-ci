@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Component\Utility\Html;
+
 /**
  * @file
  * Primary module hooks for Webspark View Modes module.
@@ -7,3 +9,63 @@
 
 // Prepare Variables for the React Guru
 // Table in Core may have preprocessing example
+
+
+/**
+ * Preparing variables for webspark card views.
+ * This file is largely copied from template_preprocess_views_view_unformatted, with some additions.
+ * The views_view_webspark_cards in the function name below matches the "theme" name in Cards.php. This preprocess function should only be called on views using your view format
+ * The code below in the foreach is referring to hardcoded field names like "field_image_link". For the new/good one we will need to find a way to read the field names dynamically from the view settings you have created.
+ * For an example of reading the view style settings and using them to prepare variables you can look at the template_preprocess_views_view_table function here: web/core/modules/views/views.theme.inc
+ * I did not paste the template_preprocess_views_view_table function here just because it's huge and daunting but I would deffinitely refer to it.
+ */  
+
+ 
+
+ function template_preprocess_views_view_webspark_cards(&$variables) {
+    $view = $variables['view'];
+    $rows = $variables['rows'];
+    $style = $view->style_plugin;
+    $options = $style->options;
+  
+    foreach ($rows as $id => $row) {
+      $variables['rows'][$id] = [];
+      $variables['rows'][$id]['content'] = $row;
+      $entity = $variables['rows'][$id]['content']['#row']->_entity;
+      if ($entity instanceof \Drupal\node\NodeInterface) {
+        $myId = $entity->id();
+        $node = \Drupal::entityTypeManager()->getStorage('node')->load($myId);
+        // create easy variable to access link to node
+        $read_more = $node->toUrl()->toString();
+        // create variable to access image url
+        if ($node->hasField('field_image_link')){
+          $image_string = $node->field_image_link->value;
+          if (!is_null($image_string)){
+            $dom = Html::load($image_string);
+            if (!is_null($dom)){
+              foreach ($dom->getElementsByTagName('img') as $i => $img) {
+                $img_url =  $img->getAttribute('src');
+                $img_alt =  $img->getAttribute('alt');
+              }
+            }
+          }
+        }
+        // create variable to access created date
+        $createdTimeString = $node->getCreatedTime();
+        $created = \Drupal::service('date.formatter')->format($createdTimeString, 'custom', 'F j, Y');
+      }
+    
+      $img_alt = "";
+      $variables['rows'][$id]['attributes'] = new Attribute();
+      $variables['rows'][$id]['read_more'] = $read_more;
+      $variables['rows'][$id]['img_url'] = $img_url;
+      $variables['rows'][$id]['img_alt'] = $img_alt;
+      $variables['rows'][$id]['created'] = $created;
+      if ($row_class = $view->style_plugin->getRowClass($id)) {
+        $variables['rows'][$id]['attributes']->addClass($row_class);
+      }
+    }
+      
+    $options = $variables['view']->style_plugin->options;
+    $variables['options'] = $options;
+  }

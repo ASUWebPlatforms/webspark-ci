@@ -28,7 +28,7 @@ use ArrangementStyleEnum;
   *   id = "cards",
   *   title = @Translation("Cards"),
   *   help = @Translation("Displays rows as Cards list."),
-  *   theme = "views_view_list",
+  *   theme = "views_view_webspark_cards",
   *   display_types = {"normal"}
   * )
   */
