@@ -34,6 +34,13 @@ use ArrangementStyleEnum;
   */
   class Cards extends StylePluginBase {
 
+      /**
+   * Does the style plugin for itself support to add fields to its output.
+   *
+   * @var bool
+   */
+    protected $usesFields = TRUE;
+
     /**
      * {@inheritdoc}
      */
@@ -162,6 +169,9 @@ use ArrangementStyleEnum;
       '#options' => $field_names,
       '#default_value' => $this->options['card_cta'],
     ];
+
+    //TODO: Add Tooltip?
+    //TODO: Add Anchor Menu Settings?
 
     //Some additional Block Settings
     $form['spacing_top'] = [
