@@ -34,6 +34,13 @@ use ArrangementStyleEnum;
   */
   class Cards extends StylePluginBase {
 
+      /**
+   * Does the style plugin for itself support to add fields to its output.
+   *
+   * @var bool
+   */
+    protected $usesFields = TRUE;
+
     /**
      * {@inheritdoc}
      */
