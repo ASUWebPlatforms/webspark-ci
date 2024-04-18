@@ -62,7 +62,7 @@ class FeatureContext extends RawDrupalContext {
    * @param string $selector
    *   Allowed selectors: #id, .className, //xpath.
    *
-   * @When I scroll :selector into view
+   * @When /^I scroll "((\\\")?.*)" into view$/
    *
    * @throws \Exception
    */
@@ -336,6 +336,350 @@ JS;
     }
     throw new \Exception(__METHOD__ . ' failed');
   }
+
+  /**
+   * Check bullet list styles.
+   *
+   * @Then I should see the bullet list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyBulletList($selector) {
+    $function = <<<JS
+(function(){
+  var ulListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+  var ulFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+  var ulMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+  var ulPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+  var ulPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+  var ulFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+  var ulListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+  var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+  var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
+  var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
+  var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+  var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+  if (ulListStyle === "none"
+      && ulFontStyle.includes("Arial")
+      && ulMaxWidth === "700px"
+      && ulPaddingBottom === "48px"
+      && ulPaddingInlineStart === "32px"
+      && ulFontSize === "16px"
+      && ulListStylePosition === "outside"
+      && liListStyle === "none"
+      && liBeforeContent === '"•"'
+      && liPaddingLeft === "32px"
+      && liMarginBottom === "16px"
+      && liDisplay === "list-item"
+      ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check multilevel bullet list styles.
+   *
+   * @Then I should see the multilevel bullet list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyMultilevelBulletList($selector) {
+    $function = <<<JS
+(function(){
+  var liUlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ul > li"), ":before").getPropertyValue('content');
+  if (liUlLiBeforeContent === '"◦"') {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check icon list styles.
+   *
+   * @Then I should see the icon list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyIconList($selector) {
+    $function = <<<JS
+(function(){
+  var ulListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+  var ulFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+  var ulMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+  var ulPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+  var ulPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+  var ulFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+  var ulListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+  var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+  var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
+  var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+  var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+  if (ulListStyle === "none"
+      && ulFontStyle.includes("Arial")
+      && ulMaxWidth === "700px"
+      && ulPaddingBottom === "48px"
+      && ulPaddingInlineStart === "32px"
+      && ulFontSize === "16px"
+      && ulListStylePosition === "outside"
+      && liListStyle === "none"
+      && liPaddingLeft === "32px"
+      && liMarginBottom === "16px"
+      && liDisplay === "list-item"
+      ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check numbered list styles.
+   *
+   * @Then I should see the numbered list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyNumberedList($selector) {
+    $function = <<<JS
+(function(){
+  var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+  var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+  var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+  var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+  var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+  var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+  var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+  var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+  var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
+  var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
+  var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+  var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+  if (olListStyle === "none"
+      && olFontStyle.includes("Arial")
+      && olMaxWidth === "700px"
+      && olPaddingBottom === "48px"
+      && olPaddingInlineStart === "48px"
+      && olFontSize === "16px"
+      && olListStylePosition === "outside"
+      && liListStyle === "none"
+      && liBeforeContent === 'counter(listcounter) ". "'
+      && liPaddingLeft === "48px"
+      && liMarginBottom === "16px"
+      && liDisplay === "list-item"
+      ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check multilevel numbered list styles.
+   *
+   * @Then I should see the multilevel numbered list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyMultilevelNumberedList($selector) {
+    $function = <<<JS
+(function(){
+  var liOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li"), ":before").getPropertyValue('content');
+  var liOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li"), ":before").getPropertyValue('content');
+  var liOlLiOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li > ol > li"), ":before").getPropertyValue('content');
+
+  if (
+    liOlLiBeforeContent === 'counter(listcounter, lower-alpha) ". "'
+    && liOlLiOlLiBeforeContent === 'counter(listcounter, lower-roman) ". "'
+    && liOlLiOlLiOlLiBeforeContent === 'counter(listcounter) ". "'
+    ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check numbered list styles.
+   *
+   * @Then I should see the step list styles are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyStepList($selector) {
+    $function = <<<JS
+(function(){
+  var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+  var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+  var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+  var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+  var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+  var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+  var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+  var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+  var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
+  var liBeforeBackgroundColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color');
+  var liBeforeBorderRadius = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius');
+  var liBeforePaddingTop = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top');
+  var liBeforePaddingRight = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right');
+  var liBeforePaddingBottom = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom');
+  var liBeforePaddingLeft = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left');
+  var liBeforeColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color');
+  var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left');
+  var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+  var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+  var liFontWeight = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('font-weight');
+  var liFontWeightSpan = window.getComputedStyle(document.querySelector("$selector > li > span")).getPropertyValue('font-weight');
+  var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
+  var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
+  var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
+  if (olListStyle === "none"
+      && olFontStyle.includes("Arial")
+      && olMaxWidth === "667.383px"
+      && olPaddingBottom === "48px"
+      && olPaddingInlineStart === "24px"
+      && olFontSize === "16px"
+      && olListStylePosition === "outside"
+      && liListStyle === "none"
+      && liBeforeContent === 'counter(listcounter)'
+      && liBeforeBackgroundColor === "rgb(25, 25, 25)"
+      && liBeforeBorderRadius === "800px"
+      && liBeforePaddingTop === "8px"
+      && liBeforePaddingRight === "12.8px"
+      && liBeforePaddingBottom === "8px"
+      && liBeforePaddingLeft === "12.8px"
+      && liBeforeColor === "rgb(250, 250, 250)"
+      && liPaddingLeft === "48px"
+      && liMarginBottom === "48px"
+      && liDisplay === "list-item"
+      && liFontWeight === "700"
+      && liFontWeightSpan === "400"
+      && liBorderBottomColor === "rgb(191, 191, 191)"
+      && liBorderBottomStyle === "solid"
+      && liBorderBottomWidth === "1px"
+      ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check CKEditor numbered list styles.
+   *
+   * @Then I should see the step list styles in CKEditor are correct on :selector
+   *
+   * @throws \Exception
+   */
+  public function verifyCKStepList($selector) {
+    $function = <<<JS
+(function(){
+  var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+  var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+  var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+  var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+  var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+  var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+  var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+  var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+  var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
+  var liBeforeBackgroundColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color');
+  var liBeforeBorderRadius = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius');
+  var liBeforePaddingTop = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top');
+  var liBeforePaddingRight = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right');
+  var liBeforePaddingBottom = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom');
+  var liBeforePaddingLeft = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left');
+  var liBeforeColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color');
+  var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left');
+  var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+  var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+  var liFontWeightBogusParagraph = window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph")).getPropertyValue('font-weight');
+  var liFontWeightBogusParagraphSpan = window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph > span")).getPropertyValue('font-weight');
+  var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
+  var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
+  var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
+  if (olListStyle === "none"
+      && olFontStyle.includes("Arial")
+      && olMaxWidth === "667.383px"
+      && olPaddingBottom === "48px"
+      && olPaddingInlineStart === "24px"
+      && olFontSize === "16px"
+      && olListStylePosition === "outside"
+      && liListStyle === "none"
+      && liBeforeContent === 'counter(listcounter)'
+      && liBeforeBackgroundColor === "rgb(25, 25, 25)"
+      && liBeforeBorderRadius === "800px"
+      && liBeforePaddingTop === "8px"
+      && liBeforePaddingRight === "12.8px"
+      && liBeforePaddingBottom === "8px"
+      && liBeforePaddingLeft === "12.8px"
+      && liBeforeColor === "rgb(250, 250, 250)"
+      && liPaddingLeft === "48px"
+      && liMarginBottom === "48px"
+      && liDisplay === "list-item"
+      && liFontWeightBogusParagraph === "700"
+      && liFontWeightBogusParagraphSpan === "400"
+      && liBorderBottomColor === "rgb(191, 191, 191)"
+      && liBorderBottomStyle === "solid"
+      && liBorderBottomWidth === "1px"
+      ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+})()
+JS;
+    if ($this->getSession()->evaluateScript($function)) {
+      return;
+    }
+    throw new \Exception(__METHOD__ . ' failed');
+  }
+
 
   /**
    * Check the label for a checkbox.
