@@ -24,16 +24,22 @@ Feature: Tabbed Content
     And I should see that "border-bottom" with "8px solid #8c1d41" is in ".uds-tabbed-panels .nav-tabs .nav-link.active" class
 
   @api @javascript
-  Scenario: Verify selecting a new item highlights the new item
+  Scenario: Verify the items content is properly visible
+    Given the "#nav-tab-1-tab" element exists
+    And the "#nav-tab-1" element exists
+    Then the "#nav-tab-1" element should have the classes ".active.show"
+
+  @api @javascript
+  Scenario: Verify selecting a new item highlights the item and displays the content
     Given the "#nav-tab-2-tab" element exists
-    Then the "#nav-tab-1-tab" element should have the class ".active"
+    Then the "#nav-tab-1-tab" element should exist
+    And the "#nav-tab-1-tab" element should have the class ".active"
     And the "#nav-tab-2-tab" element should not have the class ".active"
     When I click the element "#nav-tab-2-tab"
     Then the "#nav-tab-2-tab" element should have the class ".active"
     And the "#nav-tab-1-tab" element should not have the class ".active"
-
-  # @api @javascript
-  # Scenario: Verify tabbed content items are properly visible
+    And the "#nav-tab-2" element should have the classes ".active.show"
+    And the "#nav-tab-1" element should not have the classes ".active.show"
 
   # @api @javascript
   # Scenario: Verify the chevrons are visible as needed
