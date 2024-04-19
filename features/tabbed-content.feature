@@ -21,7 +21,7 @@ Feature: Tabbed Content
     Then only one element should have the selector "#nav-tab-1-tab"
     And the "#nav-tab-1-tab" element should have the class ".active"
     # NOTE: This definition easily provides false positives
-    And I should see that "border-bottom" with "8px solid #8c1d41" is in ".uds-tabbed-panels .nav-tabs .nav-link.active" class
+    And I should see that "border-bottom" with "8px solid #8c1d40" is in ".uds-tabbed-panels .nav-tabs .nav-link.active" class
 
   @api @javascript
   Scenario: Verify the items content is properly visible
@@ -45,4 +45,4 @@ Feature: Tabbed Content
   # Scenario: Verify the chevrons are visible as needed
 
   # @api @javascript
-  # Scenario: Verify the chevrons are visible and scroll the tabbed content
+  # Scenario: Verify the chevrons scroll the tabbed content when clicked
