@@ -8,14 +8,14 @@ Feature: Tabbed Content
     When I am at "/tabbed-content"
     Then the ".uds-tabbed-panels" element should exist
 
-  @api @javascript
+  @api @javascript @anonymous
   Scenario: Verify users can view tabbed content
     Given the "#nav-tab" element exists
     Then I should see that the "#nav-tab ~ .scroll-control-prev" element exists
     And the "#nav-tab ~ .scroll-control-next" element exists
     And the "#nav-tabContent" element exists
 
-  @api @javascript
+  @api @javascript @anonymous
   Scenario: Verify the first item is highlighted
     Given the "#nav-tab-1-tab" element exists
     Then only one element should have the selector "#nav-tab-1-tab"
@@ -23,13 +23,13 @@ Feature: Tabbed Content
     # NOTE: This definition easily provides false positives
     And I should see that "border-bottom" with "8px solid #8c1d40" is in ".uds-tabbed-panels .nav-tabs .nav-link.active" class
 
-  @api @javascript
+  @api @javascript @anonymous
   Scenario: Verify the items content is properly visible
     Given the "#nav-tab-1-tab" element exists
     And the "#nav-tab-1" element exists
     Then the "#nav-tab-1" element should have the classes ".active.show"
 
-  @api @javascript
+  @api @javascript @anonymous
   Scenario: Verify selecting a new item highlights the item and displays the content
     Given the "#nav-tab-2-tab" element exists
     Then the "#nav-tab-1-tab" element should exist
@@ -41,8 +41,9 @@ Feature: Tabbed Content
     And the "#nav-tab-2" element should have the classes ".active.show"
     And the "#nav-tab-1" element should not have the classes ".active.show"
 
-  # @api @javascript
+  # The following scenarios can be completed after WS2-2016
+  # @api @javascript @anonymous
   # Scenario: Verify the chevrons are visible as needed
 
-  # @api @javascript
+  # @api @javascript @anonymous
   # Scenario: Verify the chevrons scroll the tabbed content when clicked
