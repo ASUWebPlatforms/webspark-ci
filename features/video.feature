@@ -3,7 +3,7 @@ Feature: Video
   As an anonymous user
   I want to verify that the YouTube embed functions properly
 
-  @api @javascript
+  @api @javascript @anonymous
   Scenario: Verify Anonymous users can view and interact with YouTube videos
     Given I am an anonymous user
     When I am at '/video'
