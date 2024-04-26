@@ -10,6 +10,17 @@
     text-align: left;
     width: inherit;
     padding-left: 2rem;
+    &.maroon {
+      svg {
+        color: $uds-color-base-maroon;
+      }
+    }
+    &.gold {
+      svg {
+        color: $uds-color-base-gold;
+      }
+    }
+
     li {
       & > .fontawesome-icon-inline {
         position: absolute;
