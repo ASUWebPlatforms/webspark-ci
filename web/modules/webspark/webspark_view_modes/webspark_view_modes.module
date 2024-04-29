@@ -23,49 +23,49 @@ use Drupal\Component\Utility\Html;
  
 
  function template_preprocess_views_view_webspark_cards(&$variables) {
-    $view = $variables['view'];
-    $rows = $variables['rows'];
-    $style = $view->style_plugin;
-    $options = $style->options;
+    // $view = $variables['view'];
+    // $rows = $variables['rows'];
+    // $style = $view->style_plugin;
+    // $options = $style->options;
   
-    foreach ($rows as $id => $row) {
-      $variables['rows'][$id] = [];
-      $variables['rows'][$id]['content'] = $row;
-      $entity = $variables['rows'][$id]['content']['#row']->_entity;
-      if ($entity instanceof \Drupal\node\NodeInterface) {
-        $myId = $entity->id();
-        $node = \Drupal::entityTypeManager()->getStorage('node')->load($myId);
-        // create easy variable to access link to node
-        $read_more = $node->toUrl()->toString();
-        // create variable to access image url
-        if ($node->hasField('field_image_link')){
-          $image_string = $node->field_image_link->value;
-          if (!is_null($image_string)){
-            $dom = Html::load($image_string);
-            if (!is_null($dom)){
-              foreach ($dom->getElementsByTagName('img') as $i => $img) {
-                $img_url =  $img->getAttribute('src');
-                $img_alt =  $img->getAttribute('alt');
-              }
-            }
-          }
-        }
-        // create variable to access created date
-        $createdTimeString = $node->getCreatedTime();
-        $created = \Drupal::service('date.formatter')->format($createdTimeString, 'custom', 'F j, Y');
-      }
+    // foreach ($rows as $id => $row) {
+    //   $variables['rows'][$id] = [];
+    //   $variables['rows'][$id]['content'] = $row;
+    //   $entity = $variables['rows'][$id]['content']['#row']->_entity;
+    //   if ($entity instanceof \Drupal\node\NodeInterface) {
+    //     $myId = $entity->id();
+    //     $node = \Drupal::entityTypeManager()->getStorage('node')->load($myId);
+    //     // create easy variable to access link to node
+    //     $read_more = $node->toUrl()->toString();
+    //     // create variable to access image url
+    //     if ($node->hasField('field_image_link')){
+    //       $image_string = $node->field_image_link->value;
+    //       if (!is_null($image_string)){
+    //         $dom = Html::load($image_string);
+    //         if (!is_null($dom)){
+    //           foreach ($dom->getElementsByTagName('img') as $i => $img) {
+    //             $img_url =  $img->getAttribute('src');
+    //             $img_alt =  $img->getAttribute('alt');
+    //           }
+    //         }
+    //       }
+    //     }
+    //     // create variable to access created date
+    //     $createdTimeString = $node->getCreatedTime();
+    //     $created = \Drupal::service('date.formatter')->format($createdTimeString, 'custom', 'F j, Y');
+    //   }
     
-      $img_alt = "";
-      $variables['rows'][$id]['attributes'] = new Attribute();
-      $variables['rows'][$id]['read_more'] = $read_more;
-      $variables['rows'][$id]['img_url'] = $img_url;
-      $variables['rows'][$id]['img_alt'] = $img_alt;
-      $variables['rows'][$id]['created'] = $created;
-      if ($row_class = $view->style_plugin->getRowClass($id)) {
-        $variables['rows'][$id]['attributes']->addClass($row_class);
-      }
-    }
+    //   $img_alt = "";
+    //   $variables['rows'][$id]['attributes'] = new Attribute();
+    //   $variables['rows'][$id]['read_more'] = $read_more;
+    //   $variables['rows'][$id]['img_url'] = $img_url;
+    //   $variables['rows'][$id]['img_alt'] = $img_alt;
+    //   $variables['rows'][$id]['created'] = $created;
+    //   if ($row_class = $view->style_plugin->getRowClass($id)) {
+    //     $variables['rows'][$id]['attributes']->addClass($row_class);
+    //   }
+    // }
       
-    $options = $variables['view']->style_plugin->options;
-    $variables['options'] = $options;
+    // $options = $variables['view']->style_plugin->options;
+    // $variables['options'] = $options;
   }
