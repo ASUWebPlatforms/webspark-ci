@@ -534,8 +534,8 @@ function webspark_update_10005(&$sandbox) {
   $config = $config_factory->getEditable('system.performance');
   // Only set if default of none is configured. Otherwise, we assume the site
   // owner has intentionally changed the setting.
-  if ($config->get('cache.page.max_age') !== 0) {
-    $config->set('cache.page.max_age', 3600);
+  if ($config->get('cache.page.max_age') !== '0') {
+    $config->set('cache.page.max_age', '3600');
   }
   $config->save(TRUE);
   \Drupal::state()->set('configuration_locked', TRUE);
