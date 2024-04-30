@@ -2,3 +2,11 @@
 .uds-img.uds-img-drop-shadow {
   margin-bottom: 1rem;
 }
+
+.uds-img-rounded {
+  border-radius: 100%;
+
+  img {
+    border: 0;
+  }
+}

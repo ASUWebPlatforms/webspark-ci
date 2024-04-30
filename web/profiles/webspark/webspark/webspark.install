@@ -524,3 +524,20 @@ function webspark_update_10004(&$sandbox) {
     \Drupal::state()->set('configuration_locked', TRUE);
   }
 }
+
+/**
+ * WS2-2011: Set TTL to 1 hr
+ */
+function webspark_update_10005(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('system.performance');
+  // Only set if default of zero or none is found. Otherwise, we assume the
+  // site owner has intentionally changed the setting. Using non-typed check so
+  // if there's a null or 0 or even '0' value they'll all get updated.
+  if ($config->get('cache.page.max_age') == 0) {
+    $config->set('cache.page.max_age', 3600);
+  }
+  $config->save(TRUE);
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
