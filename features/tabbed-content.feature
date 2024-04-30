@@ -36,6 +36,7 @@ Feature: Tabbed Content
     And the "#nav-tab-1-tab" element should have the class ".active"
     And the "#nav-tab-2-tab" element should not have the class ".active"
     When I click the element "#nav-tab-2-tab"
+    Then I wait for 3 seconds
     Then the "#nav-tab-2-tab" element should have the class ".active"
     And the "#nav-tab-1-tab" element should not have the class ".active"
     And the "#nav-tab-2" element should have the classes ".active.show"
