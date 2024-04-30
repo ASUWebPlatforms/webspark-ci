@@ -33,6 +33,7 @@ Feature: Tabbed Content
   Scenario: Verify selecting a new item highlights the item and displays the content
     Given the "#nav-tab-2-tab" element exists
     Then the "#nav-tab-1-tab" element should exist
+    Then I wait for 1 seconds
     And the "#nav-tab-1-tab" element should have the class ".active"
     And the "#nav-tab-2-tab" element should not have the class ".active"
     When I click the element "#nav-tab-2-tab"
