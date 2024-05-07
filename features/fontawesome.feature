@@ -1,5 +1,5 @@
-Feature: Anonymous user
-  In order to have confidence in my site's fontawesome implementation
+Feature: FontAwesome icons
+  In order to have confidence in my site's FontAwesome implementation
   As an anonymous or admin user
   I want to verify successful rendering and widget functionality
 
@@ -13,28 +13,19 @@ Feature: Anonymous user
   Scenario: Verify FontAwesome icon picker widget
     Given I am logged in as a user with the "administrator" role
     When I go to "/node/12/layout"
-    # Scroll to appropriate place
     Then I scroll "[data-layout-block-uuid='00ed7dbd-e5f7-44f6-b135-f860cfcdcebe']" into view
     Then I wait for 1 second
     Then I scroll vertically by -130 pixels
     Then I wait for 1 second
-    # Hover to reveal pencil icon
     Then I hover over the element "[data-layout-content-preview-placeholder-label='\"3 Columns\" block']"
-    # Click pencil icon
     Then I press "Open 3 Columns configuration options"
-    # Click the Configure link
     Then I click the element "[data-layout-content-preview-placeholder-label='\"3 Columns\" block'] ul > li > a"
     Then I wait for 1 second
-    # Should see 500px icon as the currently selected icon
     Then I should see that the ".field--type-fontawesome-icon.field--name-field-icon.field--widget-fontawesome-iconpicker-widget .icons-selector svg.fa-500px" element exists
-    # Click the down arrow
     Then I click the element ".field--type-fontawesome-icon.field--name-field-icon.field--widget-fontawesome-iconpicker-widget .icons-selector .fip-icon-down-dir"
-    # Should see pop-up
     Then I should see that the ".field--type-fontawesome-icon.field--name-field-icon.field--widget-fontawesome-iconpicker-widget .icons-selector .selector-popup" element exists
-    # Search for "pitchfork"
     Then I enter "pitchfork" for "Search Icons"
     Then I wait for 1 second
-    # See "pitchfork" icon in first position
     Then I should see that the ".fip-icons-container > span:nth-of-type(2)[data-fip-value='fa-solid fa-E_hand_pitchfork_solid']" element exists
 
   @api @javascript
@@ -56,10 +47,3 @@ Feature: Anonymous user
     Given I enter "square-x-twitter" for "icon_name"
     And I click the element "#drupal-modal + .ui-dialog-buttonpane button.form-submit"
     Then I should see that the "ul.uds-list li svg.fa-square-x-twitter path" element exists
-
-
-
-
-
-
-
