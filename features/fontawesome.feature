@@ -10,7 +10,7 @@ Feature: FontAwesome icons
     Then I should see that the "#social-media a > svg.fa-square-facebook" element exists
 
   @api @javascript
-  Scenario: Verify FontAwesome icon picker widget
+  Scenario: Verify FontAwesome and ASU icons appear in picker widget
     Given I am logged in as a user with the "administrator" role
     When I go to "/node/12/layout"
     Then I scroll "[data-layout-block-uuid='00ed7dbd-e5f7-44f6-b135-f860cfcdcebe']" into view
