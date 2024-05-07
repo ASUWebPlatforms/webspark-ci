@@ -23,7 +23,7 @@ default:
               chrome:
                 switches:
                   - "--disable-gpu"
-#                  - "--headless"
+                  # - "--headless"
                   - "--no-sandbox"
                   - "--disable-dev-shm-usage"
                   - "--ignore-certificate-errors"
@@ -32,7 +32,7 @@ default:
     NuvoleWeb\Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
-#      api_driver: 'drush'
+      # api_driver: 'drush'
       drupal:
         drupal_root: '/var/www/html/web'
       text:
