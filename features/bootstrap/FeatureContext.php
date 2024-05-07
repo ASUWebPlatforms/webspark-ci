@@ -626,12 +626,13 @@ class FeatureContext extends RawDrupalContext {
   /**
    * Compare the number of paginated pages after applying a filter.
    *
-   * @Then Check the current pagination is less than the previous pagination
+   * @Then Check the current pagination is :comparison than the previous pagination
    *
-   * @return void
+   * @param string $comparison less|greater
+   *
    * @throws Exception
    */
-  public function checkPaginationAfterFilter() {
+  public function checkPaginationAfterFilter(string $comparison) {
     $lastPageElement = $this->getSession()
       ->getPage()
       ->find('css', '.page-item:nth-last-child(2) > .page-link');
@@ -642,8 +643,11 @@ class FeatureContext extends RawDrupalContext {
 
     $currentPageNumber = (int) filter_var($lastPageElement->getText(), FILTER_SANITIZE_NUMBER_INT);
 
-    if ($currentPageNumber >= $this->pagedNumbers) {
-      throw new Exception("Expected the last pagination page number to be less than the stored value {$this->pagedNumbers}, but found $currentPageNumber");
+    if ($comparison === 'less' && $currentPageNumber >= $this->pagedNumbers) {
+      throw new Exception("Expected less than the stored value {$this->pagedNumbers}, but found $currentPageNumber");
+    }
+    elseif ($comparison === 'greater' && $currentPageNumber <= $this->pagedNumbers) {
+      throw new Exception("Expected greater than the stored value {$this->pagedNumbers}, but found $currentPageNumber");
     }
 
     echo $currentPageNumber;
