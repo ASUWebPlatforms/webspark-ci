@@ -4,6 +4,11 @@
 
 #drupal-off-canvas-wrapper  {
   z-index: 1260;
+  // Override OffCanvas font styles within CKEditor.
+  .ck-reset {
+    font-family: Arial, Helvetica, 'Nimbus Sans L', 'Liberation Sans', FreeSans, sans-serif;
+  }
+
   .form-text,
   .form-tel,
   .form-email,
