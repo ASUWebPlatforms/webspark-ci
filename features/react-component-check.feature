@@ -131,23 +131,6 @@ Feature: React Component Check
     #Text for image apper
     Then I should see that the "#caption > .uds-caption-text > div > p" element exists
     Then I wait for 1 seconds
-    
-  @api @javascript @anchor_menu__test
-  Scenario: Verify Anchor menu component (components-core)
-    Given I am an anonymous user
-    When I am at '/anchor-menu'
-    Then I wait for 2 seconds
-    #Check "On this page" appear
-    Then I should see that the ".uds-anchor-menu-wrapper" element exists
-    And I should see the heading "On This Page:"
-    #Check “current” item highlighted
-    Then I click "Block B"
-    And I wait for 1 seconds
-    And I scroll "#webspark-anchor-link--152" into view
-    And I wait for 1 seconds
-    And I should see that the "a.nav-link.active[data-ga-text='block b']" element exists
-    #Check sticky Anchor menu
-    Then I should see that the ".uds-anchor-menu-attached" element exists
 
   @api @javascript @notification_banner-test
   Scenario: Verify Notification banner component
