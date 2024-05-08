@@ -64,7 +64,7 @@ class FeatureContext extends RawDrupalContext {
    *
    * @When I scroll :selector into view
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function scrollIntoView($selector) {
     $locator = $selector;
@@ -110,14 +110,14 @@ JS;
         break;
 
       default:
-        throw new \Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
+        throw new Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
     }
 
     try {
       $this->getSession()->executeScript($function);
     }
     catch (Exception $e) {
-      throw new \Exception(__METHOD__ . ' failed');
+      throw new Exception(__METHOD__ . ' failed');
     }
   }
 
@@ -129,7 +129,7 @@ JS;
    *
    * @Then /^I scroll vertically by (-?\d+) pixels$/
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function scrollByN(int $number) {
     $function = <<<JS
@@ -206,7 +206,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -229,7 +229,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -237,9 +237,9 @@ JS;
    *
    * @param string $selector
    *
-   * @Then I should see that the :selector element exists
+   * @Then /^(?:I should see that )?the "(?P<selector>[^"]*)" element (?:exists|should exist)$/
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function singleElementExists($selector) {
     $function = <<<JS
@@ -251,7 +251,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -259,7 +259,7 @@ JS;
    *
    * @Then I should see that the :selector element does not exist
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function singleElementDoesNotExist($selector) {
     $function = <<<JS
@@ -271,7 +271,7 @@ JS;
     if (!$this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -292,7 +292,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
 
   }
 
@@ -300,7 +300,7 @@ JS;
    * Check if multiple elements exist on the page.
    *
    * @Then I should see that multiple :selector elements exist
-   * @throws \Exception
+   * @throws Exception
    */
   public function multipleElementsExist($selector) {
     $function = <<<JS
@@ -312,7 +312,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -322,7 +322,7 @@ JS;
    * @param string $selector
    *
    * @Then I should see that :number of :selector elements exist
-   * @throws \Exception
+   * @throws Exception
    */
   public function xNumberElementsExist($number, $selector) {
     $function = <<<JS
@@ -334,7 +334,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -342,7 +342,7 @@ JS;
    *
    * @Then I should see the gold underline exists on :selector menu item
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function goldUnderlineExists($selector) {
     $function = <<<JS
@@ -360,7 +360,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -368,7 +368,7 @@ JS;
    *
    * @Then I should see the chevron icon exists on the :selector pager item
    *
-   * @throws \Exception
+   * @throws Exception
    */
   public function chevronExists($selector) {
     $function = <<<JS
@@ -392,7 +392,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -404,7 +404,7 @@ JS;
    * @param $number
    *
    * @return void
-   * @throws \Exception
+   * @throws Exception
    */
   public function dragVerticallyByXpx($selector, $number) {
     $function = <<<JS
@@ -449,7 +449,7 @@ JS;
     if ($this->getSession()->evaluateScript($function)) {
       return;
     }
-    throw new \Exception(__METHOD__ . ' failed');
+    throw new Exception(__METHOD__ . ' failed');
   }
 
   /**
@@ -467,7 +467,7 @@ JS;
       return $this->getSession()->executeScript($function);
     }
     catch (Exception $e) {
-      throw new \Exception(__METHOD__ . ' failed');
+      throw new Exception(__METHOD__ . ' failed');
     }
   }
 
@@ -571,8 +571,80 @@ JS;
       return $this->getSession()->executeScript($function);
     }
     catch (Exception $e) {
-      throw new \Exception(__METHOD__ . ' failed');
+      throw new Exception(__METHOD__ . ' failed');
     }
   }
 
+  /**
+   * Verify only one element on the page has a certain selector.
+   *
+   * @Then only one element should have the selector :selector
+   *
+   * @param $selector
+   *
+   * @return void
+   * @throws Exception
+   */
+  public function onlyOneElementShouldHaveTheSelector($selector): void {
+    $elements = $this->getSession()->getPage()->findAll('css', $selector);
+    if (count($elements) !== 1) {
+      throw new Exception(sprintf('Expected exactly one element to match the selector "%s", but found %d.', $selector, count($elements)));
+    }
+  }
+
+  /**
+   * Verify a certain element contains a certain class.
+   *
+   * @Given the :selector element should have the class/classes :classes
+   *
+   * @param $selector
+   * @param $classes
+   *
+   * @return void
+   * @throws Exception
+   */
+  public function theElementShouldHaveTheClasses($selector, $classes): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception(sprintf('The element "%s" was not found on the page.', $selector));
+    }
+
+    $classList = array_filter(explode('.', $classes), function($class) {
+      return !empty($class);
+    });
+
+    foreach ($classList as $class) {
+      if (!$element->hasClass($class)) {
+        throw new Exception(sprintf('The element "%s" does not have the class "%s".', $selector, $class));
+      }
+    }
+  }
+
+  /**
+   * Verify a certain element does not contain a certain class.
+   *
+   * @Given the :selector element should not have the class/classes :classes
+   *
+   * @param $selector
+   * @param $classes
+   *
+   * @return void
+   * @throws Exception
+   */
+  public function theElementShouldNotHaveTheClasses($selector, $classes): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception(sprintf('The element "%s" was not found on the page.', $selector));
+    }
+
+    $classList = array_filter(explode('.', $classes), function($class) {
+      return !empty($class);
+    });
+
+    foreach ($classList as $class) {
+      if ($element->hasClass($class)) {
+        throw new Exception(sprintf('The element "%s" has the class "%s".', $selector, $class));
+      }
+    }
+  }
 }
