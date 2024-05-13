@@ -820,7 +820,7 @@ class FeatureContext extends RawDrupalContext {
         var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
         var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
         var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        if (ulListStyle === "none"
+        return ulListStyle === "none"
             && ulFontStyle.includes("Arial")
             && ulMaxWidth === "700px"
             && ulPaddingBottom === "48px"
@@ -830,13 +830,7 @@ class FeatureContext extends RawDrupalContext {
             && liListStyle === "none"
             && liPaddingLeft === "32px"
             && liMarginBottom === "16px"
-            && liDisplay === "list-item"
-            ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+            && liDisplay === "list-item";
       })()
     JS;
 
@@ -869,7 +863,7 @@ class FeatureContext extends RawDrupalContext {
         var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
         var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
         var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        if (olListStyle === "none"
+        return olListStyle === "none"
             && olFontStyle.includes("Arial")
             && olMaxWidth === "700px"
             && olPaddingBottom === "48px"
@@ -880,13 +874,7 @@ class FeatureContext extends RawDrupalContext {
             && liBeforeContent === 'counter(listcounter) ". "'
             && liPaddingLeft === "48px"
             && liMarginBottom === "16px"
-            && liDisplay === "list-item"
-            ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+            && liDisplay === "list-item";
       })()
     JS;
 
@@ -911,16 +899,9 @@ class FeatureContext extends RawDrupalContext {
         var liOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li"), ":before").getPropertyValue('content');
         var liOlLiOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li > ol > li"), ":before").getPropertyValue('content');
 
-        if (
-          liOlLiBeforeContent === 'counter(listcounter, lower-alpha) ". "'
+        return liOlLiBeforeContent === 'counter(listcounter, lower-alpha) ". "'
           && liOlLiOlLiBeforeContent === 'counter(listcounter, lower-roman) ". "'
-          && liOlLiOlLiOlLiBeforeContent === 'counter(listcounter) ". "'
-          ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+          && liOlLiOlLiOlLiBeforeContent === 'counter(listcounter) ". "';
       })()
     JS;
 
@@ -965,7 +946,7 @@ class FeatureContext extends RawDrupalContext {
         var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
         var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
         var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
-        if (olListStyle === "none"
+        return olListStyle === "none"
             && olFontStyle.includes("Arial")
             && olMaxWidth === "667.383px"
             && olPaddingBottom === "48px"
@@ -988,13 +969,7 @@ class FeatureContext extends RawDrupalContext {
             && liFontWeightSpan === "400"
             && liBorderBottomColor === "rgb(191, 191, 191)"
             && liBorderBottomStyle === "solid"
-            && liBorderBottomWidth === "1px"
-            ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+            && liBorderBottomWidth === "1px";
       })()
     JS;
 
@@ -1039,7 +1014,7 @@ class FeatureContext extends RawDrupalContext {
         var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
         var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
         var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
-        if (olListStyle === "none"
+        return olListStyle === "none"
             && olFontStyle.includes("Arial")
             && olMaxWidth === "667.383px"
             && olPaddingBottom === "48px"
@@ -1062,13 +1037,7 @@ class FeatureContext extends RawDrupalContext {
             && liFontWeightBogusParagraphSpan === "400"
             && liBorderBottomColor === "rgb(191, 191, 191)"
             && liBorderBottomStyle === "solid"
-            && liBorderBottomWidth === "1px"
-            ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+            && liBorderBottomWidth === "1px";
       })()
     JS;
 

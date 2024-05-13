@@ -17,14 +17,14 @@ Feature: Text list verification
     # Icon list
     Given I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul" element exists
     Then I should see the icon list styles are correct on ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul"
-      ## Check for rocket icon
-      Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-rocket > path" element exists
-      ## Check for bus icon
-      Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-bus > path" element exists
-      ## Check for car icon
-      Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-car > path" element exists
-      ## Check for bicycle icon
-      Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-bicycle > path" element exists
+    ## Check for rocket icon
+    Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-rocket > path" element exists
+    ## Check for bus icon
+    Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-bus > path" element exists
+    ## Check for car icon
+    Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-car > path" element exists
+    ## Check for bicycle icon
+    Then I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) > ul.uds-list.fa-ul li > .fontawesome-icon-inline > svg.fa-bicycle > path" element exists
     # Step list
     Given I should see that the ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) ol.uds-list.uds-steplist" element exists
     Then I should see the step list styles are correct on ".row.g-0 + .layout__fixed-width .layout__region--first div:nth-of-type(2) ol.uds-list.uds-steplist"
