@@ -127,6 +127,12 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
 
   // Remove the default behaviour.
   unset($variables['page']['content']['system_main']);
+  /* Hide error messages on 404 page for anonymous users. This is needed
+     because even when the site is configured not to display error messages,
+     for some reason they keep displaying on the 404 page. (WS2-1994) */
+  if ($variables['logged_in'] === false) {
+    unset($variables['page']['content']['messages']);
+  }
   // Create a wrapper, so we can add classes here.
   $wrapper = [
     '#type' => 'container',
@@ -160,12 +166,12 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
   $links = $config->get('webspark_utility_links');
 
   // loop through $links to find any non-empty values
-  // if we find any, we'll display the links  
+  // if we find any, we'll display the links
   // if we don't find any, we'll skip displaying the links
-  
-  foreach ($links as $link) {
-    if (!empty($link['link_url']) && !empty($link['link_title'])) {
-      $has_links = TRUE;
+  if (is_array($links)) {
+    foreach ($links as $link) {
+      if (!empty($link['link_url']) && !empty($link['link_title'])) {
+        $has_links = TRUE;
         if ($has_links) {
           $wrapper['links'] = [
             '#theme' => 'webspark_blocks__links',
@@ -173,12 +179,13 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
             '#links' => $links,
           ];
         }
-      break;
+        break;
+      }
     }
   }
 
   $variables['page']['content']['page_404_content'] = $wrapper;
-  
+
 }
 
 /**
