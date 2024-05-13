@@ -749,7 +749,7 @@ class FeatureContext extends RawDrupalContext {
         var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
         var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
         var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        if (ulListStyle === "none"
+        return ulListStyle === "none"
             && ulFontStyle.includes("Arial")
             && ulMaxWidth === "700px"
             && ulPaddingBottom === "48px"
@@ -760,13 +760,7 @@ class FeatureContext extends RawDrupalContext {
             && liBeforeContent === '"•"'
             && liPaddingLeft === "32px"
             && liMarginBottom === "16px"
-            && liDisplay === "list-item"
-            ) {
-          return true;
-        }
-        else {
-          return false;
-        }
+            && liDisplay === "list-item";
       })()
     JS;
 
@@ -898,7 +892,6 @@ class FeatureContext extends RawDrupalContext {
         var liOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li"), ":before").getPropertyValue('content');
         var liOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li"), ":before").getPropertyValue('content');
         var liOlLiOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li > ol > li"), ":before").getPropertyValue('content');
-
         return liOlLiBeforeContent === 'counter(listcounter, lower-alpha) ". "'
           && liOlLiOlLiBeforeContent === 'counter(listcounter, lower-roman) ". "'
           && liOlLiOlLiOlLiBeforeContent === 'counter(listcounter) ". "';
@@ -1046,5 +1039,73 @@ class FeatureContext extends RawDrupalContext {
     }
 
     throw new Exception(__METHOD__ . ' failed');
+  }
+
+  /**
+   * Check if the Tabbed Content scroll next button should appear.
+   *
+   * @Then Check the Tabbed Content scroll next button appears as needed for :selector
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function checkTabbedContentScrollNext(string $selector): void {
+    $function = <<<JS
+      (function(){
+        const tabbedContent = document.querySelector("$selector");
+        const tabbedContentNav = tabbedContent.querySelector(".nav-tabs");
+        return {
+          tabbedContentWidth: tabbedContent.clientWidth,
+          tabbedContentNavWidth: tabbedContentNav.scrollWidth,
+          isScrollNextNeeded: tabbedContentNav.scrollWidth > tabbedContent.clientWidth
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+    echo 'Tabbed Content width: ' . $result['tabbedContentWidth'] . "\n";
+    echo 'Tabbed Content Navigation width: ' . $result['tabbedContentNavWidth'] . "\n";
+    echo 'Scroll next needed: ' . ($result['isScrollNextNeeded'] ? 'True' : 'False');
+  }
+
+  /**
+   * Check if an element is visible.
+   *
+   * @Then The element :selector should be visible
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function theElementShouldBeVisible(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    if (!$element->isVisible()) {
+      throw new Exception("The element '$selector' is not visible on the page.");
+    }
+  }
+
+  /**
+   * Check if an element is not visible.
+   *
+   * @Then The element :selector should not be visible
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function theElementShouldNotBeVisible(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    if ($element->isVisible()) {
+      throw new Exception("The element '$selector' is visible on the page.");
+    }
   }
 }
