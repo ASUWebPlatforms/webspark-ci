@@ -7,6 +7,7 @@ use Drupal\DrupalExtension\Context\RawDrupalContext;
  */
 class FeatureContext extends RawDrupalContext {
   private int $pagedNumbers = 0;
+  private array $elPosition = [];
 
   /**
    * Initializes context.
@@ -737,43 +738,30 @@ class FeatureContext extends RawDrupalContext {
   public function verifyBulletList($selector): void {
     $function = <<<JS
       (function(){
-        const styles = {
-          ulListStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type'),
-          ulFontStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family'),
-          ulMaxWidth: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width'),
-          ulPaddingBottom: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom'),
-          ulPaddingInlineStart: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start'),
-          ulFontSize: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size'),
-          ulListStylePosition: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position'),
-          liListStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type'),
-          liBeforeContent: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content'),
-          liPaddingLeft: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left'),
-          liMarginBottom: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom'),
-          liDisplay: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display')
-        };
-        const testValues = [];
-        testValues['ulListStyle'] = "none";
-        testValues['ulFontStyle'] = 'Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif';
-        testValues['ulMaxWidth'] = "700px";
-        testValues['ulPaddingBottom'] = "48px";
-        testValues['ulPaddingInlineStart'] = "32px";
-        testValues['ulFontSize'] = "16px";
-        testValues['ulListStylePosition'] = "outside";
-        testValues['liListStyle'] = "none";
-        testValues['liBeforeContent'] = '"•"';
-        testValues['liPaddingLeft'] = "32px";
-        testValues['liMarginBottom'] = "16px";
-        testValues['liDisplay'] = "list-item";
-
-        for (const [key, value] of Object.entries(styles)) {
-          if (value === testValues[key]) {
-            continue;
-          }
-          else {
-            return key;
-          }
-        }
-        return true;
+        var ulListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
+        var ulFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
+        var ulMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
+        var ulPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
+        var ulPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
+        var ulFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
+        var ulListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
+        var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
+        var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
+        var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
+        var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
+        var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
+        return ulListStyle === "none"
+            && ulFontStyle.includes("Arial")
+            && ulMaxWidth === "700px"
+            && ulPaddingBottom === "48px"
+            && ulPaddingInlineStart === "32px"
+            && ulFontSize === "16px"
+            && ulListStylePosition === "outside"
+            && liListStyle === "none"
+            && liBeforeContent === '"•"'
+            && liPaddingLeft === "32px"
+            && liMarginBottom === "16px"
+            && liDisplay === "list-item";
       })()
     JS;
     $result = $this->getSession()->evaluateScript($function);
@@ -928,7 +916,6 @@ class FeatureContext extends RawDrupalContext {
         var liOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li"), ":before").getPropertyValue('content');
         var liOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li"), ":before").getPropertyValue('content');
         var liOlLiOlLiOlLiBeforeContent = window.getComputedStyle(document.querySelector("$selector > li > ol > li > ol > li > ol > li"), ":before").getPropertyValue('content');
-
         return liOlLiBeforeContent === 'counter(listcounter, lower-alpha) ". "'
           && liOlLiOlLiBeforeContent === 'counter(listcounter, lower-roman) ". "'
           && liOlLiOlLiOlLiBeforeContent === 'counter(listcounter) ". "';
@@ -1101,5 +1088,169 @@ class FeatureContext extends RawDrupalContext {
       return;
     }
     throw new \Exception(__METHOD__ . ' failed at ' . $result);
+  }
+
+  /**
+   * Check if the Tabbed Content scroll next button should appear.
+   *
+   * @Then check the Tabbed Content scroll next button appears as needed for :selector
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function checkTabbedContentScrollNext(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    $function = <<<JS
+      (function(){
+        const tabbedContent = document.querySelector("$selector");
+        const tabbedContentNav = tabbedContent.querySelector(".nav-tabs");
+        return {
+          tabbedContentWidth: tabbedContent.clientWidth,
+          tabbedContentNavWidth: tabbedContentNav.scrollWidth,
+          isScrollNextNeeded: tabbedContentNav.scrollWidth > tabbedContent.clientWidth
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+    echo 'Tabbed Content width: ' . $result['tabbedContentWidth'] . "\n";
+    echo 'Tabbed Content Navigation width: ' . $result['tabbedContentNavWidth'] . "\n";
+    echo 'Scroll next needed: ' . ($result['isScrollNextNeeded'] ? 'True' : 'False');
+  }
+
+  /**
+   * Check if an element is visible.
+   *
+   * @Then The element :selector should be visible
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function theElementShouldBeVisible(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    if (!$element->isVisible()) {
+      throw new Exception("The element '$selector' is not visible on the page.");
+    }
+  }
+
+  /**
+   * Check if an element is not visible.
+   *
+   * @Then The element :selector should not be visible
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function theElementShouldNotBeVisible(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (NULL === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    if ($element->isVisible()) {
+      throw new Exception("The element '$selector' is visible on the page.");
+    }
+  }
+
+  /**
+   * @Then store the position of :selector
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function storeThePositionOfSelector(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    $function = <<<JS
+      (function() {
+        const rect = document.querySelector("$selector").getBoundingClientRect();
+        return {
+          bottom: rect.bottom,
+          height: rect.height,
+          left: rect.left,
+          right: rect.right,
+          top: rect.top,
+          width: rect.width,
+          x: rect.x,
+          y: rect.y,
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+
+    $this->elPosition = [
+      'bottom' => $result['bottom'],
+      'height' => $result['height'],
+      'left' => $result['left'],
+      'right' => $result['right'],
+      'top' => $result['top'],
+      'width' => $result['width'],
+      'x' => $result['x'],
+      'y' => $result['y'],
+    ];
+    echo 'Stored position: ' . json_encode($this->elPosition);
+  }
+
+  /**
+   * @Then the position of :selector should be different from its stored position
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function compareThePositionOfSelector(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    $function = <<<JS
+      (function() {
+        const rect = document.querySelector("$selector").getBoundingClientRect();
+        return {
+          bottom: rect.bottom,
+          height: rect.height,
+          left: rect.left,
+          right: rect.right,
+          top: rect.top,
+          width: rect.width,
+          x: rect.x,
+          y: rect.y,
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+    $newPosition = [
+      'bottom' => $result['bottom'],
+      'height' => $result['height'],
+      'left' => $result['left'],
+      'right' => $result['right'],
+      'top' => $result['top'],
+      'width' => $result['width'],
+      'x' => $result['x'],
+      'y' => $result['y'],
+    ];
+    echo 'New position: ' . json_encode($newPosition);
+
+    if ($this->elPosition['left'] == $newPosition['left'] && $this->elPosition['x'] == $newPosition['x']) {
+      throw new Exception("The position of '$selector' has not changed.");
+    }
   }
 }

@@ -4,8 +4,7 @@ Feature: Tabbed Content
   I want to verify that the tabbed content functions properly
 
   Background:
-    Given I am an anonymous user
-    When I am at "/tabbed-content"
+    Given I am at "/tabbed-content"
     Then the ".uds-tabbed-panels" element should exist
 
   @api @javascript @anonymous
@@ -43,9 +42,27 @@ Feature: Tabbed Content
     And the "#nav-tab-2" element should have the classes ".active.show"
     And the "#nav-tab-1" element should not have the classes ".active.show"
 
-  # The following scenarios can be completed after WS2-2016
-  # @api @javascript @anonymous
-  # Scenario: Verify the chevrons are visible as needed
+  @api @javascript @anonymous
+  Scenario: Verify the scroll next is visible for long content
+    Given the ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels" element exists
+    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels"
+    And The element ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels > .scroll-control-next" should be visible
 
-  # @api @javascript @anonymous
-  # Scenario: Verify the chevrons scroll the tabbed content when clicked
+  @api @javascript @anonymous
+  Scenario: Verify the scroll next is not visible for short content
+    Given the ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels" element exists
+    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels"
+    And The element ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels > .scroll-control-next" should not be visible
+
+  @api @javascript @anonymous
+  Scenario: Verify the scroll next and previous buttons work when clicked
+    Given the ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels" element exists
+    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels"
+    Then store the position of "#nav-tab-3-tab"
+    Then I click the element ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels > .scroll-control-next"
+    Then I wait for 2 seconds
+    Then the position of "#nav-tab-3-tab" should be different from its stored position
+    Then store the position of "#nav-tab-1-tab"
+    Then I click the element ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels > .scroll-control-prev"
+    Then I wait for 2 seconds
+    Then the position of "#nav-tab-1-tab" should be different from its stored position
