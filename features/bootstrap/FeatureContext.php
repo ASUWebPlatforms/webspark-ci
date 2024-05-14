@@ -764,12 +764,11 @@ class FeatureContext extends RawDrupalContext {
             && liDisplay === "list-item";
       })()
     JS;
-
-    if ($this->getSession()->evaluateScript($function)) {
+    $result = $this->getSession()->evaluateScript($function);
+    if ($result === true) {
       return;
     }
-
-    throw new Exception(__METHOD__ . ' failed');
+    throw new \Exception(__METHOD__ . ' failed at ' . $result);
   }
 
   /**
@@ -804,36 +803,48 @@ class FeatureContext extends RawDrupalContext {
   public function verifyIconList($selector): void {
     $function = <<<JS
       (function(){
-        var ulListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
-        var ulFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
-        var ulMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
-        var ulPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
-        var ulPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
-        var ulFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
-        var ulListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
-        var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
-        var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
-        var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
-        var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        return ulListStyle === "none"
-            && ulFontStyle.includes("Arial")
-            && ulMaxWidth === "700px"
-            && ulPaddingBottom === "48px"
-            && ulPaddingInlineStart === "32px"
-            && ulFontSize === "16px"
-            && ulListStylePosition === "outside"
-            && liListStyle === "none"
-            && liPaddingLeft === "32px"
-            && liMarginBottom === "16px"
-            && liDisplay === "list-item";
+        const styles = {
+          ulListStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type'),
+          ulFontStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family'),
+          ulMaxWidth: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width'),
+          ulPaddingBottom: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom'),
+          ulPaddingInlineStart: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start'),
+          ulFontSize: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size'),
+          ulListStylePosition: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position'),
+          liListStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type'),
+          liPaddingLeft: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left'),
+          liMarginBottom: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom'),
+          liDisplay: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display')
+        };
+        const testValues = [];
+        testValues['ulListStyle'] = "none";
+        testValues['ulFontStyle'] = 'Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif';
+        testValues['ulMaxWidth'] = "700px";
+        testValues['ulPaddingBottom'] = "48px";
+        testValues['ulPaddingInlineStart'] = "32px";
+        testValues['ulFontSize'] = "16px";
+        testValues['ulListStylePosition'] = "outside";
+        testValues['liListStyle'] = "none";
+        testValues['liPaddingLeft'] = "32px";
+        testValues['liMarginBottom'] = "16px";
+        testValues['liDisplay'] = "list-item";
+
+        for (const [key, value] of Object.entries(styles)) {
+          if (value === testValues[key]) {
+            continue;
+          }
+          else {
+            return key;
+          }
+        }
+        return true;
       })()
     JS;
-
-    if ($this->getSession()->evaluateScript($function)) {
+    $result = $this->getSession()->evaluateScript($function);
+    if ($result === true) {
       return;
     }
-
-    throw new Exception(__METHOD__ . ' failed');
+    throw new \Exception(__METHOD__ . ' failed at ' . $result);
   }
 
   /**
@@ -846,38 +857,50 @@ class FeatureContext extends RawDrupalContext {
   public function verifyNumberedList($selector): void {
     $function = <<<JS
       (function(){
-        var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
-        var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
-        var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
-        var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
-        var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
-        var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
-        var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
-        var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
-        var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
-        var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left');
-        var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
-        var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        return olListStyle === "none"
-            && olFontStyle.includes("Arial")
-            && olMaxWidth === "700px"
-            && olPaddingBottom === "48px"
-            && olPaddingInlineStart === "48px"
-            && olFontSize === "16px"
-            && olListStylePosition === "outside"
-            && liListStyle === "none"
-            && liBeforeContent === 'counter(listcounter) ". "'
-            && liPaddingLeft === "48px"
-            && liMarginBottom === "16px"
-            && liDisplay === "list-item";
+        const styles = {
+          olListStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type'),
+          olFontStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family'),
+          olMaxWidth: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width'),
+          olPaddingBottom: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom'),
+          olPaddingInlineStart: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start'),
+          olFontSize: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size'),
+          olListStylePosition: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position'),
+          liListStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type'),
+          liBeforeContent: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content'),
+          liPaddingLeft: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-left'),
+          liMarginBottom: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom'),
+          liDisplay: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display')
+        }
+        const testValues = [];
+        testValues['olListStyle'] = "none";
+        testValues['olFontStyle'] = 'Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif';
+        testValues['olMaxWidth'] = "700px";
+        testValues['olPaddingBottom'] = "48px";
+        testValues['olPaddingInlineStart'] = "48px";
+        testValues['olFontSize'] = "16px";
+        testValues['olListStylePosition'] = "outside";
+        testValues['liListStyle'] = "none";
+        testValues['liBeforeContent'] = 'counter(listcounter) ". "';
+        testValues['liPaddingLeft'] = "48px";
+        testValues['liMarginBottom'] = "16px";
+        testValues['liDisplay'] = "list-item";
+
+        for (const [key, value] of Object.entries(styles)) {
+          if (value === testValues[key]) {
+            continue;
+          }
+          else {
+            return key;
+          }
+        }
+        return true;
       })()
     JS;
-
-    if ($this->getSession()->evaluateScript($function)) {
+    $result = $this->getSession()->evaluateScript($function);
+    if ($result === true) {
       return;
     }
-
-    throw new Exception(__METHOD__ . ' failed');
+    throw new \Exception(__METHOD__ . ' failed at ' . $result);
   }
 
   /**
@@ -916,62 +939,75 @@ class FeatureContext extends RawDrupalContext {
   public function verifyStepList($selector): void {
     $function = <<<JS
       (function(){
-        var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
-        var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
-        var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
-        var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
-        var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
-        var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
-        var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
-        var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
-        var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
-        var liBeforeBackgroundColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color');
-        var liBeforeBorderRadius = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius');
-        var liBeforePaddingTop = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top');
-        var liBeforePaddingRight = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right');
-        var liBeforePaddingBottom = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom');
-        var liBeforePaddingLeft = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left');
-        var liBeforeColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color');
-        var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left');
-        var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
-        var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        var liFontWeight = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('font-weight');
-        var liFontWeightSpan = window.getComputedStyle(document.querySelector("$selector > li > span")).getPropertyValue('font-weight');
-        var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
-        var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
-        var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
-        return olListStyle === "none"
-            && olFontStyle.includes("Arial")
-            && olMaxWidth === "667.383px"
-            && olPaddingBottom === "48px"
-            && olPaddingInlineStart === "24px"
-            && olFontSize === "16px"
-            && olListStylePosition === "outside"
-            && liListStyle === "none"
-            && liBeforeContent === 'counter(listcounter)'
-            && liBeforeBackgroundColor === "rgb(25, 25, 25)"
-            && liBeforeBorderRadius === "800px"
-            && liBeforePaddingTop === "8px"
-            && liBeforePaddingRight === "12.8px"
-            && liBeforePaddingBottom === "8px"
-            && liBeforePaddingLeft === "12.8px"
-            && liBeforeColor === "rgb(250, 250, 250)"
-            && liPaddingLeft === "48px"
-            && liMarginBottom === "48px"
-            && liDisplay === "list-item"
-            && liFontWeight === "700"
-            && liFontWeightSpan === "400"
-            && liBorderBottomColor === "rgb(191, 191, 191)"
-            && liBorderBottomStyle === "solid"
-            && liBorderBottomWidth === "1px";
+        const styles = {
+          olListStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type'),
+          olFontStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family'),
+          olMaxWidth: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width'),
+          olPaddingBottom: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom'),
+          olPaddingInlineStart: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start'),
+          olFontSize: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size'),
+          olListStylePosition: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position'),
+          liListStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type'),
+          liBeforeContent: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content'),
+          liBeforeBackgroundColor: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color'),
+          liBeforeBorderRadius: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius'),
+          liBeforePaddingTop: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top'),
+          liBeforePaddingRight: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right'),
+          liBeforePaddingBottom: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom'),
+          liBeforePaddingLeft: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left'),
+          liBeforeColor: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color'),
+          liPaddingLeft: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left'),
+          liMarginBottom: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom'),
+          liDisplay: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display'),
+          liFontWeight: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('font-weight'),
+          liFontWeightSpan: window.getComputedStyle(document.querySelector("$selector > li > span")).getPropertyValue('font-weight'),
+          liBorderBottomColor: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color'),
+          liBorderBottomStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style'),
+          liBorderBottomWidth: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width')
+        };
+
+        const testValues = [];
+        testValues['olListStyle'] = "none";
+        testValues['olFontStyle'] = 'Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif';
+        testValues['olMaxWidth'] = "667.383px";
+        testValues['olPaddingBottom'] = "48px";
+        testValues['olPaddingInlineStart'] = "24px";
+        testValues['olFontSize'] = "16px";
+        testValues['olListStylePosition'] = "outside";
+        testValues['liListStyle'] = "none";
+        testValues['liBeforeContent'] = 'counter(listcounter)';
+        testValues['liBeforeBackgroundColor'] = "rgb(25, 25, 25)";
+        testValues['liBeforeBorderRadius'] = "800px";
+        testValues['liBeforePaddingTop'] = "8px";
+        testValues['liBeforePaddingRight'] = "12.8px";
+        testValues['liBeforePaddingBottom'] = "8px";
+        testValues['liBeforePaddingLeft'] = "12.8px";
+        testValues['liBeforeColor'] = "rgb(250, 250, 250)";
+        testValues['liPaddingLeft'] = "48px";
+        testValues['liMarginBottom'] = "48px";
+        testValues['liDisplay'] = "list-item";
+        testValues['liFontWeight'] = "700";
+        testValues['liFontWeightSpan'] = "400";
+        testValues['liBorderBottomColor'] = "rgb(191, 191, 191)";
+        testValues['liBorderBottomStyle'] = "solid";
+        testValues['liBorderBottomWidth'] = "1px";
+
+        for (const [key, value] of Object.entries(styles)) {
+          if (value === testValues[key]) {
+            continue;
+          }
+          else {
+            return key;
+          }
+        }
+        return true;
       })()
     JS;
-
-    if ($this->getSession()->evaluateScript($function)) {
+    $result = $this->getSession()->evaluateScript($function);
+    if ($result === true) {
       return;
     }
-
-    throw new Exception(__METHOD__ . ' failed');
+    throw new \Exception(__METHOD__ . ' failed at ' . $result);
   }
 
   /**
@@ -984,62 +1020,74 @@ class FeatureContext extends RawDrupalContext {
   public function verifyCKStepList($selector): void {
     $function = <<<JS
       (function(){
-        var olListStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type');
-        var olFontStyle = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family');
-        var olMaxWidth = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width');
-        var olPaddingBottom = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom');
-        var olPaddingInlineStart = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start');
-        var olFontSize = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size');
-        var olListStylePosition = window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position');
-        var liListStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type');
-        var liBeforeContent = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content');
-        var liBeforeBackgroundColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color');
-        var liBeforeBorderRadius = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius');
-        var liBeforePaddingTop = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top');
-        var liBeforePaddingRight = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right');
-        var liBeforePaddingBottom = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom');
-        var liBeforePaddingLeft = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left');
-        var liBeforeColor = window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color');
-        var liPaddingLeft = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left');
-        var liMarginBottom = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom');
-        var liDisplay = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display');
-        var liFontWeightBogusParagraph = window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph")).getPropertyValue('font-weight');
-        var liFontWeightBogusParagraphSpan = window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph > span")).getPropertyValue('font-weight');
-        var liBorderBottomColor = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color');
-        var liBorderBottomStyle = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style');
-        var liBorderBottomWidth = window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width');
-        return olListStyle === "none"
-            && olFontStyle.includes("Arial")
-            && olMaxWidth === "667.383px"
-            && olPaddingBottom === "48px"
-            && olPaddingInlineStart === "24px"
-            && olFontSize === "16px"
-            && olListStylePosition === "outside"
-            && liListStyle === "none"
-            && liBeforeContent === 'counter(listcounter)'
-            && liBeforeBackgroundColor === "rgb(25, 25, 25)"
-            && liBeforeBorderRadius === "800px"
-            && liBeforePaddingTop === "8px"
-            && liBeforePaddingRight === "12.8px"
-            && liBeforePaddingBottom === "8px"
-            && liBeforePaddingLeft === "12.8px"
-            && liBeforeColor === "rgb(250, 250, 250)"
-            && liPaddingLeft === "48px"
-            && liMarginBottom === "48px"
-            && liDisplay === "list-item"
-            && liFontWeightBogusParagraph === "700"
-            && liFontWeightBogusParagraphSpan === "400"
-            && liBorderBottomColor === "rgb(191, 191, 191)"
-            && liBorderBottomStyle === "solid"
-            && liBorderBottomWidth === "1px";
+        const styles = {
+          olListStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-type'),
+          olFontStyle: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-family'),
+          olMaxWidth: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('max-width'),
+          olPaddingBottom: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-bottom'),
+          olPaddingInlineStart: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('padding-inline-start'),
+          olFontSize: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('font-size'),
+          olListStylePosition: window.getComputedStyle(document.querySelector("$selector")).getPropertyValue('list-style-position'),
+          liListStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('list-style-type'),
+          liBeforeContent: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('content'),
+          liBeforeBackgroundColor: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('background-color'),
+          liBeforeBorderRadius: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('border-radius'),
+          liBeforePaddingTop: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-top'),
+          liBeforePaddingRight: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-right'),
+          liBeforePaddingBottom: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-bottom'),
+          liBeforePaddingLeft: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('padding-left'),
+          liBeforeColor: window.getComputedStyle(document.querySelector("$selector > li"), ":before").getPropertyValue('color'),
+          liPaddingLeft: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('padding-left'),
+          liMarginBottom: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('margin-bottom'),
+          liDisplay: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('display'),
+          liFontWeightBogusParagraph: window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph")).getPropertyValue('font-weight'),
+          liFontWeightBogusParagraphSpan: window.getComputedStyle(document.querySelector("$selector > li > span.ck-list-bogus-paragraph > span")).getPropertyValue('font-weight'),
+          liBorderBottomColor: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-color'),
+          liBorderBottomStyle: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-style'),
+          liBorderBottomWidth: window.getComputedStyle(document.querySelector("$selector > li")).getPropertyValue('border-bottom-width')
+        };
+        const testValues = [];
+        testValues['olListStyle'] = "none";
+        testValues['olFontStyle'] = 'Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", FreeSans, sans-serif';
+        testValues['olMaxWidth'] = "667.383px";
+        testValues['olPaddingBottom'] = "48px";
+        testValues['olPaddingInlineStart'] = "24px";
+        testValues['olFontSize'] = "16px";
+        testValues['olListStylePosition'] = "outside";
+        testValues['liListStyle'] = "none";
+        testValues['liBeforeContent'] = 'counter(listcounter)';
+        testValues['liBeforeBackgroundColor'] = "rgb(25, 25, 25)";
+        testValues['liBeforeBorderRadius'] = "800px";
+        testValues['liBeforePaddingTop'] = "8px";
+        testValues['liBeforePaddingRight'] = "12.8px";
+        testValues['liBeforePaddingBottom'] = "8px";
+        testValues['liBeforePaddingLeft'] = "12.8px";
+        testValues['liBeforeColor'] = "rgb(250, 250, 250)";
+        testValues['liPaddingLeft'] = "48px";
+        testValues['liMarginBottom'] = "48px";
+        testValues['liDisplay'] = "list-item";
+        testValues['liFontWeightBogusParagraph'] = "700";
+        testValues['liFontWeightBogusParagraphSpan'] = "400";
+        testValues['liBorderBottomColor'] = "rgb(191, 191, 191)";
+        testValues['liBorderBottomStyle'] = "solid";
+        testValues['liBorderBottomWidth'] = "1px";
+
+        for (const [key, value] of Object.entries(styles)) {
+          if (value === testValues[key]) {
+            continue;
+          }
+          else {
+            return key;
+          }
+        }
+        return true;
       })()
     JS;
-
-    if ($this->getSession()->evaluateScript($function)) {
+    $result = $this->getSession()->evaluateScript($function);
+    if ($result === true) {
       return;
     }
-
-    throw new Exception(__METHOD__ . ' failed');
+    throw new \Exception(__METHOD__ . ' failed at ' . $result);
   }
 
   /**
