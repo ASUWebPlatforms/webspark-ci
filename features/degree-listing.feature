@@ -3,10 +3,11 @@ Feature: Degree Listing page verification
   As an anonymous user
   I want to verify that various functionality works appropriately
 
+  Background:
+    Given I am at "/degree-listing-page"
+
   @api @javascript
   Scenario: Verify search functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I should see that the "#search-field" element exists
     Then I wait for 7 seconds
     Then I scroll "#search-field" into view
@@ -22,8 +23,6 @@ Feature: Degree Listing page verification
 
   @api @javascript
   Scenario: Verify campus filter functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I should see that the "#locations" element exists
     Then I wait for 7 seconds
     Then I scroll "#locations" into view
@@ -39,10 +38,9 @@ Feature: Degree Listing page verification
 
   @api @javascript
   Scenario: Verify ASU location/Locals functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I should see that the "#asuLocals" element exists
     Then I wait for 7 seconds
+    Then I store the last pagination page number
     Then I scroll "#asuLocals" into view
     Then I wait for 1 second
     Then I select "ASU at Cochise" from "asuLocals"
@@ -52,14 +50,13 @@ Feature: Degree Listing page verification
     Then I should see that the "span[aria-label='Remove filter ASU at Cochise']" element exists
     Then I scroll "#degree-list-programs" into view
     Then I wait for 1 second
-    Then I should see that the "button[aria-label='Page 33 of 33']" element exists
+    Then Check the current pagination is less than the previous pagination
 
   @api @javascript
   Scenario: Verify accelerated/concurrent functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I should see that the "#acceleratedConcurrent" element exists
     Then I wait for 7 seconds
+    Then I store the last pagination page number
     Then I scroll "#acceleratedConcurrent" into view
     Then I wait for 1 second
     Then I select "Accelerated" from "acceleratedConcurrent"
@@ -69,14 +66,13 @@ Feature: Degree Listing page verification
     Then I should see that the "span[aria-label='Remove filter Accelerated']" element exists
     Then I scroll "#degree-list-programs" into view
     Then I wait for 1 second
-    Then I should see that the "button[aria-label='Page 51 of 51']" element exists
+    Then Check the current pagination is less than the previous pagination
 
   @api @javascript
   Scenario: Verify clear filters functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I should see that the "#acceleratedConcurrent" element exists
     Then I wait for 7 seconds
+    Then I store the last pagination page number
     Then I scroll "#acceleratedConcurrent" into view
     Then I wait for 1 second
     Then I select "Accelerated" from "acceleratedConcurrent"
@@ -86,17 +82,16 @@ Feature: Degree Listing page verification
     Then I should see that the "span[aria-label='Remove filter Accelerated']" element exists
     Then I scroll "#degree-list-programs" into view
     Then I wait for 1 second
-    Then I should see that the "button[aria-label='Page 51 of 51']" element exists
+    Then Check the current pagination is less than the previous pagination
+    Then I store the last pagination page number
     Then I scroll ".filter-action-buttons" into view
     Then I wait for 1 second
     Then I press the "Clear filters" button
     Then I should see that the "span[aria-label='Remove filter Accelerated']" element does not exist
-    Then I should see that the "button[aria-label='Page 83 of 83']" element exists
+    Then Check the current pagination is greater than the previous pagination
 
   @api @javascript
   Scenario: Verify collapsible functionality
-    Given I am an anonymous user
-    When I am at '/degree-listing-page'
     Then I wait for 7 seconds
     Then I scroll "#degree-list-programs" into view
     Then I wait for 1 second
