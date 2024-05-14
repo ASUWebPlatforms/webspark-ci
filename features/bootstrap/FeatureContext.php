@@ -7,6 +7,7 @@ use Drupal\DrupalExtension\Context\RawDrupalContext;
  */
 class FeatureContext extends RawDrupalContext {
   private int $pagedNumbers = 0;
+  private array $elPosition = [];
 
   /**
    * Initializes context.
@@ -1044,13 +1045,18 @@ class FeatureContext extends RawDrupalContext {
   /**
    * Check if the Tabbed Content scroll next button should appear.
    *
-   * @Then Check the Tabbed Content scroll next button appears as needed for :selector
+   * @Then check the Tabbed Content scroll next button appears as needed for :selector
    *
    * @param string $selector
    *
    * @throws Exception
    */
   public function checkTabbedContentScrollNext(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
     $function = <<<JS
       (function(){
         const tabbedContent = document.querySelector("$selector");
@@ -1106,6 +1112,97 @@ class FeatureContext extends RawDrupalContext {
 
     if ($element->isVisible()) {
       throw new Exception("The element '$selector' is visible on the page.");
+    }
+  }
+
+  /**
+   * @Then store the position of :selector
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function storeThePositionOfSelector(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    $function = <<<JS
+      (function() {
+        const rect = document.querySelector("$selector").getBoundingClientRect();
+        return {
+          bottom: rect.bottom,
+          height: rect.height,
+          left: rect.left,
+          right: rect.right,
+          top: rect.top,
+          width: rect.width,
+          x: rect.x,
+          y: rect.y,
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+
+    $this->elPosition = [
+      'bottom' => $result['bottom'],
+      'height' => $result['height'],
+      'left' => $result['left'],
+      'right' => $result['right'],
+      'top' => $result['top'],
+      'width' => $result['width'],
+      'x' => $result['x'],
+      'y' => $result['y'],
+    ];
+    echo 'Stored position: ' . json_encode($this->elPosition);
+  }
+
+  /**
+   * @Then the position of :selector should be different from its stored position
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function compareThePositionOfSelector(string $selector): void {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new Exception("The element '$selector' is not found on the page.");
+    }
+
+    $function = <<<JS
+      (function() {
+        const rect = document.querySelector("$selector").getBoundingClientRect();
+        return {
+          bottom: rect.bottom,
+          height: rect.height,
+          left: rect.left,
+          right: rect.right,
+          top: rect.top,
+          width: rect.width,
+          x: rect.x,
+          y: rect.y,
+        };
+      })()
+    JS;
+
+    $result = $this->getSession()->evaluateScript($function);
+    $newPosition = [
+      'bottom' => $result['bottom'],
+      'height' => $result['height'],
+      'left' => $result['left'],
+      'right' => $result['right'],
+      'top' => $result['top'],
+      'width' => $result['width'],
+      'x' => $result['x'],
+      'y' => $result['y'],
+    ];
+    echo 'New position: ' . json_encode($newPosition);
+
+    if ($this->elPosition['left'] == $newPosition['left'] && $this->elPosition['x'] == $newPosition['x']) {
+      throw new Exception("The position of '$selector' has not changed.");
     }
   }
 }
