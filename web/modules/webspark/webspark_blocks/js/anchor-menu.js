@@ -81,16 +81,6 @@
       anchorTargets.set(anchor, target);
     }
 
-    /*
-      Bootstrap needs to be loaded as a variable in order for this to work.
-      An alternative is to remove this and add the data-bs-spy="scroll" data-bs-target="#uds-anchor-menu nav" attributes to the body tag
-      See https://getbootstrap.com/docs/5.3/components/scrollspy/ for more info
-    */
-    const scrollSpy = new bootstrap.ScrollSpy(body, {
-      target: '#uds-anchor-menu nav',
-      rootMargin: '20%'
-    });
-
     const shouldAttachNavbarOnLoad = window.scrollY > navbarInitialTop;
     if (shouldAttachNavbarOnLoad) {
       globalHeader.appendChild(navbar);
@@ -98,7 +88,39 @@
       navbar.classList.add("uds-anchor-menu-attached");
     }
 
+    function calculateVisiblePercentage(el) {
+      var rect = el.getBoundingClientRect();
+      var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  
+      var elHeight = rect.bottom - rect.top;
+      var elWidth = rect.right - rect.left;
+  
+      var elArea = elHeight * elWidth;
+  
+      var visibleHeight = Math.min(windowHeight, rect.bottom) - Math.max(0, rect.top);
+      var visibleWidth = Math.min(windowWidth, rect.right) - Math.max(0, rect.left);
+      var visibleArea = visibleHeight * visibleWidth;
+  
+      var visiblePercentage = (visibleArea / elArea) * 100;
+  
+      return visiblePercentage;
+    }
+
     window.addEventListener("scroll", function () {
+      var elements = document.querySelectorAll('[id^="webspark-anchor-link--"]');
+      let max = 0;
+      elements.forEach(function(el) {
+        var parentVisiblePercentage = calculateVisiblePercentage(el.parentNode);
+        if(parentVisiblePercentage > 0 && parentVisiblePercentage > max) {
+          max = parentVisiblePercentage;
+          document.querySelector('[href="#' + el.id + '"]').classList.add('active');
+          document.querySelectorAll('a[href^="#webspark-anchor-link--"]:not([href="#' + el.id + '"])').forEach(function(e) {
+              e.classList.remove('active');
+            });
+        }
+      });
+
       const navbarY = navbar.getBoundingClientRect().top;
       const headerHeight = globalHeader.classList.contains("scrolled") ?  globalHeader.offsetHeight - 32 : globalHeader.offsetHeight; // 32 is the set height of the gray toolbar above the global header.
 
