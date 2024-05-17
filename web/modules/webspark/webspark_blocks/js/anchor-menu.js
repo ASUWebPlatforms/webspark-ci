@@ -89,29 +89,29 @@
     }
 
     function calculateVisiblePercentage(el) {
-      var rect = el.getBoundingClientRect();
-      var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const windowWidth = window.innerWidth || document.documentElement.clientWidth;
   
-      var elHeight = rect.bottom - rect.top;
-      var elWidth = rect.right - rect.left;
+      const elHeight = rect.bottom - rect.top;
+      const elWidth = rect.right - rect.left;
   
-      var elArea = elHeight * elWidth;
+      const elArea = elHeight * elWidth;
   
-      var visibleHeight = Math.min(windowHeight, rect.bottom) - Math.max(0, rect.top);
-      var visibleWidth = Math.min(windowWidth, rect.right) - Math.max(0, rect.left);
-      var visibleArea = visibleHeight * visibleWidth;
+      const visibleHeight = Math.min(windowHeight, rect.bottom) - Math.max(0, rect.top);
+      const visibleWidth = Math.min(windowWidth, rect.right) - Math.max(0, rect.left);
+      const visibleArea = visibleHeight * visibleWidth;
   
-      var visiblePercentage = (visibleArea / elArea) * 100;
+      const visiblePercentage = (visibleArea / elArea) * 100;
   
       return visiblePercentage;
     }
 
     window.addEventListener("scroll", function () {
-      var elements = document.querySelectorAll('[id^="webspark-anchor-link--"]');
+      const elements = document.querySelectorAll('[id^="webspark-anchor-link--"]');
       let max = 0;
       elements.forEach(function(el) {
-        var parentVisiblePercentage = calculateVisiblePercentage(el.parentNode);
+        const parentVisiblePercentage = calculateVisiblePercentage(el.parentNode);
         if(parentVisiblePercentage > 0 && parentVisiblePercentage > max) {
           max = parentVisiblePercentage;
           document.querySelector('[href="#' + el.id + '"]').classList.add('active');
