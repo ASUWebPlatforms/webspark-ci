@@ -88,22 +88,32 @@
       navbar.classList.add("uds-anchor-menu-attached");
     }
 
+    /**
+     * Calculates the percentage of an element that is visible in the viewport.
+     *
+     * @param {Element} el The element to calculate the visible percentage for.
+     * @return {number} The percentage of the element that is visible in the viewport.
+     */
     function calculateVisiblePercentage(el) {
       const rect = el.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-  
+
+      // Get the dimensions of the element
       const elHeight = rect.bottom - rect.top;
       const elWidth = rect.right - rect.left;
-  
+
+      // Calculate the area of the element
       const elArea = elHeight * elWidth;
-  
+
+      // Calculate the visible area of the element in the viewport
       const visibleHeight = Math.min(windowHeight, rect.bottom) - Math.max(0, rect.top);
       const visibleWidth = Math.min(windowWidth, rect.right) - Math.max(0, rect.left);
       const visibleArea = visibleHeight * visibleWidth;
-  
+
+      // Calculate the percentage of the element that is visible in the viewport
       const visiblePercentage = (visibleArea / elArea) * 100;
-  
+
       return visiblePercentage;
     }
 
@@ -112,12 +122,12 @@
       let max = 0;
       elements.forEach(function(el) {
         const parentVisiblePercentage = calculateVisiblePercentage(el.parentNode);
-        if(parentVisiblePercentage > 0 && parentVisiblePercentage > max) {
+        if (parentVisiblePercentage > 0 && parentVisiblePercentage > max) {
           max = parentVisiblePercentage;
           document.querySelector('[href="#' + el.id + '"]').classList.add('active');
           document.querySelectorAll('a[href^="#webspark-anchor-link--"]:not([href="#' + el.id + '"])').forEach(function(e) {
-              e.classList.remove('active');
-            });
+            e.classList.remove('active');
+          });
         }
       });
 
