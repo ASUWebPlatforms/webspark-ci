@@ -55,6 +55,10 @@
           panel.find(".scroll-control-next").show();
         }
       });
+      
+      if (nav.get(0).scrollWidth <= panel.width()) {
+        panel.find(".scroll-control-next").hide();
+      }
     });
 
     $(".uds-tabbed-panels .scroll-control-prev").hide();

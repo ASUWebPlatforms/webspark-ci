@@ -1,7 +1,7 @@
 {% set style = size == "default" ? '100%' : size ~ '%' %}
 
 <div style="max-width: {{ style }};">
-  <div class="uds-img {{ drop_shadow[0]['#markup'] == '1' ? 'uds-img-drop-shadow' }}">
+  <div class="uds-img {{ drop_shadow[0]['#markup'] == '1' ? 'uds-img-drop-shadow' }} {{ 'rounded' in media[0]['#media'].bundle() ? 'uds-img-rounded' }}">
     <figure class="figure uds-figure">
       {{ media }}
       {% if caption|render %}

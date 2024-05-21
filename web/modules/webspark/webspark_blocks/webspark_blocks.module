@@ -127,6 +127,12 @@ function _webspark_blocks_preprocess_page_404(&$variables) {
 
   // Remove the default behaviour.
   unset($variables['page']['content']['system_main']);
+  /* Hide error messages on 404 page for anonymous users. This is needed
+     because even when the site is configured not to display error messages,
+     for some reason they keep displaying on the 404 page. (WS2-1994) */
+  if ($variables['logged_in'] === false) {
+    unset($variables['page']['content']['messages']);
+  }
   // Create a wrapper, so we can add classes here.
   $wrapper = [
     '#type' => 'container',
