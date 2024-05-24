@@ -2,6 +2,8 @@
 
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Config\FileStorage;
+use Drupal\paragraphs\Entity\ParagraphsType;
+use Drupal\block_content\Entity\BlockContentType;
 
 /**
  * Removes the basic block entities and basic block entity type.
@@ -364,6 +366,87 @@ function webspark_blocks_update_10002(&$sandbox) {
     'field.field.block_content.image.field_media',
     'field.field.paragraph.card.field_media',
     'field.storage.media.field_media_image'
+   ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
+ *
+ * WS2-1934 - Modified default value like '' or ' ' in List(Text) fields.
+ */
+function webspark_blocks_update_10003(&$sandbox) {
+
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+
+  $fields_to_check = [
+    'field_accent_color' => 'accent-gray',
+    'field_card_arrangement_display' => 'two-columns',
+    'field_citation_style' => 'default',
+    'field_links_color' => 'text-gray-7',
+  ];
+
+  $paragraph_types = ParagraphsType::loadMultiple();
+  $paragraph_storage = \Drupal::entityTypeManager()->getStorage('paragraph');
+  foreach ($paragraph_types as $type) {
+    $type_id = $type->id();
+    $fields = $entity_field_manager->getFieldDefinitions('paragraph', $type_id);
+
+    foreach ($fields_to_check as $field_name => $expected_value) {
+      if (isset($fields[$field_name])) {
+        $query = $paragraph_storage->getQuery();
+        $orGroup = $query->orConditionGroup()->condition($field_name,'')->condition($field_name,' ');
+
+        $result = $query
+          ->condition('type', $type_id)
+          ->accessCheck(FALSE)
+          ->execute();
+      
+        $paragraphs = $paragraph_storage->loadMultiple($result);
+       
+        foreach ($paragraphs as $p) {
+          if ($p->hasField($field_name)) {
+            if ($p->get($field_name)->value == "''" || $p->get($field_name)->value == "' '") {
+              $p->set($field_name, $expected_value);
+              $p->save();
+            }
+          }
+        }
+
+      }
+    }
+  }
+  $block_content_types = BlockContentType::loadMultiple();
+  $blockStorage = \Drupal::entityTypeManager()->getStorage('block_content');
+  foreach ($block_content_types as $block_content_type) {
+    $type_id = $block_content_type->id();
+    $fields = $entity_field_manager->getFieldDefinitions('block_content', $type_id);
+
+    foreach ($fields_to_check as $field_name => $expected_value) {
+      if (isset($fields[$field_name])) {
+        $block_ids = $blockStorage->getQuery()
+          ->condition('type', $type_id)
+          ->accessCheck(false)
+          ->execute();
+        $blocks = $blockStorage->loadMultiple($block_ids);
+
+        foreach ($blocks as $b) {
+          if ($b->hasField($field_name)) {
+            if ($b->get($field_name)->value == "''" || $b->get($field_name)->value == "' '") {
+              $b->set($field_name, $expected_value);
+              $b->save();
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  $configs = [
+    'field.storage.paragraph.field_accent_color',
+    'field.storage.paragraph.field_citation_style',
+    'field.storage.block_content.field_card_arrangement_display',
+    'field.storage.block_content.field_links_color',
    ];
   _webspark_blocks_update_module_config_list($configs);
 }
