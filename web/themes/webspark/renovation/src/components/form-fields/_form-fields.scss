@@ -12,3 +12,28 @@
     }
   }
 }
+
+/*
+  WS2-1913
+  Styles for forms with 'uds-form' and 'was-validated' classes:
+  - Hide '.invalid-feedback' and adjacent '.invalid-feedback' for valid or invalid controls.
+  - Show '.invalid-feedback' and adjacent '.invalid-feedback' for invalid controls.
+*/
+form.uds-form {
+  &.was-validated {
+    .form-control:valid,
+    .form-control:invalid {
+      .invalid-feedback,
+      + .invalid-feedback {
+        display: none;
+      }
+    }
+    .form-control:invalid {
+      .invalid-feedback,
+      + .invalid-feedback {
+        display: inline-block;
+      }
+    }
+  }
+}
+
