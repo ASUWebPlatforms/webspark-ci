@@ -45,7 +45,9 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
     // Loads admin settings for this form/module.
     $config = $this->config(static::SETTINGS);
 
-    // Note: asu_brand module provides both global and per-block configs.
+    // Note: asu_degree_rfi module provides both global and per-node/block
+    // configs.
+
     // Global configs.
     $form['asu_degree_rfi']['asu_degree_rfi_degree_instructions'] = [
       '#type' => 'item',
@@ -103,6 +105,13 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('asu_degree_rfi.rfi_source_id'),
       '#description' => $this->t("You must provide a valid source ID to submit RFIs."),
       '#required' => TRUE,
+    ];
+    $form['asu_degree_rfi']['rfi']['rfi_form_type_default'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Default RFI form type'),
+      '#default_value' => $config->get('asu_degree_rfi.rfi_form_type_default'),
+      '#description' => $this->t("Default form type for new RFI forms. This setting can be overriden on a per-form basis."),
+      '#options' => \Drupal::service('asu_degree_rfi.helper_functions')->getRfiFormTypeOptions(),
     ];
     $form['asu_degree_rfi']['rfi']['rfi_submission_handler_url'] = [
       '#type' => 'textfield',
@@ -168,6 +177,7 @@ class AsuDegreeRfiSettingsForm extends ConfigFormBase {
     $this->configFactory->getEditable(static::SETTINGS)
       // Set the submitted configurations on our config.
       ->set('asu_degree_rfi.rfi_source_id', $form_state->getValue('rfi_source_id'))
+      ->set('asu_degree_rfi.rfi_form_type_default', $form_state->getValue('rfi_form_type_default'))
       ->set('asu_degree_rfi.rfi_submission_handler_url', $form_state->getValue('rfi_submission_handler_url'))
       ->set('asu_degree_rfi.rfi_degree_search_datasource_endpoint', $form_state->getValue('rfi_degree_search_datasource_endpoint'))
       ->set('asu_degree_rfi.rfi_asuonline_datasource_endpoint', $form_state->getValue('rfi_asuonline_datasource_endpoint'))

@@ -19,11 +19,13 @@
     targetSelector: "#rfi-container",
     props: props,
     // props: {
+    //   TBD formType: 2
     //   campus: "NOPREF", // ONLNE, GROUND, NOPREF
     //   college: undefined, // e.g. CES
     //   department: undefined, // e.g. CINFOTECH
     //   studentType: "undergrad",
     //   areaOfInterest: undefined, // e.g. STEM
+    //   TBD areaOfInterestOptional: false,
     //   programOfInterest: undefined, // e.g. TSIFTBS
     //   programOfInterestOptional: false,
     //   isCertMinor: false,
