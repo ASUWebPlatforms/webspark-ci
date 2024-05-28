@@ -385,6 +385,10 @@ function webspark_blocks_update_10003(&$sandbox) {
     'field_links_color' => 'text-gray-7',
   ];
 
+  // Update Paragraph content type fields.
+  // For each Paragraph content type, load the fields and iterate over the
+  // entities. If the field exists and has an empty value or a blank value, update the field
+  // value to the expected value.
   $paragraph_types = ParagraphsType::loadMultiple();
   $paragraph_storage = \Drupal::entityTypeManager()->getStorage('paragraph');
   foreach ($paragraph_types as $type) {
@@ -394,7 +398,6 @@ function webspark_blocks_update_10003(&$sandbox) {
     foreach ($fields_to_check as $field_name => $expected_value) {
       if (isset($fields[$field_name])) {
         $query = $paragraph_storage->getQuery();
-        $orGroup = $query->orConditionGroup()->condition($field_name,'')->condition($field_name,' ');
 
         $result = $query
           ->condition('type', $type_id)
@@ -411,10 +414,11 @@ function webspark_blocks_update_10003(&$sandbox) {
             }
           }
         }
-
       }
     }
   }
+
+  // Apply same for logic on Blocks.
   $block_content_types = BlockContentType::loadMultiple();
   $blockStorage = \Drupal::entityTypeManager()->getStorage('block_content');
   foreach ($block_content_types as $block_content_type) {
