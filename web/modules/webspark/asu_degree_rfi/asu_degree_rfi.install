@@ -134,15 +134,18 @@ function asu_degree_rfi_update_10000(&$sandbox) {
 }
 
 /**
- * Set new default global rfi setting for form type to 2 pager.
+ * Set new default global setting for RFI form variant to 2 pager.
  */
 function asu_degree_rfi_update_10001(&$sandbox) {
 
-  // Set default global rfi form type to 2 pager.
-  $rfi_form_type_global_default = 2;
+  $rfi_variant_global_default = 'rfiVariant2';
   $config = \Drupal::configFactory()->getEditable('asu_degree_rfi.settings');
-  $config->set('asu_degree_rfi.rfi_form_type_default', $rfi_form_type_global_default);
+  $config->set('asu_degree_rfi.rfi_variant_default', $rfi_variant_global_default);
   $config->save();
+
+  // Also refresh the entity defaults.
+  _asu_degree_rfi_revert_all_module_config();
+
 }
 
 function _asu_degree_rfi_revert_all_module_config() {

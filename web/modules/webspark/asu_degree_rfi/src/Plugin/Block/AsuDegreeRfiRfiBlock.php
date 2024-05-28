@@ -136,8 +136,9 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
     // Gather props to pass to JS as drupalSettings.
     $props = [];
     // From block instance config.
-    // TODO TBD prop names....
-    $props['formType'] = isset($config['asu_degree_rfi_form_type']) ? $config['asu_degree_rfi_form_type'] : $global_config->get('asu_degree_rfi.rfi_form_type_default');
+    // This first one falls back to a global config, and thus does not have a
+    // default in core.entity_view_display.node.degree_detail_page.default.yml.
+    $props['variant'] = isset($config['asu_degree_rfi_variant']) ? $config['asu_degree_rfi_variant'] : $global_config->get('asu_degree_rfi.rfi_variant_default');
     $props['campus'] = $config['asu_degree_rfi_campus'] ? $config['asu_degree_rfi_campus'] : NULL;
     if (isset($config['asu_degree_rfi_actual_campus'])) {
       $props['actualCampus'] = $config['asu_degree_rfi_actual_campus'] ? $config['asu_degree_rfi_actual_campus'] : NULL;
@@ -146,7 +147,6 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
     $props['department'] = $config['asu_degree_rfi_department'] ? $config['asu_degree_rfi_department'] : NULL;
     $props['studentType'] = $config['asu_degree_rfi_student_type'] ? $config['asu_degree_rfi_student_type'] : NULL;
     $props['areaOfInterest'] = $config['asu_degree_rfi_area_of_interest'] ? $config['asu_degree_rfi_area_of_interest'] : NULL;
-    // TODO TBD prop names...
     $props['areaOfInterestOptional'] = $config['asu_degree_rfi_a_of_i_optional'] ? $config['asu_degree_rfi_a_of_i_optional'] : NULL;
     $props['programOfInterest'] = $config['asu_degree_rfi_program_of_interest'] ? $config['asu_degree_rfi_program_of_interest'] : $route_pgm_of_interest;
     $props['programOfInterestOptional'] = $config['asu_degree_rfi_p_of_i_optional'] ? $config['asu_degree_rfi_p_of_i_optional'] : NULL;
@@ -316,12 +316,12 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
     // Config for this instance.
     $config = $this->getConfiguration();
 
-    $form['asu_degree_rfi_form_type'] = [
+    $form['asu_degree_rfi_variant'] = [
       '#type' => 'select',
-      '#title' => $this->t('RFI form type'),
+      '#title' => $this->t('RFI form type variation'),
       '#description' => $this->t('Select whether the form should display as a one or two page form.'),
-      '#options' => \Drupal::service('asu_degree_rfi.helper_functions')->getRfiFormTypeOptions(),
-      '#default_value' => $config['asu_degree_rfi_form_type'] ?? $global_config->get('asu_degree_rfi.rfi_form_type_default')
+      '#options' => \Drupal::service('asu_degree_rfi.helper_functions')->getRfiVariantOptions(),
+      '#default_value' => $config['asu_degree_rfi_variant'] ?? $global_config->get('asu_degree_rfi.rfi_variant_default')
     ];
     $form['asu_degree_rfi_college'] = [
       '#type' => 'select',
@@ -464,8 +464,8 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
 
     $values = $form_state->getValues();
 
-    $this->configuration['asu_degree_rfi_form_type'] =
-      $values['asu_degree_rfi_form_type'];
+    $this->configuration['asu_degree_rfi_variant'] =
+      $values['asu_degree_rfi_variant'];
     $this->configuration['asu_degree_rfi_college'] =
       $values['asu_degree_rfi_college'];
     $this->configuration['asu_degree_rfi_department'] =

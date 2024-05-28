@@ -1,2 +1,2 @@
 asu_degree_rfi:
-  rfi_form_type_default: 2
+  rfi_variant_default: 'rfiVariant2'

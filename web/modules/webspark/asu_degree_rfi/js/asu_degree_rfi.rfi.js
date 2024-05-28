@@ -12,6 +12,8 @@
   // Get config values passed in from AsuDegreeRfiRfiBlock.php
   var props = drupalSettings.asu_degree_rfi.props;
 
+  // TODO Remove before PR: ensure the `variant` global default makes its way here if no override is set.
+
   // Launcher code here.
 
   // Initialize the RFI form with provided props.
@@ -19,13 +21,13 @@
     targetSelector: "#rfi-container",
     props: props,
     // props: {
-    //   TBD formType: 2
+    //   variant: "rfiVariant2", // or rfiVariant1
     //   campus: "NOPREF", // ONLNE, GROUND, NOPREF
     //   college: undefined, // e.g. CES
     //   department: undefined, // e.g. CINFOTECH
     //   studentType: "undergrad",
     //   areaOfInterest: undefined, // e.g. STEM
-    //   TBD areaOfInterestOptional: false,
+    //   areaOfInterestOptional: false,
     //   programOfInterest: undefined, // e.g. TSIFTBS
     //   programOfInterestOptional: false,
     //   isCertMinor: false,
