@@ -53,6 +53,8 @@ use ArrangementStyleEnum;
      */
     protected $usesRowClass = TRUE;
 
+    protected $usesOptions = true;
+
 
     /**
      * Set default options.
@@ -84,126 +86,127 @@ use ArrangementStyleEnum;
 
     public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
-    parent::buildOptionsForm($form, $form_state);
+      parent::buildOptionsForm($form, $form_state);
 
-    //Here's the magic where we pull in all of the Fields to select from when assigning the items below.
-    $field_names = $this->displayHandler->getFieldLabels();
+      //Here's the magic where we pull in all of the Fields to select from when assigning the items below.
+      $field_names = $this->displayHandler->getFieldLabels();
 
-    $form['heading'] = [
-      '#title' => $this->t('Heading'),
-      '#type' => 'textfield',
-      '#size' => '30',
-      '#default_value' => $this->options['heading'],
-    ];
+      $form['heading'] = [
+        '#title' => $this->t('Heading'),
+        '#type' => 'textfield',
+        '#size' => '30',
+        '#default_value' => $this->options['heading'],
+      ];
 
-    $form['heading_color'] = [
-      '#title' => $this->t('Text Color'),
-      '#options' => ColorEnum::mainContentTextOptions(),
-      '#type' => 'select',
-      '#default_value' => $this->options['heading_color'],
-    ];
+      $form['heading_color'] = [
+        '#title' => $this->t('Text Color'),
+        '#options' => ColorEnum::mainContentTextOptions(),
+        '#type' => 'select',
+        '#default_value' => $this->options['heading_color'],
+      ];
 
-    //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
-    //TODO: Can I make this effectively APPLY when the selection is changed, but not dismiss the view?
-    $form['custom_arrangement_style'] = [
-      '#title' => $this->t('Card Arrangement Style'),
-      '#options' => ArrangementStyleEnum::allOptions(),
-      '#type' => 'select',
-      '#default_value' => $this->options['custom_arrangement_style'],
-    ];
+      //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
+      //TODO: Can I make this effectively APPLY when the selection is changed, but not dismiss the view?
+      $form['custom_arrangement_style'] = [
+        '#title' => $this->t('Card Arrangement Style'),
+        '#options' => ArrangementStyleEnum::allOptions(),
+        '#type' => 'select',
+        '#default_value' => $this->options['custom_arrangement_style'],
+      ];
 
-  //HIDDEN RANKING OPTION
-  if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::RANKING->name){
+    //HIDDEN RANKING OPTION
+    if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::RANKING->name){
 
-    $form['card_ranking'] = [
-      '#title' => $this->t('Card Ranking'),
-      '#type' => 'select',
-      '#options' => $field_names,
-      '#default_value' => $this->options['card_ranking'],
-    ];
+      $form['card_ranking'] = [
+        '#title' => $this->t('Card Ranking'),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $this->options['card_ranking'],
+      ];
 
-  }
-
-  //HIDDEN ICON OPTIONS
-  if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::ICON->name){
-
-    $form['card_icon'] = [
-      '#title' => $this->t('Card Icon'),
-      '#options' => $field_names,
-      '#type' => 'select',
-      '#default_value' => $this->options['card_icon'],
-    ];
-
-    $form['card_is_border_showing'] = [
-      '#title' => $this->t('Show Card Border'),
-      '#type' => 'checkbox',
-      '#default_value' => $this->options['card_is_border_showing'],
-    ];
-
-  }
-
-    $form['card_media'] = [
-      '#title' => $this->t('Card Media'),
-      '#type' => 'select',
-      '#options' => $field_names,
-      '#default_value' => $this->options['card_media'],
-    ];
-
-    $form['card_heading'] = [
-      '#title' => $this->t('Card Heading'),
-      '#type' => 'select',
-      '#options' => $field_names,
-      '#default_value' => $this->options['card_heading'],
-    ];
-
-    $form['card_body'] = [
-      '#title' => $this->t('Card Body'),
-      '#type' => 'select',
-      '#options' => $field_names,
-      '#default_value' => $this->options['card_body'],
-    ];
-
-    $form['card_cta'] = [
-      '#title' => $this->t('Card CTA'),
-      '#type' => 'select',
-      '#options' => $field_names,
-      '#default_value' => $this->options['card_cta'],
-    ];
-
-    //TODO: Add Tooltip?
-    //TODO: Add Anchor Menu Settings?
-
-    //Some additional Block Settings
-    $form['spacing_top'] = [
-      '#title' => $this->t('Spacing Top'),
-      '#options' => SpacingEnum::allOptions(),
-      '#type' => 'select',
-      '#default_value' => $this->options['spacing_top'],
-    ];
-
-    $form['spacing_bottom'] = [
-      '#title' => $this->t('Spacing Bottom'),
-      '#options' => SpacingEnum::allOptions(),
-      '#type' => 'select',
-      '#default_value' => $this->options['spacing_bottom'],
-    ];
-
-    $form['columns_to_display'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Columns to Display'),
-      '#options' => ColumnEnum::allOptions(),
-      '#default_value' => $this->options['columns_to_display'],
-    ];
-
-    $form['view_mode'] = [
-      '#type' => 'select',
-      '#title' => $this->t('View Mode'),
-      '#description' => $this->t('The view mode in which to render the block.'),
-      '#options' => ViewModeEnum::allOptions(),
-      '#default_value' =>  $this->options['view_mode'],
-    ];
     }
+
+    //HIDDEN ICON OPTIONS
+    if ($this->options['custom_arrangement_style'] == ArrangementStyleEnum::ICON->name){
+
+      $form['card_icon'] = [
+        '#title' => $this->t('Card Icon'),
+        '#options' => $field_names,
+        '#type' => 'select',
+        '#default_value' => $this->options['card_icon'],
+      ];
+
+      $form['card_is_border_showing'] = [
+        '#title' => $this->t('Show Card Border'),
+        '#type' => 'checkbox',
+        '#default_value' => $this->options['card_is_border_showing'],
+      ];
+
+      $form['card_media'] = [
+        '#title' => $this->t('Card Media'),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $this->options['card_media'],
+      ];
+
+      $form['card_heading'] = [
+        '#title' => $this->t('Card Heading'),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $this->options['card_heading'],
+      ];
+
+      $form['card_body'] = [
+        '#title' => $this->t('Card Body'),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $this->options['card_body'],
+      ];
+
+      $form['card_cta'] = [
+        '#title' => $this->t('Card CTA'),
+        '#type' => 'select',
+        '#options' => $field_names,
+        '#default_value' => $this->options['card_cta'],
+      ];
+
+      //TODO: Add Tooltip?
+      //TODO: Add Anchor Menu Settings?
+
+      //Some additional Block Settings
+      $form['spacing_top'] = [
+        '#title' => $this->t('Spacing Top'),
+        '#options' => SpacingEnum::allOptions(),
+        '#type' => 'select',
+        '#default_value' => $this->options['spacing_top'],
+      ];
+
+      $form['spacing_bottom'] = [
+        '#title' => $this->t('Spacing Bottom'),
+        '#options' => SpacingEnum::allOptions(),
+        '#type' => 'select',
+        '#default_value' => $this->options['spacing_bottom'],
+      ];
+
+      /* Hi Dave! Probably want to set a default value for the columns here if nothing is selected
+      for example  (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO' 
+      probably should match whatever the default columns are in layout builder card arrangement */
+
+      $form['columns_to_display'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Columns to Display'),
+        '#options' => ColumnEnum::allOptions(),
+        '#default_value' => $this->options['columns_to_display'],
+      ];
+
+      $form['view_mode'] = [
+        '#type' => 'select',
+        '#title' => $this->t('View Mode'),
+        '#description' => $this->t('The view mode in which to render the block.'),
+        '#options' => ViewModeEnum::allOptions(),
+        '#default_value' =>  $this->options['view_mode'],
+      ];
+    }
+    
   }
-
-
-
+}
