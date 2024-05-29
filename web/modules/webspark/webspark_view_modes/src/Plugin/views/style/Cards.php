@@ -135,6 +135,7 @@ use ArrangementStyleEnum;
         '#type' => 'select',
         '#default_value' => $this->options['card_icon'],
       ];
+    }
 
       $form['card_is_border_showing'] = [
         '#title' => $this->t('Show Card Border'),
@@ -195,8 +196,12 @@ use ArrangementStyleEnum;
       $form['columns_to_display'] = [
         '#type' => 'select',
         '#title' => $this->t('Columns to Display'),
-        '#options' => ColumnEnum::allOptions(),
-        '#default_value' => $this->options['columns_to_display'],
+        '#options' => array (
+          'two-columns' => '2 columns',
+          'three-columns' => '3 columns',
+          'four-columns' => '4 columns'
+        ),
+        '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO',
       ];
 
       $form['view_mode'] = [
@@ -209,4 +214,3 @@ use ArrangementStyleEnum;
     }
     
   }
-}

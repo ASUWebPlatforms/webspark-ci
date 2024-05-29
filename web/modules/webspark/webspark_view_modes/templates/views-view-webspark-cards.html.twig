@@ -155,4 +155,17 @@
 
   {{ content|without('field_heading', 'field_cta', 'field_formatted_text', 'field_card_group', 'field_card_arrangement_display', 'field_anchor_menu_settings', 'field_display_orientation') }}
 </div> #}
-<h1> My column value is {{options.columns_to_display|raw}} </h1>
+<h1> My column value is {{options.columns_to_display}} </h1>
+
+{# markup copied from web/themes/webspark/renovation/src/components/cards/card-arrangement.twig #}
+
+<div class="uds-card-arrangement {{ class_layout }}">
+  <div class="uds-card-arrangement-content-container {{ text_color }}">
+    <h2>{{ heading }}</h2>
+    {{ text }}
+    {{ cta }}
+  </div>
+  <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{options.columns_to_display}}{#{{ not class_layout ? columns }}#}">
+    {{ cards }}
+  </div>
+</div>
