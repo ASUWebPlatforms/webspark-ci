@@ -4,9 +4,6 @@ dependencies:
   config:
     - block_content.type.content_image
     - field.storage.block_content.field_media
-    - media.type.cropped_image_sqare
-    - media.type.cropped_image_wide
-    - media.type.image
     - media.type.image_block_images
 id: block_content.content_image.field_media
 field_name: field_media
