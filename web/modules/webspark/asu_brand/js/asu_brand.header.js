@@ -117,7 +117,9 @@
             headerElement.classList.remove("asu-brand-toolbar-header-tray-closed-compat" + vertSuffix);
             headerElement.classList.remove("asu-brand-toolbar-header-tray-closed-compat");
             // Set for current state.
-            headerElement.classList.add("asu-brand-toolbar-header-tray-closed-compat" + classSuffix);
+            if(drupalSettings.is_admin) {
+              headerElement.classList.add("asu-brand-toolbar-header-tray-closed-compat" + classSuffix);
+            }
           }
         }
 
