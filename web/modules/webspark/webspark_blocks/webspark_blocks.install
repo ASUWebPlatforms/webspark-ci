@@ -369,6 +369,17 @@ function webspark_blocks_update_10002(&$sandbox) {
 }
 
 /**
+ * 
+ * WS2-2035
+ */
+function webspark_blocks_update_10003(&$sandbox) {
+  $configs = [
+    'field.field.block_content.content_image.field_media'
+  ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {
