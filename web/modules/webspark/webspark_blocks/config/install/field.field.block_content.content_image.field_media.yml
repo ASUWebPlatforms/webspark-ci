@@ -20,9 +20,6 @@ settings:
   handler_settings:
     target_bundles:
       image_block_images: image_block_images
-      cropped_image_sqare: cropped_image_sqare
-      cropped_image_wide: cropped_image_wide
-      image: image
     sort:
       field: _none
       direction: ASC
