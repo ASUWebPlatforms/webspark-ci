@@ -88,7 +88,7 @@ class ReactComponentHelperFunctions {
       $cta = new \stdClass();
       $cta->label = $paragraph->field_cta->entity->field_cta_link->title;
       $link = Url::fromUri($paragraph->field_cta->entity->field_cta_link->uri);
-      $cta->href = $link->toString();
+      $cta->href = $link->toUriString();
       $options = $paragraph->field_cta->entity->field_cta_link->options;
       $color = $this->getButtonColor($options,'maroon' );
       if (isset($options['attributes']['target'])) {
@@ -102,7 +102,7 @@ class ReactComponentHelperFunctions {
       $cta = new \stdClass();
       $cta->label = $paragraph->field_cta_secondary->entity->field_cta_link->title;
       $link = Url::fromUri($paragraph->field_cta_secondary->entity->field_cta_link->uri);
-      $cta->href = $link->toString();
+      $cta->href = $link->toUriString();
       $options = $paragraph->field_cta_secondary->entity->field_cta_link->options;
       $color = $this->getButtonColor($options,'gold' );
       if (isset($options['attributes']['target'])) {
@@ -116,7 +116,7 @@ class ReactComponentHelperFunctions {
     if ($paragraph->field_link && $paragraph->field_link->title && $paragraph->field_link->uri) {
       $card->linkLabel = $paragraph->field_link->title;
       $link = Url::fromUri($paragraph->field_link->uri);
-      $card->linkUrl = $link->toString();
+      $card->linkUrl = $link->toUriString();
     }
 
     // WS2-1674 - Card ranking image size.
@@ -132,7 +132,7 @@ class ReactComponentHelperFunctions {
     // WS2-1674 - Card ranking link URL, no link title
     if (isset($paragraph->field_card_ranking_image_size->value) && isset($paragraph->field_link->uri)) {
       $link = Url::fromUri($paragraph->field_link->uri);
-      $card->linkUrl = $link->toString();
+      $card->linkUrl = $link->toUriString();
     }
 
     //@TODO We are not going to send this information to the react component,
@@ -142,7 +142,7 @@ class ReactComponentHelperFunctions {
         $tag = new \stdClass();
         $tag->label = $term->entity->name->value;
         $link = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
-        $tag->href = $link->toString();
+        $tag->href = $link->toUriString();
         $card->tags[] = $tag;
       }
     }*/
@@ -152,7 +152,7 @@ class ReactComponentHelperFunctions {
       $icon_name = $paragraph->field_icon->icon_name;
       $icon_style = $paragraph->field_icon->style;
       if (isset($paragraph->field_icon->settings)) {
-        // PHP 8.1 warning - when null is passed to build in function, 
+        // PHP 8.1 warning - when null is passed to build in function,
         // it is no longer silently converted to empty string
         $icon_settings = unserialize($paragraph->field_icon->settings);
       } else {
@@ -165,7 +165,7 @@ class ReactComponentHelperFunctions {
     if (isset($paragraph->field_clickable->value) && isset($paragraph->field_card_link->uri)){
       $card->clickable = true;
       $link = Url::fromUri($paragraph->field_card_link->uri);
-      $card->clickHref = $link->toString();
+      $card->clickHref = $link->toUriString();
     }
 
     $card->showBorders = false;
