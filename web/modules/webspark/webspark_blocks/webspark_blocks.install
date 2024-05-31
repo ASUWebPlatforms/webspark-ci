@@ -374,7 +374,7 @@ function webspark_blocks_update_10002(&$sandbox) {
  */
 function webspark_blocks_update_10003(&$sandbox) {
   $configs = [
-    'field.field.block_content.content_image.field_media.yml'
+    'field.field.block_content.content_image.field_media'
   ];
   _webspark_blocks_update_module_config_list($configs);
 }
