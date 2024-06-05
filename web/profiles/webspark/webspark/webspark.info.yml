@@ -99,6 +99,7 @@ install:
   - layout_builder_usage_reports
   - editor_advanced_link
   - imagick
+  - pantheon_advanced_page_cache
 themes:
   - renovation
   - claro
