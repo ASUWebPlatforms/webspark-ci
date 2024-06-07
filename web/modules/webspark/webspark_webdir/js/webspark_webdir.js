@@ -44,17 +44,69 @@
           props: props,
         });
       });
-      // Allow off-canvas dialog to load all items.
-      setTimeout(function (){
-        const offCanvas = document.querySelector('#drupal-off-canvas-wrapper');
-
-        if (offCanvas !== null) {
+      async function toggleWhenFullyLoaded() {
+        try {
+          const selectors = ['#drupal-off-canvas', '#directory-tree-options', '#campus-tree-options', '#expertise-tree-options', '#employee-type-tree-options', '#asurite-list-options'];
+          const elements = await waitForElementsWithObserver(selectors);
+          // console.log('Elements found:', elements);
           $(this).toggleFilters();
+        } catch (error) {
+          console.error(error);
         }
-      }, 3000);
+      }
+
+      toggleWhenFullyLoaded().then(() => {
+        // Do nothing on success.
+      }).catch((error) => {
+        console.error('An error occurred:', error);
+      });
     },
   };
 })(jQuery, Drupal, drupalSettings, once);
+
+function waitForElementsWithObserver(selectors, timeout = 30000) {
+  return new Promise((resolve, reject) => {
+    const elementsMap = new Map();
+
+    const checkElements = () => {
+      selectors.forEach(selector => {
+        if (!elementsMap.has(selector)) {
+          const element = document.querySelector(selector);
+          if (element) {
+            elementsMap.set(selector, element);
+          }
+        }
+      });
+      if (elementsMap.size === selectors.length) {
+        observer.disconnect();
+        resolve(Array.from(elementsMap.values()));
+      }
+    };
+
+    const observer = new MutationObserver(() => {
+      checkElements();
+    });
+
+    observer.observe(document, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      characterData: true,
+    });
+
+    // Initial check in case elements are already present
+    checkElements();
+
+    setTimeout(() => {
+      observer.disconnect();
+      if (elementsMap.size === selectors.length) {
+        resolve(Array.from(elementsMap.values()));
+      } else {
+        reject(new Error(`Elements with selectors "${selectors}" not found within ${timeout}ms`));
+      }
+    }, timeout);
+  });
+}
 
 jQuery.fn.extend({
   toggleFilters: function() {
