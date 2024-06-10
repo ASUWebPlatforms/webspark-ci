@@ -526,18 +526,23 @@ function webspark_update_10004(&$sandbox) {
 }
 
 /**
- * WS2-2011: Set TTL to 1 hr
+ * WS2-2011 and WS2-2088: Set TTL to 1 day and add pantheon_advanced_page_cache
  */
 function webspark_update_10005(&$sandbox) {
-  \Drupal::state()->set('configuration_locked', FALSE);
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('system.performance');
-  // Only set if default of zero or none is found. Otherwise, we assume the
-  // site owner has intentionally changed the setting. Using non-typed check so
-  // if there's a null or 0 or even '0' value they'll all get updated.
-  if ($config->get('cache.page.max_age') == 0) {
-    $config->set('cache.page.max_age', 3600);
+  // Don't set TTL if pantheon_advanced_page_cache isn't available. Avoiding
+  // overly aggressive caching.
+  if (!Drupal::moduleHandler()->moduleExists('pantheon_advanced_page_cache')) {
+    Drupal::service('module_installer')->install(['pantheon_advanced_page_cache']);
+
+    \Drupal::state()->set('configuration_locked', FALSE);
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('system.performance');
+    // Only set if default of zero or none is found. Otherwise, we assume the
+    // site owner has intentionally changed the setting. Using non-typed check so
+    // if there's a null or 0 or even '0' value they'll all get updated.
+    if ($config->get('cache.page.max_age') == 0) {
+      $config->set('cache.page.max_age', 86400);
+    }
+    $config->save(TRUE);
   }
-  $config->save(TRUE);
-  \Drupal::state()->set('configuration_locked', TRUE);
 }

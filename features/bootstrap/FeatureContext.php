@@ -1253,4 +1253,49 @@ class FeatureContext extends RawDrupalContext {
       throw new Exception("The position of '$selector' has not changed.");
     }
   }
+
+  /**
+   * @Then click :selector if exists
+   *
+   * @param string $selector
+   *
+   * @throws Exception
+   */
+  public function clickIfExists(string $selector): void {
+    try {
+      $this->iClickTheElement($selector);
+    }
+    catch (Exception $e) {
+      echo 'Element not found: ' . $e->getMessage();
+    }
+  }
+
+  private $submissionCounts = [];
+
+  /**
+   * @Then I capture the number of submissions as :key
+   */
+  public function iCaptureTheNumberOfSubmissionsAs($key)
+  {
+      $elementText = $this->getSession()->getPage()->find('css', '#edit-state > option[selected="selected"]')->getText();
+      if (preg_match('/All \[(\d+)\]/', $elementText, $matches)) {
+        $this->submissionCounts[$key] = (int)$matches[1];
+      } else {
+          throw new Exception("Could not find the submission count in the text: '$elementText'");
+      }
+      echo "Submission count: " . $this->submissionCounts[$key];
+  }
+
+  /**
+   * @Then the number of submissions should be increased by :count
+   */
+  public function theNumberOfSubmissionsShouldBeIncreasedBy($count)
+  {
+      $initialCount = $this->submissionCounts['initial_count'];
+      $finalCount = $this->submissionCounts['final_count'];
+      if (($finalCount - $initialCount) != $count) {
+          throw new Exception("The number of submissions did not increase by $count. Initial: $initialCount, Final: $finalCount");
+      }
+  }
 }
+
