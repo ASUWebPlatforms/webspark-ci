@@ -369,6 +369,28 @@ function webspark_blocks_update_10002(&$sandbox) {
 }
 
 /**
+ *
+ * WS2-2035
+ */
+function webspark_blocks_update_10003(&$sandbox) {
+  $configs = [
+    'field.field.block_content.content_image.field_media'
+  ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
+ *
+ * WS2-2026 - Add new hero option
+ */
+function webspark_blocks_update_10004(&$sandbox) {
+  $configs = [
+    'field.storage.block_content.field_sub_heading_background'
+  ];
+  _webspark_blocks_update_module_config_list($configs);
+}
+
+/**
  * Reverts the module related configuration.
  */
 function _webspark_blocks_revert_module_config() {

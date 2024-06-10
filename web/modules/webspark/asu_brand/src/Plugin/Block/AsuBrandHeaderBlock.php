@@ -146,7 +146,7 @@ class AsuBrandHeaderBlock extends BlockBase {
     // Get and pass cookie consent status, too.
     $global_config = \Drupal::config('asu_brand.settings');
     $block_output['#attached']['drupalSettings']['asu_brand']['cookie_consent'] = $global_config->get('asu_brand.asu_brand_cookie_consent_enabled');
-
+    $block_output['#attached']['drupalSettings']['is_admin'] = \Drupal::currentUser()->hasPermission('administer site configuration');
     return $block_output;
   }
 
