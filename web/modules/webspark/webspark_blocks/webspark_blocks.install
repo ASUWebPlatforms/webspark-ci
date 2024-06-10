@@ -451,6 +451,7 @@ function webspark_blocks_update_10003(&$sandbox) {
     'field.storage.paragraph.field_citation_style',
     'field.storage.block_content.field_card_arrangement_display',
     'field.storage.block_content.field_links_color',
+    'field.storage.block_content.field_accent_color',
    ];
   _webspark_blocks_update_module_config_list($configs);
 }
