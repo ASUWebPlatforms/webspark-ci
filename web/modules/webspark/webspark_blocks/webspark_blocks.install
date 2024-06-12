@@ -474,6 +474,9 @@ function webspark_blocks_update_10005(&$sandbox) {
     'field.storage.block_content.field_card_arrangement_display',
     'field.storage.block_content.field_links_color',
     'field.storage.block_content.field_accent_color',
+    'field.field.block_content.testimonial.field_accent_color',
+    'field.field.block_content.grid_links.field_links_color',
+    'field.field.block_content.testimonial_on_image_background.field_accent_color',
    ];
    _webspark_blocks_update_module_config_list($configs);
 }
