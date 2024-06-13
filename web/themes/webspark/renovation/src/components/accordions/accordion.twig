@@ -42,12 +42,14 @@
   </div>
   <div id="accordion-content-{{ link_id }}"
     {% if expanded is same as('On') %}
-       class="collapse accordion-body show"
+       class="collapse show"
     {% else %}
-       class="collapse accordion-body"
+       class="collapse"
     {% endif %}
      aria-labelledby="{{ heading }}"
      data-bs-parent="#accordion-{{ parent_id }}">
-    {{ body_text  }}
+    <div class="accordion-body">
+      {{ body_text  }}
+    </div>
   </div>
 </div>

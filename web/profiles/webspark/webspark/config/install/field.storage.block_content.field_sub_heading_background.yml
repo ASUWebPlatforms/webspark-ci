@@ -19,6 +19,9 @@ settings:
     -
       value: highlight-black
       label: 'Gray 7 background'
+    -
+      value: text-white
+      label: 'White text, no text background color'
   allowed_values_function: ''
 module: options
 locked: false
