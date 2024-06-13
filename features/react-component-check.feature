@@ -86,10 +86,10 @@ Feature: React Component Check
     And I should see that "border-left-color" with "#191919" is in ".accordion-item-dark" class
     Then I click "accordion-header-2"
     Then I wait for 1 seconds
-    And I should see that the "#accordion-content-2.accordion-body.collapse.show" element exists
+    And I should see that the "#accordion-content-2.collapse.show" element exists
     Then I click "accordion-header-2"
     Then I wait for 1 seconds
-    And I should see that the "#accordion-content-2.accordion-body.collapse" element exists
+    And I should see that the "#accordion-content-2.collapse" element exists
 
   @api @javascript @image_gallery-test
   Scenario: Verify Image Gallery (components-core)
@@ -100,6 +100,8 @@ Feature: React Component Check
     Then I wait for 1 seconds
     Then I should see that multiple "img.glide__bullet.bullet-image" elements exist
     Then I should see that 2 of "button.glide__arrow" elements exist
+    Then I scroll "button.glide__arrow.glide__arrow--next" into view
+    And I wait for 1 second
     And I click the element "button.glide__arrow.glide__arrow--next"
     Then I wait for 1 seconds
     And I click the element "button.glide__arrow.glide__arrow--next"

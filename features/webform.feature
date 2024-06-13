@@ -19,10 +19,12 @@ Feature: Webform
     Given for "email" I enter "mlsamuel@asu.edu"
     Given for "subject" I enter "Subject"
     Given for "message" I enter "Test message"
+    Given I click the element "#edit-preferred-method label[for='edit-preferred-method-phone']"
     Then I wait for 2 seconds
     When I scroll "input[name=op]" into view
     Then I wait for 1 seconds
     Then click "input[name=op]" if exists
+    Then I should see that the ".alert.alert-danger" element does not exist
     Then I wait for 3 seconds
 
     Given I am logged in as a user with the "administrator" role
@@ -33,4 +35,3 @@ Feature: Webform
     Then I wait for 1 seconds
 
     Then the number of submissions should be increased by 1
-    

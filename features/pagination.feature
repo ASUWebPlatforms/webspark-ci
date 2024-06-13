@@ -13,8 +13,8 @@ Feature: Pagination
     And I should see that the "li.page-item.active > a[title='Current page'][data-ga-text='page 1']" element exists
     # Next button exists with chevron (it says "last page," but that's a mistake).
     And I should see that the "li.page-item > a[title='Go to last page']" element exists
-    And I should see the link "Next"
-    And I should see the chevron icon exists on the "li.page-item > a[title='Go to last page']" pager item
+#    And I should see the link "Next"
+    And I should see the chevron icon exists on the "li.page-item > a[title='Go to next page']" pager item
     # Click page 2.
     When I click the element "li.page-item > a[title='Go to page 2']"
     # Page 1 is no longer the 'active' item.
@@ -24,10 +24,10 @@ Feature: Pagination
     # "Prev" button now displays with chevron.
     And I should see that the "li.page-item > a[title='Go to previous page']" element exists
     And I should see the chevron icon exists on the "li.page-item > a[title='Go to previous page']" pager item
-    # A total of 11 items should display (9 pages plus "Prev" and "Next")
-    Then I should see that 11 of "ul.pagination.pager__items li.page-item" elements exist
+    # A total of 13 items should display ("<" plus 10 pages, the ellipses, and ">")
+    Then I should see that 13 of "ul.pagination.pager__items li.page-item" elements exist
     # Click "Next".
-    When I click the element "li.page-item > a[title='Go to last page']"
+    When I click the element "li.page-item > a[title='Go to next page']"
     # Page 3 should be active/current.
     Then I should see that the "li.page-item.active > a[title='Current page'][data-ga-text='page 3']" element exists
     # Click "Prev".
