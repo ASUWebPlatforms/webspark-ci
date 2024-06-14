@@ -170,7 +170,7 @@ jQuery.fn.extend({
         const classesToAdd = ['alert', 'alert-danger'];
         disclaimer.id = 'filter-disclaimer';
         disclaimer.classList.add(...classesToAdd);
-        disclaimer.innerHTML = '<small><strong class="text-danger">Please note: </strong>Filter settings do not apply to the Web Directory customized sort option.</small>';
+        disclaimer.innerHTML = '<small><strong class="text-danger">Please note: </strong>Some filter settings are not available when using the Web Directory customized sort option and have been hidden.</small>';
         if (document.getElementById('filter-disclaimer') === null) {
           displaySettingsBlock.parentNode.insertBefore(disclaimer, displaySettingsBlock);
         }
