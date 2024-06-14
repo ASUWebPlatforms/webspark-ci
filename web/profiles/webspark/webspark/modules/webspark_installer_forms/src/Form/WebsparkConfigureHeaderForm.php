@@ -56,6 +56,9 @@ class WebsparkConfigureHeaderForm extends ConfigFormBase {
       '#type' => 'url',
       '#default_value' => '',
       '#states' => [
+        'visible' => [
+          ':input[name="parent_unit_name"]' => ['filled' => TRUE],
+        ],
         'required' => [
           ':input[name="parent_unit_name"]' =>['filled' => TRUE],
         ],
