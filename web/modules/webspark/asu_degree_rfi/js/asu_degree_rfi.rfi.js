@@ -12,8 +12,6 @@
   // Get config values passed in from AsuDegreeRfiRfiBlock.php
   var props = drupalSettings.asu_degree_rfi.props;
 
-  // TODO Remove before PR: ensure the `variant` global default makes its way here if no override is set.
-
   // Launcher code here.
 
   // Initialize the RFI form with provided props.
