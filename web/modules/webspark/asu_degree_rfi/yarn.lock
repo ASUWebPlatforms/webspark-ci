@@ -17,12 +17,12 @@
     react-tooltip "^4.2.21"
     styled-components "^5.3.0"
 
-"@asu/app-rfi@2.2.0":
-  version "2.2.0"
-  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.2.0/d3e528b7ae5382521b2333636baa3381dc1e831b#d3e528b7ae5382521b2333636baa3381dc1e831b"
-  integrity sha512-NhlN+Sre3ERxlJ9FEjEzHcOPaRzRQdoQH77kPK63UzVCRa0AkKsTuFv9B02PQwHkBAaWPNL9kKypwNzsmweqeQ==
+"@asu/app-rfi@2.3.0":
+  version "2.3.0"
+  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.3.0/e73b01e0401a8e7011f906be56474daccc9e0e86#e73b01e0401a8e7011f906be56474daccc9e0e86"
+  integrity sha512-ekVEy2Ohtbqi06bI48NM6dYXe0V8+zeIsD/94qaYcUXj5OBpECNfI2j5lcCO4ceWXwmbvYjlTHTYAzMwQq9Rkw==
   dependencies:
-    "@asu/components-core" "^2.1.0"
+    "@asu/components-core" "^3.0.0"
     formik "^2.1.4"
     prop-types "^15.7.2"
     react ">= 16.14.0 < 18"
@@ -32,15 +32,13 @@
     yup "^0.28.1"
     yup-phone "^1.2.19"
 
-"@asu/components-core@^2.1.0":
-  version "2.2.2"
-  resolved "https://npm.pkg.github.com/download/@asu/components-core/2.2.2/9c2feb05aee4330d7e39386f71c1749cdd5b3adf#9c2feb05aee4330d7e39386f71c1749cdd5b3adf"
-  integrity sha512-eo5evxlRtNrCjVKnAXonx5jVENxPWAWeeqkyO747BsGwnBBXBfUn/UYSoyJYwme3126sTAmdd3yv1coqCsOi1g==
+"@asu/components-core@^3.0.0":
+  version "3.3.5"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.5/29abc0de94172f787328295b8be7f7b294bacbe5#29abc0de94172f787328295b8be7f7b294bacbe5"
+  integrity sha512-5k02yMT9dighjUuNZi8FaaFovX0tmvL6v4s9X3P2NMjRuF8pu97DmTrKLnNaOsUrmaUjIcyKPP/upk/skN1AqA==
   dependencies:
-    "@storybook/addon-knobs" "^6.2.9"
     classnames "^2.2.6"
     date-fns "^2.19.0"
-    dompurify "^2.2.7"
     phone-fns "^3.2.3"
     prop-types "^15.7.2"
     styled-components "^5.3.0"
@@ -582,11 +580,6 @@ dom-walk@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
   integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
-
-dompurify@^2.2.7:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.3.3.tgz#c1af3eb88be47324432964d8abc75cf4b98d634c"
-  integrity sha512-dqnqRkPMAjOZE0FogZ+ceJNM2dZ3V/yNOuFB7+39qpO93hHhfRpHw3heYQC7DPK9FqbQTfBKUJhiSfz4MvXYwg==
 
 error-ex@^1.3.1:
   version "1.3.2"

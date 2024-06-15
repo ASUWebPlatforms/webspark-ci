@@ -222,9 +222,15 @@ function asu_degree_rfi_config_readonly_whitelist_patterns() {
     ->getModule(basename(__FILE__, '.module'))
     ->getName();
   $configs = \Drupal::service('webspark.config_manager')->getModuleConfigFiles($module);
+  $filtered_configs = [];
+  $filtered_configs = array_filter($configs, function ($v) {
+    // We want to allow the global config form for the module to be exempted
+    // so we filter it out.
+    return $v !== 'asu_degree_rfi.settings';
+  });
   // Lock all the configurations from this module.
   if (\Drupal::state()->get('configuration_locked', TRUE)) {
-    return array_map(function ($item) { return '~' . $item; }, $configs);
+    return array_map(function ($item) { return '~' . $item; }, $filtered_configs);
   }
   else {
     return [];
