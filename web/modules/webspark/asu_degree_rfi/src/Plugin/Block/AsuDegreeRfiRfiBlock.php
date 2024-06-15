@@ -136,6 +136,9 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
     // Gather props to pass to JS as drupalSettings.
     $props = [];
     // From block instance config.
+    // This first one falls back to a global config, and thus does not have a
+    // default in core.entity_view_display.node.degree_detail_page.default.yml.
+    $props['variant'] = isset($config['asu_degree_rfi_variant']) ? $config['asu_degree_rfi_variant'] : $global_config->get('asu_degree_rfi.rfi_variant_default');
     $props['campus'] = $config['asu_degree_rfi_campus'] ? $config['asu_degree_rfi_campus'] : NULL;
     if (isset($config['asu_degree_rfi_actual_campus'])) {
       $props['actualCampus'] = $config['asu_degree_rfi_actual_campus'] ? $config['asu_degree_rfi_actual_campus'] : NULL;
@@ -144,6 +147,7 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
     $props['department'] = $config['asu_degree_rfi_department'] ? $config['asu_degree_rfi_department'] : NULL;
     $props['studentType'] = $config['asu_degree_rfi_student_type'] ? $config['asu_degree_rfi_student_type'] : NULL;
     $props['areaOfInterest'] = $config['asu_degree_rfi_area_of_interest'] ? $config['asu_degree_rfi_area_of_interest'] : NULL;
+    $props['areaOfInterestOptional'] = $config['asu_degree_rfi_a_of_i_optional'] ? $config['asu_degree_rfi_a_of_i_optional'] : NULL;
     $props['programOfInterest'] = $config['asu_degree_rfi_program_of_interest'] ? $config['asu_degree_rfi_program_of_interest'] : $route_pgm_of_interest;
     $props['programOfInterestOptional'] = $config['asu_degree_rfi_p_of_i_optional'] ? $config['asu_degree_rfi_p_of_i_optional'] : NULL;
     $props['isCertMinor'] = $config['asu_degree_rfi_is_cert_minor'] ? $config['asu_degree_rfi_is_cert_minor'] : $isCertMinorDefault;
@@ -306,9 +310,19 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
       ['US', 'CA']
     );
 
+    // Get the global config.
+    $global_config = \Drupal::config('asu_degree_rfi.settings');
+
     // Config for this instance.
     $config = $this->getConfiguration();
 
+    $form['asu_degree_rfi_variant'] = [
+      '#type' => 'select',
+      '#title' => $this->t('RFI form type variation'),
+      '#description' => $this->t('Select whether the form should display as a one or two page form.'),
+      '#options' => \Drupal::service('asu_degree_rfi.helper_functions')->getRfiVariantOptions(),
+      '#default_value' => $config['asu_degree_rfi_variant'] ?? $global_config->get('asu_degree_rfi.rfi_variant_default')
+    ];
     $form['asu_degree_rfi_college'] = [
       '#type' => 'select',
       '#title' => $this->t('College'),
@@ -360,6 +374,14 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
       '#options' => array_merge(['' => $this->t('None')], $aoi_options),
       '#default_value' => $config['asu_degree_rfi_area_of_interest'] ?? '',
     ];
+    $form['asu_degree_rfi_a_of_i_optional'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Area of interest is optional'),
+      '#description' => $this->t('Set area of interest as optional. Not
+        usually recommended.'),
+      '#default_value' => isset($config['asu_degree_rfi_a_of_i_optional']) ?
+      $config['asu_degree_rfi_a_of_i_optional'] : 0,
+    ];
     // AKA plan code or academic plan code.
     $form['asu_degree_rfi_program_of_interest'] = [
       '#type' => 'select',
@@ -374,7 +396,7 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
       '#title' => $this->t('Program of interest is optional'),
       '#description' => $this->t('Set program of interest as optional. Not
         usually recommended, but can be useful for non-academic units.'),
-      '#default_value' => isset($config['asu_degree_rfi_is_cert_minor']) ?
+      '#default_value' => isset($config['asu_degree_rfi_p_of_i_optional']) ?
       $config['asu_degree_rfi_p_of_i_optional'] : 0,
     ];
     $form['asu_degree_rfi_is_cert_minor'] = [
@@ -442,6 +464,8 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
 
     $values = $form_state->getValues();
 
+    $this->configuration['asu_degree_rfi_variant'] =
+      $values['asu_degree_rfi_variant'];
     $this->configuration['asu_degree_rfi_college'] =
       $values['asu_degree_rfi_college'];
     $this->configuration['asu_degree_rfi_department'] =
@@ -454,6 +478,8 @@ class AsuDegreeRfiRfiBlock extends BlockBase implements ContainerFactoryPluginIn
       $values['asu_degree_rfi_student_type'];
     $this->configuration['asu_degree_rfi_area_of_interest'] =
       $values['asu_degree_rfi_area_of_interest'];
+    $this->configuration['asu_degree_rfi_a_of_i_optional'] =
+      $values['asu_degree_rfi_a_of_i_optional'];
     $this->configuration['asu_degree_rfi_program_of_interest'] =
       $values['asu_degree_rfi_program_of_interest'];
     $this->configuration['asu_degree_rfi_p_of_i_optional'] =
