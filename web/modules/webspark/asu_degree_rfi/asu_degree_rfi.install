@@ -9,6 +9,14 @@ function asu_degree_rfi_module_preinstall($module) {
 
 function asu_degree_rfi_modules_installed($modules) {
   if (in_array('asu_degree_rfi', $modules)) {
+
+    // We don't provide an asu_degree.settings.yml to avoid overwriting
+    // source ID and other admin form values during revert-alls, so let's set
+    // this one default we want to be sure to have during install.
+    $rfi_variant_global_default = 'rfiVariant2';
+    $config = \Drupal::configFactory()->getEditable('asu_degree_rfi.settings');
+    $config->set('asu_degree_rfi.rfi_variant_default', $rfi_variant_global_default);
+
     // Lock the configuration storage after install.
     \Drupal::state()->set('configuration_locked', TRUE);
   }
@@ -141,6 +149,11 @@ function asu_degree_rfi_update_10001(&$sandbox) {
   $rfi_variant_global_default = 'rfiVariant2';
   $config = \Drupal::configFactory()->getEditable('asu_degree_rfi.settings');
   $config->set('asu_degree_rfi.rfi_variant_default', $rfi_variant_global_default);
+
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.node.degree_detail_page.default.yml');
+  \Drupal::state()->set('configuration_locked', TRUE);
+
   $config->save();
 
   // Also refresh the entity defaults.
