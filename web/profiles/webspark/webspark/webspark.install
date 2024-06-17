@@ -544,5 +544,6 @@ function webspark_update_10005(&$sandbox) {
       $config->set('cache.page.max_age', 86400);
     }
     $config->save(TRUE);
+    \Drupal::state()->set('configuration_locked', TRUE);
   }
 }
