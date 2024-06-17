@@ -64,7 +64,37 @@ export default class InsertWebsparkListStyleCommand extends Command {
     _getSibling(currentNode, elementsBelow, "forward");
     elementsBelow.forEach((element) => {
       this.value = Object.fromEntries(element.getAttributes());
+
+      const nodes = element._children._nodes;
+      nodes.forEach((child, index) => {
+        if (index === 0) {
+          child._attrs.delete('htmlSpan');
+        }
+        if(child.name === 'softBreak') {
+          const nextChild = nodes[index + 1];
+          if (nextChild) { // Check if nextChild exists
+            // Ensure _attrs is a Map
+            if (!nextChild._attrs) {
+              nextChild._attrs = new Map();
+            }
+
+            // If _attrs is not a Map, convert it to one (optional depending on context)
+            if (!(nextChild._attrs instanceof Map)) {
+                nextChild._attrs = new Map(Object.entries(nextChild._attrs));
+            }
+
+            // Add the 'htmlSpan' entry with an object as its value
+            nextChild._attrs.set('htmlSpan', {});
+          }
+        }
+      })
     });
+    try {
+      const aux = this.editor.model.document.selection.anchor.index;
+      if(aux == 0) {
+        this.editor.model.document.selection._selection._attrs.delete('htmlSpan'); 
+      }
+    } catch (e) {}
   }
 
   /**
