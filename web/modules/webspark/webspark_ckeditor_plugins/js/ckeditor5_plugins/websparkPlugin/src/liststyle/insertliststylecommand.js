@@ -65,6 +65,11 @@ export default class InsertWebsparkListStyleCommand extends Command {
     elementsBelow.forEach((element) => {
       this.value = Object.fromEntries(element.getAttributes());
 
+      // Iterate over the child nodes of each element below the current node
+      // If the child node is the first child, remove the 'htmlSpan' attribute
+      // If the child node is a 'softBreak', get the next child node
+      // If the next child node exists, add a new 'htmlSpan' attribute to it
+      // This ensures that each 'softBreak' node has a corresponding 'htmlSpan' attribute
       const nodes = element._children._nodes;
       nodes.forEach((child, index) => {
         if (index === 0) {
@@ -89,6 +94,7 @@ export default class InsertWebsparkListStyleCommand extends Command {
         }
       })
     });
+    // If the current node is the first node, remove the 'htmlSpan' attribute
     try {
       const aux = this.editor.model.document.selection.anchor.index;
       if(aux == 0) {
