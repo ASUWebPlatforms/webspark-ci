@@ -75,7 +75,7 @@ export default class InsertWebsparkListStyleCommand extends Command {
         if (index === 0) {
           child._attrs.delete('htmlSpan');
         }
-        if(child.name === 'softBreak') {
+        if (child.name === 'softBreak') {
           const nextChild = nodes[index + 1];
           if (nextChild) { // Check if nextChild exists
             // Ensure _attrs is a Map
@@ -97,7 +97,7 @@ export default class InsertWebsparkListStyleCommand extends Command {
     // If the current node is the first node, remove the 'htmlSpan' attribute
     try {
       const aux = this.editor.model.document.selection.anchor.index;
-      if(aux == 0) {
+      if (aux == 0) {
         this.editor.model.document.selection._selection._attrs.delete('htmlSpan'); 
       }
     } catch (e) {}
