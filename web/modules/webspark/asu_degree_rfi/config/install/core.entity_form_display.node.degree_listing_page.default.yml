@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.degree_listing_page.field_degree_list_intro_title
     - field.field.node.degree_listing_page.field_degree_list_intro_type
     - field.field.node.degree_listing_page.field_degree_list_photo_grid
+    - field.field.node.degree_listing_page.field_degree_list_breadcrumbs
     - field.field.node.degree_listing_page.field_degree_list_program
     - field.field.node.degree_listing_page.field_degree_list_show_filters
     - field.field.node.degree_listing_page.field_degree_list_show_search
@@ -57,6 +58,7 @@ third_party_settings:
         - field_degree_list_intro_type
         - field_degree_list_intro_title
         - field_degree_list_header
+        - field_degree_list_breadcrumbs
         - field_degree_list_intro_content
         - field_degree_list_photo_grid
         - field_degree_listing_intro_media
@@ -226,6 +228,14 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_degree_list_breadcrumbs:
+    type: link_default
+    weight: 21
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   path:
     type: path

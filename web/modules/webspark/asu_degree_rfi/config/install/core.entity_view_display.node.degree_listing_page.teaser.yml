@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.degree_listing_page.field_degree_list_hero_title
     - field.field.node.degree_listing_page.field_degree_list_hide_colschl
     - field.field.node.degree_listing_page.field_degree_list_intro_content
+    - field.field.node.degree_listing_page.field_degree_list_breadcrumbs
     - field.field.node.degree_listing_page.field_degree_list_intro_title
     - field.field.node.degree_listing_page.field_degree_list_intro_type
     - field.field.node.degree_listing_page.field_degree_list_photo_grid
@@ -63,6 +64,7 @@ hidden:
   field_degree_list_program: true
   field_degree_list_show_filters: true
   field_degree_list_show_search: true
+  field_degree_list_breadcrumbs: true
   field_degree_listing_intro_media: true
   field_exclude_from_display: true
   layout_builder__layout: true

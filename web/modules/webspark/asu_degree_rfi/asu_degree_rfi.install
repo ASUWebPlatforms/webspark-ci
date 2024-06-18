@@ -149,6 +149,15 @@ function asu_degree_rfi_update_10001(&$sandbox) {
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
+/**
+  * Adds breascrumbs to listing pages.
+  */
+function asu_degree_rfi_update_10002(&$sandbox) {
+  $config = \Drupal::configFactory()->getEditable('asu_degree_rfi.settings');
+  $config->set('asu_degree_rfi.breadcrumbs_enabled', TRUE);
+  $config->save();
+}
+
 function _asu_degree_rfi_revert_all_module_config() {
   // Get this module name.
   $module = \Drupal::service('module_handler')
