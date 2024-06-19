@@ -29,5 +29,8 @@
     },
     "drupal/ckeditor_responsive_plugin": {
         "#3334636 : Add content after injecting the grid ": "https://www.drupal.org/files/issues/2023-08-22/ckeditor_responsive_plugin_2-1.patch"
+    },
+    "drupal/new_relic_rpm": {
+        "#3444218: Allow for RUM Manual Instrumentation": "upstream-configuration/patches/newrelic-manual-rum.patch"
     }
 }

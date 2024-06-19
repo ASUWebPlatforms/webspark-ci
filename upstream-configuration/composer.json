@@ -38,6 +38,7 @@
         "drupal/maxlength": "2.1.2",
         "drupal/media_library_form_element": "2.0.6",
         "drupal/metatag": "2.0.0",
+        "drupal/new_relic_rpm": "^2.1.0",
         "drupal/paragraphs": "1.17.0",
         "drupal/pathauto": "1.12.0",
         "drupal/radix": "5.0.11",

@@ -1,0 +1,2919 @@
+From 7557ec6bb7059d56a2b053022d8550b2c582f494 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Mon, 29 Apr 2024 13:36:40 -0500
+Subject: [PATCH 01/15] Allow manual instrumentation
+
+---
+ config/install/new_relic_rpm.settings.yml     |  1 +
+ config/schema/new_relic_rpm.schema.yml        |  2 +
+ new_relic_rpm.module                          | 29 ++++++++++
+ src/Form/NewRelicRpmSettings.php              |  8 +++
+ .../rum_manual_instrumentation.info.yml       |  6 +++
+ .../rum_manual_instrumentation.module         | 28 ++++++++++
+ tests/src/Functional/AdminUiTest.php          |  3 ++
+ .../Functional/ManualInstrumentationTest.php  | 54 +++++++++++++++++++
+ 8 files changed, 131 insertions(+)
+ create mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
+ create mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
+ create mode 100644 tests/src/Functional/ManualInstrumentationTest.php
+
+diff --git a/config/install/new_relic_rpm.settings.yml b/config/install/new_relic_rpm.settings.yml
+index 7816eca..e95b49d 100644
+--- a/config/install/new_relic_rpm.settings.yml
++++ b/config/install/new_relic_rpm.settings.yml
+@@ -12,3 +12,4 @@ watchdog_severities: { }
+ views_log_slow: false
+ views_log_threshold: 100
+ disable_autorum: false
++rum_manual_instrumentation: false
+diff --git a/config/schema/new_relic_rpm.schema.yml b/config/schema/new_relic_rpm.schema.yml
+index ad5bc3c..5e3a4a5 100644
+--- a/config/schema/new_relic_rpm.schema.yml
++++ b/config/schema/new_relic_rpm.schema.yml
+@@ -36,3 +36,5 @@ new_relic_rpm.settings:
+       label: Slow view threshold in ms
+     disable_autorum:
+       type: boolean
++    rum_manual_instrumentation:
++      type: boolean
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index 9d8fb51..9c83c1d 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -7,6 +7,7 @@
+
+ use Drupal\Component\Utility\Timer;
+ use Drupal\views\ViewExecutable;
++use Drupal\Core\Render\Markup;
+ use Drupal\Core\Routing\RouteMatchInterface;
+
+ /**
+@@ -92,6 +93,34 @@ function new_relic_rpm_views_post_render(ViewExecutable $view) {
+   }
+ }
+
++/**
++ * Implements hook_page_top().
++ */
++function new_relic_rpm_page_top(array &$page_top) {
++  if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
++    && function_exists('newrelic_get_browser_timing_header')
++    ) {
++
++    $page_top['new_relic_rpm'] = [
++      '#markup' => Markup::create(newrelic_get_browser_timing_header()),
++    ];
++  }
++}
++
++/**
++ * Implements hook_page_bottom().
++ */
++function new_relic_rpm_page_bottom(array &$page_bottom) {
++  if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
++    && function_exists('newrelic_get_browser_timing_footer')
++    ) {
++
++    $page_bottom['new_relic_rpm'] = [
++      '#markup' => Markup::create(newrelic_get_browser_timing_footer()),
++    ];
++  }
++}
++
+ /**
+  * Implements hook_help().
+  */
+diff --git a/src/Form/NewRelicRpmSettings.php b/src/Form/NewRelicRpmSettings.php
+index 9aea285..079c094 100644
+--- a/src/Form/NewRelicRpmSettings.php
++++ b/src/Form/NewRelicRpmSettings.php
+@@ -166,6 +166,13 @@ class NewRelicRpmSettings extends ConfigFormBase {
+       '#default_value' => $this->config('new_relic_rpm.settings')->get('disable_autorum'),
+     ];
+
++    $form['browser']['rum_manual_instrumentation'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Manual Instrumentation'),
++      '#description' => $this->t('Check to implement manual instrumentation. This setting is required for Drupal 10.2.0+ due to the <code>Content-Length</code> header.'),
++      '#default_value' => $this->config('new_relic_rpm.settings')->get('rum_manual_instrumentation'),
++    ];
++
+     $form['insights'] = [
+       '#type' => 'details',
+       '#title' => $this->t('Insights'),
+@@ -210,6 +217,7 @@ class NewRelicRpmSettings extends ConfigFormBase {
+       'views_log_slow',
+       'views_log_threshold',
+       'disable_autorum',
++      'rum_manual_instrumentation',
+     ];
+
+     foreach ($variables as $variable) {
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
+new file mode 100644
+index 0000000..d9041b4
+--- /dev/null
++++ b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
+@@ -0,0 +1,6 @@
++name: 'RUM Manual Instrumentation Test Module'
++description: 'Provides missing NR functions needed for test coverage'
++package: Testing
++
++type: module
++core_version_requirement: ^9.1 || ^10
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
+new file mode 100644
+index 0000000..bcb8b91
+--- /dev/null
++++ b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
+@@ -0,0 +1,28 @@
++<?php
++
++/**
++ * @file
++ * This modules provides New Relic fuctions missing from a CI/CD environment.
++ */
++
++/**
++ * Provides testable response for missing NR function.
++ *
++ * @return string
++ *   Test string response.
++ */
++// phpcs:ignore
++function newrelic_get_browser_timing_header() {
++  return "<script>console.log('header script inserted')</script>";
++}
++
++/**
++ * Provides testable response for missing NR function.
++ *
++ * @return string
++ *   Test string response.
++ */
++// phpcs:ignore
++function newrelic_get_browser_timing_footer() {
++  return "<script>console.log('footer script inserted')</script>";
++}
+diff --git a/tests/src/Functional/AdminUiTest.php b/tests/src/Functional/AdminUiTest.php
+index 639ebf9..326dc43 100644
+--- a/tests/src/Functional/AdminUiTest.php
++++ b/tests/src/Functional/AdminUiTest.php
+@@ -78,6 +78,9 @@ class AdminUiTest extends BrowserTestBase {
+     $this->page->hasField('module_deployment');
+     $this->page->hasField('config_import');
+
++    // Browser.
++    $this->page->hasField('rum_manual_instrumentation');
++
+     // Insight.
+     $this->page->hasField('views_log_slow');
+     $this->page->hasField('views_log_threshold');
+diff --git a/tests/src/Functional/ManualInstrumentationTest.php b/tests/src/Functional/ManualInstrumentationTest.php
+new file mode 100644
+index 0000000..89c455a
+--- /dev/null
++++ b/tests/src/Functional/ManualInstrumentationTest.php
+@@ -0,0 +1,54 @@
++<?php
++
++namespace Drupal\Tests\new_relic_rpm\Functional;
++
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests manual instrumentation.
++ *
++ * @package Drupal\Tests\new_relic_rpm\Functional
++ * @group new_relic_rpm
++ */
++class ManualInstrumentationTest extends BrowserTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['new_relic_rpm', 'rum_manual_instrumentation'];
++
++  protected $defaultTheme = 'stark';
++
++  /**
++   * Tests markup is rendered.
++   */
++  public function testMarkupRender() {
++    $assert = $this->assertSession();
++
++    // Verify setting is disabled by default.
++    $this->assertFalse(
++      \Drupal::config('new_relic_rpm.settings')
++        ->get('rum_manual_instrumentation')
++    );
++
++    $this->drupalGet('/');
++
++    $assert->responseNotContains("<script>console.log('header script inserted')</script>");
++    $assert->responseNotContains("<script>console.log('footer script inserted')</script>");
++
++    $this->container->get('config.factory')
++      ->getEditable('new_relic_rpm.settings')
++      ->set('rum_manual_instrumentation', TRUE)
++      ->save();
++
++    // It shouldn't be necessary to clear cache for the config change to take
++    // efffect.
++    drupal_flush_all_caches();
++
++    $this->drupalGet('/');
++
++    $assert->responseContains("<script>console.log('header script inserted')</script>");
++    $assert->responseContains("<script>console.log('footer script inserted')</script>");
++  }
++
++}
+--
+GitLab
+
+
+From 0c074f6f77576012ee96b5228feb50332f0b3ae2 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Tue, 30 Apr 2024 09:27:13 -0500
+Subject: [PATCH 02/15] Add settings cache tag to new_relic_rpm_page_top() and
+ new_relic_rpm_page_bottom()
+
+---
+ new_relic_rpm.module | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index 9c83c1d..fa96b9d 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -104,6 +104,7 @@ function new_relic_rpm_page_top(array &$page_top) {
+     $page_top['new_relic_rpm'] = [
+       '#markup' => Markup::create(newrelic_get_browser_timing_header()),
+     ];
++    $page_top['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+   }
+ }
+
+@@ -118,6 +119,7 @@ function new_relic_rpm_page_bottom(array &$page_bottom) {
+     $page_bottom['new_relic_rpm'] = [
+       '#markup' => Markup::create(newrelic_get_browser_timing_footer()),
+     ];
++    $page_bottom['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+   }
+ }
+
+--
+GitLab
+
+
+From ddba34be65050c8d169fc22fae5dc22451214eb9 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Tue, 30 Apr 2024 10:27:30 -0500
+Subject: [PATCH 03/15] Fix cache tag insertion in new_relic_rpm_page_top() and
+ new_relic_rpm_page_bottom()
+
+---
+ new_relic_rpm.module                               | 6 ++++--
+ tests/src/Functional/ManualInstrumentationTest.php | 4 ----
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index fa96b9d..eac6432 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -104,8 +104,9 @@ function new_relic_rpm_page_top(array &$page_top) {
+     $page_top['new_relic_rpm'] = [
+       '#markup' => Markup::create(newrelic_get_browser_timing_header()),
+     ];
+-    $page_top['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+   }
++
++  $page_top['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+ }
+
+ /**
+@@ -119,8 +120,9 @@ function new_relic_rpm_page_bottom(array &$page_bottom) {
+     $page_bottom['new_relic_rpm'] = [
+       '#markup' => Markup::create(newrelic_get_browser_timing_footer()),
+     ];
+-    $page_bottom['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+   }
++
++  $page_bottom['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+ }
+
+ /**
+diff --git a/tests/src/Functional/ManualInstrumentationTest.php b/tests/src/Functional/ManualInstrumentationTest.php
+index 89c455a..1c50597 100644
+--- a/tests/src/Functional/ManualInstrumentationTest.php
++++ b/tests/src/Functional/ManualInstrumentationTest.php
+@@ -41,10 +41,6 @@ class ManualInstrumentationTest extends BrowserTestBase {
+       ->set('rum_manual_instrumentation', TRUE)
+       ->save();
+
+-    // It shouldn't be necessary to clear cache for the config change to take
+-    // efffect.
+-    drupal_flush_all_caches();
+-
+     $this->drupalGet('/');
+
+     $assert->responseContains("<script>console.log('header script inserted')</script>");
+--
+GitLab
+
+
+From 769cc5c044049acddeff6045ba1023e17dfda4e2 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Wed, 8 May 2024 15:48:30 -0500
+Subject: [PATCH 04/15] Use new_relic_rpm.adapter service
+
+---
+ new_relic_rpm.module                          |  8 +++---
+ src/ExtensionAdapter/ExtensionAdapter.php     | 14 ++++++++++
+ .../NewRelicAdapterInterface.php              | 16 +++++++++++
+ src/ExtensionAdapter/NullAdapter.php          | 14 ++++++++++
+ .../rum_manual_instrumentation.module         | 28 -------------------
+ .../rum_manual_instrumentation.services.yml   |  5 ++++
+ .../src/ExtensionAdapter/AdapterFactory.php   | 20 +++++++++++++
+ .../src/ExtensionAdapter/NullAdapter.php      | 26 +++++++++++++++++
+ 8 files changed, 99 insertions(+), 32 deletions(-)
+ delete mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
+ create mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
+ create mode 100644 tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php
+ create mode 100644 tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php
+
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index eac6432..7c0ea1b 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -98,11 +98,11 @@ function new_relic_rpm_views_post_render(ViewExecutable $view) {
+  */
+ function new_relic_rpm_page_top(array &$page_top) {
+   if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
+-    && function_exists('newrelic_get_browser_timing_header')
++    && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingHeader()
+     ) {
+
+     $page_top['new_relic_rpm'] = [
+-      '#markup' => Markup::create(newrelic_get_browser_timing_header()),
++      '#markup' => Markup::create($markup),
+     ];
+   }
+
+@@ -114,11 +114,11 @@ function new_relic_rpm_page_top(array &$page_top) {
+  */
+ function new_relic_rpm_page_bottom(array &$page_bottom) {
+   if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
+-    && function_exists('newrelic_get_browser_timing_footer')
++    && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingFooter()
+     ) {
+
+     $page_bottom['new_relic_rpm'] = [
+-      '#markup' => Markup::create(newrelic_get_browser_timing_footer()),
++      '#markup' => Markup::create($markup),
+     ];
+   }
+
+diff --git a/src/ExtensionAdapter/ExtensionAdapter.php b/src/ExtensionAdapter/ExtensionAdapter.php
+index 7f3369a..b7aba43 100644
+--- a/src/ExtensionAdapter/ExtensionAdapter.php
++++ b/src/ExtensionAdapter/ExtensionAdapter.php
+@@ -67,4 +67,18 @@ class ExtensionAdapter implements NewRelicAdapterInterface {
+     return newrelic_disable_autorum();
+   }
+
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingHeader() {
++    return newrelic_get_browser_timing_header();
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingFooter() {
++    return newrelic_get_browser_timing_footer();
++  }
++
+ }
+diff --git a/src/ExtensionAdapter/NewRelicAdapterInterface.php b/src/ExtensionAdapter/NewRelicAdapterInterface.php
+index 1ec4ecf..d07e11a 100644
+--- a/src/ExtensionAdapter/NewRelicAdapterInterface.php
++++ b/src/ExtensionAdapter/NewRelicAdapterInterface.php
+@@ -75,4 +75,20 @@ interface NewRelicAdapterInterface {
+    */
+   public function disableAutorum();
+
++  /**
++   * Gets the browser timing header for manual instrumentation.
++   *
++   * @return string|null
++   *   The browser timing header string, if available. Otherwise NULL.
++   */
++  public function getBrowserTimingHeader();
++
++  /**
++   * Gets the browser timing footer for manual instrumentation.
++   *
++   * @return string|null
++   *   The browser timing footer string, if available. Otherwise NULL.
++   */
++  public function getBrowserTimingFooter();
++
+ }
+diff --git a/src/ExtensionAdapter/NullAdapter.php b/src/ExtensionAdapter/NullAdapter.php
+index 4f904b1..f229f71 100644
+--- a/src/ExtensionAdapter/NullAdapter.php
++++ b/src/ExtensionAdapter/NullAdapter.php
+@@ -44,4 +44,18 @@ class NullAdapter implements NewRelicAdapterInterface {
+     return NULL;
+   }
+
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingHeader() {
++    return NULL;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingFooter() {
++    return NULL;
++  }
++
+ }
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
+deleted file mode 100644
+index bcb8b91..0000000
+--- a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.module
++++ /dev/null
+@@ -1,28 +0,0 @@
+-<?php
+-
+-/**
+- * @file
+- * This modules provides New Relic fuctions missing from a CI/CD environment.
+- */
+-
+-/**
+- * Provides testable response for missing NR function.
+- *
+- * @return string
+- *   Test string response.
+- */
+-// phpcs:ignore
+-function newrelic_get_browser_timing_header() {
+-  return "<script>console.log('header script inserted')</script>";
+-}
+-
+-/**
+- * Provides testable response for missing NR function.
+- *
+- * @return string
+- *   Test string response.
+- */
+-// phpcs:ignore
+-function newrelic_get_browser_timing_footer() {
+-  return "<script>console.log('footer script inserted')</script>";
+-}
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
+new file mode 100644
+index 0000000..008a3ed
+--- /dev/null
++++ b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
+@@ -0,0 +1,5 @@
++services:
++  rum_manual_instrumentation.adapter:
++    decorates: new_relic_rpm.adapter
++    class: Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface
++    factory: Drupal\rum_manual_instrumentation\ExtensionAdapter\AdapterFactory::getAdapter
+diff --git a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php b/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php
+new file mode 100644
+index 0000000..4668a29
+--- /dev/null
++++ b/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php
+@@ -0,0 +1,20 @@
++<?php
++
++namespace Drupal\rum_manual_instrumentation\ExtensionAdapter;
++
++/**
++ * Factory to create a New Relic adapter.
++ */
++class AdapterFactory {
++
++  /**
++   * Returns a test new relic adapter.
++   *
++   * @return \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface
++   *   The new relic adapter.
++   */
++  public static function getAdapter() {
++    return new NullAdapter();
++  }
++
++}
+diff --git a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php b/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php
+new file mode 100644
+index 0000000..fa36801
+--- /dev/null
++++ b/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php
+@@ -0,0 +1,26 @@
++<?php
++
++namespace Drupal\rum_manual_instrumentation\ExtensionAdapter;
++
++use Drupal\new_relic_rpm\ExtensionAdapter\NullAdapter as ExtendedNullAdapter;
++
++/**
++ * Null Adapter extended for testing.
++ */
++class NullAdapter extends ExtendedNullAdapter {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingHeader() {
++    return "<script>console.log('header script inserted')</script>";
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getBrowserTimingFooter() {
++    return "<script>console.log('footer script inserted')</script>";
++  }
++
++}
+--
+GitLab
+
+
+From bef000ca698108e912b7a8e1d974c5d208640b8b Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Wed, 8 May 2024 17:55:31 -0500
+Subject: [PATCH 05/15] Replace "disable_autorum" settings with
+ "rum_instrumentation" setting; rename test module
+
+---
+ config/install/new_relic_rpm.settings.yml     |  3 +-
+ config/schema/new_relic_rpm.schema.yml        |  7 +-
+ new_relic_rpm.module                          |  4 +-
+ new_relic_rpm.post_update.php                 | 28 ++++++
+ .../NewRelicRequestSubscriber.php             |  4 +-
+ src/Form/NewRelicRpmSettings.php              | 25 +++---
+ ...w_relic_rpm_intstrumentation_test.info.yml |  5 ++
+ ...lic_rpm_intstrumentation_test.services.yml |  5 ++
+ .../src/ExtensionAdapter/AdapterFactory.php   |  2 +-
+ .../src/ExtensionAdapter/NullAdapter.php      |  2 +-
+ .../rum_manual_instrumentation.info.yml       |  6 --
+ .../rum_manual_instrumentation.services.yml   |  5 --
+ tests/src/Functional/AdminUiTest.php          |  2 +-
+ ...tationTest.php => InstrumentationTest.php} | 13 +--
+ tests/src/Kernel/UpdateTest.php               | 90 +++++++++++++++++++
+ 15 files changed, 157 insertions(+), 44 deletions(-)
+ create mode 100644 new_relic_rpm.post_update.php
+ create mode 100644 tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.info.yml
+ create mode 100644 tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.services.yml
+ rename tests/modules/{rum_manual_instrumentation => new_relic_rpm_intstrumentation_test}/src/ExtensionAdapter/AdapterFactory.php (81%)
+ rename tests/modules/{rum_manual_instrumentation => new_relic_rpm_intstrumentation_test}/src/ExtensionAdapter/NullAdapter.php (87%)
+ delete mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
+ delete mode 100644 tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
+ rename tests/src/Functional/{ManualInstrumentationTest.php => InstrumentationTest.php} (76%)
+ create mode 100644 tests/src/Kernel/UpdateTest.php
+
+diff --git a/config/install/new_relic_rpm.settings.yml b/config/install/new_relic_rpm.settings.yml
+index e95b49d..cb3be8b 100644
+--- a/config/install/new_relic_rpm.settings.yml
++++ b/config/install/new_relic_rpm.settings.yml
+@@ -11,5 +11,4 @@ override_exception_handler: false
+ watchdog_severities: { }
+ views_log_slow: false
+ views_log_threshold: 100
+-disable_autorum: false
+-rum_manual_instrumentation: false
++rum_instrumentation: auto
+diff --git a/config/schema/new_relic_rpm.schema.yml b/config/schema/new_relic_rpm.schema.yml
+index 5e3a4a5..ccff920 100644
+--- a/config/schema/new_relic_rpm.schema.yml
++++ b/config/schema/new_relic_rpm.schema.yml
+@@ -34,7 +34,6 @@ new_relic_rpm.settings:
+     views_log_threshold:
+       type: integer
+       label: Slow view threshold in ms
+-    disable_autorum:
+-      type: boolean
+-    rum_manual_instrumentation:
+-      type: boolean
++    rum_instrumentation:
++      type: string
++      label: RUM Instrumentation
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index 7c0ea1b..206f3a6 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -97,7 +97,7 @@ function new_relic_rpm_views_post_render(ViewExecutable $view) {
+  * Implements hook_page_top().
+  */
+ function new_relic_rpm_page_top(array &$page_top) {
+-  if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
++  if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
+     && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingHeader()
+     ) {
+
+@@ -113,7 +113,7 @@ function new_relic_rpm_page_top(array &$page_top) {
+  * Implements hook_page_bottom().
+  */
+ function new_relic_rpm_page_bottom(array &$page_bottom) {
+-  if (\Drupal::config('new_relic_rpm.settings')->get('rum_manual_instrumentation')
++  if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
+     && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingFooter()
+     ) {
+
+diff --git a/new_relic_rpm.post_update.php b/new_relic_rpm.post_update.php
+new file mode 100644
+index 0000000..8e0a12a
+--- /dev/null
++++ b/new_relic_rpm.post_update.php
+@@ -0,0 +1,28 @@
++<?php
++
++/**
++ * @file
++ * Post update functions for the New Relic module.
++ */
++
++/**
++ * Replace disable_autorum setting with rum_instrumentation setting.
++ */
++function new_relic_rpm_post_update_instrumentation() {
++  $config = \Drupal::configFactory()
++    ->getEditable('new_relic_rpm.settings');
++  $data = $config->getRawData();
++
++  if (!isset($data['disable_autorum'])) {
++    $data['rum_instrumentation'] = 'auto';
++  }
++  elseif ($data['disable_autorum'] == TRUE) {
++    $data['rum_instrumentation'] = 'disabled';
++  }
++  elseif ($data['disable_autorum'] == FALSE) {
++    $data['rum_instrumentation'] = 'auto';
++  }
++
++  unset($data['disable_autorum']);
++  $config->setData($data)->save();
++}
+diff --git a/src/EventSubscriber/NewRelicRequestSubscriber.php b/src/EventSubscriber/NewRelicRequestSubscriber.php
+index 9665a0c..349c877 100644
+--- a/src/EventSubscriber/NewRelicRequestSubscriber.php
++++ b/src/EventSubscriber/NewRelicRequestSubscriber.php
+@@ -113,9 +113,9 @@ class NewRelicRequestSubscriber implements EventSubscriberInterface {
+     $ignore_urls = $config->get('ignore_urls');
+     $bg_urls = $config->get('bg_urls');
+     $exclude_urls = $config->get('exclusive_urls');
+-    $disable_autorum = $config->get('disable_autorum');
++    $rum_instrumentation = $config->get('rum_instrumentation');
+
+-    if ($disable_autorum) {
++    if ($rum_instrumentation != 'auto') {
+       $this->adapter->disableAutorum();
+     }
+
+diff --git a/src/Form/NewRelicRpmSettings.php b/src/Form/NewRelicRpmSettings.php
+index 079c094..d6bdda3 100644
+--- a/src/Form/NewRelicRpmSettings.php
++++ b/src/Form/NewRelicRpmSettings.php
+@@ -159,18 +159,16 @@ class NewRelicRpmSettings extends ConfigFormBase {
+       '#open' => TRUE,
+     ];
+
+-    $form['browser']['disable_autorum'] = [
+-      '#type' => 'checkbox',
+-      '#title' => $this->t('Disable AutoRUM'),
+-      '#description' => $this->t('Check to disable the automatic real user monitoring inserted by a New Relic transaction.'),
+-      '#default_value' => $this->config('new_relic_rpm.settings')->get('disable_autorum'),
+-    ];
+-
+-    $form['browser']['rum_manual_instrumentation'] = [
+-      '#type' => 'checkbox',
+-      '#title' => $this->t('Manual Instrumentation'),
+-      '#description' => $this->t('Check to implement manual instrumentation. This setting is required for Drupal 10.2.0+ due to the <code>Content-Length</code> header.'),
+-      '#default_value' => $this->config('new_relic_rpm.settings')->get('rum_manual_instrumentation'),
++    $form['browser']['rum_instrumentation'] = [
++      '#type' => 'select',
++      '#title' => $this->t('RUM Instrumentation'),
++      '#description' => $this->t('How RUM should be instrumented. If enabled, manual instrumentation must be used for Drupal 10.2.0+ because auto-instrumentation is incompatible with the <code>Content-Length</code> header set in Drupal 10.2.0+'),
++      '#options' => [
++        'disabled' => $this->t('Disabled'),
++        'auto' => $this->t('Auto'),
++        'manual' => $this->t('Manual'),
++      ],
++      '#default_value' => $this->config('new_relic_rpm.settings')->get('rum_instrumentation'),
+     ];
+
+     $form['insights'] = [
+@@ -216,8 +214,7 @@ class NewRelicRpmSettings extends ConfigFormBase {
+       'config_import',
+       'views_log_slow',
+       'views_log_threshold',
+-      'disable_autorum',
+-      'rum_manual_instrumentation',
++      'rum_instrumentation',
+     ];
+
+     foreach ($variables as $variable) {
+diff --git a/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.info.yml b/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.info.yml
+new file mode 100644
+index 0000000..d04d0db
+--- /dev/null
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.info.yml
+@@ -0,0 +1,5 @@
++name: 'RUM Instrumentation Test Module'
++package: Testing
++
++type: module
++core_version_requirement: ^9.1 || ^10
+diff --git a/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.services.yml b/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.services.yml
+new file mode 100644
+index 0000000..357125c
+--- /dev/null
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/new_relic_rpm_intstrumentation_test.services.yml
+@@ -0,0 +1,5 @@
++services:
++  new_relic_rpm_intstrumentation_test.adapter:
++    decorates: new_relic_rpm.adapter
++    class: Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface
++    factory: Drupal\new_relic_rpm_intstrumentation_test\ExtensionAdapter\AdapterFactory::getAdapter
+diff --git a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/AdapterFactory.php
+similarity index 81%
+rename from tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php
+rename to tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/AdapterFactory.php
+index 4668a29..39bb14e 100644
+--- a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/AdapterFactory.php
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/AdapterFactory.php
+@@ -1,6 +1,6 @@
+ <?php
+
+-namespace Drupal\rum_manual_instrumentation\ExtensionAdapter;
++namespace Drupal\new_relic_rpm_intstrumentation_test\ExtensionAdapter;
+
+ /**
+  * Factory to create a New Relic adapter.
+diff --git a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+similarity index 87%
+rename from tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php
+rename to tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+index fa36801..18d3e55 100644
+--- a/tests/modules/rum_manual_instrumentation/src/ExtensionAdapter/NullAdapter.php
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+@@ -1,6 +1,6 @@
+ <?php
+
+-namespace Drupal\rum_manual_instrumentation\ExtensionAdapter;
++namespace Drupal\new_relic_rpm_intstrumentation_test\ExtensionAdapter;
+
+ use Drupal\new_relic_rpm\ExtensionAdapter\NullAdapter as ExtendedNullAdapter;
+
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
+deleted file mode 100644
+index d9041b4..0000000
+--- a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.info.yml
++++ /dev/null
+@@ -1,6 +0,0 @@
+-name: 'RUM Manual Instrumentation Test Module'
+-description: 'Provides missing NR functions needed for test coverage'
+-package: Testing
+-
+-type: module
+-core_version_requirement: ^9.1 || ^10
+diff --git a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml b/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
+deleted file mode 100644
+index 008a3ed..0000000
+--- a/tests/modules/rum_manual_instrumentation/rum_manual_instrumentation.services.yml
++++ /dev/null
+@@ -1,5 +0,0 @@
+-services:
+-  rum_manual_instrumentation.adapter:
+-    decorates: new_relic_rpm.adapter
+-    class: Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface
+-    factory: Drupal\rum_manual_instrumentation\ExtensionAdapter\AdapterFactory::getAdapter
+diff --git a/tests/src/Functional/AdminUiTest.php b/tests/src/Functional/AdminUiTest.php
+index 326dc43..0ebe9f3 100644
+--- a/tests/src/Functional/AdminUiTest.php
++++ b/tests/src/Functional/AdminUiTest.php
+@@ -79,7 +79,7 @@ class AdminUiTest extends BrowserTestBase {
+     $this->page->hasField('config_import');
+
+     // Browser.
+-    $this->page->hasField('rum_manual_instrumentation');
++    $this->page->hasField('rum_instrumentation');
+
+     // Insight.
+     $this->page->hasField('views_log_slow');
+diff --git a/tests/src/Functional/ManualInstrumentationTest.php b/tests/src/Functional/InstrumentationTest.php
+similarity index 76%
+rename from tests/src/Functional/ManualInstrumentationTest.php
+rename to tests/src/Functional/InstrumentationTest.php
+index 1c50597..5b9beee 100644
+--- a/tests/src/Functional/ManualInstrumentationTest.php
++++ b/tests/src/Functional/InstrumentationTest.php
+@@ -10,25 +10,26 @@ use Drupal\Tests\BrowserTestBase;
+  * @package Drupal\Tests\new_relic_rpm\Functional
+  * @group new_relic_rpm
+  */
+-class ManualInstrumentationTest extends BrowserTestBase {
++class InstrumentationTest extends BrowserTestBase {
+
+   /**
+    * {@inheritdoc}
+    */
+-  protected static $modules = ['new_relic_rpm', 'rum_manual_instrumentation'];
++  protected static $modules = ['new_relic_rpm', 'new_relic_rpm_intstrumentation_test'];
+
+   protected $defaultTheme = 'stark';
+
+   /**
+    * Tests markup is rendered.
+    */
+-  public function testMarkupRender() {
++  public function testManualInstrumentation() {
+     $assert = $this->assertSession();
+
+     // Verify setting is disabled by default.
+-    $this->assertFalse(
++    $this->assertSame(
+       \Drupal::config('new_relic_rpm.settings')
+-        ->get('rum_manual_instrumentation')
++        ->get('rum_instrumentation'),
++      'auto'
+     );
+
+     $this->drupalGet('/');
+@@ -38,7 +39,7 @@ class ManualInstrumentationTest extends BrowserTestBase {
+
+     $this->container->get('config.factory')
+       ->getEditable('new_relic_rpm.settings')
+-      ->set('rum_manual_instrumentation', TRUE)
++      ->set('rum_instrumentation', 'manual')
+       ->save();
+
+     $this->drupalGet('/');
+diff --git a/tests/src/Kernel/UpdateTest.php b/tests/src/Kernel/UpdateTest.php
+new file mode 100644
+index 0000000..e7864ba
+--- /dev/null
++++ b/tests/src/Kernel/UpdateTest.php
+@@ -0,0 +1,90 @@
++<?php
++
++namespace Drupal\Tests\new_relic_rpm\Kernel;
++
++use Drupal\KernelTests\KernelTestBase;
++
++/**
++ * Tests update functions.
++ *
++ * @group new_relic_rpm
++ */
++class UpdateTest extends KernelTestBase {
++
++  /**
++   * {@inheritdoc}
++   *
++   * Disable check of config schema so update functions can be tested.
++   */
++  protected $strictConfigSchema = FALSE;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = [
++    'new_relic_rpm',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++
++    $this->installConfig(['new_relic_rpm']);
++  }
++
++  /**
++   * Tests new_relic_rpm_post_update_instrumentation().
++   */
++  public function testUpdateInstrumentation() {
++    \Drupal::service('module_handler')->loadInclude('new_relic_rpm', 'php', 'new_relic_rpm.post_update');
++    $config = \Drupal::service('config.factory')->getEditable('new_relic_rpm.settings');
++
++    // Set config to pre-update state with disable_autorum unset.
++    $data = $config->getRawData();
++    unset($data['rum_instrumentation']);
++    unset($data['disable_autorum']);
++    $config->setData($data)->save();
++
++    // Run post-update function.
++    new_relic_rpm_post_update_instrumentation();
++
++    $rum_instrumentation = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('rum_instrumentation');
++    $this->assertEquals($rum_instrumentation, 'auto');
++
++    $disable_autorum = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('disable_autorum');
++    $this->assertNull($disable_autorum);
++
++    // Set config to pre-update state with disable_autorum enabled.
++    $data = $config->getRawData();
++    unset($data['rum_instrumentation']);
++    $data['disable_autorum'] = TRUE;
++    $config->setData($data)->save();
++
++    // Run post-update function.
++    new_relic_rpm_post_update_instrumentation();
++
++    $rum_instrumentation = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('rum_instrumentation');
++    $this->assertEquals($rum_instrumentation, 'disabled');
++
++    $disable_autorum = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('disable_autorum');
++    $this->assertNull($disable_autorum);
++
++    // Set config to pre-update state with disable_autorum disabled.
++    $data = $config->getRawData();
++    unset($data['rum_instrumentation']);
++    $data['disable_autorum'] = FALSE;
++    $config->setData($data)->save();
++
++    // Run post-update function.
++    new_relic_rpm_post_update_instrumentation();
++
++    $rum_instrumentation = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('rum_instrumentation');
++    $this->assertEquals($rum_instrumentation, 'auto');
++
++    $disable_autorum = \Drupal::service('config.factory')->get('new_relic_rpm.settings')->get('disable_autorum');
++    $this->assertNull($disable_autorum);
++  }
++
++}
+--
+GitLab
+
+
+From 66b4302597d78d268e13b4eac715be4bec4f8415 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Wed, 8 May 2024 18:24:20 -0500
+Subject: [PATCH 06/15] Add requirement check for D10.2.0+ and
+ auto-instrumentation
+
+---
+ new_relic_rpm.install | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/new_relic_rpm.install b/new_relic_rpm.install
+index ea2a22f..ea3c33e 100644
+--- a/new_relic_rpm.install
++++ b/new_relic_rpm.install
+@@ -5,6 +5,7 @@
+  * Install and uninstall functions for the New Relic module.
+  */
+
++use Composer\Semver\Comparator;
+ use Drupal\Core\Url;
+
+ /**
+@@ -34,6 +35,18 @@ function new_relic_rpm_requirements($phase) {
+
+   }
+
++  $instrumentation = \Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation');
++  if ($instrumentation != 'disabled') {
++    $core_version = \Drupal::VERSION;
++    $incompatible = (Comparator::greaterThanOrEqualTo($core_version, '10.2.0') && $instrumentation == 'auto') ? TRUE : FALSE;
++    $requirements['newrelic_instrumentation'] = [
++      'title' => t('New Relic RUM Instrumentation'),
++      'description' => t('Auto-instrumentation is incompatible with Drupal 10.2.0+ due to the <code>Content-Length</code> header.'),
++      'value' => $incompatible ? t('Incompatible configuration detected') : t('Instrumentation is compatible with Drupal @core version', ['@core' => $core_version]),
++      'severity' => $incompatible ? REQUIREMENT_ERROR : REQUIREMENT_OK,
++    ];
++  }
++
+   return $requirements;
+ }
+
+--
+GitLab
+
+
+From 71ffccb4f5e296b92b7f934629c9da723cd0f372 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Thu, 9 May 2024 09:44:40 -0500
+Subject: [PATCH 07/15] Update form options for clarity
+
+---
+ src/Form/NewRelicRpmSettings.php | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/Form/NewRelicRpmSettings.php b/src/Form/NewRelicRpmSettings.php
+index d6bdda3..7bf7a75 100644
+--- a/src/Form/NewRelicRpmSettings.php
++++ b/src/Form/NewRelicRpmSettings.php
+@@ -162,11 +162,11 @@ class NewRelicRpmSettings extends ConfigFormBase {
+     $form['browser']['rum_instrumentation'] = [
+       '#type' => 'select',
+       '#title' => $this->t('RUM Instrumentation'),
+-      '#description' => $this->t('How RUM should be instrumented. If enabled, manual instrumentation must be used for Drupal 10.2.0+ because auto-instrumentation is incompatible with the <code>Content-Length</code> header set in Drupal 10.2.0+'),
++      '#description' => $this->t('If browser monitoring is enabled, manual instrumentation must be used for Drupal 10.2.0+ because auto-instrumentation is incompatible with the <code>Content-Length</code> header set in Drupal 10.2.0+'),
+       '#options' => [
+-        'disabled' => $this->t('Disabled'),
+-        'auto' => $this->t('Auto'),
+-        'manual' => $this->t('Manual'),
++        'disabled' => $this->t('Disable browser monitoring'),
++        'auto' => $this->t('Allow auto-instrumentation'),
++        'manual' => $this->t('Manual instrumentation'),
+       ],
+       '#default_value' => $this->config('new_relic_rpm.settings')->get('rum_instrumentation'),
+     ];
+--
+GitLab
+
+
+From 7c892fa2649216a406fab3512abb74f6a04e9efc Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Thu, 9 May 2024 09:44:55 -0500
+Subject: [PATCH 08/15] Updated README
+
+---
+ README.txt | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/README.txt b/README.txt
+index 37d58c6..86e0fe3 100644
+--- a/README.txt
++++ b/README.txt
+@@ -88,8 +88,18 @@ SETTINGS
+    exception handler, which allows reporting the correct backtrace of uncatched
+    exceptions.
+
+- * Disable AutoRUM - Disables the automatic browser tracking inserted by a
+-   New Relic APM transaction.
++ * RUM Instrumentation - This settings allows for browser monitoring to be
++   controlled. 'Disable browser monitoring' will disable auto-instrumenation
++   in the event auto-instrumenation is configured at the server level.
++   'Allow auto-instrumentation' will allow for auto-instrumenation in the event
++   it is configured at the server level. 'Manual instrumenation' will disable
++   auto-instrumentation, if configured at the server level, and insert the
++   browser monitoring JavaScript into the page header and footer.
++
++   NOTE: Auto-instrumenation is incompatible with Drupal 10.2.0+. Beginning in
++   Drupal 10.2.0, Drupal sets a Content-Length header for most responses. New
++   Relic RUM auto-instrumentation is incompatible with the Content-Length
++   header and requires manual instrumenation.
+
+
+ MAINTAINERS
+--
+GitLab
+
+
+From a654572dc34e31ace6baeac67822caf881808c6e Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Wed, 12 Jun 2024 18:09:38 -0500
+Subject: [PATCH 09/15] Rework RUM footer JS placement
+
+---
+ js/new-relic-rum.js                           |  9 ++++
+ new_relic_rpm.libraries.yml                   |  5 ++
+ new_relic_rpm.module                          | 15 +++---
+ new_relic_rpm.services.yml                    |  5 ++
+ src/ExtensionAdapter/ExtensionAdapter.php     |  4 +-
+ ...lResponseAttachmentsProcessorDecorator.php | 52 +++++++++++++++++++
+ .../src/ExtensionAdapter/NullAdapter.php      |  4 +-
+ .../InstrumentationTest.php                   | 22 +++++---
+ tests/src/Kernel/UpdateTest.php               |  2 +
+ 9 files changed, 100 insertions(+), 18 deletions(-)
+ create mode 100644 js/new-relic-rum.js
+ create mode 100644 new_relic_rpm.libraries.yml
+ create mode 100644 src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+ rename tests/src/{Functional => FunctionalJavascript}/InstrumentationTest.php (51%)
+
+diff --git a/js/new-relic-rum.js b/js/new-relic-rum.js
+new file mode 100644
+index 0000000..fa9e836
+--- /dev/null
++++ b/js/new-relic-rum.js
+@@ -0,0 +1,9 @@
++(function (Drupal, drupalSettings) {
++  Drupal.behaviors.NRRumFooter = {
++    attach: function (context, settings) {
++      once('NRRumFooterInsert', 'html').forEach(function (element) {
++        eval(drupalSettings.rum_footer.markup);
++      })
++    }
++  };
++})(Drupal, drupalSettings);
+diff --git a/new_relic_rpm.libraries.yml b/new_relic_rpm.libraries.yml
+new file mode 100644
+index 0000000..389c5e8
+--- /dev/null
++++ b/new_relic_rpm.libraries.yml
+@@ -0,0 +1,5 @@
++rum_footer:
++  js:
++    js/new-relic-rum.js: {}
++  dependencies:
++    - core/drupalSettings
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index 206f3a6..a5f37cb 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -6,9 +6,9 @@
+  */
+
+ use Drupal\Component\Utility\Timer;
+-use Drupal\views\ViewExecutable;
+ use Drupal\Core\Render\Markup;
+ use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\views\ViewExecutable;
+
+ /**
+  * Implements hook_cron().
+@@ -110,19 +110,20 @@ function new_relic_rpm_page_top(array &$page_top) {
+ }
+
+ /**
+- * Implements hook_page_bottom().
++ * Implements hook_page_attachments().
+  */
+-function new_relic_rpm_page_bottom(array &$page_bottom) {
++function new_relic_rpm_page_attachments(array &$attachments) {
+   if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
+     && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingFooter()
+     ) {
+
+-    $page_bottom['new_relic_rpm'] = [
+-      '#markup' => Markup::create($markup),
+-    ];
++    $attachments['#attached']['library'][] = 'new_relic_rpm/rum_footer';
++    // Pass the JS footer script to new-relic-rum.js
++    // via drupalSettings.
++    $attachments['#attached']['drupalSettings']['rum_footer']['markup'] = $markup;
+   }
+
+-  $page_bottom['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
++  $attachments['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+ }
+
+ /**
+diff --git a/new_relic_rpm.services.yml b/new_relic_rpm.services.yml
+index b848a42..91926c5 100644
+--- a/new_relic_rpm.services.yml
++++ b/new_relic_rpm.services.yml
+@@ -34,3 +34,8 @@ services:
+   new_relic_rpm.client:
+     class: Drupal\new_relic_rpm\Client\NewRelicApiClient
+     arguments: ['@config.factory', '@http_client', '@serialization.json', '@logger.factory', '@string_translation']
++  new_relic_rpm.html_response.attachments_processor:
++    class: Drupal\new_relic_rpm\Render\HtmlResponseAttachmentsProcessorDecorator
++    decorates: html_response.attachments_processor
++    public: false
++    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner']
+diff --git a/src/ExtensionAdapter/ExtensionAdapter.php b/src/ExtensionAdapter/ExtensionAdapter.php
+index b7aba43..2afcb55 100644
+--- a/src/ExtensionAdapter/ExtensionAdapter.php
++++ b/src/ExtensionAdapter/ExtensionAdapter.php
+@@ -71,6 +71,7 @@ class ExtensionAdapter implements NewRelicAdapterInterface {
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingHeader() {
++    // Return script with <script> tag.
+     return newrelic_get_browser_timing_header();
+   }
+
+@@ -78,7 +79,8 @@ class ExtensionAdapter implements NewRelicAdapterInterface {
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingFooter() {
+-    return newrelic_get_browser_timing_footer();
++    // Return script without <script> tag.
++    return newrelic_get_browser_timing_footer(FALSE);
+   }
+
+ }
+diff --git a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+new file mode 100644
+index 0000000..1324a66
+--- /dev/null
++++ b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+@@ -0,0 +1,52 @@
++<?php
++
++namespace Drupal\new_relic_rpm\Render;
++
++use Drupal\Core\Render\AttachmentsInterface;
++use Drupal\Core\Render\HtmlResponseAttachmentsProcessor;
++
++/**
++ * Decorates the HtmlResponseAttachmentsProcessor service.
++ */
++class HtmlResponseAttachmentsProcessorDecorator extends HtmlResponseAttachmentsProcessor {
++
++  /**
++   * The decorated HtmlResponseAttachmentsProcessor service.
++   *
++   * @var \Drupal\Core\Render\HtmlResponseAttachmentsProcessor
++   */
++  protected $decorated;
++
++  /**
++   * Constructs a HtmlResponseAttachmentsProcessorDecorator object.
++   *
++   * @param \Drupal\Core\Render\HtmlResponseAttachmentsProcessor $decorated
++   *   The decorated HtmlResponseAttachmentsProcessor service.
++   */
++  public function __construct(HtmlResponseAttachmentsProcessor $decorated) {
++    $this->decorated = $decorated;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function processAttachments(AttachmentsInterface $response) {
++    $response = $this->decorated->processAttachments($response);
++    $attachments = $response->getAttachments();
++
++    // If the rum_footer library is attached, move it to the end of the library
++    // array so its JS is loaded last. JS included in Drupal libraries can
++    // only have a negative weight, making this decorator necessary.
++    if (in_array('new_relic_rpm/rum_footer', $attachments['library'])) {
++      $key = array_search('new_relic_rpm/rum_footer', $attachments['library'], TRUE);
++      unset($attachments['library'][$key]);
++      $attachments['library'][] = 'new_relic_rpm/rum_footer';
++      // Reset index.
++      $attachments['library'] = array_values($attachments['library']);
++      $response->setAttachments($attachments);
++    }
++
++    return $response;
++  }
++
++}
+diff --git a/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+index 18d3e55..7246818 100644
+--- a/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+@@ -13,14 +13,14 @@ class NullAdapter extends ExtendedNullAdapter {
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingHeader() {
+-    return "<script>console.log('header script inserted')</script>";
++    return "<script>document.body.appendChild(document.createTextNode('header script inserted'));</script>";
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingFooter() {
+-    return "<script>console.log('footer script inserted')</script>";
++    return "<script>document.body.appendChild(document.createTextNode('footer script inserted'));</script>";
+   }
+
+ }
+diff --git a/tests/src/Functional/InstrumentationTest.php b/tests/src/FunctionalJavascript/InstrumentationTest.php
+similarity index 51%
+rename from tests/src/Functional/InstrumentationTest.php
+rename to tests/src/FunctionalJavascript/InstrumentationTest.php
+index 5b9beee..f82789e 100644
+--- a/tests/src/Functional/InstrumentationTest.php
++++ b/tests/src/FunctionalJavascript/InstrumentationTest.php
+@@ -1,22 +1,25 @@
+ <?php
+
+-namespace Drupal\Tests\new_relic_rpm\Functional;
++namespace Drupal\Tests\new_relic_rpm\FunctionalJavascript;
+
+-use Drupal\Tests\BrowserTestBase;
++use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
+
+ /**
+  * Tests manual instrumentation.
+  *
+- * @package Drupal\Tests\new_relic_rpm\Functional
++ * @package Drupal\Tests\new_relic_rpm\FunctionalJavascript
+  * @group new_relic_rpm
+  */
+-class InstrumentationTest extends BrowserTestBase {
++class InstrumentationTest extends WebDriverTestBase {
+
+   /**
+    * {@inheritdoc}
+    */
+   protected static $modules = ['new_relic_rpm', 'new_relic_rpm_intstrumentation_test'];
+
++  /**
++   * {@inheritdoc}
++   */
+   protected $defaultTheme = 'stark';
+
+   /**
+@@ -34,8 +37,11 @@ class InstrumentationTest extends BrowserTestBase {
+
+     $this->drupalGet('/');
+
+-    $assert->responseNotContains("<script>console.log('header script inserted')</script>");
+-    $assert->responseNotContains("<script>console.log('footer script inserted')</script>");
++    // NullAdapter, provided by new_relic_instrumentation_test, returns JS that
++    // inserts text into the DOM. By checking for this text, this test is also
++    // checking that the JS is executed in the browser.
++    $assert->responseNotContains("header script inserted");
++    $assert->responseNotContains("footer script inserted");
+
+     $this->container->get('config.factory')
+       ->getEditable('new_relic_rpm.settings')
+@@ -44,8 +50,8 @@ class InstrumentationTest extends BrowserTestBase {
+
+     $this->drupalGet('/');
+
+-    $assert->responseContains("<script>console.log('header script inserted')</script>");
+-    $assert->responseContains("<script>console.log('footer script inserted')</script>");
++    $assert->responseContains("header script inserted");
++    $assert->responseContains("footer script inserted");
+   }
+
+ }
+diff --git a/tests/src/Kernel/UpdateTest.php b/tests/src/Kernel/UpdateTest.php
+index e7864ba..f0a2864 100644
+--- a/tests/src/Kernel/UpdateTest.php
++++ b/tests/src/Kernel/UpdateTest.php
+@@ -11,12 +11,14 @@ use Drupal\KernelTests\KernelTestBase;
+  */
+ class UpdateTest extends KernelTestBase {
+
++  // phpcs:disable DrupalPractice.Objects.StrictSchemaDisabled
+   /**
+    * {@inheritdoc}
+    *
+    * Disable check of config schema so update functions can be tested.
+    */
+   protected $strictConfigSchema = FALSE;
++  // phpcs:enable
+
+   /**
+    * {@inheritdoc}
+--
+GitLab
+
+
+From 75ff6398ff4de8227807b6d10f12c6c36e62725c Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Thu, 13 Jun 2024 16:00:04 -0500
+Subject: [PATCH 10/15] Move header JS to <HEAD>; rework footer JS insertion
+
+---
+ js/new-relic-rum.js                           |  9 ---
+ new_relic_rpm.libraries.yml                   |  5 --
+ new_relic_rpm.module                          | 35 ++++------
+ new_relic_rpm.services.yml                    |  2 +-
+ src/ExtensionAdapter/ExtensionAdapter.php     |  4 +-
+ ...lResponseAttachmentsProcessorDecorator.php | 64 ++++++++++++++-----
+ .../src/ExtensionAdapter/NullAdapter.php      |  4 +-
+ .../InstrumentationTest.php                   | 11 ++--
+ 8 files changed, 70 insertions(+), 64 deletions(-)
+ delete mode 100644 js/new-relic-rum.js
+ delete mode 100644 new_relic_rpm.libraries.yml
+
+diff --git a/js/new-relic-rum.js b/js/new-relic-rum.js
+deleted file mode 100644
+index fa9e836..0000000
+--- a/js/new-relic-rum.js
++++ /dev/null
+@@ -1,9 +0,0 @@
+-(function (Drupal, drupalSettings) {
+-  Drupal.behaviors.NRRumFooter = {
+-    attach: function (context, settings) {
+-      once('NRRumFooterInsert', 'html').forEach(function (element) {
+-        eval(drupalSettings.rum_footer.markup);
+-      })
+-    }
+-  };
+-})(Drupal, drupalSettings);
+diff --git a/new_relic_rpm.libraries.yml b/new_relic_rpm.libraries.yml
+deleted file mode 100644
+index 389c5e8..0000000
+--- a/new_relic_rpm.libraries.yml
++++ /dev/null
+@@ -1,5 +0,0 @@
+-rum_footer:
+-  js:
+-    js/new-relic-rum.js: {}
+-  dependencies:
+-    - core/drupalSettings
+diff --git a/new_relic_rpm.module b/new_relic_rpm.module
+index a5f37cb..2de6f24 100644
+--- a/new_relic_rpm.module
++++ b/new_relic_rpm.module
+@@ -93,34 +93,27 @@ function new_relic_rpm_views_post_render(ViewExecutable $view) {
+   }
+ }
+
+-/**
+- * Implements hook_page_top().
+- */
+-function new_relic_rpm_page_top(array &$page_top) {
+-  if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
+-    && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingHeader()
+-    ) {
+-
+-    $page_top['new_relic_rpm'] = [
+-      '#markup' => Markup::create($markup),
+-    ];
+-  }
+-
+-  $page_top['new_relic_rpm']['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+-}
+-
+ /**
+  * Implements hook_page_attachments().
+  */
+ function new_relic_rpm_page_attachments(array &$attachments) {
+   if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
+-    && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingFooter()
++    && $markup = \Drupal::service('new_relic_rpm.adapter')->getBrowserTimingHeader()
+     ) {
+
+-    $attachments['#attached']['library'][] = 'new_relic_rpm/rum_footer';
+-    // Pass the JS footer script to new-relic-rum.js
+-    // via drupalSettings.
+-    $attachments['#attached']['drupalSettings']['rum_footer']['markup'] = $markup;
++    // Insert RUM JS into <HEAD>.
++    $attachments['#attached']['html_head'][] = [
++      [
++        '#type' => 'html_tag',
++        '#tag' => 'script',
++        '#attributes' => [
++          'type' => 'text/javascript',
++        ],
++        '#value' => Markup::create($markup),
++        '#weight' => -999,
++      ],
++      'new_relic_rum_header',
++    ];
+   }
+
+   $attachments['#cache']['tags'] = \Drupal::config('new_relic_rpm.settings')->getCacheTags();
+diff --git a/new_relic_rpm.services.yml b/new_relic_rpm.services.yml
+index 91926c5..5166214 100644
+--- a/new_relic_rpm.services.yml
++++ b/new_relic_rpm.services.yml
+@@ -38,4 +38,4 @@ services:
+     class: Drupal\new_relic_rpm\Render\HtmlResponseAttachmentsProcessorDecorator
+     decorates: html_response.attachments_processor
+     public: false
+-    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner']
++    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner', '@new_relic_rpm.adapter', '@asset.resolver', '@config.factory', '@asset.css.collection_renderer', '@asset.js.collection_renderer', '@request_stack', '@renderer', '@module_handler', '@language_manager']
+diff --git a/src/ExtensionAdapter/ExtensionAdapter.php b/src/ExtensionAdapter/ExtensionAdapter.php
+index 2afcb55..8829307 100644
+--- a/src/ExtensionAdapter/ExtensionAdapter.php
++++ b/src/ExtensionAdapter/ExtensionAdapter.php
+@@ -71,8 +71,8 @@ class ExtensionAdapter implements NewRelicAdapterInterface {
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingHeader() {
+-    // Return script with <script> tag.
+-    return newrelic_get_browser_timing_header();
++    // Return script without <script> tag.
++    return newrelic_get_browser_timing_header(FALSE);
+   }
+
+   /**
+diff --git a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+index 1324a66..e3a84d1 100644
+--- a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
++++ b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+@@ -2,8 +2,17 @@
+
+ namespace Drupal\new_relic_rpm\Render;
+
+-use Drupal\Core\Render\AttachmentsInterface;
++use Drupal\Core\Asset\AssetCollectionRendererInterface;
++use Drupal\Core\Asset\AssetResolverInterface;
++use Drupal\Core\Asset\AttachedAssetsInterface;
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Language\LanguageManagerInterface;
+ use Drupal\Core\Render\HtmlResponseAttachmentsProcessor;
++use Drupal\Core\Render\Markup;
++use Drupal\Core\Render\RendererInterface;
++use Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface;
++use Symfony\Component\HttpFoundation\RequestStack;
+
+ /**
+  * Decorates the HtmlResponseAttachmentsProcessor service.
+@@ -22,31 +31,52 @@ class HtmlResponseAttachmentsProcessorDecorator extends HtmlResponseAttachmentsP
+    *
+    * @param \Drupal\Core\Render\HtmlResponseAttachmentsProcessor $decorated
+    *   The decorated HtmlResponseAttachmentsProcessor service.
++   * @param \Drupal\Core\Asset\AssetResolverInterface $asset_resolver
++   *   An asset resolver.
++   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
++   *   A config factory for retrieving required config objects.
++   * @param \Drupal\Core\Asset\AssetCollectionRendererInterface $css_collection_renderer
++   *   The CSS asset collection renderer.
++   * @param \Drupal\Core\Asset\AssetCollectionRendererInterface $js_collection_renderer
++   *   The JS asset collection renderer.
++   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
++   *   The request stack.
++   * @param \Drupal\Core\Render\RendererInterface $renderer
++   *   The renderer.
++   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
++   *   The module handler service.
++   * @param \Drupal\Core\Language\LanguageManagerInterface|null $languageManager
++   *   The language manager.
++   * @param \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface $adapter
++   *   The New Relic Adapster service.
+    */
+-  public function __construct(HtmlResponseAttachmentsProcessor $decorated) {
++  public function __construct(HtmlResponseAttachmentsProcessor $decorated, NewRelicAdapterInterface $adapter, AssetResolverInterface $asset_resolver, ConfigFactoryInterface $config_factory, AssetCollectionRendererInterface $css_collection_renderer, AssetCollectionRendererInterface $js_collection_renderer, RequestStack $request_stack, RendererInterface $renderer, ModuleHandlerInterface $module_handler, protected ?LanguageManagerInterface $languageManager = NULL) {
++    parent::__construct($asset_resolver, $config_factory, $css_collection_renderer, $js_collection_renderer, $request_stack, $renderer, $module_handler, $languageManager);
+     $this->decorated = $decorated;
++    $this->adapter = $adapter;
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+-  public function processAttachments(AttachmentsInterface $response) {
+-    $response = $this->decorated->processAttachments($response);
+-    $attachments = $response->getAttachments();
+-
+-    // If the rum_footer library is attached, move it to the end of the library
+-    // array so its JS is loaded last. JS included in Drupal libraries can
+-    // only have a negative weight, making this decorator necessary.
+-    if (in_array('new_relic_rpm/rum_footer', $attachments['library'])) {
+-      $key = array_search('new_relic_rpm/rum_footer', $attachments['library'], TRUE);
+-      unset($attachments['library'][$key]);
+-      $attachments['library'][] = 'new_relic_rpm/rum_footer';
+-      // Reset index.
+-      $attachments['library'] = array_values($attachments['library']);
+-      $response->setAttachments($attachments);
++  protected function processAssetLibraries(AttachedAssetsInterface $assets, array $placeholders) {
++    $variables = $this->decorated->processAssetLibraries($assets, $placeholders);
++
++    if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
++      && $markup = $this->adapter->getBrowserTimingFooter()
++      ) {
++
++      $variables['scripts_bottom'][] = [
++        '#type' => 'html_tag',
++        '#tag' => 'script',
++        '#value' => Markup::create($markup),
++        '#attributes' => [
++          'type' => 'text/javascript',
++        ],
++      ];
+     }
+
+-    return $response;
++    return $variables;
+   }
+
+ }
+diff --git a/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+index 7246818..2358648 100644
+--- a/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
++++ b/tests/modules/new_relic_rpm_intstrumentation_test/src/ExtensionAdapter/NullAdapter.php
+@@ -13,14 +13,14 @@ class NullAdapter extends ExtendedNullAdapter {
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingHeader() {
+-    return "<script>document.body.appendChild(document.createTextNode('header script inserted'));</script>";
++    return "console.log('header script inserted');";
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function getBrowserTimingFooter() {
+-    return "<script>document.body.appendChild(document.createTextNode('footer script inserted'));</script>";
++    return "console.log('footer script inserted');";
+   }
+
+ }
+diff --git a/tests/src/FunctionalJavascript/InstrumentationTest.php b/tests/src/FunctionalJavascript/InstrumentationTest.php
+index f82789e..e6e85da 100644
+--- a/tests/src/FunctionalJavascript/InstrumentationTest.php
++++ b/tests/src/FunctionalJavascript/InstrumentationTest.php
+@@ -37,11 +37,8 @@ class InstrumentationTest extends WebDriverTestBase {
+
+     $this->drupalGet('/');
+
+-    // NullAdapter, provided by new_relic_instrumentation_test, returns JS that
+-    // inserts text into the DOM. By checking for this text, this test is also
+-    // checking that the JS is executed in the browser.
+-    $assert->responseNotContains("header script inserted");
+-    $assert->responseNotContains("footer script inserted");
++    $assert->responseNotContains("<script type=\"text/javascript\">console.log('header script inserted');</script>");
++    $assert->responseNotContains("<script type=\"text/javascript\">console.log('footer script inserted');</script>");
+
+     $this->container->get('config.factory')
+       ->getEditable('new_relic_rpm.settings')
+@@ -50,8 +47,8 @@ class InstrumentationTest extends WebDriverTestBase {
+
+     $this->drupalGet('/');
+
+-    $assert->responseContains("header script inserted");
+-    $assert->responseContains("footer script inserted");
++    $assert->responseContains("<script type=\"text/javascript\">console.log('header script inserted');</script>");
++    $assert->responseContains("<script type=\"text/javascript\">console.log('footer script inserted');</script>");
+   }
+
+ }
+--
+GitLab
+
+
+From 701520606a6e9c983dde0bc165521c3e741c3b89 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Thu, 13 Jun 2024 17:21:56 -0500
+Subject: [PATCH 11/15] Move InstrumentationTest back to a Functional test - no
+ JS to test now
+
+---
+ .../InstrumentationTest.php                               | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename tests/src/{FunctionalJavascript => Functional}/InstrumentationTest.php (84%)
+
+diff --git a/tests/src/FunctionalJavascript/InstrumentationTest.php b/tests/src/Functional/InstrumentationTest.php
+similarity index 84%
+rename from tests/src/FunctionalJavascript/InstrumentationTest.php
+rename to tests/src/Functional/InstrumentationTest.php
+index e6e85da..ce3bdd5 100644
+--- a/tests/src/FunctionalJavascript/InstrumentationTest.php
++++ b/tests/src/Functional/InstrumentationTest.php
+@@ -1,16 +1,16 @@
+ <?php
+
+-namespace Drupal\Tests\new_relic_rpm\FunctionalJavascript;
++namespace Drupal\Tests\new_relic_rpm\Functional;
+
+-use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
++use Drupal\Tests\BrowserTestBase;
+
+ /**
+  * Tests manual instrumentation.
+  *
+- * @package Drupal\Tests\new_relic_rpm\FunctionalJavascript
++ * @package Drupal\Tests\new_relic_rpm\Functional
+  * @group new_relic_rpm
+  */
+-class InstrumentationTest extends WebDriverTestBase {
++class InstrumentationTest extends BrowserTestBase {
+
+   /**
+    * {@inheritdoc}
+--
+GitLab
+
+
+From 6a1d8871123b5d6df0e2b7f98c62784d5d730dfe Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Sat, 15 Jun 2024 12:12:39 -0500
+Subject: [PATCH 12/15] Use propert decorator pattern
+
+---
+ new_relic_rpm.services.yml                    |   2 +-
+ ...lResponseAttachmentsProcessorDecorator.php | 503 +++++++++++++++++-
+ 2 files changed, 495 insertions(+), 10 deletions(-)
+
+diff --git a/new_relic_rpm.services.yml b/new_relic_rpm.services.yml
+index 5166214..4bb439d 100644
+--- a/new_relic_rpm.services.yml
++++ b/new_relic_rpm.services.yml
+@@ -38,4 +38,4 @@ services:
+     class: Drupal\new_relic_rpm\Render\HtmlResponseAttachmentsProcessorDecorator
+     decorates: html_response.attachments_processor
+     public: false
+-    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner', '@new_relic_rpm.adapter', '@asset.resolver', '@config.factory', '@asset.css.collection_renderer', '@asset.js.collection_renderer', '@request_stack', '@renderer', '@module_handler', '@language_manager']
++    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner', '@new_relic_rpm.adapter', '@asset.resolver', '@config.factory', '@asset.css.collection_renderer', '@asset.js.collection_renderer', '@request_stack', '@renderer', '@module_handler', '@language_manager' ]
+diff --git a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+index e3a84d1..1b89f08 100644
+--- a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
++++ b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+@@ -4,10 +4,16 @@ namespace Drupal\new_relic_rpm\Render;
+
+ use Drupal\Core\Asset\AssetCollectionRendererInterface;
+ use Drupal\Core\Asset\AssetResolverInterface;
++use Drupal\Core\Asset\AttachedAssets;
+ use Drupal\Core\Asset\AttachedAssetsInterface;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Form\EnforcedResponseException;
+ use Drupal\Core\Language\LanguageManagerInterface;
++use Drupal\Core\Render\AttachmentsInterface;
++use Drupal\Core\Render\AttachmentsResponseProcessorInterface;
++use Drupal\Core\Render\BubbleableMetadata;
++use Drupal\Core\Render\HtmlResponse;
+ use Drupal\Core\Render\HtmlResponseAttachmentsProcessor;
+ use Drupal\Core\Render\Markup;
+ use Drupal\Core\Render\RendererInterface;
+@@ -15,9 +21,23 @@ use Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface;
+ use Symfony\Component\HttpFoundation\RequestStack;
+
+ /**
+- * Decorates the HtmlResponseAttachmentsProcessor service.
++ * Processes attachments of HTML responses.
++ *
++ * This class is used by the rendering service to process the #attached part of
++ * the render array, for HTML responses.
++ *
++ * To render attachments to HTML for testing without a controller, use the
++ * 'bare_html_page_renderer' service to generate a
++ * Drupal\Core\Render\HtmlResponse object. Then use its getContent(),
++ * getStatusCode(), and/or the headers property to access the result.
++ *
++ * @see template_preprocess_html()
++ * @see \Drupal\Core\Render\AttachmentsResponseProcessorInterface
++ * @see \Drupal\Core\Render\BareHtmlPageRenderer
++ * @see \Drupal\Core\Render\HtmlResponse
++ * @see \Drupal\Core\Render\MainContent\HtmlRenderer
+  */
+-class HtmlResponseAttachmentsProcessorDecorator extends HtmlResponseAttachmentsProcessor {
++class HtmlResponseAttachmentsProcessorDecorator implements AttachmentsResponseProcessorInterface {
+
+   /**
+    * The decorated HtmlResponseAttachmentsProcessor service.
+@@ -27,10 +47,75 @@ class HtmlResponseAttachmentsProcessorDecorator extends HtmlResponseAttachmentsP
+   protected $decorated;
+
+   /**
+-   * Constructs a HtmlResponseAttachmentsProcessorDecorator object.
++   * The New Relic Adapster service.
++   *
++   * @var \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface
++   */
++  protected $adapter;
++
++  /**
++   * The asset resolver service.
++   *
++   * @var \Drupal\Core\Asset\AssetResolverInterface
++   */
++  protected $assetResolver;
++
++  /**
++   * A config object for the system performance configuration.
++   *
++   * @var \Drupal\Core\Config\Config
++   */
++  protected $config;
++
++  /**
++   * A config object for New Relic configuration.
++   *
++   * @var \Drupal\Core\Config\Config
++   */
++  protected $configNewRelic;
++
++  /**
++   * The CSS asset collection renderer service.
++   *
++   * @var \Drupal\Core\Asset\AssetCollectionRendererInterface
++   */
++  protected $cssCollectionRenderer;
++
++  /**
++   * The JS asset collection renderer service.
++   *
++   * @var \Drupal\Core\Asset\AssetCollectionRendererInterface
++   */
++  protected $jsCollectionRenderer;
++
++  /**
++   * The request stack.
++   *
++   * @var \Symfony\Component\HttpFoundation\RequestStack
++   */
++  protected $requestStack;
++
++  /**
++   * The renderer.
++   *
++   * @var \Drupal\Core\Render\RendererInterface
++   */
++  protected $renderer;
++
++  /**
++   * The module handler service.
++   *
++   * @var \Drupal\Core\Extension\ModuleHandlerInterface
++   */
++  protected $moduleHandler;
++
++  /**
++   * Constructs a HtmlResponseAttachmentsProcessor object.
+    *
+    * @param \Drupal\Core\Render\HtmlResponseAttachmentsProcessor $decorated
+    *   The decorated HtmlResponseAttachmentsProcessor service.
++   * @param \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface $adapter
++   *   The New Relic Adapster service.
+    * @param \Drupal\Core\Asset\AssetResolverInterface $asset_resolver
+    *   An asset resolver.
+    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+@@ -47,22 +132,422 @@ class HtmlResponseAttachmentsProcessorDecorator extends HtmlResponseAttachmentsP
+    *   The module handler service.
+    * @param \Drupal\Core\Language\LanguageManagerInterface|null $languageManager
+    *   The language manager.
+-   * @param \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface $adapter
+-   *   The New Relic Adapster service.
+    */
+   public function __construct(HtmlResponseAttachmentsProcessor $decorated, NewRelicAdapterInterface $adapter, AssetResolverInterface $asset_resolver, ConfigFactoryInterface $config_factory, AssetCollectionRendererInterface $css_collection_renderer, AssetCollectionRendererInterface $js_collection_renderer, RequestStack $request_stack, RendererInterface $renderer, ModuleHandlerInterface $module_handler, protected ?LanguageManagerInterface $languageManager = NULL) {
+-    parent::__construct($asset_resolver, $config_factory, $css_collection_renderer, $js_collection_renderer, $request_stack, $renderer, $module_handler, $languageManager);
+-    $this->decorated = $decorated;
+     $this->adapter = $adapter;
++    $this->assetResolver = $asset_resolver;
++    $this->config = $config_factory->get('system.performance');
++    $this->configNewRelic = $config_factory->get('new_relic_rpm.settings');
++    $this->cssCollectionRenderer = $css_collection_renderer;
++    $this->jsCollectionRenderer = $js_collection_renderer;
++    $this->requestStack = $request_stack;
++    $this->renderer = $renderer;
++    $this->moduleHandler = $module_handler;
++    if (!isset($languageManager)) {
++      // phpcs:ignore Drupal.Semantics.FunctionTriggerError
++      @trigger_error('Calling ' . __METHOD__ . '() without the $languageManager argument is deprecated in drupal:10.1.0 and will be required in drupal:11.0.0', E_USER_DEPRECATED);
++      $this->languageManager = \Drupal::languageManager();
++    }
+   }
+
+   /**
+    * {@inheritdoc}
+    */
++  public function processAttachments(AttachmentsInterface $response) {
++    assert($response instanceof HtmlResponse);
++
++    // First, render the actual placeholders; this may cause additional
++    // attachments to be added to the response, which the attachment
++    // placeholders rendered by renderHtmlResponseAttachmentPlaceholders() will
++    // need to include.
++    //
++    // @todo Exceptions should not be used for code flow control. However, the
++    //   Form API does not integrate with the HTTP Kernel based architecture of
++    //   Drupal 8. In order to resolve this issue properly it is necessary to
++    //   completely separate form submission from rendering.
++    //   @see https://www.drupal.org/node/2367555
++    try {
++      $response = $this->renderPlaceholders($response);
++    }
++    catch (EnforcedResponseException $e) {
++      return $e->getResponse();
++    }
++
++    // Get a reference to the attachments.
++    $attached = $response->getAttachments();
++
++    // Send a message back if the render array has unsupported #attached types.
++    $unsupported_types = array_diff(
++      array_keys($attached),
++      ['html_head', 'feed', 'html_head_link', 'http_header', 'library', 'html_response_attachment_placeholders', 'placeholders', 'drupalSettings']
++    );
++    if (!empty($unsupported_types)) {
++      throw new \LogicException(sprintf('You are not allowed to use %s in #attached.', implode(', ', $unsupported_types)));
++    }
++
++    // If we don't have any placeholders, there is no need to proceed.
++    if (!empty($attached['html_response_attachment_placeholders'])) {
++      // Get the placeholders from attached and then remove them.
++      $attachment_placeholders = $attached['html_response_attachment_placeholders'];
++      unset($attached['html_response_attachment_placeholders']);
++
++      $assets = AttachedAssets::createFromRenderArray(['#attached' => $attached]);
++      // Take Ajax page state into account, to allow for something like
++      // Turbolinks to be implemented without altering core.
++      // @see https://github.com/rails/turbolinks/
++      $ajax_page_state = $this->requestStack->getCurrentRequest()->get('ajax_page_state');
++      $assets->setAlreadyLoadedLibraries(isset($ajax_page_state) ? explode(',', $ajax_page_state['libraries']) : []);
++      $variables = $this->processAssetLibraries($assets, $attachment_placeholders);
++      // $variables now contains the markup to load the asset libraries. Update
++      // $attached with the final list of libraries and JavaScript settings, so
++      // that $response can be updated with those. Then the response object will
++      // list the final, processed attachments.
++      $attached['library'] = $assets->getLibraries();
++      $attached['drupalSettings'] = $assets->getSettings();
++
++      // Since we can only replace content in the HTML head section if there's a
++      // placeholder for it, we can safely avoid processing the render array if
++      // it's not present.
++      if (!empty($attachment_placeholders['head'])) {
++        // 'feed' is a special case of 'html_head_link'. We process them into
++        // 'html_head_link' entries and merge them.
++        if (!empty($attached['feed'])) {
++          $attached = BubbleableMetadata::mergeAttachments(
++            $attached,
++            $this->processFeed($attached['feed'])
++          );
++          unset($attached['feed']);
++        }
++        // 'html_head_link' is a special case of 'html_head' which can be present
++        // as a head element, but also as a Link: HTTP header depending on
++        // settings in the render array. Processing it can add to both the
++        // 'html_head' and 'http_header' keys of '#attached', so we must address
++        // it before 'html_head'.
++        if (!empty($attached['html_head_link'])) {
++          // Merge the processed 'html_head_link' into $attached so that its
++          // 'html_head' and 'http_header' values are present for further
++          // processing.
++          $attached = BubbleableMetadata::mergeAttachments(
++            $attached,
++            $this->processHtmlHeadLink($attached['html_head_link'])
++          );
++          unset($attached['html_head_link']);
++        }
++
++        // Now we can process 'html_head', which contains both 'feed' and
++        // 'html_head_link'.
++        if (!empty($attached['html_head'])) {
++          $variables['head'] = $this->processHtmlHead($attached['html_head']);
++        }
++      }
++
++      // Now replace the attachment placeholders.
++      $this->renderHtmlResponseAttachmentPlaceholders($response, $attachment_placeholders, $variables);
++    }
++
++    // Set the HTTP headers and status code on the response if any bubbled.
++    if (!empty($attached['http_header'])) {
++      $this->setHeaders($response, $attached['http_header']);
++    }
++
++    // AttachmentsResponseProcessorInterface mandates that the response it
++    // processes contains the final attachment values.
++    $response->setAttachments($attached);
++
++    return $response;
++  }
++
++  /**
++   * Formats an attribute string for an HTTP header.
++   *
++   * @param array $attributes
++   *   An associative array of attributes such as 'rel'.
++   *
++   * @return string
++   *   A ; separated string ready for insertion in a HTTP header. No escaping is
++   *   performed for HTML entities, so this string is not safe to be printed.
++   *
++   * @internal
++   *
++   * @see https://www.drupal.org/node/3000051
++   */
++  public static function formatHttpHeaderAttributes(array $attributes = []) {
++    foreach ($attributes as $attribute => &$data) {
++      if (is_array($data)) {
++        $data = implode(' ', $data);
++      }
++      $data = $attribute . '="' . $data . '"';
++    }
++    return $attributes ? ' ' . implode('; ', $attributes) : '';
++  }
++
++  /**
++   * Renders placeholders (#attached['placeholders']).
++   *
++   * First, the HTML response object is converted to an equivalent render array,
++   * with #markup being set to the response's content and #attached being set to
++   * the response's attachments. Among these attachments, there may be
++   * placeholders that need to be rendered (replaced).
++   *
++   * Next, RendererInterface::renderRoot() is called, which renders the
++   * placeholders into their final markup.
++   *
++   * The markup that results from RendererInterface::renderRoot() is now the
++   * original HTML response's content, but with the placeholders rendered. We
++   * overwrite the existing content in the original HTML response object with
++   * this markup. The markup that was rendered for the placeholders may also
++   * have attachments (e.g. for CSS/JS assets) itself, and cacheability metadata
++   * that indicates what that markup depends on. That metadata is also added to
++   * the HTML response object.
++   *
++   * @param \Drupal\Core\Render\HtmlResponse $response
++   *   The HTML response whose placeholders are being replaced.
++   *
++   * @return \Drupal\Core\Render\HtmlResponse
++   *   The updated HTML response, with replaced placeholders.
++   *
++   * @see \Drupal\Core\Render\Renderer::replacePlaceholders()
++   * @see \Drupal\Core\Render\Renderer::renderPlaceholder()
++   */
++  protected function renderPlaceholders(HtmlResponse $response) {
++    $build = [
++      '#markup' => Markup::create($response->getContent()),
++      '#attached' => $response->getAttachments(),
++    ];
++    // RendererInterface::renderRoot() renders the $build render array and
++    // updates it in place. We don't care about the return value (which is just
++    // $build['#markup']), but about the resulting render array.
++    // @todo Simplify this when https://www.drupal.org/node/2495001 lands.
++    $this->renderer->renderRoot($build);
++
++    // Update the Response object now that the placeholders have been rendered.
++    $placeholders_bubbleable_metadata = BubbleableMetadata::createFromRenderArray($build);
++    $response
++      ->setContent($build['#markup'])
++      ->addCacheableDependency($placeholders_bubbleable_metadata)
++      ->setAttachments($placeholders_bubbleable_metadata->getAttachments());
++
++    return $response;
++  }
++
++  /**
++   * Processes asset libraries into render arrays.
++   *
++   * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
++   *   The attached assets collection for the current response.
++   * @param array $placeholders
++   *   The placeholders that exist in the response.
++   *
++   * @return array
++   *   An array keyed by asset type, with keys:
++   *     - styles
++   *     - scripts
++   *     - scripts_bottom
++   */
+   protected function processAssetLibraries(AttachedAssetsInterface $assets, array $placeholders) {
+-    $variables = $this->decorated->processAssetLibraries($assets, $placeholders);
++    $variables = [];
++
++    $maintenance_mode = defined('MAINTENANCE_MODE') || \Drupal::state()->get('system.maintenance_mode');
++
++    // Print styles - if present.
++    if (isset($placeholders['styles'])) {
++      // Optimize CSS if necessary, but only during normal site operation.
++      $optimize_css = !$maintenance_mode && $this->config->get('css.preprocess');
++      $variables['styles'] = $this->cssCollectionRenderer->render($this->assetResolver->getCssAssets($assets, $optimize_css, $this->languageManager->getCurrentLanguage()));
++    }
++
++    // Print scripts - if any are present.
++    if (isset($placeholders['scripts']) || isset($placeholders['scripts_bottom'])) {
++      // Optimize JS if necessary, but only during normal site operation.
++      $optimize_js = !$maintenance_mode && $this->config->get('js.preprocess');
++      [$js_assets_header, $js_assets_footer] = $this->assetResolver->getJsAssets($assets, $optimize_js, $this->languageManager->getCurrentLanguage());
++      $variables['scripts'] = $this->jsCollectionRenderer->render($js_assets_header);
++      $variables['scripts_bottom'] = $this->jsCollectionRenderer->render($js_assets_footer);
++    }
++
++    // Insert RUM footer JS.
++    $variables = $this->insertRumFooterJs($variables);
++
++    return $variables;
++  }
++
++  /**
++   * Renders HTML response attachment placeholders.
++   *
++   * This is the last step where all of the attachments are placed into the
++   * response object's contents.
++   *
++   * @param \Drupal\Core\Render\HtmlResponse $response
++   *   The HTML response to update.
++   * @param array $placeholders
++   *   An array of placeholders, keyed by type with the placeholders
++   *   present in the content of the response as values.
++   * @param array $variables
++   *   The variables to render and replace, keyed by type with renderable
++   *   arrays as values.
++   */
++  protected function renderHtmlResponseAttachmentPlaceholders(HtmlResponse $response, array $placeholders, array $variables) {
++    $content = $response->getContent();
++    foreach ($placeholders as $type => $placeholder) {
++      if (isset($variables[$type])) {
++        $content = str_replace($placeholder, $this->renderer->renderPlain($variables[$type]), $content);
++      }
++    }
++    $response->setContent($content);
++  }
++
++  /**
++   * Sets headers on a response object.
++   *
++   * @param \Drupal\Core\Render\HtmlResponse $response
++   *   The HTML response to update.
++   * @param array $headers
++   *   The headers to set, as an array. The items in this array should be as
++   *   follows:
++   *   - The header name.
++   *   - The header value.
++   *   - (optional) Whether to replace a current value with the new one, or add
++   *     it to the others. If the value is not replaced, it will be appended,
++   *     resulting in a header like this: 'Header: value1,value2'
++   */
++  protected function setHeaders(HtmlResponse $response, array $headers) {
++    foreach ($headers as $values) {
++      $name = $values[0];
++      $value = $values[1];
++      $replace = !empty($values[2]);
++
++      // Drupal treats the HTTP response status code like a header, even though
++      // it really is not.
++      if (strtolower($name) === 'status') {
++        $response->setStatusCode($value);
++      }
++      else {
++        $response->headers->set($name, $value, $replace);
++      }
++    }
++  }
++
++  /**
++   * Ensure proper key/data order and defaults for renderable head items.
++   *
++   * @param array $html_head
++   *   The ['#attached']['html_head'] portion of a render array.
++   *
++   * @return array
++   *   The ['#attached']['html_head'] portion of a render array with #type of
++   *   html_tag added for items without a #type.
++   */
++  protected function processHtmlHead(array $html_head) {
++    $head = [];
++    foreach ($html_head as $item) {
++      [$data, $key] = $item;
++      if (!isset($data['#type'])) {
++        $data['#type'] = 'html_tag';
++      }
++      $head[$key] = $data;
++    }
++    return $head;
++  }
++
++  /**
++   * Transform a html_head_link array into html_head and http_header arrays.
++   *
++   * Variable html_head_link is a special case of html_head which can be present
++   * as a link item in the HTML head section, and also as a Link: HTTP header,
++   * depending on options in the render array. Processing it can add to both the
++   * html_head and http_header sections.
++   *
++   * @param array $html_head_link
++   *   The 'html_head_link' value of a render array. Each head link is specified
++   *   by a two-element array:
++   *   - An array specifying the attributes of the link. The 'href' and 'rel'
++   *     attributes are required, and the 'href' attribute is expected to be a
++   *     percent-encoded URI for proper serialization in the Link: HTTP header,
++   *     as specified by RFC 8288.
++   *   - A boolean specifying whether the link should also be a Link: HTTP
++   *     header.
++   *
++   * @return array
++   *   An ['#attached'] section of a render array. This allows us to easily
++   *   merge the results with other render arrays. The array could contain the
++   *   following keys:
++   *   - http_header
++   *   - html_head
++   */
++  protected function processHtmlHeadLink(array $html_head_link) {
++    $attached = [];
++
++    foreach ($html_head_link as $item) {
++      $attributes = $item[0];
++      $should_add_header = $item[1] ?? FALSE;
++
++      $element = [
++        '#tag' => 'link',
++        '#attributes' => $attributes,
++      ];
++      $href = $attributes['href'];
++      $rel = $attributes['rel'];
++
++      // Allow multiple hreflang tags to use the same href.
++      if (isset($attributes['hreflang'])) {
++        $attached['html_head'][] = [$element, 'html_head_link:' . $rel . ':' . $attributes['hreflang'] . ':' . $href];
++      }
++      else {
++        $attached['html_head'][] = [$element, 'html_head_link:' . $rel . ':' . $href];
++      }
+
+-    if (\Drupal::config('new_relic_rpm.settings')->get('rum_instrumentation') == 'manual'
++      if ($should_add_header) {
++        // Also add a HTTP header "Link:".
++        $href = '<' . $attributes['href'] . '>';
++        unset($attributes['href']);
++        if ($param = static::formatHttpHeaderAttributes($attributes)) {
++          $href .= ';' . $param;
++        }
++
++        $attached['http_header'][] = ['Link', $href, FALSE];
++      }
++    }
++    return $attached;
++  }
++
++  /**
++   * Transform a 'feed' attachment into an 'html_head_link' attachment.
++   *
++   * The RSS feed is a special case of 'html_head_link', so we just turn it into
++   * one.
++   *
++   * @param array $attached_feed
++   *   The ['#attached']['feed'] portion of a render array.
++   *
++   * @return array
++   *   An ['#attached']['html_head_link'] array, suitable for merging with
++   *   another 'html_head_link' array.
++   */
++  protected function processFeed($attached_feed) {
++    $html_head_link = [];
++    foreach ($attached_feed as $item) {
++      $feed_link = [
++        'href' => $item[0],
++        'rel' => 'alternate',
++        'title' => empty($item[1]) ? '' : $item[1],
++        'type' => 'application/rss+xml',
++      ];
++      $html_head_link[] = [$feed_link, FALSE];
++    }
++    return ['html_head_link' => $html_head_link];
++  }
++
++  /**
++   * Adds the RUM footer JS script to 'scripts_bottom'.
++   *
++   * @param array $variables
++   *   A render array of processed asset libraries.
++   *
++   * @return array
++   *   A modified render array of processed asset libraries.
++   */
++  protected function insertRumFooterJs(array $variables) {
++    if ($this->configNewRelic->get('rum_instrumentation') == 'manual'
+       && $markup = $this->adapter->getBrowserTimingFooter()
+       ) {
+
+--
+GitLab
+
+
+From 0c2d648279a6bf6f578903ffe419fc672c815470 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Sat, 15 Jun 2024 12:13:06 -0500
+Subject: [PATCH 13/15] Add test coverage to ensure decorator does not break
+ core tests
+
+---
+ .../HtmlResponseAttachmentsTest.php           | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 tests/src/Functional/HtmlResponseAttachmentsTest.php
+
+diff --git a/tests/src/Functional/HtmlResponseAttachmentsTest.php b/tests/src/Functional/HtmlResponseAttachmentsTest.php
+new file mode 100644
+index 0000000..fe1af20
+--- /dev/null
++++ b/tests/src/Functional/HtmlResponseAttachmentsTest.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace Drupal\Tests\new_relic_rpm\Functional;
++
++use Drupal\Tests\system\Functional\Render\HtmlResponseAttachmentsTest as CoreHtmlResponseAttachmentsTest;
++
++/**
++ * Ensure HtmlResponseAttachmentsProcessorDecorator doesn't break core.
++ *
++ * @package Drupal\Tests\new_relic_rpm\Functional
++ * @group new_relic_rpm
++ */
++class HtmlResponseAttachmentsTest extends CoreHtmlResponseAttachmentsTest {
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  protected static $modules = ['render_attached_test', 'new_relic_rpm', 'new_relic_rpm_intstrumentation_test'];
++
++}
+--
+GitLab
+
+
+From bac35c845dd362da1e03c4b9a1bc5acb550dd7c5 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Sat, 15 Jun 2024 12:23:39 -0500
+Subject: [PATCH 14/15] Enable manual instrumentation in
+ HtmlResponseAttachmentsTest.php
+
+---
+ tests/src/Functional/HtmlResponseAttachmentsTest.php | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/tests/src/Functional/HtmlResponseAttachmentsTest.php b/tests/src/Functional/HtmlResponseAttachmentsTest.php
+index fe1af20..3299dd8 100644
+--- a/tests/src/Functional/HtmlResponseAttachmentsTest.php
++++ b/tests/src/Functional/HtmlResponseAttachmentsTest.php
+@@ -19,4 +19,16 @@ class HtmlResponseAttachmentsTest extends CoreHtmlResponseAttachmentsTest {
+    */
+   protected static $modules = ['render_attached_test', 'new_relic_rpm', 'new_relic_rpm_intstrumentation_test'];
+
++  /**
++   * Set up test.
++   */
++  protected function setUp() : void {
++    parent::setUp();
++
++    $this->container->get('config.factory')
++      ->getEditable('new_relic_rpm.settings')
++      ->set('rum_instrumentation', 'manual')
++      ->save();
++  }
++
+ }
+--
+GitLab
+
+
+From b5ba42fa2d047e179c6558cb1ecd6234d843a966 Mon Sep 17 00:00:00 2001
+From: Chris Burge <7604-ChrisBurge@users.noreply.drupalcode.org>
+Date: Sat, 15 Jun 2024 18:41:36 -0500
+Subject: [PATCH 15/15] Rework decorator to avoid massive code duplication
+
+---
+ new_relic_rpm.services.yml                    |   2 +-
+ ...lResponseAttachmentsProcessorDecorator.php | 490 +-----------------
+ 2 files changed, 19 insertions(+), 473 deletions(-)
+
+diff --git a/new_relic_rpm.services.yml b/new_relic_rpm.services.yml
+index 4bb439d..6c04a60 100644
+--- a/new_relic_rpm.services.yml
++++ b/new_relic_rpm.services.yml
+@@ -38,4 +38,4 @@ services:
+     class: Drupal\new_relic_rpm\Render\HtmlResponseAttachmentsProcessorDecorator
+     decorates: html_response.attachments_processor
+     public: false
+-    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner', '@new_relic_rpm.adapter', '@asset.resolver', '@config.factory', '@asset.css.collection_renderer', '@asset.js.collection_renderer', '@request_stack', '@renderer', '@module_handler', '@language_manager' ]
++    arguments: ['@new_relic_rpm.html_response.attachments_processor.inner', '@new_relic_rpm.adapter', '@config.factory', '@renderer']
+diff --git a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+index 1b89f08..f63736f 100644
+--- a/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
++++ b/src/Render/HtmlResponseAttachmentsProcessorDecorator.php
+@@ -2,23 +2,13 @@
+
+ namespace Drupal\new_relic_rpm\Render;
+
+-use Drupal\Core\Asset\AssetCollectionRendererInterface;
+-use Drupal\Core\Asset\AssetResolverInterface;
+-use Drupal\Core\Asset\AttachedAssets;
+-use Drupal\Core\Asset\AttachedAssetsInterface;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+-use Drupal\Core\Extension\ModuleHandlerInterface;
+-use Drupal\Core\Form\EnforcedResponseException;
+-use Drupal\Core\Language\LanguageManagerInterface;
+ use Drupal\Core\Render\AttachmentsInterface;
+ use Drupal\Core\Render\AttachmentsResponseProcessorInterface;
+-use Drupal\Core\Render\BubbleableMetadata;
+-use Drupal\Core\Render\HtmlResponse;
+ use Drupal\Core\Render\HtmlResponseAttachmentsProcessor;
+ use Drupal\Core\Render\Markup;
+ use Drupal\Core\Render\RendererInterface;
+ use Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface;
+-use Symfony\Component\HttpFoundation\RequestStack;
+
+ /**
+  * Processes attachments of HTML responses.
+@@ -53,20 +43,6 @@ class HtmlResponseAttachmentsProcessorDecorator implements AttachmentsResponsePr
+    */
+   protected $adapter;
+
+-  /**
+-   * The asset resolver service.
+-   *
+-   * @var \Drupal\Core\Asset\AssetResolverInterface
+-   */
+-  protected $assetResolver;
+-
+-  /**
+-   * A config object for the system performance configuration.
+-   *
+-   * @var \Drupal\Core\Config\Config
+-   */
+-  protected $config;
+-
+   /**
+    * A config object for New Relic configuration.
+    *
+@@ -74,27 +50,6 @@ class HtmlResponseAttachmentsProcessorDecorator implements AttachmentsResponsePr
+    */
+   protected $configNewRelic;
+
+-  /**
+-   * The CSS asset collection renderer service.
+-   *
+-   * @var \Drupal\Core\Asset\AssetCollectionRendererInterface
+-   */
+-  protected $cssCollectionRenderer;
+-
+-  /**
+-   * The JS asset collection renderer service.
+-   *
+-   * @var \Drupal\Core\Asset\AssetCollectionRendererInterface
+-   */
+-  protected $jsCollectionRenderer;
+-
+-  /**
+-   * The request stack.
+-   *
+-   * @var \Symfony\Component\HttpFoundation\RequestStack
+-   */
+-  protected $requestStack;
+-
+   /**
+    * The renderer.
+    *
+@@ -103,455 +58,33 @@ class HtmlResponseAttachmentsProcessorDecorator implements AttachmentsResponsePr
+   protected $renderer;
+
+   /**
+-   * The module handler service.
+-   *
+-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+-   */
+-  protected $moduleHandler;
+-
+-  /**
+-   * Constructs a HtmlResponseAttachmentsProcessor object.
++   * Constructs a HtmlResponseAttachmentsProcessorDecorator object.
+    *
+    * @param \Drupal\Core\Render\HtmlResponseAttachmentsProcessor $decorated
+    *   The decorated HtmlResponseAttachmentsProcessor service.
+    * @param \Drupal\new_relic_rpm\ExtensionAdapter\NewRelicAdapterInterface $adapter
+    *   The New Relic Adapster service.
+-   * @param \Drupal\Core\Asset\AssetResolverInterface $asset_resolver
+-   *   An asset resolver.
+    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+    *   A config factory for retrieving required config objects.
+-   * @param \Drupal\Core\Asset\AssetCollectionRendererInterface $css_collection_renderer
+-   *   The CSS asset collection renderer.
+-   * @param \Drupal\Core\Asset\AssetCollectionRendererInterface $js_collection_renderer
+-   *   The JS asset collection renderer.
+-   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
+-   *   The request stack.
+    * @param \Drupal\Core\Render\RendererInterface $renderer
+    *   The renderer.
+-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+-   *   The module handler service.
+-   * @param \Drupal\Core\Language\LanguageManagerInterface|null $languageManager
+-   *   The language manager.
+    */
+-  public function __construct(HtmlResponseAttachmentsProcessor $decorated, NewRelicAdapterInterface $adapter, AssetResolverInterface $asset_resolver, ConfigFactoryInterface $config_factory, AssetCollectionRendererInterface $css_collection_renderer, AssetCollectionRendererInterface $js_collection_renderer, RequestStack $request_stack, RendererInterface $renderer, ModuleHandlerInterface $module_handler, protected ?LanguageManagerInterface $languageManager = NULL) {
++  public function __construct(HtmlResponseAttachmentsProcessor $decorated, NewRelicAdapterInterface $adapter, ConfigFactoryInterface $config_factory, RendererInterface $renderer) {
++    $this->decorated = $decorated;
+     $this->adapter = $adapter;
+-    $this->assetResolver = $asset_resolver;
+-    $this->config = $config_factory->get('system.performance');
+     $this->configNewRelic = $config_factory->get('new_relic_rpm.settings');
+-    $this->cssCollectionRenderer = $css_collection_renderer;
+-    $this->jsCollectionRenderer = $js_collection_renderer;
+-    $this->requestStack = $request_stack;
+     $this->renderer = $renderer;
+-    $this->moduleHandler = $module_handler;
+-    if (!isset($languageManager)) {
+-      // phpcs:ignore Drupal.Semantics.FunctionTriggerError
+-      @trigger_error('Calling ' . __METHOD__ . '() without the $languageManager argument is deprecated in drupal:10.1.0 and will be required in drupal:11.0.0', E_USER_DEPRECATED);
+-      $this->languageManager = \Drupal::languageManager();
+-    }
+   }
+
+   /**
+    * {@inheritdoc}
+    */
+   public function processAttachments(AttachmentsInterface $response) {
+-    assert($response instanceof HtmlResponse);
+-
+-    // First, render the actual placeholders; this may cause additional
+-    // attachments to be added to the response, which the attachment
+-    // placeholders rendered by renderHtmlResponseAttachmentPlaceholders() will
+-    // need to include.
+-    //
+-    // @todo Exceptions should not be used for code flow control. However, the
+-    //   Form API does not integrate with the HTTP Kernel based architecture of
+-    //   Drupal 8. In order to resolve this issue properly it is necessary to
+-    //   completely separate form submission from rendering.
+-    //   @see https://www.drupal.org/node/2367555
+-    try {
+-      $response = $this->renderPlaceholders($response);
+-    }
+-    catch (EnforcedResponseException $e) {
+-      return $e->getResponse();
+-    }
+-
+-    // Get a reference to the attachments.
+-    $attached = $response->getAttachments();
+-
+-    // Send a message back if the render array has unsupported #attached types.
+-    $unsupported_types = array_diff(
+-      array_keys($attached),
+-      ['html_head', 'feed', 'html_head_link', 'http_header', 'library', 'html_response_attachment_placeholders', 'placeholders', 'drupalSettings']
+-    );
+-    if (!empty($unsupported_types)) {
+-      throw new \LogicException(sprintf('You are not allowed to use %s in #attached.', implode(', ', $unsupported_types)));
+-    }
+-
+-    // If we don't have any placeholders, there is no need to proceed.
+-    if (!empty($attached['html_response_attachment_placeholders'])) {
+-      // Get the placeholders from attached and then remove them.
+-      $attachment_placeholders = $attached['html_response_attachment_placeholders'];
+-      unset($attached['html_response_attachment_placeholders']);
+-
+-      $assets = AttachedAssets::createFromRenderArray(['#attached' => $attached]);
+-      // Take Ajax page state into account, to allow for something like
+-      // Turbolinks to be implemented without altering core.
+-      // @see https://github.com/rails/turbolinks/
+-      $ajax_page_state = $this->requestStack->getCurrentRequest()->get('ajax_page_state');
+-      $assets->setAlreadyLoadedLibraries(isset($ajax_page_state) ? explode(',', $ajax_page_state['libraries']) : []);
+-      $variables = $this->processAssetLibraries($assets, $attachment_placeholders);
+-      // $variables now contains the markup to load the asset libraries. Update
+-      // $attached with the final list of libraries and JavaScript settings, so
+-      // that $response can be updated with those. Then the response object will
+-      // list the final, processed attachments.
+-      $attached['library'] = $assets->getLibraries();
+-      $attached['drupalSettings'] = $assets->getSettings();
+-
+-      // Since we can only replace content in the HTML head section if there's a
+-      // placeholder for it, we can safely avoid processing the render array if
+-      // it's not present.
+-      if (!empty($attachment_placeholders['head'])) {
+-        // 'feed' is a special case of 'html_head_link'. We process them into
+-        // 'html_head_link' entries and merge them.
+-        if (!empty($attached['feed'])) {
+-          $attached = BubbleableMetadata::mergeAttachments(
+-            $attached,
+-            $this->processFeed($attached['feed'])
+-          );
+-          unset($attached['feed']);
+-        }
+-        // 'html_head_link' is a special case of 'html_head' which can be present
+-        // as a head element, but also as a Link: HTTP header depending on
+-        // settings in the render array. Processing it can add to both the
+-        // 'html_head' and 'http_header' keys of '#attached', so we must address
+-        // it before 'html_head'.
+-        if (!empty($attached['html_head_link'])) {
+-          // Merge the processed 'html_head_link' into $attached so that its
+-          // 'html_head' and 'http_header' values are present for further
+-          // processing.
+-          $attached = BubbleableMetadata::mergeAttachments(
+-            $attached,
+-            $this->processHtmlHeadLink($attached['html_head_link'])
+-          );
+-          unset($attached['html_head_link']);
+-        }
+-
+-        // Now we can process 'html_head', which contains both 'feed' and
+-        // 'html_head_link'.
+-        if (!empty($attached['html_head'])) {
+-          $variables['head'] = $this->processHtmlHead($attached['html_head']);
+-        }
+-      }
+-
+-      // Now replace the attachment placeholders.
+-      $this->renderHtmlResponseAttachmentPlaceholders($response, $attachment_placeholders, $variables);
+-    }
+-
+-    // Set the HTTP headers and status code on the response if any bubbled.
+-    if (!empty($attached['http_header'])) {
+-      $this->setHeaders($response, $attached['http_header']);
+-    }
+-
+-    // AttachmentsResponseProcessorInterface mandates that the response it
+-    // processes contains the final attachment values.
+-    $response->setAttachments($attached);
+-
+-    return $response;
+-  }
+-
+-  /**
+-   * Formats an attribute string for an HTTP header.
+-   *
+-   * @param array $attributes
+-   *   An associative array of attributes such as 'rel'.
+-   *
+-   * @return string
+-   *   A ; separated string ready for insertion in a HTTP header. No escaping is
+-   *   performed for HTML entities, so this string is not safe to be printed.
+-   *
+-   * @internal
+-   *
+-   * @see https://www.drupal.org/node/3000051
+-   */
+-  public static function formatHttpHeaderAttributes(array $attributes = []) {
+-    foreach ($attributes as $attribute => &$data) {
+-      if (is_array($data)) {
+-        $data = implode(' ', $data);
+-      }
+-      $data = $attribute . '="' . $data . '"';
+-    }
+-    return $attributes ? ' ' . implode('; ', $attributes) : '';
+-  }
+-
+-  /**
+-   * Renders placeholders (#attached['placeholders']).
+-   *
+-   * First, the HTML response object is converted to an equivalent render array,
+-   * with #markup being set to the response's content and #attached being set to
+-   * the response's attachments. Among these attachments, there may be
+-   * placeholders that need to be rendered (replaced).
+-   *
+-   * Next, RendererInterface::renderRoot() is called, which renders the
+-   * placeholders into their final markup.
+-   *
+-   * The markup that results from RendererInterface::renderRoot() is now the
+-   * original HTML response's content, but with the placeholders rendered. We
+-   * overwrite the existing content in the original HTML response object with
+-   * this markup. The markup that was rendered for the placeholders may also
+-   * have attachments (e.g. for CSS/JS assets) itself, and cacheability metadata
+-   * that indicates what that markup depends on. That metadata is also added to
+-   * the HTML response object.
+-   *
+-   * @param \Drupal\Core\Render\HtmlResponse $response
+-   *   The HTML response whose placeholders are being replaced.
+-   *
+-   * @return \Drupal\Core\Render\HtmlResponse
+-   *   The updated HTML response, with replaced placeholders.
+-   *
+-   * @see \Drupal\Core\Render\Renderer::replacePlaceholders()
+-   * @see \Drupal\Core\Render\Renderer::renderPlaceholder()
+-   */
+-  protected function renderPlaceholders(HtmlResponse $response) {
+-    $build = [
+-      '#markup' => Markup::create($response->getContent()),
+-      '#attached' => $response->getAttachments(),
+-    ];
+-    // RendererInterface::renderRoot() renders the $build render array and
+-    // updates it in place. We don't care about the return value (which is just
+-    // $build['#markup']), but about the resulting render array.
+-    // @todo Simplify this when https://www.drupal.org/node/2495001 lands.
+-    $this->renderer->renderRoot($build);
+-
+-    // Update the Response object now that the placeholders have been rendered.
+-    $placeholders_bubbleable_metadata = BubbleableMetadata::createFromRenderArray($build);
+-    $response
+-      ->setContent($build['#markup'])
+-      ->addCacheableDependency($placeholders_bubbleable_metadata)
+-      ->setAttachments($placeholders_bubbleable_metadata->getAttachments());
+-
+-    return $response;
+-  }
+-
+-  /**
+-   * Processes asset libraries into render arrays.
+-   *
+-   * @param \Drupal\Core\Asset\AttachedAssetsInterface $assets
+-   *   The attached assets collection for the current response.
+-   * @param array $placeholders
+-   *   The placeholders that exist in the response.
+-   *
+-   * @return array
+-   *   An array keyed by asset type, with keys:
+-   *     - styles
+-   *     - scripts
+-   *     - scripts_bottom
+-   */
+-  protected function processAssetLibraries(AttachedAssetsInterface $assets, array $placeholders) {
+-    $variables = [];
+-
+-    $maintenance_mode = defined('MAINTENANCE_MODE') || \Drupal::state()->get('system.maintenance_mode');
+-
+-    // Print styles - if present.
+-    if (isset($placeholders['styles'])) {
+-      // Optimize CSS if necessary, but only during normal site operation.
+-      $optimize_css = !$maintenance_mode && $this->config->get('css.preprocess');
+-      $variables['styles'] = $this->cssCollectionRenderer->render($this->assetResolver->getCssAssets($assets, $optimize_css, $this->languageManager->getCurrentLanguage()));
+-    }
+-
+-    // Print scripts - if any are present.
+-    if (isset($placeholders['scripts']) || isset($placeholders['scripts_bottom'])) {
+-      // Optimize JS if necessary, but only during normal site operation.
+-      $optimize_js = !$maintenance_mode && $this->config->get('js.preprocess');
+-      [$js_assets_header, $js_assets_footer] = $this->assetResolver->getJsAssets($assets, $optimize_js, $this->languageManager->getCurrentLanguage());
+-      $variables['scripts'] = $this->jsCollectionRenderer->render($js_assets_header);
+-      $variables['scripts_bottom'] = $this->jsCollectionRenderer->render($js_assets_footer);
+-    }
+-
+-    // Insert RUM footer JS.
+-    $variables = $this->insertRumFooterJs($variables);
+-
+-    return $variables;
+-  }
+-
+-  /**
+-   * Renders HTML response attachment placeholders.
+-   *
+-   * This is the last step where all of the attachments are placed into the
+-   * response object's contents.
+-   *
+-   * @param \Drupal\Core\Render\HtmlResponse $response
+-   *   The HTML response to update.
+-   * @param array $placeholders
+-   *   An array of placeholders, keyed by type with the placeholders
+-   *   present in the content of the response as values.
+-   * @param array $variables
+-   *   The variables to render and replace, keyed by type with renderable
+-   *   arrays as values.
+-   */
+-  protected function renderHtmlResponseAttachmentPlaceholders(HtmlResponse $response, array $placeholders, array $variables) {
+-    $content = $response->getContent();
+-    foreach ($placeholders as $type => $placeholder) {
+-      if (isset($variables[$type])) {
+-        $content = str_replace($placeholder, $this->renderer->renderPlain($variables[$type]), $content);
+-      }
+-    }
+-    $response->setContent($content);
+-  }
+-
+-  /**
+-   * Sets headers on a response object.
+-   *
+-   * @param \Drupal\Core\Render\HtmlResponse $response
+-   *   The HTML response to update.
+-   * @param array $headers
+-   *   The headers to set, as an array. The items in this array should be as
+-   *   follows:
+-   *   - The header name.
+-   *   - The header value.
+-   *   - (optional) Whether to replace a current value with the new one, or add
+-   *     it to the others. If the value is not replaced, it will be appended,
+-   *     resulting in a header like this: 'Header: value1,value2'
+-   */
+-  protected function setHeaders(HtmlResponse $response, array $headers) {
+-    foreach ($headers as $values) {
+-      $name = $values[0];
+-      $value = $values[1];
+-      $replace = !empty($values[2]);
+-
+-      // Drupal treats the HTTP response status code like a header, even though
+-      // it really is not.
+-      if (strtolower($name) === 'status') {
+-        $response->setStatusCode($value);
+-      }
+-      else {
+-        $response->headers->set($name, $value, $replace);
+-      }
+-    }
+-  }
+-
+-  /**
+-   * Ensure proper key/data order and defaults for renderable head items.
+-   *
+-   * @param array $html_head
+-   *   The ['#attached']['html_head'] portion of a render array.
+-   *
+-   * @return array
+-   *   The ['#attached']['html_head'] portion of a render array with #type of
+-   *   html_tag added for items without a #type.
+-   */
+-  protected function processHtmlHead(array $html_head) {
+-    $head = [];
+-    foreach ($html_head as $item) {
+-      [$data, $key] = $item;
+-      if (!isset($data['#type'])) {
+-        $data['#type'] = 'html_tag';
+-      }
+-      $head[$key] = $data;
+-    }
+-    return $head;
+-  }
+-
+-  /**
+-   * Transform a html_head_link array into html_head and http_header arrays.
+-   *
+-   * Variable html_head_link is a special case of html_head which can be present
+-   * as a link item in the HTML head section, and also as a Link: HTTP header,
+-   * depending on options in the render array. Processing it can add to both the
+-   * html_head and http_header sections.
+-   *
+-   * @param array $html_head_link
+-   *   The 'html_head_link' value of a render array. Each head link is specified
+-   *   by a two-element array:
+-   *   - An array specifying the attributes of the link. The 'href' and 'rel'
+-   *     attributes are required, and the 'href' attribute is expected to be a
+-   *     percent-encoded URI for proper serialization in the Link: HTTP header,
+-   *     as specified by RFC 8288.
+-   *   - A boolean specifying whether the link should also be a Link: HTTP
+-   *     header.
+-   *
+-   * @return array
+-   *   An ['#attached'] section of a render array. This allows us to easily
+-   *   merge the results with other render arrays. The array could contain the
+-   *   following keys:
+-   *   - http_header
+-   *   - html_head
+-   */
+-  protected function processHtmlHeadLink(array $html_head_link) {
+-    $attached = [];
+-
+-    foreach ($html_head_link as $item) {
+-      $attributes = $item[0];
+-      $should_add_header = $item[1] ?? FALSE;
+-
+-      $element = [
+-        '#tag' => 'link',
+-        '#attributes' => $attributes,
+-      ];
+-      $href = $attributes['href'];
+-      $rel = $attributes['rel'];
+-
+-      // Allow multiple hreflang tags to use the same href.
+-      if (isset($attributes['hreflang'])) {
+-        $attached['html_head'][] = [$element, 'html_head_link:' . $rel . ':' . $attributes['hreflang'] . ':' . $href];
+-      }
+-      else {
+-        $attached['html_head'][] = [$element, 'html_head_link:' . $rel . ':' . $href];
+-      }
+-
+-      if ($should_add_header) {
+-        // Also add a HTTP header "Link:".
+-        $href = '<' . $attributes['href'] . '>';
+-        unset($attributes['href']);
+-        if ($param = static::formatHttpHeaderAttributes($attributes)) {
+-          $href .= ';' . $param;
+-        }
+-
+-        $attached['http_header'][] = ['Link', $href, FALSE];
+-      }
+-    }
+-    return $attached;
+-  }
+-
+-  /**
+-   * Transform a 'feed' attachment into an 'html_head_link' attachment.
+-   *
+-   * The RSS feed is a special case of 'html_head_link', so we just turn it into
+-   * one.
+-   *
+-   * @param array $attached_feed
+-   *   The ['#attached']['feed'] portion of a render array.
+-   *
+-   * @return array
+-   *   An ['#attached']['html_head_link'] array, suitable for merging with
+-   *   another 'html_head_link' array.
+-   */
+-  protected function processFeed($attached_feed) {
+-    $html_head_link = [];
+-    foreach ($attached_feed as $item) {
+-      $feed_link = [
+-        'href' => $item[0],
+-        'rel' => 'alternate',
+-        'title' => empty($item[1]) ? '' : $item[1],
+-        'type' => 'application/rss+xml',
+-      ];
+-      $html_head_link[] = [$feed_link, FALSE];
+-    }
+-    return ['html_head_link' => $html_head_link];
+-  }
+-
+-  /**
+-   * Adds the RUM footer JS script to 'scripts_bottom'.
+-   *
+-   * @param array $variables
+-   *   A render array of processed asset libraries.
+-   *
+-   * @return array
+-   *   A modified render array of processed asset libraries.
+-   */
+-  protected function insertRumFooterJs(array $variables) {
+     if ($this->configNewRelic->get('rum_instrumentation') == 'manual'
+       && $markup = $this->adapter->getBrowserTimingFooter()
+       ) {
+
+-      $variables['scripts_bottom'][] = [
++      $script_render_array = [
+         '#type' => 'html_tag',
+         '#tag' => 'script',
+         '#value' => Markup::create($markup),
+@@ -559,9 +92,22 @@ class HtmlResponseAttachmentsProcessorDecorator implements AttachmentsResponsePr
+           'type' => 'text/javascript',
+         ],
+       ];
++
++      $content = $response->getContent();
++      $attached = $response->getAttachments();
++      // Perform a string replacement to insert raw JS markup directly
++      // into $content.
++      if (isset($attached['html_response_attachment_placeholders']['scripts_bottom'])) {
++        $content = str_replace(
++          $attached['html_response_attachment_placeholders']['scripts_bottom'],
++          $attached['html_response_attachment_placeholders']['scripts_bottom'] . PHP_EOL . $this->renderer->renderPlain($script_render_array)->__toString(),
++          $content
++        );
++        $response->setContent($content);
++      }
+     }
+
+-    return $variables;
++    return $this->decorated->processAttachments($response);
+   }
+
+ }
+--
+GitLab
+
