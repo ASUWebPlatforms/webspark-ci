@@ -190,19 +190,26 @@ use ArrangementStyleEnum;
       ];
 
       /* Hi Dave! Probably want to set a default value for the columns here if nothing is selected
-      for example  (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO' 
+      for example  (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO'
       probably should match whatever the default columns are in layout builder card arrangement */
 
-      $form['columns_to_display'] = [
-        '#type' => 'select',
-        '#title' => $this->t('Columns to Display'),
-        '#options' => array (
-          'two-columns' => '2 columns',
-          'three-columns' => '3 columns',
-          'four-columns' => '4 columns'
-        ),
-        '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO',
-      ];
+    //   $form['columns_to_display'] = [
+    //     '#type' => 'select',
+    //     '#title' => 'Columns to Display',
+    //     '#options' => ColumnEnum::allOptions(),
+    //     '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
+    // ];
+
+    $form['columns_to_display'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Columns to Display'),
+      '#options' => array (
+        'two-columns' => '2 columns',
+        'three-columns' => '3 columns',
+        'four-columns' => '4 columns'
+      ),
+      '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
+    ];
 
       $form['view_mode'] = [
         '#type' => 'select',
@@ -212,5 +219,5 @@ use ArrangementStyleEnum;
         '#default_value' =>  $this->options['view_mode'],
       ];
     }
-    
+
   }
