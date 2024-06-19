@@ -12,8 +12,10 @@ require_once('enums/Column.enum.php');
 use ColumnEnum;
 require_once('enums/TargetWindow.enum.php');
 use TargetWindowEnum;
-require_once('enums/Spacing.enum.php');
-use SpacingEnum;
+require_once('enums/SpacingBottom.enum.php');
+use SpacingBottomEnum;
+require_once('enums/SpacingTop.enum.php');
+use SpacingTopEnum;
 require_once('enums/ViewMode.enum.php');
 use ViewModeEnum;
 require_once('enums/ArrangementStyle.enum.php');
@@ -177,39 +179,42 @@ use ArrangementStyleEnum;
       //Some additional Block Settings
       $form['spacing_top'] = [
         '#title' => $this->t('Spacing Top'),
-        '#options' => SpacingEnum::allOptions(),
+        '#options' => SpacingTopEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => $this->options['spacing_top'],
+        '#default_value' => (isset($this->options['spacing_top'])) ? $this->options['spacing_top'] : '',
       ];
 
       $form['spacing_bottom'] = [
         '#title' => $this->t('Spacing Bottom'),
-        '#options' => SpacingEnum::allOptions(),
+        '#options' => SpacingBottomEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => $this->options['spacing_bottom'],
+        '#default_value' => (isset($this->options['spacing_bottom'])) ? $this->options['spacing_bottom'] : '',
+
       ];
 
       /* Hi Dave! Probably want to set a default value for the columns here if nothing is selected
       for example  (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'TWO'
       probably should match whatever the default columns are in layout builder card arrangement */
 
-    //   $form['columns_to_display'] = [
-    //     '#type' => 'select',
-    //     '#title' => 'Columns to Display',
-    //     '#options' => ColumnEnum::allOptions(),
-    //     '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
-    // ];
-
-    $form['columns_to_display'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Columns to Display'),
-      '#options' => array (
-        'two-columns' => '2 columns',
-        'three-columns' => '3 columns',
-        'four-columns' => '4 columns'
-      ),
-      '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
+      //REFACTORED with ColumnEnum::allOptions() returning both key and value for avail options
+      $form['columns_to_display'] = [
+        '#type' => 'select',
+        '#title' => 'Columns to Display',
+        '#options' => ColumnEnum::allOptions(),
+        '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
     ];
+
+    // PREVIOUS code for reference
+    // $form['columns_to_display'] = [
+    //   '#type' => 'select',
+    //   '#title' => $this->t('Columns to Display'),
+    //   '#options' => array (
+    //     'two-columns' => '2 columns',
+    //     'three-columns' => '3 columns',
+    //     'four-columns' => '4 columns'
+    //   ),
+    //   '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
+    // ];
 
       $form['view_mode'] = [
         '#type' => 'select',
