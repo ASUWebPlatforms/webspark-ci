@@ -475,7 +475,7 @@ class FeatureContext extends RawDrupalContext {
   public function iClickTheCheckboxLabelFor($checkbox) {
     $function = <<<JS
       (function(){
-        document.querySelectorAll('[for=${checkbox}]')[0].click();
+        document.querySelectorAll('[for={$checkbox}]')[0].click();
       })()
     JS;
 

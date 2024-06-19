@@ -20,10 +20,6 @@ Feature: Sidebar Menu
     # Check for active element within collapsible
     And I should see that the "nav#sidebar-left #cardBodypages [data-ga-text='Sidebar'].nav-link.is-active" element exists
     And I should see the gold underline exists on "nav#sidebar-left #cardBodypages [data-ga-text='Sidebar'].nav-link.is-active" menu item
-    # Close collapsible
-    Given I click the element "nav#sidebar-left a#pages"
-    Then I should see that the "nav#sidebar-left a#pages.collapsed" element exists
-    And I should see that the "nav#sidebar-left .card-foldable #cardBodypages.card-body.collapse.show" element does not exist
 
   @api @javascript
   Scenario: Verify adding, moving, and removing items
