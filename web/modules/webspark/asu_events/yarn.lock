@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asu/component-events@2.1.1":
-  version "2.1.1"
-  resolved "https://npm.pkg.github.com/download/@asu/component-events/2.1.1/6e62849f69e561fa5214c7e14c2807e76172fc15#6e62849f69e561fa5214c7e14c2807e76172fc15"
-  integrity sha512-FzUXA8Nf1R2SHBzp57N3/i9xGiGPHVFL7c7MGg+tUS3K/Qm6ny0Jtk81F6DggWa59t5+XkaDj4xnWnGOYg3j7A==
+"@asu/component-events@2.1.2":
+  version "2.1.2"
+  resolved "https://npm.pkg.github.com/download/@asu/component-events/2.1.2/26f3003ddc12296ab71b5ba601d77a786532741c#26f3003ddc12296ab71b5ba601d77a786532741c"
+  integrity sha512-nYjpce3EVfTkvjPhP/vG3Dd10eNiRvuLd+vWMkHusJ4IqzBAhXClqEGf5W+wLWZc9EtKXH8aoNokcKVHLC80Tw==
   dependencies:
     "@asu/components-core" "^3.0.0"
     "@babel/plugin-transform-react-jsx" "^7.13.12"
