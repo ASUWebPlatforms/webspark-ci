@@ -10,7 +10,7 @@
         "#3225009: Cant add custom block with field states ui using layout builder": "https://www.drupal.org/files/issues/2023-06-21/3225009-6.patch"
     },
     "drupal/linkit": {
-        "2877535: Fix issue with path alias": "https://www.drupal.org/files/issues/2022-06-07/2877535-39.patch"
+        "2877535: Fix issue with path alias": "https://www.drupal.org/files/issues/2023-10-05/linkit-2877535-64.patch"
     },
     "drupal/fontawesome": {
         "#3274028: Fixing CKEditor 5 compatibility": "https://www.drupal.org/files/issues/2024-01-17/ckeditor_compatibility_issue_0.patch",
