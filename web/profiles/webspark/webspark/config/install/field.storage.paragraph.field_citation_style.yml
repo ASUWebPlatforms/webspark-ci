@@ -4,21 +4,18 @@ dependencies:
   module:
     - options
     - paragraphs
-id: paragraph.field_accent_color
-field_name: field_accent_color
+id: paragraph.field_citation_style
+field_name: field_citation_style
 entity_type: paragraph
 type: list_string
 settings:
   allowed_values:
     -
-      value: "''"
-      label: 'Gray 7'
+      value: "default"
+      label: Default
     -
-      value: accent-maroon
-      label: Maroon
-    -
-      value: accent-gold
-      label: Gold
+      value: alt-citation
+      label: Alternative
   allowed_values_function: ''
 module: options
 locked: false

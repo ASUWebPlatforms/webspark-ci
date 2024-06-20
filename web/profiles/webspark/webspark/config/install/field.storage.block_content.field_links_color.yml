@@ -2,20 +2,23 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
+    - block_content
     - options
-id: node.field_header_style
-field_name: field_header_style
-entity_type: node
+id: block_content.field_links_color
+field_name: field_links_color
+entity_type: block_content
 type: list_string
 settings:
   allowed_values:
     -
-      value: default
-      label: Default
+      value: "text-gray-7"
+      label: 'Gray 7 Links'
     -
-      value: large
-      label: Large
+      value: text-gold
+      label: 'Gold Links'
+    -
+      value: text-white
+      label: 'White Links'
   allowed_values_function: ''
 module: options
 locked: false

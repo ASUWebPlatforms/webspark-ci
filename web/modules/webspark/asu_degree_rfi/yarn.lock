@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asu/app-degree-pages@2.5.0":
-  version "2.5.0"
-  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.5.0/a9f3152b668096d7756cab545ba1e13a7418db90#a9f3152b668096d7756cab545ba1e13a7418db90"
-  integrity sha512-JUJ8VLfs5Pno9ZXXLxPwZdPgYqwM/mIIxnbv7hXB5vGNM/uyUuBw5OhgT153GcgEtRcvN7FySdkNIzDRz6HMzA==
+"@asu/app-degree-pages@2.5.3":
+  version "2.5.3"
+  resolved "https://npm.pkg.github.com/download/@asu/app-degree-pages/2.5.3/d4f2950a6fbb556472583a75c37f00fff62fbbe3#d4f2950a6fbb556472583a75c37f00fff62fbbe3"
+  integrity sha512-c4kDUf2ULmpVbmVEVyRJ/jJLaFHdmjH0Lg0d5qsflGXOvFIryjdmS93S/+nBPYK+SUji3GLVeB/15ioMN1mwxw==
   dependencies:
     "@asu/components-core" "^3.1.0"
     "@popperjs/core" "^2.9.2"
@@ -17,10 +17,10 @@
     react-tooltip "^4.2.21"
     styled-components "^5.3.0"
 
-"@asu/app-rfi@2.3.0":
-  version "2.3.0"
-  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.3.0/e73b01e0401a8e7011f906be56474daccc9e0e86#e73b01e0401a8e7011f906be56474daccc9e0e86"
-  integrity sha512-ekVEy2Ohtbqi06bI48NM6dYXe0V8+zeIsD/94qaYcUXj5OBpECNfI2j5lcCO4ceWXwmbvYjlTHTYAzMwQq9Rkw==
+"@asu/app-rfi@2.3.1":
+  version "2.3.1"
+  resolved "https://npm.pkg.github.com/download/@asu/app-rfi/2.3.1/1206be5c013c2917878ba52d56fb4527dc4997b5#1206be5c013c2917878ba52d56fb4527dc4997b5"
+  integrity sha512-Ziv2wvnH2zDy8jbcJXhySzqBIk1cArX0uCgK88w3EkipO15tjurABjVLZnZGVWtlcXeyFQBI9XMZqDcApnZw1A==
   dependencies:
     "@asu/components-core" "^3.0.0"
     formik "^2.1.4"

@@ -44,12 +44,11 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu/components-core@3.3.1":
-  version "3.3.1"
-  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.1/b1f12cd29a9d0795bf4161c6309227c2d712d929#b1f12cd29a9d0795bf4161c6309227c2d712d929"
-  integrity sha512-6fBV3sqaWriJjQ5whzWhb1WF8w0cXB6b3olVqa+C9V0usfiMZzSOjcyFsBMeBP6tiXx2EA7UMqhvg5o7kqFkdg==
+"@asu/components-core@3.3.6":
+  version "3.3.6"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.6/75dc5a8b48706a6be86ac647c06c4aecce15943a#75dc5a8b48706a6be86ac647c06c4aecce15943a"
+  integrity sha512-Gc9C5Mbu0vEofL7WlzN12z+37tfsVwbGhnjpf9J1KBi7rDdc8QTm6LK9Wsv6PaIcasqv9eVjnvc0AGSqv7FGiw==
   dependencies:
-    "@storybook/addon-knobs" "^6.2.9"
     classnames "^2.2.6"
     date-fns "^2.19.0"
     phone-fns "^3.2.3"

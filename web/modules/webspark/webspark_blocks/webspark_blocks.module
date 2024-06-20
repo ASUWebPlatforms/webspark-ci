@@ -81,7 +81,7 @@ function webspark_blocks_form_alter(&$form, FormStateInterface $form_state, $for
         $column_values = [];
         foreach ($field_definition->getSetting('allowed_values') as $key => $value) {
           //Comparing against Two columns option
-          if ($key != "''") {
+          if ($key != "''" && $key != "two-columns") { //WS2-1934: Adding two columns option
             $column_values[] = [$key => $value];
           }
         }

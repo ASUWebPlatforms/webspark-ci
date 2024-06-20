@@ -4,21 +4,21 @@ dependencies:
   module:
     - block_content
     - options
-id: block_content.field_links_color
-field_name: field_links_color
+id: block_content.field_accent_color
+field_name: field_accent_color
 entity_type: block_content
 type: list_string
 settings:
   allowed_values:
     -
-      value: "' '"
-      label: 'Gray 7 Links'
+      value: "accent-gray"
+      label: 'Gray 7'
     -
-      value: text-gold
-      label: 'Gold Links'
+      value: accent-maroon
+      label: Maroon
     -
-      value: text-white
-      label: 'White Links'
+      value: accent-gold
+      label: Gold
   allowed_values_function: ''
 module: options
 locked: false
