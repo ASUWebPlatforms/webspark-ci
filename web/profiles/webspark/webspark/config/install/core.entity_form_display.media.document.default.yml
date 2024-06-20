@@ -7,7 +7,6 @@ dependencies:
   module:
     - file
     - path
-    - user
 id: media.document.default
 targetEntityType: media
 bundle: document

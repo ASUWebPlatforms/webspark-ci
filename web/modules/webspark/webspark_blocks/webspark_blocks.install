@@ -167,8 +167,11 @@ function webspark_blocks_update_9019(&$sandbox) {
       $accordion->save();
     }
   }
-
-  _webspark_blocks_revert_module_config();
+  // Update the configs without using the revertAll() function,
+  // due to a change in where config files are stored. This also targets
+  // the configs to match the release in which this update was made.
+  $configs = \Drupal::service('webspark.config_manager')->getCsvConfigArray('webspark_blocks', '2.11.1_webspark_blocks_configs.csv');
+  _webspark_blocks_update_module_config_list($configs);
 
   if (!empty($accordions_to_update)) {
     $accordions_colors = [
@@ -244,7 +247,8 @@ function webspark_blocks_update_9023() {
  * WS2-1839 - Add required and default value to field_hero_background_color.
  */
 function webspark_blocks_update_9024(&$sandbox) {
-  _webspark_blocks_revert_module_config();
+  // updated in WS2-1936 to avoid doing a full revert.
+  _webspark_blocks_update_module_config_list(['field.field.block_content.video_hero.field_hero_background_color']);
 }
 
 /**
@@ -370,7 +374,7 @@ function webspark_blocks_update_10002(&$sandbox) {
   _webspark_blocks_update_module_config_list($configs);
 }
 
-/** 
+/**
  * WS2-2035
  */
 function webspark_blocks_update_10003(&$sandbox) {
@@ -425,9 +429,9 @@ function webspark_blocks_update_10005(&$sandbox) {
           ->condition('type', $type_id)
           ->accessCheck(FALSE)
           ->execute();
-      
+
         $paragraphs = $paragraph_storage->loadMultiple($result);
-       
+
         foreach ($paragraphs as $p) {
           if ($p->hasField($field_name)) {
             if ($p->get($field_name)->value == "''" || $p->get($field_name)->value == "' '") {
@@ -481,22 +485,6 @@ function webspark_blocks_update_10005(&$sandbox) {
    _webspark_blocks_update_module_config_list($configs);
 }
 
-/**
- * Reverts the module related configuration.
- */
-function _webspark_blocks_revert_module_config() {
-  // Get this module name.
-  $module = \Drupal::service('module_handler')
-      ->getModule(basename(__FILE__, '.install'))
-      ->getName();
-
-  // Unlock the configuration storage.
-  \Drupal::state()->set('configuration_locked', FALSE);
-  // Revert all configs from this module.
-  \Drupal::service('webspark.config_manager')->revertAll($module);
-  // Lock the configuration storage.
-  \Drupal::state()->set('configuration_locked', TRUE);
-}
 
 /**
  * Update specific configuration files.
