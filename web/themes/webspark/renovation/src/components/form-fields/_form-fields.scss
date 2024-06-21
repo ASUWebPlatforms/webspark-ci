@@ -12,3 +12,8 @@
     }
   }
 }
+
+// Reset padding from the submit button in Webforms
+.webform-submission-form .form-submit.btn-primary {
+  padding-left: var(--bs-btn-padding-x) !important;
+}
