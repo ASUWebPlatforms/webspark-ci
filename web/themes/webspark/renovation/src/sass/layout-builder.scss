@@ -346,6 +346,15 @@
     }
   }
 
+  .uds-img-rounded {
+    border-radius: 100%;
+  
+    img {
+      border: 0;
+      border-radius: 100%;
+    }
+  }
+
 }
 
 body .ui-dialog.ui-widget.ui-widget-content.media-library-widget-modal {

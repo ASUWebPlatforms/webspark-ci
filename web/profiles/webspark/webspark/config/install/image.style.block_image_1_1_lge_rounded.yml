@@ -34,8 +34,3 @@ effects:
     data:
       crop_type: 1_1_rounded
       automatic_crop_provider: null
-  ab605aed-1f13-4e39-a3bf-35c5f64c4316:
-    uuid: ab605aed-1f13-4e39-a3bf-35c5f64c4316
-    id: image_transparent_background
-    weight: 4
-    data: {  }
