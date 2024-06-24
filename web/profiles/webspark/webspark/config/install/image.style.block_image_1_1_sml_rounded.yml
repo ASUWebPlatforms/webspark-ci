@@ -34,8 +34,3 @@ effects:
       stroke_width: '10'
       displace: '5'
       size_correction: '-6'
-  bbec67c9-c76b-479d-b9a7-beae1207398c:
-    uuid: bbec67c9-c76b-479d-b9a7-beae1207398c
-    id: image_transparent_background
-    weight: 4
-    data: {  }
