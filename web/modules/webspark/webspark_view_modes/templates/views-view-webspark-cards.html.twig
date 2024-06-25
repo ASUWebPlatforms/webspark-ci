@@ -154,34 +154,37 @@
   </div>
 
   {{ content|without('field_heading', 'field_cta', 'field_formatted_text', 'field_card_group', 'field_card_arrangement_display', 'field_anchor_menu_settings', 'field_display_orientation') }}
-</div> #}
+ </div> #}
 
-<h1> My header text is {{options.heading}} </h1>
+ <p> My header text is "{{ options.heading }}" </p>
+ <p> My heading color is  "{{ options.heading_color }}" </p>
+ <p> My card arrangement style is {{ options.custom_arrangement_style }} </p>
+ <p> Show card border is {{ options.card_is_border_showing }} </p>
+ <p> Card Media is {{ options.card_media }}  </p>
+ <p> Card Heading is {{ options.card_heading }}  </p>
+ <p> Card Body is {{ options.card_body }}  </p>
+ <p> Card CTA is {{ options.card_cta }}  </p>
+ <p> My top spacing value is {{ options.spacing_top }}  </p>
+ <p> My bottom spacing value is {{ options.spacing_bottom }}  </p>
+ <p> My column value is {{ options.columns_to_display }}  </p>
+ <p> My View Mode is {{ options.view_mode }}  </p>
 
-<div class="uds-card-arrangement-content-container {{ options.heading_color }}">
-<h1> My text color is {{options.heading_color}} </h1>
-</div>
+ {# markup copied from web/themes/webspark/renovation/src/components/cards/card-arrangement.twig #}
 
-<h1> My card arrangement style is {{options.custom_arrangement_style}} </h1>
-<h1> Show card border is {{options.card_is_border_showing}} </h1>
-<h1> Card Media is {{options.card_media}} </h1>
-<h1> Card Heading is {{options.card_heading}} </h1>
-<h1> Card Body is {{options.card_body}} </h1>
-<h1> Card CTA is {{options.card_cta}} </h1>
-<h1> My top spacing value is {{options.spacing_top}} </h1>
-<h1> My bottom spacing value is {{options.spacing_bottom}} </h1>
-<h1> My column value is {{options.columns_to_display}} </h1>
-<h1> My View Mode is {{options.view_mode}} </h1>
+ <h3> Below is an attempt to assemble a basic card arrangement using the selections made. </h3>
+ <p> (Column adjustments and Header title + color are working, so far.) </p>
 
-{# markup copied from web/themes/webspark/renovation/src/components/cards/card-arrangement.twig #}
-
-<div class="uds-card-arrangement {{ class_layout }}">
-  <div class="uds-card-arrangement-content-container {{ text_color }}">
-    <h2>{{ heading }}</h2>
-    {{ text }}
-    {{ cta }}
+ <div class="uds-card-arrangement {{ options.custom_arrangement_style }}">
+  <div class="uds-card-arrangement-content-container {{ options.heading_color }}">
+    <h2> {{ options.heading }} </h2>
+   </div>
+   <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{ not class_layout ? options.columns_to_display }}">
+   <p> {{ options.card_heading }} </p>
+   <p> {{ options.card_body }} </p>
+   <p> {{ options.card_media }} </p>
+   <p> {{ options.card_cta }} </p>
+   <p> cards </p>
+    <p> go </p>
+     <p> here </p>
   </div>
-  <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{options.columns_to_display}}{#{{ not class_layout ? columns }}#}">
-    {{ cards }}
-  </div>
-</div>
+ </div>

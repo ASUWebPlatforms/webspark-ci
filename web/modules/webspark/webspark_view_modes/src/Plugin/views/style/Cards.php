@@ -104,7 +104,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Text Color'),
         '#options' => ColorEnum::mainContentTextOptions(),
         '#type' => 'select',
-        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'bg-dark',
+        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'accordion-item-dark',
       ];
 
       //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
