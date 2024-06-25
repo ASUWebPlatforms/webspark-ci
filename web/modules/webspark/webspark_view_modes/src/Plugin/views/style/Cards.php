@@ -97,14 +97,14 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Heading'),
         '#type' => 'textfield',
         '#size' => '30',
-        '#default_value' => $this->options['heading'],
+        '#default_value' => (isset($this->options['heading'])) ? $this->options['heading'] : '',
       ];
 
       $form['heading_color'] = [
         '#title' => $this->t('Text Color'),
         '#options' => ColorEnum::mainContentTextOptions(),
         '#type' => 'select',
-        '#default_value' => $this->options['heading_color'],
+        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'INSERTCOLORKEYHERE',
       ];
 
       //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)

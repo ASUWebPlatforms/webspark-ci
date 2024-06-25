@@ -49,6 +49,7 @@
         }
     ],
     "require": {
+        "drupal/views_dates": "2.x-dev@dev",
         "pantheon-upstreams/upstream-configuration": "*",
         "webspark/custom-dependencies": "*"
     },
