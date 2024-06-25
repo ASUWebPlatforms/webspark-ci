@@ -155,12 +155,19 @@
 
   {{ content|without('field_heading', 'field_cta', 'field_formatted_text', 'field_card_group', 'field_card_arrangement_display', 'field_anchor_menu_settings', 'field_display_orientation') }}
 </div> #}
-<h1> My column value is {{options.columns_to_display}} </h1>
+
+<h1> My header text is {{options.heading}} </h1>
+<h1> My text color is {{options.heading_color}} </h1>
+<h1> My card arrangement style is {{options.custom_arrangement_style}} </h1>
+<h1> Show card border is {{options.card_is_border_showing}} </h1>
+<h1> Card Media is {{options.card_media}} </h1>
+<h1> Card Heading is {{options.card_heading}} </h1>
+<h1> Card Body is {{options.card_body}} </h1>
+<h1> Card CTA is {{options.card_cta}} </h1>
 <h1> My top spacing value is {{options.spacing_top}} </h1>
 <h1> My bottom spacing value is {{options.spacing_bottom}} </h1>
-<h1> My header text is {{options.heading}} </h1>
-<h1> My header color is {{options.heading_color}} </h1>
-
+<h1> My column value is {{options.columns_to_display}} </h1>
+<h1> My View Mode is {{options.view_mode}} </h1>
 
 {# markup copied from web/themes/webspark/renovation/src/components/cards/card-arrangement.twig #}
 

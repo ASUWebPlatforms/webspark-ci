@@ -104,7 +104,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Text Color'),
         '#options' => ColorEnum::mainContentTextOptions(),
         '#type' => 'select',
-        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'INSERTCOLORKEYHERE',
+        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'bg-dark',
       ];
 
       //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
@@ -113,7 +113,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Card Arrangement Style'),
         '#options' => ArrangementStyleEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => $this->options['custom_arrangement_style'],
+        '#default_value' => (isset($this->options['custom_arrangement_style'])) ? $this->options['custom_arrangement_style'] : 'card_group_story',
       ];
 
     //HIDDEN RANKING OPTION
