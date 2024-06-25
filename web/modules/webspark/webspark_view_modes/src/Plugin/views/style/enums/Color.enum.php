@@ -40,49 +40,57 @@ enum ColorEnum: String {
     $options = [];
     $options['text-gold'] = self::GOLD->value;
     $options['accent-maroon'] = self::MAROON->value;
-    $options['bg-gray-2'] = self::GREY2->value;
-    $options['bg_dark'] = self::GREY7->value;
+    $options['accordion-item-gray'] = self::GREY2->value;
+    $options['accordion-item-dark'] = self::GREY7->value;
     return $options;
   }
 
   //TODO: Replace with the exact key needed for this specific content.
   public static function mainContentTextOptions(): array {
     $options = [];
-    $options['bg-dark'] = self::GREY7->value;
+    $options['accordion-item-dark'] = self::GREY7->value;
     $options['text-white'] = self::WHITE->value;
     return $options;
   }
 }
 
 
-// -
+// Some existing colors and their associated keys:
 // value: default
 // label: Gold
-// -
+
 // value: accordion-item-maroon
 // label: Maroon
+
 // value: accordion-item-gray
 // label: 'Gray 2'
+
 // value: accordion-item-dark
 // label: 'Gray 7'
+
 // value: bg-white
 // label: White
+
 // value: bg-gray-1
 // label: 'Gray 1'
+
 // value: bg-gray-2
 // label: 'Gray 2'
+
 // value: bg-dark
 // label: 'Gray 7'
+
 // value: text-gold
 // label: 'Gold Links'
+
 // value: text-white
 // label: 'White Links'
 
 // value: "''"
 // label: 'Gray 7'
-// -
+
 // value: accent-maroon
 // label: Maroon
-// -
+
 // value: accent-gold
 // label: Gold
