@@ -44,10 +44,10 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu/components-core@3.3.6":
-  version "3.3.6"
-  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.6/75dc5a8b48706a6be86ac647c06c4aecce15943a#75dc5a8b48706a6be86ac647c06c4aecce15943a"
-  integrity sha512-Gc9C5Mbu0vEofL7WlzN12z+37tfsVwbGhnjpf9J1KBi7rDdc8QTm6LK9Wsv6PaIcasqv9eVjnvc0AGSqv7FGiw==
+"@asu/components-core@3.3.7":
+  version "3.3.7"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.7/1db42bbe1982b6b06c188241cd1602441d26bf0c#1db42bbe1982b6b06c188241cd1602441d26bf0c"
+  integrity sha512-vWhOeNTCa1mMInKJG9wHu5C/n834EaqIcbKvqAxIN8LgOTiWDZOEKpianBh43Jk1lA8X7Mp4z3SC8JEnEMW0ag==
   dependencies:
     classnames "^2.2.6"
     date-fns "^2.19.0"
