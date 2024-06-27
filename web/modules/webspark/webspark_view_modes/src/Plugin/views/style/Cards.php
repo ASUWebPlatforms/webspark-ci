@@ -176,7 +176,6 @@ use ArrangementStyleEnum;
       //TODO: Add Tooltip?
       //TODO: Add Anchor Menu Settings?
 
-      //Some additional Block Settings
       $form['spacing_top'] = [
         '#title' => $this->t('Spacing Top'),
         '#options' => SpacingTopEnum::allOptions(),
@@ -189,7 +188,6 @@ use ArrangementStyleEnum;
         '#options' => SpacingBottomEnum::allOptions(),
         '#type' => 'select',
         '#default_value' => (isset($this->options['spacing_bottom'])) ? $this->options['spacing_bottom'] : '',
-
       ];
 
       $form['columns_to_display'] = [
@@ -197,15 +195,16 @@ use ArrangementStyleEnum;
         '#title' => 'Columns to Display',
         '#options' => ColumnEnum::allOptions(),
         '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
-    ];
+      ];
 
       $form['view_mode'] = [
         '#type' => 'select',
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
         '#options' => ViewModeEnum::allOptions(),
-        '#default_value' =>  $this->options['view_mode'],
+        '#default_value' => (isset($this->options['view_mode'])) ? $this->options['view_mode'] : '0',
       ];
+
     }
 
   }

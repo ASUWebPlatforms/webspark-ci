@@ -159,11 +159,11 @@
  <p> My header text is "{{ options.heading }}" </p>
  <p> My heading color is  "{{ options.heading_color }}" </p>
  <p> My card arrangement style is {{ options.custom_arrangement_style }} </p>
- <p> Show card border is {{ options.card_is_border_showing }} </p>
- <p> Card Media is {{ options.card_media }}  </p>
- <p> Card Heading is {{ options.card_heading }}  </p>
- <p> Card Body is {{ options.card_body }}  </p>
- <p> Card CTA is {{ options.card_cta }}  </p>
+ <p> My Show card border is {{ options.card_is_border_showing }} </p>
+ <p> My Card Media is {{ options.card_media }}  </p>
+ <p> My Card Heading is {{ options.card_heading }}  </p>
+ <p> My Card Body is {{ options.card_body }}  </p>
+ <p> My Card CTA is {{ options.card_cta }}  </p>
  <p> My top spacing value is {{ options.spacing_top }}  </p>
  <p> My bottom spacing value is {{ options.spacing_bottom }}  </p>
  <p> My column value is {{ options.columns_to_display }}  </p>
@@ -179,12 +179,16 @@
     <h2> {{ options.heading }} </h2>
    </div>
    <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{ not class_layout ? options.columns_to_display }}">
+
    <p> {{ options.card_heading }} </p>
    <p> {{ options.card_body }} </p>
    <p> {{ options.card_media }} </p>
    <p> {{ options.card_cta }} </p>
-   <p> cards </p>
-    <p> go </p>
-     <p> here </p>
+   <p> cards... </p>
+   <p> go... </p>
+   <p> here... </p>
+
+   {{ cards }}
+
   </div>
  </div>
