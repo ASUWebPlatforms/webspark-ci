@@ -122,3 +122,15 @@ ol.uds-list,
   // to be fixed in Unity:
   //--list-padding-left: 3rem;
 }
+
+.uds-list {
+  li {
+    p {
+      display: inline !important;
+    }
+  }
+
+  p {
+    display: inline !important;
+  }
+}
