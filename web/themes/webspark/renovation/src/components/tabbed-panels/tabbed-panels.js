@@ -25,15 +25,15 @@
     });
 
     $(".scroll-control-next").on("click", function (e) {
-      if (window.innerWidth > 992) {
+      //if (window.innerWidth > 992) {
         slideNav(this, e, -1);
-      }
+      //}
     });
 
     $(".scroll-control-prev").on("click", function (e) {
-      if (window.innerWidth > 992) {
+      //if (window.innerWidth > 992) {
         slideNav(this, e, 1);
-      }
+      //}
     });
 
     $(".uds-tabbed-panels").each(function () {
