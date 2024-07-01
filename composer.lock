@@ -5571,16 +5571,16 @@
         },
         {
             "name": "fileeye/mimemap",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FileEye/MimeMap.git",
-                "reference": "7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce"
+                "reference": "2cb60da59d5c6fb881a78b481d513c4c68a1a93c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce",
-                "reference": "7992d33502de8a82065fd9fe2d2e2b1f7f33d1ce",
+                "url": "https://api.github.com/repos/FileEye/MimeMap/zipball/2cb60da59d5c6fb881a78b481d513c4c68a1a93c",
+                "reference": "2cb60da59d5c6fb881a78b481d513c4c68a1a93c",
                 "shasum": ""
             },
             "require": {
@@ -5623,9 +5623,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FileEye/MimeMap/issues",
-                "source": "https://github.com/FileEye/MimeMap/tree/2.1.1"
+                "source": "https://github.com/FileEye/MimeMap/tree/2.1.2"
             },
-            "time": "2024-05-17T19:22:06+00:00"
+            "time": "2024-06-29T16:52:07+00:00"
         },
         {
             "name": "fileeye/pel",
