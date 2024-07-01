@@ -73,7 +73,7 @@ class AsuDegreePagesCreation extends ControllerBase {
         if ($node->id()) {
           $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
           $response = new RedirectResponse($url);
-          $response->send();
+          return $response->send();
         } else {
           \Drupal::logger('asu_degree_rfi')->error('Node creation failed or node ID is null.');
         }
