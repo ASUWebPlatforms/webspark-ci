@@ -68,8 +68,18 @@ class AsuDegreePagesCreation extends ControllerBase {
       $node->enforceIsNew();
       $node->set('path', $path);
       $node->save();
-      $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
-      return (new RedirectResponse(URL::fromUserInput($url)->toString()))->send();
+
+      try {
+        if ($node->id()) {
+          $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
+          $response = new RedirectResponse($url);
+          $response->send();
+        } else {
+          \Drupal::logger('asu_degree_rfi')->error('Node creation failed or node ID is null.');
+        }
+      } catch (\Exception $e) {
+        \Drupal::logger('asu_degree_rfi')->error($e->getMessage());
+      }
     }
 
     return ['#markup' => $this->t('The requested page could not be found.')];
