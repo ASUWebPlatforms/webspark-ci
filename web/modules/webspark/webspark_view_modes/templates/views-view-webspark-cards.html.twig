@@ -156,23 +156,6 @@
   {{ content|without('field_heading', 'field_cta', 'field_formatted_text', 'field_card_group', 'field_card_arrangement_display', 'field_anchor_menu_settings', 'field_display_orientation') }}
  </div> #}
 
- <p> My header text is "{{ options.heading }}" </p>
- <p> My heading color is  "{{ options.heading_color }}" </p>
- <p> My card arrangement style is {{ options.custom_arrangement_style }} </p>
- <p> My Show card border is {{ options.card_is_border_showing }} </p>
- <p> My Card Media is {{ options.card_media }}  </p>
- <p> My Card Heading is {{ options.card_heading }}  </p>
- <p> My Card Body is {{ options.card_body }}  </p>
- <p> My Card CTA is {{ options.card_cta }}  </p>
- <p> My top spacing value is {{ options.spacing_top }}  </p>
- <p> My bottom spacing value is {{ options.spacing_bottom }}  </p>
- <p> My column value is {{ options.columns_to_display }}  </p>
- <p> My View Mode is {{ options.view_mode }}  </p>
-
- {# markup copied from web/themes/webspark/renovation/src/components/cards/card-arrangement.twig #}
-
- <h3> Below is an attempt to assemble a basic card arrangement using the selections made. </h3>
- <p> (Column adjustments and Header title + color are working, so far.) </p>
 
  <div class="uds-card-arrangement {{ options.custom_arrangement_style }}">
   <div class="uds-card-arrangement-content-container {{ options.heading_color }}">
@@ -180,15 +163,82 @@
    </div>
    <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{ not class_layout ? options.columns_to_display }}">
 
-   <p> {{ options.card_heading }} </p>
-   <p> {{ options.card_body }} </p>
-   <p> {{ options.card_media }} </p>
-   <p> {{ options.card_cta }} </p>
-   <p> cards... </p>
-   <p> go... </p>
-   <p> here... </p>
+   <div class="card card-story">
+    <img
+        class="card-img-top"
+        src="https://asu.github.io/asu-unity-stack/@asu/unity-bootstrap-theme/static/media/cards-image.cffeb008.jpg"
+        alt="Card image cap"
+        width="600"
+        height="337"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="high"
+        />
+    <div class="card-header">
+        <h3 class="card-title"><a href="#">{{ options.card_heading }}</a></h3>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {{ options.card_body }}
+        </p>
+    </div>
+    <div class="card-buttons">
+        <div class="card-button">
+            <a
+                href="#"
+                class="btn btn-gold"
+                data-ga="Button link here"
+                data-ga-name="onclick"
+                data-ga-event="link"
+                data-ga-action="click"
+                data-ga-type="internal link"
+                data-ga-region="main content"
+                data-ga-section="card default title"
+                >
+                Button link here
+                </a>
+        </div>
+    </div>
+    <div class="card-link">
+        <a
+            href="#"
+            class=""
+            data-ga="Text link here"
+            data-ga-name="onclick"
+            data-ga-event="link"
+            data-ga-action="click"
+            data-ga-type="internal link"
+            data-ga-region="main content"
+            data-ga-section="card default title"
+            >
+            Regular text link here
+        </a>
+    </div>
+    <div class="card-tags">
+        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 1</a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 2</a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 3</a>
+    </div>
+</div>
 
-   {{ cards }}
 
-  </div>
- </div>
+<div class="card card-story">
+  Card 2
+</div>
+
+<div class="card card-story">
+  Card 3
+</div>
+
+<div class="card card-story">
+  Card 4
+</div>
+
+<div class="card card-story">
+  Card 5
+</div>
+
+<div class="card card-story">
+  Card 6
+</div>
+
