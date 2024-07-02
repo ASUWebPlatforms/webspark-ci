@@ -61,25 +61,24 @@ class AsuDegreePagesCreation extends ControllerBase {
 
       $node = Node::create(['type' => 'degree_detail_page']);
       $degree_query = $this->dataPotluckClient->getDegreeByAcadPlan($split_path[3]);
-      $title = $degree_query['acadPlanDescription'] ?? $split_path[3];
-      $node->set('title', $title);
-      $node->set('field_degree_detail_acadplancode', $split_path[3]);
-      $node->set('status', 1);
-      $node->enforceIsNew();
-      $node->set('path', $path);
-      $node->save();
+      if ($degree_query) {
+        $title = $degree_query['acadPlanDescription'] ?? $split_path[3];
+        $node->set('title', $title);
+        $node->set('field_degree_detail_acadplancode', $split_path[3]);
+        $node->set('status', 1);
+        $node->enforceIsNew();
+        $node->set('path', $path);
+        $node->save();
 
-      try {
-        if ($node->id()) {
-          $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
-          $response = new RedirectResponse($url);
-          return $response->send();
-        } else {
-          \Drupal::logger('asu_degree_rfi')->error('Node creation failed or node ID is null.');
-        }
-      } catch (\Exception $e) {
-        \Drupal::logger('asu_degree_rfi')->error($e->getMessage());
+        // Needed for anonymous flow
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
+        $response = new RedirectResponse($url);
+        $response->send();
+
       }
+      return ['#markup' => $this->t('The requested page could not be found.')];
     }
 
     return ['#markup' => $this->t('The requested page could not be found.')];
