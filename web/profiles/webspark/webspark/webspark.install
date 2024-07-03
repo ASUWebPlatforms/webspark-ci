@@ -514,7 +514,7 @@ function webspark_update_10003(&$sandbox) {
 }
 
 /**
- * WS2-1834: Install Imagick module
+ * WS2-1834: Install Imagick module (Deprecated)
  */
 function webspark_update_10004(&$sandbox) {
 
@@ -553,17 +553,3 @@ function webspark_update_10005(&$sandbox) {
   }
 }
 
-/**
- * Uninstall Imagick
- */
-function webspark_update_10006(&$sandbox) {
-  \Drupal::state()->set('configuration_locked', FALSE);
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_lge_rounded');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_med_rounded');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_sml_rounded');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
-  \Drupal::state()->set('configuration_locked', TRUE);
-  if (Drupal::moduleHandler()->moduleExists('imagick')) {
-    Drupal::service('module_installer')->uninstall(['imagick']);
-  }
-}
