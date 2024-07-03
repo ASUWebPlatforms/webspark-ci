@@ -517,12 +517,17 @@ function webspark_update_10003(&$sandbox) {
  * WS2-1834: Install Imagick module
  */
 function webspark_update_10004(&$sandbox) {
-  if (!Drupal::moduleHandler()->moduleExists('imagick')) {
-    Drupal::service('module_installer')->install(['imagick']);
-    \Drupal::state()->set('configuration_locked', FALSE);
-    \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
-    \Drupal::state()->set('configuration_locked', TRUE);
-  }
+
+  // NOTE: The install of the imagick module has been deferred
+  // to a future release due to dependencies on some of its fields, used
+  // by the webspark_webdir module.
+
+  //if (!Drupal::moduleHandler()->moduleExists('imagick')) {
+  //  Drupal::service('module_installer')->install(['imagick']);
+  //  \Drupal::state()->set('configuration_locked', FALSE);
+  //  \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
+  //  \Drupal::state()->set('configuration_locked', TRUE);
+  //}
 }
 
 /**
@@ -545,5 +550,20 @@ function webspark_update_10005(&$sandbox) {
     }
     $config->save(TRUE);
     \Drupal::state()->set('configuration_locked', TRUE);
+  }
+}
+
+/**
+ * Uninstall Imagick
+ */
+function webspark_update_10006(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_lge_rounded');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_med_rounded');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_sml_rounded');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
+  \Drupal::state()->set('configuration_locked', TRUE);
+  if (Drupal::moduleHandler()->moduleExists('imagick')) {
+    Drupal::service('module_installer')->uninstall(['imagick']);
   }
 }
