@@ -30,7 +30,6 @@
         "drupal/fontawesome": "2.x-dev#65e140f",
         "drupal/image_widget_crop": "2.4.0",
         "drupal/imagemagick": "3.6.0",
-        "drupal/imagick": "1.11.0",
         "drupal/layout_builder_component_attributes": "2.1.1",
         "drupal/layout_builder_restrictions": "2.19.0",
         "drupal/layout_section_classes": "1.5.0",
