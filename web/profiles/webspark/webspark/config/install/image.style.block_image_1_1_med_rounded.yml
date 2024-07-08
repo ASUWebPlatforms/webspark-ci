@@ -5,7 +5,6 @@ dependencies:
     - crop.type.1_1_rounded
   module:
     - crop
-    - imagick
 name: block_image_1_1_med_rounded
 label: 'Block Image 1:1 MED (Rounded)'
 effects:
@@ -24,13 +23,3 @@ effects:
       width: 600
       height: 600
       anchor: center-center
-  9ea86320-f4d6-47bb-b0b8-7aaa58197b2c:
-    uuid: 9ea86320-f4d6-47bb-b0b8-7aaa58197b2c
-    id: image_rounded_corners
-    weight: 3
-    data:
-      x_rounding: '600'
-      y_rounding: '600'
-      stroke_width: '10'
-      displace: '5'
-      size_correction: '-6'

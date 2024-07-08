@@ -5,7 +5,6 @@ dependencies:
     - crop.type.1_1_rounded
   module:
     - crop
-    - imagick
 name: block_image_1_1_sml_rounded
 label: 'Block Image 1:1 SML (Rounded)'
 effects:
@@ -24,13 +23,3 @@ effects:
       width: 300
       height: 300
       anchor: center-center
-  abf53483-8a7a-48ba-95d8-a5df28b77a82:
-    uuid: abf53483-8a7a-48ba-95d8-a5df28b77a82
-    id: image_rounded_corners
-    weight: 3
-    data:
-      x_rounding: '300'
-      y_rounding: '300'
-      stroke_width: '10'
-      displace: '5'
-      size_correction: '-6'

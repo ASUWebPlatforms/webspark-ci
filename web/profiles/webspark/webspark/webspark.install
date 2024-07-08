@@ -514,21 +514,9 @@ function webspark_update_10003(&$sandbox) {
 }
 
 /**
- * WS2-1834: Install Imagick module
- */
-function webspark_update_10004(&$sandbox) {
-  if (!Drupal::moduleHandler()->moduleExists('imagick')) {
-    Drupal::service('module_installer')->install(['imagick']);
-    \Drupal::state()->set('configuration_locked', FALSE);
-    \Drupal::service('webspark.config_manager')->updateConfigFile('system.image');
-    \Drupal::state()->set('configuration_locked', TRUE);
-  }
-}
-
-/**
  * WS2-2011 and WS2-2088: Set TTL to 1 day and add pantheon_advanced_page_cache
  */
-function webspark_update_10005(&$sandbox) {
+function webspark_update_10004(&$sandbox) {
   // Don't set TTL if pantheon_advanced_page_cache isn't available. Avoiding
   // overly aggressive caching.
   if (!Drupal::moduleHandler()->moduleExists('pantheon_advanced_page_cache')) {
@@ -547,3 +535,4 @@ function webspark_update_10005(&$sandbox) {
     \Drupal::state()->set('configuration_locked', TRUE);
   }
 }
+
