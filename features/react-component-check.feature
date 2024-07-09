@@ -84,12 +84,14 @@ Feature: React Component Check
     And I should see that "border-left-color" with "#8c1d40" is in ".accordion-item-maroon" class
     And I should see that "border-left-color" with "#bfbfbf" is in ".accordion-item-gray" class
     And I should see that "border-left-color" with "#191919" is in ".accordion-item-dark" class
-    Then I click "accordion-header-2"
-    Then I wait for 1 seconds
-    And I should see that the "#accordion-content-2.collapse.show" element exists
+#   First accordion should load as expanded
+    Then I should see that the "#accordion-content-2.collapse.show" element exists
     Then I click "accordion-header-2"
     Then I wait for 1 seconds
     And I should see that the "#accordion-content-2.collapse" element exists
+    Then I click "accordion-header-2"
+    Then I wait for 1 seconds
+    And I should see that the "#accordion-content-2.collapse.show" element exists
 
   @api @javascript @image_gallery-test
   Scenario: Verify Image Gallery (components-core)
