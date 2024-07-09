@@ -536,3 +536,9 @@ function webspark_update_10004(&$sandbox) {
   }
 }
 
+function webspark_update_10005(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.image.field_image_caption');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
