@@ -136,6 +136,7 @@
   }
 
   .description {
+    display: block;
     &.text-muted {
       color: inherit !important;
     }
@@ -348,7 +349,7 @@
 
   .uds-img-rounded {
     border-radius: 100%;
-  
+
     img {
       border: 0;
       border-radius: 100%;
