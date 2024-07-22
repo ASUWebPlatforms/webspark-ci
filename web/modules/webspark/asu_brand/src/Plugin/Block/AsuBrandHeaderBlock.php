@@ -199,7 +199,7 @@ class AsuBrandHeaderBlock extends BlockBase {
     $form['titles']['asu_brand_header_block_base_url'] = [
       '#type' => 'url',
       '#title' => $this->t('Site URL'),
-      '#description' => $this->t("(optional) Only use this if you need to specify a subsite URL. Leave blank if none."),
+      '#description' => $this->t("(optional) Only use if you need to specify a subsite URL. Leave blank to use the current site URL."),
       '#default_value' => $config['asu_brand_header_block_base_url'] ?? '',
       '#required' => FALSE
     ];
