@@ -8,7 +8,7 @@
           return;
         }
 
-        let section = $('.uds-anchor-menu-wrapper h4').text().toLowerCase().trim();
+        let section = $('.uds-anchor-menu-wrapper h2').text().toLowerCase().trim();
 
         $(once('append-anchor-menu-items', links, context)).each(function(i, item) {
           let icon = $(item).siblings('.anchor-link-icon').html();
