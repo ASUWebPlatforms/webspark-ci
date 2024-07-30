@@ -46,7 +46,7 @@
     {% else %}
        class="collapse"
     {% endif %}
-     aria-labelledby="{{ heading }}"
+     aria-labelledby="accordion-header-{{ link_id }}"
      data-bs-parent="#accordion-{{ parent_id }}">
     <div class="accordion-body">
       {{ body_text  }}
