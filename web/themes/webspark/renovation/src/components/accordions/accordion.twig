@@ -5,7 +5,7 @@
 <div class="accordion-item mt-3 {{ color != 'default' ? color }}">
   <div class="accordion-header {{ is_icon ? 'accordion-header-icon' }}">
     <h3>
-      <a id="accordion-header-{{ link_id|lower }}"
+      <button id="accordion-header-{{ link_id|lower }}"
         {% if expanded is same as('On') %}
           class=""
         {% else %}
@@ -37,7 +37,7 @@
           {{ heading }}
         {% endif %}
         <span class="fas fa-chevron-up"></span>
-      </a>
+      </button>
     </h3>
   </div>
   <div id="accordion-content-{{ link_id }}"
