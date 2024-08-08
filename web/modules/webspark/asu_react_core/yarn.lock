@@ -29,7 +29,18 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu/components-core@3.3.7", "@asu/components-core@^3.0.0":
+"@asu/components-core@4.1.0":
+  version "4.1.0"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/4.1.0/49f06bd2084203ac040e05b85569ad2460933790#49f06bd2084203ac040e05b85569ad2460933790"
+  integrity sha512-BIACx1y10jTpS8wIaVS4w9dpqAMuWK5MTZqoy2Q4/lKWrom2I+YsLlmZGwFDFYdPVgTyI7OYcNenx83ufUKgow==
+  dependencies:
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
+"@asu/components-core@^3.0.0":
   version "3.3.7"
   resolved "https://npm.pkg.github.com/download/@asu/components-core/3.3.7/1db42bbe1982b6b06c188241cd1602441d26bf0c#1db42bbe1982b6b06c188241cd1602441d26bf0c"
   integrity sha512-vWhOeNTCa1mMInKJG9wHu5C/n834EaqIcbKvqAxIN8LgOTiWDZOEKpianBh43Jk1lA8X7Mp4z3SC8JEnEMW0ag==
