@@ -8,7 +8,7 @@
           return;
         }
 
-        let section = $('.uds-anchor-menu-wrapper h4').text().toLowerCase().trim();
+        let section = $('.uds-anchor-menu-wrapper h2').text().toLowerCase().trim();
 
         $(once('append-anchor-menu-items', links, context)).each(function(i, item) {
           let icon = $(item).siblings('.anchor-link-icon').html();
@@ -19,14 +19,10 @@
           $('#uds-anchor-menu .nav').append('<a class="nav-link" data-ga-event="link" data-ga-action="click" data-ga-name="onclick" data-ga-type="internal link" data-ga-region="main content" data-ga-component="" data-ga-section="' + section + '" data-ga-text="' + data_title + '" href="#' + href + '">' + icon + '</span>' + title + '</a>');
         });
 
-
-        $('#ws2HeaderContainer header').attr('id', 'global-header');
-
         // We use setTimeout to compensate header built by react 🤦
         let navbar = document.getElementById('uds-anchor-menu');
 
         setTimeout(function() {
-
           initializeAnchorMenu();
         }, 100);
 
@@ -42,7 +38,6 @@
         window.addEventListener('resize', () => {
           navbar.style.top = getAnchorMenuTop() + 'px';
         });
-
       }
     }
   };
