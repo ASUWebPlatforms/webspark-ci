@@ -188,17 +188,16 @@
 
         e.target.classList.add('active');
 
-        const anchorId = e.target.getAttribute('href');
-        if (anchorId) {
-          const newFocus = document.getElementById(anchorId.slice(1));
-          if (newFocus) {
-            newFocus.focus();
-          }
-        }
-
       });
     }
 
+    $('div.webspark-anchor-link-data').on('keyup', function(e) {
+      if (e.keyCode === 13) {
+        const anchor = document.querySelector('a[href="#' + $(this).attr('id') + '"]');
+
+        if (anchor) anchor.focus();
+      }
+    });
   };
 
   /**
