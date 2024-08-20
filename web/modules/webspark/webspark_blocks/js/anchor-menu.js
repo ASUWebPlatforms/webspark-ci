@@ -190,7 +190,6 @@
 
         const anchorId = e.target.getAttribute('href');
         if (anchorId) {
-          console.log(anchorId);
           const newFocus = document.getElementById(anchorId.slice(1));
           if (newFocus) {
             newFocus.focus();
@@ -200,15 +199,6 @@
       });
     }
 
-    document.addEventListener('keydown', (event) => {
-      if (event.shiftKey && event.key === 'Tab') {
-        const element = document.querySelector('a[href="' + event.target.hash + '"]');
-        console.log(element);
-        if(element) {
-          element.focus();
-        }
-      }
-    })
   };
 
   /**
