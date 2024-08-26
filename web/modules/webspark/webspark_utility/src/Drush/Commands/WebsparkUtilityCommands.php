@@ -45,7 +45,9 @@ final class WebsparkUtilityCommands extends DrushCommands {
     $date = new \DateTime();
     $now = $date->getTimestamp();
     $getBackupDate = exec('terminus backup:info webspark-release-stable.dev --element=db --format=php 2>&1', $backupOutput);
-    if (in_array('[37;41m  You are not logged in. Run `auth:login` to authenticate or `help auth:login` for more info.  [39;49m', $backupOutput)) {
+    // Check if user is logged in.
+    $backupOutputArray = array_map(fn($i) => str_contains($i, 'You are not logged in'), $backupOutput);
+    if (in_array(true, $backupOutputArray, true)) {
       $this->logger()->error('Your DDEV instance is currently not logged in to Pantheon via terminus.' . PHP_EOL .
         '  Please run `ddev ssh` and then run `terminus auth:login --machine-token=$TERMINUS_MACHINE_TOKEN; exit` to authenticate.');
       return;
