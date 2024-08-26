@@ -542,3 +542,11 @@ function webspark_update_10005(&$sandbox) {
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
+/**
+ * Makes Image Based Card link text required.
+ */
+function webspark_update_10010(&$sandbox) {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.image_based_card.field_link');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
