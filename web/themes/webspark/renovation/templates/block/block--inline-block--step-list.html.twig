@@ -1,9 +1,10 @@
 {#
 /**
  * @file
- * Template for a accordion block.
+ * Template for a Step List block.
  */
 #}
+
 {% set classes = [
   'block',
   'block-' ~ configuration.provider|clean_class,
@@ -21,8 +22,7 @@
   {{ title_suffix }}
   {{ content.field_tooltip }}
 
-  {% set unique_id = block.id.value %}
-  <div class="accordion" id="accordion-{{ unique_id }}">
-    {{ content|without('field_color', 'field_anchor_menu_settings', 'field_tooltip') }}
-  </div>
+  <ol class="uds-list uds-steplist uds-steplist-{{ content.field_accent_color[0]['#markup']|lower }}">
+    {{ content|without('field_anchor_menu_settings', 'field_tooltip', 'field_accent_color') }}
+  </ol>
 </div>
