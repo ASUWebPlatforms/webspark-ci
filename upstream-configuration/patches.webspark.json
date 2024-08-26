@@ -15,7 +15,7 @@
     },
     "drupal/fontawesome": {
         "#3274028: Fixing CKEditor 5 compatibility": "https://www.drupal.org/files/issues/2024-01-17/ckeditor_compatibility_issue_0.patch",
-        "#3274028: Fixing CKEditor 5 inline Icons": "https://www.drupal.org/files/issues/2024-01-16/fix_inline_icons_0.patch",
+        "#3274028: Fixing CKEditor 5 inline Icons": "upstream-configuration/patches/fix_inline_icons_1.patch",
         "3417901: Breaking change introduced in a38b572": "https://www.drupal.org/files/issues/2024-01-29/fontawesome-prefixbug-3417901-1.patch"
     },
     "drupal/cas": {
