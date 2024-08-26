@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update and uninstall functions for the webspark installation profile.
+ * Install, update and uninstall functions for the Webspark installation profile.
  */
 
 use Drupal\user\Entity\User;
@@ -622,5 +622,14 @@ function webspark_update_10009(&$sandbox): void {
   \Drupal::state()->set('configuration_locked', FALSE);
   \Drupal::service('webspark.config_manager')->importConfigFile('field.storage.block_content.field_list_item');
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_accent_color');
+  \Drupal::state()->set('configuration_locked', TRUE);
+  }
+
+/**
+ * Makes Image Based Card link text required.
+ */
+function webspark_update_10010(&$sandbox): void {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.image_based_card.field_link');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
