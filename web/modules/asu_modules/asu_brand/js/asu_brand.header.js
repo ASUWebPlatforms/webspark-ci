@@ -52,7 +52,7 @@
       }
     }
   }
-  
+
   function inActiveTrail(item, path) {
     // Check if the item path is a match.
     if (item['href'] === path) {
