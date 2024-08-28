@@ -4,7 +4,7 @@ dependencies:
   config:
     - block_content.type.hover_cards
     - field.field.block_content.hover_cards.field_anchor_menu_settings
-    - field.field.block_content.hover_cards.field_card
+    - field.field.block_content.hover_cards.field_hover_cards
     - field.field.block_content.hover_cards.field_spacing_bottom
     - field.field.block_content.hover_cards.field_spacing_top
     - field.field.block_content.hover_cards.field_tooltip
@@ -24,14 +24,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_card:
+  field_hover_cards:
     type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_tooltip:
     type: entity_reference_revisions_entity_view
@@ -40,7 +40,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
 hidden:
   field_spacing_bottom: true

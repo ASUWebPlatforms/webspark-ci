@@ -4,7 +4,7 @@ dependencies:
   config:
     - block_content.type.hover_cards
     - field.field.block_content.hover_cards.field_anchor_menu_settings
-    - field.field.block_content.hover_cards.field_card
+    - field.field.block_content.hover_cards.field_hover_cards
     - field.field.block_content.hover_cards.field_spacing_bottom
     - field.field.block_content.hover_cards.field_spacing_top
     - field.field.block_content.hover_cards.field_tooltip
@@ -21,7 +21,7 @@ third_party_settings:
       label: 'Appearance Settings'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: tab
       format_settings:
         classes: ''
@@ -47,18 +47,22 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-  field_card:
+  field_hover_cards:
     type: entity_reference_paragraphs
-    weight: 2
+    weight: 3
     region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
       edit_mode: open
       add_mode: dropdown
-      form_display_mode: card_and_image
-      default_paragraph_type: card_with_icon
-    third_party_settings: {  }
+      form_display_mode: default
+      default_paragraph_type: hover_card
+    third_party_settings:
+      field_states_ui:
+        form:
+          type: ''
+          list: ''
   field_spacing_bottom:
     type: options_select
     weight: 6
