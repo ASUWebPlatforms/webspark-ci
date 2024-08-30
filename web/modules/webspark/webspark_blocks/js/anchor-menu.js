@@ -11,7 +11,7 @@
         let section = $('.uds-anchor-menu-wrapper h4').text().toLowerCase().trim();
 
         // If the user is an admin, we clear the anchor menu items to not duplicate links
-        if(drupalSettings.is_admin) {
+        if (drupalSettings.is_admin) {
           $(once('clear-anchor-menu-items', '#uds-anchor-menu .nav', context)).each(function() {
             $('#uds-anchor-menu .nav').empty();
           });
