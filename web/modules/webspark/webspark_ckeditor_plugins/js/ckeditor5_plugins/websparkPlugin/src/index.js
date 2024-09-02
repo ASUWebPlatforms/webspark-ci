@@ -15,6 +15,7 @@ import WebsparkTable from "./table/websparktable";
 import WebsparkAdvancedImage from "./advancedimage/websparkadvancedimage";
 import WebsparkMediaAlter from "./mediaalter/websparkmediaalter";
 import WebsparkListStyle from "./liststyle/websparkliststyle";
+import WebsparkAnimatedText from "./animatedtext/websparkanimatedtext";
 
 export default {
   WebsparkButton,
@@ -26,4 +27,5 @@ export default {
   WebsparkAdvancedImage,
   WebsparkMediaAlter,
   WebsparkListStyle,
+  WebsparkAnimatedText,
 };
