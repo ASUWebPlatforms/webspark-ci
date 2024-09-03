@@ -1,307 +1,334 @@
-import { Plugin, icons } from 'ckeditor5/src/core';
+import { Plugin, icons } from "ckeditor5/src/core";
 import {
-	addToolbarToDropdown,
-	createDropdown,
-	ButtonView,
-	ListSeparatorView,
-	MenuBarMenuView,
-	MenuBarMenuListView,
-	MenuBarMenuListItemView,
-	MenuBarMenuListItemButtonView,
-	SplitButtonView,
-	ToolbarSeparatorView
-} from 'ckeditor5/src/ui';
+  addToolbarToDropdown,
+  createDropdown,
+  ButtonView,
+  ListSeparatorView,
+  MenuBarMenuView,
+  MenuBarMenuListView,
+  MenuBarMenuListItemView,
+  MenuBarMenuListItemButtonView,
+  SplitButtonView,
+  ToolbarSeparatorView,
+} from "ckeditor5/src/ui";
 
-import markerIcon from './icons/marker.svg';
-import penIcon from './icons/pen.svg';
-import './css/animatedtext.css';
+import markerIcon from "./icons/marker.svg";
+import penIcon from "./icons/pen.svg";
+import "./css/animatedtext.css";
 
 export default class WebsparkAnimatedTextUI extends Plugin {
+  get localizedOptionTitles() {
+    const t = this.editor.t;
 
-	get localizedOptionTitles() {
-		const t = this.editor.t;
+    return {
+      "Yellow marker": t("Yellow marker"),
+      "Green marker": t("Green marker"),
+      "Pink marker": t("Pink marker"),
+      "Blue marker": t("Blue marker"),
+      "Red pen": t("Red pen"),
+      "Green pen": t("Green pen"),
+    };
+  }
 
-		return {
-			'Yellow marker': t( 'Yellow marker' ),
-			'Green marker': t( 'Green marker' ),
-			'Pink marker': t( 'Pink marker' ),
-			'Blue marker': t( 'Blue marker' ),
-			'Red pen': t( 'Red pen' ),
-			'Green pen': t( 'Green pen' )
-		};
-	}
+  /**
+   * @inheritDoc
+   */
+  static get pluginName() {
+    return "HighlightUI";
+  }
 
-	/**
-	 * @inheritDoc
-	 */
-	static get pluginName() {
-		return 'HighlightUI';
-	}
+  /**
+   * @inheritDoc
+   */
+  init() {
+    const options = this.editor.config.get("highlight.options");
 
-	/**
-	 * @inheritDoc
-	 */
-	init() {
-		const options = this.editor.config.get( 'highlight.options' );
+    for (const option of options) {
+      this._addHighlighterButton(option);
+    }
 
-		for ( const option of options ) {
-			this._addHighlighterButton( option );
-		}
+    this._addRemoveHighlightButton();
+    this._addDropdown(options);
+    this._addMenuBarButton(options);
+  }
 
-		this._addRemoveHighlightButton();
+  /**
+   * Creates the "Remove highlight" button.
+   */
+  _addRemoveHighlightButton() {
+    const t = this.editor.t;
+    const command = this.editor.commands.get("highlight");
 
-		this._addDropdown( options );
+    this._addButton(
+      "removeHighlight",
+      t("Remove highlight"),
+      icons.eraser,
+      null,
+      (button) => {
+        button.bind("isEnabled").to(command, "isEnabled");
+      }
+    );
+  }
 
-		this._addMenuBarButton( options );
-	}
+  /**
+   * Creates a toolbar button from the provided highlight option.
+   */
+  _addHighlighterButton(option) {
+    const command = this.editor.commands.get("highlight");
 
-	/**
-	 * Creates the "Remove highlight" button.
-	 */
-	_addRemoveHighlightButton() {
-		const t = this.editor.t;
-		const command = this.editor.commands.get( 'highlight' );
+    // TODO: change naming
+    this._addButton(
+      "highlight:" + option.model,
+      option.title,
+      getIconForType(option.type),
+      option.model,
+      decorateHighlightButton
+    );
 
-		this._addButton( 'removeHighlight', t( 'Remove highlight' ), icons.eraser, null, button => {
-			button.bind( 'isEnabled' ).to( command, 'isEnabled' );
-		} );
-	}
+    function decorateHighlightButton(button) {
+      button.bind("isEnabled").to(command, "isEnabled");
+      button
+        .bind("isOn")
+        .to(command, "value", (value) => value === option.model);
+      button.iconView.fillColor = option.color;
+      button.isToggleable = true;
+    }
+  }
 
-	/**
-	 * Creates a toolbar button from the provided highlight option.
-	 */
-	_addHighlighterButton( option ) {
-		const command = this.editor.commands.get( 'highlight' );
+  /**
+   * Internal method for creating highlight buttons.
+   *
+   * @param name The name of the button.
+   * @param label The label for the button.
+   * @param icon The button icon.
+   * @param value The `value` property passed to the executed command.
+   * @param decorateButton A callback getting ButtonView instance so that it can be further customized.
+   */
+  _addButton(name, label, icon, value, decorateButton) {
+    const editor = this.editor;
 
-		// TODO: change naming
-		this._addButton( 'highlight:' + option.model, option.title, getIconForType( option.type ), option.model, decorateHighlightButton );
+    editor.ui.componentFactory.add(name, (locale) => {
+      const buttonView = new ButtonView(locale);
 
-		function decorateHighlightButton( button ) {
-			button.bind( 'isEnabled' ).to( command, 'isEnabled' );
-			button.bind( 'isOn' ).to( command, 'value', value => value === option.model );
-			button.iconView.fillColor = option.color;
-			button.isToggleable = true;
-		}
-	}
+      const localized = this.localizedOptionTitles[label]
+        ? this.localizedOptionTitles[label]
+        : label;
 
-	/**
-	 * Internal method for creating highlight buttons.
-	 *
-	 * @param name The name of the button.
-	 * @param label The label for the button.
-	 * @param icon The button icon.
-	 * @param value The `value` property passed to the executed command.
-	 * @param decorateButton A callback getting ButtonView instance so that it can be further customized.
-	 */
-	_addButton( name, label, icon, value, decorateButton ) {
-		const editor = this.editor;
+      buttonView.set({
+        label: localized,
+        icon,
+        tooltip: true,
+      });
 
-		editor.ui.componentFactory.add( name, locale => {
-			const buttonView = new ButtonView( locale );
+      buttonView.on("execute", () => {
+        editor.execute("highlight", { value });
+        editor.editing.view.focus();
+      });
 
-			const localized = this.localizedOptionTitles[ label ] ? this.localizedOptionTitles[ label ] : label;
+      // Add additional behavior for buttonView.
+      decorateButton(buttonView);
 
-			buttonView.set( {
-				label: localized,
-				icon,
-				tooltip: true
-			} );
+      return buttonView;
+    });
+  }
 
-			buttonView.on( 'execute', () => {
-				editor.execute( 'highlight', { value } );
-				editor.editing.view.focus();
-			} );
+  /**
+   * Creates the split button dropdown UI from the provided highlight options.
+   */
+  _addDropdown(options) {
+    const editor = this.editor;
+    const t = editor.t;
+    const componentFactory = editor.ui.componentFactory;
 
-			// Add additional behavior for buttonView.
-			decorateButton( buttonView );
+    const startingHighlighter = options[0];
 
-			return buttonView;
-		} );
-	}
+    const optionsMap = options.reduce((retVal, option) => {
+      retVal[option.model] = option;
+      return retVal;
+    }, {});
 
-	/**
-	 * Creates the split button dropdown UI from the provided highlight options.
-	 */
-	_addDropdown( options ) {
-		const editor = this.editor;
-		const t = editor.t;
-		const componentFactory = editor.ui.componentFactory;
+    componentFactory.add("websparkAnimatedText", (locale) => {
+      const command = editor.commands.get("highlight");
+      const dropdownView = createDropdown(locale, SplitButtonView);
+      const splitButtonView = dropdownView.buttonView;
 
-		const startingHighlighter = options[ 0 ];
+      splitButtonView.set({
+        label: t("Highlight"),
+        tooltip: true,
+        // Holds last executed highlighter.
+        lastExecuted: startingHighlighter.model,
+        // Holds current highlighter to execute (might be different then last used).
+        commandValue: startingHighlighter.model,
+        isToggleable: true,
+      });
 
-		const optionsMap = options.reduce( ( retVal, option ) => {
-			retVal[ option.model ] = option;
-			return retVal;
-		}, {} );
+      // Dropdown button changes to selection (command.value):
+      // - If selection is in highlight it get active highlight appearance (icon, color) and is activated.
+      // - Otherwise it gets appearance (icon, color) of last executed highlight.
+      splitButtonView
+        .bind("icon")
+        .to(command, "value", (value) =>
+          getIconForType(getActiveOption(value, "type"))
+        );
+      splitButtonView
+        .bind("color")
+        .to(command, "value", (value) => getActiveOption(value, "color"));
+      splitButtonView
+        .bind("commandValue")
+        .to(command, "value", (value) => getActiveOption(value, "model"));
+      splitButtonView.bind("isOn").to(command, "value", (value) => !!value);
 
-		componentFactory.add( 'websparkAnimatedText', locale => {
-			const command = editor.commands.get( 'highlight' );
-			const dropdownView = createDropdown( locale, SplitButtonView );
-			const splitButtonView = dropdownView.buttonView;
+      splitButtonView.delegate("execute").to(dropdownView);
 
-			splitButtonView.set( {
-				label: t( 'Highlight' ),
-				tooltip: true,
-				// Holds last executed highlighter.
-				lastExecuted: startingHighlighter.model,
-				// Holds current highlighter to execute (might be different then last used).
-				commandValue: startingHighlighter.model,
-				isToggleable: true
-			} );
+      // Create buttons array.
+      const buttonsCreator = () => {
+        const buttons = options.map((option) => {
+          // Get existing highlighter button.
+          const buttonView = componentFactory.create(
+            "highlight:" + option.model
+          );
 
-			// Dropdown button changes to selection (command.value):
-			// - If selection is in highlight it get active highlight appearance (icon, color) and is activated.
-			// - Otherwise it gets appearance (icon, color) of last executed highlight.
-			splitButtonView.bind( 'icon' ).to( command, 'value', value => getIconForType( getActiveOption( value, 'type' ) ) );
-			splitButtonView.bind( 'color' ).to( command, 'value', value => getActiveOption( value, 'color' ) );
-			splitButtonView.bind( 'commandValue' ).to( command, 'value', value => getActiveOption( value, 'model' ) );
-			splitButtonView.bind( 'isOn' ).to( command, 'value', value => !!value );
+          // Update lastExecutedHighlight on execute.
+          this.listenTo(buttonView, "execute", () => {
+            dropdownView.buttonView.set({ lastExecuted: option.model });
+          });
 
-			splitButtonView.delegate( 'execute' ).to( dropdownView );
+          return buttonView;
+        });
 
-			// Create buttons array.
-			const buttonsCreator = () => {
-				const buttons = options.map( option => {
-					// Get existing highlighter button.
-					const buttonView = componentFactory.create( 'highlight:' + option.model );
+        // Add separator and eraser buttons to dropdown.
+        buttons.push(new ToolbarSeparatorView());
+        buttons.push(componentFactory.create("removeHighlight"));
 
-					// Update lastExecutedHighlight on execute.
-					this.listenTo( buttonView, 'execute', () => {
-						dropdownView.buttonView.set( { lastExecuted: option.model } );
-					} );
+        return buttons;
+      };
 
-					return buttonView;
-				} );
+      // Make toolbar button enabled when any button in dropdown is enabled before adding separator and eraser.
+      dropdownView.bind("isEnabled").to(command, "isEnabled");
 
-				// Add separator and eraser buttons to dropdown.
-				buttons.push( new ToolbarSeparatorView() );
-				buttons.push( componentFactory.create( 'removeHighlight' ) );
+      addToolbarToDropdown(dropdownView, buttonsCreator, {
+        enableActiveItemFocusOnDropdownOpen: true,
+        ariaLabel: t("Text highlight toolbar"),
+      });
+      bindToolbarIconStyleToActiveColor(dropdownView);
 
-				return buttons;
-			};
+      // Execute current action from dropdown's split button action button.
+      splitButtonView.on("execute", () => {
+        editor.execute("highlight", { value: splitButtonView.commandValue });
+      });
 
-			// Make toolbar button enabled when any button in dropdown is enabled before adding separator and eraser.
-			dropdownView.bind( 'isEnabled' ).to( command, 'isEnabled' );
+      // Focus the editable after executing the command.
+      // It overrides a default behaviour where the focus is moved to the dropdown button (#12125).
+      this.listenTo(dropdownView, "execute", () => {
+        editor.editing.view.focus();
+      });
 
-			addToolbarToDropdown( dropdownView, buttonsCreator, {
-				enableActiveItemFocusOnDropdownOpen: true,
-				ariaLabel: t( 'Text highlight toolbar' )
-			} );
-			bindToolbarIconStyleToActiveColor( dropdownView );
+      /**
+       * Returns active highlighter option depending on current command value.
+       * If current is not set or it is the same as last execute this method will return the option key (like icon or color)
+       * of last executed highlighter. Otherwise it will return option key for current one.
+       */
+      function getActiveOption(current, key) {
+        const whichHighlighter =
+          !current || current === splitButtonView.lastExecuted
+            ? splitButtonView.lastExecuted
+            : current;
 
-			// Execute current action from dropdown's split button action button.
-			splitButtonView.on( 'execute', () => {
-				editor.execute( 'highlight', { value: splitButtonView.commandValue } );
-			} );
+        return optionsMap[whichHighlighter][key];
+      }
 
-			// Focus the editable after executing the command.
-			// It overrides a default behaviour where the focus is moved to the dropdown button (#12125).
-			this.listenTo( dropdownView, 'execute', () => {
-				editor.editing.view.focus();
-			} );
+      return dropdownView;
+    });
+  }
 
-			/**
-			 * Returns active highlighter option depending on current command value.
-			 * If current is not set or it is the same as last execute this method will return the option key (like icon or color)
-			 * of last executed highlighter. Otherwise it will return option key for current one.
-			 */
-			function getActiveOption( current, key ) {
-				const whichHighlighter = !current ||
-				current === splitButtonView.lastExecuted ? splitButtonView.lastExecuted : current;
+  /**
+   * Creates the menu bar button for highlight including submenu with available options.
+   */
+  _addMenuBarButton(options) {
+    const editor = this.editor;
+    const t = editor.t;
+    const command = editor.commands.get("highlight");
 
-				return optionsMap[ whichHighlighter ][ key ];
-			}
+    editor.ui.componentFactory.add("menuBar:highlight", (locale) => {
+      const menuView = new MenuBarMenuView(locale);
 
-			return dropdownView;
-		} );
-	}
+      menuView.buttonView.set({
+        label: t("Highlight"),
+        icon: getIconForType("marker"),
+      });
+      menuView.bind("isEnabled").to(command);
+      menuView.buttonView.iconView.fillColor = "transparent";
 
-	/**
-	 * Creates the menu bar button for highlight including submenu with available options.
-	 */
-	_addMenuBarButton( options ) {
-		const editor = this.editor;
-		const t = editor.t;
-		const command = editor.commands.get( 'highlight' );
+      const listView = new MenuBarMenuListView(locale);
 
-		editor.ui.componentFactory.add( 'menuBar:highlight', locale => {
-			const menuView = new MenuBarMenuView( locale );
+      for (const option of options) {
+        const listItemView = new MenuBarMenuListItemView(locale, menuView);
+        const buttonView = new MenuBarMenuListItemButtonView(locale);
 
-			menuView.buttonView.set( {
-				label: t( 'Highlight' ),
-				icon: getIconForType( 'marker' )
-			} );
-			menuView.bind( 'isEnabled' ).to( command );
-			menuView.buttonView.iconView.fillColor = 'transparent';
+        buttonView.set({
+          label: option.title,
+          icon: getIconForType(option.type),
+          role: "menuitemradio",
+          isToggleable: true,
+        });
 
-			const listView = new MenuBarMenuListView( locale );
+        buttonView.iconView.fillColor = option.color;
 
-			for ( const option of options ) {
-				const listItemView = new MenuBarMenuListItemView( locale, menuView );
-				const buttonView = new MenuBarMenuListItemButtonView( locale );
+        buttonView.delegate("execute").to(menuView);
+        buttonView
+          .bind("isOn")
+          .to(command, "value", (value) => value === option.model);
 
-				buttonView.set( {
-					label: option.title,
-					icon: getIconForType( option.type ),
-					role: 'menuitemradio',
-					isToggleable: true
-				} );
+        buttonView.on("execute", () => {
+          editor.execute("highlight", { value: option.model });
 
-				buttonView.iconView.fillColor = option.color;
+          editor.editing.view.focus();
+        });
 
-				buttonView.delegate( 'execute' ).to( menuView );
-				buttonView.bind( 'isOn' ).to( command, 'value', value => value === option.model );
+        listItemView.children.add(buttonView);
+        listView.items.add(listItemView);
+      }
 
-				buttonView.on( 'execute', () => {
-					editor.execute( 'highlight', { value: option.model } );
+      // Add remove highlight button
+      listView.items.add(new ListSeparatorView(locale));
+      const listItemView = new MenuBarMenuListItemView(locale, menuView);
+      const buttonView = new MenuBarMenuListItemButtonView(locale);
 
-					editor.editing.view.focus();
-				} );
+      buttonView.set({
+        label: t("Remove highlight"),
+        icon: icons.eraser,
+      });
 
-				listItemView.children.add( buttonView );
-				listView.items.add( listItemView );
-			}
+      buttonView.delegate("execute").to(menuView);
 
-			// Add remove highlight button
-			listView.items.add( new ListSeparatorView( locale ) );
-			const listItemView = new MenuBarMenuListItemView( locale, menuView );
-			const buttonView = new MenuBarMenuListItemButtonView( locale );
+      buttonView.on("execute", () => {
+        editor.execute("highlight", { value: null });
 
-			buttonView.set( {
-				label: t( 'Remove highlight' ),
-				icon: icons.eraser
-			} );
+        editor.editing.view.focus();
+      });
 
-			buttonView.delegate( 'execute' ).to( menuView );
+      listItemView.children.add(buttonView);
+      listView.items.add(listItemView);
 
-			buttonView.on( 'execute', () => {
-				editor.execute( 'highlight', { value: null } );
+      menuView.panelView.children.add(listView);
 
-				editor.editing.view.focus();
-			} );
-
-			listItemView.children.add( buttonView );
-			listView.items.add( listItemView );
-
-			menuView.panelView.children.add( listView );
-
-			return menuView;
-		} );
-	}
+      return menuView;
+    });
+  }
 }
 
 /**
  * Extends split button icon style to reflect last used button style.
  */
-function bindToolbarIconStyleToActiveColor( dropdownView ) {
-	const actionView = dropdownView.buttonView.actionView;
+function bindToolbarIconStyleToActiveColor(dropdownView) {
+  const actionView = dropdownView.buttonView.actionView;
 
-	actionView.iconView.bind( 'fillColor' ).to( dropdownView.buttonView, 'color' );
+  actionView.iconView.bind("fillColor").to(dropdownView.buttonView, "color");
 }
 
 /**
  * Returns icon for given highlighter type.
  */
-function getIconForType( type ) {
-	return type === 'marker' ? markerIcon : penIcon;
+function getIconForType(type) {
+  return type === "marker" ? markerIcon : penIcon;
 }
