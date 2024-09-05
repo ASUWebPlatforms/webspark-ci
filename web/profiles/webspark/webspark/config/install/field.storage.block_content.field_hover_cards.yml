@@ -5,15 +5,15 @@ dependencies:
     - block_content
     - entity_reference_revisions
     - paragraphs
-id: block_content.field_card
-field_name: field_card
+id: block_content.field_hover_cards
+field_name: field_hover_cards
 entity_type: block_content
 type: entity_reference_revisions
 settings:
   target_type: paragraph
 module: entity_reference_revisions
 locked: false
-cardinality: 1
+cardinality: 3
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

@@ -633,3 +633,38 @@ function webspark_update_10010(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.paragraph.image_based_card.field_link');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * Adds Hover Cards block and fields.
+ */
+function webspark_update_10011(&$sandbox): void {
+  \Drupal::state()->set('configuration_locked', FALSE);
+  \Drupal::service('webspark.config_manager')->importConfigFile('block_content.type.hover_cards');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_form_display.block_content.hover_cards.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_form_display.media.cropped_image_16_25.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_form_display.media.cropped_image_16_25.media_library');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_form_display.paragraph.hover_card.carousel_card');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_form_display.paragraph.hover_card.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.block_content.hover_cards.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.media.cropped_image_16_25.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.media.cropped_image_16_25.media_library');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.paragraph.hover_card.default');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.paragraph.hover_card.landscape');
+  \Drupal::service('webspark.config_manager')->importConfigFile('core.entity_view_display.paragraph.hover_card.portrait');
+  \Drupal::service('webspark.config_manager')->importConfigFile('crop.type.16_25');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.block_content.hover_cards.field_anchor_menu_settings');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.block_content.hover_cards.field_hover_cards');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.block_content.hover_cards.field_spacing_bottom');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.block_content.hover_cards.field_spacing_top');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.block_content.hover_cards.field_tooltip');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.media.cropped_image_16_25.field_media_image');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.paragraph.hover_card.field_body');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.paragraph.hover_card.field_heading');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.paragraph.hover_card.field_link');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.field.paragraph.hover_card.field_media');
+  \Drupal::service('webspark.config_manager')->importConfigFile('field.storage.block_content.field_hover_cards');
+  \Drupal::service('webspark.config_manager')->importConfigFile('image.style.block_image_16_25_lge');
+  \Drupal::service('webspark.config_manager')->importConfigFile('media.type.cropped_image_16_25');
+  \Drupal::service('webspark.config_manager')->importConfigFile('paragraphs.paragraphs_type.hover_card');
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
