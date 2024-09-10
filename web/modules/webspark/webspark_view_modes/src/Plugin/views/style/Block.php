@@ -22,8 +22,8 @@ class Block {
   //Certain properties have a limited number of options, which I would think lends itself to using Enums
   public ColorEnum $block_text_color;
   public ArrangementStyleEnum $block_card_group_type;
-  public SpacingEnum $spacing_bottom;
-  public SpacingEnum $spacing_top;
+  public SpacingBottomEnum $spacing_bottom;
+  public SpacingTopEnum $spacing_top;
   public ViewModeEnum $view_mode_type;
   public ColumnEnum $column_type;
 
