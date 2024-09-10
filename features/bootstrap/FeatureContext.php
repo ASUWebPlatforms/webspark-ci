@@ -1115,7 +1115,7 @@ class FeatureContext extends RawDrupalContext {
           isScrollNextNeeded: tabbedContentNav.scrollWidth > tabbedContent.clientWidth
         };
       })()
-    JS;
+JS;
 
     $result = $this->getSession()->evaluateScript($function);
     echo 'Tabbed Content width: ' . $result['tabbedContentWidth'] . "\n";
