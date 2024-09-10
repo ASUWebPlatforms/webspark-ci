@@ -97,14 +97,14 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Heading'),
         '#type' => 'textfield',
         '#size' => '30',
-        '#default_value' => (isset($this->options['heading'])) ? $this->options['heading'] : '',
+        '#default_value' => isset($this->options['heading']) ? $this->options['heading'] : '',
       ];
 
       $form['heading_color'] = [
         '#title' => $this->t('Text Color'),
         '#options' => ColorEnum::mainContentTextOptions(),
         '#type' => 'select',
-        '#default_value' => (isset($this->options['heading_color'])) ? $this->options['heading_color'] : 'accordion-item-dark',
+        '#default_value' => isset($this->options['heading_color']) ? $this->options['heading_color'] : 'accordion-item-dark',
       ];
 
       //Select which Card Arrangment style you want (Default, Ranking, Icon, etc.)
@@ -180,21 +180,21 @@ use ArrangementStyleEnum;
         '#title' => $this->t('Spacing Top'),
         '#options' => SpacingTopEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => (isset($this->options['spacing_top'])) ? $this->options['spacing_top'] : '',
+        '#default_value' => isset($this->options['spacing_top']) ? $this->options['spacing_top'] : '',
       ];
 
       $form['spacing_bottom'] = [
         '#title' => $this->t('Spacing Bottom'),
         '#options' => SpacingBottomEnum::allOptions(),
         '#type' => 'select',
-        '#default_value' => (isset($this->options['spacing_bottom'])) ? $this->options['spacing_bottom'] : '',
+        '#default_value' => isset($this->options['spacing_bottom']) ? $this->options['spacing_bottom'] : '',
       ];
 
       $form['columns_to_display'] = [
         '#type' => 'select',
         '#title' => 'Columns to Display',
         '#options' => ColumnEnum::allOptions(),
-        '#default_value' => (isset($this->options['columns_to_display'])) ? $this->options['columns_to_display'] : 'two-columns',
+        '#default_value' => isset($this->options['columns_to_display']) ? $this->options['columns_to_display'] : 'two-columns',
       ];
 
       $form['view_mode'] = [
@@ -202,7 +202,7 @@ use ArrangementStyleEnum;
         '#title' => $this->t('View Mode'),
         '#description' => $this->t('The view mode in which to render the block.'),
         '#options' => ViewModeEnum::allOptions(),
-        '#default_value' => (isset($this->options['view_mode'])) ? $this->options['view_mode'] : '0',
+        '#default_value' => isset($this->options['view_mode']) ? $this->options['view_mode'] : '0',
       ];
 
     }

@@ -119,6 +119,13 @@
       </tr>
     {% endfor %}
     <h5>...Row in Rows Ends Here</h5>
+
+    <h5>Trying Item in Items Here...</h5>
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+    <h5>... Item in Items ends Here</h5>
+
   </tbody>
 </table>
 
@@ -163,7 +170,6 @@
   <div class="uds-card-arrangement-content-container {{ options.heading_color }}">
     <h2> {{ options.heading }} </h2>
    </div>
-      Columns - {{ options.columns_to_display }}
    <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{ not class_layout ? options.columns_to_display }}">
 
    <div class="card card-story">
@@ -221,6 +227,7 @@
         <a class="btn btn-tag btn-tag-alt-white" href="#"> Top Spacing: {{options.spacing_top}} </a>
         <a class="btn btn-tag btn-tag-alt-white" href="#"> Bottom Spacing: {{options.spacing_bottom}} </a>
         <a class="btn btn-tag btn-tag-alt-white" href="#"> View Mode: {{options.view_mode}} </a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#"> Columns - {{ options.columns_to_display }} </a>
     </div>
 </div>
 
@@ -236,6 +243,7 @@
 <div class="card card-story">
   Card 4
 </div>
+
 
 
 
