@@ -88,6 +88,7 @@
     </thead>
   {% endif %}
   <tbody>
+  <h5>Trying Row in Rows Here...</h5>
     {% for row in rows %}
       <tr{{ row.attributes }}>
         {% for key, column in row.columns %}
@@ -117,6 +118,7 @@
         {% endfor %}
       </tr>
     {% endfor %}
+    <h5>...Row in Rows Ends Here</h5>
   </tbody>
 </table>
 
@@ -131,7 +133,7 @@
   'block-' ~ configuration.provider|clean_class,
   'block-' ~ plugin_id|clean_class,
 ] %}
-{% set class_layout = content['#view_mode'] == 'landscape' ? 'uds-card-arrangement-vertical'%}
+{% set class_layout = options.view_mode == "0" ? 'uds-card-arrangement-vertical'%}
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
@@ -161,6 +163,7 @@
   <div class="uds-card-arrangement-content-container {{ options.heading_color }}">
     <h2> {{ options.heading }} </h2>
    </div>
+      Columns - {{ options.columns_to_display }}
    <div class="uds-card-arrangement-card-container {{ not class_layout ? 'auto-arrangement' }} {{ not class_layout ? options.columns_to_display }}">
 
    <div class="card card-story">
@@ -175,7 +178,7 @@
         fetchpriority="high"
         />
     <div class="card-header">
-        <h3 class="card-title"><a href="#">{{ options.card_heading }}</a></h3>
+        Card Title: <h3 class="card-title"><a href="#">{{ options.card_heading }}</a></h3>
     </div>
     <div class="card-body">
         <p class="card-text">
@@ -187,7 +190,7 @@
             <a
                 href="#"
                 class="btn btn-gold"
-                data-ga="Button link here"
+                data-ga="Button text link here"
                 data-ga-name="onclick"
                 data-ga-event="link"
                 data-ga-action="click"
@@ -215,9 +218,9 @@
         </a>
     </div>
     <div class="card-tags">
-        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 1</a>
-        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 2</a>
-        <a class="btn btn-tag btn-tag-alt-white" href="#">test tag 3</a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#"> Top Spacing: {{options.spacing_top}} </a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#"> Bottom Spacing: {{options.spacing_bottom}} </a>
+        <a class="btn btn-tag btn-tag-alt-white" href="#"> View Mode: {{options.view_mode}} </a>
     </div>
 </div>
 
@@ -234,11 +237,8 @@
   Card 4
 </div>
 
-<div class="card card-story">
-  Card 5
-</div>
 
-<div class="card card-story">
-  Card 6
-</div>
+
+
+
 
