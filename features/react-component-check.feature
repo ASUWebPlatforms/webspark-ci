@@ -86,10 +86,10 @@ Feature: React Component Check
     And I should see that "border-left-color" with "#191919" is in ".accordion-item-dark" class
 #   First accordion should load as expanded
     Then I should see that the "#accordion-content-2.collapse.show" element exists
-    Then I click "accordion-header-2"
+    Then I click the element "#accordion-header-2"
     Then I wait for 1 seconds
     And I should see that the "#accordion-content-2.collapse" element exists
-    Then I click "accordion-header-2"
+    Then I click the element "#accordion-header-2"
     Then I wait for 1 seconds
     And I should see that the "#accordion-content-2.collapse.show" element exists
 
@@ -118,10 +118,10 @@ Feature: React Component Check
   @api @javascript @notification_banner-test
   Scenario: Verify Notification banner component
     When I am at '/notification-banner'
-    Then I should see that the "div.banner[role='banner']" element exists
+    Then I should see that the ".block-inline-blockbanner" element exists
     Then I wait for 2 seconds
     Then I should see that the "div.banner-close" element exists
     And I click the element "button[data-ga-action='close']"
     Then I wait for 1 seconds
-    Then I should see that the ".div.banner[role='banner']" element does not exist
+    Then I should see that the ".block-inline-blockbanner[style='display: none;']" element exists
     Then I wait for 2 seconds

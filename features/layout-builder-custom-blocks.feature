@@ -10,7 +10,6 @@ Feature: Layout Builder Custom Blocks Check
     Then I scroll ".layout__region--first" into view
     Then I click "Add block"
     Then I click "Create content block"
-    Then I should see that 30 of "#drupal-off-canvas-wrapper ul li" elements exist
     Then I should see the link "Accordion"
     Then I should see the link "Blockquote"
     Then I should see the link "Card and Image"
@@ -18,11 +17,14 @@ Feature: Layout Builder Custom Blocks Check
     Then I should see the link "Card Carousel"
     Then I should see the link "Card image and content"
     Then I should see the link "Content image overlap"
+    Then I should see the link "Display List"
     Then I should see the link "Divider"
     Then I should see the link "Donut Chart"
     Then I should see the link "Events"
     Then I should see the link "Grid Links"
     Then I should see the link "Hero"
+    Then I should see the link "Hover Cards"
+    Then I should see the link "Icon List"
     Then I should see the link "Image"
     Then I should see the link "Image And Text Block"
     Then I should see the link "Image Background With Call To Action"
@@ -40,7 +42,7 @@ Feature: Layout Builder Custom Blocks Check
     Then I should see the link "Video"
     Then I should see the link "Video hero"
     # The Web Directory link was giving problems, so I'm accessing it this way
-    Then I should see that the "#drupal-off-canvas > div > ul > li:nth-child(29) > a" element exists
+    Then I should see that the "#drupal-off-canvas > div > ul > li:nth-child(33) > a" element exists
     Then I should see the link "Webform"
 
   @api @javascript @appearance_settings_test
@@ -55,9 +57,12 @@ Feature: Layout Builder Custom Blocks Check
     Then I perform actions and checks for menu item "Card Carousel"
     Then I perform actions and checks for menu item "Card image and content"
     Then I perform actions and checks for menu item "Content image overlap"
+    Then I perform actions and checks for menu item "Display List"
     Then I perform actions and checks for menu item "Events"
     Then I perform actions and checks for menu item "Grid Links"
     Then I perform actions and checks for menu item "Hero"
+    Then I perform actions and checks for menu item "Hover Cards"
+    Then I perform actions and checks for menu item "Icon List"
     Then I perform actions and checks for menu item "Image"
     Then I perform actions and checks for menu item "Image And Text Block"
     Then I perform actions and checks for menu item "Image Background With Call To Action"
