@@ -86,6 +86,15 @@ export default class WebsparkAnimatedTextEditing extends Plugin {
     // Allow highlight attribute on text nodes.
     editor.model.schema.extend("$text", { allowAttributes: "highlight" });
 
+    editor.model.schema.addAttributeCheck((context, attributeName) => {
+      if (attributeName === "highlight") {
+        if (context.endsWith("websparkBlockquoteAnimatedParagraph $text")) {
+          return true;
+        }
+        return false;
+      }
+    });
+
     const options = editor.config.get("highlight.options");
 
     // Set-up the two-way conversion.
