@@ -21,6 +21,18 @@
 }
 
 .uds-blockquoteAnimated {
+
+  h2 {
+    font-size: 4rem;
+    letter-spacing: -.14rem;
+    line-height: 4.25rem;
+    max-width: 100%;
+  }
+
+  a {
+    color: $black;
+  }
+
   p {
     max-width: none;
   }

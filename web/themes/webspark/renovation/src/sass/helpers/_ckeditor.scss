@@ -88,7 +88,7 @@ a.btn-maroon, a.btn-dark {
   }
 }
 
-$marker-yellow: hsl(60, 97%, 73%);
+$marker-yellow: #ffc627;
 $marker-green: hsl(120, 93%, 68%);
 $marker-pink: hsl(345, 96%, 73%);
 $marker-blue: hsl(201, 97%, 72%);
@@ -102,6 +102,7 @@ $pen-green: hsl(112, 100%, 27%);
   box-shadow: none;
   transition: background-position .8s;
   transition-delay: .2s;
+  padding: 0;
 }
 
 .marker-yellow {
