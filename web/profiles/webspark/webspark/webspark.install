@@ -662,19 +662,21 @@ function webspark_update_10012(&$sandbox) {
                 ['websparkAnimatedText'],
                 array_slice($toolbar_items, $position)
             );
-          } else {
+          }
+          else {
             array_unshift($toolbar_items, 'websparkAnimatedText');
           }
           // Add Animated Blockquote
-          $websparkBlockquote_key = array_search('websparkBlockquote', $toolbar_items);
-          if ($websparkBlockquote_key !== false) {
-            $position = $websparkBlockquote_key + 1;
+          $webspark_blockquote_key = array_search('websparkBlockquote', $toolbar_items);
+          if ($webspark_blockquote_key !== false) {
+            $position = $webspark_blockquote_key + 1;
             $toolbar_items = array_merge(
                 array_slice($toolbar_items, 0, $position),
                 ['websparkBlockquoteAnimated'],
                 array_slice($toolbar_items, $position)
             );
-          } else {
+          }
+          else {
             array_push($toolbar_items, 'websparkBlockquoteAnimated');
           }
 
