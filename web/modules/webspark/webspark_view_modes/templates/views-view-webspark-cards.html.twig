@@ -122,9 +122,10 @@
 
     <h5>Trying Item in Items Here...</h5>
     {% for item in items %}
-      {{ item.content }}
+      {{ item }}
     {% endfor %}
     <h5>... Item in Items ends Here</h5>
+
 
   </tbody>
 </table>
@@ -228,25 +229,10 @@
         <a class="btn btn-tag btn-tag-alt-white" href="#"> Bottom Spacing: {{options.spacing_bottom}} </a>
         <a class="btn btn-tag btn-tag-alt-white" href="#"> View Mode: {{options.view_mode}} </a>
         <a class="btn btn-tag btn-tag-alt-white" href="#"> Columns - {{ options.columns_to_display }} </a>
+
     </div>
 </div>
 
-
 <div class="card card-story">
-  Card 2
+  Rows - {{ rows }}
 </div>
-
-<div class="card card-story">
-  Card 3
-</div>
-
-<div class="card card-story">
-  Card 4
-</div>
-
-
-
-
-
-
-
