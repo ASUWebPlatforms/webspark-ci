@@ -672,7 +672,7 @@ function webspark_update_10011(&$sandbox): void {
 /**
  * WS2-2089 - CK Editor - Added Highlighting capabilities and Animated Blockquote.
  */
-function webspark_update_10012(&$sandbox) {
+function webspark_update_10012(&$sandbox): void{
   \Drupal::state()->set('configuration_locked', FALSE);
   $config_factory = \Drupal::service('config.factory');
   // Find all editor configs
@@ -702,9 +702,9 @@ function webspark_update_10012(&$sandbox) {
           }
 
           // Add Highlighting capabilities
-          $italic_key = array_search('websparkBlockquoteAnimated', $toolbar_items);
-          if ($italic_key !== false) {
-            $position = $italic_key + 1;
+          $webspark_blockquote_animated_key = array_search('websparkBlockquoteAnimated', $toolbar_items);
+          if ($webspark_blockquote_animated_key !== false) {
+            $position = $webspark_blockquote_animated_key + 1;
             $toolbar_items = array_merge(
                 array_slice($toolbar_items, 0, $position),
                 ['websparkAnimatedText'],
@@ -732,5 +732,6 @@ function webspark_update_10012(&$sandbox) {
       }
     }
   }
+  \Drupal::state()->set('configuration_locked', TRUE);
 }
 
