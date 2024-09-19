@@ -89,11 +89,6 @@ a.btn-maroon, a.btn-dark {
 }
 
 $marker-yellow: #ffc627;
-$marker-green: hsl(120, 93%, 68%);
-$marker-pink: hsl(345, 96%, 73%);
-$marker-blue: hsl(201, 97%, 72%);
-$pen-red: hsl(0, 85%, 49%);
-$pen-green: hsl(112, 100%, 27%);
 
 @mixin mark-background {
   background-color: transparent;
@@ -107,33 +102,6 @@ $pen-green: hsl(112, 100%, 27%);
 
 .marker-yellow {
   background-color: $marker-yellow;
-}
-
-.marker-green {
-  background-color: $marker-green;
-}
-
-.marker-pink {
-  background-color: $marker-pink;
-}
-
-.marker-blue {
-  background-color: $marker-blue;
-}
-
-.pen-red {
-  background-image: linear-gradient(270deg, transparent 50%, $marker-pink 0);
-  @include mark-background;
-}
-
-.pen-green {
-  background-image: linear-gradient(270deg, transparent 50%, $marker-green 0);
-  @include mark-background;
-}
-
-.pen-blue {
-  background-image: linear-gradient(270deg, transparent 50%, $marker-blue 0);
-  @include mark-background;
 }
 
 .pen-yellow{

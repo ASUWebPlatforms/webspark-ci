@@ -60,10 +60,13 @@ export default class InsertwebsparkBlockquoteAnimatedAnimatedCommand extends Com
         );
       }
 
-      writer.append(
-        websparkBlockquoteAnimatedTitle,
-        websparkBlockquoteAnimatedContainer
-      );
+      if (title.length > 0) {
+        writer.append(
+          websparkBlockquoteAnimatedTitle,
+          websparkBlockquoteAnimatedContainer
+        );
+      }
+
       writer.append(
         websparkBlockquoteAnimatedParagraph,
         websparkBlockquoteAnimatedContainer

@@ -21,12 +21,7 @@ export default class WebsparkAnimatedTextUI extends Plugin {
     const t = this.editor.t;
 
     return {
-      "Yellow marker": t("Yellow marker"),
-      "Green marker": t("Green marker"),
-      "Pink marker": t("Pink marker"),
-      "Blue marker": t("Blue marker"),
-      "Red pen": t("Red pen"),
-      "Green pen": t("Green pen"),
+      "Yellow pen": t("Yellow pen"),
     };
   }
 

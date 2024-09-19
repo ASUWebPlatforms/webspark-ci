@@ -682,24 +682,11 @@ function webspark_update_10012(&$sandbox) {
   foreach ($editor_configs as $value) {
     $config = \Drupal::config($value);
     // Check if the config is not the restricted_html
-    if ($config && $config->getName() != 'filter.format.restricted_html') {
+    if ($config && !strpos($config->getName(), 'restricted_html') && !strpos($config->getName(), 'minimal_format')) {
       $data = $config->getRawData();
       if ($data && isset($data['settings']['toolbar']['items'])) {
         $toolbar_items = $data['settings']['toolbar']['items'];
         if ($toolbar_items) {
-          // Add Highlighting capabilities
-          $italic_key = array_search('italic', $toolbar_items);
-          if ($italic_key !== false) {
-            $position = $italic_key + 1;
-            $toolbar_items = array_merge(
-                array_slice($toolbar_items, 0, $position),
-                ['websparkAnimatedText'],
-                array_slice($toolbar_items, $position)
-            );
-          }
-          else {
-            array_unshift($toolbar_items, 'websparkAnimatedText');
-          }
           // Add Animated Blockquote
           $webspark_blockquote_key = array_search('websparkBlockquote', $toolbar_items);
           if ($webspark_blockquote_key !== false) {
@@ -712,6 +699,20 @@ function webspark_update_10012(&$sandbox) {
           }
           else {
             array_push($toolbar_items, 'websparkBlockquoteAnimated');
+          }
+
+          // Add Highlighting capabilities
+          $italic_key = array_search('websparkBlockquoteAnimated', $toolbar_items);
+          if ($italic_key !== false) {
+            $position = $italic_key + 1;
+            $toolbar_items = array_merge(
+                array_slice($toolbar_items, 0, $position),
+                ['websparkAnimatedText'],
+                array_slice($toolbar_items, $position)
+            );
+          }
+          else {
+            array_unshift($toolbar_items, 'websparkAnimatedText');
           }
 
           $config_editable = $config_factory->getEditable($value);
