@@ -118,7 +118,7 @@ export class WebsparkButtonFormView extends View {
     childViews.forEach((v) => {
       // Register the view as focusable.
       this._focusables.add(v);
-
+console.log(v)
       // Register the view in the focus tracker.
       this.focusTracker.add(v.element);
     });

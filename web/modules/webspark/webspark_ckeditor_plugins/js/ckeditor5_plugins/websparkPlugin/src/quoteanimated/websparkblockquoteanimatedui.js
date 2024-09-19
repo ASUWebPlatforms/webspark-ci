@@ -53,7 +53,7 @@ export default class WebsparkBlockquoteAnimatedUI extends Plugin {
       "open",
       () => {
         form.setValues(command.value);
-        form.textInputView.children[1].element.select();
+        form.titleView.children[1].element.select();
       },
       { priority: "low" }
     );
