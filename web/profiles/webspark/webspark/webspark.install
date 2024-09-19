@@ -682,7 +682,7 @@ function webspark_update_10012(&$sandbox): void{
   foreach ($editor_configs as $value) {
     $config = \Drupal::config($value);
     // Check if the config is not the restricted_html
-    if ($config && !strpos($config->getName(), 'restricted_html') && !strpos($config->getName(), 'minimal_format')) {
+    if ($config && !strpos($config->getName(), 'restricted_html') && !strpos($config->getName(), 'minimal_format') && !strpos($config->getName(), 'webform_default')) {
       $data = $config->getRawData();
       if ($data && isset($data['settings']['toolbar']['items'])) {
         $toolbar_items = $data['settings']['toolbar']['items'];
