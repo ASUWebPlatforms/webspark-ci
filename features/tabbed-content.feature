@@ -44,19 +44,19 @@ Feature: Tabbed Content
 
   @api @javascript @anonymous
   Scenario: Verify the scroll next is visible for long content
-    Given the ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels" element exists
-    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels"
+    Given the ".layout__region--first .uds-tabbed-panels" element exists
+    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first .uds-tabbed-panels"
     And The element ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels > .scroll-control-next" should be visible
 
-  @api @javascript @anonymous
+  @api @javascript @anonymous @scrollnext
   Scenario: Verify the scroll next is not visible for short content
-    Given the ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels" element exists
-    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels"
-    And The element ".layout__region--first > div:nth-of-type(3) .uds-tabbed-panels > .scroll-control-next" should not be visible
+    Given the ".layout__region--first .uds-tabbed-panels" element exists
+    Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first .uds-tabbed-panels"
+    And The element ".layout__region--first .uds-tabbed-panels .scroll-control-next" should be visible
 
   @api @javascript @anonymous
   Scenario: Verify the scroll next and previous buttons work when clicked
-    Given the ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels" element exists
+    Given the ".layout__region--first .uds-tabbed-panels" element exists
     Then check the Tabbed Content scroll next button appears as needed for ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels"
     Then store the position of "#nav-tab-3-tab"
     Then I click the element ".layout__region--first > div:nth-of-type(2) .uds-tabbed-panels > .scroll-control-next"
