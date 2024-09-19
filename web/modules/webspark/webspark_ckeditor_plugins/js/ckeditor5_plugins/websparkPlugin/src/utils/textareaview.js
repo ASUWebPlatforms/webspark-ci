@@ -1,6 +1,6 @@
-import { View } from "ckeditor5/src/ui";
+import { InputView } from "ckeditor5/src/ui";
 
-export class TextAreaView extends View {
+export class TextAreaView extends InputView {
   constructor(locale, defaultValue) {
     super(locale);
 
