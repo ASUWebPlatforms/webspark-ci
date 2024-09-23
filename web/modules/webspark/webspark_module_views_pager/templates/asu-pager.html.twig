@@ -28,13 +28,13 @@
 {# DESKTOP #}
 {% set items = desktop.items %}
 {% set ellipses = desktop.ellipses %}
-<div class="d-sm-none d-md-block">
+<div class="d-none d-lg-block">
   {% include '@webspark_module_views_pager/templates/asu-pager-nav.html.twig' %}
 </div>
 {# MOBILE #}
 {% set items = mobile.items %}
 {% set ellipses = mobile.ellipses %}
-<div class="d-none d-sm-block d-md-none">
+<div class="d-lg-none">
   {% if items %}
     {% include '@webspark_module_views_pager/templates/asu-pager-nav.html.twig' %}
   {% endif %}
