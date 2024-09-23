@@ -668,3 +668,70 @@ function webspark_update_10011(&$sandbox): void {
   \Drupal::service('webspark.config_manager')->importConfigFile('paragraphs.paragraphs_type.hover_card');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-2089 - CK Editor - Added Highlighting capabilities and Animated Blockquote.
+ */
+function webspark_update_10012(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+  $config_factory = \Drupal::service('config.factory');
+  // Find all editor configs
+  $editor_configs = $config_factory->listAll('editor.editor');
+  $editor_configs = [...$editor_configs, ...$config_factory->listAll('filter.format')];
+  // Loop through all editor configs
+  foreach ($editor_configs as $value) {
+    $config = \Drupal::config($value);
+    // Check if the config is not the restricted_html
+    if ($config && !strpos($config->getName(), 'restricted_html') && !strpos($config->getName(), 'minimal_format') && !strpos($config->getName(), 'webform_default')) {
+      $data = $config->getRawData();
+      if ($data && isset($data['settings']['toolbar']['items'])) {
+        $toolbar_items = $data['settings']['toolbar']['items'];
+        if ($toolbar_items) {
+          // Add Animated Blockquote
+          $webspark_blockquote_key = array_search('websparkBlockquote', $toolbar_items);
+          if ($webspark_blockquote_key !== false) {
+            $position = $webspark_blockquote_key + 1;
+            $toolbar_items = array_merge(
+                array_slice($toolbar_items, 0, $position),
+                ['websparkBlockquoteAnimated'],
+                array_slice($toolbar_items, $position)
+            );
+          }
+          else {
+            array_push($toolbar_items, 'websparkBlockquoteAnimated');
+          }
+
+          // Add Highlighting capabilities
+          $webspark_blockquote_animated_key = array_search('websparkBlockquoteAnimated', $toolbar_items);
+          if ($webspark_blockquote_animated_key !== false) {
+            $position = $webspark_blockquote_animated_key + 1;
+            $toolbar_items = array_merge(
+                array_slice($toolbar_items, 0, $position),
+                ['websparkAnimatedText'],
+                array_slice($toolbar_items, $position)
+            );
+          }
+          else {
+            array_unshift($toolbar_items, 'websparkAnimatedText');
+          }
+
+          $config_editable = $config_factory->getEditable($value);
+          $config_editable->set('settings.toolbar.items', $toolbar_items);
+          $config_editable->save();
+        }
+      }
+      else if ($data && isset($data['filters']['filter_html']['settings']['allowed_html'])) {
+        $allowed_html = $data['filters']['filter_html']['settings']['allowed_html'];
+        // Add mark class to allowed_html
+        if ($allowed_html) {
+          $allowed_html = $allowed_html . ' <mark class>';
+          $config_editable = $config_factory->getEditable($value);
+          $config_editable->set('filters.filter_html.settings.allowed_html', $allowed_html);
+          $config_editable->save();
+        }
+      }
+    }
+  }
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
