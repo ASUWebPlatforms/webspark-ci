@@ -176,6 +176,7 @@ class AsuDegreeRfiDataPotluckClient {
       [
         'degreeType' => $program,
         'method' => 'findAllDegrees',
+        'filter' => 'activeInDegreeSearch',
         'include' => 'planCategories',
       ],
       "acad-plans"
@@ -203,7 +204,7 @@ class AsuDegreeRfiDataPotluckClient {
    * @return array
    *   Programs of Interest.
    */
-  public function getProgramsOfInterest($program) {
+  public function getProgramsOfInterest($program, $requireiRfiDisplay = TRUE) {
 
     $poi_options = [];
 
@@ -211,13 +212,17 @@ class AsuDegreeRfiDataPotluckClient {
       [
         'degreeType' => $program,
         'method' => 'findAllDegrees',
+        'filter' => 'activeInDegreeSearch',
+        'include' => 'rfiDisplay',
       ],
       "acad-plans"
     );
 
     // Process and return as options-ready key-value array.
     foreach ($response as $row) {
-      $poi_options[$row['acadPlanCode']] = $row['acadPlanDescription'] . ' : ' . $row['acadPlanCode'];
+      if (!$requireiRfiDisplay || ($requireiRfiDisplay && $row['rfiDisplay'] === TRUE)) {
+        $poi_options[$row['acadPlanCode']] = $row['acadPlanDescription'] . ' : ' . $row['acadPlanCode'];
+      }
     }
     asort($poi_options, SORT_STRING);
     return $poi_options;
