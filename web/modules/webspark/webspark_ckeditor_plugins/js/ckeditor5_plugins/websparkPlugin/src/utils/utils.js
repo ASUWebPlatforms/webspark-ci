@@ -114,3 +114,9 @@ export function createTextArea(label, locale) {
 const isObjectEmpty = (objectName) => {
   return Object.keys(objectName).length === 0
 }
+
+export function createLabel(label, locale) {
+  const labelView = new LabelView(locale);
+  labelView.text = label;
+  return labelView;
+}

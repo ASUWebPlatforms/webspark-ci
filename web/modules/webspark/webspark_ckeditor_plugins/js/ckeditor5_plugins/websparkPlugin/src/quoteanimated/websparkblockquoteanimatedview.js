@@ -18,6 +18,7 @@ import {
   createInput,
   createRow,
   createSelect,
+  createLabel,
   createTextArea,
 } from "../utils/utils";
 
@@ -35,6 +36,7 @@ export class WebsparkBlockquoteAnimatedFormView extends View {
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
+    this.labelView = createLabel(t("Animated quotes do not support any other text styles used via the text editor; they only support regular text."), locale);
     this.titleView = createInput(t("Title"), locale);
     this.textInputView = createTextArea(t("Content"), locale);
     this.citationNameView = createInput(t("Citation Name"), locale);
@@ -81,6 +83,7 @@ export class WebsparkBlockquoteAnimatedFormView extends View {
         tabindex: "-1",
       },
       children: [
+        createRow(this.labelView),
         createRow(this.titleView),
         createRow(this.textInputView),
         createRow(this.citationNameView),
