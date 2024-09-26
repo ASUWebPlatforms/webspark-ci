@@ -80,7 +80,9 @@ class AsuDegreeRfiDataPotluckClient {
    *   Response data.
    */
   public function degreeLookup(string $code) {
-    return $this->potluckClient->getData('codeset/acad-plan/' . $code);
+    return $this->potluckClient->getData('codeset/acad-plan/' . $code, [
+      'query' => Query::build(['include' => 'acadPlanMarketingDescription']),
+    ]);
   }
 
   // Services reference:
