@@ -36,7 +36,7 @@ export class WebsparkBlockquoteAnimatedFormView extends View {
     this.focusTracker = new FocusTracker();
     this.keystrokes = new KeystrokeHandler();
 
-    this.labelView = createLabel(t("Animated quotes do not support any other text styles used via the text editor; they only support regular text."), locale);
+    this.labelView = createLabel(t("Animated quotes only support regular text and highlighted text. Other text styles are not supported."), locale);
     this.titleView = createInput(t("Title"), locale);
     this.textInputView = createTextArea(t("Content"), locale);
     this.citationNameView = createInput(t("Citation Name"), locale);
