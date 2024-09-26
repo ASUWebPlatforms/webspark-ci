@@ -122,7 +122,7 @@
 
     <h5>Trying Item in Items Here...</h5>
     {% for item in items %}
-      {{ item }}
+      {{ item.content }}
     {% endfor %}
     <h5>... Item in Items ends Here</h5>
 
@@ -185,7 +185,12 @@
         fetchpriority="high"
         />
     <div class="card-header">
-        Title: <h3 class="card-title"><a href="#">{{ options.card_heading }}</a></h3>
+        <p class="card-text">
+      Card Heading key ->  {{ options.card_heading }}
+        </p>
+        <p class="card-text">
+        Card Heading value -> {{ rows[0][options.card_heading] }}
+        </p>
     </div>
     <div class="card-body">
         <p class="card-text">
@@ -236,3 +241,6 @@
 <div class="card card-story">
   Rows - {{ rows }}
 </div>
+  Card Heading -> {{ options.card_heading }}
+  </br>
+  How can I access a single property of a card? -> {{ rows[0] }}
