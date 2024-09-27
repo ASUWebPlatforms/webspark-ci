@@ -23,7 +23,7 @@ Feature: Visibility of the footer
     #Check global footer and “Repeatedly ranked #1”
     Then I should see that the "#wrapper-footer-innovation" element exists
     And I should see that the "a[data-ga-footer='#1 in the u.s. for innovation']" element exists
-    And I should see that the "img[alt='Repeatedly ranked #1 in innovation (ASU ahead of MIT and Stanford), sustainability (ASU ahead of Stanford and UC Berkeley), and global impact (ASU ahead of MIT and Penn State)']" element exists
+    And I should see that the "img[alt='Repeatedly ranked #1 on 20+ lists in the last 3 years']" element exists
     Then I should see that the "#wrapper-footer-colophon" element exists
     Then I wait for 2 seconds
 
