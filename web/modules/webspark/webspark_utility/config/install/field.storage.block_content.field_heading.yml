@@ -3,9 +3,6 @@ status: true
 dependencies:
   module:
     - block_content
-  enforced:
-    module:
-      - webspark_blocks
 id: block_content.field_heading
 field_name: field_heading
 entity_type: block_content
