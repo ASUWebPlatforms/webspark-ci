@@ -7,7 +7,6 @@ style:
     assets/js/bootstrap.bundle.min.js: {}
     js/datalayer.js: {}
     js/animated.js: {}
-    js/href-aria-hidden.js: {}
     # assets/js/renovation.script.js: {}
   dependencies:
     - core/jquery
