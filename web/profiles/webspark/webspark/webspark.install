@@ -735,3 +735,17 @@ function webspark_update_10012(&$sandbox): void{
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
+/**
+ * WS2-2223 - Changed comments permissions and register: admin_only
+ */
+function webspark_update_10013(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+
+  //Changed comments permissions
+  \Drupal::service('webspark.config_manager')->updateConfigFile('user.role.authenticated');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('user.role.anonymous');
+  //Changed register: admin_only
+  \Drupal::service('webspark.config_manager')->updateConfigFile('user.settings');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
