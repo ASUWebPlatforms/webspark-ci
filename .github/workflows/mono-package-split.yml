@@ -1,16 +1,20 @@
 name: 'Split ASU Packages'
 
+# Run action only on code deployments with a tag that matches the regex.
+# This will make it so that this only runs when we create a release.
 on:
   push:
     tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  # Allow us to manually trigger the workflow
   workflow_dispatch:
-env:
-  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
 jobs:
   packages_split:
-    if: github.repository == 'ASUWebPlatforms/webspark-release-stable'
+    # Limit this workflow to a specific repo. This will ensure that
+    # it only runs on the webspark-ci repo, and not any downstream
+    # repositories that will also include this file.
+    if: github.repository == 'ASUWebPlatforms/webspark-ci'
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,44 +22,60 @@ jobs:
       matrix:
         # define package to repository map
         package:
-          - local_path: 'asu_brand'
-            split_repository: 'asu_brand_fork'
-          - local_path: 'asu_user'
-            split_repository: 'asu_user_fork'
+          - local_path: asu_brand
+            split_repository: asu_brand_readonly
+          - local_path: asu_user
+            split_repository: asu_user_readonly
 
     steps:
-      -   uses: "actions/checkout@v4.1.7"
+      - uses: actions/checkout@v4
+      # Utilize a Github App to generate a temporary token for access to the various repositories.
+      # This allows us to avoid hard coding a personal access token.
+      # Inspired by https://devopsjournal.io/blog/2022/01/03/GitHub-Tokens,
+      # but we are using a newer, better, official github action instead of
+      # the community contributed one used in the blog post.
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          # This app allows us to select all of the repositories we will be adding
+          # our access permissions to via the app-token. Just list them below
+          # in a comma separated string (without any spaces).
+          repositories: 'asu_user_readonly,asu_brand_readonly'
+
+      # The danharrin/monorepo-split-github-action below is the tool that we are using
+      # to sync the contents of the modules into their respective standalone,
+      # read-only github repositories. This may seem awkward, but it's because
+      # Packagist requires each repo to be standalone, unlike what we are able
+      # to do with JavaScript where the monorepo splits out via tagging and
+      # does not require "shadow" repositories.
+      # See https://blog.logrocket.com/hosting-all-your-php-packages-together-in-a-monorepo
 
       # no tag
       -
         if: "!startsWith(github.ref, 'refs/tags/')"
-        uses: "danharrin/monorepo-split-github-action@v2.3.0"
+        uses: danharrin/monorepo-split-github-action@v2.3.0
+        env:
+          GITHUB_TOKEN: x-access-token:${{ steps.app-token.outputs.token }}
         with:
-          # ↓ split "/web/modules/asu_modules/*" directory
           package_directory: 'web/modules/asu_modules/${{ matrix.package.local_path }}'
-
-          # ↓ into https://github.com/asuwebplatforms/* repository
-          repository_organization: 'ASUWebPlatforms'
+          repository_organization: ASUWebPlatforms
           repository_name: '${{ matrix.package.split_repository }}'
-
-          # ↓ the user signed under the split commit
-          user_name: "tbutterf"
-          user_email: "tbutterf@asu.edu"
+          user_name: ws2-release-bot
+          user_email: ws2-release-bot@asu.edu
 
       # with tag
       -
         if: "startsWith(github.ref, 'refs/tags/')"
-        uses: "danharrin/monorepo-split-github-action@v2.3.0"
+        uses: danharrin/monorepo-split-github-action@v2.3.0
+        env:
+          GITHUB_TOKEN: x-access-token:${{ steps.app-token.outputs.token }}
         with:
           tag: ${GITHUB_REF#refs/tags/}
-
-          # ↓ split "/web/modules/asu_modules/*" directory
           package_directory: 'web/modules/asu_modules/${{ matrix.package.local_path }}'
-
-          # ↓ into https://github.com/asuwebplatforms/* repository
-          repository_organization: 'ASUWebPlatforms'
+          repository_organization: ASUWebPlatforms
           repository_name: '${{ matrix.package.split_repository }}'
-
-          # ↓ the user signed under the split commit
-          user_name: "tbutterf"
-          user_email: "tbutterf@asu.edu"
+          user_name: ws2-release-bot
+          user_email: ws2-release-bot@asu.edu
