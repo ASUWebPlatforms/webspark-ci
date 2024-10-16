@@ -23,8 +23,8 @@ jobs:
         # define package to repository map
         package:
           - local_path: asu_brand
-            split_repository: asu_brand_split
-          - local_path: asu_user_split
+            split_repository: asu_brand
+          - local_path: asu_user
             split_repository: asu_user
 
     steps:
@@ -43,7 +43,7 @@ jobs:
           # This app allows us to select all of the repositories we will be adding
           # our access permissions to via the app-token. Just list them below
           # in a comma separated string (without any spaces).
-          repositories: 'asu_user_split,asu_brand_split'
+          repositories: 'asu_user,asu_brand'
 
       # The danharrin/monorepo-split-github-action below is the tool that we are using
       # to sync the contents of the modules into their respective standalone,
