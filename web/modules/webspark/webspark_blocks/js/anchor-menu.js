@@ -194,8 +194,17 @@
         if (active) active.classList.remove('active');
 
         e.target.classList.add('active');
+
       });
     }
+
+    $('div.webspark-anchor-link-data').on('keyup', function(e) {
+      if (e.keyCode === 13) {
+        const anchor = document.querySelector('a[href="#' + $(this).attr('id') + '"]');
+
+        if (anchor) anchor.focus();
+      }
+    });
   };
 
   /**
