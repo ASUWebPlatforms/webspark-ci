@@ -14,7 +14,7 @@ jobs:
     # Limit this workflow to a specific repo. This will ensure that
     # it only runs on the webspark-ci repo, and not any downstream
     # repositories that will also include this file.
-    if: github.repository == 'ASUWebPlatforms/webspark-ci'
+    if: github.repository == 'asuwebplatforms/webspark-ci'
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,9 +23,9 @@ jobs:
         # define package to repository map
         package:
           - local_path: asu_brand
-            split_repository: asu_brand_readonly
-          - local_path: asu_user
-            split_repository: asu_user_readonly
+            split_repository: asu_brand_split
+          - local_path: asu_user_split
+            split_repository: asu_user
 
     steps:
       - uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
           # This app allows us to select all of the repositories we will be adding
           # our access permissions to via the app-token. Just list them below
           # in a comma separated string (without any spaces).
-          repositories: 'asu_user_readonly,asu_brand_readonly'
+          repositories: 'asu_user_split,asu_brand_split'
 
       # The danharrin/monorepo-split-github-action below is the tool that we are using
       # to sync the contents of the modules into their respective standalone,
