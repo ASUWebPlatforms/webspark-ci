@@ -4,8 +4,10 @@ name: 'Split ASU Packages'
 # This will make it so that this only runs when we create a release.
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - WS2-1623
+#    tags:
+#      - 'v[0-9]+.[0-9]+.[0-9]+'
   # Allow us to manually trigger the workflow
   workflow_dispatch:
 
