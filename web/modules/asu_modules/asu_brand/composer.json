@@ -1,0 +1,6 @@
+{
+    "name": "asuwebplatforms/asu_brand",
+    "description": "ASU Header component and brand assets.",
+    "type": "drupal-module",
+    "license": "MIT"
+}
