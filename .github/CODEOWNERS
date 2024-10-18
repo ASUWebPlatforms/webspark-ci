@@ -1,4 +1,4 @@
-.github/CODEOWNERS @ci-pipeline-admins
-.github/workflows/ @ci-pipeline-admins
-.ci @ci-pipeline-admins
-.circleci/ @ci-pipeline-admins
+.github/CODEOWNERS @ASUWebPlatforms/ci-pipeline-admins
+.github/workflows/ @ASUWebPlatforms/ci-pipeline-admins
+.ci @ASUWebPlatforms/ci-pipeline-admins
+.circleci/ @ASUWebPlatforms/ci-pipeline-admins
