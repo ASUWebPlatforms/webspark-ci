@@ -1,0 +1,4 @@
+.github/CODEOWNERS @ci-pipeline-admins
+.github/workflows/ @ci-pipeline-admins
+.ci @ci-pipeline-admins
+.circleci/ @ci-pipeline-admins
