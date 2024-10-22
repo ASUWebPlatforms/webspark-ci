@@ -5,9 +5,9 @@ name: 'Split ASU Packages'
 on:
   push:
     branches:
-      - main
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - WS2-1623
+#    tags:
+#      - 'v[0-9]+.[0-9]+.[0-9]+'
   # Allow us to manually trigger the workflow
   workflow_dispatch:
 
@@ -28,6 +28,12 @@ jobs:
             split_repository: asu_brand
           - local_path: asu_user
             split_repository: asu_user
+          - local_path: asu_react_core
+            split_repository: asu_react_core
+          - local_path: asu_react_integration
+            split_repository: asu_react_integration
+          - local_path: asu_config_utility
+            split_repository: asu_config_utility
 
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +51,7 @@ jobs:
           # This app allows us to select all of the repositories we will be adding
           # our access permissions to via the app-token. Just list them below
           # in a comma separated string (without any spaces).
-          repositories: 'asu_user,asu_brand'
+          repositories: 'asu_user,asu_brand,asu_react_core,asu_react_integration'
 
       # The danharrin/monorepo-split-github-action below is the tool that we are using
       # to sync the contents of the modules into their respective standalone,
