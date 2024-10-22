@@ -1,0 +1,6 @@
+{
+    "name": "asuwebplatforms/asu_config_utility",
+    "description": "ASU Configuration Utility",
+    "type": "drupal-module",
+    "license": "MIT"
+}

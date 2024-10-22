@@ -12,11 +12,11 @@ use Drupal\Core\Entity\Exception\FieldStorageDefinitionUpdateForbiddenException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
- * Description of WebsparkUtilityConfigManager
+ * Description of ASUConfigUtilityConfigManager
  *
  * @author ovidiu
  */
-class WebsparkUtilityConfigManager {
+class ASUConfigUtilityConfigManager {
 
   /**
    * The entity manager.
@@ -62,7 +62,7 @@ class WebsparkUtilityConfigManager {
   protected $configFactory;
 
   /**
-   * Constructs a WebsparkUtilityConfigManager.
+   * Constructs a ASUConfigUtilityConfigManager.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
    *   The entity manager.

@@ -8,7 +8,7 @@ use Drupal\Core\DependencyInjection\ServiceProviderBase;
 /**
  * Modifies the config_readonly_form_subscriber service.
  */
-class WebsparkUtilityServiceProvider extends ServiceProviderBase {
+class ASUConfigUtilityServiceProvider extends ServiceProviderBase {
 
   /**
    * {@inheritdoc}
