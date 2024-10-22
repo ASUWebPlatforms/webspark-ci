@@ -66,12 +66,7 @@
     },
     "replace": {
         "asu_modules/asu_brand": "self.version",
-        "asu_modules/asu_components_appearance": "self.version",
-        "asu_modules/asu_data_potluck": "self.version",
-        "asu_modules/asu_degree_rfi": "self.version",
-        "asu_modules/asu_events": "self.version",
-        "asu_modules/asu_footer": "self.version",
-        "asu_modules/asu_news": "self.version",
+        "asu_modules/asu_config_utility": "self.version",
         "asu_modules/asu_react_core": "self.version",
         "asu_modules/asu_react_integration": "self.version",
         "asu_modules/asu_user": "self.version"

@@ -49,7 +49,7 @@ function webspark_blocks_update_9005(&$sandbox) {
   // Unlock the configuration storage.
   \Drupal::state()->set('configuration_locked', FALSE);
   // Revert all configs from this module.
-  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_background_color');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_background_color');
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }
@@ -99,7 +99,7 @@ function webspark_blocks_update_9012(&$sandbox) {
 
   \Drupal::state()->set('configuration_locked', FALSE);
   foreach ($yml_list as $yml) {
-    \Drupal::service('webspark.config_manager')->updateConfigFile($yml);
+    \Drupal::service('asu_config.config_manager')->updateConfigFile($yml);
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 
@@ -170,7 +170,7 @@ function webspark_blocks_update_9019(&$sandbox) {
   // Update the configs without using the revertAll() function,
   // due to a change in where config files are stored. This also targets
   // the configs to match the release in which this update was made.
-  $configs = \Drupal::service('webspark.config_manager')->getCsvConfigArray('webspark_blocks', '2.11.1_webspark_blocks_configs.csv');
+  $configs = \Drupal::service('asu_config.config_manager')->getCsvConfigArray('webspark_blocks', '2.11.1_webspark_blocks_configs.csv');
   _webspark_blocks_update_module_config_list($configs);
 
   if (!empty($accordions_to_update)) {
@@ -193,8 +193,8 @@ function webspark_blocks_update_9019(&$sandbox) {
  */
 function webspark_blocks_update_9020(&$sandbox) {
   \Drupal::state()->set('configuration_locked', FALSE);
-  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_spacing_bottom');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_spacing_top');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_spacing_bottom');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_spacing_top');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
@@ -203,16 +203,16 @@ function webspark_blocks_update_9020(&$sandbox) {
  */
 function webspark_blocks_update_9021(&$sandbox) {
   \Drupal::state()->set('configuration_locked', FALSE);
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_lge');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_med');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_1_1_sml');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_lge');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_med');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_16_9_sml');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_lge');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_med');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.block_image_sml');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('image.style.video_poster_image');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_1_1_lge');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_1_1_med');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_1_1_sml');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_16_9_lge');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_16_9_med');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_16_9_sml');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_lge');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_med');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.block_image_sml');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('image.style.video_poster_image');
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
@@ -491,7 +491,7 @@ function webspark_blocks_update_10005(&$sandbox) {
 function _webspark_blocks_update_module_config_list($config_list = []) {
   \Drupal::state()->set('configuration_locked', FALSE);
   foreach ($config_list as $config) {
-    \Drupal::service('webspark.config_manager')->updateConfigFile($config);
+    \Drupal::service('asu_config.config_manager')->updateConfigFile($config);
   }
   \Drupal::state()->set('configuration_locked', TRUE);
 }

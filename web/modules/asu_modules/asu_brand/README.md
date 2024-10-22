@@ -1,4 +1,4 @@
-# ASU Brand module for Drupal 9
+# ASU Brand module for Drupal
 
 The ASU Brand module provides the following functionality:
 * An ASU branded, accessible, Web Standards compliant Header with integration
@@ -59,10 +59,11 @@ There are three types of buttons available in the menu.
    forms using the "ASU Brand menu link type" dropdown.
 3. Buttons in the tray at the bottom of drop down menus are enabled by clicking
    a menu link item's "Display as ASU Brand button in dropdown tray" checkbox.
-   For 2 and 3, enabling the button settings will transform that menu link into
-   the corresponding button type ONLY if that menu item is in the second level of
-   your menu. If those menu link fields are configured in non-header menus, they
-   will be ignored.
+
+For 2 and 3, enabling the button settings will transform that menu link into
+the corresponding button type ONLY if that menu item is in the second level of
+your menu. If those menu link fields are configured in non-header menus, they
+will be ignored.
 ### Header menu depth
 Only header menu links at the top and second level are displayed in the header.
 ## Other configurations

@@ -199,7 +199,7 @@ function webspark_blocks_config_readonly_whitelist_patterns() {
   $module = \Drupal::service('module_handler')
       ->getModule(basename(__FILE__, '.module'))
       ->getName();
-  $configs = \Drupal::service('webspark.config_manager')->getModuleConfigFiles($module);
+  $configs = \Drupal::service('asu_config.config_manager')->getModuleConfigFiles($module);
   // Make fontawesome settings locked.
   $configs[] = 'fontawesome.settings';
   // Lock all the configurations from this module.

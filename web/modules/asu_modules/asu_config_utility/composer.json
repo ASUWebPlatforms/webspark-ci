@@ -2,5 +2,8 @@
     "name": "asuwebplatforms/asu_config_utility",
     "description": "ASU Configuration Utility",
     "type": "drupal-module",
-    "license": "MIT"
+    "license": "MIT",
+    "require": {
+        "drupal/config_update": "2.0.0-alpha3"
+    }
 }

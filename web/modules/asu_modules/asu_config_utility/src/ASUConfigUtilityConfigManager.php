@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webspark_utility;
+namespace Drupal\asu_config_utility;
 
 use Drupal\Core\Config\Entity\ConfigEntityType;
 use Drupal\Core\Config\StorageInterface;
