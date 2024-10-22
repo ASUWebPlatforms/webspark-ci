@@ -6,4 +6,6 @@ package: ASU
 dependencies:
   - drupal:cas
   - drupal:file
+  - drupal:field
+  - asuwebplatforms:asu_config_utility
 

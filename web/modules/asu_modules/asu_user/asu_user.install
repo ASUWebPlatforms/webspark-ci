@@ -15,7 +15,7 @@ function _asu_user_revert_all_module_config() {
   // Unlock the configuration storage.
   \Drupal::state()->set('configuration_locked', FALSE);
   // Revert all configs from this module.
-  \Drupal::service('webspark.config_manager')->revertAll($module);
+  \Drupal::service('asu_config.config_manager')->revertAll($module);
   // Lock the configuration storage.
   \Drupal::state()->set('configuration_locked', TRUE);
 }

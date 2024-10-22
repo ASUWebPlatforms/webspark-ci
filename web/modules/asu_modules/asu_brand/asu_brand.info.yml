@@ -4,3 +4,6 @@ type: module
 core_version_requirement: ^8 || ^9 || ^10
 package: ASU
 configure: asu_brand.asu_brand_settings
+dependencies:
+  - asu_react_integration:asu_react_integration
+  - asu_react_core:asu_react_core
