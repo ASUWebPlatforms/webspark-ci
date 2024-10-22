@@ -749,3 +749,11 @@ function webspark_update_10013(&$sandbox): void{
 
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-1623 - Enable the asu_config_utility module.
+ */
+function webspark_update_10014(&$sandbox): void {
+  \Drupal::service('module_installer')->install(['asu_config_utility']);
+  \Drupal::service('module_installer')->install(['asu_components_appearance']);
+}
