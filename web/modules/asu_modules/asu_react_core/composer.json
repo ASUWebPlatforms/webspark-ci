@@ -2,5 +2,8 @@
     "name": "asuwebplatforms/asu_react_core",
     "description": "ASU react core components integration",
     "type": "drupal-module",
-    "license": "MIT"
+    "license": "MIT",
+    "require": {
+        "drupal/paragraphs": "^1.17.0"
+    }
 }

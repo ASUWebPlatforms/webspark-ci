@@ -2,5 +2,9 @@
     "name": "asuwebplatforms/asu_brand",
     "description": "ASU Header component and brand assets.",
     "type": "drupal-module",
-    "license": "MIT"
+    "license": "MIT",
+    "require": {
+        "asuwebplatforms/asu_react_core": "^1.0",
+        "asuwebplatforms/asu_react_integration": "^1.0"
+    }
 }
