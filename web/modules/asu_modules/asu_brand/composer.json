@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "asuwebplatforms/asu_react_core": "^2.14",
-        "asuwebplatforms/asu_react_integration": "^2.14"
+        "asuwebplatforms/asu_react_integration": "^2.14",
+        "asuwebplatforms/asu_user": "^2.14"
     }
 }
