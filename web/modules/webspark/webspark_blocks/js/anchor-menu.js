@@ -49,8 +49,9 @@
     }
   };
 
-  // The following function is a copy of the initializeAnchorMenu function from the javascript file
-  // in https://github.com/ASU/asu-unity-stack/pull/1252. More infor about future consolidation: https://asudev.jira.com/browse/WS2-1961?atlOrigin=eyJpIjoiNGYxZWJjNjA5ZmRlNGExNmEwM2JiZDkxZDYxMTdlNjIiLCJwIjoiaiJ9
+  // Customized version of initializeAnchorMenu for Drupal
+  // See: https://github.com/ASU/asu-unity-stack/blob/dev/packages/unity-bootstrap-theme/stories/atoms/anchor-menu/anchor-menu.js
+  // See: https://asudev.jira.com/browse/WS2-1961
   function initializeAnchorMenu () {
     const HEADER_IDS = ['asu-header', 'asuHeader'];
 
@@ -96,6 +97,7 @@
      * @param {Element} el The element to calculate the visible percentage for.
      * @return {number} The percentage of the element that is visible in the viewport.
      */
+    // Custom code added for Drupal
     function calculateVisiblePercentage(el) {
       const rect = el.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -120,6 +122,7 @@
     }
 
     window.addEventListener("scroll", function () {
+      // Custom code added for Drupal
       const elements = document.querySelectorAll('[id^="webspark-anchor-link--"]');
       let max = 0;
       elements.forEach(function(el) {
@@ -133,6 +136,7 @@
         }
       });
 
+      // Standard code
       const navbarY = navbar.getBoundingClientRect().top;
       const headerHeight = globalHeader.classList.contains("scrolled") ?  globalHeader.offsetHeight - 32 : globalHeader.offsetHeight; // 32 is the set height of the gray toolbar above the global header.
 
