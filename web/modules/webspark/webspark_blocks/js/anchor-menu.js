@@ -225,6 +225,7 @@
     }
   }
 
+  // NOTE: This function is not used in the current implementation of the Anchor Menu. Delete.
   function getGlobalHeaderTop() {
     let $toolbarBar = $('#toolbar-bar');
     let $toolbarItemAdministrationTray = $('#toolbar-item-administration-tray');
