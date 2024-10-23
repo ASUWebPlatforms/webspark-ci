@@ -136,7 +136,6 @@ upstream/web/
 # The drupal/core-composer-scaffold component will write .gitignore
 # files to other locations where it scaffolds files that are not
 # already ignored. We must also ignore these generated files.
-/web/**/.gitignore
 
 
 # Other common rules

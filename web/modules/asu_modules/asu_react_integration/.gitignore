@@ -10,5 +10,3 @@ node_modules/react-dom/*
 !node_modules/react-dom/umd/
 node_modules/react-dom/umd/*
 !node_modules/react-dom/umd/react-dom.production.min.js
-
-

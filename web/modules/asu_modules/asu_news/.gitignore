@@ -36,5 +36,5 @@ node_modules/@asu/component-news/dist/*
 /config/_*changes.diff
 /config/**/_diff_commands.bash
 *APPLICABLE.patch
-.DS_Store 
+.DS_Store
 .DS_Stor*
