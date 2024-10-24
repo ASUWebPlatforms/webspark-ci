@@ -204,7 +204,8 @@
 
   /**
    * This functions has the ability to calculate
-   * the position where the Anchor menu must be renderized.
+   * the position where the Anchor menu must be rendered.
+   * NOTE; This appears to be ignored, as the values returned have no affect.
    */
   function getAnchorMenuTop() {
     let $toolbarBar = $('#toolbar-bar');
