@@ -81,7 +81,7 @@ function asu_news_config_readonly_whitelist_patterns() {
   $module = \Drupal::service('module_handler')
     ->getModule(basename(__FILE__, '.module'))
     ->getName();
-  $configs = \Drupal::service('asu_config.config_manager')->getModuleConfigFiles($module);
+  $configs = \Drupal::service('webspark.config_manager')->getModuleConfigFiles($module);
   // Lock all the configurations from this module.
   if (\Drupal::state()->get('configuration_locked', TRUE)) {
     return array_map(function ($item) { return '~' . $item; }, $configs);

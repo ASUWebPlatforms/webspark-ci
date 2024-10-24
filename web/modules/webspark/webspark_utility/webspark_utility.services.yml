@@ -1,4 +1,7 @@
 services:
+  webspark.config_manager:
+    class: Drupal\webspark_utility\WebsparkUtilityConfigManager
+    arguments: [ '@entity_type.manager', '@config.storage', '@config_update.extension_storage', '@config_update.config_update', '@module_handler', '@config.factory' ]
   webspark.route_subscriber:
     class: Drupal\webspark_utility\Routing\RouteSubscriber
     tags:

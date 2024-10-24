@@ -221,7 +221,7 @@ function asu_degree_rfi_config_readonly_whitelist_patterns() {
   $module = \Drupal::service('module_handler')
     ->getModule(basename(__FILE__, '.module'))
     ->getName();
-  $configs = \Drupal::service('asu_config.config_manager')->getModuleConfigFiles($module);
+  $configs = \Drupal::service('webspark.config_manager')->getModuleConfigFiles($module);
   $filtered_configs = [];
   $filtered_configs = array_filter($configs, function ($v) {
     // We want to allow the global config form for the module to be exempted

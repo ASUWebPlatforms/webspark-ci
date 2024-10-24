@@ -243,7 +243,7 @@ function webspark_webdir_update_9010(&$sandbox): void
  * Update the component_type description.
  */
 function webspark_webdir_update_9012(&$sandbox): void {
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_component_type');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_component_type');
 }
 
 /**
@@ -257,18 +257,18 @@ function webspark_webdir_update_9012(&$sandbox): void {
  * update see: https://docs.google.com/presentation/d/1MOOJNlFCBRsXXg4fBOL9YAUlP-x2W8TKIcWkMCdY11o/edit#slide=id.g110d8a6d565_3_0
  */
 function webspark_webdir_update_9013(&$sandbox): void {
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_component_type');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_view_display.block_content.web_directory.default');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_webdir_disable_alpha');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_webdir_disable_alpha');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_component_type');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_webdir_disable_alpha');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_webdir_disable_alpha');
 }
 
 /**
  * Enable reordering of items in 'People' and 'People in Departments' listings.
  */
 function webspark_webdir_update_9014(&$sandbox): void {
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_asurite_ids');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_asurite_ids');
 }
 
 /**
@@ -278,18 +278,18 @@ function webspark_webdir_update_9014(&$sandbox): void {
  * like the field inside of it, so it's problematic. Just display the field.
  */
 function webspark_webdir_update_9015(&$sandbox): void {
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
 }
 
 /**
  * WS2-1822 - Added Apparence settings for Web directory block.
  */
 function webspark_webdir_update_9016(&$sandbox): void {
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_view_display.block_content.web_directory.default');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_anchor_menu_settings');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_bottom');
-  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_top');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.block_content.web_directory.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_anchor_menu_settings');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_bottom');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.web_directory.field_spacing_top');
 }
 
 // @todo This module doesn't implement hook_config_readonly_whitelist_patterns()
