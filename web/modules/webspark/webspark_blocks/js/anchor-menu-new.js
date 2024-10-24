@@ -33,16 +33,18 @@
         //   });
         // }
 
-        // We use setTimeout to compensate header built by react
         // Initialize the anchor menu
+        // We use setTimeout to compensate header built by react
         setTimeout(function () {
           initializeAnchorMenu();
-          // Show the anchor menu... why is it hidden to start?
-          $anchorMenuEl.show();
         }, 100);
+
+        // Show the anchor menu... why is it hidden to start?
+        $anchorMenuEl.show();
 
         // Handle the anchor menu when the Drupal toolbar is present
         // This is specific to the Manage item though, should it apply to any of them?
+        // NOTE: Does not seem to matter.
         const $toolbarIconMenu = $('.toolbar-icon-menu');
         $toolbarIconMenu.on('click', () => {
           setTimeout(() => {
@@ -161,7 +163,9 @@
       const visibleArea = visibleHeight * visibleWidth;
 
       // Calculate the percentage of the element that is visible in the viewport
-      return (visibleArea / elArea) * 100;
+      const visiblePercentage = (visibleArea / elArea) * 100;
+
+      return visiblePercentage;
     }
 
     window.addEventListener('scroll', function () {
