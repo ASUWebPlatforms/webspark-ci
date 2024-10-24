@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\webspark_utility;
+namespace Drupal\asu_config_utility;
 
 use Drupal\Core\Config\Entity\ConfigEntityType;
 use Drupal\Core\Config\StorageInterface;
@@ -11,17 +11,12 @@ use Drupal\Core\Extension\ExtensionDiscovery;
 use Drupal\Core\Entity\Exception\FieldStorageDefinitionUpdateForbiddenException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 
-@trigger_error('The ' . __NAMESPACE__ . '\WebsparkUtilityConfigManager is deprecated in Webspark 2.15.0.
-Instead, use \Drupal\Drupal\asu_config_utility\ASUConfigUtilityConfigManager.', E_USER_DEPRECATED);
-
 /**
- * @deprecated Deprecated as of Webspark 2.15.0
- *
- * Description of WebsparkUtilityConfigManager
+ * Description of ASUConfigUtilityConfigManager
  *
  * @author ovidiu
  */
-class WebsparkUtilityConfigManager {
+class ASUConfigUtilityConfigManager {
 
   /**
    * The entity manager.
@@ -67,7 +62,7 @@ class WebsparkUtilityConfigManager {
   protected $configFactory;
 
   /**
-   * Constructs a WebsparkUtilityConfigManager.
+   * Constructs a ASUConfigUtilityConfigManager.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
    *   The entity manager.

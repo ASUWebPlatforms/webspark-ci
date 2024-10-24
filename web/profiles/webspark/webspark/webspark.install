@@ -736,16 +736,26 @@ function webspark_update_10012(&$sandbox): void{
 }
 
 /**
+ * WS2-1623 - Enable the asu_config_utility module.
+ */
+function webspark_update_10013(&$sandbox): void {
+  \Drupal::service('module_installer')->install(['asu_config_utility']);
+  \Drupal::service('module_installer')->install(['asu_components_appearance']);
+}
+
+/**
  * WS2-2223 - Changed comments permissions and register: admin_only
  */
-function webspark_update_10013(&$sandbox): void{
+function webspark_update_10014(&$sandbox): void{
   \Drupal::state()->set('configuration_locked', FALSE);
 
   //Changed comments permissions
-  \Drupal::service('webspark.config_manager')->updateConfigFile('user.role.authenticated');
-  \Drupal::service('webspark.config_manager')->updateConfigFile('user.role.anonymous');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('user.role.authenticated');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('user.role.anonymous');
   //Changed register: admin_only
-  \Drupal::service('webspark.config_manager')->updateConfigFile('user.settings');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('user.settings');
 
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+
