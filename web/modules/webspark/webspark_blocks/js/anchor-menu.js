@@ -9,22 +9,6 @@
         const anchorMenuNav = $anchorMenuEl.find('nav');
         const heading = $('.uds-anchor-menu-wrapper').find('h2').text().toLowerCase().trim();
 
-        // Create the anchor menu items
-        $(once('append-anchor-menu-items', $links, context)).each(function (i, item) {
-          const icon = $(item).siblings('.anchor-link-icon').html();
-          const title = $(item).data('title');
-          const href = $(item).attr('id');
-          const data_title = title.toLowerCase();
-          const markup = `<a class="nav-link" data-ga-event="link" data-ga-action="click" data-ga-name="onclick" data-ga-type="internal link" data-ga-region="main content" data-ga-component="" data-ga-section="${heading}" data-ga-text="${data_title}" href="#${href}"><span>${icon}</span>${title}</a>`;
-
-          anchorMenuNav.append(markup);
-        });
-
-        // Give the React header time to render
-        setTimeout(function () {
-          initializeAnchorMenu();
-        }, 100);
-
         // NOTE: Leaving this code here for now, if after full testing is complete and
         // the issue is not present, this should be removed before the next release.
         // If the user is an admin, we clear the anchor menu items to not duplicate links
@@ -34,8 +18,22 @@
         //   });
         // }
 
-        // This needs to remain after render otherwise
-        // it will attach to the wrong element
+        $(once('append-anchor-menu-items', $links, context)).each(function (i, item) {
+          const icon = $(item).siblings('.anchor-link-icon').html();
+          const title = $(item).data('title');
+          const href = $(item).attr('id');
+          const dataTitle = title.toLowerCase();
+          const markup = `<a class="nav-link" data-ga-event="link" data-ga-action="click" data-ga-name="onclick" data-ga-type="internal link" data-ga-region="main content" data-ga-component="" data-ga-section="${heading}" data-ga-text="${dataTitle}" href="#${href}"><span>${icon}</span>${title}</a>`;
+
+          anchorMenuNav.append(markup);
+        });
+
+        // Give the React header time to render
+        setTimeout(function () {
+          initializeAnchorMenu();
+        }, 100);
+
+        // After render otherwise it will attach to the wrong element
         $anchorMenuEl.show();
       });
     }
