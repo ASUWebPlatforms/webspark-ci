@@ -1,22 +1,12 @@
 (function ($, Drupal, drupalSettings, once) {
-  let isInitialized = false;
-
   Drupal.behaviors.anchorMenu = {
     attach: function (context, settings) {
-      if (isInitialized) return;
-
-      // Find the anchor menu on the page
-      const $anchorMenuEl = $('#uds-anchor-menu');
-      if ($anchorMenuEl.length) {
-        // Find the links
+      $(once('anchorMenuInit', '#uds-anchor-menu', context)).each(function () {
+        const $anchorMenuEl = $(this);
         const $links = $('.webspark-anchor-link-data');
-        if (!$links.length) {
-          return;
-        }
+        if (!$links.length) return;
 
-        // Grab the nav menu
         const anchorMenuNav = $anchorMenuEl.find('nav');
-        // Find and manipulate the heading to use for GA tracking
         const heading = $('.uds-anchor-menu-wrapper').find('h2').text().toLowerCase().trim();
 
         // Create the anchor menu items
@@ -30,6 +20,13 @@
           anchorMenuNav.append(markup);
         });
 
+        // Give the React header time to render
+        setTimeout(function () {
+          initializeAnchorMenu();
+        }, 100);
+
+        // NOTE: Leaving this code here for now, if after full testing is complete and
+        // the issue is not present, this should be removed before the next release.
         // If the user is an admin, we clear the anchor menu items to not duplicate links
         // if (drupalSettings.is_admin) {
         //   $(once('clear-anchor-menu-items', anchorMenuNav, context)).each(function() {
@@ -37,16 +34,10 @@
         //   });
         // }
 
-        // We use setTimeout to compensate header built by react
-        setTimeout(function () {
-          initializeAnchorMenu();
-        }, 100);
-
-        // Show the anchor menu, this needs to remain after the setTimeout
+        // This needs to remain after render otherwise
+        // it will attach to the wrong element
         $anchorMenuEl.show();
-      }
-
-      isInitialized = true;
+      });
     }
   };
 
