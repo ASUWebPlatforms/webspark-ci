@@ -17,7 +17,9 @@
 <div
   class="uds-quote-image-background"
   style="background-image: linear-gradient(rgba(25, 25, 25, 0) 0%, rgba(25, 25, 25, 0.79) 100%), url({{ image }});"
-  aria-label="{{ aria_label }}">
+  {% if aria_label is not empty %}
+    aria-label="{{ aria_label }}"
+  {% endif %}>
   <div class="uds-content-align">
     {{ testimonial }}
   </div>
