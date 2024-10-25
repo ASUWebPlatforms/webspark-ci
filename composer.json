@@ -60,11 +60,8 @@
         "drupal/drupal-driver": "2.2.2",
         "drupal/drupal-extension": "5.0.0",
         "genesis/behat-fail-aid": "3.7.5",
-        "mglaman/phpstan-drupal": "^1.3",
         "nuvoleweb/drupal-behat": "1.3.0",
         "palantirnet/drupal-rector": "0.20.3",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^1.12",
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "sirbrillig/phpcs-changed": "v2.11.4"
     },
