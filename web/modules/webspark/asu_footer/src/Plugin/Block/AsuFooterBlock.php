@@ -182,6 +182,7 @@ class AsuFooterBlock extends BlockBase {
           ],
         ],
       ],
+      '#description' => t('Recommended image size (W x H): 380 x 112 px') . '<br><b>' . t('If you upload an image larger than the recommended size, it will be automatically cropped with a center anchor.') . '</b><br>',
     ];
 
     $form['asu_footer_block_unit_logo']['asu_footer_block_logo_link_url'] = [
