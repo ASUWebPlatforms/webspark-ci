@@ -1,0 +1,7 @@
+asu_events.settings:
+  type: config_object
+  label: 'ASU Events settings'
+  mapping:
+    asu_events_feed_url:
+      type: string
+      label: 'ASU Events Feed URL'

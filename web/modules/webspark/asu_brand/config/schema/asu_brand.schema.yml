@@ -1,0 +1,26 @@
+asu_brand.settings:
+  type: config_object
+  label: 'ASU Brand settings'
+  mapping:
+    asu_brand:
+      type: mapping
+      label: 'ASU Brand settings'
+      mapping:
+        asu_brand_cookie_consent_enabled:
+          type: integer
+          label: 'Cookie consent'
+        asu_brand_universal_gtm_id:
+          type: string
+          label: 'Universal GTM ID'
+        asu_brand_gtm_enabled:
+          type: integer
+          label: 'Universal GTM enabled'
+        asu_brand_extra_gtm_id:
+          type: string
+          label: 'Extra GTM ID'
+        asu_brand_search_url:
+          type: string
+          label: 'Search URL'
+        asu_brand_local_search_url:
+          type: string
+          label: 'Local search URL'
