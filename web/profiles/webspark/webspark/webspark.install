@@ -751,9 +751,21 @@ function webspark_update_10013(&$sandbox): void{
 }
 
 /**
- * WS2-1836 - Added image centering
+ * WS2-1788 - Update block content gallery display
  */
 function webspark_update_10014(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+
+  //Update block content gallery display
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.gallery.default');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * WS2-1836 - Added image centering
+ */
+function webspark_update_10015(&$sandbox): void{
   \Drupal::state()->set('configuration_locked', FALSE);
 
   \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.image.default');
