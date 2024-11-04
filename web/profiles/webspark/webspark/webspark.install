@@ -749,3 +749,18 @@ function webspark_update_10013(&$sandbox): void{
 
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-1836 - Added image centering
+ */
+function webspark_update_10014(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_form_display.block_content.image.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('core.entity_view_display.block_content.image.default');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.field.block_content.image.field_center_image');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_center_image');
+  \Drupal::service('webspark.config_manager')->updateConfigFile('field.storage.block_content.field_image_size');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
