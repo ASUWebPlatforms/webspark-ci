@@ -4,7 +4,7 @@
 {% set is_center_image = center_image[0]['#markup'] == '1' %}
 
 
-<div style="max-width: {{ style }}; {% if is_center_image %}margin: 0 auto;{% endif %}">
+<div style="max-width: {{ style }};" {% if is_center_image %}class="center-container"{% endif %}>
   <div class="uds-img {{ is_drop_shadow ? 'uds-img-drop-shadow' : '' }} {{ is_rounded ? 'uds-img-rounded' : '' }}">
     <figure class="figure uds-figure">
       {{ media }}
