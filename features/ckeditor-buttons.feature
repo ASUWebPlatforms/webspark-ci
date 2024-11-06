@@ -6,14 +6,8 @@ Feature: CKEditor button verification
   @api @javascript
   Scenario: Verify CKEditor buttons
     Given I am logged in as user "admin"
-    When I am at '/node/28/layout'
-    Then I scroll ".layout__region--first" into view
+    When I am at '/node/add/page'
     Then I wait for 2 seconds
-    Then I hover over the element ".block-inline-blocktext-content"
-    Then I press "Open Text Content configuration options"
-    # Configure link
-    Then I click the element ".block-inline-blocktext-content ul > li:nth-child(1) > a"
-    Then I wait for 1 second
     # Bold button
     Then I should see that the "[data-cke-tooltip-text^='Bold']" element exists
     # Italics button
@@ -52,5 +46,3 @@ Feature: CKEditor button verification
     Then I should see that the "[data-cke-tooltip-text='Blockquote']" element exists
     # Webspark table button
     Then I should see that the "[data-cke-tooltip-text='Webspark table']" element exists
-
-
