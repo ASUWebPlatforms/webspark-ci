@@ -758,4 +758,29 @@ function webspark_update_10014(&$sandbox): void{
   \Drupal::state()->set('configuration_locked', TRUE);
 }
 
+/**
+ * WS2-1788 - Update block content gallery display
+ */
+function webspark_update_10015(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
 
+  //Update block content gallery display
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_form_display.block_content.gallery.default');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * WS2-1836 - Added image centering
+ */
+function webspark_update_10016(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_form_display.block_content.image.default');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('core.entity_view_display.block_content.image.default');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.block_content.image.field_center_image');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_center_image');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('field.storage.block_content.field_image_size');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}
