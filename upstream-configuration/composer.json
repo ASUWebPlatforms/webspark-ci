@@ -63,7 +63,9 @@
         "drupal/ckeditor": "1.0.2",
         "drupal/fakeobjects": "1.2.0",
         "northernco/ckeditor5-anchor-drupal": "0.4.0",
-        "drupal/layout_builder_usage_reports": "1.0.2"
+        "drupal/layout_builder_usage_reports": "1.0.2",
+        "drupal/ckeditor5_plugin_pack": "1.2.2",
+        "symfony/http-client": "6.4.13"
     },
     "config": {
         "sort-packages": true
