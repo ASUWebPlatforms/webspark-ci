@@ -49,7 +49,9 @@
         }
     ],
     "require": {
+        "drupal/ckeditor5_plugin_pack": "^1.2",
         "pantheon-upstreams/upstream-configuration": "*",
+        "symfony/http-client": "^6.4",
         "webspark/custom-dependencies": "*"
     },
     "require-dev": {

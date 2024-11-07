@@ -371,7 +371,7 @@ body .ui-dialog.ui-widget.ui-widget-content.media-library-widget-modal {
     position: fixed;
     bottom: 0;
     left: calc(50% - 400px);
-    z-index: 31;
+    z-index: 1600;
     align-items: baseline;
     border-radius: 20px 20px 0 0;
     width: 800px;
@@ -418,4 +418,9 @@ form.layout-builder-configure-block .form-check {
       content: none;
     }
   }
+}
+
+#drupal-off-canvas-wrapper {
+  resize: horizontal;
+  max-width: 100%;
 }
