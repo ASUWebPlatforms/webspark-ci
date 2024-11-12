@@ -76,7 +76,7 @@ function asu_brand_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     $form['links']['links']['#header'][] = t("Header settings");
     foreach (Element::children($form['links']['links']) as $key => $child) {
       $link_parts = explode(':', $child);
-      if ($link_parts[2] && Uuid::isValid($link_parts[2])) { // TODO Is there a better check we can do here?
+      if (count($link_parts) > 2 && $link_parts[2] && Uuid::isValid($link_parts[2])) { // TODO Is there a better check we can do here?
         $link_uuid = $link_parts[2];
         $link_entity = \Drupal::service('entity.repository')
           ->loadEntityByUuid('menu_link_content', $link_uuid);
@@ -434,3 +434,17 @@ function asu_brand_asu_brand_gtm_datalayer_alter(array &$datalayer) {
   $datalayer['site'] = 'My Site';
 }
 */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function asu_brand_form_menu_edit_form_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form['id']['#default_value']) && $form['id']['#default_value'] == 'main') {
+    // Add information text in the main menu on edit.
+    $form['indicatior'] = [
+      '#markup' => t('First menu link automatically becomes the home link'),
+      '#weight' => 1,
+    ];
+    $form['links']['#weight'] = 2;
+  }
+}

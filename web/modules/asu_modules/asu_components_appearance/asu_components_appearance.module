@@ -31,17 +31,3 @@ function asu_components_appearance_field_widget_entity_reference_paragraphs_form
   // Skip "Confirm deletion / Restore actions" behavior for a given paragraph.
   $element['top']['links']['remove_button']['#paragraphs_mode'] = 'removed';
 }
-
-/**
- * Implements hook_form_FORM_ID_alter().
- */
-function asu_components_appearance_form_menu_edit_form_alter(&$form, FormStateInterface $form_state) {
-  if (isset($form['id']['#default_value']) && $form['id']['#default_value'] == 'main') {
-    // Add information text in the main menu on edit.
-    $form['indicatior'] = [
-      '#markup' => t('First menu link automatically becomes the home link'),
-      '#weight' => 1,
-    ];
-    $form['links']['#weight'] = 2;
-  }
-}
