@@ -729,6 +729,50 @@ class FeatureContext extends RawDrupalContext {
   }
 
   /**
+   * Check for ellipses when pagination items exceed a threshold.
+   *
+   * @Then I should see ellipses if pagination items are greater than :threshold
+   *
+   * @param int $threshold
+   *
+   * @return void
+   * @throws Exception
+   */
+  public function checkElipsesExistsWithPagination(int $threshold): void {
+    $lastPageElement = $this->getSession()
+      ->getPage()
+      ->find('css', '.page-item:nth-last-child(2) > .page-link');
+
+    if (NULL === $lastPageElement) {
+      throw new Exception('last pagination element not found.');
+    }
+
+    $totalPages = (int) filter_var($lastPageElement->getText(), FILTER_SANITIZE_NUMBER_INT);
+
+    // Check if pagination exceeds threshold
+    if ($totalPages > $threshold) {
+      // There is a typo in Drupal for the class name, it should be "ellipsis" instead of "elipses"
+      $element = $this->getSession()
+        ->getPage()
+        ->find('css', 'li.page-item.elipses > span.page-link');
+      if (NULL === $element) {
+        throw new Exception(sprintf(
+          'Ellipses not found when pagination count (%d) exceeds threshold (%d)',
+          $totalPages,
+          $threshold
+        ));
+      }
+    }
+    else {
+      echo sprintf(
+        'Pagination count (%d) does not exceed threshold (%d), skipping ellipses check',
+        $totalPages,
+        $threshold
+      );
+    }
+  }
+
+  /**
    * Check bullet list styles.
    *
    * @Then I should see the bullet list styles are correct on :selector
