@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asu/component-news@2.1.1":
-  version "2.1.1"
-  resolved "https://npm.pkg.github.com/download/@asu/component-news/2.1.1/cf527fee86af265f7a34a8bfa9ef9e48f740bbac#cf527fee86af265f7a34a8bfa9ef9e48f740bbac"
-  integrity sha512-ub0YV12+axjRSaULfinPqP35oxJpb6KdjFAszB3LJgCTEEEEGskjxhXOXbWW8ybmVKzHe4zi98QHe9Heg82jJA==
+"@asu/component-news@3.0.0":
+  version "3.0.0"
+  resolved "https://npm.pkg.github.com/download/@asu/component-news/3.0.0/8ae27a30e5b84832160cbb3234201477671109df#8ae27a30e5b84832160cbb3234201477671109df"
+  integrity sha512-PkXCOdFYKG4FrTEzTYGKk5wqAU7F56q9vdnEItSUDRxKzO0v1g+f8h9MpmYYIyw1QRy5nvxEbVIImWM3DZ12qw==
   dependencies:
     "@asu/components-core" "^3.0.0"
     "@babel/preset-env" "^7.15.0"

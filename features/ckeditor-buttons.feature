@@ -6,20 +6,20 @@ Feature: CKEditor button verification
   @api @javascript
   Scenario: Verify CKEditor buttons
     Given I am logged in as user "admin"
-    When I am at '/node/28/layout'
-    Then I scroll ".layout__region--first" into view
+    When I am at '/node/add/page'
     Then I wait for 2 seconds
-    Then I hover over the element ".block-inline-blocktext-content"
-    Then I press "Open Text Content configuration options"
-    # Configure link
-    Then I click the element ".block-inline-blocktext-content ul > li:nth-child(1) > a"
-    Then I wait for 1 second
     # Bold button
     Then I should see that the "[data-cke-tooltip-text^='Bold']" element exists
     # Italics button
     Then I should see that the "[data-cke-tooltip-text^='Italic']" element exists
     # Link button
     Then I should see that the "[data-cke-tooltip-text^='Link']" element exists
+    # Unordered list button
+    Then I should see that the "[data-cke-tooltip-text='Bulleted List']" element exists
+    # Ordered list button
+    Then I should see that the "[data-cke-tooltip-text='Numbered List']" element exists
+    # Disabled list styles button
+    Then I should see that the "[data-cke-tooltip-text='List Properties']" element exists
     # Fontawesome button
     Then I should see that the "[data-cke-tooltip-text='Insert Fontawesome Icon']" element exists
     # Upload image button
@@ -32,12 +32,6 @@ Feature: CKEditor button verification
     Then I should see that the "[data-cke-tooltip-text='Source']" element exists
     # Responsive columns button
     Then I should see that the "[data-cke-tooltip-text='CKEditor Responsive']" element exists
-    # Unordered list button
-    Then I should see that the "[data-cke-tooltip-text='Bulleted List']" element exists
-    # Ordered list button
-    Then I should see that the "[data-cke-tooltip-text='Numbered List']" element exists
-    # Disabled list styles button
-    Then I should see that the "[data-cke-tooltip-text='List Properties']" element exists
     # Button button
     Then I should see that the "[data-cke-tooltip-text='Button']" element exists
     # Horizontal line button
@@ -50,7 +44,9 @@ Feature: CKEditor button verification
     Then I should see that the "[data-cke-tooltip-text='Highlighted Heading']" element exists
     # Blockquote button
     Then I should see that the "[data-cke-tooltip-text='Blockquote']" element exists
+    # Animated Bliockquote
+    Then I should see that the "[data-cke-tooltip-text='Blockquote Animated']" element exists
+    # Highlight
+    Then I should see that the "[data-cke-tooltip-text='Highlight']" element exists
     # Webspark table button
     Then I should see that the "[data-cke-tooltip-text='Webspark table']" element exists
-
-
