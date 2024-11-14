@@ -65,6 +65,13 @@
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "sirbrillig/phpcs-changed": "v2.11.4"
     },
+    "replace": {
+        "asu_modules/asu_brand": "self.version",
+        "asu_modules/asu_config_utility": "self.version",
+        "asu_modules/asu_react_core": "self.version",
+        "asu_modules/asu_react_integration": "self.version",
+        "asu_modules/asu_user": "self.version"
+    },
     "conflict": {
         "drupal/drupal": "*"
     },
