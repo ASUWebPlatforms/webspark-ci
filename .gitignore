@@ -165,3 +165,4 @@ upstream/web/
 
 # Ignore the auth.json file
 auth.json
+/test/playwright/core
