@@ -1,0 +1,4 @@
+.github/CODEOWNERS @ASUWebPlatforms/webspark-ci-pipeline-admins
+.github/workflows/ @ASUWebPlatforms/webspark-ci-pipeline-admins
+.ci/ @ASUWebPlatforms/webspark-ci-pipeline-admins
+.circleci/ @ASUWebPlatforms/webspark-ci-pipeline-admins
