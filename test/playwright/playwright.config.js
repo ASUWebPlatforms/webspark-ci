@@ -47,9 +47,9 @@ module.exports = defineConfig({
       testIgnore: /.*mobile.spec.js/,
     },
     // {
-      //   name: 'webkit',
-      //   use: { ...devices['Desktop Safari'] },
-      //   testIgnore: /.*mobile.spec.js/,
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    //   testIgnore: /.*mobile.spec.js/,
     // },
 
     /* Test against mobile viewports. */

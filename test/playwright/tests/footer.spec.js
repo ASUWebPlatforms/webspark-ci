@@ -5,7 +5,7 @@ const innovationLinks = [
   { name: 'Jobs', url: 'https://cfo.asu.edu/applicant' },
   { name: 'Directory', url: 'https://search.asu.edu/?search-tabs=web_dir_faculty_staff' },
   { name: 'Contact ASU', url: 'https://www.asu.edu/about/contact' },
-  { name: 'My ASU', url: 'https://my.asu.edu' }
+  { name: 'My ASU', url: 'https://my.asu.edu' },
 ];
 
 const colophonLinks = [
@@ -13,13 +13,13 @@ const colophonLinks = [
   { name: 'Accessibility', url: 'https://accessibility.asu.edu/report' },
   { name: 'Privacy', url: 'https://www.asu.edu/about/privacy' },
   { name: 'Terms of Use', url: 'https://www.asu.edu/about/terms-of-use' },
-  { name: 'Emergency', url: 'https://www.asu.edu/emergency' }
+  { name: 'Emergency', url: 'https://www.asu.edu/emergency' },
 ];
 
 const rankingImage = {
   alt: 'Repeatedly ranked #1 on 20+ lists in the last 3 years',
   src: '/modules/webspark/asu_footer/img/240917_ASU_Rankings_GOLD.png',
-  href: 'https://www.asu.edu/rankings'
+  href: 'https://www.asu.edu/rankings',
 };
 
 const socialLinks = [
@@ -27,29 +27,29 @@ const socialLinks = [
   { name: 'X / Twitter Social Media Icon' },
   { name: 'Instagram Social Media Icon' },
   { name: 'YouTube Social Media Icon' },
-  { name: 'LinkedIn Social Media Icon' }
+  { name: 'LinkedIn Social Media Icon' },
 ];
 
-test.describe('Footer tests', { tag: '@webspark' }, () => {
+test.describe('footer tests', { tag: '@webspark' }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await page.goto('/');
   });
 
-  test('test endorsed footer', async ({ page }) => {
+  test('endorsed footer', async ({ page }) => {
     await expect(page.locator('#wrapper-endorsed-footer')).toBeVisible();
     for (const link of socialLinks) {
       await expect(page.getByLabel('Social Media').getByRole('link', { name: link.name, exact: true })).toBeVisible();
     }
   });
 
-  test('test footer columns', async ({ page }) => {
+  test('footer columns', async ({ page }) => {
     await expect(page.locator('#wrapper-footer-columns')).toBeVisible();
 
     const columns = page.locator('#footer-columns div.col-xl');
     await expect(columns).toHaveCount(6);
   });
 
-  test('test footer innovation', async ({ page }) => {
+  test('footer innovation', async ({ page }) => {
     await expect(page.locator('#wrapper-footer-innovation')).toBeVisible();
 
     const img = page.getByAltText(rankingImage.alt);
@@ -65,7 +65,7 @@ test.describe('Footer tests', { tag: '@webspark' }, () => {
     }
   });
 
-  test('test footer colophon', async ({ page }) => {
+  test('footer colophon', async ({ page }) => {
     await expect(page.locator('#wrapper-footer-colophon')).toBeVisible();
 
     for (const link of colophonLinks) {

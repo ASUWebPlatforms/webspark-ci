@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Video hero tests', { tag: '@webspark' }, () => {
+test.describe('video hero tests', { tag: '@webspark' }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await page.goto('/video-hero');
   });
@@ -18,15 +18,15 @@ test.describe('Video hero tests', { tag: '@webspark' }, () => {
     expect(currentTime).toBeGreaterThan(0);
   });
 
-  test('video hero can be paused', async ({ page }) => {
+  test('video hero pauses', async ({ page }) => {
     const video = page.locator('#media-video');
 
-    // Pause video
+    // Pause
     await page.getByLabel('Pause').click();
     const isPaused = await video.evaluate((video) => video.paused);
     expect(isPaused).toBeTruthy();
 
-    // Play video
+    // Unpause
     await expect(page.getByRole('button', { name: 'Play hero video' })).toBeVisible();
     await page.getByRole('button', { name: 'Play hero video' }).click();
     const isPlaying = await video.evaluate((video) => !video.paused);
