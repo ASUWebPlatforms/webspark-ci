@@ -39,41 +39,41 @@ module.exports = defineConfig({
     // {
     //   name: 'chromium',
     //   use: { ...devices['Desktop Chrome'] },
-    //   testIgnore: /.*mobile.test.js/,
+    //   testIgnore: /.*mobile.spec.js/,
     // },
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-      testIgnore: /.*mobile.test.js/,
+      testIgnore: /.*mobile.spec.js/,
     },
     // {
       //   name: 'webkit',
       //   use: { ...devices['Desktop Safari'] },
-      //   testIgnore: /.*mobile.test.js/,
+      //   testIgnore: /.*mobile.spec.js/,
     // },
 
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
-    //   testMatch: /.*mobile.test.js/,
+    //   testMatch: /.*mobile.spec.js/,
     // },
     {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
-      testMatch: /.*mobile.test.js/,
+      testMatch: /.*mobile.spec.js/,
     },
 
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',
     //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    //   testIgnore: /.*mobile.test.js/,
+    //   testIgnore: /.*mobile.spec.js/,
     // },
     // {
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    //   testIgnore: /.*mobile.test.js/,
+    //   testIgnore: /.*mobile.spec.js/,
     // },
   ],
 
