@@ -5,10 +5,11 @@ test.describe('testimonial carousel (mobile) tests', { tag: '@webspark' }, () =>
     await page.goto('/testimonial-carousel');
   });
 
-  test('carousel functionality', async ({ page }) => {
-    // check arrows visibility
-    // check buttons NOT visiblew
-    // click arrow, check next slide
-    // swipe to next slide
+  test('testimonial carousel functionality', async ({ page }) => {
+    await expect(page.getByLabel('Slide view 1')).toBeHidden();
+    await expect(page.getByLabel('Next slide')).toBeVisible();
+    // Best we have for now until native swipe is implemented in Playwright
+    await page.getByLabel('Next slide').tap();
+    await expect(page.locator('.glide__slide').nth(1)).toBeVisible();
   });
 });
