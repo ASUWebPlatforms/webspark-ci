@@ -217,7 +217,7 @@ ddev pull pantheon
 
 ## Playwright
 
-We use [Playwright](https://playwright.dev) for  front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests
+We use [Playwright](https://playwright.dev) for  front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
 
 ### Installing Playwright
 
@@ -272,11 +272,18 @@ ddev playwright test --headed
 ```
 
 Generate Playwright tests by browsing:
+> See [the docs](https://playwright.dev/docs/codegen#generate-tests-with-the-playwright-inspector) for all Codegen options
 
 ```bash
 # Open the UI from https://webspark-ci.ddev.site:8444
 # Username is your local (computer home folder) username. Password is 'secret'.
 ddev playwright codegen
+
+# You can also open to a URL
+ddev playwright codegen <url>
+
+# You can also tell it the size of the viewport to use
+ddev playwright codegen --viewport-size=<width>,<height>
 ```
 
 View HTML or other Playwright reports:
