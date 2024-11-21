@@ -235,7 +235,24 @@ ddev install-playwright
 Run Playwright tests using the CI:
 
 ```bash
+# Run all tests for all projects
 ddev playwright test
+
+# Run a specific test file(s)
+# Ex: ddev playwright test homepage.spec.js charts.spec.js
+ddev playwright test <file> <file2>
+
+# Run any tests via keyword(s)
+# Ex: ddev playwright test footer chart
+ddev playwright test <keyword> <keyword2>
+
+# Run a test with a specific title
+# Ex: ddev playwright test -g "search from 404"
+ddev playwright test -g "<title>"
+
+# Run tests for a specific project
+# Ex: ddev playwright test --project firefox
+ddev playwright test --project <project>
 ```
 
 Run Playwright tests using the UI:
