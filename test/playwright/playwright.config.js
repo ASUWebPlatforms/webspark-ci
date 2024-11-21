@@ -31,38 +31,46 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
-    viewport: { width: 1920, height: 1080 },
   },
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    //   testIgnore: /.*mobile.spec.js/,
-    // },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        viewport: { width: 1920, height: 1080 },
+      },
       testIgnore: /.*mobile.spec.js/,
     },
     // {
+    //   name: 'chromium',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     viewport: { width: 1920, height: 1080 },
+    //   },
+    //   testIgnore: /.*mobile.spec.js/,
+    // },
+    // {
     //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     viewport: { width: 1920, height: 1080 },
+    //   },
     //   testIgnore: /.*mobile.spec.js/,
     // },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    //   testMatch: /.*mobile.spec.js/,
-    // },
     {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
       testMatch: /.*mobile.spec.js/,
     },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    //   testMatch: /.*mobile.spec.js/,
+    // },
 
     /* Test against branded browsers. */
     // {
