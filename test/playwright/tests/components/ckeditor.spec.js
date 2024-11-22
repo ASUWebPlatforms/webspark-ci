@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import drupal from './helpers/drupal.helpers';
+import drupal from '../helpers/drupal.helpers';
 
 const buttons = [
   'Bold',
@@ -24,13 +24,11 @@ const buttons = [
   'Webspark table',
 ];
 
-test.describe('ckeditor tests', { tag: '@webspark' }, () => {
-  test('default buttons load', async ({ page }) => {
-    await drupal.loginAsAdmin(page);
-    await page.goto('/node/add/page');
-    await expect(page.getByLabel('Highlight').nth(1)).toBeVisible();
-    for (const i of buttons) {
-      await expect(page.getByLabel(i, { exact: true })).toBeVisible();
-    }
-  });
+test('default ckeditor buttons load', { tag: '@webspark' }, async ({ page }) => {
+  await drupal.loginAsAdmin(page);
+  await page.goto('/node/add/page');
+  await expect(page.getByLabel('Highlight').nth(1)).toBeVisible();
+  for (const i of buttons) {
+    await expect(page.getByLabel(i, { exact: true })).toBeVisible();
+  }
 });

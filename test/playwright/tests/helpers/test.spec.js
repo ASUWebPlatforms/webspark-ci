@@ -4,7 +4,7 @@
  */
 
 import { test, expect } from '@playwright/test';
-import drupal from './helpers/drupal.helpers';
+import drupal from './drupal.helpers';
 
 test('login as admin', async ({ page }) => {
   await drupal.loginAsAdmin(page);
