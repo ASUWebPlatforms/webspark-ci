@@ -24,6 +24,17 @@ class DrupalHelpers {
     const url = this.drush('uli');
     return await page.goto(url.toString());
   }
+
+  /**
+   * Visit the Layout Builder for the Basic Page.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  async visitLayoutBuilder(page) {
+    await this.loginAsAdmin(page);
+    return await page.goto('/node/35/layout');
+  }
 }
 
 export default new DrupalHelpers();
