@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asu/component-carousel@2.1.1":
-  version "2.1.1"
-  resolved "https://npm.pkg.github.com/download/@ASU/component-carousel/2.1.1/ddfdbca096e0a37403b686d22bcca83824c4ec1e#ddfdbca096e0a37403b686d22bcca83824c4ec1e"
-  integrity sha512-QIbrivGpxG9gb9Q3H+c32Ll3AOOF7YgODnNXNqnesQIj1RaOXYelCURI7WdHW980XoBvFDAzbgALyDt77VW1Mg==
+"@asu/component-carousel@2.2.0":
+  version "2.2.0"
+  resolved "https://npm.pkg.github.com/download/@ASU/component-carousel/2.2.0/03d7cff4cc662e45006c8a64b810d7e177750d5a#03d7cff4cc662e45006c8a64b810d7e177750d5a"
+  integrity sha512-Cc5iBByGUrYFZl0lbe5J3a5Y+DTeA/Q2dp++F96GMDDy3e8QvzCVDTJxk8/xhoMm3Q274m6TwljT12+R4YneDg==
   dependencies:
     "@asu/components-core" "^3.0.0"
     "@babel/plugin-transform-react-jsx" "^7.13.12"
