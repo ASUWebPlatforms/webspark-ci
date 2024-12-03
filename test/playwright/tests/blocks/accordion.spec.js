@@ -3,16 +3,28 @@ import drupal from '../helpers/drupal.helpers';
 
 test.describe('', { tag: '@webspark' }, () => {
   test.beforeEach('setup', async ({ page }) => {
-    // login as admin
-    // visit layout builder
+    await drupal.visitLayoutBuilder(page);
   });
 
   test('create', async ({ page }) => {
-    // add a new block to the page
-    // add all required fields
-    // add optional fields
-    // save
-    // ensure block is visible with all fields
+    await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await page.getByRole('link', { name: 'Accordion', exact: true }).click();
+    await page.getByLabel('Required Block admin title').click();
+    await page.getByLabel('Required Block admin title').fill('Accordion');
+    await page.getByRole('textbox', { name: 'Heading' }).click();
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Accordion heading');
+    await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
+    await page.getByLabel('Rich Text Editor').getByRole('paragraph').fill('Accordion content');
+    await page.getByRole('button', { name: 'Add block' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click();
+  });
+
+  test('verify create', async ({ page }) => {
+    // visit the page where i just created the block
+    await expect(page.getByRole('button', { name: 'Accordion heading', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Accordion heading', exact: true }).click();
+    await expect(page.getByText('Accordion content')).toBeVisible();
   });
 
   test('edit', async ({ page }) => {
