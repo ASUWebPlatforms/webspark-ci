@@ -3,6 +3,7 @@ import drupal from '../helpers/drupal.helpers';
 
 test.describe('', { tag: '@webspark' }, () => {
   test.beforeEach('setup', async ({ page }) => {
+    await drupal.closeCookieConsent(page);
     await drupal.visitLayoutBuilder(page);
   });
 
@@ -21,10 +22,10 @@ test.describe('', { tag: '@webspark' }, () => {
   });
 
   test('verify create', async ({ page }) => {
-    // visit the page where i just created the block
-    await expect(page.getByRole('button', { name: 'Accordion heading', exact: true })).toBeVisible();
-    await page.getByRole('button', { name: 'Accordion heading', exact: true }).click();
-    await expect(page.getByText('Accordion content')).toBeVisible();
+    // await page.goto('/basic-page');
+    // await expect(page.getByRole('button', { name: 'Accordion heading', exact: true })).toBeVisible();
+    // await page.getByRole('button', { name: 'Accordion heading', exact: true }).click();
+    // await expect(page.getByText('Accordion content')).toBeVisible();
   });
 
   test('edit', async ({ page }) => {

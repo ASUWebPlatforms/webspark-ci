@@ -26,6 +26,22 @@ class DrupalHelpers {
   }
 
   /**
+   * Close the cookie consent banner if it is visible.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  // todo: find a good way to get rid of this at all times
+  async closeCookieConsent(page) {
+    const count = await page.getByLabel('Close cookie consent').count();
+    console.log(count);
+    if (count > 0) {
+      return await page.getByLabel('Close cookie consent').click();
+    }
+    return;
+  }
+
+  /**
    * Visit the Layout Builder for the Basic Page.
    *
    * @param page
