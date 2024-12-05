@@ -1,3 +1,5 @@
+import { findSourceMap } from 'module';
+
 const { execSync } = require('child_process');
 
 /**
@@ -26,22 +28,6 @@ class DrupalHelpers {
   }
 
   /**
-   * Close the cookie consent banner if it is visible.
-   *
-   * @param page
-   * @returns {Promise<*>}
-   */
-  // todo: find a good way to get rid of this at all times
-  async closeCookieConsent(page) {
-    const count = await page.getByLabel('Close cookie consent').count();
-    console.log(count);
-    if (count > 0) {
-      return await page.getByLabel('Close cookie consent').click();
-    }
-    return;
-  }
-
-  /**
    * Visit the Layout Builder for the Basic Page.
    *
    * @param page
@@ -50,6 +36,34 @@ class DrupalHelpers {
   async visitLayoutBuilder(page) {
     await this.loginAsAdmin(page);
     return await page.goto('/node/35/layout');
+  }
+
+  /**
+   * Close the cookie consent banner if it is visible.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  async removeElement(page, selector) {
+    const el = page.locator(selector);
+    const counts = await el.count();
+    if (counts > 0) {
+      await el.evaluate(el => el.remove());
+    } else {
+      console.log(`Element "${selector}" not found in the DOM.`);
+    }
+  }
+
+  /**
+   * Remove a block from the layout.
+   *
+   * @param page
+   */
+  async removeBlock(page) {
+    await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
+    await page.getByRole('link', { name: 'Remove block' }).click();
+    await page.getByRole('button', { name: 'Remove' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
   }
 }
 

@@ -1,13 +1,23 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-test.describe('', { tag: '@webspark' }, () => {
-  test.beforeEach('setup', async ({ page }) => {
-    await drupal.closeCookieConsent(page);
+test.describe('accordion block tests', { tag: '@webspark' }, () => {
+  /** @type {import('@playwright/test').Page} */
+  let page;
+
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
     await drupal.visitLayoutBuilder(page);
+    await drupal.removeElement(page, '.cookie-consent-component');
   });
 
-  test('create', async ({ page }) => {
+  test.afterAll('cleanup', async () => {
+    await page.getByRole('link', { name: 'Layout' }).first().click();
+    await drupal.removeBlock(page);
+    await page.close();
+  });
+
+  test('create', async () => {
     await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
     await page.getByRole('link', { name: 'Create content block' }).click();
     await page.getByRole('link', { name: 'Accordion', exact: true }).click();
@@ -18,35 +28,36 @@ test.describe('', { tag: '@webspark' }, () => {
     await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
     await page.getByLabel('Rich Text Editor').getByRole('paragraph').fill('Accordion content');
     await page.getByRole('button', { name: 'Add block' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
+
+    // after the redirect to /basic-page
+    await expect(page.getByRole('button', { name: 'Accordion heading', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Accordion heading', exact: true }).click();
+    await expect(page.getByText('Accordion content')).toBeVisible();
   });
 
-  test('verify create', async ({ page }) => {
-    // await page.goto('/basic-page');
-    // await expect(page.getByRole('button', { name: 'Accordion heading', exact: true })).toBeVisible();
-    // await page.getByRole('button', { name: 'Accordion heading', exact: true }).click();
-    // await expect(page.getByText('Accordion content')).toBeVisible();
-  });
+  // test('edit', async () => {
+  //   await page.getByRole('link', { name: 'Layout' }).first().click();
+  //   // need to hover over the block first before the button shows up
+  //   await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).dispatchEvent('click');
+  //   await page.getByRole('link', { name: 'Configure', exact: true }).click();
+  //   await page.getByLabel('Required Color Options').selectOption('accordion-item-maroon');
+  //   await page.locator('.selector-button').first().click();
+  //   await page.locator('#edit-settings-block-form-field-paragraph-0-subform-field-icon-wrapper--tXW9fNGJ6Uw').getByTitle('Arizona,ASUAwesome,D_arizona').locator('path').click();
+  //   await page.getByLabel('Initially Expanded').check();
+  //   await page.getByRole('button', { name: 'Appearance Settings' }).click();
+  //   await page.getByLabel('Anchor menu title').click();
+  //   await page.getByLabel('Anchor menu title').fill('Anchor accordion');
+  //   await page.getByLabel('Spacing top').selectOption('spacing-top-8');
+  //   await page.getByLabel('Spacing bottom').selectOption('spacing-bottom-16');
+  //   await page.getByRole('button', { name: 'Update' }).click();
+  //   await page.getByRole('button', { name: 'Save layout' }).dispatchEvent('click');
 
-  test('edit', async ({ page }) => {
-    // select the block you just created
-    // edit the block
-    // save
-    // ensure block is visible
-    // drag and drop it to a new location on the page
-  });
-
-  test('delete', async ({ page }) => {
-    // select the block you just created
-    // delete the block
-    // ensure block is not visible
-  });
-
-  test('anchor menu', async ({ page }) => {
-    // add the anchor menu options
-    // save
-    // ensure the adequate markup is present
-    // note, it is not the responsibility of the test to validate the anchor menu functionality here
-    // only that the block itself provides the data to the anchor menu
-  });
+  //   // after the redirect to /basic-page
+  //   await expect(page.getByText('Accordion content')).toBeVisible();
+  //   await expect(page.locator('accordion-item.accordion-item-maroon')).toBeVisible();
+  //   await expect(page.locator('.accordion-item .accordion-icon')).toBeVisible();
+  //   await expect(page.locator('.spacing-top-8.spacing-bottom-16.block-inline-blockaccordion')).toHaveCount(1);
+  //   await expect(page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', 'Anchor accordion');
+  // });
 });
