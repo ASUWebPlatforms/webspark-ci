@@ -63,6 +63,7 @@ class DrupalHelpers {
     await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
     await page.getByRole('link', { name: 'Remove block' }).click();
     await page.getByRole('button', { name: 'Remove' }).click();
+    // this click doesnt seem to actually save the changes
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
   }
 }

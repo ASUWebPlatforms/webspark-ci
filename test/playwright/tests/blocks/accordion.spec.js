@@ -36,28 +36,27 @@ test.describe('accordion block tests', { tag: '@webspark' }, () => {
     await expect(page.getByText('Accordion content')).toBeVisible();
   });
 
-  // test('edit', async () => {
-  //   await page.getByRole('link', { name: 'Layout' }).first().click();
-  //   // need to hover over the block first before the button shows up
-  //   await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).dispatchEvent('click');
-  //   await page.getByRole('link', { name: 'Configure', exact: true }).click();
-  //   await page.getByLabel('Required Color Options').selectOption('accordion-item-maroon');
-  //   await page.locator('.selector-button').first().click();
-  //   await page.locator('#edit-settings-block-form-field-paragraph-0-subform-field-icon-wrapper--tXW9fNGJ6Uw').getByTitle('Arizona,ASUAwesome,D_arizona').locator('path').click();
-  //   await page.getByLabel('Initially Expanded').check();
-  //   await page.getByRole('button', { name: 'Appearance Settings' }).click();
-  //   await page.getByLabel('Anchor menu title').click();
-  //   await page.getByLabel('Anchor menu title').fill('Anchor accordion');
-  //   await page.getByLabel('Spacing top').selectOption('spacing-top-8');
-  //   await page.getByLabel('Spacing bottom').selectOption('spacing-bottom-16');
-  //   await page.getByRole('button', { name: 'Update' }).click();
-  //   await page.getByRole('button', { name: 'Save layout' }).dispatchEvent('click');
+  test('edit', async () => {
+    await page.getByRole('link', { name: 'Layout' }).first().click();
+    await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
+    await page.getByRole('link', { name: 'Configure', exact: true }).click();
+    await page.getByLabel('Required Color Options').selectOption('accordion-item-maroon');
+    await page.locator('.fip-icon-down-dir').first().click();
+    await page.locator('.field--widget-fontawesome-iconpicker-widget').getByTitle('Arizona,ASUAwesome,D_arizona').first().click();
+    await page.getByLabel('Initially Expanded').check();
+    await page.getByRole('button', { name: 'Appearance Settings' }).click();
+    await page.getByLabel('Anchor menu title').click();
+    await page.getByLabel('Anchor menu title').fill('Anchor accordion');
+    await page.getByLabel('Spacing top').selectOption('spacing-top-8');
+    await page.getByLabel('Spacing bottom').selectOption('spacing-bottom-16');
+    await page.getByRole('button', { name: 'Update' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
 
-  //   // after the redirect to /basic-page
-  //   await expect(page.getByText('Accordion content')).toBeVisible();
-  //   await expect(page.locator('accordion-item.accordion-item-maroon')).toBeVisible();
-  //   await expect(page.locator('.accordion-item .accordion-icon')).toBeVisible();
-  //   await expect(page.locator('.spacing-top-8.spacing-bottom-16.block-inline-blockaccordion')).toHaveCount(1);
-  //   await expect(page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', 'Anchor accordion');
-  // });
+    // after the redirect to /basic-page
+    await expect(page.getByLabel('First region in Top').getByText('Accordion content')).toBeVisible();
+    await expect(page.locator('.accordion-item.accordion-item-maroon')).toBeVisible();
+    await expect(page.locator('.accordion-item .accordion-icon')).toBeVisible();
+    await expect(page.locator('.spacing-top-8.spacing-bottom-16.block-inline-blockaccordion')).toHaveCount(1);
+    await expect(page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', 'Anchor accordion');
+  });
 });

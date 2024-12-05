@@ -1,4 +1,5 @@
-// TODO: break this entire file into individual block level tests, see accordion.spec.js for an example
+// todo: break this entire file into individual block level tests, see accordion.spec.js for an example
+// todo: then, test the core layout builder functionality, that any block can be added, edited, and deleted
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
