@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-test.describe('donut chart block tests', { tag: '@webspark' }, () => {
+test.describe('divider block tests', { tag: '@webspark' }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
@@ -20,31 +20,25 @@ test.describe('donut chart block tests', { tag: '@webspark' }, () => {
   test('create', async () => {
     await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
     await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: 'Donut Chart', exact: true }).click();
+    await page.getByRole('link', { name: 'Divider', exact: true }).click();
     await page.getByLabel('Required Block admin title').click();
-    await page.getByLabel('Required Block admin title').fill('Donut Chart');
-    await page.getByLabel('Required Number').click();
-    await page.getByLabel('Required Number').press('NumLock');
-    await page.getByLabel('Required Number').fill('25');
-    await page.getByLabel('Text', { exact: true }).click();
-    await page.getByLabel('Text', { exact: true }).fill('25% increase');
+    await page.getByLabel('Required Block admin title').fill('Divider');
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
 
     // after the redirect to /basic-page
-    await expect(page.locator('#uds-donut').first()).toBeVisible();
-    await expect(page.locator('#uds-donut').first()).toHaveCSS('height', '350px');
-    await expect(page.locator('#percentage-display').first()).toContainText('25%');
-    await expect(page.locator('#percentage-display + span').first()).toContainText('25% increase');
+    await expect(page.getByRole('separator')).toBeVisible();
+    await expect(page.getByRole('separator')).toHaveClass('margin-width-divider');
   });
 
   test('edit', async () => {
     await drupal.visitLayoutBuilderForNode(page);
-    await page.getByLabel('Required Text Color').selectOption('text-white');
+    await page.getByLabel('Required Divider type').selectOption('copy');
     await page.getByRole('button', { name: 'Update' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
-    await expect(page.locator('.uds-charts-and-graphs-overlay.text-white')).toHaveCount(1);
-    // this block doesnt appear in achor menu yet
-    // await drupal.checkAppearanceSettings(page, 'donut-chart');
+
+    // after the redirect to /basic-page
+    await expect(page.getByRole('separator')).toBeVisible();
+    await expect(page.getByRole('separator')).toHaveClass('copy-divider');
   });
 });
