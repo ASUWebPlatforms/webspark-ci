@@ -5,7 +5,7 @@ test.describe('accordion block tests', { tag: '@webspark' }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
-  test.beforeAll(async ({ browser }) => {
+  test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
     await drupal.visitLayoutBuilder(page);
     await drupal.removeElement(page, '.cookie-consent-component');
@@ -37,26 +37,16 @@ test.describe('accordion block tests', { tag: '@webspark' }, () => {
   });
 
   test('edit', async () => {
-    await page.getByRole('link', { name: 'Layout' }).first().click();
-    await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
-    await page.getByRole('link', { name: 'Configure', exact: true }).click();
+    await drupal.visitLayoutBuilderForNode(page);
     await page.getByLabel('Required Color Options').selectOption('accordion-item-maroon');
     await page.locator('.fip-icon-down-dir').first().click();
     await page.locator('.field--widget-fontawesome-iconpicker-widget').getByTitle('Arizona,ASUAwesome,D_arizona').first().click();
     await page.getByLabel('Initially Expanded').check();
-    await page.getByRole('button', { name: 'Appearance Settings' }).click();
-    await page.getByLabel('Anchor menu title').click();
-    await page.getByLabel('Anchor menu title').fill('Anchor accordion');
-    await page.getByLabel('Spacing top').selectOption('spacing-top-8');
-    await page.getByLabel('Spacing bottom').selectOption('spacing-bottom-16');
-    await page.getByRole('button', { name: 'Update' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
+    await drupal.checkAppearanceSettings(page, 'accordion');
 
     // after the redirect to /basic-page
     await expect(page.getByLabel('First region in Top').getByText('Accordion content')).toBeVisible();
     await expect(page.locator('.accordion-item.accordion-item-maroon')).toBeVisible();
     await expect(page.locator('.accordion-item .accordion-icon')).toBeVisible();
-    await expect(page.locator('.spacing-top-8.spacing-bottom-16.block-inline-blockaccordion')).toHaveCount(1);
-    await expect(page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', 'Anchor accordion');
   });
 });
