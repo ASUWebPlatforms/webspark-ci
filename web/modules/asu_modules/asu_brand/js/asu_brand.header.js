@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
   // Not using behaviors for most of this.
   Drupal.behaviors.AsuBrandHeaderBehavior = {
     attach: function (context, settings) {
@@ -173,6 +173,4 @@
     }
   }
 
-// TODO Without jQuery, we get Uncaught ReferenceError: jQuery is not defined.
-// Is it required by Drupal or drupalSettings? Would like it working w/o jQuery.
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);
