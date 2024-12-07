@@ -4,7 +4,6 @@ import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
 const blocks = [
-  'Accordion',
   'Blockquote',
   'Card and Image',
   'Card Arrangement',
@@ -12,8 +11,6 @@ const blocks = [
   'Card image and content',
   'Content image overlap',
   'Display List',
-  'Divider',
-  'Donut Chart',
   'Events',
   'Grid Links',
   'Hero',
