@@ -22,37 +22,41 @@ test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
 
   test('create', async () => {
     await drupal.addBlock(page, BLOCK);
-    await page.getByRole('textbox', { name: 'Heading' }).click();
-    await page.getByRole('textbox', { name: 'Heading' }).fill('Heading');
-    await page.getByLabel('Editor editing area: main').click();
+    await page.getByLabel('Required Accent Color').selectOption('accent-gold');
+    await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
+    await page.getByLabel('Rich Text Editor').getByRole('paragraph').fill('Blockquote content');
     await page.getByLabel('Citation author').click();
     await page.getByLabel('Citation author').fill('Blockquote author');
     await page.getByLabel('Citation Title').click();
     await page.getByLabel('Citation Title').fill('Blockquote author title');
-    await page.getByRole('button', { name: 'Add media' }).click();
-    await page.locator('article').filter({ hasText: 'Hero-DreamscapeLearn-2022.jpeg' }).getByRole('img').click();
-    await page.getByRole('button', { name: 'Insert selected' }).click();
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
 
     // after the redirect to /basic-page
-    await expect(page.getByText('Heading')).toBeVisible();
+    await expect(page.locator('.uds-blockquote')).toHaveClass(/accent-gold/);
     await expect(page.getByText('Blockquote content')).toBeVisible();
     await expect(page.getByText('Blockquote author', { exact: true })).toBeVisible();
     await expect(page.getByText('Blockquote author title')).toBeVisible();
-    await expect(page.getByRole('img', { name: 'test' })).toBeVisible();
   });
 
   test('edit', async () => {
     await drupal.visitLayoutBuilderForNode(page);
-    await page.getByLabel('Required Accent Color').selectOption('accent-gold');
+    await page.getByRole('textbox', { name: 'Heading' }).click();
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Blockquote heading');
     await page.getByLabel('Required Text Color').selectOption('text-white');
     await page.getByLabel('Heading Highlight').selectOption('highlight-gold');
-    await page.locator('#edit-settings-block-form-field-blockquote-0-subform-field-image-position--LV38YQ99hSE').getByText('Right').click();
-    await page.getByRole('button', { name: 'Update' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
+    await page.locator('.form-item-settings-block-form-field-blockquote-0-subform-field-image-position > .form-check-label').getByText('Right').click();
+    await page.getByRole('button', { name: 'Add media' }).click();
+    await page.locator('article').filter({ hasText: 'Hero-DreamscapeLearn-2022.jpeg' }).getByRole('img').click();
+    await page.getByRole('button', { name: 'Insert selected' }).click();
+    await page.getByLabel('Citation Style').selectOption('alt-citation');
     await drupal.checkAppearanceSettings(page, MACHINE_NAME);
 
     // after the redirect to /basic-page
+    await expect(page.locator('.uds-blockquote')).toHaveClass(/text-white reversed/);
+    await expect(page.getByText('Blockquote heading')).toHaveClass('highlight-gold');
+    await expect(page.getByText('Blockquote heading')).toBeVisible();
+    await expect(page.getByRole('img', { name: 'test' })).toBeVisible();
+    await expect(page.locator('.uds-blockquote .citation')).toBeVisible();
   });
 });

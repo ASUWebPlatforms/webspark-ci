@@ -4,7 +4,6 @@ import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
 const blocks = [
-  'Blockquote',
   'Card and Image',
   'Card Arrangement',
   'Card Carousel',
