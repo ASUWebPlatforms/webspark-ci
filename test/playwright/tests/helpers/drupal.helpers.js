@@ -98,6 +98,7 @@ class DrupalHelpers {
 
   /**
    * Test the Appearance settings.
+   * Note that this method will update and save the layout.
    *
    * @param page
    * @param title

@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-test.describe('divider block tests', { tag: '@webspark' }, () => {
+const BLOCK = 'Divider';
+const MACHINE_NAME = 'divider';
+
+test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
@@ -18,11 +21,7 @@ test.describe('divider block tests', { tag: '@webspark' }, () => {
   });
 
   test('create', async () => {
-    await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: 'Divider', exact: true }).click();
-    await page.getByLabel('Required Block admin title').click();
-    await page.getByLabel('Required Block admin title').fill('Divider');
+    await drupal.addBlock(page, BLOCK);
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
 

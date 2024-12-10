@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-test.describe('accordion block tests', { tag: '@webspark' }, () => {
+const BLOCK = 'Accordion';
+const MACHINE_NAME = 'accordion';
+
+test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
@@ -18,11 +21,7 @@ test.describe('accordion block tests', { tag: '@webspark' }, () => {
   });
 
   test('create', async () => {
-    await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: 'Accordion', exact: true }).click();
-    await page.getByLabel('Required Block admin title').click();
-    await page.getByLabel('Required Block admin title').fill('Accordion');
+    await drupal.addBlock(page, BLOCK);
     await page.getByRole('textbox', { name: 'Heading' }).click();
     await page.getByRole('textbox', { name: 'Heading' }).fill('Accordion heading');
     await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
@@ -42,7 +41,7 @@ test.describe('accordion block tests', { tag: '@webspark' }, () => {
     await page.locator('.fip-icon-down-dir').first().click();
     await page.locator('.field--widget-fontawesome-iconpicker-widget').getByTitle('Arizona,ASUAwesome,D_arizona').first().click();
     await page.getByLabel('Initially Expanded').check();
-    await drupal.checkAppearanceSettings(page, 'accordion');
+    await drupal.checkAppearanceSettings(page, MACHINE_NAME);
 
     // after the redirect to /basic-page
     await expect(page.getByLabel('First region in Top').getByText('Accordion content')).toBeVisible();

@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-test.describe('donut chart block tests', { tag: '@webspark' }, () => {
+const BLOCK = 'Donut Chart';
+
+test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
@@ -18,11 +20,7 @@ test.describe('donut chart block tests', { tag: '@webspark' }, () => {
   });
 
   test('create', async () => {
-    await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: 'Donut Chart', exact: true }).click();
-    await page.getByLabel('Required Block admin title').click();
-    await page.getByLabel('Required Block admin title').fill('Donut Chart');
+    await drupal.addBlock(page, BLOCK);
     await page.getByLabel('Required Number').click();
     await page.getByLabel('Required Number').press('NumLock');
     await page.getByLabel('Required Number').fill('25');
@@ -44,7 +42,5 @@ test.describe('donut chart block tests', { tag: '@webspark' }, () => {
     await page.getByRole('button', { name: 'Update' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
     await expect(page.locator('.uds-charts-and-graphs-overlay.text-white')).toHaveCount(1);
-    // this block doesnt appear in achor menu yet
-    // await drupal.checkAppearanceSettings(page, 'donut-chart');
   });
 });
