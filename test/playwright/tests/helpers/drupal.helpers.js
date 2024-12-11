@@ -104,7 +104,7 @@ class DrupalHelpers {
    * @param title
    * @returns {Promise<void>}
    */
-  async checkAppearanceSettings(page, title) {
+  async addAppearanceSettings(page, title) {
     await page.getByRole('button', { name: 'Appearance Settings' }).click();
     await page.getByLabel('Anchor menu title').click();
     await page.getByLabel('Anchor menu title').fill(title);
@@ -116,6 +116,49 @@ class DrupalHelpers {
     // after the redirect to /basic-page
     await expect(page.locator(`.spacing-top-8.spacing-bottom-8.block-inline-block${title}`)).toHaveCount(1);
     await expect(page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', title);
+  }
+
+  /**
+   * Add media to a block.
+   *
+   * @param page
+   * @param media
+   * @returns {Promise<void>}
+   */
+  async addMediaField(page, media = 'Hero-DreamscapeLearn-2022.jpeg') {
+    await page.getByRole('button', { name: 'Add media' }).click();
+    await page.locator('article').filter({ hasText: media }).getByRole('img').click();
+    await page.getByRole('button', { name: 'Insert selected' }).click();
+  }
+
+  /**
+   * Add a heading to a block.
+   *
+   * @param page
+   * @param content
+   * @returns {Promise<void>}
+   */
+  async addHeadingField(page, content) {
+  }
+
+  /**
+   * Add CKE content to a block.
+   *
+   * @param page
+   * @param content
+   * @returns {Promise<void>}
+   */
+  async addCkField(page, content) {
+  }
+
+  /**
+   * Add an icon to a block.
+   *
+   * @param page
+   * @param icon
+   * @returns {Promise<void>}
+   */
+  async addIconField(page, icon) {
   }
 }
 

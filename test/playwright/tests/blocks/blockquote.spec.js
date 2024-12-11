@@ -46,11 +46,9 @@ test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
     await page.getByLabel('Required Text Color').selectOption('text-white');
     await page.getByLabel('Heading Highlight').selectOption('highlight-gold');
     await page.locator('.form-item-settings-block-form-field-blockquote-0-subform-field-image-position > .form-check-label').getByText('Right').click();
-    await page.getByRole('button', { name: 'Add media' }).click();
-    await page.locator('article').filter({ hasText: 'Hero-DreamscapeLearn-2022.jpeg' }).getByRole('img').click();
-    await page.getByRole('button', { name: 'Insert selected' }).click();
+    await drupal.addMediaField(page);
     await page.getByLabel('Citation Style').selectOption('alt-citation');
-    await drupal.checkAppearanceSettings(page, MACHINE_NAME);
+    await drupal.addAppearanceSettings(page, MACHINE_NAME);
 
     // after the redirect to /basic-page
     await expect(page.locator('.uds-blockquote')).toHaveClass(/text-white reversed/);
