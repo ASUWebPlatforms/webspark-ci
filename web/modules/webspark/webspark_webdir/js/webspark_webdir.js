@@ -43,6 +43,7 @@
             usePager: value.dataset.usePager,
             profilesPerPage: value.dataset.profilesPerPage,
             doNotDisplayProfiles: value.dataset.doNotDisplayProfiles,
+            grid: value.dataset.grid,
           },
           alphaFilter: value.dataset.alphaFilter,
           appPathFolder: value.dataset.appPathFolder,
