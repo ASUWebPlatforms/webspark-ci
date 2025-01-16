@@ -134,7 +134,7 @@
   props.renderDiv = 'true';
 
   // Initialize the asu_brand component-header header.
-  AsuHeader.initGlobalHeader({
+  AsuHeaderFooter.initGlobalHeader({
     targetSelector: '#ws2HeaderContainer',
     props: props
   });

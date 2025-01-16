@@ -2,7 +2,7 @@
 
   Drupal.behaviors.imageCarousel = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCarousel !== "undefined" && typeof AsuWebCarousel.initImageCarousel !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initImageCarousel !== "undefined";
       var imageExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.carousel_image !== "undefined";
 
       if (!imageExist || !componentLoaded) {
@@ -17,7 +17,7 @@
 
         var type = carouselData.type
         // Setup and initialize the Image carousel.
-        AsuWebCarousel.initImageCarousel({
+        unityReactCore.initImageCarousel({
           targetSelector: "#imageCarouselContainer" + imageId,
           props: {
             perView: "2",

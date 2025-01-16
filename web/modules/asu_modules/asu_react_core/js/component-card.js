@@ -2,7 +2,7 @@
 
   Drupal.behaviors.card = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCore !== "undefined" && typeof AsuWebCore.initCard !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initCard !== "undefined";
       var cardExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.content_section !== "undefined";
 
       if (!cardExist || !componentLoaded) {
@@ -14,7 +14,7 @@
 	      var cardId = cardData.cardId;
         var card = settings.asu.components.card[cardId];
         //Setup and initialize the Card.
-        AsuWebCore.initCard({
+        unityReactCore.initCard({
           targetSelector: '#card-' + card.id,
           props: {
             type: card.cardType,

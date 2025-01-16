@@ -2,7 +2,7 @@
 
   Drupal.behaviors.cardCarousel = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCarousel !== "undefined" && typeof AsuWebCarousel.initCardCarousel !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initCardCarousel !== "undefined";
       var cardExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.card_carousel !== "undefined";
 
       if (!cardExist || !componentLoaded) {
@@ -17,7 +17,7 @@
         });
 
         // Setup and initialize the Card carousel.
-        AsuWebCarousel.initCardCarousel({
+        unityReactCore.initCardCarousel({
           targetSelector: '#' + carouselData.targetSelector,
           props: {
             perView: carouselData.perView,
