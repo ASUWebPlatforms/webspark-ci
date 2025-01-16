@@ -2,7 +2,7 @@
 
   Drupal.behaviors.testimonial = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCore !== "undefined" && typeof AsuWebCore.initTestimonial !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initTestimonial !== "undefined";
       var testimonialBlockExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.testimonialblock !== "undefined";
 
       if (!testimonialBlockExist || !componentLoaded) {
@@ -15,7 +15,7 @@
 				var testimonial = settings.asu.components.testimonial[testimonialId];
 
         // Setup and initialize testimonial options.
-        AsuWebCore.initTestimonial({
+        unityReactCore.initTestimonial({
           targetSelector: '#testimonial-' + testimonialId,
           props: {
             quote: {

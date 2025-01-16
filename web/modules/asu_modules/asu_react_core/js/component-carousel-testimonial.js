@@ -2,7 +2,7 @@
 
   Drupal.behaviors.testimonialCarousel = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCarousel !== "undefined" && typeof AsuWebCarousel.initTestimonialCarousel !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initTestimonialCarousel !== "undefined";
       var testimonialExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.testimonial_carousel !== "undefined";
 
       if (!testimonialExist || !componentLoaded) {
@@ -17,7 +17,7 @@
           testimonials.push(settings.asu.components.testimonial[item]);
         });
 
-        AsuWebCarousel.initTestimonialCarousel({
+        unityReactCore.initTestimonialCarousel({
           targetSelector: "#testimonialCarouselContainer" + testimonialId,
           props: {
             testimonialItems: testimonials,
