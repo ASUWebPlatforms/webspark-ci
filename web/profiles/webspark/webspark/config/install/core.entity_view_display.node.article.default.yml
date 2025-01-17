@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.article.field_date_published
     - field.field.node.article.field_header_style
     - field.field.node.article.field_media
+    - field.field.node.article.field_test_term
     - field.field.node.article.layout_builder__layout
     - node.type.article
   module:
@@ -159,6 +160,22 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 7
             additional: {  }
+          3c2b860d-6544-4578-8c03-b0872f2a0e23:
+            uuid: 3c2b860d-6544-4578-8c03-b0872f2a0e23
+            region: first
+            configuration:
+              id: 'field_block:node:article:field_test_term'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: entity_reference_label
+                label: above
+                settings:
+                  link: true
+                third_party_settings: {  }
+            weight: 8
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
@@ -235,6 +252,14 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_test_term:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: first
   links:
     settings: {  }
     third_party_settings: {  }
