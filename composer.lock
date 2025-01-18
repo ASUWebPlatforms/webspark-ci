@@ -6985,11 +6985,11 @@
         },
         {
             "name": "pantheon-upstreams/upstream-configuration",
-            "version": "2.14.2",
+            "version": "2.15.0",
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "8df818be123e80a6b993f37e70def16adb7ecb9f"
+                "reference": "053ed405864425a743cc5fe5cc1b56e12d7a6bd5"
             },
             "require": {
                 "composer/installers": "v2.0.0",
@@ -18049,11 +18049,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.3.0"
     },
