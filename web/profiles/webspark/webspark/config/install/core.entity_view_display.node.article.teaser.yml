@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.article.field_date_published
     - field.field.node.article.field_header_style
     - field.field.node.article.field_media
-    - field.field.node.article.field_test_term
     - field.field.node.article.layout_builder__layout
     - node.type.article
   module:
@@ -29,5 +28,4 @@ hidden:
   field_date_published: true
   field_header_style: true
   field_media: true
-  field_test_term: true
   layout_builder__layout: true
