@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
 
 function renovation_form_alter(&$form, &$form_state, $form_id) {
   // Add classes to cancel button on Layout Builder discard/revert changes.
@@ -32,6 +33,17 @@ function renovation_preprocess_input__submit(&$variables) {
  */
 function renovation_preprocess_input(&$variables) {
   $variables['attributes']['aria-describedby'][] = 'error-' . $variables['attributes']['name'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function renovation_preprocess_textarea(&$variables) {
+  if (!isset($variables['attributes']) || !($variables['attributes'] instanceof Attribute)) {
+    $variables['attributes'] = new Attribute();
+  }
+
+  $variables['attributes']->setAttribute('aria-describedby', 'error-' . $variables['attributes']['name']);
 }
 
 /**
