@@ -28,6 +28,13 @@ function renovation_preprocess_input__submit(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ */
+function renovation_preprocess_input(&$variables) {
+  $variables['attributes']['aria-describedby'][] = 'error-' . $variables['attributes']['name'];
+}
+
+/**
  * Add description text to media item dialogs regarding Remote Videos.
  * Add additional fields for configuring media items of type 'image'.
  *
