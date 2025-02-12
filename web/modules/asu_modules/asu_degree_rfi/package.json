@@ -1,0 +1,12 @@
+{
+  "name": "asu_degree_rfi",
+  "version": "1.0.0",
+  "description": "ASU Degree RFI module component bundle.",
+  "main": "index.js",
+  "author": "Michael Samuelson",
+  "license": "MIT",
+  "dependencies": {
+    "@asu/app-degree-pages": "2.6.2",
+    "@asu/app-rfi": "2.4.2"
+  }
+}
