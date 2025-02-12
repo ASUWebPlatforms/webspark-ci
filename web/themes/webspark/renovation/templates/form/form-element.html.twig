@@ -87,7 +87,8 @@
     {{ label }}
   {% endif %}
   {% if errors %}
-    <small class="invalid-feedback">
+    {% set id = 'error-' ~ name|clean_class %}
+    <small class="invalid-feedback" id="{{ id }}">
       <span title="Alert" class="fa fa-icon fa-exclamation-triangle"></span>
       {{ errors }}
     </small>
