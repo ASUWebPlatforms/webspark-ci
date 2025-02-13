@@ -1,0 +1,19 @@
+services:
+  asu_secure_superadmin.change_super_admin_service:
+    class: Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService
+    arguments: [ '@entity_type.manager', '@event_dispatcher', '@cas.user_manager', '@password_generator']
+
+  asu_secure_superadmin.account_cancel.subscriber:
+    class: Drupal\asu_secure_superadmin\EventSubscriber\CustomUserCancelSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  asu_secure_superadmin.entity_cancel.subscriber:
+    class: Drupal\asu_secure_superadmin\EventSubscriber\EntityAccountCancelSubscriber
+    arguments: ['@entity_type.manager','@module_handler' , '@asu_secure_superadmin.entity_mass_update']
+    tags:
+      - { name: event_subscriber }
+
+  asu_secure_superadmin.entity_mass_update:
+    class: Drupal\asu_secure_superadmin\Services\EntityMassUpdateService
+    arguments: ['@entity_type.manager', '@extension.list.module', '@messenger', '@renderer', '@string_translation']

@@ -5,7 +5,6 @@
  * Install, update and uninstall functions for the Webspark installation profile.
  */
 
-use Drupal\user\Entity\User;
 use Drupal\user\Entity\Role;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\pathauto\PathautoGeneratorInterface;
@@ -26,11 +25,6 @@ function webspark_install() {
     ->getEditable('system.theme')
     ->set('default', 'renovation')
     ->save();
-
-  // Assign user 1 the "administrator" role.
-  $user = User::load(1);
-  $user->roles[] = 'administrator';
-  $user->save();
 
   // Enable webspark_installer module.
   \Drupal::service('module_installer')
