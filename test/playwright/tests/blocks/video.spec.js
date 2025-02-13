@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('video tests', { tag: '@webspark' }, () => {
+test.describe('video tests', { tag: ['@webspark', '@desktop'] }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await page.goto('/video');
   });

@@ -1,16 +1,18 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+// import dotenv from 'dotenv';
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -38,8 +40,8 @@ module.exports = defineConfig({
     {
       name: 'firefox',
       use: {
-        ...devices['Desktop Firefox'],
-        viewport: { width: 1920, height: 1080 },
+         ...devices['Desktop Firefox'],
+         viewport: { width: 1920, height: 1080 },
       },
       testIgnore: /.*mobile.spec.js/,
     },
@@ -48,8 +50,8 @@ module.exports = defineConfig({
     //   use: {
     //     ...devices['Desktop Chrome'],
     //     viewport: { width: 1920, height: 1080 },
-    //   },
-    //   testIgnore: /.*mobile.spec.js/,
+    //    },
+    //    testIgnore: /.*mobile.spec.js/,
     // },
     // {
     //   name: 'webkit',
@@ -75,13 +77,21 @@ module.exports = defineConfig({
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    //   use: {
+    //     ...devices['Desktop Edge'],
+    //     channel: 'msedge',
+    //     viewport: { width: 1920, height: 1080 },
+    //   },
     //   testIgnore: /.*mobile.spec.js/,
     // },
     // {
     //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    //   testIgnore: /.*mobile.spec.js/,
+    //   use: {
+    //      ...devices['Desktop Chrome'],
+    //      channel: 'chrome',
+    //      viewport: { width: 1920, height: 1080 },
+    //     },
+    //     testIgnore: /.*mobile.spec.js/,
     // },
   ],
 

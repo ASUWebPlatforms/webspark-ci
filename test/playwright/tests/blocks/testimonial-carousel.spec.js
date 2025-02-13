@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('testimonial carousel tests', { tag: '@webspark' }, () => {
+test.describe('testimonial carousel tests', { tag: ['@webspark', '@desktop'] }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await page.goto('/testimonial-carousel');
   });

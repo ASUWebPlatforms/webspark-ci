@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('testimonial carousel functionality', { tag: '@webspark' }, async ({ page }) => {
+test('testimonial carousel functionality', { tag: ['@webspark', '@mobile'] }, async ({ page }) => {
   await page.goto('/testimonial-carousel');
   await expect(page.getByLabel('Slide view 1')).toBeHidden();
   await expect(page.getByLabel('Next slide')).toBeVisible();

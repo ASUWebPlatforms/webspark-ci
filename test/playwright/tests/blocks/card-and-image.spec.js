@@ -4,7 +4,7 @@ import drupal from '../helpers/drupal.helpers';
 const BLOCK = 'Card and Image';
 const MACHINE_NAME = 'card-and-image';
 
-test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 

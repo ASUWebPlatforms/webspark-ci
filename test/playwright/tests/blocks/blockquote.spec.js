@@ -4,7 +4,7 @@ import drupal from '../helpers/drupal.helpers';
 const BLOCK = 'Blockquote';
 const MACHINE_NAME = 'blockquote';
 
-test.describe(`${BLOCK} block tests`, { tag: '@webspark' }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 

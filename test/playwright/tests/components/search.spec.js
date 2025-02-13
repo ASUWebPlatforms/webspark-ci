@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('search tests', { tag: '@webspark' }, () => {
+test.describe('search tests', { tag: ['@webspark', '@desktop'] }, () => {
   test('search', async ({ page }) => {
     await page.goto('/');
     await page.getByTestId('search-button').click();

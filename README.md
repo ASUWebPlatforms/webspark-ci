@@ -184,8 +184,8 @@ First, in the DDEV config we need to update the PHP version to `8.3`, and the Ma
 # .ddev/config.yaml
 php_version: "8.3"
 database:
-    type: mariadb
-    version: "10.6"
+  type: mariadb
+  version: "10.6"
 ```
 
 Next, we need to tell DDEV which site in Pantheon to pull the database and files from. In `.ddev/providers`, you will find a file named `pantheon.yaml.example`. Copy the contents of this file into a new file called `pantheon.yaml`. Next, we will add the Webspark CI Pantheon site as our target site:
@@ -217,16 +217,25 @@ ddev pull pantheon
 
 ## Playwright
 
-We use [Playwright](https://playwright.dev) for  front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
+We use [Playwright](https://playwright.dev) for front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
 
 ### Installing Playwright
 
-The Playwright for DDEV add-on should already be installed, but if not, install it by running the following commands:
+If you need to install Playwright from scratch, follow these steps:
 
 ```bash
-mkdir -p test/playwright
 ddev add-on get Lullabot/ddev-playwright
+ddev restart
+mkdir -p test/playwright
+# When running the command below, use JavaScript and also install Playwright operating system dependencies
 ddev exec -d /var/www/html/test/playwright yarn create playwright
+# Review the generated playwright.config.js file and make any necessary changes first
+ddev install-playwright
+```
+
+Otherwise, ensure Playwright is ready to run by running the following command:
+
+```bash
 ddev install-playwright
 ```
 
@@ -235,16 +244,22 @@ ddev install-playwright
 Run Playwright tests using the CI:
 
 ```bash
-# Run all tests for all projects
+# Run all tests for all browsers and projects
 ddev playwright test
 
 # Run a specific test file(s)
 # Ex: ddev playwright test homepage.spec.js charts.spec.js
-ddev playwright test <file> <file2>
+ddev playwright test <file> <file>
+
+# Run a test(s) by tag
+# Ex: ddev playwright test @desktop
+ddev playwright test --grep <tag>
+# You can also skip a tag
+ddev playwright test --grep-invert <tag>
 
 # Run any tests via keyword(s)
 # Ex: ddev playwright test footer chart
-ddev playwright test <keyword> <keyword2>
+ddev playwright test <keyword> <keyword>
 
 # Run a test with a specific title
 # Ex: ddev playwright test -g "search from 404"
@@ -272,6 +287,7 @@ ddev playwright test --headed
 ```
 
 Generate Playwright tests by browsing:
+
 > See [the docs](https://playwright.dev/docs/codegen#generate-tests-with-the-playwright-inspector) for all Codegen options
 
 ```bash

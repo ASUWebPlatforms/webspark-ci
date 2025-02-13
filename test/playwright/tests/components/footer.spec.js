@@ -30,7 +30,7 @@ const socialLinks = [
   { name: 'LinkedIn Social Media Icon' },
 ];
 
-test.describe('footer tests', { tag: '@webspark' }, () => {
+test.describe('footer tests', { tag: ['@webspark', '@desktop'] }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await page.goto('/');
   });

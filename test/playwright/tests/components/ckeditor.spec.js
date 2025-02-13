@@ -24,7 +24,7 @@ const buttons = [
   'Webspark table',
 ];
 
-test('default ckeditor buttons load', { tag: '@webspark' }, async ({ page }) => {
+test('default ckeditor buttons load', { tag: ['@webspark', '@desktop'] }, async ({ page }) => {
   await drupal.loginAsAdmin(page);
   await page.goto('/node/add/page');
   await expect(page.getByLabel('Highlight').nth(1)).toBeVisible();

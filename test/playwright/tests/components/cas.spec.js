@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('cas', { tag: '@webspark' }, async ({ page }) => {
+test('cas', { tag: ['@webspark', '@desktop'] }, async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Sign In' }).click();
   await expect(page.getByRole('heading', { name: 'Application Not Authorized to' })).toBeVisible();

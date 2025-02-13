@@ -36,7 +36,7 @@ const blocks = [
   'Webform',
 ];
 
-test.describe('layout builder tests', { tag: '@webspark' }, () => {
+test.describe('layout builder tests', { tag: ['@webspark', '@desktop'] }, () => {
   test.beforeEach('setup', async ({ page }) => {
     await drupal.visitLayoutBuilder(page);
     await page.getByRole('link', { name: 'Add block in Top, First region' }).click();

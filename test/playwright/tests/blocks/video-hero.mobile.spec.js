@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('video hero loads', { tag: '@webspark' }, async ({ page }) => {
+test('video hero loads', { tag: ['@webspark', '@mobile'] }, async ({ page }) => {
   await page.goto('/video-hero');
   await expect(page.locator('.uds-video-hero')).toBeVisible();
   await expect(page.locator('.uds-video-hero .hero')).toBeVisible();
