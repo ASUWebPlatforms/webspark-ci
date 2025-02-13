@@ -1,0 +1,5 @@
+name: 'ASU Secure Superadmin'
+type: module
+description: 'This module is meant to secure the user 1 super admin account.'
+package: ASU
+core_version_requirement: ^10.3.11
