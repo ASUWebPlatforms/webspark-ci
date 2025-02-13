@@ -1,0 +1,14 @@
+administer asu governance configuration:
+  title: 'Administer ASU Governance configuration'
+  description: 'Make changes to the ASU Governance module&#039;s settings.'
+  restrict access: true
+
+administer asu themes:
+  title: 'Administer ASU Themes'
+  description: 'Install, uninstall and configure ASU Themes.'
+  restrict access: true
+
+administer asu modules:
+  title: 'Administer ASU Modules'
+  description: 'Enable, uninstall and configure ASU Modules.'
+  restrict access: true

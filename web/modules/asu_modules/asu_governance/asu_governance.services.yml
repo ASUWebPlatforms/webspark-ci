@@ -1,0 +1,19 @@
+services:
+  asu_governance.module_permission_loader:
+    class: Drupal\asu_governance\Services\ModulePermissionLoader
+    arguments: ['@user.permissions', '@module_handler', '@config.factory']
+    Drupal\asu_governance\Services\ModulePermissionLoader: '@asu_governance.module_permission_loader'
+
+  asu_governance.route_subscriber:
+    class: Drupal\asu_governance\EventSubscriber\AsuGovernanceRouteSubscriber
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+    Drupal\asu_governance\EventSubscriber\AsuGovernanceRouteSubscriber: '@asu_governance.route_subscriber'
+
+  asu_governance.config_access_check:
+    class: Drupal\asu_governance\Services\ConfigAccessCheck
+    autowire: true
+    tags:
+      - { name: access_check, applies_to: _allow_asu_config_access }
+    Drupal\asu_governance\Services\ConfigAccessCheck: '@asu_governance.config_access_check'

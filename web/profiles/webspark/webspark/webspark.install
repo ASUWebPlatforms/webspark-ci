@@ -27,11 +27,6 @@ function webspark_install() {
     ->set('default', 'renovation')
     ->save();
 
-  // Assign user 1 the "administrator" role.
-  $user = User::load(1);
-  $user->roles[] = 'administrator';
-  $user->save();
-
   // Enable webspark_installer module.
   \Drupal::service('module_installer')
     ->install(['webspark_installer_forms'], TRUE);
@@ -50,8 +45,8 @@ function webspark_install() {
     ->set('settings.default_form_novalidate', TRUE)
     ->save();
 
-  // Enable config_readonly module.
-  \Drupal::service('module_installer')->install(['config_readonly']);
+  // Enable config_readonly and asu_governance modules.
+  \Drupal::service('module_installer')->install(['config_readonly', 'asu_governance']);
 }
 
 /**
@@ -799,4 +794,13 @@ function webspark_update_10017(&$sandbox): void{
   \Drupal::service('asu_config.config_manager')->updateConfigFile('field.field.media.video_poster_image_73_100.field_media_image');
 
   \Drupal::state()->set('configuration_locked', TRUE);
+}
+
+/**
+ * Enable asu_governance module
+ */
+function webspark_update_10018(&$sandbox): void {
+  if (!Drupal::moduleHandler()->moduleExists('asu_governance')) {
+    Drupal::service('module_installer')->install(['asu_governance'], true);
+  }
 }

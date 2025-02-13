@@ -1,0 +1,19 @@
+# Schema for the configuration files of the ASU governance module.
+asu_governance.settings:
+  type: config_object
+  label: 'ASU Governance Settings'
+  mapping:
+    allowable_modules:
+      type: sequence
+      label: 'Allowable Modules'
+      orderby: value
+      sequence:
+        type: string
+        label: 'Module'
+    allowable_themes:
+      type: sequence
+      label: 'Allowable Themes'
+      orderby: value
+      sequence:
+        type: string
+        label: 'Theme'

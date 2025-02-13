@@ -1,0 +1,129 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for asu_governance module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function asu_governance_preprocess_page(&$variables) {
+  $variables['#attached']['library'][] = 'asu_governance/base';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the asu_governance_curated_modules form.
+ */
+function asu_governance_form_asu_governance_curated_modules_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form['filters'])) {
+    $form['filters']['#attributes']['class'][] = 'modules-table-filter';
+    if (isset($form['filters']['text'])) {
+      unset($form['filters']['text']['#title_display']);
+      $form['filters']['text']['#title'] = t('Filter');
+    }
+  }
+
+  // Convert module links to action links.
+  $modules = $form['modules'] ?? NULL;
+  if (isset($modules)) {
+    foreach (Element::children($form['modules']) as $key) {
+      $link_key_to_action_link_type = [
+        'help' => 'questionmark',
+        'permissions' => 'key',
+        'configure' => 'cog',
+      ];
+      if (isset($form['modules'][$key]['#type']) && $form['modules'][$key]['#type'] === 'details') {
+        $form['modules'][$key]['#module_package_listing'] = TRUE;
+        foreach (Element::children($form['modules'][$key]) as $module_key) {
+          if (isset($form['modules'][$key][$module_key]['links'])) {
+            foreach ($form['modules'][$key][$module_key]['links'] as $link_key => &$link) {
+              if (array_key_exists($link_key, $link_key_to_action_link_type)) {
+                $action_link_type = $link_key_to_action_link_type[$link_key];
+                $link['#options']['attributes']['class'][] = 'action-link';
+                $link['#options']['attributes']['class'][] = 'action-link--small';
+                $link['#options']['attributes']['class'][] = "action-link--icon-$action_link_type";
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function asu_governance_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'asu_governance.modules_list':
+      $output = '<p>' . t('Always run the <a href=":update-php">update script</a> each time a module is updated.', [':update-php' => Url::fromRoute('system.db_update')->toString()]) . '</p>';
+      return $output;
+
+    case 'asu_governance.modules_uninstall':
+      return '<p>' . t('The uninstall process removes all data related to a module.') . '</p>';
+
+    case 'asu_governance.themes_page':
+      $output = '<p>' . t('Set and configure the default theme for your website.') . '</p>';
+      if (\Drupal::moduleHandler()->moduleExists('block')) {
+        $output .= '<p>' . t('You can place blocks for each theme on the <a href=":blocks">block layout</a> page.', [':blocks' => Url::fromRoute('block.admin_display')->toString()]) . '</p>';
+      }
+      return $output;
+
+    case 'system.theme_settings_theme':
+      $theme_list = \Drupal::service('theme_handler')->listInfo();
+      $theme = $theme_list[$route_match->getParameter('theme')];
+      return '<p>' . t('These options control the display settings for the %name theme. When your site is displayed using this theme, these settings will be used.', ['%name' => $theme->info['name']]) . '</p>';
+  }
+  return null;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for links.
+ */
+function asu_governance_preprocess_links(&$variables) {
+  $admin_theme = \Drupal::theme()->getActiveTheme()->getName();
+  if ($admin_theme === 'claro') {
+    // Convert links to action links.
+    foreach ($variables['links'] as $links_item) {
+      if (!empty($links_item['link']) && !empty($links_item['link']['#url']) && $links_item['link']['#url'] instanceof Url) {
+        if ($links_item['link']['#url']->isRouted()) {
+          switch ($links_item['link']['#url']->getRouteName()) {
+            case 'asu_governance.theme_settings_theme':
+              $links_item['link'] = _claro_convert_link_to_action_link($links_item['link'], 'cog', 'small');
+              break;
+
+            case 'asu_governance.theme_uninstall':
+              $links_item['link'] = _claro_convert_link_to_action_link($links_item['link'], 'ex', 'small');
+              break;
+
+            case 'asu_governance.theme_set_default':
+              $links_item['link'] = _claro_convert_link_to_action_link($links_item['link'], 'checkmark', 'small');
+              break;
+
+            case 'asu_governance.theme_install':
+              $links_item['link'] = _claro_convert_link_to_action_link($links_item['link'], 'plus', 'small');
+              break;
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+#[LegacyHook]
+function asu_governance_modules_installed(array $modules) {
+  \Drupal::service('asu_governance.module_permission_loader')->updateContentAdministratorPermissions($modules);
+}
