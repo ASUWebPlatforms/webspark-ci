@@ -83,6 +83,11 @@ class ChangeSuperAdminService {
     }
     // Reload the newUser object to get the new uid.
     $newUserReloaded = user_load_by_name($original_name);
+    $roles = $newUserReloaded->getRoles();
+    if (!in_array('administrator', $roles)) {
+      $newUserReloaded->addRole('administrator');
+      $newUserReloaded->save();
+    }
     $method = 'user_cancel_block_reassign_content_admin';
     $context = [
       'user_cancel_notify' => FALSE,
