@@ -5,7 +5,6 @@ dependencies:
     - block_content.type.web_directory
     - field.storage.block_content.field_default_sort
   module:
-    - block_content
     - options
 id: block_content.web_directory.field_default_sort
 field_name: field_default_sort
