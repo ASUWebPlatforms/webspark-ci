@@ -37,4 +37,3 @@ dependencies:
   - drupal:webform
   - webspark_module_asu_breadcrumb:webspark_module_asu_breadcrumb
   - webspark_module_renovation_layouts:webspark_module_renovation_layouts
-  - asu_secure_superadmin:asu_secure_superadmin

@@ -44,8 +44,8 @@ function webspark_install() {
     ->set('settings.default_form_novalidate', TRUE)
     ->save();
 
-  // Enable config_readonly and asu_governance modules.
-  \Drupal::service('module_installer')->install(['config_readonly', 'asu_governance']);
+  // Enable config_readonly, asu_secure_superadmin and asu_governance modules.
+  \Drupal::service('module_installer')->install(['config_readonly', 'asu_secure_superadmin', 'asu_governance']);
 }
 
 /**
@@ -800,6 +800,22 @@ function webspark_update_10017(&$sandbox): void{
  */
 function webspark_update_10018(&$sandbox): void {
   if (!Drupal::moduleHandler()->moduleExists('asu_governance')) {
-    Drupal::service('module_installer')->install(['asu_governance'], true);
+    Drupal::service('module_installer')->install(['asu_governance']);
+  }
+  if (!Drupal::moduleHandler()->moduleExists('asu_secure_superadmin')) {
+    Drupal::service('module_installer')->install(['asu_secure_superadmin']);
+  }
+  // Reset cache tags so that Drupal picks up services etc from the new modules.
+  \Drupal::service('cache_tags.invalidator')->invalidateTags(['config', 'container', 'router']);
+  try {
+    \Drupal::service('asu_secure_superadmin.change_super_admin_service')
+      ->changeSuperAdmin();
+    \Drupal::messenger()
+      ->addMessage('The superadmin account has been secured.');
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());
+    \Drupal::messenger()->addError($e->getMessage());
+    return;
   }
 }
