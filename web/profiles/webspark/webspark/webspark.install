@@ -799,6 +799,7 @@ function webspark_update_10017(&$sandbox): void{
  * Enable asu_governance module
  */
 function webspark_update_10018(&$sandbox): void {
+  \Drupal::state()->set('configuration_locked', FALSE);
   if (!Drupal::moduleHandler()->moduleExists('asu_governance')) {
     Drupal::service('module_installer')->install(['asu_governance']);
   }
@@ -818,4 +819,5 @@ function webspark_update_10018(&$sandbox): void {
     \Drupal::messenger()->addError($e->getMessage());
     return;
   }
+  \Drupal::state()->set('configuration_locked', TRUE);
 }
