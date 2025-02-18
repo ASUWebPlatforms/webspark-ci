@@ -76,7 +76,7 @@ dependencies:
     - toolbar
     - webform
 id: content_editor
-label: 'Content Editor'
+label: 'Content editor'
 weight: 4
 is_admin: null
 permissions:
