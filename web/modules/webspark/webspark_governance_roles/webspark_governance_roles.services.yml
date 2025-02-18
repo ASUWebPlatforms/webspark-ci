@@ -1,0 +1,5 @@
+services:
+  webspark_governance_roles.module_permission_loader:
+    class: Drupal\webspark_governance_roles\Services\ModulePermissionLoader
+    arguments: ['@user.permissions', '@module_handler', '@config.factory']
+    Drupal\webspark_governance_roles\Services\ModulePermissionLoader: '@webspark_governance_roles.module_permission_loader'

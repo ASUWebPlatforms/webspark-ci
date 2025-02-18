@@ -117,13 +117,3 @@ function asu_governance_preprocess_links(&$variables) {
     }
   }
 }
-
-/**
- * Implements hook_modules_installed().
- *
- * @throws \Drupal\Core\Entity\EntityStorageException
- */
-#[LegacyHook]
-function asu_governance_modules_installed(array $modules) {
-  \Drupal::service('asu_governance.module_permission_loader')->updateContentAdministratorPermissions($modules);
-}

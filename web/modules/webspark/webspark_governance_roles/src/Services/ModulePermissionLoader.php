@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\asu_governance\Services;
+namespace Drupal\webspark_governance_roles\Services;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\user\PermissionHandlerInterface;

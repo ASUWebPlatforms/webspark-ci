@@ -9,12 +9,11 @@
  * Implements hook_install().
  */
 function asu_governance_install() {
-  // Get the module permission loader service.
-  $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_loader');
-  // Get the list of allowable modules.
-  $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
-  // Update the Site Builder role's permissions.
-  $modulePermissionLoader->updateContentAdministratorPermissions($allowableModules);
+
+  $currentProfile = \Drupal::installProfile();
+  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
+    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
+  }
 
   // Get the current theme
   $currentTheme = \Drupal::service('theme_handler')->getDefault();
