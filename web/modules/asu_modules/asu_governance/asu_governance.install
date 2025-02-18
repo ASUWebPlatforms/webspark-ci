@@ -15,4 +15,13 @@ function asu_governance_install() {
   $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
   // Update the Site Builder role's permissions.
   $modulePermissionLoader->updateContentAdministratorPermissions($allowableModules);
+
+  // Get the current theme
+  $currentTheme = \Drupal::service('theme_handler')->getDefault();
+  $config = \Drupal::configFactory()->getEditable('asu_governance.settings');
+  $allowableThemes = $config->get('allowable_themes') ?? [];
+  if (!in_array($currentTheme, $allowableThemes, TRUE)) {
+    $allowableThemes = array_merge($allowableThemes, [$currentTheme]);
+    $config->set('allowable_themes', $allowableThemes)->save();
+  }
 }
