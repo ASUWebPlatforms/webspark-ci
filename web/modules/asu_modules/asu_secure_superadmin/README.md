@@ -23,7 +23,7 @@ If you are using a Composer workflow and have the `cweagans/composer-patches` pa
     "extra": {
         "patches": {
             "drupal/core": {
-                "Add user1 account migration": "web/modules/asu_modules/asu_secure_superadmin/patch/drupal-10.3.11-user1-migration.patch"
+                "Add user1 account migration": "web/modules/asu_modules/asu_secure_superadmin/patch/user-module-3135592-2241mr-c39.patch"
             }
         }
     }
@@ -36,4 +36,4 @@ After successfully applying the core patch, install this module as you would nor
 See: https://www.drupal.org/node/895232 for further information.
 
 ## Configuration
-This module has a configuration page located at `/admin/config/system/asu-secure-superadmin/settings`. This page houses a very simple form with a single button that can be clicked to trigger the process of securing the superadmin user account.
+No special configuration is needed for this module. Its functionality is automatically enabled and run on module installation.
