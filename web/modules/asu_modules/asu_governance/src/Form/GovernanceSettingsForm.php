@@ -122,6 +122,11 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $allThemes = array_keys($extensionDiscovery->scan('theme'));
     $disallowedThemes = ['bartik', 'seven', 'stark', 'classy'];
     $badThemes = [];
+    $currentTheme = $this->themeHandler->getDefault();
+    $adminTheme = $this->config('system.theme')->get('admin');
+    $includesDefault = in_array($currentTheme, $themesInput, TRUE);
+    $includesAdmin = in_array($adminTheme, $themesInput, TRUE);
+
 
     foreach ($modulesInput as $module) {
       if (!in_array($module, $allModules, TRUE) || in_array($module, $disallowedModules, TRUE)) {
@@ -143,6 +148,16 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     // Throw error if entered theme does not match themes available in code.
     if (!empty($badThemes)) {
       $form_state->setErrorByName('allowable_themes', $this->t('The following themes are either not valid or not allowed: @themes', ['@themes' => implode(', ', $badThemes)]));
+    }
+
+    // Throw error if entered theme does not match themes available in code.
+    if (!$includesDefault) {
+      $form_state->setErrorByName('allowable_themes', $this->t('The current default theme (@theme) must be included in the list of allowable themes.', ['@theme' => $currentTheme]));
+    }
+
+    // Throw error if entered theme does not match themes available in code.
+    if (!$includesAdmin) {
+      $form_state->setErrorByName('allowable_themes', $this->t('The current admin theme (@theme) must be included in the list of allowable themes.', ['@theme' => $adminTheme]));
     }
 
     parent::validateForm($form, $form_state);
