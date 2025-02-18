@@ -1,0 +1,6 @@
+{
+    "name": "asuwebplatforms/asu_governance",
+    "description": "A module to lock down ASU Drupal sites for Acquia Site Factory",
+    "type": "drupal-module",
+    "license": "MIT"
+}

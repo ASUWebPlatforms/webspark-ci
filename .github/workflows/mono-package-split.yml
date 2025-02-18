@@ -36,6 +36,8 @@ jobs:
             split_repository: asu_config_utility
           - local_path: web/modules/asu_modules/asu_secure_superadmin
             split_repository: asu_secure_superadmin
+          - local_path: web/modules/asu_modules/asu_governance
+          - split_repository: asu_governance
 
     steps:
       - uses: actions/checkout@v4
@@ -53,7 +55,7 @@ jobs:
           # This app allows us to select all of the repositories we will be adding
           # our access permissions to via the app-token. Just list them below
           # in a comma separated string (without any spaces).
-          repositories: 'asu_user,asu_brand,asu_react_core,asu_react_integration,asu_config_utility,asu_secure_superadmin'
+          repositories: 'asu_user,asu_brand,asu_react_core,asu_react_integration,asu_config_utility,asu_secure_superadmin,asu_governance'
 
       # The danharrin/monorepo-split-github-action below is the tool that we are using
       # to sync the contents of the modules into their respective standalone,

@@ -71,7 +71,8 @@
         "asu_modules/asu_react_core": "self.version",
         "asu_modules/asu_react_integration": "self.version",
         "asu_modules/asu_user": "self.version",
-        "asu_modules/asu_secure_superadmin": "self.version"
+        "asu_modules/asu_secure_superadmin": "self.version",
+        "asu_modules/asu_governance": "self.version"
     },
     "conflict": {
         "drupal/drupal": "*"
