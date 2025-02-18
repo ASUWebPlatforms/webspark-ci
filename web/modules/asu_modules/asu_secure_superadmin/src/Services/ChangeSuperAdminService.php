@@ -67,7 +67,7 @@ class ChangeSuperAdminService {
     $newUser->isNew();
     $newUser->set('uid', NULL);
     $user1->set('name', 'etsuper');
-    $user1->set('mail', 'DL.WG.ET.WebPlatformsAcquia@exchange.asu.edu');
+    $user1->set('mail', 'DL.WG.ET.WebPlatforms@exchange.asu.edu');
     // Remove roles from the old user.
     $roles = $user1->getRoles();
     foreach ($roles as $role) {
