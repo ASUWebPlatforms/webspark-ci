@@ -28,6 +28,20 @@ class DrupalHelpers {
   }
 
   /**
+   * Add a new page.
+   *
+   * @param page
+   * @param name
+   * @returns {Promise<void>}
+   */
+  async createPage(page, name) {
+    await page.goto('/node/add/page');
+    await page.getByRole('textbox', { name: 'Title *' }).click();
+    await page.getByRole('textbox', { name: 'Title *' }).fill(`Playwright ${name}`);
+    await page.getByRole('button', { name: 'Save' }).click();
+  }
+
+  /**
    * Visit the Layout Builder for the Basic Page.
    *
    * @param page
@@ -48,6 +62,18 @@ class DrupalHelpers {
     await page.getByRole('link', { name: 'Layout' }).first().click();
     await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
     await page.getByRole('link', { name: 'Configure', exact: true }).click();
+  }
+
+  /**
+   * Close the cookie consent banner if it is visible.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  async setConfigs() {
+    this.drush('config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
+    this.drush('config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled 0');
+    // await page.getByRole('button', { name: 'Ok, I agree' }).click();
   }
 
   /**
