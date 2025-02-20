@@ -138,15 +138,15 @@ class Batch
    */
   public static function finishedCallback(bool $success, array $results, array $operations): void {
     if ($success) {
+      $count = array_key_exists('items', $results) ? count($results['items']) : 0;
       // The 'success' parameter means no fatal PHP errors were detected.
-      $message = t('@count items were processed.', [
-        '@count' => count($results['items']),
+      $message = t('@count items were successfully processed.', [
+        '@count' => $count,
       ]);
-
-      Drupal::messenger()->addStatus($message);
-    } else {
+    }
+    else {
       // A fatal error occurred.
-      $message = t('Finished with an error.');
+      $message = t('There was an error with the batch processor.');
       Drupal::messenger()->addWarning($message);
     }
   }
