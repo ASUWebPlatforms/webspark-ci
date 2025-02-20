@@ -10,7 +10,7 @@ use Drupal\user\Event\AccountCancelEvent;
 use Drupal\Core\Password\DefaultPasswordGenerator;
 
 /**
- * Change the super admin (uid 1) to a new user.
+ * Change the SuperAdmin (uid 1) to a new user.
  */
 class ChangeSuperAdminService {
 
@@ -53,11 +53,14 @@ class ChangeSuperAdminService {
   }
 
   /**
-   * Change the super admin (uid 1) to a new user.
+   * Change the SuperAdmin (uid 1) to a new user.
+   *
+   * @param bool $newInstall
+   *   Whether this is a new installation.
    *
    * @throws \Exception
    */
-  public function changeSuperAdmin() :void {
+  public function changeSuperAdmin(bool $newInstall = FALSE) :void {
     /** @var \Drupal\user\Entity\User $user1 */
     $user1 = User::load(1);
     $original_name = $user1->get('name')->value;
@@ -97,7 +100,14 @@ class ChangeSuperAdminService {
       'user_cancel_notify' => FALSE,
       'reassign_content_admin' => $newUserReloaded->id(),
     ];
-    $this->triggerAccountCancelEvent($user1, $method, $context);
+    // Trigger the AccountCancelEvent if this is not a new installation.
+    if (!$newInstall) {
+      $this->triggerAccountCancelEvent($user1, $method, $context);
+    }
+    else {
+      $user1->block();
+      $user1->save();
+    }
   }
 
   /**

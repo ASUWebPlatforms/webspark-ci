@@ -19,18 +19,10 @@ function asu_secure_superadmin_requirements($phase) :array {
 
   if (($phase === 'install') && !file_exists($filePath)) {
     $requirements['asu_secure_superadmin_patch_test'] = [
-      'description' => t('The ASU Secure Superadmin module requires the @patch_name. Your site does not have this patch installed.', ['@patch_name' => $patchName]),
+      'description' => t('The ASU Secure SuperAdmin module requires the @patch_name. Your site does not have this patch installed.', ['@patch_name' => $patchName]),
       'severity' => REQUIREMENT_ERROR,
     ];
   }
 
   return $requirements;
-}
-
-function asu_secure_superadmin_install() {
-  $user = User::load(1);
-  $already_secure = ($user && $user->getAccountName() === 'etsuper');
-  if (!$already_secure) {
-    \Drupal::messenger()->addMessage(\Drupal\Core\Render\Markup::create('The ASU Secure Superadmin module has been installed. Please visit <a href="/admin/config/system/asu-secure-superadmin/settings">the settings page</a> to secure the Superadmin account.'));
-  }
 }
