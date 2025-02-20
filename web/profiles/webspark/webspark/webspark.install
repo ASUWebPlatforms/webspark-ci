@@ -800,10 +800,7 @@ function webspark_update_10017(&$sandbox): void{
  */
 function webspark_update_10018(&$sandbox): void {
   \Drupal::state()->set('configuration_locked', FALSE);
-  if (!Drupal::moduleHandler()->moduleExists('asu_governance')) {
-    Drupal::service('module_installer')->install(['asu_governance']);
-  }
-  if (!Drupal::moduleHandler()->moduleExists('asu_secure_superadmin')) {
+    if (!Drupal::moduleHandler()->moduleExists('asu_secure_superadmin')) {
     Drupal::service('module_installer')->install(['asu_secure_superadmin']);
   }
   // Reset cache tags so that Drupal picks up services etc from the new modules.
@@ -820,13 +817,8 @@ function webspark_update_10018(&$sandbox): void {
     return;
   }
 
-  try {
-    \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
-  }
-  catch (Exception $e) {
-    \Drupal::logger('asu_governance')->error($e->getMessage());
-    \Drupal::messenger()->addError($e->getMessage());
-    return;
+  if (!Drupal::moduleHandler()->moduleExists('asu_governance')) {
+    Drupal::service('module_installer')->install(['asu_governance']);
   }
 
   \Drupal::state()->set('configuration_locked', TRUE);

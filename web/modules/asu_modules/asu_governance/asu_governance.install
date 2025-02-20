@@ -9,12 +9,6 @@
  * Implements hook_install().
  */
 function asu_governance_install() {
-
-  $currentProfile = \Drupal::installProfile();
-  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
-    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
-  }
-
   // Get the current theme
   $currentTheme = \Drupal::service('theme_handler')->getDefault();
   $config = \Drupal::configFactory()->getEditable('asu_governance.settings');
@@ -22,5 +16,20 @@ function asu_governance_install() {
   if (!in_array($currentTheme, $allowableThemes, TRUE)) {
     $allowableThemes = array_merge($allowableThemes, [$currentTheme]);
     $config->set('allowable_themes', $allowableThemes)->save();
+  }
+
+  $currentProfile = \Drupal::installProfile();
+  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
+    // Install the webspark_governance_roles module.
+    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
+  }
+  // Downgrade all users with the 'admin' role to 'site_builder'.
+  try {
+    \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error($e->getMessage());
+    \Drupal::messenger()->addError($e->getMessage());
+    return;
   }
 }

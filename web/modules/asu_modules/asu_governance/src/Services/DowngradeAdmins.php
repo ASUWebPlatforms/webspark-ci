@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\asu_governance;
+namespace Drupal\asu_governance\Services;
 
 use Drupal\asu_governance\Batch\Batch;
 use Drupal\Core\Messenger\MessengerInterface;
