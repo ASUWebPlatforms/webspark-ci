@@ -34,6 +34,13 @@ function webspark_install_tasks(&$install_state) {
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
     'function' => 'Drupal\webspark_installer_forms\Form\WebsparkConfigureGAForm',
   ];
+  $tasks['webspark_install_configure_superadmin_form'] = [
+    'display_name' => t('Secure SuperAdmin user account'),
+    'type' => 'form',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+    'function' => 'Drupal\asu_secure_superadmin\Form\SecureSuperAdminForm',
+  ];
+
   return $tasks;
 }
 
