@@ -819,5 +819,15 @@ function webspark_update_10018(&$sandbox): void {
     \Drupal::messenger()->addError($e->getMessage());
     return;
   }
+
+  try {
+    \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error($e->getMessage());
+    \Drupal::messenger()->addError($e->getMessage());
+    return;
+  }
+
   \Drupal::state()->set('configuration_locked', TRUE);
 }
