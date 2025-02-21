@@ -26,3 +26,22 @@ function asu_secure_superadmin_requirements($phase) :array {
 
   return $requirements;
 }
+
+/**
+ * Implements hook_install().
+ */
+function asu_secure_superadmin_install() {
+  $currentProfile = \Drupal::installProfile();
+  if ($currentProfile !== 'webspark') {
+    // Downgrade all users with the 'administrator' role to 'site_builder'.
+    try {
+      \Drupal::service('asu_secure_superadmin.change_super_admin_service')
+        ->changeSuperAdmin(TRUE);
+    }
+    catch (Exception $e) {
+      \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());
+      \Drupal::messenger()->addError($e->getMessage());
+      return;
+    }
+  }
+}
