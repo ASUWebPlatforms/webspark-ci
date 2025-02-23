@@ -296,9 +296,12 @@ Generate Playwright tests by browsing:
 ddev playwright codegen
 
 # You can also open to a URL
+# ddev playwright codegen http://webspark-ci.ddev.site
+# Note the http vs https here
 ddev playwright codegen <url>
 
 # You can also tell it the size of the viewport to use
+# ddev playwright codegen http://webspark-ci.ddev.site --viewport-size=1200,720
 ddev playwright codegen --viewport-size=<width>,<height>
 ```
 

@@ -1,16 +1,19 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal.helpers';
 
-const BLOCK = '';
-const MACHINE_NAME = '';
+const BLOCK = 'Blockquote';
+const MACHINE_NAME = 'blockquote';
 
-test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@block'] }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
   let pageUrl;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
+    await drupal.consent(page);
+    await drupal.setConfigs();
+    await drupal.loginAsAdmin(page);
     pageUrl = await drupal.createPage(page, BLOCK);
   });
 
@@ -39,10 +42,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@block'] }, () => {
   });
 
   test('verify', async () => {
-    // ...
-  });
-
-  test('data layer', async () => {
     // ...
   });
 });

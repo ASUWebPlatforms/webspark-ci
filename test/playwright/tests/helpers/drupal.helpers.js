@@ -17,6 +17,28 @@ class DrupalHelpers {
   }
 
   /**
+   * Close the cookie consent banner if it is visible.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  async setConfigs() {
+    this.drush('config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
+    this.drush('config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled 0');
+  }
+
+  /**
+   * Accept the cookie consent banner if it is visible.
+   *
+   * @param page
+   * @returns {Promise<*>}
+   */
+  async consent(page) {
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Ok, I agree' }).click();
+  }
+
+  /**
    * Login as administrator.
    *
    * @param page
@@ -36,9 +58,9 @@ class DrupalHelpers {
    */
   async createPage(page, name) {
     await page.goto('/node/add/page');
-    await page.getByRole('textbox', { name: 'Title *' }).click();
     await page.getByRole('textbox', { name: 'Title *' }).fill(`Playwright ${name}`);
     await page.getByRole('button', { name: 'Save' }).click();
+    return page.url();
   }
 
   /**
@@ -66,18 +88,7 @@ class DrupalHelpers {
 
   /**
    * Close the cookie consent banner if it is visible.
-   *
-   * @param page
-   * @returns {Promise<*>}
-   */
-  async setConfigs() {
-    this.drush('config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
-    this.drush('config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled 0');
-    // await page.getByRole('button', { name: 'Ok, I agree' }).click();
-  }
-
-  /**
-   * Close the cookie consent banner if it is visible.
+   * Deprecate. Dont use this any longer.
    *
    * @param page
    * @param selector
