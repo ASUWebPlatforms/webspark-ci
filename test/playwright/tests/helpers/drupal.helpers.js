@@ -159,12 +159,13 @@ class DrupalHelpers {
    * Add media to a block.
    *
    * @param page
-   * @param media
+   * @param n int The nth child CSS selector, starting with a 0 index
+   * @param media string The file to use
    * @returns {Promise<void>}
    */
-  async addMediaField(page, media = 'Hero-DreamscapeLearn-2022.jpeg') {
-    await page.getByRole('button', { name: 'Add media' }).click();
-    await page.locator('article').filter({ hasText: media }).getByRole('img').click();
+  async addMediaField(page, n = 0, media = 'Hero-DreamscapeLearn-2022.jpeg') {
+    await page.getByRole('button', { name: 'Add media' }).nth(n).click();
+    await page.getByRole('checkbox', { name: `Select ${media}` }).check();
     await page.getByRole('button', { name: 'Insert selected' }).click();
   }
 

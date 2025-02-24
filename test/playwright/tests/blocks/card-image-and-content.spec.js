@@ -4,74 +4,85 @@ import drupal from '../helpers/drupal.helpers';
 const BLOCK = 'Card image and content';
 const MACHINE_NAME = 'card-image-and-content';
 
-test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop'] }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
+  let pageUrl;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.visitLayoutBuilder(page);
-    await drupal.removeElement(page, '.cookie-consent-component');
+    await drupal.consent(page);
+    await drupal.setConfigs();
+    await drupal.loginAsAdmin(page);
+    pageUrl = await drupal.createPage(page, BLOCK);
   });
 
-  // test.afterAll('cleanup', async () => {
-  //   await page.getByRole('link', { name: 'Layout' }).first().click();
-  //   await drupal.removeBlock(page);
-  //   await page.close();
-  // });
+  test.beforeEach(async () => {
+    await page.goto(pageUrl);
+  });
+
+  test.afterAll('cleanup', async () => {
+    await page.close();
+  });
 
   test('create', async () => {
-    await drupal.addBlock(page, BLOCK);
-    await page.locator('[id^="edit-settings-block-form-field-heading-0-value"]').click();
-    await page.locator('[id^="edit-settings-block-form-field-heading-0-value"]').fill(`${BLOCK} heading`);
-    await page.getByLabel('Required Heading color').selectOption('default');
-    await page.getByRole('button', { name: 'Add media' }).nth(0).click();
-    await page.locator('article').filter({ hasText: 'Hero-DreamscapeLearn-2022.jpeg' }).getByRole('img').click();
-    await page.getByRole('button', { name: 'Insert selected' }).click();
-    await page.locator('[id^="edit-settings-block-form-field-formatted-text-wrapper"]').getByRole('paragraph').click();
-    await page.locator('[id^="edit-settings-block-form-field-formatted-text-wrapper"]').getByRole('paragraph').fill(`${BLOCK} content`);
-    await page.getByLabel('Required Text Color').selectOption('text-white');
-    await page.getByRole('button', { name: 'Add media' }).nth(1).click();
-    await page.locator('article').filter({ hasText: 'Hero-DreamscapeLearn-2022.jpeg' }).getByRole('img').click();
-    await page.getByRole('button', { name: 'Insert selected' }).click();
+    await page.getByRole('link', { name: 'Layout' }).click();
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await expect(page.getByRole('link', { name: BLOCK })).toBeVisible();
+    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
-    await page.locator('[id^="edit-settings-block-form-field-card-0-subform-field-heading-0-value"]').click();
-    await page.locator('[id^="edit-settings-block-form-field-card-0-subform-field-heading-0-value"]').fill('Card heading');
-    // await page.getByRole('cell', { name: 'Card Remove Heading card' }).getByRole('paragraph').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-add-more-add-more-button-cta--DXrLSgPrUYg').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-uri--T4keMXkYS20').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-uri--T4keMXkYS20').fill('https://asu.edu');
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-uri--T4keMXkYS20').press('Tab');
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-title--ZLhhrnuVXRk').press('Tab');
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-title--ZLhhrnuVXRk').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-title--ZLhhrnuVXRk').fill('CTA 1');
-    // await page.getByLabel('Required Style').selectOption('btn-default btn-maroon btn');
-    // await page.getByRole('button', { name: 'Add CTA' }).click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-uri--eVm7aZQ5wO0').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-uri--eVm7aZQ5wO0').fill('https://asu.edu');
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-title--IDHHoK3rzuY').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-title--IDHHoK3rzuY').fill('CTA 2');
-    // await page.getByRole('textbox', { name: 'URL', exact: true }).click();
-    // await page.getByRole('textbox', { name: 'URL', exact: true }).fill('https://asu.edu');
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-link-0-title--pAHnk3bekMQ').click();
-    // await page.locator('#edit-settings-block-form-field-card-0-subform-field-link-0-title--pAHnk3bekMQ').fill('ASU');
-    // await page.getByText('Show borders').click();
-    // await page.getByRole('button', { name: 'Add block' }).click();
-    // await expect(page.getByText('Card image and content').first()).toBeVisible();
+    //--- Begin custom test steps
+    await page.getByRole('textbox', { name: 'Heading' }).first().fill('Block heading');
+    await page.getByRole('combobox', { name: 'Required Heading color' }).selectOption({ label: 'Gray 7' });
+    await drupal.addMediaField(page);
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').first().fill('Block content');
+    await page.getByRole('combobox', { name: 'Required Text Color' }).selectOption({ label: 'White' });
+    await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-media-open-button"]').click();
+    await page.getByRole('checkbox', { name: 'Select Hero-DreamscapeLearn-2022.jpeg' }).check();
+    await page.getByRole('button', { name: 'Insert selected' }).click();
+    await page.getByRole('textbox', { name: 'Heading' }).last().fill('Block heading');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').last().fill('Block content');
+    await page.getByRole('button', { name: 'Add CTA' }).first().click();
+    await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-uri"]').first().fill('https://asu.edu');
+    await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-cta-0-subform-field-cta-link-0-title"]').first().fill('Block CTA');
+    await page.getByRole('combobox', { name: 'Select a target' }).first().selectOption({ label: 'New window (_blank)' });
+    await page.getByRole('combobox', { name: 'Required Style' }).first().selectOption({ label: 'Maroon' });
+    await page.getByRole('button', { name: 'Add CTA' }).last().click();
+    await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-uri"]').last().fill('https://asu.edu');
+    await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-cta-secondary-0-subform-field-cta-link-0-title"]').last().fill('Block CTA');
+    await page.getByRole('textbox', { name: 'URL' }).last().fill('https://asu.edu');
+    await page.getByRole('textbox', { name: 'Link text' }).last().fill('Block CTA');
+    await page.getByRole('checkbox', { name: 'Show borders' }).setChecked(true);
+    //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
-
-
-    // after the redirect to /basic-page
-
+    await page.getByRole('button', { name: 'Save layout' }).click();
   });
 
-  // test('edit', async () => {
-  //   await drupal.visitLayoutBuilderForNode(page);
+  test('verify', async () => {
+    const div = page.locator('.uds-card-image-and-content-image-container');
+    const heading = page.getByText('Block heading', { exact: true });
+    const content = page.getByText('Block content', { exact: true });
+    const contentParent = page.locator('.content').filter({ has: content });
+    const cta = page.getByRole('link', { name: 'Block CTA', exact: true });
+    const image = page.getByRole('img', { name: 'test' });
 
-  //   await drupal.addAppearanceSettings(page, MACHINE_NAME);
-
-  //   // after the redirect to /basic-page
-  // });
+    await expect(div).toHaveCSS('background-image', /Hero-DreamscapeLearn-2022.jpeg/);
+    await expect(heading.first()).toBeVisible();
+    await expect(content.first()).toBeVisible();
+    await expect(contentParent).toHaveClass(/text-white/);
+    await expect(image).toBeVisible();
+    await expect(heading.last()).toBeVisible();
+    await expect(content.last()).toBeVisible();
+    await expect(cta.nth(0)).toBeVisible();
+    await expect(cta.nth(0)).toHaveClass(/btn-maroon/);
+    await expect(cta.nth(0)).toHaveAttribute('href', 'https://asu.edu');
+    await expect(cta.nth(0)).toHaveAttribute('target', '_blank');
+    await expect(cta.nth(1)).toBeVisible();
+    await expect(cta.nth(1)).toHaveClass(/btn-gold/);
+    await expect(cta.nth(1)).toHaveClass(/btn-md/);
+    await expect(cta.nth(2)).toBeVisible();
+  });
 });
