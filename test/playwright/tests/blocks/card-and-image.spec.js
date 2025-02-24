@@ -4,80 +4,90 @@ import drupal from '../helpers/drupal.helpers';
 const BLOCK = 'Card and Image';
 const MACHINE_NAME = 'card-and-image';
 
-test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop'] }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
+  let pageUrl;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.visitLayoutBuilder(page);
-    await drupal.removeElement(page, '.cookie-consent-component');
+    await drupal.consent(page);
+    await drupal.setConfigs();
+    await drupal.loginAsAdmin(page);
+    pageUrl = await drupal.createPage(page, BLOCK);
+  });
+
+  test.beforeEach(async () => {
+    await page.goto(pageUrl);
   });
 
   test.afterAll('cleanup', async () => {
-    await page.getByRole('link', { name: 'Layout' }).first().click();
-    await drupal.removeBlock(page);
     await page.close();
   });
 
   test('create', async () => {
-    await drupal.addBlock(page, BLOCK);
-    await drupal.addMediaField(page);
-    await page.getByRole('textbox', { name: 'Heading' }).click();
-    await page.getByRole('textbox', { name: 'Heading' }).fill('Card and Image heading');
-    await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
-    await page.getByLabel('Rich Text Editor').getByRole('paragraph').fill('Card and Image content');
-    await page.getByRole('button', { name: 'Add block' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
+    await page.getByRole('link', { name: 'Layout' }).click();
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await expect(page.getByRole('link', { name: BLOCK })).toBeVisible();
+    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
-    // after the redirect to /basic-page
-    await expect(page.getByText('Card and Image heading')).toBeVisible();
-    await expect(page.getByText('Card and Image content')).toBeVisible();
-    await expect(page.locator('.uds-card-and-image')).toHaveCSS('background-image', /Hero-DreamscapeLearn-2022.jpeg/);
+    //--- Begin custom test steps
+    await drupal.addMediaField(page);
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Block heading');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
+    await page.getByRole('button', { name: 'Add CTA' }).click();
+    await page.getByRole('textbox', { name: 'URL' }).fill('https://asu.edu');
+    await page.getByRole('textbox', { name: 'Link text' }).fill('Block CTA');
+    await page.getByRole('combobox', { name: 'Select a target' }).selectOption({ label: 'New window (_blank)' });
+    await page.getByRole('combobox', { name: 'Required Style' }).selectOption({ label: 'Maroon' });
+    await page.getByRole('checkbox', { name: 'Show borders' }).setChecked(true);
+    await page.locator('.fip-icon-down-dir').first().click();
+    await page.getByTitle('Pyramid,ASUAwesome,Shapes,').first().click();
+    await page.getByRole('combobox', { name: 'Required Content Position' }).selectOption({ label: 'Right' });
+    await page.getByRole('button', { name: 'Add block' }).click();
+
+    // Parallax variant
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
+    await drupal.addMediaField(page);
+    await page.getByRole('checkbox', { name: 'Parallax' }).setChecked(true);
+    //--- End custom test steps
+
+    await page.getByRole('button', { name: 'Add block' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click();
   });
 
-  test('edit', async () => {
-    await drupal.visitLayoutBuilderForNode(page);
-    await page.getByLabel('Parallax').check();
-    await page.getByRole('button', { name: 'Add CTA' }).click();
-    await page.getByLabel('URL').click();
-    await page.getByLabel('URL').fill('https://asu.edu');
-    await page.getByLabel('Link text').click();
-    await page.getByLabel('Link text').fill('CTA');
-    await page.locator('.fip-icon-down-dir').first().click();
-    await page.locator('.field--widget-fontawesome-iconpicker-widget').getByTitle('Arizona,ASUAwesome,D_arizona').first().click();
-    await page.getByLabel('Required Content Position').selectOption('right');
-    await drupal.addAppearanceSettings(page, MACHINE_NAME);
+  test('verify', async () => {
+    let block = page.locator('.uds-card-and-image');
+    let icon = page.getByTestId('card-icon');
+    let heading = page.getByText('Block heading', { exact: true });
+    let content = page.getByText('Block content', { exact: true });
+    let cta = page.getByRole('link', { name: 'Block CTA', exact: true });
+    let image = page.getByRole('img', { name: 'test' });
 
-    // after the redirect to /basic-page
-    await expect(page.locator('.uds-card-and-image')).toHaveClass(/parallax-container-content/);
-    await expect(page.locator('.uds-card-and-image')).toHaveClass(/uds-card-and-image-right/);
-    await expect(page.locator('.parallax-container > img')).toBeVisible();
-    await expect(page.getByTestId('card-button').getByRole('link', { name: 'CTA' })).toBeVisible();
-    await expect(page.getByTestId('card-button').getByRole('link', { name: 'CTA' })).toHaveAttribute('href', 'https://asu.edu');
-    // be more specific, check for the icon I chose
-    await expect(page.getByTestId('card-icon')).toBeVisible();
+    await expect(block.first()).toHaveCSS('background-image', /Hero-DreamscapeLearn-2022.jpeg/);
+    await expect(block.first()).toHaveClass(/uds-card-and-image-right/);
+    await expect(icon).toBeVisible();
+    await expect(heading).toBeVisible();
+    await expect(content).toBeVisible();
+    await expect(cta).toBeVisible();
+    await expect(cta).toHaveClass(/btn-maroon/);
+    await expect(cta).toHaveAttribute('href', 'https://asu.edu');
+    await expect(cta).toHaveAttribute('target', '_blank');
 
-    // Get the image inside container
-    const parallaxImage = page.locator('.parallax-container > img');
-    const initialPosition = await parallaxImage.evaluate((img) => {
-      return img.style.top;
-    });
+    // Parallax variant
+    await expect(block.last()).toHaveClass(/parallax-container-content/);
+    await expect(image).toBeVisible();
 
-    // Scroll the page and verify position changes
-    await page.evaluate(() => {
-      window.scrollTo(0, window.innerHeight / 2);
-    });
-
-    // Wait for animation frame
+    // Check the parallax effect is working
+    const initialPosition = await image.evaluate((img) => img.style.top);
+    await page.evaluate(() => window.scrollTo(0, window.innerHeight / 2));
     await page.waitForTimeout(100);
-
-    // Get new position
-    const scrolledPosition = await parallaxImage.evaluate((img) => {
-      return img.style.top;
-    });
-
-    // Verify position changed
+    const scrolledPosition = await image.evaluate((img) => img.style.top);
     expect(initialPosition).not.toEqual(scrolledPosition);
   });
 });

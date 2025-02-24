@@ -33,6 +33,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('link', { name: BLOCK }).click();
     await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
+    //--- Begin custom test steps
     await page.getByRole('combobox', { name: 'Required Accent Color' }).selectOption({ label: 'Gold' });
     await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
     await page.getByRole('combobox', { name: 'Citation Style' }).selectOption({ label: 'Alternative' });
@@ -53,6 +54,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await drupal.addMediaField(page);
     await page.getByRole('textbox', { name: 'Citation author' }).fill('Block author');
     await page.getByRole('textbox', { name: 'Citation Title' }).fill('Block title');
+    //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click();
