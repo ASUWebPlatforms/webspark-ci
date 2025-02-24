@@ -61,11 +61,11 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
-    let block = page.locator('.uds-blockquote');
-    let heading = page.getByText('Block heading', { exact: true });
-    let content = page.getByText('Block content', { exact: true });
-    let author = page.getByText('Block author', { exact: true });
-    let title = page.getByText('Block title', { exact: true });
+    const block = page.locator('.uds-blockquote');
+    const heading = page.getByText('Block heading', { exact: true });
+    const content = page.getByText('Block content', { exact: true });
+    const author = page.getByText('Block author', { exact: true });
+    const title = page.getByText('Block title', { exact: true });
 
     await expect(block.first()).toHaveClass(/accent-gold/);
     await expect(block.first()).toHaveClass(/alt-citation/);

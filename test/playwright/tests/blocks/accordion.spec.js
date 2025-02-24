@@ -47,8 +47,8 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
-    let heading = page.getByRole('button', { name: 'Block heading' });
-    let content = page.getByText('Block content', { exact: true });
+    const heading = page.getByRole('button', { name: 'Block heading' });
+    const content = page.getByText('Block content', { exact: true });
 
     await expect(page.locator('.accordion-item.accordion-item-maroon')).toBeVisible();
     await expect(page.locator('.accordion-header.accordion-header-icon')).toBeVisible();
