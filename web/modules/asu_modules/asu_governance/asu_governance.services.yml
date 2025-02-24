@@ -5,12 +5,20 @@ services:
     tags:
       - { name: event_subscriber }
     Drupal\asu_governance\EventSubscriber\AsuGovernanceRouteSubscriber: '@asu_governance.route_subscriber'
+
   asu_governance.config_access_check:
     class: Drupal\asu_governance\Services\ConfigAccessCheck
     autowire: true
     tags:
       - { name: access_check, applies_to: _allow_asu_config_access }
     Drupal\asu_governance\Services\ConfigAccessCheck: '@asu_governance.config_access_check'
+
+  asu_governance.perms_roles_access_check:
+    class: Drupal\asu_governance\Services\PermsRolesAccessCheck
+    autowire: true
+    tags:
+      - { name: access_check, applies_to: _custom_perms_roles }
+    Drupal\asu_governance\Services\PermsRolesAccessCheck: '@asu_governance.perms_roles_access_check'
 
   asu_governance.downgrade_admins:
     class: Drupal\asu_governance\Services\DowngradeAdmins

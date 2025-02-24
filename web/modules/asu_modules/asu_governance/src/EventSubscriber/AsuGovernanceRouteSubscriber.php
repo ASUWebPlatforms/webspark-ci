@@ -16,7 +16,7 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
    * {@inheritdoc}
    */
   protected function alterRoutes(RouteCollection $collection): void {
-    $routes = [
+    $configRoutes = [
       'config.diff',
       'config.diff_collection',
       'config.export_download',
@@ -27,7 +27,17 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
       'config.sync',
     ];
 
-    foreach ($routes as $route_name) {
+    $permissionsRoutes = [
+      'user.admin_permissions',
+      'entity.user_role.collection',
+      'user.role_add',
+      'entity.user_role.edit_form',
+      'entity.user_role.delete_form',
+      'user.role.settings',
+      'entity.user_role.edit_permissions_form'
+    ];
+
+    foreach ($configRoutes as $route_name) {
       /** @var \Symfony\Component\Routing\Route $route */
       $route = $collection->get($route_name);
       if ($route->getRequirement('_permission') === 'synchronize configuration' || $route->getRequirement('_permission') === 'import configuration' || $route->getRequirement('_permission') === 'export configuration') {
@@ -35,6 +45,12 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
         $route->setRequirement('_allow_asu_config_access',
           'TRUE');
       }
+    }
+    foreach ($permissionsRoutes as $routeName) {
+      /** @var \Symfony\Component\Routing\Route $route */
+      $route = $collection->get($routeName);
+      $route->setRequirements([]);
+      $route->setRequirement('_custom_perms_roles', 'TRUE');
     }
   }
 

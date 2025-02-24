@@ -10,12 +10,14 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\user\RoleInterface;
 
 /**
  * Implements hook_preprocess_page().
  */
 function asu_governance_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = 'asu_governance/base';
+  $route = \Drupal::routeMatch()->getRouteName();
 }
 
 /**
@@ -115,5 +117,17 @@ function asu_governance_preprocess_links(&$variables) {
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function asu_governance_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Disable the administrator option from the roles list for non-admin users.
+  if (!\Drupal::currentUser()->hasRole('administrator')) {
+    $form['account']['roles']['administrator'] = [
+      '#disabled' => TRUE,
+    ];
   }
 }
