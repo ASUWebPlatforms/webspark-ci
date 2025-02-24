@@ -313,6 +313,14 @@ View HTML or other Playwright reports:
 ddev playwright show-report --host=0.0.0.0
 ```
 
+### Tips for writing Playwright tests
+
+1. Read the Playwright documentation before attempting to write tests. There **is** a learning curve.
+2. Use accessible locators as much as possible.
+3. Take advantage of implied visibility. There is no reason to assert `toBeVisible` and `toContainText` on the same element.
+4. Take note of shortcomings in our own work. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
+5. Think about what you are actually trying to test. Writing tests is not as easy as it first seems. Take your time.
+
 ## PHPUnit
 
 Coming soon.

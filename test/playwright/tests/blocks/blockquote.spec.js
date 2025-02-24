@@ -4,57 +4,79 @@ import drupal from '../helpers/drupal.helpers';
 const BLOCK = 'Blockquote';
 const MACHINE_NAME = 'blockquote';
 
-test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop'] }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
+  let pageUrl;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.visitLayoutBuilder(page);
-    await drupal.removeElement(page, '.cookie-consent-component');
+    await drupal.consent(page);
+    await drupal.setConfigs();
+    await drupal.loginAsAdmin(page);
+    pageUrl = await drupal.createPage(page, BLOCK);
+  });
+
+  test.beforeEach(async () => {
+    await page.goto(pageUrl);
   });
 
   test.afterAll('cleanup', async () => {
-    await page.getByRole('link', { name: 'Layout' }).first().click();
-    await drupal.removeBlock(page);
     await page.close();
   });
 
   test('create', async () => {
-    await drupal.addBlock(page, BLOCK);
-    await page.getByLabel('Required Accent Color').selectOption('accent-gold');
-    await page.getByLabel('Rich Text Editor').getByRole('paragraph').click();
-    await page.getByLabel('Rich Text Editor').getByRole('paragraph').fill('Blockquote content');
-    await page.getByLabel('Citation author').click();
-    await page.getByLabel('Citation author').fill('Blockquote author');
-    await page.getByLabel('Citation Title').click();
-    await page.getByLabel('Citation Title').fill('Blockquote author title');
-    await page.getByRole('button', { name: 'Add block' }).click();
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
+    await page.getByRole('link', { name: 'Layout' }).click();
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await expect(page.getByRole('link', { name: BLOCK })).toBeVisible();
+    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
-    // after the redirect to /basic-page
-    await expect(page.locator('.uds-blockquote')).toHaveClass(/accent-gold/);
-    await expect(page.getByText('Blockquote content')).toBeVisible();
-    await expect(page.getByText('Blockquote author', { exact: true })).toBeVisible();
-    await expect(page.getByText('Blockquote author title')).toBeVisible();
+    await page.getByRole('combobox', { name: 'Required Accent Color' }).selectOption({ label: 'Gold' });
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
+    await page.getByRole('combobox', { name: 'Citation Style' }).selectOption({ label: 'Alternative' });
+    await page.getByRole('textbox', { name: 'Citation author' }).fill('Block author');
+    await page.getByRole('textbox', { name: 'Citation Title' }).fill('Block title');
+    await page.getByRole('button', { name: 'Add block' }).click();
+
+    // Image variant
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
+    await page.getByRole('link', { name: 'Create content block' }).click();
+    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Block heading');
+    await page.getByRole('combobox', { name: 'Heading Highlight' }).selectOption({ label: 'Gold' });
+    await page.getByRole('combobox', { name: 'Required Text Color' }).selectOption({ label: 'White' });
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
+    await page.getByRole('radio', { name: 'Right' }).setChecked(true);
+    await drupal.addMediaField(page);
+    await page.getByRole('textbox', { name: 'Citation author' }).fill('Block author');
+    await page.getByRole('textbox', { name: 'Citation Title' }).fill('Block title');
+
+    await page.getByRole('button', { name: 'Add block' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click();
   });
 
-  test('edit', async () => {
-    await drupal.visitLayoutBuilderForNode(page);
-    await page.getByRole('textbox', { name: 'Heading' }).click();
-    await page.getByRole('textbox', { name: 'Heading' }).fill('Blockquote heading');
-    await page.getByLabel('Required Text Color').selectOption('text-white');
-    await page.getByLabel('Heading Highlight').selectOption('highlight-gold');
-    await page.locator('.form-item-settings-block-form-field-blockquote-0-subform-field-image-position > .form-check-label').getByText('Right').click();
-    await drupal.addMediaField(page);
-    await page.getByLabel('Citation Style').selectOption('alt-citation');
-    await drupal.addAppearanceSettings(page, MACHINE_NAME);
+  test('verify', async () => {
+    let block = page.locator('.uds-blockquote');
+    let heading = page.getByText('Block heading', { exact: true });
+    let content = page.getByText('Block content', { exact: true });
+    let author = page.getByText('Block author', { exact: true });
+    let title = page.getByText('Block title', { exact: true });
 
-    // after the redirect to /basic-page
-    await expect(page.locator('.uds-blockquote')).toHaveClass(/text-white reversed/);
-    await expect(page.getByText('Blockquote heading')).toHaveClass('highlight-gold');
-    await expect(page.getByText('Blockquote heading')).toBeVisible();
+    await expect(block.first()).toHaveClass(/accent-gold/);
+    await expect(block.first()).toHaveClass(/alt-citation/);
+    await expect(heading.first()).toBeVisible();
+    await expect(content.first()).toBeVisible();
+    await expect(author.first()).toBeVisible();
+    await expect(title.first()).toBeVisible();
+
+    // Image variant
+    await expect(block.last()).toHaveClass(/with-image/);
+    await expect(block.last()).toHaveClass(/text-white/);
+    await expect(block.last()).toHaveClass(/reversed/);
+    await expect(heading.last()).toHaveClass('highlight-gold');
     await expect(page.getByRole('img', { name: 'test' })).toBeVisible();
-    await expect(page.locator('.uds-blockquote .citation')).toBeVisible();
   });
 });

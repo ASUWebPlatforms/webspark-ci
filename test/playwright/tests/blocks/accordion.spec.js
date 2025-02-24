@@ -33,14 +33,12 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('link', { name: BLOCK }).click();
     await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
-    //--- Begin custom test steps
     await page.getByRole('combobox', { name: 'Required Color Options' }).selectOption({ label: 'Maroon' });
     await page.locator('.fip-icon-down-dir').first().click();
     await page.getByTitle('Pyramid,ASUAwesome,Shapes,').first().click();
     await page.getByRole('textbox', { name: 'Heading' }).fill('Block heading');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
     await page.getByRole('checkbox', { name: 'Initially Expanded' }).setChecked(true);
-    //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.getByRole('button', { name: 'Save layout' }).click();
