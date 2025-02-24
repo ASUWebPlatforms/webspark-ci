@@ -10,7 +10,6 @@ Blocks
 - Card Carousel
 - Content Image Overlap
 - Display List
-- Donut Chart
 - Events
 - Grid Links
 - Hero
