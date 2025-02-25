@@ -29,8 +29,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('link', { name: 'Layout' }).click();
     await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
     await page.getByRole('link', { name: 'Create content block' }).click();
-    await expect(page.getByRole('link', { name: BLOCK })).toBeVisible();
-    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('link', { name: BLOCK, exact: true }).click();
     await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
 
     //--- Begin custom test steps
@@ -44,7 +43,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     // Image variant
     await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
     await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: BLOCK }).click();
+    await page.getByRole('link', { name: BLOCK, exact: true }).click();
     await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
     await page.getByRole('textbox', { name: 'Heading' }).fill('Block heading');
     await page.getByRole('combobox', { name: 'Heading Highlight' }).selectOption({ label: 'Gold' });
