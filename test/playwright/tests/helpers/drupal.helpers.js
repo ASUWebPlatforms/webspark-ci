@@ -170,23 +170,17 @@ class DrupalHelpers {
   }
 
   /**
-   * Add a heading to a block.
+   * Add a CTA to a block.
    *
    * @param page
-   * @param content
+   * @param n int The nth child CSS selector, starting with a 0 index
    * @returns {Promise<void>}
    */
-  async addHeadingField(page, content) {
-  }
-
-  /**
-   * Add CKE content to a block.
-   *
-   * @param page
-   * @param content
-   * @returns {Promise<void>}
-   */
-  async addCkField(page, content) {
+  async addCTAField(page, n = 0) {
+    await page.getByRole('textbox', { name: 'URL' }).nth(n).fill('https://asu.edu');
+    await page.getByRole('textbox', { name: 'Link text' }).nth(n).fill('Block CTA');
+    await page.getByRole('combobox', { name: 'Select a target' }).nth(n).selectOption({ label: 'New window (_blank)' });
+    await page.getByRole('combobox', { name: 'Required Style' }).nth(n).selectOption({ label: 'Maroon' });
   }
 
   /**
