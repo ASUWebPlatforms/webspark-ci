@@ -160,12 +160,12 @@ class DrupalHelpers {
    *
    * @param page
    * @param n int The nth child CSS selector, starting with a 0 index
-   * @param media string The file to use
+   * @param media string The name of the file to use
    * @returns {Promise<void>}
    */
-  async addMediaField(page, n = 0, media = 'Hero-DreamscapeLearn-2022.jpeg') {
+  async addMediaField(page, n = 0, media = 'sample') {
     await page.getByRole('button', { name: 'Add media' }).nth(n).click();
-    await page.getByRole('checkbox', { name: `Select ${media}` }).check();
+    await page.getByRole('checkbox', { name: `Select ${media}`, exact: true }).check();
     await page.getByRole('button', { name: 'Insert selected' }).click();
   }
 

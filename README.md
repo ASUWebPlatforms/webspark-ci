@@ -219,6 +219,12 @@ ddev pull pantheon
 
 We use [Playwright](https://playwright.dev) for front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
 
+### Getting the site ready for Playwright
+
+Before creating Playwright tests, it is a good idea to first seed the website with sample media. You can fill forms with text on demand, but this is not the case with media files.
+
+Visit `/media/add`, and add media for each available media type. Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
+
 ### Installing Playwright
 
 If you need to install Playwright from scratch, follow these steps:
@@ -317,7 +323,7 @@ ddev playwright show-report --host=0.0.0.0
 
 1. Read the Playwright documentation before attempting to write tests. There **is** a learning curve.
 2. Use accessible locators as much as possible.
-3. Take advantage of implied visibility. There is no reason to assert `toBeVisible` and `toContainText` on the same element.
+3. Take advantage of implied visibility. For example, there is no reason to assert both `toBeVisible` and `toContainText` on the same element. This is because the element must first be visible in order for the text to be read to begin with.
 4. Take note of shortcomings in our own work. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
 5. Think about what you are actually trying to test. Writing tests is not as easy as it first seems. Take your time.
 6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen wont always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
