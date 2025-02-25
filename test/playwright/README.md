@@ -30,7 +30,6 @@ Blocks
 - Testimonial Carousel
 - Testimonial on Image Background
 - Text Content
-- Video
 - Video Hero
 - Web Directory
 - Webform
