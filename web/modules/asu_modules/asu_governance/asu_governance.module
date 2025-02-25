@@ -124,10 +124,29 @@ function asu_governance_preprocess_links(&$variables) {
  * Implements hook_form_FORM_ID_alter().
  */
 function asu_governance_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Disable the administrator option from the roles list for non-admin users.
   if (!\Drupal::currentUser()->hasRole('administrator')) {
+    // Disable the administrator option from the roles list for non-admin users.
     $form['account']['roles']['administrator'] = [
       '#disabled' => TRUE,
     ];
+  }
+  // Disable the Status field on the etsuper account
+  if ($form['account']['name']['#default_value'] === 'etsuper') {
+    $form['account']['status']['#disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id === 'views_form_user_admin_people_page_1' && !\Drupal::currentUser()->hasRole('administrator')) {
+    // Add a custom bulk operation.
+    $options = $form["header"]["user_bulk_form"]["action"]["#options"];
+    foreach ($options as $key => $value) {
+      if (str_contains($value, 'Administrator')) {
+        unset($form["header"]["user_bulk_form"]["action"]["#options"][$key]);
+      }
+    }
   }
 }
