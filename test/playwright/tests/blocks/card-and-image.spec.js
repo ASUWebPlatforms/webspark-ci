@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import drupal from '../helpers/drupal.helpers';
+import drupal from '../helpers/drupal';
 
 const BLOCK = 'Card and Image';
 const MACHINE_NAME = 'card-and-image';
