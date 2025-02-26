@@ -36,14 +36,7 @@ Blocks
 
 Components
 
-- CAS
 - CKEditor
 - Footer
 - Header
 - Search
-
-Pages
-
-- 404
-- Maintenance
-- Home

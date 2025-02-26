@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('cas', { tag: ['@webspark', '@desktop'] }, async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('link', { name: 'Sign In' }).click();
-  await expect(page.getByRole('heading', { name: 'Application Not Authorized to' })).toBeVisible();
-  await expect(page.locator('h2')).toContainText('Application Not Authorized to Use CAS');
+test.describe('cas tests', { tag: ['@webspark', '@desktop'] }, () => {
+  test('verify', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Sign In', exact: true }).click();
+
+    const header = page.getByRole('heading', { name: 'Application Not Authorized to Use CAS', exact: true });
+    await expect(header).toBeVisible();
+  });
 });
