@@ -17,7 +17,6 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 - Image Background with Call to Action
 - Image Carousel
 - Image Gallery
-- Inset Box
 - News
 - Notification Banner
 - Sidebar Menu
