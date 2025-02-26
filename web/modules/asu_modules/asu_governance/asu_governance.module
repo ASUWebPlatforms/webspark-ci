@@ -149,4 +149,10 @@ function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form
       }
     }
   }
+  if ($form_id === 'bulk_add_cas_users' && !\Drupal::currentUser()->hasRole('administrator')) {
+    // Disable the administrator option from the roles list for non-admin users.
+    $form['roles']['administrator'] = [
+      '#disabled' => TRUE,
+    ];
+  }
 }
