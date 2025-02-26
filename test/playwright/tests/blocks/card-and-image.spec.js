@@ -66,9 +66,9 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     const heading = page.getByText('Block heading', { exact: true });
     const content = page.getByText('Block content', { exact: true });
     const cta = page.getByRole('link', { name: 'Block CTA', exact: true });
-    const image = page.getByRole('img', { name: 'test' });
+    const image = page.getByRole('img', { name: 'sample image' });
 
-    await expect(block.first()).toHaveCSS('background-image', /Hero-DreamscapeLearn-2022.jpeg/);
+    await expect(block.first()).toHaveCSS('background-image', /.*sample.*/);
     await expect(block.first()).toHaveClass(/uds-card-and-image-right/);
     await expect(icon).toBeVisible();
     await expect(heading).toBeVisible();

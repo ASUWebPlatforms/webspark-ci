@@ -25,7 +25,6 @@ class DrupalHelpers {
   async toggleCookieConsent(enabled = 0) {
     this.drush(`config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled ${enabled}`);
     this.drush(`config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled ${enabled}`);
-    this.drush('cache:rebuild');
   }
 
   /**

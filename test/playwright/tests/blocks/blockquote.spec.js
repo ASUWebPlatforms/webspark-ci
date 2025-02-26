@@ -65,6 +65,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     const content = page.getByText('Block content', { exact: true });
     const author = page.getByText('Block author', { exact: true });
     const title = page.getByText('Block title', { exact: true });
+    const image = page.getByRole('img', { name: 'sample image' });
 
     await expect(block.first()).toHaveClass(/accent-gold/);
     await expect(block.first()).toHaveClass(/alt-citation/);
@@ -78,6 +79,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await expect(block.last()).toHaveClass(/text-white/);
     await expect(block.last()).toHaveClass(/reversed/);
     await expect(heading.last()).toHaveClass('highlight-gold');
-    await expect(page.getByRole('img', { name: 'test' })).toBeVisible();
+    await expect(image).toBeVisible();
   });
 });

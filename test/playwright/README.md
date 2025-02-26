@@ -13,7 +13,6 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 - Hero
 - Hover Cards
 - Icon List
-- Image
 - Image and Text Block
 - Image Background with Call to Action
 - Image Carousel

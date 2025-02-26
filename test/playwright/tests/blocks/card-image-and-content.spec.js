@@ -39,7 +39,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByLabel('Rich Text Editor').getByRole('textbox').first().fill('Block content');
     await page.getByRole('combobox', { name: 'Required Text Color' }).selectOption({ label: 'White' });
     await page.locator('[data-drupal-selector^="edit-settings-block-form-field-card-0-subform-field-media-open-button"]').click();
-    await page.getByRole('checkbox', { name: 'Select Hero-DreamscapeLearn-2022.jpeg' }).check();
+    await page.getByRole('checkbox', { name: 'Select sample', exact: true }).check();
     await page.getByRole('button', { name: 'Insert selected' }).click();
     await page.getByRole('textbox', { name: 'Heading' }).last().fill('Block heading');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').last().fill('Block content');
@@ -66,9 +66,9 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     const content = page.getByText('Block content', { exact: true });
     const contentParent = page.locator('.content').filter({ has: content });
     const cta = page.getByRole('link', { name: 'Block CTA', exact: true });
-    const image = page.getByRole('img', { name: 'test' });
+    const image = page.getByRole('img', { name: 'sample image' });
 
-    await expect(div).toHaveCSS('background-image', /Hero-DreamscapeLearn-2022.jpeg/);
+    await expect(div).toHaveCSS('background-image', /.*sample.*/);
     await expect(heading.first()).toBeVisible();
     await expect(content.first()).toBeVisible();
     await expect(contentParent).toHaveClass(/text-white/);
