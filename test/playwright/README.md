@@ -1,5 +1,7 @@
 # Playwright
 
+TODO: Move all of these into JIRA tasks instead to show movement on the board, then delete this file.
+
 ## Tests to create or update
 
 We want to ensure we have tests for functionality that we have added.
@@ -29,8 +31,6 @@ Blocks
 - Testimonial
 - Testimonial Carousel
 - Testimonial on Image Background
-- Text Content
-- Video Hero
 - Web Directory
 - Webform
 
