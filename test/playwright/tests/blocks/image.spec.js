@@ -52,7 +52,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     const image = page.getByRole('img', { name: 'sample image' });
     const caption = page.getByText('Block caption', { exact: true });
 
-    // await expect(blockParent).toHaveCSS('max-width', '50%');
+    await expect(blockParent).toHaveCSS('max-width', '50%');
     await expect(block).toHaveClass(/uds-img-drop-shadow/);
     await expect(image).toBeVisible();
     await expect(caption).toBeVisible();
