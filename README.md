@@ -329,6 +329,7 @@ ddev playwright show-report --host=0.0.0.0
 6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen wont always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
 7. Nested items and other dynamic elements in the Layout Builder are rendered on demand, so you need to be sure that your Playwright locator uses a targeting method with that in mind. Whenever possible in these cases, use the `drupal-data-selector` attribute.
 8. If you need to use Drush in your test, you will need to build the `page` variable manually.
+9. Some selectors are and need to be very specific, because that is how they appear to the browser and thus the user. If the inconsistency of the naming conventions and capitalization between things such as `Card Carousel` and `Content image overlap` is bothersome to us developers, imagine how our users feel.
 
 ## PHPUnit
 

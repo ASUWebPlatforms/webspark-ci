@@ -6,7 +6,6 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 
 - Card Arrangement
 - Card Carousel
-- Content Image Overlap
 - Display List
 - Events
 - Grid Links
