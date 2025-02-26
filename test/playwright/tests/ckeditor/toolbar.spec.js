@@ -11,7 +11,7 @@ const buttons = [
   'Insert Fontawesome Icon',
   'Upload image from computer',
   'Insert Media',
-  'Heading',
+  'Paragraph, Heading',
   'Source',
   'CKEditor Responsive',
   'Button',
@@ -24,11 +24,13 @@ const buttons = [
   'Webspark table',
 ];
 
-test('default ckeditor buttons load', { tag: ['@webspark', '@desktop'] }, async ({ page }) => {
-  await drupal.loginAsAdmin(page);
-  await page.goto('/node/add/page');
-  await expect(page.getByLabel('Highlight').nth(1)).toBeVisible();
-  for (const i of buttons) {
-    await expect(page.getByLabel(i, { exact: true })).toBeVisible();
-  }
+test.describe('ckeditor toolbar tests', { tag: ['@webspark', '@desktop'] }, () => {
+  test('verify', async ({ page }) => {
+    await drupal.loginAsAdmin(page);
+    await page.goto('/node/add/page');
+    for (const i of buttons) {
+      await expect(page.getByLabel(i, { exact: true })).toBeVisible();
+    }
+    await expect(page.getByLabel('Highlight', { exact: true }).nth(1)).toBeVisible();
+  });
 });
