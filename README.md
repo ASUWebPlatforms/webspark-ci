@@ -328,6 +328,7 @@ ddev playwright show-report --host=0.0.0.0
 5. Think about what you are actually trying to test. Writing tests is not as easy as it first seems. Take your time.
 6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen wont always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
 7. Nested items and other dynamic elements in the Layout Builder are rendered on demand, so you need to be sure that your Playwright locator uses a targeting method with that in mind. Whenever possible in these cases, use the `drupal-data-selector` attribute.
+8. If you need to use Drush in your test, you will need to build the `page` variable manually.
 
 ## PHPUnit
 

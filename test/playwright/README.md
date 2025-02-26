@@ -1,12 +1,8 @@
-# Playwright
+# Playwright Tests
 
 TODO: Move all of these into JIRA tasks instead to show movement on the board, then delete this file.
 
-## Tests to create or update
-
-We want to ensure we have tests for functionality that we have added.
-
-Blocks
+### Blocks
 
 - Card Arrangement
 - Card Carousel
@@ -34,9 +30,17 @@ Blocks
 - Web Directory
 - Webform
 
-Components
+### Components
 
 - CKEditor
+  - Button
+  - Horizontal line
+  - Divider
+  - Lead
+  - Highlighted Heading
+  - Blockquote
+  - Blockquote Animated
+  - Webspark table
 - Footer
 - Header
 - Search
