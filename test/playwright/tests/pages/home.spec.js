@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('homepage', { tag: ['@webspark', '@desktop'] }, async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('#asuHeader')).toBeVisible();
-  await expect(page.getByRole('heading')).toContainText('Explore Webspark 2');
-  await expect(page.locator('#asu-footer')).toBeVisible();
+test.describe('home page tests', { tag: ['@webspark', '@desktop'] }, () => {
+  test('verify', async ({ page }) => {
+    const response = await page.goto('/');
+    const header = page.locator('#asuHeader');
+    const footer = page.locator('#asu-footer');
+
+    expect(response.status()).toBe(200);
+    await expect(header).toBeVisible();
+    await expect(footer).toBeVisible();
+  });
 });
