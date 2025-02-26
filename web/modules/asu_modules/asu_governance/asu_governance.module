@@ -141,10 +141,14 @@ function asu_governance_form_user_form_alter(&$form, FormStateInterface $form_st
  */
 function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id === 'views_form_user_admin_people_page_1' && !\Drupal::currentUser()->hasRole('administrator')) {
-    // Add a custom bulk operation.
+    // Prevent non-admins from performing operations on the Administrator role.
     $options = $form["header"]["user_bulk_form"]["action"]["#options"];
     foreach ($options as $key => $value) {
       if (str_contains($value, 'Administrator')) {
+        unset($form["header"]["user_bulk_form"]["action"]["#options"][$key]);
+      }
+      // Prevent non-admins from unblocking etsuper.
+      if (str_contains($value, 'Unblock')) {
         unset($form["header"]["user_bulk_form"]["action"]["#options"][$key]);
       }
     }
