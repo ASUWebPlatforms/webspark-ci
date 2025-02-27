@@ -17,9 +17,8 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 - Sidebar Menu
 - Step List
 - Tabbed Content
-- Testimonial
-- Testimonial Carousel
 - Testimonial on Image Background
+- Testimonial Carousel
 - Web Directory
 - Webform
 
