@@ -35,7 +35,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('textbox', { name: 'Sub Heading', exact: true }).fill('Block sub heading');
     await page.getByRole('combobox', { name: 'Required Sub Heading Background Color' }).selectOption({ label: 'Gray 7 background' });
     await drupal.addMediaField(page);
-    await page.waitForTimeout(2000);
 
     await page.locator('[data-drupal-selector^="edit-settings-block-form-field-two-cta-0-subform-field-cta-link-0-uri"]').fill('https://asu.edu');
     await page.locator('[data-drupal-selector^="edit-settings-block-form-field-two-cta-0-subform-field-cta-link-0-title"]').fill('Block CTA');

@@ -78,7 +78,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     // Check the parallax effect is working
     const initialPosition = await image.evaluate((img) => img.style.top);
     await page.evaluate(() => window.scrollTo(0, window.innerHeight / 2));
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(500);
     const scrolledPosition = await image.evaluate((img) => img.style.top);
     expect(initialPosition).not.toEqual(scrolledPosition);
   });

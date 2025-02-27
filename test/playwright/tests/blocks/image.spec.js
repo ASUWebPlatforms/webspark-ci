@@ -33,8 +33,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('checkbox', { name: 'Center image' }).setChecked(true);
     await page.getByRole('checkbox', { name: 'Add Drop Shadow' }).setChecked(true);
     await drupal.addMediaField(page);
-    // For some reason Drupal takes long to load images in this block
-    await page.waitForTimeout(3000);
     await page.getByRole('textbox', { name: 'Image Caption' }).fill('Block caption');
     //--- End custom test steps
 
