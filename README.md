@@ -221,7 +221,9 @@ We use [Playwright](https://playwright.dev) for front end testing. We have insta
 
 ### Getting the site ready for Playwright
 
-Before creating Playwright tests, it is a good idea to first seed the website with sample media. You can fill forms with text on demand, but this is not the case with media files.
+Before creating Playwright tests, it is a good idea to first seed the website with sample users and media. You can fill forms with text on demand, but this is not the case with media files.
+
+Visit to add an admin user. Give it the username `playwright`.
 
 Visit `/media/add`, and add media for each available media type. Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
 
@@ -330,6 +332,8 @@ ddev playwright show-report --host=0.0.0.0
 7. Nested items and other dynamic elements in the Layout Builder are rendered on demand, so you need to be sure that your Playwright locator uses a targeting method with that in mind. Whenever possible in these cases, use the `drupal-data-selector` attribute.
 8. If you need to use Drush in your test, you will need to build the `page` variable manually.
 9. Some selectors are and need to be very specific, because that is how they appear to the browser and thus the user. If the inconsistency of the naming conventions and capitalization between things such as `Card Carousel` and `Content image overlap` is bothersome to us developers, imagine how our users feel.
+10. Sometimes it seems that Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page. If you see this, run the test using the UI, and you will commonly find that when selecting elements within the Layout Builder, sometimes Drupals AJAX request is just too slow for Playwright. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
+11. When using Layout Builder, you also need to be aware of conditional fields. Again, watch the test in the UI to catch this.
 
 ## PHPUnit
 
