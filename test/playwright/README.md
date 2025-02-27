@@ -8,7 +8,6 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 - Card Carousel
 - Display List
 - Events
-- Hero
 - Hover Cards
 - Icon List
 - Image and Text Block

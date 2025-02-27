@@ -122,11 +122,10 @@ class DrupalHelpers {
    * @returns {Promise<void>}
    */
   async addBlock(page, name) {
-    await page.getByRole('link', { name: 'Add block in Top, First region' }).click();
+    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
     await page.getByRole('link', { name: 'Create content block' }).click();
     await page.getByRole('link', { name: name, exact: true }).click();
-    await page.getByLabel('Required Block admin title').click();
-    await page.getByLabel('Required Block admin title').fill(name);
+    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(name);
   }
 
   /**
