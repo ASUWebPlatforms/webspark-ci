@@ -324,16 +324,15 @@ ddev playwright show-report --host=0.0.0.0
 ### Tips for writing Playwright tests
 
 1. Read the Playwright documentation before attempting to write tests. There **is** a learning curve.
-2. Use accessible locators as much as possible.
-3. Take advantage of implied visibility. For example, there is no reason to assert both `toBeVisible` and `toContainText` on the same element. This is because the element must first be visible in order for the text to be read to begin with.
-4. Take note of shortcomings in our own work. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
+2. Use accessible locators as much as possible. The `getByRole` locator is your friend.
+3. Take advantage of implied visibility as much as possible. For example, there is no reason to test `toBeVisible` on an element targeted by `getByText('foo')` because the element already needs to be visible in order for Playwright to target it by its content to begin with.
+4. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
 5. Think about what you are actually trying to test. Writing tests is not as easy as it first seems. Take your time.
-6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen wont always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
-7. Nested items and other dynamic elements in the Layout Builder are rendered on demand, so you need to be sure that your Playwright locator uses a targeting method with that in mind. Whenever possible in these cases, use the `drupal-data-selector` attribute.
+6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen won't always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
+7. Some elements in the Layout Builder are dynamicly rendered, so you need to be sure that your Playwright locator uses a targeting method with that in mind. In these cases, the `drupal-data-selector` attribute is helpful.
 8. If you need to use Drush in your test, you will need to build the `page` variable manually.
-9. Some selectors are and need to be very specific, because that is how they appear to the browser and thus the user. If the inconsistency of the naming conventions and capitalization between things such as `Card Carousel` and `Content image overlap` is bothersome to us developers, imagine how our users feel.
-10. Sometimes it seems that Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page. If you see this, run the test using the UI, and you will commonly find that when selecting elements within the Layout Builder, sometimes Drupals AJAX request is just too slow for Playwright. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
-11. When using Layout Builder, you also need to be aware of conditional fields. Again, watch the test in the UI to catch this.
+9. Sometimes Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page yet. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
+10. When using Layout Builder, you need to be aware of conditional fields.
 
 ## PHPUnit
 

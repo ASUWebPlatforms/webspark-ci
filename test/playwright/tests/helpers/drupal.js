@@ -176,8 +176,7 @@ class DrupalHelpers {
     await page.getByRole('button', { name: 'Add media' }).nth(n).click();
     await page.getByRole('checkbox', { name: `Select ${media}`, exact: true }).check();
     await page.getByRole('button', { name: 'Insert selected' }).click();
-    // Drupal AJAX is sometimes slow here, so manually giving it some time
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2000);
   }
 
   /**
