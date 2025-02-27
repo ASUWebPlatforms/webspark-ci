@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal';
 
 const BLOCK = 'Blockquote';
-const MACHINE_NAME = 'blockquote';
 
 test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
@@ -27,10 +26,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
   test('create', async () => {
     await page.getByRole('link', { name: 'Layout' }).click();
-    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: BLOCK, exact: true }).click();
-    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
+    await drupal.addBlock(page, BLOCK);
 
     //--- Begin custom test steps
     await page.getByRole('combobox', { name: 'Required Accent Color' }).selectOption({ label: 'Gold' });
@@ -41,10 +37,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('button', { name: 'Add block' }).click();
 
     // Image variant
-    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: BLOCK, exact: true }).click();
-    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
+    await drupal.addBlock(page, BLOCK);
     await page.getByRole('textbox', { name: 'Heading' }).fill('Block heading');
     await page.getByRole('combobox', { name: 'Heading Highlight' }).selectOption({ label: 'Gold' });
     await page.getByRole('combobox', { name: 'Required Text Color' }).selectOption({ label: 'White' });

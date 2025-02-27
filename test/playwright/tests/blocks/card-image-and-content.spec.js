@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal';
 
 const BLOCK = 'Card image and content';
-const MACHINE_NAME = 'card-image-and-content';
 
 test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
   /** @type {import('@playwright/test').Page} */
@@ -27,10 +26,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
   test('create', async () => {
     await page.getByRole('link', { name: 'Layout' }).click();
-    await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
-    await page.getByRole('link', { name: 'Create content block' }).click();
-    await page.getByRole('link', { name: BLOCK, exact: true }).click();
-    await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(MACHINE_NAME);
+    await drupal.addBlock(page, BLOCK);
 
     //--- Begin custom test steps
     await page.getByRole('textbox', { name: 'Heading' }).first().fill('Block heading');
