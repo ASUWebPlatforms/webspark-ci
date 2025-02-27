@@ -35,11 +35,12 @@ class CustomUserCancelSubscriber extends AccountCancelSubscriber implements Even
     $batch_builder = (new BatchBuilder())
       ->setTitle(t('Cancelling user account'))
       ->addOperation(static::class . '::doCustomCancelAccount', [
-        $event->getAccount(),
+        $event->getAccount()->id(),
         $event->getMethod(),
         $event->getContext(),
       ]);
-    batch_set($batch_builder->toArray());
+    $batch = $batch_builder->toArray();
+    batch_set($batch);
     $event->stopPropagation();
   }
 
@@ -49,17 +50,18 @@ class CustomUserCancelSubscriber extends AccountCancelSubscriber implements Even
    * Note that this method is declared static to avoid serialization of a huge
    * object by the batch API.
    *
-   * @param \Drupal\user\UserInterface $account
+   * @param string $account_id
    *   The user account to be cancelled.
    * @param string $method
    *   The cancellation method.
    * @param array $context
    *   A context array. Typically, an array of submitted form values.
    */
-  public static function doCustomCancelAccount(UserInterface $account, string $method, array $context): void {
+  public static function doCustomCancelAccount(string $account_id, string $method, array $context): void {
     $logger = \Drupal::logger('user');
     $messenger = \Drupal::messenger();
-
+    /** @var UserInterface $account */
+    $account = \Drupal::entityTypeManager()->getStorage('user')->load($account_id);
     switch ($method) {
       case 'user_cancel_block':
       case 'user_cancel_block_unpublish':

@@ -23,7 +23,7 @@ If you are using a Composer workflow and have the `cweagans/composer-patches` pa
     "extra": {
         "patches": {
             "drupal/core": {
-                "Add user1 account migration": "web/modules/asu_modules/asu_secure_superadmin/patch/user-module-3135592-2241mr-c39.patch"
+                "Add user1 account migration": "web/modules/contrib/asu_secure_superadmin/patch/user-module-3135592-2241mr-c39.patch"
             }
         }
     }

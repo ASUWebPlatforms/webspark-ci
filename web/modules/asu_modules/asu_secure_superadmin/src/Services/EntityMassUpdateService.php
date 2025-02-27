@@ -2,6 +2,7 @@
 
 namespace Drupal\asu_secure_superadmin\Services;
 
+use ArrayAccess;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Batch\BatchBuilder;
@@ -9,6 +10,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Render\Renderer;
 use Drupal\Core\StringTranslation\TranslationManager;
@@ -30,6 +32,7 @@ class EntityMassUpdateService {
     private readonly MessengerInterface $messenger,
     private readonly Renderer $renderer,
     private readonly TranslationManager $translationManager,
+    private readonly LoggerChannelFactoryInterface $logger,
   ) {}
 
   /**
@@ -51,6 +54,8 @@ class EntityMassUpdateService {
    * @param bool $revisions
    *   (optional) TRUE if $entities contains an array of revision IDs instead
    *   of entity IDs. Defaults to FALSE; will be ignored if $load is FALSE.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function entityMassUpdate(string $entity_type_id, UserInterface $account, array $updates, $langcode = NULL, $load = FALSE, $revisions = FALSE) :void {
     try {
@@ -83,10 +88,17 @@ class EntityMassUpdateService {
         // We use a single multi-pass operation, so the default
         // 'Remaining x of y operations' message will be confusing here.
         ->setProgressMessage('');
-      batch_set($batch_builder->toArray());
+      $batch = $batch_builder->toArray();
+      batch_set($batch);
     }
     else {
-      $storage = $this->entityTypeManager->getStorage($entity_type_id);
+      try {
+        $storage = $this->entityTypeManager->getStorage($entity_type_id);
+      }
+      catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
+        $this->logger->get('asu_secure_superadmin')->warning(t('No @type entities found for the user.', ['@type' => $entity_type_id]));
+        return;
+      }
       if ($entities) {
         // Load the entities if no revisions.
         if ($load && !$revisions) {
@@ -112,7 +124,7 @@ class EntityMassUpdateService {
    * Updates individual entities.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   A entity to update.
+   *   An entity to update.
    * @param array $updates
    *   Associative array of updates.
    * @param string $langcode
@@ -121,6 +133,8 @@ class EntityMassUpdateService {
    *
    * @return \Drupal\Core\Entity\EntityInterface
    *   An updated entity object.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    *
    * @see entityMassUpdate()
    */
@@ -158,8 +172,11 @@ class EntityMassUpdateService {
    *   (optional) TRUE if $entities contains an array of revision IDs instead
    *   of
    *   entity IDs. Defaults to FALSE; will be ignored if $load is FALSE.
-   * @param array|\ArrayAccess $context
+   * @param array|ArrayAccess $context
    *   An array of contextual key/values.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   * @throws \Drupal\Core\Entity\EntityMalformedException
    */
   public function entityMassUpdateBatchProcess(string $entity_type_id, array $entities, array $updates, $langcode, $load, $revisions, &$context) :void {
     if (!isset($context['sandbox']['progress'])) {
@@ -169,14 +186,20 @@ class EntityMassUpdateService {
     }
 
     // Process entities by groups of 5.
-    $storage = $this->entityTypeManager->getStorage($entity_type_id);
+    try {
+      $storage = $this->entityTypeManager->getStorage($entity_type_id);
+    }
+    catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
+      $this->logger->get('asu_secure_superadmin')->error('The entity type @type does not exist.', ['@type' => $entity_type_id]);
+    }
     $count = min(5, count($context['sandbox']['entities']));
     for ($i = 1; $i <= $count; $i++) {
       // Load each entity, reset the values, and save it.
-      $entity = array_shift($context['sandbox']['entities']);
+      $entity_id = array_shift($context['sandbox']['entities']);
+      $entity = $load ? $storage->load($entity_id) : $entity_id;
       if ($load) {
         $entity = $revisions ?
-          $storage->loadRevision($entity) : $storage->load($entity);
+          $storage->loadRevision($entity->id()) : $storage->load($entity->id());
       }
       if ($entity) {
         $entity = $this->entityMassUpdateHelper($entity, $updates, $langcode);
@@ -210,6 +233,8 @@ class EntityMassUpdateService {
    *   process.
    * @param array $operations
    *   An array of function calls (not used in this function).
+   *
+   * @throws \Exception
    *
    * @see entityMassUpdateBatchProcess()
    */

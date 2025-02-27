@@ -9,8 +9,6 @@ use Drupal\user\Entity\User;
 
 /**
  * Implements hook_requirements().
- *
- * @throws \JsonException
  */
 function asu_secure_superadmin_requirements($phase) :array {
   $requirements = [];
@@ -33,10 +31,16 @@ function asu_secure_superadmin_requirements($phase) :array {
 function asu_secure_superadmin_install() {
   $currentProfile = \Drupal::installProfile();
   if ($currentProfile !== 'webspark') {
-    // Downgrade all users with the 'administrator' role to 'site_builder'.
     try {
+      // Do a drupal query to get the number of users.
+      $users = count(\Drupal::entityQuery('user')->accessCheck(FALSE)->execute());
+      /** @var User $superAdmin */
+      $superAdmin = User::load(1);
+      $superAdminName = $superAdmin->get('name')->value;
+      $newInstall = !($users > 2 && $superAdminName !== 'etsuper');
+      // Copy user 1 to a new user and migrate its content.
       \Drupal::service('asu_secure_superadmin.change_super_admin_service')
-        ->changeSuperAdmin(TRUE);
+        ->changeSuperAdmin($newInstall);
     }
     catch (Exception $e) {
       \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());

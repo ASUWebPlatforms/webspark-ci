@@ -16,4 +16,4 @@ services:
 
   asu_secure_superadmin.entity_mass_update:
     class: Drupal\asu_secure_superadmin\Services\EntityMassUpdateService
-    arguments: ['@entity_type.manager', '@extension.list.module', '@messenger', '@renderer', '@string_translation']
+    arguments: ['@entity_type.manager', '@extension.list.module', '@messenger', '@renderer', '@string_translation', '@logger.factory']

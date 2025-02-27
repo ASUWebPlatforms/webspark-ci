@@ -23,9 +23,20 @@ function asu_governance_install() {
     // Install the webspark_governance_roles module.
     \Drupal::service('module_installer')->install(['webspark_governance_roles']);
   }
-  // Downgrade all users with the 'admin' role to 'site_builder'.
+
   try {
+    $request = \Drupal::request();
+    // Downgrade all users with the 'admin' role to 'site_builder'.
     \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
+    // Trigger the batch process if not part of update.php or a form submission.
+    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || $request->isMethod('POST'))) {
+      if (PHP_SAPI === 'cli') {
+        drush_backend_batch_process();
+      }
+      else {
+        batch_process();
+      }
+    }
   }
   catch (Exception $e) {
     \Drupal::logger('asu_governance')->error($e->getMessage());
