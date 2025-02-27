@@ -13,7 +13,6 @@ TODO: Move all of these into JIRA tasks instead to show movement on the board, t
 - Image Carousel
 - Image Gallery
 - News
-- Notification Banner
 - Sidebar Menu
 - Step List
 - Tabbed Content
