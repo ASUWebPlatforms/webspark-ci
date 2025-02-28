@@ -1,0 +1,11 @@
+{
+    "name": "asuwebplatforms/asu_secure_drupal",
+    "description": "A Drupal recipe for securing ASU Drupal sites.",
+    "type": "drupal-recipe",
+    "license": ["GPL-2.0-or-later"],
+    "require": {
+        "asuwebplatforms/asu_secure_superadmin": "dev-main",
+        "asuwebplatforms/asu_governance": "dev-main",
+        "asuwebplatforms/site_builder_role": "dev-main"
+    }
+}

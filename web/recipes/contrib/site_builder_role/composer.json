@@ -1,0 +1,6 @@
+{
+    "name": "asuwebplatforms/site_builder_role",
+    "description": "A Drupal recipe for creating a Site Builder role",
+    "type": "drupal-recipe",
+    "license": ["GPL-2.0-or-later"]
+}
