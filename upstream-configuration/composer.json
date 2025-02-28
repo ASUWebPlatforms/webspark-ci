@@ -2,6 +2,7 @@
     "name": "pantheon-upstreams/upstream-configuration",
     "type": "project",
     "require": {
+        "asuwebplatforms/asu_secure_drupal": "dev-main",
         "composer/installers": "v2.0.0",
         "cweagans/composer-patches": "1.7.3",
         "drupal/admin_toolbar": "3.4.2",
