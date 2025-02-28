@@ -29,8 +29,7 @@ function asu_secure_superadmin_requirements($phase) :array {
  * Implements hook_install().
  */
 function asu_secure_superadmin_install() {
-  $currentProfile = \Drupal::installProfile();
-  if ($currentProfile !== 'webspark') {
+  if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update'))) {
     try {
       // Do a drupal query to get the number of users.
       $users = count(\Drupal::entityQuery('user')->accessCheck(FALSE)->execute());
