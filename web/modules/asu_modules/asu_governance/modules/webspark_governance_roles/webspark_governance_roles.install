@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the webspark_governance_roles module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function webspark_governance_roles_install() {
+  // Get the module permission loader service.
+  $modulePermissionLoader = \Drupal::service('webspark_governance_roles.module_permission_loader');
+  // Get the list of allowable modules.
+  $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
+  // Update the Site Builder role's permissions.
+  $modulePermissionLoader->updateContentAdministratorPermissions($allowableModules);
+}

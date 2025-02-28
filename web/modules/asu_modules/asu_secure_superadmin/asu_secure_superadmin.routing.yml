@@ -1,0 +1,7 @@
+asu_secure_superadmin.settings:
+  path: '/admin/config/system/asu-secure-superadmin/settings'
+  defaults:
+    _title: 'ASU Secure SuperAdmin Settings'
+    _form: 'Drupal\asu_secure_superadmin\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

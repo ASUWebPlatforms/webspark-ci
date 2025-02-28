@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the asu_secure_superadmin module.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_requirements().
+ */
+function asu_secure_superadmin_requirements($phase) :array {
+  $requirements = [];
+  $patchName = 'user-module-3135592-2241mr-c39.patch';
+  $filePath = DRUPAL_ROOT . '/core/modules/user/src/Event/AccountCancelEvent.php';
+
+  if (($phase === 'install') && !file_exists($filePath)) {
+    $requirements['asu_secure_superadmin_patch_test'] = [
+      'description' => t('The ASU Secure SuperAdmin module requires the @patch_name. Your site does not have this patch installed.', ['@patch_name' => $patchName]),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function asu_secure_superadmin_install() {
+  if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update'))) {
+    try {
+      // Do a drupal query to get the number of users.
+      $users = count(\Drupal::entityQuery('user')->accessCheck(FALSE)->execute());
+      /** @var User $superAdmin */
+      $superAdmin = User::load(1);
+      $superAdminName = $superAdmin->get('name')->value;
+      $newInstall = !($users > 2 && $superAdminName !== 'etsuper');
+      // Copy user 1 to a new user and migrate its content.
+      \Drupal::service('asu_secure_superadmin.change_super_admin_service')
+        ->changeSuperAdmin($newInstall);
+    }
+    catch (Exception $e) {
+      \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());
+      \Drupal::messenger()->addError($e->getMessage());
+      return;
+    }
+  }
+}
