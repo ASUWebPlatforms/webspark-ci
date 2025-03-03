@@ -52,15 +52,15 @@ class ModulePermissionLoader {
   }
 
   /**
-   * Update the Site Builder role's permissions.
+   * Add the Site Builder role's permissions.
    *
    * @param array $modules
    *   An array of module names.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  #[Hook('modules_installed')]
-  public function updateSiteBuilderPermissions(array $modules) {
+  #[Hook('install')]
+  public function addSiteBuilderPermissions(array $modules) {
     $allowed_modules = $this->configFactory->get('asu_governance.settings')->get('allowable_modules');
     foreach ($modules as $module) {
       // Skip modules that are not enabled or not allowed
@@ -68,10 +68,11 @@ class ModulePermissionLoader {
       if (!$this->moduleHandler->moduleExists($module) || !in_array($module, $allowed_modules, TRUE)) {
         continue;
       }
-      // Load the module.
-      $module = $this->moduleHandler->getModule($module);
       // Get the module's permissions.
-      $modulePermissions = $this->getModulePermissions($module->getName());
+      $modulePermissions = $this->getModulePermissions($module);
+      if (empty($modulePermissions)) {
+        continue;
+      }
       // Load the Site Builder role.
       /** @var \Drupal\user\Entity\Role $role */
       $role = Role::load('site_builder');
@@ -83,12 +84,38 @@ class ModulePermissionLoader {
       // If there are differences, add them to the Site Builder role.
       if (!empty($diff)) {
         // Grant permission for each role in the diff array.
-        foreach ($diff as $permission) {
-
+        foreach ($modulePermissions as $permission) {
           $role->grantPermission($permission);
         }
         $role->save();
       }
+    }
+  }
+
+  /**
+   * Revoke the Site Builder role's permissions.
+   *
+   * @param array $modules
+   *   An array of module names to have permissions revoked.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  #[Hook('install')]
+  public function revokeSiteBuilderPermissions(array $modules) {
+    foreach ($modules as $module) {
+      // Get the module's permissions.
+      $modulePermissions = $this->getModulePermissions($module);
+      if (empty($modulePermissions)) {
+        continue;
+      }
+      // Load the Site Builder role.
+      /** @var \Drupal\user\Entity\Role $role */
+      $role = Role::load('site_builder');
+      // Revoke permissions from the Site Builder role.
+        foreach ($modulePermissions as $permission) {
+          $role->revokePermission($permission);
+        }
+      $role->save();
     }
   }
 

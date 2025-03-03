@@ -14,5 +14,5 @@ function webspark_governance_roles_install() {
   // Get the list of allowable modules.
   $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
   // Update the Site Builder role's permissions.
-  $modulePermissionLoader->updateSiteBuilderPermissions($allowableModules);
+  $modulePermissionLoader->addSiteBuilderPermissions($allowableModules);
 }

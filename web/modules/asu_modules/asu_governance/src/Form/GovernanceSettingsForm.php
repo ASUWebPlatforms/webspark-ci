@@ -96,15 +96,14 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       '#type' => 'textarea',
       '#title' => $this->t('Allowable Modules'),
       '#description' => $this->t('<p>Add modules, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>
-        <p><strong>Please note:</strong> ALL permissions for the modules listed above will be automatically granted to the <strong>Site Builder</strong> role when the module is enabled.</p>'),
+        <p><strong>Please note:</strong> ALL associated permissions for the modules listed above will be automatically updated on the <strong>Site Builder</strong> role when this form is saved or the module is enabled.</p>'),
       '#default_value' => implode("\n", $modulesInput),
     ];
 
     $form['allowable_themes'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Allowable Themes'),
-      '#description' => $this->t('<p>Add themes, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>
-        <p><strong>Please note:</strong> ALL permissions for the themes listed above will be automatically granted to the <strong>Site Builder</strong> role when the theme is enabled.</p>'),
+      '#description' => $this->t('<p>Add themes, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>'),
       '#default_value' => implode("\n", $themesInput),
     ];
 
@@ -179,6 +178,8 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
+    // Get the original values.
+    $originals = $this->config('asu_governance.settings')->get('allowable_modules');
 
     // Explode submitted modules textarea into an array and remove duplicates.
     $modulesInput = array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_modules')))));
@@ -186,8 +187,15 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $this->config('asu_governance.settings')
       ->set('allowable_modules', $modulesInput)
       ->save();
+    // Get a list of modules that were removed from the original list.
+    $modulesDiff = array_diff($originals, $modulesInput);
+    if (!empty($modulesDiff)) {
+      // Revoke permissions for modules that are no longer allowed.
+      $this->modulePermissionLoader->revokeSiteBuilderPermissions($modulesDiff);
+    }
+
     // Update the Site Builder role's permissions.
-    $this->modulePermissionLoader->updateSiteBuilderPermissions($modulesInput);
+    $this->modulePermissionLoader->addSiteBuilderPermissions($modulesInput);
 
     // Explode submitted themes textarea into an array and remove duplicates.
     $themesInput = array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_themes')))));
