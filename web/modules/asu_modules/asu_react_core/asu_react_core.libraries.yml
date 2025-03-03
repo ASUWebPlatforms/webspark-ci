@@ -6,36 +6,29 @@ react-core:
     - core/drupalSettings
     - asu_react_integration/reactjs
   js:
-    node_modules/@asu/components-core/dist/libCore.umd.js: {}
-react-carousel:
-  version: 0.0.1
-  dependencies:
-    - asu_react_core/react-core
-  js:
-    node_modules/@asu/component-carousel/dist/vendor.umd.js: { }
-    node_modules/@asu/component-carousel/dist/asuCarousel.umd.js: {}
+    node_modules/@asu/unity-react-core/dist/unityReactCore.umd.js: {}
 testimonial-carousel:
   version: 0.0.1
   dependencies:
-    - asu_react_core/react-carousel
+    - asu_react_core/react-core
   js:
     js/component-carousel-testimonial.js: {}
 image-carousel:
   version: 0.0.1
   dependencies:
-    - asu_react_core/react-carousel
+    - asu_react_core/react-core
   js:
     js/component-carousel-image.js: {}
 image_gallery_carousel:
   version: 0.0.1
   dependencies:
-    - asu_react_core/react-carousel
+    - asu_react_core/react-core
   js:
     js/component-carousel-image-gallery.js: { }
 card_carousel:
   version: 0.0.1
   dependencies:
-    - asu_react_core/react-carousel
+    - asu_react_core/react-core
   js:
     js/component-carousel-card.js: { }
 card-arrangement:

@@ -5,8 +5,7 @@ components-library:
     - core/drupal
     - core/drupalSettings
   js:
-    node_modules/@asu/component-header/dist/vendor.umd.js: {}
-    node_modules/@asu/component-header/dist/asuHeader.umd.js: {}
+    node_modules/@asu/component-header/dist/asuHeaderFooter.umd.js: {}
     node_modules/@asu/component-cookie-consent/dist/vendor.umd.js: {}
     node_modules/@asu/component-cookie-consent/dist/asuCookieConsent.umd.js: {}
     js/asu_brand.header.js: {}

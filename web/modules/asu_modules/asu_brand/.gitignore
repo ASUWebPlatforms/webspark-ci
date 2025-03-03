@@ -12,18 +12,18 @@ node_modules/@asu-design-system/*
 !node_modules/@asu-design-system/component-cookie-consent/
 node_modules/@asu-design-system/component-cookie-consent/*
 !node_modules/@asu-design-system/component-cookie-consent/dist
-!node_modules/@asu-design-system/component-header
-node_modules/@asu-design-system/component-header/*
-!node_modules/@asu-design-system/component-header/dist
+!node_modules/@asu-design-system/component-header-footer
+node_modules/@asu-design-system/component-header-footer/*
+!node_modules/@asu-design-system/component-header-footer/dist
 
 !node_modules/@asu
 node_modules/@asu/*
 !node_modules/@asu/component-cookie-consent/
 node_modules/@asu/component-cookie-consent/*
 !node_modules/@asu/component-cookie-consent/dist
-!node_modules/@asu/component-header
-node_modules/@asu/component-header/*
-!node_modules/@asu/component-header/dist
+!node_modules/@asu/component-header-footer
+node_modules/@asu/component-header-footer/*
+!node_modules/@asu/component-header-footer/dist
 
 # Drupal/external libraries
 /vendor/
