@@ -51,10 +51,10 @@
     prop-types "^15.7.2"
     styled-components "^5.3.0"
 
-"@asu/unity-react-core@1.0.2":
-  version "1.0.2"
-  resolved "https://npm.pkg.github.com/download/@asu/unity-react-core/1.0.2/dbc684356f437d566b0085fe98d8709ccadf8d3b#dbc684356f437d566b0085fe98d8709ccadf8d3b"
-  integrity sha512-g9ZzMzfoFOjkjeq+1wUjp8OXZeHsdLDNQnJKodc9C7vO9NBfjTllEvw/M0sn/VE6nuM4p/uN61khpYRyKrm9oA==
+"@asu/unity-react-core@1.0.3":
+  version "1.0.3"
+  resolved "https://npm.pkg.github.com/download/@asu/unity-react-core/1.0.3/6446f97055a7301a727c3bce92ddfcd39e891f6b#6446f97055a7301a727c3bce92ddfcd39e891f6b"
+  integrity sha512-V61UdUQtrGuXm1glrPLeDae61TCvebPcXNYz/h1vQWzm/kKaNf0GgKrHZDFJFUbRv+/2BjHdjasWNCArQOuNpQ==
   dependencies:
     "@glidejs/glide" "~3.6.2"
     classnames "^2.2.6"
