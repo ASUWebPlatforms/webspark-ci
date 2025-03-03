@@ -60,7 +60,7 @@ class ModulePermissionLoader {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   #[Hook('modules_installed')]
-  public function updateContentAdministratorPermissions(array $modules) {
+  public function updateSiteBuilderPermissions(array $modules) {
     $allowed_modules = $this->configFactory->get('asu_governance.settings')->get('allowable_modules');
     foreach ($modules as $module) {
       // Skip modules that are not enabled or not allowed
@@ -76,10 +76,10 @@ class ModulePermissionLoader {
       /** @var \Drupal\user\Entity\Role $role */
       $role = Role::load('site_builder');
       // Get the role's permissions.
-      $contentAdminPerms = $role->getPermissions();
+      $siteBuilderPerms = $role->getPermissions();
       // Find the difference between the module permissions and
       // the Site Builder role's permissions.
-      $diff = array_diff($modulePermissions, $contentAdminPerms);
+      $diff = array_diff($modulePermissions, $siteBuilderPerms);
       // If there are differences, add them to the Site Builder role.
       if (!empty($diff)) {
         // Grant permission for each role in the diff array.

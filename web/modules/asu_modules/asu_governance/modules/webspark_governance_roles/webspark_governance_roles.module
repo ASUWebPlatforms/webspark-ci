@@ -13,5 +13,5 @@
  */
 #[LegacyHook]
 function webspark_governance_roles_modules_installed(array $modules) {
-  \Drupal::service('webspark_governance_roles.module_permission_loader')->updateContentAdministratorPermissions($modules);
+  \Drupal::service('webspark_governance_roles.module_permission_loader')->updateSiteBuilderPermissions($modules);
 }
