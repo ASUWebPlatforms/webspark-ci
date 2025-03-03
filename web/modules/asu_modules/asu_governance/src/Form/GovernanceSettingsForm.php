@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\asu_governance\Form;
 
+use Drupal\asu_governance\Services\ModulePermissionLoader;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
@@ -32,6 +33,13 @@ final class GovernanceSettingsForm extends ConfigFormBase {
   protected $themeHandler;
 
   /**
+   * The module permission loader service.
+   *
+   * @var \Drupal\asu_governance\Services\ModulePermissionLoader
+   */
+  protected $modulePermissionLoader;
+
+  /**
    * Build the form.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -41,10 +49,11 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler, ModulePermissionLoader $modulePermissionLoader) {
     parent::__construct($config_factory);
     $this->moduleHandler = $module_handler;
     $this->themeHandler = $theme_handler;
+    $this->modulePermissionLoader = $modulePermissionLoader;
   }
 
   /**
@@ -54,7 +63,8 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     return new static(
       $container->get('config.factory'),
       $container->get('module_handler'),
-      $container->get('theme_handler')
+      $container->get('theme_handler'),
+      $container->get('asu_governance.module_permission_loader')
     );
   }
 
@@ -165,6 +175,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
@@ -175,6 +186,8 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $this->config('asu_governance.settings')
       ->set('allowable_modules', $modulesInput)
       ->save();
+    // Update the Site Builder role's permissions.
+    $this->modulePermissionLoader->updateSiteBuilderPermissions($modulesInput);
 
     // Explode submitted themes textarea into an array and remove duplicates.
     $themesInput = array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_themes')))));
