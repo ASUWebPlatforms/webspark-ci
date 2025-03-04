@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal';
 
+const PLUGIN = 'Toolbar';
+
 const buttons = [
   'Bold',
   'Italic',
@@ -24,10 +26,28 @@ const buttons = [
   'Webspark table',
 ];
 
-test.describe('ckeditor toolbar tests', { tag: ['@webspark', '@desktop'] }, () => {
-  test('verify', async ({ page }) => {
+test.describe(`CKEditor ${PLUGIN} tests`, { tag: ['@webspark', '@desktop', '@ckeditor'] }, () => {
+  /** @type {import('@playwright/test').Page} */
+  let page;
+  let pageUrl;
+
+  test.beforeAll('setup', async ({ browser }) => {
+    page = await browser.newPage();
     await drupal.loginAsAdmin(page);
-    await page.goto('/node/add/page');
+    pageUrl = await drupal.createPage(page, PLUGIN);
+  });
+
+  test.beforeEach(async () => {
+    await page.goto(pageUrl);
+  });
+
+  test.afterAll('cleanup', async () => {
+    await page.close();
+  });
+
+  test('verify', async () => {
+    await page.getByRole('link', { name: 'Edit' }).click();
+
     for (const i of buttons) {
       await expect(page.getByLabel(i, { exact: true })).toBeVisible();
     }
