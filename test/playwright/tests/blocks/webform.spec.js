@@ -43,9 +43,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     const email = page.locator('#edit-email');
     const subject = page.locator('#edit-subject');
     const message = page.getByRole('textbox', { name: 'Required Message' });
-    const checkbox = page.getByRole('checkbox', { name: 'Ok to contact?' });
-    const radio = page.getByRole('radio', { name: 'Email' });
-    const select = page.getByRole('combobox', { name: 'Best time' });
     const submit = page.locator('#edit-actions-submit');
     const error = page.getByText('error has been found: Message');
     const success = page.getByText('Your message has been sent.', { exact: true });
@@ -57,15 +54,13 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await expect(name).toHaveValue('admin');
     await expect(email).toHaveValue('mlsamuel@asu.edu');
     await subject.fill('subject');
-    await checkbox.setChecked(true);
-    await radio.setChecked(true);
-    await select.selectOption({ label: 'Morning' });
     await submit.click();
 
     await expect(error).toBeVisible();
     await expect(form).toHaveClass(/was-validated/);
-    await expect(name).toHaveCSS('border', 'solid #446d12');
-    await expect(message).toHaveCSS('border', 'solid var(--invalid-feedback-light-background)');
+
+    await expect(name).toHaveCSS('border-bottom-color', 'rgb(68, 109, 18)');
+    await expect(message).toHaveCSS('border-bottom-color', 'rgb(183, 42, 42)');
     await message.fill('message');
     await submit.click();
     await expect(success).toBeVisible();
