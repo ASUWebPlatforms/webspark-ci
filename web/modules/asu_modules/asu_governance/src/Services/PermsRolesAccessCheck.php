@@ -5,6 +5,7 @@ namespace Drupal\asu_governance\Services;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -22,7 +23,12 @@ class PermsRolesAccessCheck implements AccessInterface {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
    */
-  public function __construct(private readonly EntityTypeManagerInterface $entityTypeManager, private readonly MessengerInterface $messenger, private readonly loggerChannelFactoryInterface $loggerChannelFactory) {
+  public function __construct(
+    private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly MessengerInterface $messenger,
+    private readonly loggerChannelFactoryInterface $loggerChannelFactory,
+    private readonly ConfigFactoryInterface $configFactory
+  ) {
   }
 
   /**
@@ -49,7 +55,9 @@ class PermsRolesAccessCheck implements AccessInterface {
       $this->messenger->addError($e->getMessage());
       $this->loggerChannelFactory->get('asu_governance')->error($e->getMessage() . PHP_EOL . '<pre>' . $e->getTrace()->toString() . '</pre>');
     }
-    if ($user->hasRole('administrator')) {
+    // Get the editable configuration for asu_governance.settings.
+    $config = $this->configFactory->getEditable('asu_governance.settings');
+    if ($user->hasRole('administrator') || ($user->hasRole('site_builder') && $config->get('allow_roles_perms_admin') && in_array($user->get('name')->value, $config->get('permissions_users'), TRUE))) {
       return AccessResult::allowed();
     }
 
