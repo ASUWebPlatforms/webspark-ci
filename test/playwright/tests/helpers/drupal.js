@@ -202,6 +202,53 @@ class DrupalHelpers {
    */
   async addIconField(page, icon) {
   }
+
+  /**
+   * General test for carousel functionality.
+   *
+   * @param page
+   * @param {Object} options - Optional parameters for carousel testing
+   * @param {int} options.count - The number of slides in the carousel (default: 3)
+   * @param {int} options.pages - The number of paginated pages in the carousel (default: 3)
+   * @param {string} options.role - The ARIA role for the pagination buttons (default: 'button')
+   * @returns {Promise<void>}
+   */
+  async testCarousel(page, options = {}) {
+    const count = options.count ?? 3;
+    const pages = options.pages ?? 3;
+    const role = options.role ?? 'button';
+
+    const slide = page.locator('.glide__slide');
+    const pager = page.getByRole(role, { name: `Slide view ${pages}` });
+    const prev = page.getByRole('button', { name: 'Previous slide' });
+    const next = page.getByRole('button', { name: 'Next slide' });
+
+    await expect(slide).toHaveCount(count);
+    await expect(slide.nth(0)).toBeVisible();
+
+    await expect(slide.nth(0)).toHaveClass(/glide__slide--active/);
+    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
+
+    await expect(prev).toBeDisabled();
+    await next.click();
+    await page.waitForTimeout(300);
+
+    await expect(slide.nth(0)).not.toHaveClass(/glide__slide--active/);
+    await expect(slide.nth(1)).toHaveClass(/glide__slide--active/);
+
+    await pager.click();
+    await page.waitForTimeout(300);
+
+    await expect(pager).toHaveClass(/glide__bullet--active/);
+    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
+    await expect(slide.nth(2)).toHaveClass(/glide__slide--active/);
+
+    await expect(next).toBeDisabled();
+    await prev.click();
+    await page.waitForTimeout(300);
+
+    await expect(slide.nth(2)).not.toHaveClass(/glide__slide--active/);
+  }
 }
 
 export default new DrupalHelpers();

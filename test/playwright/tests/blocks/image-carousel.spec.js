@@ -32,20 +32,22 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
     //--- Begin custom test steps
     // TODO: See if I can simplify all the [data-drupal-selector^="foo"] selectors with just the nth(n) equivalents for all tests
+    const add = page.getByRole('button', { name: 'Add Gallery Image' });
+
     await page.getByRole('textbox', { name: 'Title' }).nth(1).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(0).fill('Block content');
     await drupal.addMediaField(page);
-    await page.getByRole('button', { name: 'Add Gallery Image' }).click();
+    await add.click();
 
     await page.getByRole('textbox', { name: 'Title' }).nth(2).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1).fill('Block content');
     await drupal.addMediaField(page, 1);
-    await page.getByRole('button', { name: 'Add Gallery Image' }).click();
+    await add.click();
 
     await page.getByRole('textbox', { name: 'Title' }).nth(3).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(2).fill('Block content');
     await drupal.addMediaField(page, 2);
-    await page.getByRole('button', { name: 'Add Gallery Image' }).click();
+    await add.click();
 
     await page.getByRole('textbox', { name: 'Title' }).nth(4).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(3).fill('Block content');
@@ -57,42 +59,14 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
-    const slide = page.locator('.glide__slide');
     const image = page.getByRole('img', { name: 'sample image' });
     const title = page.getByText('Block title', { exact: true });
     const content = page.getByText('Block content', { exact: true });
-    const pager = page.getByRole('button', { name: 'Slide view 3' });
-    const prev = page.getByRole('button', { name: 'Previous slide' });
-    const next = page.getByRole('button', { name: 'Next slide' })
 
-    await expect(slide.nth(0)).toBeVisible();
     await expect(image.nth(0)).toBeVisible();
     await expect(title.nth(0)).toBeVisible();
     await expect(content.nth(0)).toBeVisible();
 
-    await expect(slide).toHaveCount(4);
-    await expect(slide.nth(0)).toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(2)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(3)).not.toHaveClass(/glide__slide--active/);
-
-    await expect(prev).toBeDisabled();
-    await next.click();
-    await page.waitForTimeout(300);
-
-    await expect(slide.nth(0)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(1)).toHaveClass(/glide__slide--active/);
-
-    await pager.click();
-    await page.waitForTimeout(300);
-
-    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(2)).toHaveClass(/glide__slide--active/);
-
-    await expect(next).toBeDisabled();
-    await prev.click();
-    await page.waitForTimeout(300);
-
-    await expect(slide.nth(2)).not.toHaveClass(/glide__slide--active/);
+    await drupal.testCarousel(page, { count: 4 });
   });
 });

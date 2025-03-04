@@ -29,14 +29,21 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await drupal.addBlock(page, BLOCK);
 
     //--- Begin custom test steps
+    const add = page.getByRole('button', { name: 'Add Gallery Image' });
+
     await page.getByRole('textbox', { name: 'Title' }).nth(0).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(0).fill('Block content');
     await drupal.addMediaField(page);
-    await page.getByRole('button', { name: 'Add Gallery Image' }).click();
+    await add.click();
 
     await page.getByRole('textbox', { name: 'Title' }).nth(1).fill('Block title');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1).fill('Block content');
     await drupal.addMediaField(page, 1);
+    await add.click();
+
+    await page.getByRole('textbox', { name: 'Title' }).nth(2).fill('Block title');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(2).fill('Block content');
+    await drupal.addMediaField(page, 2);
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -44,34 +51,13 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
-    const slide = page.locator('.glide__slide');
     const image = page.getByRole('img', { name: 'sample image' });
     const content = page.getByText('Block content');
-    const prev = page.getByRole('button', { name: 'Previous slide' });
-    const next = page.getByRole('button', { name: 'Next slide' });
-    const pager = page.getByRole('option', { name: 'Slide view 1' });
 
-    await expect(slide.nth(0)).toBeVisible();
+    await page.waitForTimeout(300);
     await expect(image.nth(0)).toBeVisible();
     await expect(content.nth(0)).toBeVisible();
 
-    await expect(slide).toHaveCount(2);
-    await expect(slide.nth(0)).toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
-
-    await expect(prev).toBeDisabled();
-    await next.click();
-    await page.waitForTimeout(300);
-
-    await expect(next).toBeDisabled();
-    await expect(slide.nth(0)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(1)).toHaveClass(/glide__slide--active/);
-
-    await pager.click();
-    await page.waitForTimeout(300);
-
-    await expect(pager).toHaveClass(/glide__bullet--active/);
-    await expect(slide.nth(1)).not.toHaveClass(/glide__slide--active/);
-    await expect(slide.nth(0)).toHaveClass(/glide__slide--active/);
+    await drupal.testCarousel(page, { role: 'option' });
   });
 });
