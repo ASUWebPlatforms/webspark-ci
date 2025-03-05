@@ -1,0 +1,88 @@
+asu_governance.settings:
+  path: '/admin/config/system/asu/governance-settings'
+  defaults:
+    _title: 'ASU Governance Settings'
+    _form: 'Drupal\asu_governance\Form\GovernanceSettingsForm'
+  requirements:
+    _permission: 'administer asu governance configuration'
+
+asu_governance.modules_list:
+  path: '/admin/config/system/asu/modules'
+  defaults:
+    _title: 'ASU Modules'
+    _form: 'Drupal\asu_governance\Form\CuratedModulesListForm'
+  requirements:
+    _permission: 'administer asu modules'
+
+asu_governance.modules_list_confirm:
+  path: '/admin/config/system/asu/modules/confirm'
+  defaults:
+    _title: 'Confirm Install'
+    _form: 'Drupal\asu_governance\Form\CuratedModulesListConfirmForm'
+  requirements:
+    _permission: 'administer asu modules'
+
+asu_governance.modules_uninstall:
+  path: '/admin/config/system/asu/modules/uninstall'
+  defaults:
+    _title: 'Uninstall ASU Modules'
+    _form: 'Drupal\asu_governance\Form\CuratedModulesUninstallForm'
+  requirements:
+    _permission: 'administer asu modules'
+
+asu_governance.modules_uninstall_confirm:
+  path: '/admin/config/system/asu/modules/uninstall/confirm'
+  defaults:
+    _title: 'Confirm Uninstall'
+    _form: 'Drupal\asu_governance\Form\CuratedModulesUninstallConfirmForm'
+  requirements:
+    _permission: 'administer asu modules'
+
+asu_governance.themes_page:
+  path: '/admin/config/system/asu/themes'
+  defaults:
+      _title: 'ASU Themes'
+      _controller: 'Drupal\asu_governance\Controller\CuratedSystemController::themesPage'
+  requirements:
+    _permission: 'administer asu themes'
+
+asu_governance.theme_settings:
+  path: '/admin/config/system/asu/themes/settings'
+  defaults:
+    _form: 'Drupal\asu_governance\Form\CuratedThemeSettingsForm'
+    _title: 'Appearance settings'
+  requirements:
+    _permission: 'administer asu themes'
+
+asu_governance.theme_settings_theme:
+  path: '/admin/config/system/asu/themes/settings/{theme}'
+  defaults:
+    _form: 'Drupal\system\Form\ThemeSettingsForm'
+    _title_callback: 'theme_handler:getName'
+  requirements:
+    _permission: 'administer asu themes'
+
+asu_governance.theme_set_default:
+  path: '/admin/appearance/default'
+  defaults:
+    _title: 'Set as default theme'
+    _controller: 'Drupal\asu_governance\Controller\CuratedThemeController::setDefaultTheme'
+  requirements:
+    _permission: 'administer asu themes'
+    _csrf_token: 'TRUE'
+
+asu_governance.theme_uninstall:
+  path: '/admin/appearance/uninstall'
+  defaults:
+    _controller: 'Drupal\asu_governance\Controller\CuratedThemeController::uninstall'
+  requirements:
+    _permission: 'administer asu themes'
+    _csrf_token: 'TRUE'
+
+asu_governance.theme_install:
+  path: '/admin/appearance/install'
+  defaults:
+    _controller: 'Drupal\asu_governance\Controller\CuratedThemeController::install'
+  requirements:
+    _permission: 'administer asu themes'
+    _csrf_token: 'TRUE'

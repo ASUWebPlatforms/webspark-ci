@@ -1,0 +1,36 @@
+allowable_modules:
+  - asu_brand
+  - asu_components_appearance
+  - asu_config_utility
+  - asu_data_potluck
+  - asu_degree_rfi
+  - asu_events
+  - asu_footer
+  - asu_news
+  - asu_react_core
+  - asu_react_integration
+  - asu_user
+  - webform_access
+  - webform_attachment
+  - webform_cards
+  - webform_entity_print
+  - webform_entity_print_attachment
+  - webform_image_select
+  - webform_node
+  - webform_options_limit
+  - webform_scheduled_email
+  - webform_submission_export_import
+  - webform_submission_log
+  - webform_ui
+  - webspark_blocks
+  - webspark_cas
+  - webspark_ckeditor_plugins
+  - webspark_cropper_theme
+  - webspark_module_asu_breadcrumb
+  - webspark_utility
+  - webspark_webdir
+allowable_themes:
+  - claro
+  - olivero
+  - radix
+  - renovation

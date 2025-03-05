@@ -34,24 +34,13 @@ function webspark_install_tasks(&$install_state) {
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
     'function' => 'Drupal\webspark_installer_forms\Form\WebsparkConfigureGAForm',
   ];
-  return $tasks;
-}
-
-/**
- * Implements hook_form_FORM_ID_alter() for install_configure_form().
- *
- * Allows the profile to alter the site configuration form.
- */
-function webspark_form_install_configure_form_alter(&$form, FormStateInterface $form_state): void {
-  $form['admin_account']['openasu_admin_asurite'] = [
-    '#title' => 'ASURITE User ID',
-    '#description' => t('Associate admin account with ASURITE User'),
-    '#type' => 'textfield',
-    '#required' => FALSE,
-    '#weight' => 20,
+  $tasks['webspark_install_configure_superadmin_form'] = [
+    'display_name' => t('Secure SuperAdmin user account'),
+    'type' => 'form',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+    'function' => 'Drupal\asu_secure_superadmin\Form\SecureSuperAdminForm',
   ];
-  $form['regional_settings']['site_default_country']['#default_value'] = 'US';
-  $form['#submit'][] = 'webspark_form_install_configure_submit';
+  return $tasks;
 }
 
 /**
@@ -63,14 +52,6 @@ function webspark_form_install_configure_submit($form, FormStateInterface $form_
   $block = $config_factory->getEditable('block.block.asubrandheader');
   $block->set('settings.asu_brand_header_block_title', $form_state->getValue('site_name'));
   $block->save(TRUE);
-
-  // If the ASURITE User ID is populated during installation
-  // then the CAS Username from the account of the admin user will be stored.
-  if(!empty($form_state->getValue('openasu_admin_asurite'))) {
-    $user = User::load(1);
-    $cas_user_manager = \Drupal::service('cas.user_manager');
-    $cas_user_manager->setCasUsernameForAccount($user, $form_state->getValue('openasu_admin_asurite'));
-  }
 }
 
 /**

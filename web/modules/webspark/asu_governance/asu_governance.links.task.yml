@@ -1,0 +1,33 @@
+asu_governance.modules_list:
+  route_name: asu_governance.modules_list
+  base_route: asu_governance.modules_list
+  title: 'List'
+
+asu_governance.modules_uninstall:
+  route_name: asu_governance.modules_uninstall
+  base_route: asu_governance.modules_list
+  title: 'Uninstall'
+  weight: 20
+
+asu_governance.themes_page:
+  route_name: asu_governance.themes_page
+  title: 'List'
+  base_route: asu_governance.themes_page
+
+asu_governance.theme_settings_global:
+  route_name: asu_governance.theme_settings
+  title: 'Global settings'
+  parent_id: asu_governance.theme_settings
+  weight: -100
+
+asu_governance.theme_settings:
+  route_name: asu_governance.theme_settings
+  title: 'Settings'
+  base_route: asu_governance.themes_page
+  weight: 100
+
+asu_governance.theme_settings_theme:
+  route_name: asu_governance.theme_settings_theme
+  title: 'Theme name'
+  parent_id: asu_governance.theme_settings
+  deriver: Drupal\system\Plugin\Derivative\ThemeLocalTask

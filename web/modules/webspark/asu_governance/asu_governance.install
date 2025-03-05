@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the asu_governance module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function asu_governance_install() {
+  // Get the current theme
+  $currentTheme = \Drupal::service('theme_handler')->getDefault();
+  $config = \Drupal::configFactory()->getEditable('asu_governance.settings');
+  $allowableThemes = $config->get('allowable_themes') ?? [];
+  if (!in_array($currentTheme, $allowableThemes, TRUE)) {
+    $allowableThemes = array_merge($allowableThemes, [$currentTheme]);
+    $config->set('allowable_themes', $allowableThemes)->save();
+  }
+
+  $currentProfile = \Drupal::installProfile();
+  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
+    // Install the webspark_governance_roles module.
+    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
+  }
+
+  try {
+    $request = \Drupal::request();
+    // Downgrade all users with the 'admin' role to 'site_builder'.
+    \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
+    // Trigger the batch process if not part of update.php or a form submission.
+    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || $request->isMethod('POST'))) {
+      if (PHP_SAPI === 'cli') {
+        drush_backend_batch_process();
+      }
+      else {
+        batch_process();
+      }
+    }
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error($e->getMessage());
+    \Drupal::messenger()->addError($e->getMessage());
+    return;
+  }
+}

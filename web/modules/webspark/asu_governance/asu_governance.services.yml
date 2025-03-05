@@ -1,0 +1,34 @@
+services:
+  asu_governance.route_subscriber:
+    class: Drupal\asu_governance\EventSubscriber\AsuGovernanceRouteSubscriber
+    autowire: true
+    tags:
+      - { name: event_subscriber }
+    Drupal\asu_governance\EventSubscriber\AsuGovernanceRouteSubscriber: '@asu_governance.route_subscriber'
+
+  asu_governance.config_access_check:
+    class: Drupal\asu_governance\Services\ConfigAccessCheck
+    autowire: true
+    arguments: [ '@entity_type.manager' ]
+    tags:
+      - { name: access_check, applies_to: _allow_asu_config_access }
+    Drupal\asu_governance\Services\ConfigAccessCheck: '@asu_governance.config_access_check'
+
+  asu_governance.perms_roles_access_check:
+    class: Drupal\asu_governance\Services\PermsRolesAccessCheck
+    autowire: true
+    arguments: [ '@entity_type.manager', '@messenger', '@logger.factory' ]
+    tags:
+      - { name: access_check, applies_to: _custom_perms_roles }
+    Drupal\asu_governance\Services\PermsRolesAccessCheck: '@asu_governance.perms_roles_access_check'
+
+  asu_governance.downgrade_admins:
+    class: Drupal\asu_governance\Services\DowngradeAdmins
+    autowire: true
+    arguments: ['@logger.factory']
+    Drupal\asu_governance\DowngradeAdmins: '@asu_governance.downgrade_admins'
+
+  asu_governance.module_permission_loader:
+    class: Drupal\asu_governance\Services\ModulePermissionLoader
+    arguments: [ '@user.permissions', '@module_handler', '@config.factory' ]
+    Drupal\asu_governance\Services\ModulePermissionLoader: '@asu_governance.module_permission_loader'
