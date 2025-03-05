@@ -31,9 +31,9 @@ test.describe(`CKEditor ${PLUGIN} tests`, { tag: ['@webspark', '@desktop', '@cke
     await page.locator('div').filter({ hasText: /^StyleButton GoldButton MaroonButton Gray 2Button Gray 7$/ }).getByRole('combobox').selectOption('maroon');
     await page.locator('div').filter({ hasText: /^SizeDefaultMediumSmall$/ }).getByRole('combobox').selectOption('md');
     await page.getByRole('combobox').nth(2).selectOption('_blank');
+    await page.getByLabel('Editor toolbar').getByRole('button', { name: 'Save' }).click();
     //--- End custom test steps
 
-    await page.getByLabel('Editor toolbar').getByRole('button', { name: 'Save' }).click();
     await page.getByRole('button', { name: 'Save' }).click();
   });
 
