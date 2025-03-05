@@ -249,6 +249,20 @@ class DrupalHelpers {
 
     await expect(slide.nth(2)).not.toHaveClass(/glide__slide--active/);
   }
+
+  /**
+   * General test for search pages.
+   *
+   * @param {*} page
+   */
+  async testSearch(page) {
+    const search = page.getByPlaceholder('Search asu.edu');
+
+    await search.fill('test');
+    await search.press('Enter');
+    await expect(page.getByRole('heading', { name: 'Search' }).locator('span')).toBeVisible();
+    await expect(search).toHaveValue('test');
+  }
 }
 
 export default new DrupalHelpers();
