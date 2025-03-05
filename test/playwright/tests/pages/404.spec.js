@@ -10,7 +10,8 @@ test.describe('404 page tests', { tag: ['@webspark', '@desktop'] }, () => {
     expect(response.status()).toBe(404);
     await expect(content).toBeVisible();
     await expect(title).toBeVisible();
-    await expect(input).toBeVisible();
+
+    // This test is a more detailed search test
     await input.fill('sparky');
     await page.evaluate(() => {
       document.getElementById('webspark-blocks-asu-search-form').submit();
