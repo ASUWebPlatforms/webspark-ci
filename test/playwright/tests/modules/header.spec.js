@@ -71,47 +71,22 @@ test.describe('header tests', { tag: ['@webspark', '@desktop'] }, () => {
     await expect(page.getByRole('img', { name: 'Partner Logo' })).toBeVisible();
     await expect(page.getByTestId('partner').getByRole('link', { name: 'Partner Logo' })).toHaveAttribute('href', 'https://asu.edu');
   });
+
+  test('verify menu', async () => {
+    await page.goto('/admin/structure/menu/manage/main');
+    await page.getByRole('link', { name: '+Add link' }).click();
+    await page.getByRole('textbox', { name: 'Menu link title *' }).click();
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
+    await page.getByRole('textbox', { name: 'Link *' }).click();
+    await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByRole('link', { name: '+Add link' }).click();
+    await page.getByRole('textbox', { name: 'Menu link title *' }).click();
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
+    await page.getByRole('textbox', { name: 'Link *' }).click();
+    await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
+    await page.getByLabel('ASU Brand menu link type').selectOption('heading');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByRole('button', { name: 'Save' }).click();
+  });
 });
-
-// Setup the Main Navigation
-/admin/structure/menu/manage/main
-await page.getByRole('link', { name: '+Add link' }).click();
-await page.getByRole('textbox', { name: 'Menu link title *' }).click();
-await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
-await page.getByRole('textbox', { name: 'Link *' }).click();
-await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
-await page.getByRole('button', { name: 'Save' }).click();
-await page.getByRole('link', { name: '+Add link' }).click();
-await page.getByRole('textbox', { name: 'Menu link title *' }).click();
-await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
-await page.getByRole('textbox', { name: 'Link *' }).click();
-await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
-await page.getByLabel('ASU Brand menu link type').selectOption('heading');
-await page.getByRole('button', { name: 'Save' }).click();
-await page.getByRole('button', { name: 'Save' }).click();
-
-// Setup the Header
-
-
-
-
-
-
-await page.getByRole('button', { name: 'Login Paths' }).click();
-await page.getByRole('textbox', { name: 'Login path *' }).click();
-await page.getByRole('button', { name: 'Save block' }).click();
-
-// Header tests
-await expect(page.getByRole('link', { name: 'ASU Home' })).toBeVisible();
-await expect(page.getByTestId('universal-navbar').getByRole('link', { name: 'My ASU' })).toBeVisible();
-await expect(page.getByRole('link', { name: 'Colleges and Schools' })).toBeVisible();
-await expect(page.getByRole('link', { name: 'Sign In' })).toBeVisible();
-await expect(page.getByTestId('search-button')).toBeVisible();
-await expect(page.getByTestId('logo')).toBeVisible();
-await expect(page.getByTestId('title').getByRole('link', { name: 'Drush Site-Install' })).toBeVisible();
-await expect(page.getByTestId('nav-item')).toBeVisible();
-
-
-// Test initial default loadout + parent unit + cta buttons
-// Test Partner loadout
-// Test full mega menu build
