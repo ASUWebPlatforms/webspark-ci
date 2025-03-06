@@ -6,7 +6,6 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\user\Event\AccountCancelEvent;
 use Drupal\user\EventSubscriber\AccountCancelSubscriber;
-use Drupal\user\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -60,7 +59,7 @@ class CustomUserCancelSubscriber extends AccountCancelSubscriber implements Even
   public static function doCustomCancelAccount(string $account_id, string $method, array $context): void {
     $logger = \Drupal::logger('user');
     $messenger = \Drupal::messenger();
-    /** @var UserInterface $account */
+    /** @var \Drupal\user\UserInterface $account */
     $account = \Drupal::entityTypeManager()->getStorage('user')->load($account_id);
     switch ($method) {
       case 'user_cancel_block':

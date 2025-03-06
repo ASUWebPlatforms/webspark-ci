@@ -50,4 +50,5 @@ final class SecureSuperAdminForm extends FormBase {
     }
     \Drupal::messenger()->addMessage('The SuperAdmin account has been secured. Please log in again.');
   }
+
 }
