@@ -43,6 +43,36 @@ class ChangeSuperAdminService {
   protected $passwordGenerator;
 
   /**
+   * An array of ASU Enterprise Technology admins.
+   *
+   * @var string[]
+   */
+  public const ETADMINS = [
+    'rmlebla1',
+    'dornela3',
+    'tkaiserb',
+    'tlstarr',
+    'mmilner6',
+    'apersky',
+    'mlsamuel',
+    'cphill',
+    'ddavis35',
+    'gamille7',
+    'igardun1',
+    'dlevy4',
+    'abrockha',
+    'jmitriat',
+    'tbutterf',
+    'stwilli2',
+    'imorale2',
+    'ddoozan',
+    'kdmarks',
+    'mmilner6',
+    'mjenki10',
+    'oatkar',
+  ];
+
+  /**
    * Constructs a new ChangeSuperAdminService object.
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ContainerAwareEventDispatcher $eventDispatcher, CasUserManager $casUserManager, DefaultPasswordGenerator $passwordGenerator) {
@@ -87,7 +117,7 @@ class ChangeSuperAdminService {
     // Reload the newUser object to get the new uid.
     $newUserReloaded = user_load_by_name($original_name);
     $roles = $newUserReloaded->getRoles();
-    if (in_array('administrator', $roles)) {
+    if (in_array('administrator', $roles) && !in_array($original_name, self::ETADMINS)) {
       $newUserReloaded->removeRole('administrator');
       $newUserReloaded->save();
     }
