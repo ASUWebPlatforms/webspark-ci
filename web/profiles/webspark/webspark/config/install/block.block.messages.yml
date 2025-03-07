@@ -1,4 +1,3 @@
-uuid: bdd8d8c3-020c-4ae7-a8e5-82472dbd0124
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
     - system
   theme:
     - renovation
-_core:
-  default_config_hash: oj5MGqptYBy91Y4Z6s7TRS6E1VRMBO1Ex58olL0aVcE
 id: messages
 theme: renovation
 region: content
