@@ -1,12 +1,15 @@
+uuid: 4a7f2160-d2f9-49ab-89d4-9e6e8475c013
 langcode: en
 status: true
 dependencies:
   theme:
     - renovation
+_core:
+  default_config_hash: kkjfY1T6o3tpXWww87i9i9KiATd9vRlwL-SmTAV9Zqs
 id: tabs
 theme: renovation
 region: pre_content
-weight: -3
+weight: -5
 provider: null
 plugin: local_tasks_block
 settings:

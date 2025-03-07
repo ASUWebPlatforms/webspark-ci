@@ -1,3 +1,4 @@
+uuid: 1fa0e61b-b13f-44c0-939b-8ade68a7fcc8
 langcode: en
 status: true
 dependencies:
@@ -5,10 +6,12 @@ dependencies:
     - node
   theme:
     - renovation
+_core:
+  default_config_hash: NbZuJS-SjpyLHLAK3PR7HD6px2LMD9mGIIxfPZ2wNlY
 id: primaryadminactions
 theme: renovation
 region: pre_content
-weight: -1
+weight: -4
 provider: null
 plugin: local_actions_block
 settings:
