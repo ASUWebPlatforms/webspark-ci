@@ -10,7 +10,7 @@
   error: 'danger',
   info: 'info',
 } %}
-
+<div class="container">
 {% for type, messages in message_list %}
   {% embed '@renovation/alerts/alert.twig' with {
     type: types[type],
@@ -31,3 +31,4 @@
     {% endblock %}
   {% endembed %}
 {% endfor %}
+</div>

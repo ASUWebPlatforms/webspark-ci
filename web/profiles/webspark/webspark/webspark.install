@@ -800,3 +800,17 @@ function webspark_update_10017(&$sandbox): void{
 
   \Drupal::state()->set('configuration_locked', TRUE);
 }
+
+/**
+ * WS2-2306 - Rearranged Messages block
+ */
+function webspark_update_10018(&$sandbox): void{
+  \Drupal::state()->set('configuration_locked', FALSE);
+
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('block.block.backtotop');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('block.block.messages');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('block.block.primaryadminactions');
+  \Drupal::service('asu_config.config_manager')->updateConfigFile('block.block.tabs');
+
+  \Drupal::state()->set('configuration_locked', TRUE);
+}

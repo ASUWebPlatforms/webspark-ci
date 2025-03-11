@@ -8,8 +8,8 @@ dependencies:
     - renovation
 id: messages
 theme: renovation
-region: pre_content
-weight: -2
+region: content
+weight: -4
 provider: null
 plugin: system_messages_block
 settings:
