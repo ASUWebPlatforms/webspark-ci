@@ -39,8 +39,7 @@ class Batch {
     // the progress bar from start to finish, then goes on to the next batch.
     $batch_builder->addOperation($operation_callback, [$items]);
 
-    // Since we are not inside a form submit handler we also need to call
-    // batch_process() to initiate the redirect.
+    // Set the batch.
     batch_set($batch_builder->toArray());
   }
 
