@@ -29,12 +29,13 @@ function asu_governance_install() {
   try {
     // Downgrade all users with the 'admin' role to 'site_builder'.
     \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
-    // Run the batch process if not part of an update or a POST request.
-    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || \Drupal::request()->isMethod('POST'))) {
+    // Run manually if not part of a site install, update or form submission.
+    if (!((defined('MAINTENANCE_MODE') && (MAINTENANCE_MODE === 'update' || MAINTENANCE_MODE === 'install')) || \Drupal::request()->isMethod('POST'))) {
       // Process the batch.
       $batch = &batch_get();
       $process_info = [
         'current_set' => 0,
+        'progressive' => TRUE,
       ];
       $batch += $process_info;
       if (isset($batch)) {
