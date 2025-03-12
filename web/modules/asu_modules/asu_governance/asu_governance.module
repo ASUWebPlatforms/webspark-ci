@@ -140,7 +140,8 @@ function asu_governance_form_user_form_alter(&$form, FormStateInterface $form_st
  * Implements hook_form_alter().
  */
 function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id === 'views_form_user_admin_people_page_1' && !\Drupal::currentUser()->hasRole('administrator')) {
+  $current_user = \Drupal::currentUser();
+  if ($form_id === 'views_form_user_admin_people_page_1' && $current_user->hasRole('administrator')) {
     // Prevent non-admins from performing operations on the Administrator role.
     $options = $form["header"]["user_bulk_form"]["action"]["#options"];
     foreach ($options as $key => $value) {
@@ -153,10 +154,16 @@ function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form
       }
     }
   }
-  if ($form_id === 'bulk_add_cas_users' && !\Drupal::currentUser()->hasRole('administrator')) {
+  if ($form_id === 'bulk_add_cas_users' && !$current_user->hasRole('administrator')) {
     // Disable the administrator option from the roles list for non-admin users.
     $form['roles']['administrator'] = [
       '#disabled' => TRUE,
     ];
+  }
+  if ($form_id === 'cas_settings') {
+    $adminKey = array_key_exists('administrator', $form['user_accounts']['auto_assigned_roles']['#options']);
+    if ($adminKey && !$current_user->hasRole('administrator')) {
+      unset($form['user_accounts']['auto_assigned_roles']['#options']['administrator']);
+    }
   }
 }
