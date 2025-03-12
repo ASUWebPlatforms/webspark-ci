@@ -2,7 +2,6 @@
 
 namespace Drupal\asu_secure_superadmin\Services;
 
-use ArrayAccess;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Batch\BatchBuilder;

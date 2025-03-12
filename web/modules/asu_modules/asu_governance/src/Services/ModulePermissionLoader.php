@@ -124,9 +124,9 @@ class ModulePermissionLoader {
       /** @var \Drupal\user\Entity\Role $role */
       $role = Role::load('site_builder');
       // Revoke permissions from the Site Builder role.
-        foreach ($modulePermissions as $permission) {
-          $role->revokePermission($permission);
-        }
+      foreach ($modulePermissions as $permission) {
+        $role->revokePermission($permission);
+      }
       $role->save();
     }
   }

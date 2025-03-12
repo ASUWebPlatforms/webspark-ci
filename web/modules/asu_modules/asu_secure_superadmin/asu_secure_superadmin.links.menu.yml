@@ -1,4 +1,0 @@
-asu_secure_superadmin.settings:
-  title: ASU Secure SuperAdmin Settings
-  parent: system.admin_config_system
-  route_name: asu_secure_superadmin.settings

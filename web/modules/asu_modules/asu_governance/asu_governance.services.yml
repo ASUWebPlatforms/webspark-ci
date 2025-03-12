@@ -23,6 +23,7 @@ services:
   asu_governance.downgrade_admins:
     class: Drupal\asu_governance\Services\DowngradeAdmins
     autowire: true
+    arguments: ['@logger.factory', '@asu_secure_superadmin.change_super_admin_service']
     Drupal\asu_governance\DowngradeAdmins: '@asu_governance.downgrade_admins'
 
   asu_governance.module_permission_loader:
