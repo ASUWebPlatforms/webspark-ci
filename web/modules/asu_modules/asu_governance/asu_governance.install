@@ -35,6 +35,7 @@ function asu_governance_install() {
       $batch = &batch_get();
       $process_info = [
         'current_set' => 0,
+        'id' => NULL,
         'progressive' => TRUE,
       ];
       $batch += $process_info;
