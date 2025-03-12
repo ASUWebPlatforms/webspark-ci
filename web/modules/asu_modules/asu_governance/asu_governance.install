@@ -7,6 +7,8 @@
 
 /**
  * Implements hook_install().
+ *
+ * @throws \Exception
  */
 function asu_governance_install() {
   // Get the current theme
@@ -25,22 +27,29 @@ function asu_governance_install() {
   }
 
   try {
-    $request = \Drupal::request();
     // Downgrade all users with the 'admin' role to 'site_builder'.
     \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
-    // Trigger the batch process if not part of update.php or a form submission.
-    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || $request->isMethod('POST'))) {
-      if (PHP_SAPI === 'cli') {
-        drush_backend_batch_process();
-      }
-      else {
-        batch_process();
+    // Run the batch process if not part of an update or a POST request.
+    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || \Drupal::request()->isMethod('POST'))) {
+      // Process the batch.
+      $batch = &batch_get();
+      $process_info = [
+        'current_set' => 0,
+      ];
+      $batch += $process_info;
+      if (isset($batch)) {
+        // Move operations to a job queue.
+        foreach ($batch['sets'] as $key => $batch_set) {
+          _batch_populate_queue($batch, $key);
+        }
+        // Process the queue.
+        require_once DRUPAL_ROOT . '/core/includes/batch.inc';
+        _batch_process();
       }
     }
   }
   catch (Exception $e) {
-    \Drupal::logger('asu_governance')->error($e->getMessage());
+    \Drupal::logger('asu_governance')->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
     \Drupal::messenger()->addError($e->getMessage());
-    return;
   }
 }

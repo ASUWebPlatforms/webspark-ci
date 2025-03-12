@@ -34,7 +34,7 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
       'entity.user_role.edit_form',
       'entity.user_role.delete_form',
       'user.role.settings',
-      'entity.user_role.edit_permissions_form'
+      'entity.user_role.edit_permissions_form',
     ];
 
     foreach ($configRoutes as $route_name) {
