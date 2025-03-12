@@ -38,7 +38,7 @@ class ConfigAccessCheck implements AccessInterface {
     /** @var \Drupal\user\Entity\User $user */
     $user = $this->entityTypeManager->getStorage('user')->load($account->id());
     $allowConfigAccess = \Drupal::config('asu_governance.settings')->get('allow_config_access');
-    if (($allowConfigAccess && in_array('site_builder', $user->getRoles(), TRUE)) || in_array('administrator', $user->getRoles(), TRUE)) {
+    if (($allowConfigAccess && $user->hasRole('site_builder')) || $user->hasRole('administrator')) {
       return AccessResult::allowed();
     }
 

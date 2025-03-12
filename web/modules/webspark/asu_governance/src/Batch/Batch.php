@@ -2,15 +2,17 @@
 
 namespace Drupal\asu_governance\Batch;
 
-use Drupal;
 use Drupal\Core\Batch\BatchBuilder;
-use Drupal\Core\Url;
+use Drupal\user\Entity\User;
 
 /**
  * Provides the batch callbacks from the various sources.
  */
-class Batch
-{
+class Batch {
+
+  /**
+   * Run the batch process.
+   */
   public static function run(array $batch_size): void {
     // The Batch API needs an array of data to process.
     $items = $batch_size;
@@ -37,8 +39,7 @@ class Batch
     // the progress bar from start to finish, then goes on to the next batch.
     $batch_builder->addOperation($operation_callback, [$items]);
 
-    // Since we are not inside a form submit handler we also need to call
-    // batch_process() to initiate the redirect.
+    // Set the batch.
     batch_set($batch_builder->toArray());
   }
 
@@ -46,9 +47,10 @@ class Batch
    * Process callback for the batch set in the form.
    *
    * @param array $items
+   *   The items to process.
    * @param array|\DrushBatchContext $context
+   *   The batch context.
    *
-   * @return void
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public static function operationCallback(array $items, &$context): void {
@@ -84,15 +86,17 @@ class Batch
               '@percentage' => round(($context['sandbox']['progress'] / $context['sandbox']['max']) * 100) . '%',
               '@item' => $context['sandbox']['progress'],
             ]);
-          } else {
+          }
+          else {
             $context['message'] = t('Updating item: @item', [
               '@item' => $context['sandbox']['progress'],
             ]);
           }
 
-          // Preform the business logic
+          // Preform the business logic.
           self::processBatch($item);
-        } else {
+        }
+        else {
           // Failed to process this particular item.
           $context['sandbox']['errors'][] = t('Unable to process item @item', [
             '@item' => $items[$context['sandbox']['progress']],
@@ -114,13 +118,13 @@ class Batch
    * This method will be run on each item in the batch.
    *
    * @param \Drupal\user\Entity\User $item
+   *   The user entity to process.
    *
-   * @return void
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public static function processBatch($item): void {
+  public static function processBatch(User $item): void {
     if (empty($item)) {
-      Drupal::logger('sample_batch')->notice('Nothing to process.');
+      \Drupal::logger('asu_governance')->notice('Nothing to process.');
     }
 
     $item->removeRole('administrator');
@@ -132,9 +136,12 @@ class Batch
   /**
    * Batch finished callback.
    *
-   * @param bool $success Batch encountered errors or not.
-   * @param array $results The processed chapters.
-   * @param array $operations The different batches that were run.
+   * @param bool $success
+   *   Batch encountered errors or not.
+   * @param array $results
+   *   The processed chapters.
+   * @param array $operations
+   *   The different batches that were run.
    */
   public static function finishedCallback(bool $success, array $results, array $operations): void {
     if ($success) {
@@ -147,7 +154,8 @@ class Batch
     else {
       // A fatal error occurred.
       $message = t('There was an error with the batch processor.');
-      Drupal::messenger()->addWarning($message);
+      \Drupal::messenger()->addWarning($message);
     }
   }
+
 }

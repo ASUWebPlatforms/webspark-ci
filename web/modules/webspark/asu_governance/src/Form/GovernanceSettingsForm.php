@@ -48,6 +48,8 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    *   The module handler service.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler service.
+   * @param \Drupal\asu_governance\Services\ModulePermissionLoader $modulePermissionLoader
+   *   The module permission loader service.
    */
   public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler, ModulePermissionLoader $modulePermissionLoader) {
     parent::__construct($config_factory);
@@ -136,7 +138,6 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $includesDefault = in_array($currentTheme, $themesInput, TRUE);
     $includesAdmin = in_array($adminTheme, $themesInput, TRUE);
 
-
     foreach ($modulesInput as $module) {
       if (!in_array($module, $allModules, TRUE) || in_array($module, $disallowedModules, TRUE)) {
         $badModules[] = $module;
@@ -174,6 +175,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
 
   /**
    * {@inheritdoc}
+   *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {

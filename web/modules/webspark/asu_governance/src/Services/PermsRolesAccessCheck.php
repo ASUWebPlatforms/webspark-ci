@@ -21,8 +21,12 @@ class PermsRolesAccessCheck implements AccessInterface {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerChannelFactory
+   *   The logger channel factory.
    */
-  public function __construct(private readonly EntityTypeManagerInterface $entityTypeManager, private readonly MessengerInterface $messenger, private readonly loggerChannelFactoryInterface $loggerChannelFactory) {
+  public function __construct(private readonly EntityTypeManagerInterface $entityTypeManager, private readonly MessengerInterface $messenger, private readonly LoggerChannelFactoryInterface $loggerChannelFactory) {
   }
 
   /**
@@ -30,7 +34,9 @@ class PermsRolesAccessCheck implements AccessInterface {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The account to check access for.
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException|\Drupal\Component\Plugin\Exception\PluginNotFoundException
+   *   Thrown when the user entity cannot be loaded.
    *
    * @return \Drupal\Core\Access\AccessResult
    *   The access result.
@@ -45,7 +51,7 @@ class PermsRolesAccessCheck implements AccessInterface {
       $user = $this->entityTypeManager->getStorage('user')
         ->load($account->id());
     }
-    catch (InvalidPluginDefinitionException|PluginNotFoundException $e) {
+    catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
       $this->messenger->addError($e->getMessage());
       $this->loggerChannelFactory->get('asu_governance')->error($e->getMessage() . PHP_EOL . '<pre>' . $e->getTrace()->toString() . '</pre>');
     }

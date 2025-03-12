@@ -11,7 +11,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
- * @todo Add class description.
+ * A service to downgrade ASU Enterprise Technology admins to site builders.
  */
 final class DowngradeAdmins {
 
@@ -40,7 +40,8 @@ final class DowngradeAdmins {
 
     try {
       Batch::run($users);
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       $this->logger->get('asu_governance')->error($e->getMessage() . PHP_EOL . '<pre>' . $e->getTraceAsString() . '</pre>');
     }
   }
