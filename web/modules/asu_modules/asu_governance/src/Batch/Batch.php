@@ -124,7 +124,7 @@ class Batch {
    */
   public static function processBatch(User $item): void {
     if (empty($item)) {
-      \Drupal::logger('sample_batch')->notice('Nothing to process.');
+      \Drupal::logger('asu_governance')->notice('Nothing to process.');
     }
 
     $item->removeRole('administrator');
