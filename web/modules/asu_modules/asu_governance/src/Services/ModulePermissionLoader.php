@@ -35,6 +35,18 @@ class ModulePermissionLoader {
    */
   protected $configFactory;
 
+  public const array BLACKLIST = [
+    'administer asu governance configuration',
+    'administer actions',
+    'administer modules',
+    'administer software updates',
+    'administer themes',
+    'view update notifications',
+    'export configuration',
+    'import configuration',
+    'synchronize configuration',
+  ];
+
   /**
    * Constructs the ModulePermissionLoader object.
    *
@@ -139,6 +151,33 @@ class ModulePermissionLoader {
     }
 
     return array_keys($module_permissions);
+  }
+
+  /**
+   * Blacklist permissions for all roles, except for the administrator role.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function blacklistPermissions() {
+    $blacklist = $this::BLACKLIST;
+    // Get all roles.
+    $roles = Role::loadMultiple();
+    // Remove the administrator role from the list.
+    unset($roles['administrator']);
+    // Loop through each role.
+    foreach ($roles as $role) {
+      // Get the role's permissions.
+      $permissions = $role->getPermissions();
+      // Loop through each permission.
+      foreach ($permissions as $permission) {
+        // If the permission is in the blacklist, revoke it.
+        if (in_array($permission, $blacklist)) {
+          $role->revokePermission($permission);
+        }
+      }
+      // Save the role.
+      $role->save();
+    }
   }
 
 }

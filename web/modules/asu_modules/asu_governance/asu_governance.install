@@ -54,4 +54,12 @@ function asu_governance_install() {
     \Drupal::logger('asu_governance')->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
     \Drupal::messenger()->addError($e->getMessage());
   }
+
+  try {// Apply permission blacklist to all roles but 'administrator'.
+    \Drupal::service('asu_governance.module_permission_loader')->blacklistPermissions();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
+    return;
+  }
 }
