@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7fb9a3d84dc4a1503052e7f457c739f",
+    "content-hash": "9b3b155d18b8539a2911a032f7290329",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5614,6 +5614,51 @@
             "time": "2024-12-27T00:36:43+00:00"
         },
         {
+            "name": "ewcomposer/unpack",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woredeyonas/Drupal-Recipe-Unpack.git",
+                "reference": "ea34c30e34e3aa5acec4fb114bb2ce973c014917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woredeyonas/Drupal-Recipe-Unpack/zipball/ea34c30e34e3aa5acec4fb114bb2ce973c014917",
+                "reference": "ea34c30e34e3aa5acec4fb114bb2ce973c014917",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2",
+                "php": ">=7.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8@stable"
+            },
+            "default-branch": true,
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Drupal\\Recipe\\Unpack\\Composer\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\Recipe\\Unpack\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Composer functionality to individualize package management of module dependencies.",
+            "keywords": [
+                "drupal",
+                "drupal_recipe"
+            ],
+            "support": {
+                "source": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/tree/master",
+                "issues": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/issues"
+            },
+            "time": "2023-11-08T12:14:14+00:00"
+        },
+        {
             "name": "fileeye/mimemap",
             "version": "2.2.1",
             "source": {
@@ -6181,16 +6226,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.44.1",
+            "version": "v11.44.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "48f5357348093bc8b94c691aa3ffc861d2ecc2a0"
+                "reference": "f2f537dfb2a142791d37478f34c920b44a45cea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/48f5357348093bc8b94c691aa3ffc861d2ecc2a0",
-                "reference": "48f5357348093bc8b94c691aa3ffc861d2ecc2a0",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/f2f537dfb2a142791d37478f34c920b44a45cea9",
+                "reference": "f2f537dfb2a142791d37478f34c920b44a45cea9",
                 "shasum": ""
             },
             "require": {
@@ -6233,11 +6278,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-28T16:55:51+00:00"
+            "time": "2025-03-06T14:02:47+00:00"
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.44.1",
+            "version": "v11.44.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -6283,7 +6328,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.44.1",
+            "version": "v11.44.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -6331,7 +6376,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.44.1",
+            "version": "v11.44.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -6996,7 +7041,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "ab5f909c77002c361f16f6b4c43f5f4f120be9f9"
+                "reference": "62a5672df3d75146d85f030f22f282e40fd22c59"
             },
             "require": {
                 "composer/installers": "v2.0.0",
@@ -7052,6 +7097,7 @@
                 "drupal/webform": "6.2.3",
                 "drush-ops/behat-drush-endpoint": "9.4.1",
                 "drush/drush": "^12.4.3 || ^13.0",
+                "ewcomposer/unpack": "dev-master",
                 "fontawesome/fontawesome": "6.4.2",
                 "northernco/ckeditor5-anchor-drupal": "0.4.0",
                 "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",

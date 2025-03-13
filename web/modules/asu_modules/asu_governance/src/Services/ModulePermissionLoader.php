@@ -39,6 +39,7 @@ class ModulePermissionLoader {
     'administer asu governance configuration',
     'administer actions',
     'administer modules',
+    'administer permissions',
     'administer software updates',
     'administer themes',
     'view update notifications',

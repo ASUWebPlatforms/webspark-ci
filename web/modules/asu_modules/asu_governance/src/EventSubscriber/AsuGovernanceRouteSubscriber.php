@@ -18,7 +18,6 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
     'user.role_add',
     'entity.user_role.edit_form',
     'entity.user_role.delete_form',
-    'user.role.settings',
     'entity.user_role.edit_permissions_form'
   ];
 
@@ -54,6 +53,11 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
       $route->setRequirements([]);
       $route->setRequirement('_custom_perms_roles', 'TRUE');
     }
+    // Ensure user.role.settings route is only accessible by administrators.
+    $roleRoute = 'user.role.settings';
+    $route = $collection->get($roleRoute);
+    $route->setRequirements([]);
+    $route->setRequirement('_role', 'administrator');
   }
 
 }
