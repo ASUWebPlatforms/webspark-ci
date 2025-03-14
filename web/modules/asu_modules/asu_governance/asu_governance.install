@@ -20,11 +20,12 @@ function asu_governance_install() {
     $config->set('allowable_themes', $allowableThemes)->save();
   }
 
-  $currentProfile = \Drupal::installProfile();
-  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
-    // Install the webspark_governance_roles module.
-    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
-  }
+  // Get the module permission loader service.
+  $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_loader');
+  // Get the list of allowable modules.
+  $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
+  // Update the Site Builder role's permissions.
+  $modulePermissionLoader->addSiteBuilderPermissions($allowableModules);
 
   try {
     // Downgrade all users with the 'admin' role to 'site_builder'.
@@ -55,7 +56,8 @@ function asu_governance_install() {
     \Drupal::messenger()->addError($e->getMessage());
   }
 
-  try {// Apply permission blacklist to all roles but 'administrator'.
+  try {
+    // Apply permission blacklist to all roles but 'administrator'.
     \Drupal::service('asu_governance.module_permission_loader')->blacklistPermissions();
   }
   catch (Exception $e) {
