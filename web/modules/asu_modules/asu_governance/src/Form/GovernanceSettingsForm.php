@@ -236,7 +236,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
           $badUsers[] = $user;
         }
       }
-      // Throw error if entered theme does not match themes available in code.
+      // Throw error if entered permission does not match permissions available in code.
       if (!empty($badPermissions)) {
         $form_state->setErrorByName('permissions_blacklist', $this->t('The following permissions are not valid: <strong>@perms</strong>', ['@perms' => implode(', ', array_map(fn($perm) => "\"$perm\"", $badPermissions))]));
       }

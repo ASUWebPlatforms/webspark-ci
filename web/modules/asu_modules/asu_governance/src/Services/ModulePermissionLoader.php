@@ -72,7 +72,6 @@ class ModulePermissionLoader {
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  #[Hook('install')]
   public function addSiteBuilderPermissions(array $modules) {
     $allowed_modules = $this->configFactory->get('asu_governance.settings')->get('allowable_modules');
     foreach ($modules as $module) {
@@ -113,7 +112,6 @@ class ModulePermissionLoader {
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  #[Hook('install')]
   public function revokeSiteBuilderPermissions(array $modules) {
     foreach ($modules as $module) {
       // Get the module's permissions.

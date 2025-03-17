@@ -153,8 +153,9 @@ class Batch {
     }
     else {
       // A fatal error occurred.
-      $message = t('There was an error with the batch processor.');
-      \Drupal::messenger()->addWarning($message);
+      $message = t('There was an error with the asu_governance batch processor.');
+      \Drupal::messenger()->addError($message);
+      \Drupal::logger('asu_governance')->error($message . PHP_EOL .  ' Backtrace: ' . print_r(debug_backtrace(), TRUE));
     }
   }
 
