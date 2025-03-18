@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b3b155d18b8539a2911a032f7290329",
+    "content-hash": "d949d527e3e3fd4f8580d255ff0c3990",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5614,51 +5614,6 @@
             "time": "2024-12-27T00:36:43+00:00"
         },
         {
-            "name": "ewcomposer/unpack",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/woredeyonas/Drupal-Recipe-Unpack.git",
-                "reference": "ea34c30e34e3aa5acec4fb114bb2ce973c014917"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/woredeyonas/Drupal-Recipe-Unpack/zipball/ea34c30e34e3aa5acec4fb114bb2ce973c014917",
-                "reference": "ea34c30e34e3aa5acec4fb114bb2ce973c014917",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^2",
-                "php": ">=7.3.0"
-            },
-            "require-dev": {
-                "composer/composer": "^1.8@stable"
-            },
-            "default-branch": true,
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Drupal\\Recipe\\Unpack\\Composer\\Plugin"
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\Recipe\\Unpack\\": "src/"
-                }
-            },
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "Composer functionality to individualize package management of module dependencies.",
-            "keywords": [
-                "drupal",
-                "drupal_recipe"
-            ],
-            "support": {
-                "source": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/tree/master",
-                "issues": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/issues"
-            },
-            "time": "2023-11-08T12:14:14+00:00"
-        },
-        {
             "name": "fileeye/mimemap",
             "version": "2.2.1",
             "source": {
@@ -7041,7 +6996,7 @@
             "dist": {
                 "type": "path",
                 "url": "upstream-configuration",
-                "reference": "62a5672df3d75146d85f030f22f282e40fd22c59"
+                "reference": "ab5f909c77002c361f16f6b4c43f5f4f120be9f9"
             },
             "require": {
                 "composer/installers": "v2.0.0",
@@ -7097,7 +7052,6 @@
                 "drupal/webform": "6.2.3",
                 "drush-ops/behat-drush-endpoint": "9.4.1",
                 "drush/drush": "^12.4.3 || ^13.0",
-                "ewcomposer/unpack": "dev-master",
                 "fontawesome/fontawesome": "6.4.2",
                 "northernco/ckeditor5-anchor-drupal": "0.4.0",
                 "npm-asset/fonticonpicker--fonticonpicker": "3.1.1",
@@ -7994,16 +7948,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.7",
+            "version": "v0.12.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "d73fa3c74918ef4522bb8a3bf9cab39161c4b57c"
+                "reference": "85057ceedee50c49d4f6ecaff73ee96adb3b3625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/d73fa3c74918ef4522bb8a3bf9cab39161c4b57c",
-                "reference": "d73fa3c74918ef4522bb8a3bf9cab39161c4b57c",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/85057ceedee50c49d4f6ecaff73ee96adb3b3625",
+                "reference": "85057ceedee50c49d4f6ecaff73ee96adb3b3625",
                 "shasum": ""
             },
             "require": {
@@ -8067,9 +8021,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.7"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.8"
             },
-            "time": "2024-12-10T01:58:33+00:00"
+            "time": "2025-03-16T03:05:19+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -12579,6 +12533,51 @@
             "time": "2023-12-13T17:17:05+00:00"
         },
         {
+            "name": "ewcomposer/unpack",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/woredeyonas/Drupal-Recipe-Unpack.git",
+                "reference": "ea34c30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/woredeyonas/Drupal-Recipe-Unpack/zipball/ea34c30",
+                "reference": "ea34c30",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2",
+                "php": ">=7.3.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8@stable"
+            },
+            "default-branch": true,
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Drupal\\Recipe\\Unpack\\Composer\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Drupal\\Recipe\\Unpack\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Composer functionality to individualize package management of module dependencies.",
+            "keywords": [
+                "drupal",
+                "drupal_recipe"
+            ],
+            "support": {
+                "source": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/tree/master",
+                "issues": "https://github.com/woredeyonas/Drupal-Recipe-Unpack/issues"
+            },
+            "time": "2023-11-08T12:14:14+00:00"
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v4.0.3",
             "source": {
@@ -12765,16 +12764,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.30.0",
+            "version": "v4.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "e1d66682f6836aa87820400f0aa07d9eb566feb6"
+                "reference": "f29ba8a30dfd940efb3a8a75dc44446539101f24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/e1d66682f6836aa87820400f0aa07d9eb566feb6",
-                "reference": "e1d66682f6836aa87820400f0aa07d9eb566feb6",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/f29ba8a30dfd940efb3a8a75dc44446539101f24",
+                "reference": "f29ba8a30dfd940efb3a8a75dc44446539101f24",
                 "shasum": ""
             },
             "require": {
@@ -12803,9 +12802,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.30.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.30.1"
             },
-            "time": "2025-03-04T22:54:49+00:00"
+            "time": "2025-03-13T21:08:17+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
@@ -16833,16 +16832,16 @@
         },
         {
             "name": "sirbrillig/phpcs-variable-analysis",
-            "version": "v2.11.22",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sirbrillig/phpcs-variable-analysis.git",
-                "reference": "ffb6f16c6033ec61ed84446b479a31d6529f0eb7"
+                "reference": "4debf5383d9ade705e0a25121f16c3fecaf433a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sirbrillig/phpcs-variable-analysis/zipball/ffb6f16c6033ec61ed84446b479a31d6529f0eb7",
-                "reference": "ffb6f16c6033ec61ed84446b479a31d6529f0eb7",
+                "url": "https://api.github.com/repos/sirbrillig/phpcs-variable-analysis/zipball/4debf5383d9ade705e0a25121f16c3fecaf433a7",
+                "reference": "4debf5383d9ade705e0a25121f16c3fecaf433a7",
                 "shasum": ""
             },
             "require": {
@@ -16886,7 +16885,7 @@
                 "source": "https://github.com/sirbrillig/phpcs-variable-analysis",
                 "wiki": "https://github.com/sirbrillig/phpcs-variable-analysis/wiki"
             },
-            "time": "2025-01-06T17:54:24+00:00"
+            "time": "2025-03-17T16:17:38+00:00"
         },
         {
             "name": "slevomat/coding-standard",
@@ -16955,16 +16954,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.11.3",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10"
+                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10",
-                "reference": "ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
+                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
                 "shasum": ""
             },
             "require": {
@@ -17031,11 +17030,11 @@
                     "type": "open_collective"
                 },
                 {
-                    "url": "https://thanks.dev/phpcsstandards",
+                    "url": "https://thanks.dev/u/gh/phpcsstandards",
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-01-23T17:04:15+00:00"
+            "time": "2025-03-18T05:04:51+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -18100,7 +18099,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "ewcomposer/unpack": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {},

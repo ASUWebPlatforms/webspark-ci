@@ -63,8 +63,7 @@
         "drupal/ckeditor": "1.0.2",
         "drupal/fakeobjects": "1.2.0",
         "northernco/ckeditor5-anchor-drupal": "0.4.0",
-        "drupal/layout_builder_usage_reports": "1.0.2",
-        "ewcomposer/unpack": "dev-master"
+        "drupal/layout_builder_usage_reports": "1.0.2"
     },
     "config": {
         "sort-packages": true
