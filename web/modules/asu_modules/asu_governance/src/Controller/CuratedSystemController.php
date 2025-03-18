@@ -9,6 +9,7 @@ use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Theme\ThemeAccessCheck;
 use Drupal\Core\Url;
 use Drupal\system\SystemManager;
@@ -303,6 +304,11 @@ class CuratedSystemController extends SystemController {
       '#theme' => 'system_themes_page',
       '#theme_groups' => $theme_groups,
       '#theme_group_titles' => $theme_group_titles,
+    ];
+    \Drupal::messenger()->addMessage($this->t('<p><strong>Please note:</strong> This is a filtered list of all the themes available to you in the site based on your user role/permissions.</p><p>If you do not see a theme you previously had access to in Pantheon, please <a href="https://asu.edu/webservices">open a Web Services ticket</a> and we will assist you.</p>'), 'warning');
+    $build[] = [
+      // render a warning message
+      '#type' => 'status_messages',
     ];
     $build[] = $this->formBuilder->getForm('Drupal\system\Form\ThemeAdminForm', $admin_theme_options);
 

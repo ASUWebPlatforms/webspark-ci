@@ -16,6 +16,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\KeyValueStore\KeyValueStoreExpirableInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Messenger\Messenger;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Session\AccountInterface;
@@ -95,6 +96,13 @@ class CuratedModulesListForm extends FormBase {
   protected $allowableModules;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\Messenger
+   */
+  protected $messenger;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -105,7 +113,9 @@ class CuratedModulesListForm extends FormBase {
       $container->get('access_manager'),
       $container->get('current_user'),
       $container->get('user.permissions'),
-      $container->get('extension.list.module')
+      $container->get('extension.list.module'),
+      $container->get('messenger')
+
     );
   }
 
@@ -124,10 +134,12 @@ class CuratedModulesListForm extends FormBase {
    *   The current user.
    * @param \Drupal\user\PermissionHandlerInterface $permission_handler
    *   The permission handler.
-   * @param \Drupal\Core\Extension\ModuleExtensionList $extension_list_module
+   * @param \Drupal\Core\Extension\ModuleExtensionList $extension_list_module,
    *   The module extension list.
+   * @param \Drupal\Core\Messenger\Messenger $messenger
+   *   The messenger service.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, KeyValueStoreExpirableInterface $key_value_expirable, AccessManagerInterface $access_manager, AccountInterface $current_user, PermissionHandlerInterface $permission_handler, ModuleExtensionList $extension_list_module) {
+  public function __construct(ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, KeyValueStoreExpirableInterface $key_value_expirable, AccessManagerInterface $access_manager, AccountInterface $current_user, PermissionHandlerInterface $permission_handler, ModuleExtensionList $extension_list_module, Messenger $messenger) {
     $this->moduleExtensionList = $extension_list_module;
     $this->moduleHandler = $module_handler;
     $this->moduleInstaller = $module_installer;
@@ -136,6 +148,7 @@ class CuratedModulesListForm extends FormBase {
     $this->currentUser = $current_user;
     $this->permissionHandler = $permission_handler;
     $this->allowableModules = $this->config('asu_governance.settings')->get('allowable_modules') ?? [];
+    $this->messenger = $messenger;
   }
 
   /**
@@ -149,6 +162,9 @@ class CuratedModulesListForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $this->messenger->addMessage($this->t('<p><strong>Please note:</strong> This is a filtered list of all the modules available to you in the site based on your user role/permissions.</p><p>If you do not see a module you previously had access to in Pantheon, please <a href="https://asu.edu/webservices">open a Web Services ticket</a> and we will assist you.</p>'), 'warning');
+
     require_once DRUPAL_ROOT . '/core/includes/install.inc';
     $distribution = drupal_install_profile_distribution_name();
 
