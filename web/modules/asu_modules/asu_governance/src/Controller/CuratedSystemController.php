@@ -3,13 +3,11 @@
 namespace Drupal\asu_governance\Controller;
 
 use Drupal\Core\Extension\ExtensionLifecycle;
-use Drupal\Core\Extension\ModuleDependencyMessageTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Theme\ThemeAccessCheck;
 use Drupal\Core\Url;
 use Drupal\system\SystemManager;
@@ -19,50 +17,6 @@ use Drupal\system\Controller\SystemController;
  * Returns responses for System routes.
  */
 class CuratedSystemController extends SystemController {
-
-  use ModuleDependencyMessageTrait;
-
-  /**
-   * System Manager Service.
-   *
-   * @var \Drupal\system\SystemManager
-   */
-  protected $systemManager;
-
-  /**
-   * The theme access checker service.
-   *
-   * @var \Drupal\Core\Theme\ThemeAccessCheck
-   */
-  protected $themeAccess;
-
-  /**
-   * The form builder service.
-   *
-   * @var \Drupal\Core\Form\FormBuilderInterface
-   */
-  protected $formBuilder;
-
-  /**
-   * The menu link tree service.
-   *
-   * @var \Drupal\Core\Menu\MenuLinkTreeInterface
-   */
-  protected $menuLinkTree;
-
-  /**
-   * The module extension list.
-   *
-   * @var \Drupal\Core\Extension\ModuleExtensionList
-   */
-  protected $moduleExtensionList;
-
-  /**
-   * The theme extension list.
-   *
-   * @var \Drupal\Core\Extension\ThemeExtensionList
-   */
-  protected ThemeExtensionList $themeExtensionList;
 
   /**
    * The themes that are allowed to be enabled.
@@ -88,7 +42,13 @@ class CuratedSystemController extends SystemController {
    *   The theme extension list.
    */
   public function __construct(SystemManager $systemManager, ThemeAccessCheck $theme_access, FormBuilderInterface $form_builder, MenuLinkTreeInterface $menu_link_tree, ModuleExtensionList $module_extension_list, ThemeExtensionList $theme_extension_list) {
-    parent::__construct($systemManager, $theme_access, $form_builder, $menu_link_tree, $module_extension_list, $theme_extension_list);
+    parent::__construct(
+      $systemManager,
+      $theme_access,
+      $form_builder,
+      $menu_link_tree,
+      $module_extension_list,
+      $theme_extension_list);
     $this->allowableThemes = $this->config('asu_governance.settings')->get('allowable_themes') ?? [];
   }
 
@@ -105,7 +65,7 @@ class CuratedSystemController extends SystemController {
       return !$module->isObsolete();
     });
 
-    // Only include ASU modules.
+    // Only include ASU themes.
     $displayedThemes = array_filter($allThemes, function ($theme) {
       if (!$theme->isObsolete()
         && (in_array($theme->getName(), $this->allowableThemes, TRUE)
@@ -305,12 +265,10 @@ class CuratedSystemController extends SystemController {
       '#theme_groups' => $theme_groups,
       '#theme_group_titles' => $theme_group_titles,
     ];
-    \Drupal::messenger()->addMessage($this->t('<p><strong>Please note:</strong> This is a filtered list of all the themes available to you in the site based on your user role/permissions.</p><p>If you do not see a theme you previously had access to in Pantheon, please <a href="https://asu.edu/webservices">open a Web Services ticket</a> and we will assist you.</p>'), 'warning');
-    $build[] = [
-      // render a warning message
-      '#type' => 'status_messages',
-    ];
     $build[] = $this->formBuilder->getForm('Drupal\system\Form\ThemeAdminForm', $admin_theme_options);
+
+    // Add warning message
+    \Drupal::messenger()->addMessage($this->t('<p><strong>Please note:</strong> This is a filtered list of all the themes available to you in the site based on your user role/permissions.</p><p>If you do not see a theme you previously had access to in Pantheon, please <a href="https://asu.edu/webservices">open a Web Services ticket</a> and we will assist you.</p>'), 'warning');
 
     return $build;
   }
