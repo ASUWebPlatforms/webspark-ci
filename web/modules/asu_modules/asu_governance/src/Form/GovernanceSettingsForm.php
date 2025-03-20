@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\asu_governance\Form;
 
-use Drupal\asu_governance\Services\ModulePermissionLoader;
+use Drupal\asu_governance\Services\ModulePermissionHandler;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
@@ -36,7 +36,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
   /**
    * The module permission loader service.
    *
-   * @var \Drupal\asu_governance\Services\ModulePermissionLoader
+   * @var \Drupal\asu_governance\Services\ModulePermissionHandler
    */
   protected $modulePermissionLoader;
 
@@ -56,10 +56,10 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    *   The module handler service.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler service.
-   * @param \Drupal\asu_governance\Services\ModulePermissionLoader $modulePermissionLoader
+   * @param \Drupal\asu_governance\Services\ModulePermissionHandler $modulePermissionLoader
    *   The module permission loader service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler, ModulePermissionLoader $modulePermissionLoader, Connection $connection) {
+  public function __construct(ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler, ModulePermissionHandler $modulePermissionLoader, Connection $connection) {
     parent::__construct($config_factory);
     $this->moduleHandler = $module_handler;
     $this->themeHandler = $theme_handler;
@@ -75,7 +75,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('module_handler'),
       $container->get('theme_handler'),
-      $container->get('asu_governance.module_permission_loader'),
+      $container->get('asu_governance.module_permission_handler'),
       $container->get('database'),
     );
   }

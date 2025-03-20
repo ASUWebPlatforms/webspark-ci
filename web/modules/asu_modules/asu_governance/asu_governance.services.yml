@@ -26,7 +26,7 @@ services:
     arguments: ['@logger.factory', '@asu_secure_superadmin.change_super_admin_service']
     Drupal\asu_governance\DowngradeAdmins: '@asu_governance.downgrade_admins'
 
-  asu_governance.module_permission_loader:
-    class: Drupal\asu_governance\Services\ModulePermissionLoader
+  asu_governance.module_permission_handler:
+    class: Drupal\asu_governance\Services\ModulePermissionHandler
     arguments: [ '@user.permissions', '@module_handler', '@config.factory' ]
-    Drupal\asu_governance\Services\ModulePermissionLoader: '@asu_governance.module_permission_loader'
+    Drupal\asu_governance\Services\ModulePermissionHandler: '@asu_governance.module_permission_handler'
