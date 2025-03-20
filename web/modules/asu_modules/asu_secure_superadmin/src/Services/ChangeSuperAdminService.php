@@ -84,12 +84,9 @@ class ChangeSuperAdminService {
   /**
    * Change the SuperAdmin (uid 1) to a new user.
    *
-   * @param bool $newInstall
-   *   Whether this is a new installation.
-   *
    * @throws \Exception
    */
-  public function changeSuperAdmin(bool $newInstall = FALSE) :void {
+  public function changeSuperAdmin() :void {
     /** @var \Drupal\user\Entity\User $user1 */
     $user1 = User::load(1);
     $original_name = $user1->get('name')->value;
@@ -124,38 +121,8 @@ class ChangeSuperAdminService {
       $newUserReloaded->addRole('site_builder');
       $newUserReloaded->save();
     }
-    $method = 'user_cancel_block_reassign_content_admin';
-    $context = [
-      'user_cancel_notify' => FALSE,
-      'reassign_content_admin' => $newUserReloaded->id(),
-    ];
-    // Trigger the AccountCancelEvent if this is not a new installation.
-    if (!$newInstall) {
-      $this->triggerAccountCancelEvent($user1, $method, $context);
-    }
-    else {
-      $user1->block();
-      $user1->save();
-    }
-  }
-
-  /**
-   * Trigger the AccountCancelEvent.
-   *
-   * @param \Drupal\user\Entity\User $account
-   *   The user account to be cancelled.
-   * @param string $method
-   *   The cancellation method.
-   * @param array $context
-   *   A context array. Typically, an array of submitted form values.
-   */
-  public function triggerAccountCancelEvent(User $account, string $method, array $context = []): void {
-
-    // Create the AccountCancelEvent.
-    $event = new AccountCancelEvent($account, $method, $context);
-
-    // Dispatch the event.
-    $this->eventDispatcher->dispatch($event, AccountCancelEvent::class);
+    $user1->block();
+    $user1->save();
   }
 
 }
