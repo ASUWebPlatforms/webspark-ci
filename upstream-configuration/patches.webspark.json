@@ -4,7 +4,7 @@
         "#3109650: Refactor Xss::attributes() to allow filtering of style attribute values": "https://www.drupal.org/files/issues/2024-05-16/core-10.2.3-xss-refactor_filter_attributes-3109650-74.patch",
         "#3415961: Fix issue with focus after inserting media via the modal dialog": "https://www.drupal.org/files/issues/2024-02-15/3415961.patch",
         "#3386605: Add CKEditor 5 support for WebP images": "https://www.drupal.org/files/issues/2024-08-14/3386605-9-add-ckeditor5-support-for-webp.patch",
-        "#3135592: Cannot implement a custom user cancellation method": "web/modules/asu_modules/asu_secure_superadmin/patch/user-module-3135592-2241mr-c39.patch"
+        "#3135592: Cannot implement a custom user cancellation method": "web/modules/asu_modules/asu_secure_superadmin/modules/asu_reparent_superadmin/patch/user-module-3135592-2241mr-c39.patch"
     },
     "drupal/config_readonly": {
         "#3085001: Config blacklist to only block some configuration while in read only mode": "https://www.drupal.org/files/issues/2019-10-31/config_readonly-3085001-2.patch"
