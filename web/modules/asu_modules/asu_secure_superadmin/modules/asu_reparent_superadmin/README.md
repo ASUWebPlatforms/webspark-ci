@@ -1,4 +1,4 @@
-# ASU Secure SuperAdmin
+# ASU Reparent SuperAdmin
 
 ## Introduction
 The `asu_reparent_superadmin` module is intended to provide Enterprise Technology with a tool to ...
