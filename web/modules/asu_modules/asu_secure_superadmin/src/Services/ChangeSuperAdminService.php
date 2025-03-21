@@ -5,6 +5,7 @@ namespace Drupal\asu_secure_superadmin\Services;
 use Drupal\cas\Service\CasUserManager;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
 use Drupal\user\Event\AccountCancelEvent;
 use Drupal\Core\Password\DefaultPasswordGenerator;
@@ -43,6 +44,13 @@ class ChangeSuperAdminService {
   protected $passwordGenerator;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * An array of ASU Enterprise Technology admins.
    *
    * @var string[]
@@ -74,11 +82,12 @@ class ChangeSuperAdminService {
   /**
    * Constructs a new ChangeSuperAdminService object.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ContainerAwareEventDispatcher $eventDispatcher, CasUserManager $casUserManager, DefaultPasswordGenerator $passwordGenerator) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ContainerAwareEventDispatcher $eventDispatcher, CasUserManager $casUserManager, DefaultPasswordGenerator $passwordGenerator, MessengerInterface $messenger) {
     $this->entityTypeManager = $entityTypeManager;
     $this->eventDispatcher = $eventDispatcher;
     $this->casUserManager = $casUserManager;
     $this->passwordGenerator = $passwordGenerator;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -90,6 +99,12 @@ class ChangeSuperAdminService {
     /** @var \Drupal\user\Entity\User $user1 */
     $user1 = User::load(1);
     $original_name = $user1->get('name')->value;
+    $original_from_config = \Drupal::configFactory()->get('asu_secure_superadmin.settings')
+      ->get('original_superadmin');
+    if ($original_name === 'etsuper' && isset($original_from_config)) {
+      $this->messenger->addError('The SuperAdmin account has already been secured.');
+      return;
+    }
     // Duplicate the user entity and trigger the event to reassign content.
     /** @var \Drupal\user\Entity\User $newUser */
     $newUser = $user1->createDuplicate();
