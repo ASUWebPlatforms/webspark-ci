@@ -11,15 +11,15 @@ use Drupal\user\Entity\User;
  * Implements hook_install().
  */
 function asu_secure_superadmin_install() {
+  // get the username of the uid 1 user
+  $original_superadmin = User::load(1)->getAccountName();
+  // save the original superadmin username to config
+  \Drupal::configFactory()->getEditable('asu_secure_superadmin.settings')
+    ->set('original_superadmin', $original_superadmin)
+    ->save();
+
   if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update'))) {
     try {
-      // Do a drupal query to get the number of users.
-      $users = count(\Drupal::entityQuery('user')->accessCheck(FALSE)->execute());
-      /** @var User $superAdmin */
-      $superAdmin = User::load(1);
-      $superAdminName = $superAdmin->get('name')->value;
-      $newInstall = !($users > 2 && $superAdminName !== 'etsuper');
-      // Copy user 1 to a new user and migrate its content.
       \Drupal::service('asu_secure_superadmin.change_super_admin_service')
         ->changeSuperAdmin();
     }

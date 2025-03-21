@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the asu_reparent_superadmin module.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_requirements().
+ */
+function asu_reparent_superadmin_requirements($phase) :array {
+  $requirements = [];
+  $patchName = 'user-module-3135592-2241mr-c39.patch';
+  $filePath = DRUPAL_ROOT . '/core/modules/user/src/Event/AccountCancelEvent.php';
+
+  if (($phase === 'install') && !file_exists($filePath)) {
+    $requirements['asu_reparent_superadmin_patch_test'] = [
+      'description' => t('The ASU Secure SuperAdmin module requires the @patch_name. Your site does not have this patch installed.', ['@patch_name' => $patchName]),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+
+  return $requirements;
+}
