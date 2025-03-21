@@ -136,7 +136,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $form['permissions_users'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Permissions Users'),
-      '#description' => $this->t('<p>Please list ASURITE IDs of users with the <strong>Site Builder</strong> role, <strong>one per line</strong>, that should be allowed to have limited permissions/roles administrative access.</p>'),
+      '#description' => $this->t('<p>Please list usernames (usually ASURITE IDs) of users with the <strong>Site Builder</strong> role, <strong>one per line</strong>, that should be allowed to have limited permissions/roles administrative access.</p>'),
       '#default_value' => implode("\n", $usersInput),
       '#states' => [
         'visible' => [
