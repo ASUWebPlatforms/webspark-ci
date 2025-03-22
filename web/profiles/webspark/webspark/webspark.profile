@@ -40,6 +40,7 @@ function webspark_install_tasks(&$install_state) {
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
     'function' => 'Drupal\asu_secure_superadmin\Form\SecureSuperAdminForm',
   ];
+
   return $tasks;
 }
 

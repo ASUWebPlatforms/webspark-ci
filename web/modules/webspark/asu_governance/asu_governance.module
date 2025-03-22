@@ -18,6 +18,12 @@ use Drupal\user\RoleInterface;
 function asu_governance_preprocess_page(&$variables) {
   $variables['#attached']['library'][] = 'asu_governance/base';
   $route = \Drupal::routeMatch()->getRouteName();
+  $permsArray = \Drupal::service('asu_governance.route_subscriber')::PERMSROUTES;
+  $permsArray[] = 'entity.user.collection';
+  if (in_array($route, $permsArray, TRUE)) {
+    // invalidate the local_task cache tag to allow for dynamic permissions
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(['local_task']);
+  }
 }
 
 /**
@@ -158,5 +164,24 @@ function asu_governance_form_alter(&$form, FormStateInterface $form_state, $form
     $form['roles']['administrator'] = [
       '#disabled' => TRUE,
     ];
+  }
+  if ($form_id === 'cas_settings') {
+    $adminKey = array_key_exists('administrator', $form['user_accounts']['auto_assigned_roles']['#options']);
+    if ($adminKey && !$current_user->hasRole('administrator')) {
+      unset($form['user_accounts']['auto_assigned_roles']['#options']['administrator']);
+    }
+  }
+  $permsArray = \Drupal::service('asu_governance.route_subscriber')::PERMSROUTES;
+  // replace periods with underscores for all items in the array
+  $permsArrayFormIds = array_map(function ($item) {
+    return str_replace('.', '_', $item);
+  }, $permsArray);
+  if (in_array($form_id, $permsArrayFormIds, TRUE) && !$current_user->hasRole('administrator')) {
+    $blacklist = \Drupal::service('asu_governance.module_permission_handler')::BLACKLIST;
+    foreach ($blacklist as $permission) {
+      if (isset($form['permissions'][$permission])) {
+        $form['permissions'][$permission]['#disabled'] = TRUE;
+      }
+    }
   }
 }

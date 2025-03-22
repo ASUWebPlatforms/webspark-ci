@@ -1,0 +1,7 @@
+asu_reparent_superadmin.form:
+  path: '/admin/config/system/asu/reparent-superadmin'
+  defaults:
+    _title: 'Reparent Superadmin'
+    _form: 'Drupal\asu_reparent_superadmin\Form\ReparentSuperadmin'
+  requirements:
+    _permission: 'administer asu modules+administer asu themes'

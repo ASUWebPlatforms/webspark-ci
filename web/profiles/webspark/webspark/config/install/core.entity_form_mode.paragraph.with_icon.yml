@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.with_icon
+label: 'With Icon'
+description: ''
+targetEntityType: paragraph
+cache: true

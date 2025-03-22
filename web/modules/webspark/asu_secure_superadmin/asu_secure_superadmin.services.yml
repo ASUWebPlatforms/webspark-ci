@@ -1,23 +1,5 @@
 services:
   asu_secure_superadmin.change_super_admin_service:
     class: Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService
-    arguments: [ '@entity_type.manager', '@event_dispatcher', '@cas.user_manager', '@password_generator']
+    arguments: [ '@entity_type.manager', '@event_dispatcher', '@cas.user_manager', '@password_generator', '@messenger' ]
     Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService: '@asu_secure_superadmin.change_super_admin_service'
-
-  asu_secure_superadmin.account_cancel.subscriber:
-    class: Drupal\asu_secure_superadmin\EventSubscriber\CustomUserCancelSubscriber
-    tags:
-      - { name: event_subscriber }
-    Drupal\asu_secure_superadmin\EventSubscriber\CustomUserCancelSubscriber: '@asu_secure_superadmin.account_cancel.subscriber'
-
-  asu_secure_superadmin.entity_cancel.subscriber:
-    class: Drupal\asu_secure_superadmin\EventSubscriber\EntityAccountCancelSubscriber
-    arguments: ['@entity_type.manager','@module_handler' , '@asu_secure_superadmin.entity_mass_update']
-    tags:
-      - { name: event_subscriber }
-    Drupal\asu_secure_superadmin\EventSubscriber\EntityAccountCancelSubscriber: '@asu_secure_superadmin.entity_cancel.subscriber'
-
-  asu_secure_superadmin.entity_mass_update:
-    class: Drupal\asu_secure_superadmin\Services\EntityMassUpdateService
-    arguments: ['@entity_type.manager', '@extension.list.module', '@messenger', '@renderer', '@string_translation', '@logger.factory']
-    Drupal\asu_secure_superadmin\Services\EntityMassUpdateService: '@asu_secure_superadmin.entity_mass_update'

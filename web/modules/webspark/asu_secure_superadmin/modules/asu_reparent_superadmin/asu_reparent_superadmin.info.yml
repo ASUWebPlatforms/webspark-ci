@@ -1,0 +1,7 @@
+name: 'ASU Reparent SuperAdmin'
+type: module
+description: 'This module is meant to reparent content from a previous SuperAdmin user to another.'
+package: ASU
+core_version_requirement: 9.5.11 | ^10.3.11
+dependencies:
+  - asu_secure_superadmin:asu_secure_superadmin

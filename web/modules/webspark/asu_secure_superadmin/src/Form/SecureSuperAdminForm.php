@@ -41,7 +41,7 @@ final class SecureSuperAdminForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     try {
-      \Drupal::service('asu_secure_superadmin.change_super_admin_service')->changeSuperAdmin(TRUE);
+      \Drupal::service('asu_secure_superadmin.change_super_admin_service')->changeSuperAdmin();
     }
     catch (\Exception $e) {
       \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());
@@ -50,4 +50,5 @@ final class SecureSuperAdminForm extends FormBase {
     }
     \Drupal::messenger()->addMessage('The SuperAdmin account has been secured. Please log in again.');
   }
+
 }

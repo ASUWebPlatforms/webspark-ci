@@ -5,6 +5,7 @@ namespace Drupal\asu_secure_superadmin\Services;
 use Drupal\cas\Service\CasUserManager;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
 use Drupal\user\Event\AccountCancelEvent;
 use Drupal\Core\Password\DefaultPasswordGenerator;
@@ -43,6 +44,13 @@ class ChangeSuperAdminService {
   protected $passwordGenerator;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * An array of ASU Enterprise Technology admins.
    *
    * @var string[]
@@ -69,31 +77,34 @@ class ChangeSuperAdminService {
     'kdmarks',
     'mmilner6',
     'mjenki10',
-    'oatkar',
   ];
 
   /**
    * Constructs a new ChangeSuperAdminService object.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ContainerAwareEventDispatcher $eventDispatcher, CasUserManager $casUserManager, DefaultPasswordGenerator $passwordGenerator) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ContainerAwareEventDispatcher $eventDispatcher, CasUserManager $casUserManager, DefaultPasswordGenerator $passwordGenerator, MessengerInterface $messenger) {
     $this->entityTypeManager = $entityTypeManager;
     $this->eventDispatcher = $eventDispatcher;
     $this->casUserManager = $casUserManager;
     $this->passwordGenerator = $passwordGenerator;
+    $this->messenger = $messenger;
   }
 
   /**
    * Change the SuperAdmin (uid 1) to a new user.
    *
-   * @param bool $newInstall
-   *   Whether this is a new installation.
-   *
    * @throws \Exception
    */
-  public function changeSuperAdmin(bool $newInstall = FALSE) :void {
+  public function changeSuperAdmin() :void {
     /** @var \Drupal\user\Entity\User $user1 */
     $user1 = User::load(1);
     $original_name = $user1->get('name')->value;
+    $original_from_config = \Drupal::configFactory()->get('asu_secure_superadmin.settings')
+      ->get('original_superadmin');
+    if ($original_name === 'etsuper' && isset($original_from_config)) {
+      $this->messenger->addError('The SuperAdmin account has already been secured.');
+      return;
+    }
     // Duplicate the user entity and trigger the event to reassign content.
     /** @var \Drupal\user\Entity\User $newUser */
     $newUser = $user1->createDuplicate();
@@ -125,38 +136,8 @@ class ChangeSuperAdminService {
       $newUserReloaded->addRole('site_builder');
       $newUserReloaded->save();
     }
-    $method = 'user_cancel_block_reassign_content_admin';
-    $context = [
-      'user_cancel_notify' => FALSE,
-      'reassign_content_admin' => $newUserReloaded->id(),
-    ];
-    // Trigger the AccountCancelEvent if this is not a new installation.
-    if (!$newInstall) {
-      $this->triggerAccountCancelEvent($user1, $method, $context);
-    }
-    else {
-      $user1->block();
-      $user1->save();
-    }
-  }
-
-  /**
-   * Trigger the AccountCancelEvent.
-   *
-   * @param \Drupal\user\Entity\User $account
-   *   The user account to be cancelled.
-   * @param string $method
-   *   The cancellation method.
-   * @param array $context
-   *   A context array. Typically, an array of submitted form values.
-   */
-  public function triggerAccountCancelEvent(User $account, string $method, array $context = []): void {
-
-    // Create the AccountCancelEvent.
-    $event = new AccountCancelEvent($account, $method, $context);
-
-    // Dispatch the event.
-    $this->eventDispatcher->dispatch($event, AccountCancelEvent::class);
+    $user1->block();
+    $user1->save();
   }
 
 }

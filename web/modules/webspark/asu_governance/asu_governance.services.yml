@@ -17,7 +17,7 @@ services:
   asu_governance.perms_roles_access_check:
     class: Drupal\asu_governance\Services\PermsRolesAccessCheck
     autowire: true
-    arguments: [ '@entity_type.manager', '@messenger', '@logger.factory' ]
+    arguments: [ '@entity_type.manager', '@messenger', '@logger.factory', '@config.factory' ]
     tags:
       - { name: access_check, applies_to: _custom_perms_roles }
     Drupal\asu_governance\Services\PermsRolesAccessCheck: '@asu_governance.perms_roles_access_check'
@@ -28,7 +28,7 @@ services:
     arguments: ['@logger.factory', '@asu_secure_superadmin.change_super_admin_service']
     Drupal\asu_governance\DowngradeAdmins: '@asu_governance.downgrade_admins'
 
-  asu_governance.module_permission_loader:
-    class: Drupal\asu_governance\Services\ModulePermissionLoader
+  asu_governance.module_permission_handler:
+    class: Drupal\asu_governance\Services\ModulePermissionHandler
     arguments: [ '@user.permissions', '@module_handler', '@config.factory' ]
-    Drupal\asu_governance\Services\ModulePermissionLoader: '@asu_governance.module_permission_loader'
+    Drupal\asu_governance\Services\ModulePermissionHandler: '@asu_governance.module_permission_handler'

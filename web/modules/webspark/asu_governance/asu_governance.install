@@ -18,21 +18,24 @@ function asu_governance_install() {
     $config->set('allowable_themes', $allowableThemes)->save();
   }
 
-  $currentProfile = \Drupal::installProfile();
-  if ($currentProfile === 'webspark' && !\Drupal::moduleHandler()->moduleExists('webspark_governance_roles')) {
-    // Install the webspark_governance_roles module.
-    \Drupal::service('module_installer')->install(['webspark_governance_roles']);
-  }
+  // Get the module permission loader service.
+  $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_handler');
+  // Get the list of allowable modules.
+  $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
+  // Update the Site Builder role's permissions.
+  $modulePermissionLoader->addSiteBuilderPermissions($allowableModules);
 
   try {
     // Downgrade all users with the 'admin' role to 'site_builder'.
     \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
-    // Run the batch process if not part of an update or a POST request.
-    if (!((defined('MAINTENANCE_MODE') && MAINTENANCE_MODE === 'update') || \Drupal::request()->isMethod('POST'))) {
+    // Run manually if not part of a site install, update or form submission.
+    if (!((defined('MAINTENANCE_MODE') && (MAINTENANCE_MODE === 'update' || MAINTENANCE_MODE === 'install')) || \Drupal::request()->isMethod('POST'))) {
       // Process the batch.
       $batch = &batch_get();
       $process_info = [
         'current_set' => 0,
+        'id' => NULL,
+        'progressive' => FALSE,
       ];
       $batch += $process_info;
       if (isset($batch)) {
@@ -49,5 +52,14 @@ function asu_governance_install() {
   catch (Exception $e) {
     \Drupal::logger('asu_governance')->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
     \Drupal::messenger()->addError($e->getMessage());
+  }
+
+  try {
+    // Apply permission blacklist to all roles but 'administrator'.
+    \Drupal::service('asu_governance.module_permission_handler')->blacklistPermissions();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
+    return;
   }
 }

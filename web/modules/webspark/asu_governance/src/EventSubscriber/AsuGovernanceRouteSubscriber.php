@@ -12,6 +12,15 @@ use Symfony\Component\Routing\RouteCollection;
  */
 final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
 
+  public const PERMSROUTES = [
+    'user.admin_permissions',
+    'entity.user_role.collection',
+    'user.role_add',
+    'entity.user_role.edit_form',
+    'entity.user_role.delete_form',
+    'entity.user_role.edit_permissions_form'
+  ];
+
   /**
    * {@inheritdoc}
    */
@@ -27,15 +36,7 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
       'config.sync',
     ];
 
-    $permissionsRoutes = [
-      'user.admin_permissions',
-      'entity.user_role.collection',
-      'user.role_add',
-      'entity.user_role.edit_form',
-      'entity.user_role.delete_form',
-      'user.role.settings',
-      'entity.user_role.edit_permissions_form',
-    ];
+    $permissionsRoutes = $this::PERMSROUTES;
 
     foreach ($configRoutes as $route_name) {
       /** @var \Symfony\Component\Routing\Route $route */
@@ -52,6 +53,11 @@ final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
       $route->setRequirements([]);
       $route->setRequirement('_custom_perms_roles', 'TRUE');
     }
+    // Ensure user.role.settings route is only accessible by administrators.
+    $roleRoute = 'user.role.settings';
+    $route = $collection->get($roleRoute);
+    $route->setRequirements([]);
+    $route->setRequirement('_role', 'administrator');
   }
 
 }
