@@ -1,0 +1,114 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_event.field_body
+    - field.field.paragraph.card_event.field_cta
+    - field.field.paragraph.card_event.field_cta_secondary
+    - field.field.paragraph.card_event.field_date
+    - field.field.paragraph.card_event.field_date_event
+    - field.field.paragraph.card_event.field_heading
+    - field.field.paragraph.card_event.field_link
+    - field.field.paragraph.card_event.field_location
+    - field.field.paragraph.card_event.field_media
+    - field.field.paragraph.card_event.field_tags
+    - paragraphs.paragraphs_type.card_event
+  module:
+    - datetime_range
+    - link
+    - media_library
+    - paragraphs
+    - text
+  enforced:
+    module:
+      - webspark_blocks
+id: paragraph.card_event.default
+targetEntityType: paragraph
+bundle: card_event
+mode: default
+content:
+  field_body:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_cta:
+    type: entity_reference_paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: CTA
+      title_plural: CTA
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+  field_cta_secondary:
+    type: entity_reference_paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: 'CTA Secondary'
+      title_plural: 'CTA Secondary'
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+  field_date_event:
+    type: daterange_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 7
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_location:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_media:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_autocomplete
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_date: true
+  status: true

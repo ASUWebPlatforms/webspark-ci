@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the asu_secure_superadmin module.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_install().
+ */
+function asu_secure_superadmin_install() {
+  // Get the username of the uid 1 user.
+  $original_superadmin = User::load(1)->getAccountName();
+  // Save the original superadmin username to config for use later.
+  \Drupal::configFactory()->getEditable('asu_secure_superadmin.settings')
+    ->set('original_superadmin', $original_superadmin)
+    ->save();
+
+  if (!(defined('MAINTENANCE_MODE') && (MAINTENANCE_MODE === 'update' || MAINTENANCE_MODE === 'install'))) {
+    try {
+      \Drupal::service('asu_secure_superadmin.change_super_admin_service')
+        ->changeSuperAdmin();
+      \Drupal::messenger()
+        ->addMessage('The superadmin account has been secured.');
+    }
+    catch (Exception $e) {
+      \Drupal::logger('asu_secure_superadmin')->error($e->getMessage());
+      \Drupal::messenger()->addError($e->getMessage());
+      return;
+    }
+  }
+}

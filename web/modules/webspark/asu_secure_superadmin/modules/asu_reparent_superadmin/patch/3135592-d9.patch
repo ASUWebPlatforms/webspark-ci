@@ -1,0 +1,1560 @@
+diff --git a/core/modules/comment/comment.module b/core/modules/comment/comment.module
+index 583eac8d73d..c541d91ab03 100644
+--- a/core/modules/comment/comment.module
++++ b/core/modules/comment/comment.module
+@@ -26,7 +26,6 @@
+ use Drupal\field\FieldStorageConfigInterface;
+ use Drupal\node\NodeInterface;
+ use Drupal\user\RoleInterface;
+-use Drupal\user\UserInterface;
+ 
+ /**
+  * The time cutoff for comments marked as read for entity types other node.
+@@ -443,38 +442,6 @@ function comment_node_search_result(EntityInterface $node) {
+   }
+ }
+ 
+-/**
+- * Implements hook_user_cancel().
+- */
+-function comment_user_cancel($edit, UserInterface $account, $method) {
+-  switch ($method) {
+-    case 'user_cancel_block_unpublish':
+-      $comments = \Drupal::entityTypeManager()->getStorage('comment')->loadByProperties(['uid' => $account->id()]);
+-      foreach ($comments as $comment) {
+-        $comment->setUnpublished();
+-        $comment->save();
+-      }
+-      break;
+-
+-    case 'user_cancel_reassign':
+-      /** @var \Drupal\comment\CommentInterface[] $comments */
+-      $comments = \Drupal::entityTypeManager()->getStorage('comment')->loadByProperties(['uid' => $account->id()]);
+-      foreach ($comments as $comment) {
+-        $langcodes = array_keys($comment->getTranslationLanguages());
+-        // For efficiency manually save the original comment before applying any
+-        // changes.
+-        $comment->original = clone $comment;
+-        foreach ($langcodes as $langcode) {
+-          $comment_translated = $comment->getTranslation($langcode);
+-          $comment_translated->setOwnerId(0);
+-          $comment_translated->setAuthorName(\Drupal::config('user.settings')->get('anonymous'));
+-        }
+-        $comment->save();
+-      }
+-      break;
+-  }
+-}
+-
+ /**
+  * Implements hook_ENTITY_TYPE_predelete() for user entities.
+  */
+diff --git a/core/modules/comment/comment.services.yml b/core/modules/comment/comment.services.yml
+index 3595854ceb0..324f179cb1b 100644
+--- a/core/modules/comment/comment.services.yml
++++ b/core/modules/comment/comment.services.yml
+@@ -22,3 +22,9 @@ services:
+   comment.link_builder:
+     class: Drupal\comment\CommentLinkBuilder
+     arguments: ['@current_user', '@comment.manager', '@module_handler', '@string_translation', '@entity_type.manager']
++
++  comment.account_cancel.subscriber:
++    class: Drupal\comment\EventSubscriber\CommentAccountCancelSubscriber
++    arguments: ['@entity_type.manager', '@config.factory']
++    tags:
++      - { name: event_subscriber }
+diff --git a/core/modules/comment/src/EventSubscriber/CommentAccountCancelSubscriber.php b/core/modules/comment/src/EventSubscriber/CommentAccountCancelSubscriber.php
+new file mode 100644
+index 00000000000..98fc8ded3f4
+--- /dev/null
++++ b/core/modules/comment/src/EventSubscriber/CommentAccountCancelSubscriber.php
+@@ -0,0 +1,86 @@
++<?php
++
++namespace Drupal\comment\EventSubscriber;
++
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\user\Event\AccountCancelEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Performs comment module operations when a user account is cancelled.
++ */
++class CommentAccountCancelSubscriber implements EventSubscriberInterface {
++
++  /**
++   * The entity type manager service.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected EntityTypeManagerInterface $entityTypeManager;
++
++  /**
++   * The config factory service.
++   *
++   * @var \Drupal\Core\Config\ConfigFactoryInterface
++   */
++  protected ConfigFactoryInterface $configFactory;
++
++  /**
++   * Constructs a new event subscriber instance.
++   *
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager service.
++   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
++   *   The config factory service.
++   */
++  public function __construct(EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory) {
++    $this->entityTypeManager = $entity_type_manager;
++    $this->configFactory = $config_factory;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [
++      // Act before AccountCancelSubscriber::onUserAccountCancel()
++      // @see \Drupal\user\EventSubscriber\AccountCancelSubscriber::onUserAccountCancel()
++      AccountCancelEvent::class => ['onUserAccountCancel', 20],
++    ];
++  }
++
++  /**
++   * Acts on user account cancel event.
++   *
++   * @param \Drupal\user\Event\AccountCancelEvent $event
++   *   The user cancel event.
++   *
++   * @todo Convert to a batch process in #3007581.
++   * @see https://www.drupal.org/project/drupal/issues/3007581
++   */
++  public function onUserAccountCancel(AccountCancelEvent $event): void {
++    $method = $event->getMethod();
++    if (!in_array($method, [
++      'user_cancel_block_unpublish',
++      'user_cancel_reassign',
++    ], TRUE)) {
++      return;
++    }
++
++    /** @var \Drupal\comment\CommentInterface[] $comments */
++    $comments = $this->entityTypeManager->getStorage('comment')->loadByProperties([
++      'uid' => $event->getAccount()->id(),
++    ]);
++    $anonymous_name = $this->configFactory->get('user.settings')->get('anonymous');
++    foreach ($comments as $comment) {
++      if ($method === 'user_cancel_block_unpublish') {
++        $comment->setUnpublished()->save();
++      }
++      else {
++        $comment->setOwnerId(0)->setAuthorName($anonymous_name)->save();
++      }
++    }
++  }
++
++}
+diff --git a/core/modules/history/history.module b/core/modules/history/history.module
+index d7ca78246a4..92dc9b97dc1 100644
+--- a/core/modules/history/history.module
++++ b/core/modules/history/history.module
+@@ -13,7 +13,6 @@
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+ use Drupal\Core\Routing\RouteMatchInterface;
+-use Drupal\user\UserInterface;
+ 
+ /**
+  * Entities changed before this time are always shown as read.
+@@ -164,19 +163,6 @@ function history_node_delete(EntityInterface $node) {
+     ->execute();
+ }
+ 
+-/**
+- * Implements hook_user_cancel().
+- */
+-function history_user_cancel($edit, UserInterface $account, $method) {
+-  switch ($method) {
+-    case 'user_cancel_reassign':
+-      \Drupal::database()->delete('history')
+-        ->condition('uid', $account->id())
+-        ->execute();
+-      break;
+-  }
+-}
+-
+ /**
+  * Implements hook_ENTITY_TYPE_delete() for user entities.
+  */
+diff --git a/core/modules/history/history.services.yml b/core/modules/history/history.services.yml
+new file mode 100644
+index 00000000000..b6b623d3999
+--- /dev/null
++++ b/core/modules/history/history.services.yml
+@@ -0,0 +1,7 @@
++services:
++
++  history.account_cancel.subscriber:
++    class: Drupal\history\EventSubscriber\HistoryAccountCancelSubscriber
++    arguments: ['@database']
++    tags:
++      - { name: event_subscriber }
+diff --git a/core/modules/history/src/EventSubscriber/HistoryAccountCancelSubscriber.php b/core/modules/history/src/EventSubscriber/HistoryAccountCancelSubscriber.php
+new file mode 100644
+index 00000000000..c7ab674565f
+--- /dev/null
++++ b/core/modules/history/src/EventSubscriber/HistoryAccountCancelSubscriber.php
+@@ -0,0 +1,56 @@
++<?php
++
++namespace Drupal\history\EventSubscriber;
++
++use Drupal\Core\Database\Connection;
++use Drupal\user\Event\AccountCancelEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Performs history module operations when a user account is cancelled.
++ */
++class HistoryAccountCancelSubscriber implements EventSubscriberInterface {
++
++  /**
++   * The database connection.
++   *
++   * @var \Drupal\Core\Database\Connection
++   */
++  protected Connection $database;
++
++  /**
++   * Constructs a new event subscriber instance.
++   *
++   * @param \Drupal\Core\Database\Connection $database
++   *   The database connection.
++   */
++  public function __construct(Connection $database) {
++    $this->database = $database;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [
++      // Act before AccountCancelSubscriber::onUserAccountCancel()
++      // @see \Drupal\user\EventSubscriber\AccountCancelSubscriber::onUserAccountCancel()
++      AccountCancelEvent::class => ['onUserAccountCancel', 20],
++    ];
++  }
++
++  /**
++   * Acts on user account cancel event.
++   *
++   * @param \Drupal\user\Event\AccountCancelEvent $event
++   *   The user cancel event.
++   */
++  public function onUserAccountCancel(AccountCancelEvent $event): void {
++    if ($event->getMethod() === 'user_cancel_reassign') {
++      $this->database->delete('history')
++        ->condition('uid', $event->getAccount()->id())
++        ->execute();
++    }
++  }
++
++}
+diff --git a/core/modules/jsonapi/jsonapi.services.yml b/core/modules/jsonapi/jsonapi.services.yml
+index 33852841aa8..a40e5a43030 100644
+--- a/core/modules/jsonapi/jsonapi.services.yml
++++ b/core/modules/jsonapi/jsonapi.services.yml
+@@ -186,6 +186,7 @@ services:
+       - '@jsonapi.serializer'
+       - '@datetime.time'
+       - '@current_user'
++      - '@user.account_cancellation'
+   jsonapi.file_upload:
+     class: Drupal\jsonapi\Controller\FileUpload
+     arguments:
+diff --git a/core/modules/jsonapi/src/Controller/EntityResource.php b/core/modules/jsonapi/src/Controller/EntityResource.php
+index 9ce8a725ce2..8c51c4a7de0 100644
+--- a/core/modules/jsonapi/src/Controller/EntityResource.php
++++ b/core/modules/jsonapi/src/Controller/EntityResource.php
+@@ -52,6 +52,7 @@
+ use Drupal\jsonapi\ResourceType\ResourceTypeField;
+ use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
+ use Drupal\jsonapi\Revisions\ResourceVersionRouteEnhancer;
++use Drupal\user\AccountCancellationInterface;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+ use Drupal\Core\Http\Exception\CacheableBadRequestHttpException;
+@@ -151,6 +152,13 @@ class EntityResource {
+    */
+   protected $user;
+ 
++  /**
++   * The account cancellation service.
++   *
++   * @var \Drupal\user\AccountCancellationInterface
++   */
++  protected AccountCancellationInterface $accountCancellation;
++
+   /**
+    * Instantiates an EntityResource object.
+    *
+@@ -176,8 +184,10 @@ class EntityResource {
+    *   The time service.
+    * @param \Drupal\Core\Session\AccountInterface $user
+    *   The current user account.
++   * @param \Drupal\user\AccountCancellationInterface $account_cancellation
++   *    The account cancellation service.
+    */
+-  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $field_manager, ResourceTypeRepositoryInterface $resource_type_repository, RendererInterface $renderer, EntityRepositoryInterface $entity_repository, IncludeResolver $include_resolver, EntityAccessChecker $entity_access_checker, FieldResolver $field_resolver, SerializerInterface $serializer, TimeInterface $time, AccountInterface $user) {
++  public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $field_manager, ResourceTypeRepositoryInterface $resource_type_repository, RendererInterface $renderer, EntityRepositoryInterface $entity_repository, IncludeResolver $include_resolver, EntityAccessChecker $entity_access_checker, FieldResolver $field_resolver, SerializerInterface $serializer, TimeInterface $time, AccountInterface $user, AccountCancellationInterface $account_cancellation) {
+     $this->entityTypeManager = $entity_type_manager;
+     $this->fieldManager = $field_manager;
+     $this->resourceTypeRepository = $resource_type_repository;
+@@ -189,6 +199,7 @@ public function __construct(EntityTypeManagerInterface $entity_type_manager, Ent
+     $this->serializer = $serializer;
+     $this->time = $time;
+     $this->user = $user;
++    $this->accountCancellation = $account_cancellation;
+   }
+ 
+   /**
+@@ -375,9 +386,9 @@ public function deleteIndividual(EntityInterface $entity) {
+ 
+       // Allow other modules to act.
+ 
+-      user_cancel([], $entity->id(), $cancel_method);
+-      // Since user_cancel() is not invoked via Form API, batch processing
+-      // needs to be invoked manually.
++      $this->accountCancellation->cancel($entity, $cancel_method);
++      // Since $this->accountCancellation->cancel() is not invoked via Form API,
++      // batch processing needs to be invoked manually.
+       $batch =& batch_get();
+       // Mark this batch as non-progressive to bypass the progress bar and
+       // redirect.
+diff --git a/core/modules/node/node.module b/core/modules/node/node.module
+index a09af6f0382..b6323f80218 100644
+--- a/core/modules/node/node.module
++++ b/core/modules/node/node.module
+@@ -31,7 +31,6 @@
+ use Drupal\node\Entity\NodeType;
+ use Drupal\node\NodeInterface;
+ use Drupal\node\NodeTypeInterface;
+-use Drupal\user\UserInterface;
+ 
+ /**
+  * Implements hook_help().
+@@ -631,33 +630,6 @@ function node_ranking() {
+   return $ranking;
+ }
+ 
+-/**
+- * Implements hook_user_cancel().
+- */
+-function node_user_cancel($edit, UserInterface $account, $method) {
+-  switch ($method) {
+-    case 'user_cancel_block_unpublish':
+-      // Unpublish nodes (current revisions).
+-      $nids = \Drupal::entityQuery('node')
+-        ->accessCheck(FALSE)
+-        ->condition('uid', $account->id())
+-        ->execute();
+-      \Drupal::moduleHandler()->loadInclude('node', 'inc', 'node.admin');
+-      node_mass_update($nids, ['status' => 0], NULL, TRUE);
+-      break;
+-
+-    case 'user_cancel_reassign':
+-      // Anonymize all of the nodes for this old account.
+-      \Drupal::moduleHandler()->loadInclude('node', 'inc', 'node.admin');
+-      $vids = \Drupal::entityTypeManager()->getStorage('node')->userRevisionIds($account);
+-      node_mass_update($vids, [
+-        'uid' => 0,
+-        'revision_uid' => 0,
+-      ], NULL, TRUE, TRUE);
+-      break;
+-  }
+-}
+-
+ /**
+  * Implements hook_ENTITY_TYPE_predelete() for user entities.
+  */
+diff --git a/core/modules/node/node.services.yml b/core/modules/node/node.services.yml
+index 65d4b900669..6df199c7ab1 100644
+--- a/core/modules/node/node.services.yml
++++ b/core/modules/node/node.services.yml
+@@ -53,3 +53,8 @@ services:
+     arguments: ['@current_route_match']
+     tags:
+       - { name: 'context_provider' }
++  node.account_cancel.subscriber:
++    class: Drupal\node\EventSubscriber\NodeAccountCancelSubscriber
++    arguments: [ '@entity_type.manager', '@module_handler' ]
++    tags:
++      - { name: event_subscriber }
+diff --git a/core/modules/node/src/EventSubscriber/NodeAccountCancelSubscriber.php b/core/modules/node/src/EventSubscriber/NodeAccountCancelSubscriber.php
+new file mode 100644
+index 00000000000..cb5b2ee3cf9
+--- /dev/null
++++ b/core/modules/node/src/EventSubscriber/NodeAccountCancelSubscriber.php
+@@ -0,0 +1,81 @@
++<?php
++
++namespace Drupal\node\EventSubscriber;
++
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\user\Event\AccountCancelEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Performs node module operations when a user account is cancelled.
++ */
++class NodeAccountCancelSubscriber implements EventSubscriberInterface {
++
++  /**
++   * The entity type manager service.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected EntityTypeManagerInterface $entityTypeManager;
++
++  /**
++   * The module handler service.
++   *
++   * @var \Drupal\Core\Extension\ModuleHandlerInterface
++   */
++  protected ModuleHandlerInterface $moduleHandler;
++
++  /**
++   * Constructs a new event subscriber instance.
++   *
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
++   *   The entity type manager service.
++   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
++   *   The module handler service.
++   */
++  public function __construct(EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler) {
++    $this->entityTypeManager = $entity_type_manager;
++    $this->moduleHandler = $module_handler;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [
++      // Act before AccountCancelSubscriber::onUserAccountCancel()
++      // @see \Drupal\user\EventSubscriber\AccountCancelSubscriber::onUserAccountCancel()
++      AccountCancelEvent::class => ['onUserAccountCancel', 20],
++    ];
++  }
++
++  /**
++   * Acts on user account cancel event.
++   *
++   * @param \Drupal\user\Event\AccountCancelEvent $event
++   *   The user cancel event.
++   */
++  public function onUserAccountCancel(AccountCancelEvent $event): void {
++    $method = $event->getMethod();
++    if ($method === 'user_cancel_block_unpublish') {
++      // Unpublish nodes (current revisions).
++      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
++        ->accessCheck(FALSE)
++        ->condition('uid', $event->getAccount()->id())
++        ->execute();
++      $this->moduleHandler->loadInclude('node', 'inc', 'node.admin');
++      node_mass_update($nids, ['status' => 0], NULL, TRUE);
++    }
++    elseif ($method === 'user_cancel_reassign') {
++      // Anonymize all the nodes for this old account.
++      $vids = $this->entityTypeManager->getStorage('node')->userRevisionIds($event->getAccount());
++      $this->moduleHandler->loadInclude('node', 'inc', 'node.admin');
++      node_mass_update($vids, [
++        'uid' => 0,
++        'revision_uid' => 0,
++      ], NULL, TRUE, TRUE);
++    }
++  }
++
++}
+diff --git a/core/modules/user/src/AccountCancellation.php b/core/modules/user/src/AccountCancellation.php
+new file mode 100644
+index 00000000000..8802fc7d1fd
+--- /dev/null
++++ b/core/modules/user/src/AccountCancellation.php
+@@ -0,0 +1,103 @@
++<?php
++
++namespace Drupal\user;
++
++use Drupal\Core\Batch\BatchBuilder;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\user\Event\AccountCancelEvent;
++use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
++
++/**
++ * Provides user account cancellation functionality.
++ *
++ * Third-party, having something to say on user cancellation, should subscribe
++ * to \Drupal\user\Event\AccountCancelEvent event. The 'user' module provides
++ * its own subscriber (\Drupal\user\EventSubscriber\AccountCancelSubscriber)
++ * that actually performs the cancellation. A subscriber aiming to implement its
++ * own user account cancellation logic and avoid default core behavior should
++ * set a higher priority and bypass downstream subscribers by stopping the event
++ * propagation.
++ *
++ * @see \Drupal\user\Event\AccountCancelEvent
++ * @see \Drupal\user\EventSubscriber\AccountCancelSubscriber
++ */
++class AccountCancellation implements AccountCancellationInterface {
++
++  use StringTranslationTrait;
++
++  /**
++   * The module handler service.
++   *
++   * @var \Drupal\Core\Extension\ModuleHandlerInterface
++   */
++  protected ModuleHandlerInterface $moduleHandler;
++
++  /**
++   * The event dispatcher service.
++   *
++   * @var \Symfony\Contracts\EventDispatcher\EventDispatcherInterface
++   */
++  protected EventDispatcherInterface $eventDispatcher;
++
++  /**
++   * Constructs a new service instance.
++   *
++   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
++   *   The module handler service.
++   * @param \Symfony\Contracts\EventDispatcher\EventDispatcherInterface $event_dispatcher
++   *   The event dispatcher service.
++   */
++  public function __construct(ModuleHandlerInterface $module_handler, EventDispatcherInterface $event_dispatcher) {
++    $this->moduleHandler = $module_handler;
++    $this->eventDispatcher = $event_dispatcher;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function cancel(UserInterface $account, string $method, array $context = []): void {
++    // Initialize batch (to set title).
++    $batch_builder = (new BatchBuilder())
++      ->setTitle($this->t('Cancelling account'));
++    batch_set($batch_builder->toArray());
++
++    // When the 'user_cancel_delete' method is used, the user entity is deleted,
++    // which invokes hook_ENTITY_TYPE_predelete() and hook_ENTITY_TYPE_delete().
++    // Modules should use those hooks to respond to the account deletion.
++    if ($method !== 'user_cancel_delete') {
++      // Allow modules to add further sets to this batch.
++      $description = 'The hook is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. In order to act on user account cancellation provide an event subscriber that listens to the \Drupal\user\Event\AccountCancelEvent event. The event subscriber can be defined with a priority higher than the core subscribers in order to cancel them by using AccountCancelEvent::stopPropagation(). See https://www.drupal.org/node/3279455';
++      $this->moduleHandler->invokeAllDeprecated($description, 'user_cancel', [$context, $account, $method]);
++    }
++
++    // Allow third-party to add further sets to this batch.
++    $account_cancel_event = new AccountCancelEvent($account, $method, $context);
++    $this->eventDispatcher->dispatch($account_cancel_event);
++
++    // After cancelling account, ensure that user is logged out.
++    if ($account->id() == \Drupal::currentUser()->id()) {
++      // Batch API stores data in the session, so use the finished operation to
++      // manipulate the current user's session ID.
++      $batch_builder = (new BatchBuilder())->setFinishCallback(static::class . '::regenerateSession');
++      batch_set($batch_builder->toArray());
++    }
++
++    // Batch processing is either handled via Form API or has to be invoked
++    // manually.
++  }
++
++  /**
++   * Provides a finished batch processing callback for cancelling user account.
++   *
++   * Note that this method is declared static to avoid serialization of a huge
++   * object by the batch API.
++   */
++  public static function regenerateSession(): void {
++    // Regenerate the user's session instead of calling session_destroy() as we
++    // want to preserve any messages that might have been set.
++    \Drupal::service('session')->migrate();
++  }
++
++}
++
+diff --git a/core/modules/user/src/AccountCancellationInterface.php b/core/modules/user/src/AccountCancellationInterface.php
+new file mode 100644
+index 00000000000..899cbe20388
+--- /dev/null
++++ b/core/modules/user/src/AccountCancellationInterface.php
+@@ -0,0 +1,23 @@
++<?php
++
++namespace Drupal\user;
++
++/**
++ * Interface of 'user.account_cancellation' service.
++ */
++interface AccountCancellationInterface {
++
++  /**
++   * Cancels a user account.
++   *
++   * @param \Drupal\user\UserInterface $account
++   *   The user account to be cancelled.
++   * @param string $method
++   *   The account cancellation method to use.
++   * @param array $context
++   *   (optional) Context array. Typically, an array of submitted form values as
++   *   this service is mostly consumed via form API.
++   */
++  public function cancel(UserInterface $account, string $method, array $context = []): void;
++
++}
+diff --git a/core/modules/user/src/Controller/UserController.php b/core/modules/user/src/Controller/UserController.php
+index 1a5fa550d26..944796059b7 100644
+--- a/core/modules/user/src/Controller/UserController.php
++++ b/core/modules/user/src/Controller/UserController.php
+@@ -8,6 +8,7 @@
+ use Drupal\Core\Datetime\DateFormatterInterface;
+ use Drupal\Core\Flood\FloodInterface;
+ use Drupal\Core\Url;
++use Drupal\user\AccountCancellationInterface;
+ use Drupal\user\Form\UserPasswordResetForm;
+ use Drupal\user\UserDataInterface;
+ use Drupal\user\UserInterface;
+@@ -58,6 +59,13 @@ class UserController extends ControllerBase {
+    */
+   protected $flood;
+ 
++  /**
++   * The account cancellation service.
++   *
++   * @var \Drupal\user\AccountCancellationInterface
++   */
++  protected AccountCancellationInterface $accountCancellation;
++
+   /**
+    * Constructs a UserController object.
+    *
+@@ -71,13 +79,22 @@ class UserController extends ControllerBase {
+    *   A logger instance.
+    * @param \Drupal\Core\Flood\FloodInterface $flood
+    *   The flood service.
++   * @param \Drupal\user\AccountCancellationInterface $account_cancellation
++   *    The account cancellation service.
++   *
++   * @see https://www.drupal.org/node/3279455
+    */
+-  public function __construct(DateFormatterInterface $date_formatter, UserStorageInterface $user_storage, UserDataInterface $user_data, LoggerInterface $logger, FloodInterface $flood) {
++  public function __construct(DateFormatterInterface $date_formatter, UserStorageInterface $user_storage, UserDataInterface $user_data, LoggerInterface $logger, FloodInterface $flood, AccountCancellationInterface $account_cancellation = NULL) {
+     $this->dateFormatter = $date_formatter;
+     $this->userStorage = $user_storage;
+     $this->userData = $user_data;
+     $this->logger = $logger;
+     $this->flood = $flood;
++    if (!$account_cancellation) {
++      @trigger_error('Calling ' . __METHOD__ . '() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455', E_USER_DEPRECATED);
++      $account_cancellation = \Drupal::service('user.account_cancellation');
++    }
++    $this->accountCancellation = $account_cancellation;
+   }
+ 
+   /**
+@@ -89,7 +106,8 @@ public static function create(ContainerInterface $container) {
+       $container->get('entity_type.manager')->getStorage('user'),
+       $container->get('user.data'),
+       $container->get('logger.factory')->get('user'),
+-      $container->get('flood')
++      $container->get('flood'),
++      $container->get('user.account_cancellation')
+     );
+   }
+ 
+@@ -392,7 +410,7 @@ public function confirmCancel(UserInterface $user, $timestamp = 0, $hashed_pass
+         $edit = [
+           'user_cancel_notify' => $account_data['cancel_notify'] ?? $this->config('user.settings')->get('notify.status_canceled'),
+         ];
+-        user_cancel($edit, $user->id(), $account_data['cancel_method']);
++        $this->accountCancellation->cancel($user, $account_data['cancel_method'], $edit);
+         // Since user_cancel() is not invoked via Form API, batch processing
+         // needs to be invoked manually and should redirect to the front page
+         // after completion.
+diff --git a/core/modules/user/src/Event/AccountCancelEvent.php b/core/modules/user/src/Event/AccountCancelEvent.php
+new file mode 100644
+index 00000000000..08232ee987d
+--- /dev/null
++++ b/core/modules/user/src/Event/AccountCancelEvent.php
+@@ -0,0 +1,88 @@
++<?php
++
++namespace Drupal\user\Event;
++
++use Drupal\Component\EventDispatcher\Event;
++use Drupal\user\UserInterface;
++
++/**
++ * Provides a user cancel event class.
++ *
++ * Subscribers are able to react on user account cancellation or implement their
++ * own cancellation logic. Also, by setting appropriate priories, they are able
++ * to suppress the execution of downstream subscribers, such as the default user
++ * account subscriber \Drupal\user\EventSubscriber\AccountCancelSubscriber.
++ *
++ * @see \Drupal\user\EventSubscriber\AccountCancelSubscriber
++ */
++class AccountCancelEvent extends Event {
++
++  /**
++   * The account to be cancelled.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected UserInterface $account;
++
++  /**
++   * The account cancellation method to use.
++   *
++   * @var string
++   */
++  protected string $method;
++
++  /**
++   * Context array. Typically, an array of submitted form values.
++   *
++   * @var array
++   */
++  protected array $context;
++
++  /**
++   * Constructs a new event instance.
++   *
++   * @param \Drupal\user\UserInterface $account
++   *   The user account to be cancelled.
++   * @param string $method
++   *   The account cancellation method to use.
++   * @param array $context
++   *   Context array. Typically, an array of submitted form values.
++   */
++  public function __construct(UserInterface $account, string $method, array $context) {
++    $this->account = $account;
++    $this->method = $method;
++    $this->context = $context;
++  }
++
++  /**
++   * Returns the user account to be cancelled.
++   *
++   * @return \Drupal\user\UserInterface
++   *   The user account to be cancelled.
++   */
++  public function getAccount(): UserInterface {
++    return $this->account;
++  }
++
++  /**
++   * Returns the account cancellation method to use.
++   *
++   * @return string
++   *   The account cancellation method to use.
++   */
++  public function getMethod(): string {
++    return $this->method;
++  }
++
++  /**
++   * Returns the context array. Usually an array of submitted form values.
++   *
++   * @return array
++   *   Context array. Typically, an array of submitted form values.
++   */
++  public function getContext(): array {
++    return $this->context;
++  }
++
++}
++
+diff --git a/core/modules/user/src/EventSubscriber/AccountCancelSubscriber.php b/core/modules/user/src/EventSubscriber/AccountCancelSubscriber.php
+new file mode 100644
+index 00000000000..c84eca3e9b0
+--- /dev/null
++++ b/core/modules/user/src/EventSubscriber/AccountCancelSubscriber.php
+@@ -0,0 +1,113 @@
++<?php
++
++namespace Drupal\user\EventSubscriber;
++
++use Drupal\Core\Batch\BatchBuilder;
++use Drupal\Core\Session\AnonymousUserSession;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\user\Event\AccountCancelEvent;
++use Drupal\user\UserInterface;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to user cancellation event.
++ */
++class AccountCancelSubscriber implements EventSubscriberInterface {
++
++  use StringTranslationTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [
++      // Since batch and session API require a valid user account, the actual
++      // cancellation of a user account needs to happen last.
++      AccountCancelEvent::class => 'onUserAccountCancel',
++    ];
++  }
++
++  /**
++   * Acts on user account cancel event.
++   *
++   * @param \Drupal\user\Event\AccountCancelEvent $event
++   *   The user cancel event.
++   */
++  public function onUserAccountCancel(AccountCancelEvent $event): void {
++    $batch_builder = (new BatchBuilder())
++      ->setTitle(t('Cancelling user account'))
++      ->addOperation(static::class . '::doCancelAccount', [
++        $event->getAccount(),
++        $event->getMethod(),
++        $event->getContext(),
++      ]);
++    batch_set($batch_builder->toArray());
++  }
++
++  /**
++   * Cancels a user account.
++   *
++   * Note that this method is declared static to avoid serialization of a huge
++   * object by the batch API.
++   *
++   * @param \Drupal\user\UserInterface $account
++   *   The user account to be cancelled.
++   * @param string $method
++   *   The cancellation method.
++   * @param array $context
++   *   A context array. Typically, an array of submitted form values.
++   */
++  public static function doCancelAccount(UserInterface $account, string $method, array $context): void {
++    $logger = \Drupal::logger('user');
++    $messenger = \Drupal::messenger();
++
++    switch ($method) {
++      case 'user_cancel_block':
++      case 'user_cancel_block_unpublish':
++      default:
++        if (!in_array($method, ['user_cancel_block', 'user_cancel_block_unpublish'], TRUE)) {
++          @trigger_error("Using " . __METHOD__ . "() subscriber to handle user account cancellation methods other than user_cancel_block, user_cancel_block_unpublish, user_cancel_reassign and user_cancel_delete is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. The '$method' user account cancellation method has been used. Third-party modules should add their own subscriber to handle custom cancellation methods. See https://www.drupal.org/node/3279455", E_USER_DEPRECATED);
++        }
++
++        // Send account blocked notification if option was checked.
++        if (!empty($context['user_cancel_notify'])) {
++          _user_mail_notify('status_blocked', $account);
++        }
++        $account->block()->save();
++        $messenger->addStatus(t('Account %name has been disabled.', [
++          '%name' => $account->getDisplayName(),
++        ]));
++        $logger->notice('Blocked user: %name %email.', [
++          '%name' => $account->getAccountName(),
++          '%email' => '<' . $account->getEmail() . '>',
++        ]);
++        break;
++
++      case 'user_cancel_reassign':
++      case 'user_cancel_delete':
++        // Send account canceled notification if option was checked.
++        if (!empty($context['user_cancel_notify'])) {
++          _user_mail_notify('status_canceled', $account);
++        }
++        $account->delete();
++        $messenger->addStatus(t('Account %name has been deleted.', [
++          '%name' => $account->getDisplayName(),
++        ]));
++        $logger->notice('Deleted user: %name %email.', [
++          '%name' => $account->getAccountName(),
++          '%email' => '<' . $account->getEmail() . '>',
++        ]);
++    }
++
++    // After cancelling account, ensure that user is logged out. We can't
++    // destroy their session though, as we might have information in it, and we
++    // can't  regenerate it because batch API uses the session ID, we will
++    // regenerate it in \Drupal\user\AccountCancellation::regenerateSession().
++    // @see \Drupal\user\AccountCancellation::regenerateSession()
++    if ($account->id() == \Drupal::currentUser()->id()) {
++      \Drupal::currentUser()->setAccount(new AnonymousUserSession());
++    }
++  }
++
++}
++
+diff --git a/core/modules/user/src/Form/UserCancelForm.php b/core/modules/user/src/Form/UserCancelForm.php
+index ef93b269ca8..b9a93036fb5 100644
+--- a/core/modules/user/src/Form/UserCancelForm.php
++++ b/core/modules/user/src/Form/UserCancelForm.php
+@@ -2,8 +2,13 @@
+ 
+ namespace Drupal\user\Form;
+ 
++use Drupal\Component\Datetime\TimeInterface;
+ use Drupal\Core\Entity\ContentEntityConfirmFormBase;
++use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\user\AccountCancellationInterface;
++use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+ /**
+  * Provides a confirmation form for cancelling user account.
+@@ -33,6 +38,48 @@ class UserCancelForm extends ContentEntityConfirmFormBase {
+    */
+   protected $entity;
+ 
++  /**
++   * The account cancellation service.
++   *
++   * @var \Drupal\user\AccountCancellationInterface
++   */
++  protected AccountCancellationInterface $accountCancellation;
++
++  /**
++   * Constructs a new form instance.
++   *
++   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
++   *   The entity repository service.
++   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
++   *   The entity type bundle service.
++   * @param \Drupal\Component\Datetime\TimeInterface $time
++   *   The time service.
++   * @param \Drupal\user\AccountCancellationInterface $account_cancellation
++   *   The account cancellation service.
++   *
++   * @see https://www.drupal.org/node/3279455
++   */
++  public function __construct(EntityRepositoryInterface $entity_repository, EntityTypeBundleInfoInterface $entity_type_bundle_info, TimeInterface $time, AccountCancellationInterface $account_cancellation = NULL) {
++    parent::__construct($entity_repository, $entity_type_bundle_info, $time);
++    if (!$account_cancellation) {
++      @trigger_error('Calling ' . __METHOD__ . '() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455', E_USER_DEPRECATED);
++      $account_cancellation = \Drupal::service('user.account_cancellation');
++    }
++    $this->accountCancellation = $account_cancellation;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container): self {
++    return new static(
++      $container->get('entity.repository'),
++      $container->get('entity_type.bundle.info'),
++      $container->get('datetime.time'),
++      $container->get('user.account_cancellation')
++    );
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+@@ -137,7 +184,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
+     // privileges, no confirmation mail shall be sent, and the user does not
+     // attempt to cancel the own account.
+     if (!$form_state->isValueEmpty('access') && $form_state->isValueEmpty('user_cancel_confirm') && $this->entity->id() != $this->currentUser()->id()) {
+-      user_cancel($form_state->getValues(), $this->entity->id(), $form_state->getValue('user_cancel_method'));
++      $this->accountCancellation->cancel($this->entity, $form_state->getValue('user_cancel_method'), $form_state->getValues());
+ 
+       $form_state->setRedirectUrl($this->entity->toUrl('collection'));
+     }
+diff --git a/core/modules/user/src/Form/UserMultipleCancelConfirm.php b/core/modules/user/src/Form/UserMultipleCancelConfirm.php
+index f0463686a80..53bfc1052b5 100644
+--- a/core/modules/user/src/Form/UserMultipleCancelConfirm.php
++++ b/core/modules/user/src/Form/UserMultipleCancelConfirm.php
+@@ -8,6 +8,7 @@
+ use Drupal\Core\Messenger\MessengerInterface;
+ use Drupal\Core\Url;
+ use Drupal\Core\TempStore\PrivateTempStoreFactory;
++use Drupal\user\AccountCancellationInterface;
+ use Drupal\user\UserStorageInterface;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+@@ -39,6 +40,13 @@ class UserMultipleCancelConfirm extends ConfirmFormBase {
+    */
+   protected $entityTypeManager;
+ 
++  /**
++   * The account cancellation service.
++   *
++   * @var \Drupal\user\AccountCancellationInterface
++   */
++  protected AccountCancellationInterface $accountCancellation;
++
+   /**
+    * Constructs a new UserMultipleCancelConfirm.
+    *
+@@ -48,11 +56,20 @@ class UserMultipleCancelConfirm extends ConfirmFormBase {
+    *   The user storage.
+    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+    *   The entity type manager.
++   * @param \Drupal\user\AccountCancellationInterface $account_cancellation
++   *    The account cancellation service.
++   *
++   * @see https://www.drupal.org/node/3279455
+    */
+-  public function __construct(PrivateTempStoreFactory $temp_store_factory, UserStorageInterface $user_storage, EntityTypeManagerInterface $entity_type_manager) {
++  public function __construct(PrivateTempStoreFactory $temp_store_factory, UserStorageInterface $user_storage, EntityTypeManagerInterface $entity_type_manager, AccountCancellationInterface $account_cancellation = NULL) {
+     $this->tempStoreFactory = $temp_store_factory;
+     $this->userStorage = $user_storage;
+     $this->entityTypeManager = $entity_type_manager;
++    if (!$account_cancellation) {
++      @trigger_error('Calling ' . __METHOD__ . '() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455', E_USER_DEPRECATED);
++      $account_cancellation = \Drupal::service('user.account_cancellation');
++    }
++    $this->accountCancellation = $account_cancellation;
+   }
+ 
+   /**
+@@ -62,7 +79,8 @@ public static function create(ContainerInterface $container) {
+     return new static(
+       $container->get('tempstore.private'),
+       $container->get('entity_type.manager')->getStorage('user'),
+-      $container->get('entity_type.manager')
++      $container->get('entity_type.manager'),
++      $container->get('user.account_cancellation')
+     );
+   }
+ 
+@@ -206,14 +224,14 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
+         if ($uid <= 1) {
+           continue;
+         }
++        // The $user global is not a complete user entity, so load the full
++        // entity.
++        $account = $this->userStorage->load($uid);
+         // Prevent user administrators from deleting themselves without confirmation.
+         if ($uid == $current_user_id) {
+           $admin_form_mock = [];
+           $admin_form_state = $form_state;
+           $admin_form_state->unsetValue('user_cancel_confirm');
+-          // The $user global is not a complete user entity, so load the full
+-          // entity.
+-          $account = $this->userStorage->load($uid);
+           $admin_form = $this->entityTypeManager->getFormObject('user', 'cancel');
+           $admin_form->setEntity($account);
+           // Calling this directly required to init form object with $account.
+@@ -221,7 +239,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
+           $admin_form->submitForm($admin_form_mock, $admin_form_state);
+         }
+         else {
+-          user_cancel($form_state->getValues(), $uid, $form_state->getValue('user_cancel_method'));
++          $this->accountCancellation->cancel($account, $form_state->getValue('user_cancel_method'), $form_state->getValues());
+         }
+       }
+     }
+diff --git a/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.info.yml b/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.info.yml
+new file mode 100644
+index 00000000000..a163ef5914e
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.info.yml
+@@ -0,0 +1,6 @@
++name: 'User cancel deprecated test'
++type: module
++description: 'Support module for testing deprecation of user cancel custom method.'
++package: Testing
++version: VERSION
++core_version_requirement: ^9
+diff --git a/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.module b/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.module
+new file mode 100644
+index 00000000000..1a83bd5f7c6
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_deprecated_test/user_cancel_deprecated_test.module
+@@ -0,0 +1,27 @@
++<?php
++
++/**
++ * @file
++ * Contains user_cancel_deprecated_test.module.
++ */
++
++use Drupal\user\UserInterface;
++
++/**
++ * Implements hook_user_cancel_methods_alter().
++ */
++function user_cancel_deprecated_test_user_cancel_methods_alter(array &$methods): void {
++  $methods['user_cancel_test_deprecated'] = [
++    'title' => 'User cancel test (deprecated)',
++    'description' => 'User cancel test method (deprecated)',
++  ];
++}
++
++/**
++ * Implements hook_user_cancel().
++ */
++function user_cancel_deprecated_test_user_cancel(array $edit, UserInterface $account, string $method): void {
++  if ($method === 'user_cancel_test_deprecated') {
++    \Drupal::messenger()->addStatus('Custom user deprecated cancel method executed.');
++  }
++}
+diff --git a/core/modules/user/tests/modules/user_cancel_test/src/UserCancelTestAccountCancelSubscriber.php b/core/modules/user/tests/modules/user_cancel_test/src/UserCancelTestAccountCancelSubscriber.php
+new file mode 100644
+index 00000000000..2d68d5c5801
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_test/src/UserCancelTestAccountCancelSubscriber.php
+@@ -0,0 +1,38 @@
++<?php
++
++namespace Drupal\user_cancel_test;
++
++use Drupal\user\Event\AccountCancelEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Performs user_cancel_test module operations when a user account is cancelled.
++ */
++class UserCancelTestAccountCancelSubscriber implements EventSubscriberInterface {
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [
++      // Act before all Drupal core subscribers.
++      // @see \Drupal\user\EventSubscriber\AccountCancelSubscriber::onUserAccountCancel()
++      AccountCancelEvent::class => ['onUserAccountCancel', 50],
++    ];
++  }
++
++  /**
++   * Acts on user account cancel event.
++   *
++   * @param \Drupal\user\Event\AccountCancelEvent $event
++   *   The user cancel event.
++   */
++  public function onUserAccountCancel(AccountCancelEvent $event): void {
++    if ($event->getMethod() === 'user_cancel_test') {
++      \Drupal::messenger()->addStatus('Custom user cancel method executed.');
++      $event->stopPropagation();
++    }
++  }
++
++}
++
+diff --git a/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.info.yml b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.info.yml
+new file mode 100644
+index 00000000000..5532be1a1cc
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.info.yml
+@@ -0,0 +1,6 @@
++name: 'User cancel test'
++type: module
++description: 'Support module for testing user cancel custom method.'
++package: Testing
++version: VERSION
++core_version_requirement: ^9 || ^10
+diff --git a/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.module b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.module
+new file mode 100644
+index 00000000000..ddbe79c16d8
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.module
+@@ -0,0 +1,16 @@
++<?php
++
++/**
++ * @file
++ * Contains user_cancel_test.module.
++ */
++
++/**
++ * Implements hook_user_cancel_methods_alter().
++ */
++function user_cancel_test_user_cancel_methods_alter(array &$methods): void {
++  $methods['user_cancel_test'] = [
++    'title' => 'User cancel test',
++    'description' => 'User cancel test method',
++  ];
++}
+diff --git a/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.services.yml b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.services.yml
+new file mode 100644
+index 00000000000..4d3487384ec
+--- /dev/null
++++ b/core/modules/user/tests/modules/user_cancel_test/user_cancel_test.services.yml
+@@ -0,0 +1,6 @@
++services:
++
++  user_cancel_test.account_cancel.subscriber:
++    class: Drupal\user_cancel_test\UserCancelTestAccountCancelSubscriber
++    tags:
++      - { name: event_subscriber }
+diff --git a/core/modules/user/tests/src/Functional/UserCancelCustomMethodTest.php b/core/modules/user/tests/src/Functional/UserCancelCustomMethodTest.php
+new file mode 100644
+index 00000000000..a7f715281f0
+--- /dev/null
++++ b/core/modules/user/tests/src/Functional/UserCancelCustomMethodTest.php
+@@ -0,0 +1,65 @@
++<?php
++
++namespace Drupal\Tests\user\Functional;
++
++use Drupal\Core\Test\AssertMailTrait;
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests user cancellation with a custom method.
++ *
++ * @group user
++ */
++class UserCancelCustomMethodTest extends BrowserTestBase {
++
++  use AssertMailTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = ['user_cancel_test'];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected $defaultTheme = 'stark';
++
++  /**
++   * Tests user cancellation with a custom method.
++   */
++  public function testUserCancelCustomMethod(): void {
++    $account = $this->createUser([
++      'cancel account',
++      'select account cancellation method',
++    ]);
++    $this->drupalLogin($account);
++    $this->drupalGet($account->toUrl('edit-form'));
++    $page = $this->getSession()->getPage();
++    $page->clickLink('Cancel account');
++
++    // Chose the custom cancellation method.
++    $page->selectFieldOption('user_cancel_method', 'user_cancel_test');
++    $page->pressButton('Confirm');
++
++    $this->clickConfirmationLinkFomMail();
++
++    // Check that the custom user cancellation has been executed but not the
++    // Drupal core cancellation.
++    // @see \Drupal\user\EventSubscriber\AccountCancelSubscriber::onUserAccountCancel()
++    // @see \Drupal\user_cancel_test\UserCancelTestAccountCancelSubscriber::onUserAccountCancel()
++    $this->assertSession()->pageTextContains('Custom user cancel method executed.');
++    $this->assertSession()->pageTextNotContains("{$account->getDisplayName()} has been disabled.");
++  }
++
++  /**
++   * Clicks on the confirmation link sent by email.
++   */
++  protected function clickConfirmationLinkFomMail(): void {
++    $mails = $this->getMails();
++    $mail = reset($mails);
++    preg_match('#http.*#', $mail['body'], $found);
++    $this->drupalGet($found[0]);
++  }
++
++}
++
+diff --git a/core/modules/user/tests/src/Kernel/UserDeprecatedCancelCustomMethodTest.php b/core/modules/user/tests/src/Kernel/UserDeprecatedCancelCustomMethodTest.php
+new file mode 100644
+index 00000000000..f5eb641e86c
+--- /dev/null
++++ b/core/modules/user/tests/src/Kernel/UserDeprecatedCancelCustomMethodTest.php
+@@ -0,0 +1,105 @@
++<?php
++
++namespace Drupal\Tests\user\Kernel;
++
++use Drupal\KernelTests\KernelTestBase;
++use Drupal\Tests\user\Traits\UserCreationTrait;
++use Drupal\user\Controller\UserController;
++use Drupal\user\Form\UserCancelForm;
++use Drupal\user\Form\UserMultipleCancelConfirm;
++
++/**
++ * Tests deprecation of procedural custom user account cancelling method.
++ *
++ * @group user
++ * @group legacy
++ */
++class UserDeprecatedCancelCustomMethodTest extends KernelTestBase {
++
++  use UserCreationTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected static $modules = [
++    'system',
++    'user',
++    'user_cancel_deprecated_test',
++    // In these modules, the hook has been previously implemented.
++    'comment',
++    'history',
++    'node',
++  ];
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++    $this->installSchema('system', ['sequences']);
++    $this->installEntitySchema('user');
++  }
++
++  /**
++   * Tests hook_user_cancel() hook deprecation.
++   */
++  public function testHookDeprecation(): void {
++    $this->expectDeprecation('The deprecated hook hook_user_cancel() is implemented in these functions: user_cancel_deprecated_test_user_cancel(). The hook is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. In order to act on user account cancellation provide an event subscriber that listens to the \Drupal\user\Event\AccountCancelEvent event. The event subscriber can be defined with a priority higher than the core subscribers in order to cancel them by using AccountCancelEvent::stopPropagation(). See https://www.drupal.org/node/3279455');
++    $this->container->get('user.account_cancellation')->cancel($this->createUser(), 'user_cancel_test_deprecated');
++
++    $batch =& batch_get();
++    // Bypass the progress bar and redirect.
++    $batch['progressive'] = FALSE;
++    $this->expectDeprecation("Using Drupal\user\EventSubscriber\AccountCancelSubscriber::doCancelAccount() subscriber to handle user account cancellation methods other than user_cancel_block, user_cancel_block_unpublish, user_cancel_reassign and user_cancel_delete is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. The 'user_cancel_test_deprecated' user account cancellation method has been used. Third-party modules should add their own subscriber to handle custom cancellation methods. See https://www.drupal.org/node/3279455");
++    batch_process();
++  }
++
++  /**
++   * Tests deprecation of procedural code.
++   *
++   * @covers \user_cancel
++   * @covers \_user_cancel
++   * @covers \_user_cancel_session_regenerate
++   */
++  public function testProceduralCodeDeprecations(): void {
++    $this->expectDeprecation("user_cancel is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Use the method ::cancel() from the 'user.account_cancellation' service instead. See https://www.drupal.org/node/3279455");
++    user_cancel([], $this->createUser()->id(), 'abc');
++    $this->expectDeprecation('_user_cancel is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use \Drupal\user\EventSubscriber\AccountCancelSubscriber::doCancelAccount(). See https://www.drupal.org/node/3279455');
++    _user_cancel([], $this->createUser(), 'abc');
++    $this->expectDeprecation('_user_cancel_session_regenerate() is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use \Drupal\user\AccountCancellation::regenerateSession(). See https://www.drupal.org/node/3279455');
++    _user_cancel_session_regenerate();
++  }
++
++  /**
++   * Tests constructor parameter additions deprecation messages.
++   *
++   * @covers \Drupal\user\Controller\UserController::__construct
++   * @covers \Drupal\user\Form\UserCancelForm::__construct
++   * @covers \Drupal\user\Form\UserMultipleCancelConfirm::__construct
++   */
++  public function testConstructorParamAdditionsDeprecationMessages(): void {
++    $this->expectDeprecation('Calling Drupal\user\Controller\UserController::__construct() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455');
++    new UserController(
++      $this->container->get('date.formatter'),
++      $this->container->get('entity_type.manager')->getStorage('user'),
++      $this->container->get('user.data'),
++      $this->container->get('logger.factory')->get('user'),
++      $this->container->get('flood')
++    );
++
++    $this->expectDeprecation('Calling Drupal\user\Form\UserCancelForm::__construct() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455');
++    new UserCancelForm(
++      $this->container->get('entity.repository'),
++      $this->container->get('entity_type.bundle.info'),
++      $this->container->get('datetime.time')
++    );
++
++    $this->expectDeprecation('Calling Drupal\user\Form\UserMultipleCancelConfirm::__construct() without the $account_cancellation argument is deprecated in drupal:10.0.0 and it will be required in drupal:11.0.0. See https://www.drupal.org/node/3279455');
++    new UserMultipleCancelConfirm(
++      $this->container->get('tempstore.private'),
++      $this->container->get('entity_type.manager')->getStorage('user'),
++      $this->container->get('entity_type.manager')
++    );
++  }
++
++}
+diff --git a/core/modules/user/user.api.php b/core/modules/user/user.api.php
+index b0b639afbfe..b8582698c21 100644
+--- a/core/modules/user/user.api.php
++++ b/core/modules/user/user.api.php
+@@ -36,6 +36,13 @@
+  * @param string $method
+  *   The account cancellation method.
+  *
++ * @deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. In order to
++ *    act on user account cancellation provide an event subscriber that listens
++ *    to the \Drupal\user\Event\AccountCancelEvent event. The event subscriber
++ *    can be defined with a priority higher than the core subscribers in order to
++ *    cancel them by using AccountCancelEvent::stopPropagation().
++ *
++ * @see https://www.drupal.org/node/3279455
+  * @see user_cancel_methods()
+  * @see hook_user_cancel_methods_alter()
+  */
+diff --git a/core/modules/user/user.module b/core/modules/user/user.module
+index 6b2d73332d3..c753789c641 100644
+--- a/core/modules/user/user.module
++++ b/core/modules/user/user.module
+@@ -11,7 +11,6 @@
+ use Drupal\Component\Utility\Unicode;
+ use Drupal\Core\Access\AccessibleInterface;
+ use Drupal\Core\Asset\AttachedAssetsInterface;
+-use Drupal\Core\Batch\BatchBuilder;
+ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Field\BaseFieldDefinition;
+@@ -25,8 +24,9 @@
+ use Drupal\image\Plugin\Field\FieldType\ImageItem;
+ use Drupal\filter\FilterFormatInterface;
+ use Drupal\system\Entity\Action;
++use Drupal\user\AccountCancellation;
+ use Drupal\user\Entity\Role;
+-use Drupal\user\Entity\User;
++use Drupal\user\EventSubscriber\AccountCancelSubscriber;
+ use Drupal\user\RoleInterface;
+ use Drupal\user\UserInterface;
+ 
+@@ -606,47 +606,15 @@ function user_pass_rehash(UserInterface $account, $timestamp) {
+  * @param string $method
+  *   The account cancellation method to use.
+  *
+- * @see _user_cancel()
++ * @deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Use the
++ *   method ::cancel() from the 'user.account_cancellation' service instead.
++ *
++ * @see https://www.drupal.org/node/3279455
+  */
+ function user_cancel($edit, $uid, $method) {
+-  $account = User::load($uid);
+-
+-  if (!$account) {
+-    \Drupal::messenger()->addError(t('The user account %id does not exist.', ['%id' => $uid]));
+-    \Drupal::logger('user')->error('Attempted to cancel non-existing user account: %id.', ['%id' => $uid]);
+-    return;
+-  }
+-
+-  // Initialize batch (to set title).
+-  $batch_builder = (new BatchBuilder())
+-    ->setTitle(t('Cancelling account'));
+-  batch_set($batch_builder->toArray());
+-
+-  // When the 'user_cancel_delete' method is used, user_delete() is called,
+-  // which invokes hook_ENTITY_TYPE_predelete() and hook_ENTITY_TYPE_delete()
+-  // for the user entity. Modules should use those hooks to respond to the
+-  // account deletion.
+-  if ($method != 'user_cancel_delete') {
+-    // Allow modules to add further sets to this batch.
+-    \Drupal::moduleHandler()->invokeAll('user_cancel', [$edit, $account, $method]);
+-  }
+-
+-  // Finish the batch and actually cancel the account.
+-  $batch_builder = (new BatchBuilder())
+-    ->setTitle(t('Cancelling user account'))
+-    ->addOperation('_user_cancel', [$edit, $account, $method]);
+-
+-  // After cancelling account, ensure that user is logged out.
+-  if ($account->id() == \Drupal::currentUser()->id()) {
+-    // Batch API stores data in the session, so use the finished operation to
+-    // manipulate the current user's session id.
+-    $batch_builder->setFinishCallback('_user_cancel_session_regenerate');
+-  }
+-
+-  batch_set($batch_builder->toArray());
+-
+-  // Batch processing is either handled via Form API or has to be invoked
+-  // manually.
++  @trigger_error("user_cancel is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Use the method ::cancel() from the 'user.account_cancellation' service instead. See https://www.drupal.org/node/3279455", E_USER_DEPRECATED);
++  $account = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
++  \Drupal::service('user.account_cancellation')->cancel($account, $method, $edit);
+ }
+ 
+ /**
+@@ -663,44 +631,14 @@ function user_cancel($edit, $uid, $method) {
+  * @param string $method
+  *   The account cancellation method to use.
+  *
+- * @see user_cancel()
++ * @deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use
++ *   \Drupal\user\EventSubscriber\AccountCancelSubscriber::doCancelAccount().
++ *
++ * @see https://www.drupal.org/node/3279455
+  */
+ function _user_cancel($edit, $account, $method) {
+-  $logger = \Drupal::logger('user');
+-
+-  switch ($method) {
+-    case 'user_cancel_block':
+-    case 'user_cancel_block_unpublish':
+-    default:
+-      // Send account blocked notification if option was checked.
+-      if (!empty($edit['user_cancel_notify'])) {
+-        _user_mail_notify('status_blocked', $account);
+-      }
+-      $account->block();
+-      $account->save();
+-      \Drupal::messenger()->addStatus(t('Account %name has been disabled.', ['%name' => $account->getDisplayName()]));
+-      $logger->notice('Blocked user: %name %email.', ['%name' => $account->getAccountName(), '%email' => '<' . $account->getEmail() . '>']);
+-      break;
+-
+-    case 'user_cancel_reassign':
+-    case 'user_cancel_delete':
+-      // Send account canceled notification if option was checked.
+-      if (!empty($edit['user_cancel_notify'])) {
+-        _user_mail_notify('status_canceled', $account);
+-      }
+-      $account->delete();
+-      \Drupal::messenger()->addStatus(t('Account %name has been deleted.', ['%name' => $account->getDisplayName()]));
+-      $logger->notice('Deleted user: %name %email.', ['%name' => $account->getAccountName(), '%email' => '<' . $account->getEmail() . '>']);
+-      break;
+-  }
+-
+-  // After cancelling account, ensure that user is logged out. We can't destroy
+-  // their session though, as we might have information in it, and we can't
+-  // regenerate it because batch API uses the session ID, we will regenerate it
+-  // in _user_cancel_session_regenerate().
+-  if ($account->id() == \Drupal::currentUser()->id()) {
+-    \Drupal::currentUser()->setAccount(new AnonymousUserSession());
+-  }
++  @trigger_error('_user_cancel is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use \Drupal\user\EventSubscriber\AccountCancelSubscriber::doCancelAccount(). See https://www.drupal.org/node/3279455', E_USER_DEPRECATED);
++  AccountCancelSubscriber::doCancelAccount($account, $method, $edit);
+ }
+ 
+ /**
+@@ -708,12 +646,14 @@ function _user_cancel($edit, $account, $method) {
+  *
+  * Finished batch processing callback for cancelling a user account.
+  *
+- * @see user_cancel()
++ * @deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use
++ *   \Drupal\user\AccountCancellation::regenerateSession().
++ *
++ * @see https://www.drupal.org/node/3279455
+  */
+ function _user_cancel_session_regenerate() {
+-  // Regenerate the users session instead of calling session_destroy() as we
+-  // want to preserve any messages that might have been set.
+-  \Drupal::service('session')->migrate();
++  @trigger_error('_user_cancel_session_regenerate() is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. Instead, use \Drupal\user\AccountCancellation::regenerateSession(). See https://www.drupal.org/node/3279455', E_USER_DEPRECATED);
++  AccountCancellation::regenerateSession();
+ }
+ 
+ /**
+diff --git a/core/modules/user/user.services.yml b/core/modules/user/user.services.yml
+index f8f7d15f4e1..85b948522db 100644
+--- a/core/modules/user/user.services.yml
++++ b/core/modules/user/user.services.yml
+@@ -71,3 +71,10 @@ services:
+   logger.channel.user:
+     parent: logger.channel_base
+     arguments: ['user']
++  user.account_cancellation:
++    class: Drupal\user\AccountCancellation
++    arguments: [ '@module_handler', '@event_dispatcher' ]
++    user.account_cancel.subscriber:
++      class: Drupal\user\EventSubscriber\AccountCancelSubscriber
++      tags:
++        - { name: event_subscriber }

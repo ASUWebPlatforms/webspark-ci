@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the asu_governance module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function asu_governance_install() {
+  // Get the current theme
+  $currentTheme = \Drupal::service('theme_handler')->getDefault();
+  $config = \Drupal::configFactory()->getEditable('asu_governance.settings');
+  $allowableThemes = $config->get('allowable_themes') ?? [];
+  if (!in_array($currentTheme, $allowableThemes, TRUE)) {
+    $allowableThemes = array_merge($allowableThemes, [$currentTheme]);
+    $config->set('allowable_themes', $allowableThemes)->save();
+  }
+
+  // Get the module permission loader service.
+  $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_handler');
+  // Get the list of allowable modules.
+  $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
+  // Update the Site Builder role's permissions.
+  $modulePermissionLoader->addSiteBuilderPermissions($allowableModules);
+
+  try {
+    // Downgrade all users with the 'admin' role to 'site_builder'.
+    \Drupal::service('asu_governance.downgrade_admins')->makeSiteBuilders();
+    // Run manually if not part of a site install, update or form submission.
+    if (!((defined('MAINTENANCE_MODE') && (MAINTENANCE_MODE === 'update' || MAINTENANCE_MODE === 'install')) || \Drupal::request()->isMethod('POST'))) {
+      // Process the batch.
+      $batch = &batch_get();
+      $process_info = [
+        'current_set' => 0,
+        'id' => NULL,
+        'progressive' => FALSE,
+      ];
+      $batch += $process_info;
+      if (isset($batch)) {
+        // Move operations to a job queue.
+        foreach ($batch['sets'] as $key => $batch_set) {
+          _batch_populate_queue($batch, $key);
+        }
+        // Process the queue.
+        require_once DRUPAL_ROOT . '/core/includes/batch.inc';
+        _batch_process();
+      }
+    }
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+    \Drupal::messenger()->addError($e->getMessage());
+  }
+
+  try {
+    // Apply permission blacklist to all roles but 'administrator'.
+    \Drupal::service('asu_governance.module_permission_handler')->blacklistPermissions();
+  }
+  catch (Exception $e) {
+    \Drupal::logger('asu_governance')->error('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
+    return;
+  }
+}
