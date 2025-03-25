@@ -109,9 +109,9 @@ class AsuBrandHeaderBlock extends BlockBase {
     //Logo images.
     $app_path_folder = $this->getPathImgFolder();
     $props['logo'] = [
-      'alt' => 'Arizona State University',
+      'alt' => 'Arizona State University logo',
       // ws2-1305 - Adding title attribute. Note: UDS already provides it, but adding for good measure.
-      'title' => 'ASU home page',
+      'title' => 'ASU homepage',
       'src' => $app_path_folder . '/arizona-state-university-logo-vertical.png',
       'mobileSrc' => $app_path_folder . '/arizona-state-university-logo.png',
       'brandLink' => 'https://www.asu.edu',
