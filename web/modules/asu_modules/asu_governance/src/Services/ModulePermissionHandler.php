@@ -35,7 +35,12 @@ class ModulePermissionHandler {
    */
   protected $configFactory;
 
-  public const array BLACKLIST = [
+  /**
+   * Blacklisted permissions.
+   *
+   * @var string[]
+   */
+  public const BLACKLIST = [
     'administer asu governance configuration',
     'administer actions',
     'administer modules',

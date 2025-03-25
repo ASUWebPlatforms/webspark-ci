@@ -267,7 +267,7 @@ class CuratedSystemController extends SystemController {
     ];
     $build[] = $this->formBuilder->getForm('Drupal\system\Form\ThemeAdminForm', $admin_theme_options);
 
-    // Add warning message
+    // Add warning message.
     \Drupal::messenger()->addMessage($this->t('<p><strong>Please note:</strong> This is a filtered list of all the themes available to you in the site based on your user role/permissions.</p><p>If you do not see a theme you previously had access to in Pantheon, please <a href="https://asu.edu/webservices">open a Web Services ticket</a> and we will assist you.</p>'), 'warning');
 
     return $build;

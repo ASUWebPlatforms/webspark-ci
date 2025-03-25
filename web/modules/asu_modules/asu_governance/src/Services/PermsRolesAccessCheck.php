@@ -26,7 +26,7 @@ class PermsRolesAccessCheck implements AccessInterface {
    *   The messenger service.
    * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $loggerChannelFactory
    *   The logger channel factory.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory interface.
    */
   public function __construct(

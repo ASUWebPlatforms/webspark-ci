@@ -48,6 +48,28 @@ final class GovernanceSettingsForm extends ConfigFormBase {
   protected $connection;
 
   /**
+   * Disallowed modules.
+   *
+   * @var string[]
+   */
+  public const DISALLOWED_MODULES = [
+    'asu_governance',
+  ];
+
+  /**
+   * Disallowed themes.
+   *
+   * @var string[]
+   */
+  public const DISALLOWED_THEMES = [
+    'bartik',
+    'seven',
+    'stark',
+    'classy',
+    'stable',
+  ];
+
+  /**
    * Build the form.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -112,6 +134,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       '#description' => $this->t('<p>Add modules, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>
         <p><strong>Please note:</strong> ALL associated permissions for the modules listed above will be automatically updated on the <strong>Site Builder</strong> role when this form is saved or the module is enabled.</p>'),
       '#default_value' => implode("\n", $modulesInput),
+      '#required' => TRUE,
     ];
 
     $form['allowable_themes'] = [
@@ -119,6 +142,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Allowable Themes'),
       '#description' => $this->t('<p>Add themes, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>'),
       '#default_value' => implode("\n", $themesInput),
+      '#required' => TRUE,
     ];
 
     $form['allow_config_access'] = [
@@ -170,11 +194,9 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $modulesInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_modules'))));
     $extensionDiscovery = new ExtensionDiscovery(\Drupal::root());
     $allModules = array_keys($extensionDiscovery->scan('module'));
-    $disallowedModules = ['asu_governance'];
     $badModules = [];
     $themesInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_themes'))));
     $allThemes = array_keys($extensionDiscovery->scan('theme'));
-    $disallowedThemes = ['bartik', 'seven', 'stark', 'classy'];
     $badThemes = [];
     $currentTheme = $this->themeHandler->getDefault();
     $adminTheme = $this->config('system.theme')->get('admin');
@@ -183,13 +205,13 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $baseBlacklist = $this->modulePermissionLoader::BLACKLIST;
 
     foreach ($modulesInput as $module) {
-      if (!in_array($module, $allModules, TRUE) || in_array($module, $disallowedModules, TRUE)) {
+      if (!in_array($module, $allModules, TRUE) || in_array($module, self::DISALLOWED_MODULES, TRUE)) {
         $badModules[] = $module;
       }
     }
 
     foreach ($themesInput as $theme) {
-      if (!in_array($theme, $allThemes, TRUE) || in_array($theme, $disallowedThemes, TRUE)) {
+      if (!in_array($theme, $allThemes, TRUE) || in_array($theme, self::DISALLOWED_THEMES, TRUE)) {
         $badThemes[] = $theme;
       }
     }

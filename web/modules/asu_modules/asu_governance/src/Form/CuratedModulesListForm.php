@@ -77,11 +77,11 @@ class CuratedModulesListForm extends ModulesListForm {
    * @param \Drupal\Core\Extension\ModuleExtensionList $extension_list_module
    *   The module extension list.
    * @param \Drupal\Core\Messenger\Messenger $messenger
-   *    The messenger service.
+   *   The messenger service.
    */
   public function __construct(ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, KeyValueStoreExpirableInterface $key_value_expirable, AccessManagerInterface $access_manager, AccountInterface $current_user, PermissionHandlerInterface $permission_handler, ModuleExtensionList $extension_list_module, Messenger $messenger) {
     parent::__construct($module_handler, $module_installer, $key_value_expirable, $access_manager, $current_user, $permission_handler, $extension_list_module);
-    $this->allowableModules = $this->config('asu_governance.settings')->get('allowable_modules') ?? [];
+    $this->allowableModules = !empty($this->config('asu_governance.settings')->get('allowable_modules')) ? $this->config('asu_governance.settings')->get('allowable_modules') : $this->config('asu_governance.settings')->get('allowable_modules');
     $this->messenger = $messenger;
   }
 
@@ -108,9 +108,9 @@ class CuratedModulesListForm extends ModulesListForm {
     $this->moduleHandler->loadInclude('system', 'inc', 'system.admin');
 
     $form['filters']['text']['#attributes'] = [
-        'class' => ['table-filter-text'],
-        'data-table' => '#asu-governance-curated-modules',
-        'autocomplete' => 'off',
+      'class' => ['table-filter-text'],
+      'data-table' => '#asu-governance-curated-modules',
+      'autocomplete' => 'off',
     ];
 
     // Sort all modules by their names.
@@ -121,11 +121,21 @@ class CuratedModulesListForm extends ModulesListForm {
         return !$module->isObsolete();
       });
 
-      // Only include ASU modules.
-      $displayed_modules = array_filter($all_modules, function ($module) {
-        if (!$module->isObsolete()
-            && (in_array($module->getName(), $this->allowableModules, TRUE)
-          )) {
+      // Get the list of core modules.
+      $core_modules = array_keys(array_filter($all_modules, function ($module) {
+        return $module->info['package'] === 'Core';
+      }));
+      // Get the list of active modules.
+      $activeModules = array_keys($this->moduleHandler->getModuleList());
+      // Get the list of allowable modules.
+      $allowable_modules = $this->allowableModules;
+      // Combine the lists.
+      $combinedModules = array_merge($allowable_modules, $activeModules, $core_modules);
+      // Remove disallowed modules from the list.
+      $listableModules = array_diff($combinedModules, GovernanceSettingsForm::DISALLOWED_MODULES);
+
+      $displayed_modules = array_filter($all_modules, function ($module) use ($listableModules) {
+        if (in_array($module->getName(), (array) $listableModules, TRUE)) {
           return $module;
         }
         return FALSE;

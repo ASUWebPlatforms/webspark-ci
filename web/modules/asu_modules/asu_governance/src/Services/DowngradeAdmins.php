@@ -6,7 +6,6 @@ namespace Drupal\asu_governance\Services;
 
 use Drupal\asu_governance\Batch\Batch;
 use Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\user\Entity\User;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
@@ -38,11 +37,30 @@ final class DowngradeAdmins {
       return !in_array($user->getAccountName(), $etAsurites);
     }));
 
-    try {
-      Batch::run($users);
-    }
-    catch (\Exception $e) {
-      $this->logger->get('asu_governance')->error($e->getMessage() . PHP_EOL . '<pre>' . $e->getTraceAsString() . '</pre>');
+    Batch::run($users);
+    // Run manually if not part of a site install, update or form submission.
+    if (!((defined('MAINTENANCE_MODE') && (MAINTENANCE_MODE === 'update' || MAINTENANCE_MODE === 'install')) || \Drupal::request()->isMethod('POST'))) {
+      // Process the batch.
+      $batch = &batch_get();
+      $batch_id = \Drupal::state()->get('downgrade_admin_batch');
+
+      foreach ($batch['sets'] as $key => $batch_set) {
+        if ($batch_set['title']->__toString() === 'Downgrade Administrators') {
+          $process_info = [
+            'current_set' => $key,
+            'id' => $batch_id,
+            'progressive' => FALSE,
+          ];
+          $batch += $process_info;
+
+            // Move only the specified set's operations to the queue.
+            _batch_populate_queue($batch, $key);
+
+            // Process only the queued operations.
+            require_once DRUPAL_ROOT . '/core/includes/batch.inc';
+            _batch_process();
+        }
+      }
     }
   }
 

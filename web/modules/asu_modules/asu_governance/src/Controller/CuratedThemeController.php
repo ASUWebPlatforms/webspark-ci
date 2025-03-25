@@ -14,8 +14,8 @@ class CuratedThemeController extends ThemeController {
    * {@inheritdoc}
    */
   public function uninstall(Request $request) {
-      parent::uninstall($request);
-      return $this->redirect('asu_governance.themes_page');
+    parent::uninstall($request);
+    return $this->redirect('asu_governance.themes_page');
   }
 
   /**

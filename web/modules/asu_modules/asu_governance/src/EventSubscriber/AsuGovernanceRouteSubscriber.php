@@ -12,13 +12,18 @@ use Symfony\Component\Routing\RouteCollection;
  */
 final class AsuGovernanceRouteSubscriber extends RouteSubscriberBase {
 
-  public const array PERMSROUTES = [
+  /**
+   * Permissions routes.
+   *
+   * @const array
+   */
+  public const PERMSROUTES = [
     'user.admin_permissions',
     'entity.user_role.collection',
     'user.role_add',
     'entity.user_role.edit_form',
     'entity.user_role.delete_form',
-    'entity.user_role.edit_permissions_form'
+    'entity.user_role.edit_permissions_form',
   ];
 
   /**
