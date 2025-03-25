@@ -223,7 +223,11 @@ We use [Playwright](https://playwright.dev) for front end testing. We have insta
 
 Before creating Playwright tests, it is a good idea to first seed the website with sample users and media. You can fill forms with text on demand, but this is not the case with media files.
 
-Visit to add an admin user. Give it the username `playwright`.
+```bash
+# Create an admin user for Playwright
+ddev drush ucrt playwright --mail='pw@example.com' --password='playwright'
+ddev drush urol 'administrator' playwright
+```
 
 Visit `/media/add`, and add media for each available media type. Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
 
