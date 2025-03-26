@@ -2,7 +2,7 @@
 
   Drupal.behaviors.imageGalleryCarousel = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCarousel !== "undefined" && typeof AsuWebCarousel.initImageGalleryCarousel !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initImageGalleryCarousel !== "undefined";
       var imageGalleryExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.gallery !== "undefined";
 
       if (!imageGalleryExist || !componentLoaded) {
@@ -16,7 +16,7 @@
         });
 
         var type = carouselData.type
-         AsuWebCarousel.initImageGalleryCarousel({
+         unityReactCore.initImageGalleryCarousel({
             targetSelector: "#imageGalleryCarouselContainer" + imageId,
             props: {
               perView: "2",

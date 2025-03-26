@@ -6,6 +6,5 @@ events-component:
     - core/drupal
     - core/drupalSettings
   js:
-    node_modules/@asu/component-events/dist/vendor.umd.js: { }
     node_modules/@asu/component-events/dist/asuEvents.umd.js: { }
     js/asu_events.js: { }
