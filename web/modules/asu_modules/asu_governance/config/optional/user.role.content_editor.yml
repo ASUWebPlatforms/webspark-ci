@@ -36,8 +36,6 @@ dependencies:
     - block_content.type.video_hero
     - block_content.type.web_directory
     - block_content.type.webform
-    - core.entity_view_display.node.article.default
-    - core.entity_view_display.node.page.default
     - filter.format.basic_html
     - filter.format.minimal_format
     - filter.format.restricted_html
@@ -54,8 +52,6 @@ dependencies:
     - media.type.story_hero
     - media.type.video
     - media.type.video_poster_image_73_100
-    - node.type.article
-    - node.type.page
     - taxonomy.vocabulary.location
     - taxonomy.vocabulary.tags
   module:
@@ -101,11 +97,8 @@ permissions:
   - 'administer meta tags'
   - 'administer redirects'
   - 'administer url aliases'
-  - 'configure editable article node layout overrides'
-  - 'configure editable page node layout overrides'
   - 'create accordion block content'
   - 'create and edit custom blocks'
-  - 'create article content'
   - 'create audio media'
   - 'create banner block content'
   - 'create blockquote block content'
@@ -138,7 +131,6 @@ permissions:
   - 'create media'
   - 'create menu_sidebar block content'
   - 'create news block content'
-  - 'create page content'
   - 'create remote_video media'
   - 'create step_list block content'
   - 'create story_hero media'
@@ -160,7 +152,6 @@ permissions:
   - 'customize shortcut links'
   - 'delete any accordion block content'
   - 'delete any accordion block content revisions'
-  - 'delete any article content'
   - 'delete any audio media'
   - 'delete any banner block content'
   - 'delete any banner block content revisions'
@@ -217,7 +208,6 @@ permissions:
   - 'delete any menu_sidebar block content revisions'
   - 'delete any news block content'
   - 'delete any news block content revisions'
-  - 'delete any page content'
   - 'delete any remote_video media'
   - 'delete any step_list block content'
   - 'delete any step_list block content revisions'
@@ -242,8 +232,6 @@ permissions:
   - 'delete any web_directory block content revisions'
   - 'delete any webform block content'
   - 'delete any webform block content revisions'
-  - 'delete article revisions'
-  - 'delete own article content'
   - 'delete own audio media'
   - 'delete own cropped_image_16_25 media'
   - 'delete own cropped_image_rounded_1_1 media'
@@ -253,18 +241,15 @@ permissions:
   - 'delete own files'
   - 'delete own image media'
   - 'delete own image_block_images media'
-  - 'delete own page content'
   - 'delete own remote_video media'
   - 'delete own story_hero media'
   - 'delete own video media'
   - 'delete own video_poster_image_73_100 media'
   - 'delete own webform'
   - 'delete own webform submission'
-  - 'delete page revisions'
   - 'delete terms in location'
   - 'delete terms in tags'
   - 'edit any accordion block content'
-  - 'edit any article content'
   - 'edit any banner block content'
   - 'edit any blockquote block content'
   - 'edit any card_and_image block content'
@@ -288,7 +273,6 @@ permissions:
   - 'edit any inset_box block content'
   - 'edit any menu_sidebar block content'
   - 'edit any news block content'
-  - 'edit any page content'
   - 'edit any step_list block content'
   - 'edit any tabbed_content block content'
   - 'edit any testimonial block content'
@@ -299,7 +283,6 @@ permissions:
   - 'edit any video_hero block content'
   - 'edit any web_directory block content'
   - 'edit any webform block content'
-  - 'edit own article content'
   - 'edit own audio media'
   - 'edit own cropped_image_16_25 media'
   - 'edit own cropped_image_rounded_1_1 media'
@@ -308,7 +291,6 @@ permissions:
   - 'edit own document media'
   - 'edit own image media'
   - 'edit own image_block_images media'
-  - 'edit own page content'
   - 'edit own remote_video media'
   - 'edit own story_hero media'
   - 'edit own video media'
@@ -352,8 +334,6 @@ permissions:
   - 'revert any video_hero block content revisions'
   - 'revert any web_directory block content revisions'
   - 'revert any webform block content revisions'
-  - 'revert article revisions'
-  - 'revert page revisions'
   - 'revert term revisions in location'
   - 'revert term revisions in tags'
   - 'switch shortcut sets'
@@ -398,12 +378,10 @@ permissions:
   - 'view any video_hero block content history'
   - 'view any web_directory block content history'
   - 'view any webform block content history'
-  - 'view article revisions'
   - 'view media'
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view own webform submission'
-  - 'view page revisions'
   - 'view term revisions in location'
   - 'view the administration theme'
   - 'view vocabulary labels'
