@@ -6,10 +6,16 @@
 node_modules/.cache
 node_modules/*
 
+!node_modules/@asu
+node_modules/@asu/*
+!node_modules/@asu/component-cookie-consent
+node_modules/@asu/component-cookie-consent/*
 !node_modules/@asu/component-cookie-consent/dist
+node_modules/@asu/component-cookie-consent/dist/*
 !node_modules/@asu/component-header-footer
 node_modules/@asu/component-header-footer/*
 !node_modules/@asu/component-header-footer/dist
+node_modules/@asu/component-header-footer/dist/*
 
 # Drupal/external libraries
 /vendor/
