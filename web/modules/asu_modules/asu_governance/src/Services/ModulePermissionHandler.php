@@ -51,6 +51,7 @@ class ModulePermissionHandler {
     'export configuration',
     'import configuration',
     'synchronize configuration',
+    'use PHP for settings',
   ];
 
   /**
@@ -79,6 +80,11 @@ class ModulePermissionHandler {
    */
   public function addSiteBuilderPermissions(array $modules) {
     $allowed_modules = $this->configFactory->get('asu_governance.settings')->get('allowable_modules');
+    // Load the Site Builder role.
+    /** @var \Drupal\user\Entity\Role $role */
+    $role = Role::load('site_builder');
+    // Get the role's permissions.
+    $siteBuilderPerms = $role->getPermissions();
     foreach ($modules as $module) {
       // Skip modules that are not enabled or not allowed
       // in asu_governance module's settings form.
@@ -90,11 +96,6 @@ class ModulePermissionHandler {
       if (empty($modulePermissions)) {
         continue;
       }
-      // Load the Site Builder role.
-      /** @var \Drupal\user\Entity\Role $role */
-      $role = Role::load('site_builder');
-      // Get the role's permissions.
-      $siteBuilderPerms = $role->getPermissions();
       // Find the difference between the module permissions and
       // the Site Builder role's permissions.
       $diff = array_diff($modulePermissions, $siteBuilderPerms);
@@ -104,9 +105,10 @@ class ModulePermissionHandler {
         foreach ($modulePermissions as $permission) {
           $role->grantPermission($permission);
         }
-        $role->save();
       }
     }
+
+    $role->save();
   }
 
   /**

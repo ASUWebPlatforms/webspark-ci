@@ -54,6 +54,7 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    */
   public const DISALLOWED_MODULES = [
     'asu_governance',
+    'php',
   ];
 
   /**
@@ -63,7 +64,6 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    */
   public const DISALLOWED_THEMES = [
     'bartik',
-    'seven',
     'stark',
     'classy',
     'stable',
