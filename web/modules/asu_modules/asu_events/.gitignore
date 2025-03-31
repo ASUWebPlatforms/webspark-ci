@@ -2,17 +2,6 @@
 !node_modules
 node_modules/*
 
-node_modules/@asu-design-system
-!node_modules/@asu-design-system
-node_modules/@asu-design-system/*
-!node_modules/@asu-design-system/component-events
-node_modules/@asu-design-system/component-events/*
-!node_modules/@asu-design-system/component-events/dist
-node_modules/@asu-design-system/component-events/dist/*
-!node_modules/@asu-design-system/component-events/dist/events.production.js
-!node_modules/@asu-design-system/component-events/dist/vendor.production.js
-!node_modules/@asu-design-system/component-events/dist/asuEvents.umd.js
-!node_modules/@asu-design-system/component-events/dist/vendor.umd.js
 ##
 node_modules/@asu
 !node_modules/@asu

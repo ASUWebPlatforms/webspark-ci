@@ -24,7 +24,6 @@
   // Probably don't want this inside the behavior. Fire once and be done!
   // Get config values passed in from AsuBrandHeaderBlock.php
   var props = drupalSettings.asu_brand.props;
-  console.log(props, 'props');
 
   // Pantheon strips some cookie values before they hit PHP, so
   // Attempt to get userName prop in JS here for those instances.

@@ -2,18 +2,6 @@
 !node_modules
 node_modules/*
 
-node_modules/@asu-design-system
-!node_modules/@asu-design-system
-node_modules/@asu-design-system/*
-!node_modules/@asu-design-system/component-news
-node_modules/@asu-design-system/component-news/*
-!node_modules/@asu-design-system/component-news/dist
-node_modules/@asu-design-system/component-news/dist/*
-!node_modules/@asu-design-system/component-news/dist/news.production.js
-!node_modules/@asu-design-system/component-news/dist/vendor.production.js
-!node_modules/@asu-design-system/component-news/dist/asuNews.umd.js
-!node_modules/@asu-design-system/component-news/dist/vendor.umd.js
-
 node_modules/@asu
 !node_modules/@asu
 node_modules/@asu/*
