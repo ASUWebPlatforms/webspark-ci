@@ -2,7 +2,7 @@
 
   Drupal.behaviors.cardArrangement = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebCore !== "undefined" && typeof AsuWebCore.initCard !== "undefined";
+      var componentLoaded = typeof unityReactCore !== "undefined" && typeof unityReactCore.initCard !== "undefined";
       var cardExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.card_arrangement !== "undefined";
 
       if (!cardExist || !componentLoaded) {
@@ -16,7 +16,7 @@
           card = settings.asu.components.card[item];
           //Setup and initialize the Card.
           if (card.cardType === "ranking") {
-            AsuWebCore.initRankingCard({
+            unityReactCore.initRankingCard({
               targetSelector: "#card-" + card.id,
               props: {
                 imageSize: card.imageSize,
@@ -30,7 +30,7 @@
               },
             });
           } else if (card.cardType === "image") {
-            AsuWebCore.initImage({
+            unityReactCore.initImage({
               targetSelector: "#card-" + card.id,
               props: {
                 src: card.imageSource,
@@ -49,7 +49,7 @@
               }
             });
           } else {
-            AsuWebCore.initCard({
+            unityReactCore.initCard({
               targetSelector: '#card-' + card.id,
               props: {
                 type: card.cardType,

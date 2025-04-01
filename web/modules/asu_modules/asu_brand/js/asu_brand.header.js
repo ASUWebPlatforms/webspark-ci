@@ -133,8 +133,8 @@
   //WS2-1291
   props.renderDiv = 'true';
 
-  // Initialize the asu_brand component-header header.
-  AsuHeader.initGlobalHeader({
+  // Initialize the asu_brand component-header-footer header.
+  AsuHeaderFooter.initGlobalHeader({
     targetSelector: '#ws2HeaderContainer',
     props: props
   });

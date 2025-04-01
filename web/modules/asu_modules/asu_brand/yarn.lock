@@ -15,10 +15,15 @@
     react-dom ">= 16.14.0 < 18"
     styled-components "^5.3.0"
 
-"@asu/component-header@2.3.3":
-  version "2.3.3"
-  resolved "https://npm.pkg.github.com/download/@asu/component-header/2.3.3/6cae906f53a98f6f24c01a04ff8bd5b54389934b#6cae906f53a98f6f24c01a04ff8bd5b54389934b"
-  integrity sha512-RHfYGMN8aTIZxGJwJlQMY/NW3WlOfIxEhtsXqqkDKGYJGI4OOtG55aGZfG0j79chlG6x6yxg4PIodBSmZdG3BA==
+"@asu/component-header-footer@1.0.4":
+  version "1.0.4"
+  resolved "https://npm.pkg.github.com/download/@asu/component-header-footer/1.0.4/db928436fb7898e926fdce2fd253fde7854e7d91#db928436fb7898e926fdce2fd253fde7854e7d91"
+  integrity sha512-s446gv5d6Ev+GZRjzPFwVhNP2Ftwu/MNwR7xb75G4jYO/nKABZJueQnhjeuasbWFZjr11TId+5UGFO7hHUA1xA==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^6.4.2"
+    "@fortawesome/free-brands-svg-icons" "^6.4.2"
+    "@fortawesome/free-solid-svg-icons" "^6.4.2"
+    "@fortawesome/react-fontawesome" "^0.2.0"
 
 "@babel/code-frame@^7.16.0":
   version "7.16.0"
@@ -180,6 +185,25 @@
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.5.2.tgz#eaf2f5699f73cef198454ebc0c414e3688898179"
   integrity sha512-gBxPg3aVO6J0kpfHNILc+NMhXnqHumFxOmjYCFfOiLZfwhnnfhtsdA2hfJlDnj+8PjAs6kKQPenOTKj3Rf7zHw==
+
+"@fortawesome/fontawesome-common-types@6.7.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.7.2.tgz#7123d74b0c1e726794aed1184795dbce12186470"
+  integrity sha512-Zs+YeHUC5fkt7Mg1l6XTniei3k4bwG/yo3iFUtZWd/pMx9g3fdvkSK9E0FOC+++phXOka78uJcYb8JaFkW52Xg==
+
+"@fortawesome/fontawesome-svg-core@^6.4.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.7.2.tgz#0ac6013724d5cc327c1eb81335b91300a4fce2f2"
+  integrity sha512-yxtOBWDrdi5DD5o1pmVdq3WMCvnobT0LU6R8RyyVXPvFRd2o79/0NCuQoCjNTeZz9EzA9xS3JxNWfv54RIHFEA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.7.2"
+
+"@fortawesome/free-brands-svg-icons@^6.4.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-brands-svg-icons/-/free-brands-svg-icons-6.7.2.tgz#4ebee8098f31da5446dda81edc344025eb59b27e"
+  integrity sha512-zu0evbcRTgjKfrr77/2XX+bU+kuGfjm0LbajJHVIgBWNIDzrhpRxiCPNT8DW5AdmSsq7Mcf9D1bH0aSeSUSM+Q==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.7.2"
 
 "@fortawesome/free-solid-svg-icons@^6.4.2":
   version "6.5.2"
