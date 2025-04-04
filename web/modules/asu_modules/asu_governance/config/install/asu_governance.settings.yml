@@ -31,6 +31,5 @@ allowable_modules:
   - webspark_webdir
 allowable_themes:
   - claro
-  - olivero
   - radix
   - renovation

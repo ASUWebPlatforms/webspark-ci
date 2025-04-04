@@ -78,4 +78,8 @@ function asu_governance_install() {
     \Drupal::messenger()->addError('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
     return;
   }
+
+  // Clear caches to ensure all changes are reflected.
+  drupal_flush_all_caches();
+
 }
