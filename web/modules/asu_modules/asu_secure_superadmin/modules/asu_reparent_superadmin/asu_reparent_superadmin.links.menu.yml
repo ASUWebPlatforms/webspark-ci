@@ -1,0 +1,4 @@
+asu_reparent_superadmin.settings:
+  title: ASU Reparent Superadmin
+  parent: system.admin_config_system
+  route_name: asu_reparent_superadmin.form
