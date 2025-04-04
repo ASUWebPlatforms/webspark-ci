@@ -3,9 +3,11 @@
 namespace Drupal\asu_governance\Services;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\user\PermissionHandlerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\user\Entity\Role;
+use Drupal\views\Views;
 
 /**
  * Service to handle permissions for all asu_governance allowed modules.
@@ -36,6 +38,13 @@ class ModulePermissionHandler {
   protected $configFactory;
 
   /**
+   * The entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
    * Blacklisted permissions.
    *
    * @var string[]
@@ -63,11 +72,14 @@ class ModulePermissionHandler {
    *   The module handler service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
    */
-  public function __construct(PermissionHandlerInterface $permission_handler, ModuleHandlerInterface $module_handler, ConfigFactoryInterface $config_factory) {
+  public function __construct(PermissionHandlerInterface $permission_handler, ModuleHandlerInterface $module_handler, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager) {
     $this->permissionHandler = $permission_handler;
     $this->moduleHandler = $module_handler;
     $this->configFactory = $config_factory;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -107,8 +119,29 @@ class ModulePermissionHandler {
         }
       }
     }
-
     $role->save();
+
+    // Adjust views display permissions to grant access to Site Builders.
+    $view_storage = $this->entityTypeManager->getStorage('view');
+    $views = $view_storage->loadMultiple();
+    foreach ($views as $view_id => $view) {
+      $view_config = $this->configFactory->getEditable('views.view.' . $view_id);
+      $display_definitions = $view_config->get('display');
+      $config_changed = false;
+      foreach ($display_definitions as $display_id => $display_definition) {
+        $access_type = $display_definition['display_options']['access']['type'] ?? NULL;
+        if ($access_type && $access_type === 'role') {
+          if (isset($display_definition['display_options']['access']['options']['role']['administrator'])) {
+            $view_config->set('display.' . $display_id . '.display_options.access.options.role.site_builder', 'site_builder');
+            $config_changed = true;
+          }
+        }
+      }
+      if ($config_changed) {
+        $view_config->save();
+      }
+    }
+
   }
 
   /**

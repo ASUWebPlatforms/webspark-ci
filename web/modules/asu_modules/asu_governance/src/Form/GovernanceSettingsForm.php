@@ -205,25 +205,25 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $baseBlacklist = $this->modulePermissionLoader::BLACKLIST;
 
     foreach ($modulesInput as $module) {
-      if (!in_array($module, $allModules, TRUE) || in_array($module, self::DISALLOWED_MODULES, TRUE)) {
+      if (in_array($module, self::DISALLOWED_MODULES, TRUE)) {
         $badModules[] = $module;
       }
     }
 
     foreach ($themesInput as $theme) {
-      if (!in_array($theme, $allThemes, TRUE) || in_array($theme, self::DISALLOWED_THEMES, TRUE)) {
+      if (in_array($theme, self::DISALLOWED_THEMES, TRUE)) {
         $badThemes[] = $theme;
       }
     }
 
     // Throw error if entered module does not match modules available in code.
     if (!empty($badModules)) {
-      $form_state->setErrorByName('allowable_modules', $this->t('The following modules are either not valid or not allowed: <strong>@modules</strong>', ['@modules' => implode(', ', array_map(fn($module) => "\"$module\"", $badModules))]));
+      $form_state->setErrorByName('allowable_modules', $this->t('The following modules are not allowed: <strong>@modules</strong>', ['@modules' => implode(', ', array_map(fn($module) => "\"$module\"", $badModules))]));
     }
 
     // Throw error if entered theme does not match themes available in code.
     if (!empty($badThemes)) {
-      $form_state->setErrorByName('allowable_themes', $this->t('The following themes are either not valid or not allowed: <strong>@themes</strong>', ['@themes' => implode(', ', array_map(fn($theme) => "\"$theme\"", $badThemes))]));
+      $form_state->setErrorByName('allowable_themes', $this->t('The following themes are not allowed: <strong>@themes</strong>', ['@themes' => implode(', ', array_map(fn($theme) => "\"$theme\"", $badThemes))]));
     }
 
     // Throw error if entered theme does not match themes available in code.
