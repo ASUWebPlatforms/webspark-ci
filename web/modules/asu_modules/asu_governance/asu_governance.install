@@ -43,6 +43,18 @@ function asu_governance_install() {
 
   // Get the module permission loader service.
   $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_handler');
+
+  // Create the Site Builder role if it does not already exist.
+  try {
+    $modulePermissionLoader->createSiteBuilderRole();
+  }
+  catch (Exception $e) {
+    // Log the error if role creation fails.
+    \Drupal::logger('asu_governance')->error('Failed to create Site Builder role: ' . $e->getMessage());
+    \Drupal::messenger()->addError(t('Failed to create Site Builder role.'));
+    return;
+  }
+
   // Get the list of allowable modules.
   $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
   // Update the Site Builder role's permissions.
@@ -54,7 +66,7 @@ function asu_governance_install() {
   }
   catch (Exception $e) {
     \Drupal::logger('asu_governance')->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
-    \Drupal::messenger()->addError($e->getMessage());
+    \Drupal::messenger()->addError('Could not downgrade administrators' . PHP_EOL . $e->getMessage());
   }
 
   try {
@@ -63,6 +75,7 @@ function asu_governance_install() {
   }
   catch (Exception $e) {
     \Drupal::logger('asu_governance')->error('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
+    \Drupal::messenger()->addError('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
     return;
   }
 }
