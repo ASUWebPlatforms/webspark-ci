@@ -5,7 +5,8 @@
       <ol class="breadcrumb">
         {% for link in links %}
           <li class="breadcrumb-item">
-            <a href="{{ link.url }}">{{ link.text }}</a>
+            {% set url = link.url |render %}
+            <a href="{{ url }}" {{ not url ? 'aria-current="page"' }}>{{ link.text }}</a>
           </li>
         {% endfor %}
       </ol>
