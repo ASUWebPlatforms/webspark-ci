@@ -567,12 +567,32 @@ class AsuBrandHeaderBlock extends BlockBase {
               'color' => $child_link_custom_values['button_color'],
             ];
           } else {
+            // Look one more level to show children of headers
+            $child2Items = [];
+            if (!empty($child['below']) ) {
+              foreach ($child['below'] as $child2) {
+      
+                // Get values from menu link custom fields we have added.
+                $child2_link_custom_values = $this->getMenuLinkCustomValues($child2['original_link']);
+
+                  // Set all other menu link childItems, including link_type's:
+                  // heading && button
+                  $child2Items[] = [
+                    'href' => $child2['url']->toString(),
+                    'text' => $child2['title'],
+                    'type' => $child2_link_custom_values['link_type'],
+                  ];
+                
+              }
+            }
+
             // Set all other menu link childItems, including link_type's:
             // heading && button
             $childItems[] = [
               'href' => $child['url']->toString(),
               'text' => $child['title'],
               'type' => $child_link_custom_values['link_type'],
+              'children' => $child2Items,
             ];
           }
         }
@@ -641,6 +661,14 @@ class AsuBrandHeaderBlock extends BlockBase {
       $v['type'] = ($v['type'] === "stackable heading") ? "heading" : $v['type'];
 
       $childItemCols[$col][] = $v;
+
+      // If this is a heading, put its children into this column as well
+      if($v['type'] === "heading" ) {
+        foreach ($v['children'] as $l => $w) {
+          $childItemCols[$col][] = $w;
+        }
+      }
+      
       // We want first heading/column to stay in 0, so trigger here.
       // All subsequent passes will use new columns.
       $tripwire = true;

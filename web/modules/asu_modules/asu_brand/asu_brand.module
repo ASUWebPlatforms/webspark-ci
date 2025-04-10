@@ -156,15 +156,14 @@ function asu_brand_form_menu_link_content_form_alter(array &$form, FormStateInte
       configured as ASU Brand Header menus. Some guidelines to assist in
       building your Header menu:</p>
       <ul>
-        <li>The first menu item in an ASU Brand menu will automatically be
+        <li>The first menu item in an ASU Brand Header menu will automatically be
         turned into the Home icon.</li>
-        <li>If you place a menu item at or below the third level in a menu, it
-        will not render. Only first and second level items are supported in
-        ASU Brand Headers.</li>
+        <li>Only first and second level items are supported in
+        ASU Brand Header menus.</li>
         <li>Create columns by configuring "Heading" or "Column break" menu
         items at the second level. These special menu items will not render as
         links, but will instead start new columns unless they are labelled as
-        "stackable." Use &lt;nolink&gt; as their link value.</li>
+        "stackable." Use &lt;nolink&gt; as their link value. Direct children and subsequent siblings will render below a Heading in the ASU Brand Header menu.</li>
         <li>When you configure a second level menu item as a button within a
         column, please ensure it is the last item in a column, otherwise it may
         render incorrectly in the mobile menu.</li>
