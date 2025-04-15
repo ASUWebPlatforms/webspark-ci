@@ -32,7 +32,7 @@ class PermsRolesAccessCheck implements AccessInterface {
   public function __construct(
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly MessengerInterface $messenger,
-    private readonly loggerChannelFactoryInterface $loggerChannelFactory,
+    private readonly LoggerChannelFactoryInterface $loggerChannelFactory,
     private readonly ConfigFactoryInterface $configFactory
   ) {
   }

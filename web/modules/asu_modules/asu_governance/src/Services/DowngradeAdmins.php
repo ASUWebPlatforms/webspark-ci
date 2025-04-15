@@ -53,12 +53,12 @@ final class DowngradeAdmins {
           ];
           $batch += $process_info;
 
-            // Move only the specified set's operations to the queue.
-            _batch_populate_queue($batch, $key);
+          // Move only the specified set's operations to the queue.
+          _batch_populate_queue($batch, $key);
 
-            // Process only the queued operations.
-            require_once DRUPAL_ROOT . '/core/includes/batch.inc';
-            _batch_process();
+          // Process only the queued operations.
+          require_once DRUPAL_ROOT . '/core/includes/batch.inc';
+          _batch_process();
         }
       }
     }

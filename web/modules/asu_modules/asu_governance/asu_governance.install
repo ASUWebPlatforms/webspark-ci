@@ -5,7 +5,9 @@
  * Install, update and uninstall functions for the asu_governance module.
  */
 
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Implements hook_install().
@@ -42,11 +44,11 @@ function asu_governance_install() {
   }
 
   // Get the module permission loader service.
-  $modulePermissionLoader = \Drupal::service('asu_governance.module_permission_handler');
+  $modulePermissionHandler = \Drupal::service('asu_governance.module_permission_handler');
 
   // Create the Site Builder role if it does not already exist.
   try {
-    $modulePermissionLoader->createSiteBuilderRole();
+    $modulePermissionHandler->createRole('site_builder', 'Site Builder');
   }
   catch (Exception $e) {
     // Log the error if role creation fails.
@@ -55,10 +57,30 @@ function asu_governance_install() {
     return;
   }
 
+  // Add base permissions to the Site Builder role.
+  $modulePermissionHandler->addBasePermissions('site_builder', 'BASE_SB_PERMISSIONS');
+
+
+  // Create the Content Editor role if it does not already exist.
+  try {
+    $modulePermissionHandler->createRole('content_editor', 'Content Editor');
+  }
+  catch (Exception $e) {
+    // Log the error if role creation fails.
+    \Drupal::logger('asu_governance')->error('Failed to create Content Editor role: ' . $e->getMessage());
+    \Drupal::messenger()->addError(t('Failed to create Content Editor role.'));
+    return;
+  }
+
+  // Add base permissions to the Content Editor role.
+  $modulePermissionHandler->addBasePermissions('content_editor', 'BASE_CE_PERMISSIONS');
+
   // Get the list of allowable modules.
   $allowableModules = \Drupal::config('asu_governance.settings')->get('allowable_modules');
   // Update the Site Builder role's permissions.
-  $modulePermissionLoader->addSiteBuilderPermissions($allowableModules);
+  $modulePermissionHandler->addSiteBuilderModulePermissions($allowableModules);
+  // Add Site Builder views permissions.
+  $modulePermissionHandler->addSiteBuilderViewsPermissions();
 
   try {
     // Downgrade all users with the 'admin' role to 'site_builder'.
@@ -70,8 +92,8 @@ function asu_governance_install() {
   }
 
   try {
-    // Apply permission blacklist to all roles but 'administrator'.
-    \Drupal::service('asu_governance.module_permission_handler')->blacklistPermissions();
+    // Apply permission blacklist to all roles but 'administrator' and 'site_builder'.
+    \Drupal::service('asu_governance.module_permission_handler')->revokeBlacklistedPermissions();
   }
   catch (Exception $e) {
     \Drupal::logger('asu_governance')->error('Could not apply blacklist.' . PHP_EOL . $e->getMessage());
@@ -81,5 +103,40 @@ function asu_governance_install() {
 
   // Clear caches to ensure all changes are reflected.
   drupal_flush_all_caches();
+}
+
+/**
+ * Update configs and add Content Editor role.
+ */
+function asu_governance_update_10000() {
+  // Get the extension list service.
+  $module_extension_list = \Drupal::service('extension.list.module');
+  $path = $module_extension_list->getPath('asu_governance') . '/config/install/asu_governance.settings.yml';
+  $yaml_data = Yaml::parse(file_get_contents($path));
+  $blacklist = $yaml_data['permissions_blacklist'];
+
+// Update the active configuration to include the base blacklist.
+  $config = \Drupal::configFactory()->getEditable('asu_governance.settings');
+  $config->set('permissions_blacklist', $blacklist);
+  $config->save();
+
+  // Get the module permission loader service.
+  $modulePermissionHandler = \Drupal::service('asu_governance.module_permission_handler');
+  $roles = Role::loadMultiple();
+  if (!in_array('content_editor', array_keys($roles), TRUE)) {
+    // Create the Content Editor role if it does not already exist.
+    try {
+      $modulePermissionHandler->createRole('content_editor', 'Content Editor');
+    }
+    catch (Exception $e) {
+      // Log the error if role creation fails.
+      \Drupal::logger('asu_governance')->error('Failed to create Content Editor role: ' . $e->getMessage());
+      \Drupal::messenger()->addError(t('Failed to create Content Editor role.'));
+      return;
+    }
+
+    // Add base permissions to the Site Builder role.
+    $modulePermissionHandler->addBasePermissions('content_editor', 'BASE_CE_PERMISSIONS');
+  }
 
 }

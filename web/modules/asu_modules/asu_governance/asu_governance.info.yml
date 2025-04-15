@@ -2,6 +2,6 @@ name: 'ASU Governance'
 type: module
 description: 'A module to lock down ASU Drupal sites for Acquia Site Factory'
 package: ASU
-core_version_requirement: ^10 || ^11
+core_version_requirement: ^10.3 || ^11
 dependencies:
   - asu_secure_superadmin:asu_secure_superadmin

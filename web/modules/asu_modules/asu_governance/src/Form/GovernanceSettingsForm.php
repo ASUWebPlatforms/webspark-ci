@@ -128,9 +128,10 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $themesInput = $config->get('allowable_themes') ?? [];
     $usersInput = $config->get('permissions_users') ?? [];
     $blacklistInput = $config->get('permissions_blacklist') ?? [];
+    $baseBlacklist = $this->modulePermissionLoader::BASE_BLACKLIST;
     $form['allowable_modules'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Allowable Modules'),
+      '#title' => $this->t('Allowable Modules with Permissions'),
       '#description' => $this->t('<p>Add modules, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>
         <p><strong>Please note:</strong> ALL associated permissions for the modules listed above will be automatically updated on the <strong>Site Builder</strong> role when this form is saved or the module is enabled.</p>'),
       '#default_value' => implode("\n", $modulesInput),
@@ -142,6 +143,14 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Allowable Themes'),
       '#description' => $this->t('<p>Add themes, <strong>one per line, <u>by machine name</u></strong>, that Site Builders will be able to enable/disable and configure.</p>'),
       '#default_value' => implode("\n", $themesInput),
+      '#required' => TRUE,
+    ];
+
+    $form['permissions_blacklist'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Permissions Blacklist'),
+      '#description' => $this->t('<p>Add permissions, <strong>one per line, <u>by machine name</u></strong>, that should not be granted to non-Administrator roles.</p>'),
+      '#default_value' => !empty($blacklistInput) ? implode("\n", $blacklistInput) : implode("\n", $baseBlacklist),
       '#required' => TRUE,
     ];
 
@@ -171,18 +180,6 @@ final class GovernanceSettingsForm extends ConfigFormBase {
         ],
       ],
     ];
-    $baseBlacklist = $this->modulePermissionLoader::BLACKLIST;
-    $form['permissions_blacklist'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('Permissions Blacklist'),
-      '#description' => $this->t('<p>Add permissions, <strong>one per line, <u>by machine name</u></strong>, that should not be granted to non-Administrator roles.</p>'),
-      '#default_value' => !empty($blacklistInput) ? implode("\n", $blacklistInput) : implode("\n", $baseBlacklist),
-      '#states' => [
-        'visible' => [
-          ':input[name="allow_roles_perms_admin"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
 
     return parent::buildForm($form, $form_state);
   }
@@ -192,17 +189,17 @@ final class GovernanceSettingsForm extends ConfigFormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
     $modulesInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_modules'))));
-    $extensionDiscovery = new ExtensionDiscovery(\Drupal::root());
-    $allModules = array_keys($extensionDiscovery->scan('module'));
     $badModules = [];
     $themesInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_themes'))));
-    $allThemes = array_keys($extensionDiscovery->scan('theme'));
     $badThemes = [];
     $currentTheme = $this->themeHandler->getDefault();
     $adminTheme = $this->config('system.theme')->get('admin');
     $includesDefault = in_array($currentTheme, $themesInput, TRUE);
     $includesAdmin = in_array($adminTheme, $themesInput, TRUE);
-    $baseBlacklist = $this->modulePermissionLoader::BLACKLIST;
+    $baseBlacklist = $this->modulePermissionLoader::BASE_BLACKLIST;
+    $blacklistInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_blacklist'))));
+    $allPermissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+    $missingPermissions = array_diff($baseBlacklist, $blacklistInput);
 
     foreach ($modulesInput as $module) {
       if (in_array($module, self::DISALLOWED_MODULES, TRUE)) {
@@ -236,9 +233,22 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       $form_state->setErrorByName('allowable_themes', $this->t('The current admin theme (@theme) must be included in the list of allowable themes.', ['@theme' => $adminTheme]));
     }
 
+    if (!empty($missingPermissions)) {
+      $form_state->setErrorByName('permissions_blacklist', $this->t('The following required permissions are missing from the blacklist: <strong>@perms</strong>', ['@perms' => implode(', ', array_map(fn($perm) => "\"$perm\"", $missingPermissions))]));
+    }
+
+    foreach ($blacklistInput as $permission) {
+      if (!in_array($permission, $allPermissions, TRUE) && !in_array($permission, $baseBlacklist, TRUE)) {
+        $badPermissions[] = $permission;
+      }
+    }
+
+    // Display warning if entered permissions are not available.
+    if (!empty($badPermissions)) {
+      $form_state->setErrorByName('permissions_blacklist', $this->t('The following permissions do not exist on the site: <strong>@perms</strong>. Please remove.', ['@perms' => implode(', ', array_map(fn($perm) => "\"$perm\"", $badPermissions))]));
+    }
+
     if ($form_state->getValue('allow_roles_perms_admin')) {
-      $blacklistInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_blacklist'))));
-      $allPermissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
       $usersInput = array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_users'))));
       $query = $this->connection->select('users_field_data', 'u');
       $query->join('user__roles', 'ur', 'u.uid = ur.entity_id');
@@ -247,30 +257,16 @@ final class GovernanceSettingsForm extends ConfigFormBase {
         ->condition('u.uid', 0, '>')
         ->condition('ur.roles_target_id', 'site_builder');
       $allSiteBuilders = $query->execute()->fetchCol(0);
-      foreach ($blacklistInput as $permission) {
-        if (!in_array($permission, $allPermissions, TRUE)) {
-          $badPermissions[] = $permission;
-        }
-      }
 
       foreach ($usersInput as $user) {
         if (!in_array($user, $allSiteBuilders, TRUE)) {
           $badUsers[] = $user;
         }
       }
-      // Throw error if entered permission does not match permissions available in code.
-      if (!empty($badPermissions)) {
-        $form_state->setErrorByName('permissions_blacklist', $this->t('The following permissions are not valid: <strong>@perms</strong>', ['@perms' => implode(', ', array_map(fn($perm) => "\"$perm\"", $badPermissions))]));
-      }
 
       // Throw error if entered user does not match users available on the site.
       if (!empty($badUsers)) {
         $form_state->setErrorByName('permissions_users', $this->t('The following users are not valid or do not have the Site Builder role: <strong>@users</strong>', ['@users' => implode(', ', array_map(fn($user) => "\"$user\"", $badUsers))]));
-      }
-
-      $missingPermissions = array_diff($baseBlacklist, $blacklistInput);
-      if (!empty($missingPermissions)) {
-        $form_state->setErrorByName('permissions_blacklist', $this->t('The following required permissions are missing from the blacklist: <strong>@perms</strong>', ['@perms' => implode(', ', array_map(fn($perm) => "\"$perm\"", $missingPermissions))]));
       }
     }
 
@@ -296,11 +292,11 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     $modulesDiff = array_diff($originals, $modulesInput);
     if (!empty($modulesDiff)) {
       // Revoke permissions for modules that are no longer allowed.
-      $this->modulePermissionLoader->revokeSiteBuilderPermissions($modulesDiff);
+      $this->modulePermissionLoader->revokeSiteBuilderModulePermissions($modulesDiff);
     }
 
     // Update the Site Builder role's permissions.
-    $this->modulePermissionLoader->addSiteBuilderPermissions($modulesInput);
+    $this->modulePermissionLoader->addSiteBuilderModulePermissions($modulesInput);
 
     // Explode submitted themes textarea into an array and remove duplicates.
     $themesInput = array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('allowable_themes')))));
@@ -310,6 +306,11 @@ final class GovernanceSettingsForm extends ConfigFormBase {
     // Save the config access checkbox value into configuration.
     $governanceSettings->set('allow_config_access', $form_state->getValue('allow_config_access'))->save();
 
+    // Explode submitted blacklist textarea into an array and remove duplicates.
+    $blacklistInput = $form_state->getValue('permissions_blacklist') ? array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_blacklist'))))) : [];
+    // Save the array into configuration.
+    $governanceSettings->set('permissions_blacklist', $blacklistInput)->save();
+
     if ($form_state->getValue('allow_roles_perms_admin')) {
       // Save the allow_roles_perms_admin checkbox value into configuration.
       $governanceSettings->set('allow_roles_perms_admin', $form_state->getValue('allow_roles_perms_admin'))->save();
@@ -318,17 +319,11 @@ final class GovernanceSettingsForm extends ConfigFormBase {
       $permsUsersInput = array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_users')))));
       // Save the array into configuration.
       $governanceSettings->set('permissions_users', $permsUsersInput)->save();
-
-      // Explode submitted blacklist textarea into an array and remove duplicates.
-      $blacklistInput = $form_state->getValue('permissions_blacklist') ? array_unique(array_filter(array_map('trim', explode("\n", $form_state->getValue('permissions_blacklist'))))) : [];
-      // Save the array into configuration.
-      $governanceSettings->set('permissions_blacklist', $blacklistInput)->save();
     }
     else {
       // Remove values from the active configuration.
       $governanceSettings->set('allow_roles_perms_admin', FALSE)->save();
       $governanceSettings->set('permissions_users', NULL)->save();
-      $governanceSettings->set('permissions_blacklist', NULL)->save();
     }
   }
 

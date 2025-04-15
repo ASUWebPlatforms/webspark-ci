@@ -3,6 +3,7 @@
 namespace Drupal\asu_governance\Form;
 
 use Drupal\Core\Access\AccessManagerInterface;
+use Drupal\Core\Discovery\YamlDiscovery;
 use Drupal\Core\Extension\InfoParserException;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -44,6 +45,13 @@ class CuratedModulesListForm extends ModulesListForm {
   protected $messenger;
 
   /**
+   * The module permission handler.
+   *
+   * @var \Drupal\asu_governance\ModulePermissionHandlerInterface
+   */
+  protected $modulePermissionHandler;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -55,7 +63,8 @@ class CuratedModulesListForm extends ModulesListForm {
       $container->get('current_user'),
       $container->get('user.permissions'),
       $container->get('extension.list.module'),
-      $container->get('messenger')
+      $container->get('messenger'),
+      $container->get('asu_governance.module_permission_handler')
     );
   }
 
@@ -79,10 +88,11 @@ class CuratedModulesListForm extends ModulesListForm {
    * @param \Drupal\Core\Messenger\Messenger $messenger
    *   The messenger service.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, KeyValueStoreExpirableInterface $key_value_expirable, AccessManagerInterface $access_manager, AccountInterface $current_user, PermissionHandlerInterface $permission_handler, ModuleExtensionList $extension_list_module, Messenger $messenger) {
+  public function __construct(ModuleHandlerInterface $module_handler, ModuleInstallerInterface $module_installer, KeyValueStoreExpirableInterface $key_value_expirable, AccessManagerInterface $access_manager, AccountInterface $current_user, PermissionHandlerInterface $permission_handler, ModuleExtensionList $extension_list_module, Messenger $messenger, $modulePermissionHandler) {
     parent::__construct($module_handler, $module_installer, $key_value_expirable, $access_manager, $current_user, $permission_handler, $extension_list_module);
     $this->allowableModules = !empty($this->config('asu_governance.settings')->get('allowable_modules')) ? $this->config('asu_governance.settings')->get('allowable_modules') : $this->config('asu_governance.settings')->get('allowable_modules');
     $this->messenger = $messenger;
+    $this->modulePermissionHandler = $modulePermissionHandler;
   }
 
   /**
@@ -186,7 +196,17 @@ class CuratedModulesListForm extends ModulesListForm {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
-    $route_name = !empty($modules['non_stable']) ? 'system.modules_list_non_stable_confirm' : 'asu_governance.modules_list_confirm';
+    // Retrieve a list of installable modules.
+    $availableModules = $form_state->getUserInput()['modules'];
+    $selected = array_keys(array_filter($availableModules, function ($module) {
+      return $module['enable'] === '1';
+    }));
+    if (!empty($selected)) {
+      // Add permissions to the Site Builder role.
+      $this->modulePermissionHandler->addSiteBuilderModulePermissions($selected, $form['#form_id']);
+    }
+
+    $route_name = 'asu_governance.modules_list_confirm';
     // Redirect to the confirmation form.
     $form_state->setRedirect($route_name);
   }
