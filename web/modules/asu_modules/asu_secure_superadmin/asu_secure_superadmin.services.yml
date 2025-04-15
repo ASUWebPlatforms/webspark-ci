@@ -1,0 +1,5 @@
+services:
+  asu_secure_superadmin.change_super_admin_service:
+    class: Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService
+    arguments: [ '@entity_type.manager', '@event_dispatcher', '@cas.user_manager', '@password_generator', '@messenger' ]
+    Drupal\asu_secure_superadmin\Services\ChangeSuperAdminService: '@asu_secure_superadmin.change_super_admin_service'
