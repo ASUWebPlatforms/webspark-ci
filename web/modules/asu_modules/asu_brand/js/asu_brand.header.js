@@ -25,6 +25,14 @@
   // Get config values passed in from AsuBrandHeaderBlock.php
   var props = drupalSettings.asu_brand.props;
 
+  // ACMN-202 Obtain current site domain, if not explictly defined.
+  if (!props.site) {
+    props.site = window.location.host;
+  }
+  if (props.site === 'opt-out') {
+    delete props.site;
+  }
+
   // Pantheon strips some cookie values before they hit PHP, so
   // Attempt to get userName prop in JS here for those instances.
   var name = 'SSONAME=';
