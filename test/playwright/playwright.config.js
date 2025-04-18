@@ -40,12 +40,22 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'global setup',
+      testMatch: /global\.setup\.js/,
+      teardown: 'global teardown',
+    },
+    {
+      name: 'global teardown',
+      testMatch: /global\.teardown\.js/,
+    },
+    {
       name: 'firefox',
       use: {
          ...devices['Desktop Firefox'],
          viewport: { width: 1920, height: 1080 },
       },
       testIgnore: /.*mobile.spec.js/,
+      dependencies: ['global setup'],
     },
     // {
     //   name: 'chromium',
@@ -54,6 +64,7 @@ export default defineConfig({
     //     viewport: { width: 1920, height: 1080 },
     //    },
     //    testIgnore: /.*mobile.spec.js/,
+    //    dependencies: ['global setup'],
     // },
     // {
     //   name: 'webkit',
@@ -62,6 +73,16 @@ export default defineConfig({
     //     viewport: { width: 1920, height: 1080 },
     //   },
     //   testIgnore: /.*mobile.spec.js/,
+    //   dependencies: ['global setup'],
+    // },
+    // {
+    //   name: 'sample',
+    //   use: {
+    //     ...devices['Desktop Firefox'],
+    //     viewport: { width: 1920, height: 1080 },
+    //   },
+    //   testMatch: /.*sample.spec.js/,
+    //   dependencies: ['global setup'],
     // },
 
     /* Test against mobile viewports. */
@@ -69,11 +90,13 @@ export default defineConfig({
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
       testMatch: /.*mobile.spec.js/,
+      dependencies: ['global setup'],
     },
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
     //   testMatch: /.*mobile.spec.js/,
+    //   dependencies: ['global setup'],
     // },
 
     /* Test against branded browsers. */
@@ -85,6 +108,7 @@ export default defineConfig({
     //     viewport: { width: 1920, height: 1080 },
     //   },
     //   testIgnore: /.*mobile.spec.js/,
+    //   dependencies: ['global setup'],
     // },
     // {
     //   name: 'Google Chrome',
@@ -94,6 +118,7 @@ export default defineConfig({
     //      viewport: { width: 1920, height: 1080 },
     //     },
     //     testIgnore: /.*mobile.spec.js/,
+    //     dependencies: ['global setup'],
     // },
   ],
 
