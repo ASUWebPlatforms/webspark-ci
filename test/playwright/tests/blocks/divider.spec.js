@@ -10,8 +10,8 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.consent(page);
-    await drupal.toggleCookieConsent();
+    // await drupal.consent(page);
+    // await drupal.toggleUniversalGTM();
     await drupal.loginAsAdmin(page);
     pageUrl = await drupal.createPage(page, BLOCK);
   });

@@ -10,8 +10,11 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.toggleCookieConsent();
+    // move to global setup
+    await drupal.consent(page);
+    await drupal.toggleUniversalGTM();
     await drupal.loginAsAdmin(page);
+    // stop move to global setup
     pageUrl = await drupal.createPage(page, BLOCK);
   });
 
@@ -41,7 +44,6 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
     await page.getByRole('textbox', { name: 'Required Tab Title' }).nth(2).fill('Tab 3');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(2).fill('Tab 3 content');
-
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();

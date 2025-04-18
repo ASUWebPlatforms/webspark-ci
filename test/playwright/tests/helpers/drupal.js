@@ -17,14 +17,15 @@ class DrupalHelpers {
   }
 
   /**
-   * Toggle the cookie consent banner.
+   * Toggle the cookie consent banner and universal GTM.
    *
    * @param enabled int 0|1
    * @returns {Promise<*>}
    */
-  async toggleCookieConsent(enabled = 0) {
+  async toggleUniversalGTM(enabled = 0) {
     this.drush(`config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled ${enabled}`);
     this.drush(`config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled ${enabled}`);
+    this.drush('cr');
   }
 
   /**
