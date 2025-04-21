@@ -23,7 +23,8 @@ class DrupalHelpers {
    * @returns {Promise<*>}
    */
   async toggleUniversalGTM(enabled = 0) {
-    this.drush(`config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled ${enabled}`);
+    // Make sure the cookie consent stays off
+    this.drush('config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
     this.drush(`config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled ${enabled}`);
     this.drush('cr');
   }
@@ -46,7 +47,11 @@ class DrupalHelpers {
    */
   async consent(page) {
     await page.goto('/');
-    await page.getByRole('button', { name: 'Ok, I agree' }).click();
+    const btn = page.getByRole('button', { name: 'Ok, I agree' });
+
+    if (await btn.isVisible()) {
+      await btn.click();
+    }
   }
 
   /**

@@ -10,11 +10,9 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
-    // move to global setup
     await drupal.consent(page);
     await drupal.toggleUniversalGTM();
     await drupal.loginAsAdmin(page);
-    // stop move to global setup
     pageUrl = await drupal.createPage(page, BLOCK);
   });
 
@@ -38,7 +36,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(0).fill('Tab 1 content');
     await add.click();
 
-    await page.getByRole('textbox', { name: 'Required Tab Title' }).nth(1).fill('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt');
+    await page.getByRole('textbox', { name: 'Required Tab Title' }).nth(1).fill('Tab 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt');
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1).fill('Tab 2 content');
     await add.click();
 
@@ -51,24 +49,36 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
+    const tabs = Array.from({length: 3}, (_, i) =>
+      page.getByRole('tab', { name: `Tab ${i+1}` })
+    );
+    const content = Array.from({length: 3}, (_, i) =>
+      page.getByText(`Tab ${i+1} content`)
+    );
+    const next = page.getByRole('button', { name: 'Next' });
+    const prev = page.getByRole('button', { name: 'Previous' });
+    const bg = page.locator('.bg-gray-1');
+
     // Iniital state
-    await expect(page.getByRole('tab', { name: 'Tab 1' })).toBeVisible();
-    await expect(page.getByText('Tab 1 content')).toBeVisible();
-    await expect(page.getByRole('tab', { name: 'Lorem ipsum dolor sit amet,' })).toBeVisible();
-    await expect(page.getByText('Tab 2 content')).toBeHidden();
-    await expect(page.getByRole('tab', { name: 'Tab 3' })).toBeHidden();
-    await expect(page.getByText('Tab 3 content')).toBeHidden();
+    await expect(bg).toHaveClass('bg-gray-1');
+    await expect(prev).toBeHidden();
+    await expect(next).toBeVisible();
+    await expect(tabs[0]).toBeVisible();
+    await expect(tabs[1]).toBeVisible();
+    await expect(tabs[2]).toBeVisible();
+    await expect(content[0]).toBeVisible();
+    await expect(content[1]).toBeHidden();
+    await expect(content[2]).toBeHidden();
 
     // Clicks
-    await expect(page.getByRole('button', { name: 'Next' })).toBeVisible();
-    await page.getByRole('tab', { name: 'Lorem ipsum dolor sit amet,' }).click();
-    await expect(page.getByText('Tab 2 content')).toBeVisible();
-    await page.getByRole('button', { name: 'Next' }).click();
-    await expect(page.getByRole('tab', { name: 'Tab 3' })).toBeVisible();
-    await expect(page.getByText('Tab 3 content')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Previous' })).toBeVisible();
-    await page.getByRole('button', { name: 'Previous' }).click();
-    await page.getByRole('tab', { name: 'Tab 1' }).click();
-    await expect(page.getByText('Tab 1 content')).toBeVisible();
+    await tabs[1].click();
+    await expect(content[1]).toBeVisible();
+    await expect(content[0]).toBeHidden();
+    await next.click();
+    await next.click();
+    await expect(prev).toBeVisible();
+    await expect(next).toBeHidden();
+    await tabs[2].click();
+    await expect(content[2]).toBeVisible();
   });
 });
