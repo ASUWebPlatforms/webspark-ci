@@ -219,9 +219,29 @@ ddev pull pantheon
 
 We use [Playwright](https://playwright.dev) for front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
 
+### What Playwright does and does not do
+
+Playwright is an end-to-end framework, but our use case is to test the user experience. In a nutshell, we will use it to mimic user operations, to be able to see what users see on the front and back end of Webspark sites. Although we do have the ability to get preety advanced with things such as testing specific API calls or taking snapshots for visual regression, we will not utuilize those features just yet. For now, we simply use it as a bot for generating and testing content.
+
+The easiest way to put it is that if a user can do it on the front end (in the browser), we want to use Playwright to verufy it works. We do need to be conscious of _what_ we are writing tests for however. Do not write tests for anything that Drupal core should already have a test for, and do not write a test for anything that UDS should already test for. We only want to test what _Webspark_ is responsible for.
+
+Finally, do not use Playwright to attempt to test for purely server side operations. For example, do not test that upon user login a particular Drupal service gets called and performs some operation, or that some Drupal query is executed via the Drupal database API. If something happens purely in the PHP world, a tool like PHPUnit is the correct tool for that job.
+
 ### Getting the site ready for Playwright
 
-Before creating Playwright tests, it is a good idea to first seed the website with sample users and media. You can fill forms with text on demand, but this is not the case with media files.
+We do not want any existing content in the database before we run our Playwright tests. This is because we do not want anything that might interfere with our tests (old database hooks that failed to run, existing garbage content or users, etc). We want to start with a clean slate and seed the website with our own content.
+
+#### Wipe the existing databse (if not using a clean install)
+
+Lets first ensure we are using a clean install of the site.
+
+```bash
+ddev drush site:install
+```
+
+#### Adding a sample user
+
+Let's first create a generic admin user. This user is most helpful to use when using tools such as the Playwright Codegen.
 
 ```bash
 # Create an admin user for Playwright
@@ -229,7 +249,13 @@ ddev drush ucrt playwright --mail='pw@example.com' --password='playwright'
 ddev drush urol 'administrator' playwright
 ```
 
+#### Adding sample media
+
 Visit `/media/add`, and add media for each available media type. Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
+
+#### Adding sample content
+
+You can do this if you want to, but the point is to test what the user will experience within Webspark. Since it is the users that will be creating content, we will want to also have the content created via the test itself instead of having pre-made content to test on. This allows us to test that our Webspark configurations give the editing experience we expect, as well as the visual experience we expect.
 
 ### Installing Playwright
 
