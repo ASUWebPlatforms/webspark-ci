@@ -14,6 +14,30 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await drupal.toggleUniversalGTM();
     await drupal.loginAsAdmin(page);
     pageUrl = await drupal.createPage(page, BLOCK);
+
+    // Create the menu
+    await page.goto('/admin/structure/menu/add');
+    await page.getByRole('textbox', { name: 'Title *' }).fill('PW Sidebar Menu');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Home');
+    await page.getByRole('textbox', { name: 'Link *' }).fill('<front>');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('PW Sidebar Menu');
+    await page.getByRole('textbox', { name: 'Link *' }).fill('/playwright-sidebar-menu');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
+    await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
+    await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Sublink');
+    await page.getByRole('textbox', { name: 'Link *' }).fill('<nolink>');
+    await page.getByLabel('Parent link').selectOption({ label: '-- Link' });
+    await page.getByRole('button', { name: 'Save' }).click();
+    // Save the menu itself
+    await page.getByRole('button', { name: 'Save' }).click();
   });
 
   test.beforeEach(async () => {
@@ -29,8 +53,9 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await drupal.addBlock(page, BLOCK);
 
     //--- Begin custom test steps
-    // First leave the page to create the Sidebar Menu, assigning this current page as a menu item
-    // Then add the Sidebar Menu block
+    await page.getByRole('textbox', { name: 'Title', exact: true }).fill('Block heading');
+    await page.getByRole('combobox', { name: 'Root' }).selectOption({ label: '<PW Sidebar Menu>' });
+    await page.getByRole('checkbox', { name: 'Include root?' }).check();
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
