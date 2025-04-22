@@ -30,11 +30,13 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
 
     //--- Begin custom test steps
     await page.getByRole('textbox', { name: 'Feed taxonomy term', exact: true }).fill('biodesign_center_for_bioenergetics');
+    // Will write a test for this when I figure out how this filter works
     // await page.getByRole('textbox', { name: 'Feed Filter', exact: true }).fill('');
     await page.getByRole('textbox', { name: 'Heading', exact: true }).fill('Block heading');
     await page.getByRole('combobox', { name: 'Required Heading Text Color' }).selectOption({ label: 'White' });
     await page.getByRole('textbox', { name: 'URL' }).fill('https://asu.edu');
     await page.getByRole('textbox', { name: 'Link text' }).fill('Block CTA');
+    // This will have no effect if using the CTA instead, this is the default CTA
     await page.getByRole('combobox', { name: 'Required Heading CTA Color' }).selectOption({ label: 'Maroon' });
     await page.getByRole('combobox', { name: 'Required Card CTA Color' }).selectOption({ label: 'Gold' });
     await page.getByRole('combobox', { name: 'Required Display' }).selectOption({ label: 'Horizontal' });
@@ -46,14 +48,16 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
-    // const heading = page.getByText('Block heading', { exact: true });
-    // const cta = page.getByRole('link', { name: 'Block CTA', exact: true });
-    // const events = page.getByTestId('list-view-container').getByRole('listitem');
+    const heading = page.getByText('Block heading', { exact: true });
+    const cta = page.getByRole('link', { name: 'Block CTA', exact: true });
+    const news = page.getByTestId('list-view-container').locator('.card.card-hover');
 
-    // await expect(heading).toBeVisible();
-    // await expect(heading).toHaveClass('text-white');
-    // await expect(cta).toHaveClass(/btn-maroon/);
-    // await expect(cta).toHaveAttribute('href', 'https://asu.edu');
-    // await expect(events).toHaveCount(3);
+    await expect(heading).toBeVisible();
+    await expect(heading).toHaveClass('text-white');
+    await expect(cta).toHaveClass(/btn-maroon/);
+    await expect(cta).toHaveAttribute('href', 'https://asu.edu');
+    await expect(news).toHaveCount(8);
+    await expect(news.first()).toHaveClass(/card/);
+    await expect(news.first()).toHaveClass(/card-hover/);
   });
 });
