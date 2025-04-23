@@ -7,6 +7,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   /** @type {import('@playwright/test').Page} */
   let page;
   let pageUrl;
+  let path;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
@@ -14,6 +15,8 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await drupal.toggleUniversalGTM();
     await drupal.loginAsAdmin(page);
     pageUrl = await drupal.createPage(page, BLOCK);
+    // The Drupal link() only adds the 'is-active' class for relative URLs
+    path = new URL(pageUrl).pathname;
 
     // Create the menu
     await page.goto('/admin/structure/menu/add');
@@ -25,7 +28,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await page.getByRole('button', { name: 'Save' }).click();
     await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
     await page.getByRole('textbox', { name: 'Menu link title *' }).fill('PW Sidebar Menu');
-    await page.getByRole('textbox', { name: 'Link *' }).fill('/playwright-sidebar-menu');
+    await page.getByRole('textbox', { name: 'Link *' }).fill(path);
     await page.getByRole('button', { name: 'Save' }).click();
     await page.goto('/admin/structure/menu/manage/pw-sidebar-menu/add');
     await page.getByRole('textbox', { name: 'Menu link title *' }).fill('Link');
@@ -63,6 +66,10 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
   });
 
   test('verify', async () => {
+    const heading = page.getByText('Block heading', { exact: true });
+    const link = page.getByRole('link', { name: 'PW Sidebar Menu', exact: true }).first();
 
+    await expect(heading).toBeVisible();
+    await expect(link).toHaveClass(/is-active/);
   });
 });
