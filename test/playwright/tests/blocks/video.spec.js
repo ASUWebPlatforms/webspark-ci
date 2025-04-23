@@ -49,4 +49,3 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block']
     await expect(pause).toBeVisible();
   });
 });
-
