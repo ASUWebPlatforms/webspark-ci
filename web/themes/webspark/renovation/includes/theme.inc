@@ -119,16 +119,25 @@ function renovation_page_attachments_alter(array &$page) {
     $version = $composer_contents['version'] ?? '1.0';
   }
 
-  $tag = array(
+  $tag1 = array(
     '#tag' => 'meta',
     '#attributes' => array(
       'name' => 'cmsversion',
+      'content' => 'Webspark2:' . $version,
+    ),
+  );
+
+  $tag2 = array(
+    '#tag' => 'meta',
+    '#attributes' => array(
       'http-equiv' => 'X-Name-of-Distro',
       'content' => 'Webspark2:' . $version,
     ),
   );
 
-  $page['#attached']['html_head'][] = [$tag, 'tagname'];
+  $page['#attached']['html_head'][] = [$tag1, 'cmsversion'];
+  $page['#attached']['html_head'][] = [$tag2, 'cmsversion_http'];
+
 }
 
 /**
