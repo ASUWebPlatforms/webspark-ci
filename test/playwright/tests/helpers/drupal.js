@@ -200,6 +200,17 @@ class DrupalHelpers {
   }
 
   /**
+   * Add a card to a block.
+   *
+   * @param page
+   * @param card
+   * @returns {Promise<void>}
+   */
+  async addCard(page, card) {
+
+  }
+
+  /**
    * Add an icon to a block.
    *
    * @param page
