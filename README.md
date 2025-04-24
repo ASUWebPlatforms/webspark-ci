@@ -132,19 +132,15 @@ This workflow differs from a usual Pantheon workflow in that when developing loc
 
 ## Setting up a local development environment
 
-> Although you may use whatever tool you choose, it is always a good idea to use the tool with the best documentation!
-
-We recommend the use of [DDEV](https://ddev.com) or [Lando](https://docs.lando.dev) for local Drupal development. Both will require [Docker](https://www.docker.com) to be installed.
+We recommend the use of [DDEV](https://ddev.com) for local Drupal development. DDEV requires [Docker](https://www.docker.com) to be installed.
 
 - [DDEV installation](https://ddev.readthedocs.io/en/stable)
-- [Lando installation](https://docs.lando.dev/getting-started/installation.html)
 
-After your tool of choice is installed, you then need to set up that tool specifically for Pantheon. This gives you the benefit of having Pantheon and Drupal-specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
+After you have installed DDEV, next you want it setup for Pantheon. This gives you the benefit of having Pantheon and Drupal-specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
 
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-- [Lando for Pantheon](https://docs.lando.dev/pantheon)
 
-**_A note on DDEV:_** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
+At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
 
 ## Cloning the site locally
 
@@ -353,16 +349,16 @@ ddev playwright show-report --host=0.0.0.0
 
 ### Tips for writing Playwright tests
 
-1. Read the Playwright documentation before attempting to write tests. There **is** a learning curve.
-2. Use accessible locators as much as possible. The `getByRole` locator is your friend.
-3. Take advantage of implied visibility as much as possible. For example, there is no reason to test `toBeVisible` on an element targeted by `getByText('foo')` because the element already needs to be visible in order for Playwright to target it by its content to begin with.
+1. Read the Playwright documentation before attempting to write tests. There **is** a small learning curve.
+2. Use accessible locators. The `getByRole` locator is your friend.
+3. Take advantage of implied visibility. For example, there is no reason to test `toBeVisible` on an element targeted by `getByText('foo')` because the element already needs to be visible in order for Playwright to target it to begin with.
 4. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
-5. Think about what you are actually trying to test. Writing tests is not as easy as it first seems. Take your time.
+5. Think about what you are actually trying to test. Do not test things that should have already been tested in Drupal core or UDS. Only test what Webspark has added.
 6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen won't always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
 7. Some elements in the Layout Builder are dynamicly rendered, so you need to be sure that your Playwright locator uses a targeting method with that in mind. In these cases, the `drupal-data-selector` attribute is helpful.
 8. If you need to use Drush in your test, you will need to build the `page` variable manually.
 9. Sometimes Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page yet. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
-10. When using Layout Builder, you need to be aware of conditional fields.
+10. When using Layout Builder, you need to be aware of conditional fields. If fields require AJAX, be aware that you may need to manually tell Playwright to wait for the call, or you may need to mimic key presses to trigger the AJAX call.
 
 ## PHPUnit
 
@@ -390,8 +386,6 @@ Coming soon.
 - [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
 - [DDEV](https://ddev.com)
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-- [Lando](https://docs.lando.dev)
-- [Lando for Pantheon](https://docs.lando.dev/pantheon)
 - [Playwright](https://playwright.dev)
 - [Playwright for DDEV](https://github.com/Lullabot/ddev-playwright)
 
