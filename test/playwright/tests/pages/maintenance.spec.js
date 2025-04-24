@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal';
 
-test.describe('maintenance page tests', { tag: ['@webspark', '@desktop'] }, () => {
+test.describe('maintenance page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 

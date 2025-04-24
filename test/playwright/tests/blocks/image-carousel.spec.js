@@ -3,7 +3,7 @@ import drupal from '../helpers/drupal';
 
 const BLOCK = 'Image Carousel';
 
-test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@block'] }, () => {
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@blocks'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
   let pageUrl;

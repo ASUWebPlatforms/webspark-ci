@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('home page tests', { tag: ['@webspark', '@desktop'] }, () => {
+test.describe('home page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
   test('verify', async ({ page }) => {
     const response = await page.goto('/');
     const header = page.locator('#asuHeader');

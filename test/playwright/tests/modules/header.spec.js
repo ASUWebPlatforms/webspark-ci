@@ -8,7 +8,7 @@ const links = [
   { name: 'Colleges and Schools', url: 'https://www.asu.edu/academics/colleges-schools' },
 ];
 
-test.describe('header tests', { tag: ['@webspark', '@desktop'] }, () => {
+test.describe('header tests', { tag: ['@webspark', '@desktop', '@modules'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 

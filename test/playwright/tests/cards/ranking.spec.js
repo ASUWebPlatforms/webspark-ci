@@ -4,7 +4,7 @@ import drupal from '../helpers/drupal';
 const BLOCK = 'Card Arrangement';
 const CARD = 'Ranking';
 
-test.describe(`${CARD} card tests`, { tag: ['@webspark', '@desktop', '@card'] }, () => {
+test.describe(`${CARD} card tests`, { tag: ['@webspark', '@desktop', '@cards'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
   let pageUrl;

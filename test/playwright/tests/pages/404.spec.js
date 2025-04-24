@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('404 page tests', { tag: ['@webspark', '@desktop'] }, () => {
+test.describe('404 page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
   test('verify', async ({ page }) => {
     const response = await page.goto('/foo-bar');
     const content = page.getByRole('heading', { name: 'Hmm, we can\'t find that page' });

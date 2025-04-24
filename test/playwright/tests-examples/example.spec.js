@@ -1,19 +1,43 @@
-// @ts-check
 import { test, expect } from '@playwright/test';
+import drupal from '../helpers/drupal';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+const BLOCK = '';
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@blocks', '@example'] }, () => {
+  /** @type {import('@playwright/test').Page} */
+  let page;
+  let pageUrl;
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  test.beforeAll('setup', async ({ browser }) => {
+    page = await browser.newPage();
+    pageUrl = await drupal.createPage(page, BLOCK);
+  });
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  test.beforeEach(async () => {
+    await page.goto(pageUrl);
+  });
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  test.afterAll('cleanup', async () => {
+    await page.close();
+  });
+
+  test('create', async () => {
+    await page.getByRole('link', { name: 'Layout' }).click();
+    await drupal.addBlock(page, BLOCK);
+
+    //--- Begin custom test steps
+    // ...
+    //--- End custom test steps
+
+    await page.getByRole('button', { name: 'Add block' }).click();
+    await page.getByRole('button', { name: 'Save layout' }).click();
+  });
+
+  test('verify', async () => {
+    // ...
+  });
+
+  test('data layer', async () => {
+    // ...
+  });
 });
