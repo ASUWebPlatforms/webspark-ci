@@ -335,7 +335,7 @@ ddev playwright codegen
 ddev playwright codegen <url>
 
 # You can also tell it the size of the viewport to use
-# ddev playwright codegen http://webspark-ci.ddev.site --viewport-size=1200,720
+# ddev playwright codegen http://webspark-ci.ddev.site --viewport-size=1440,720
 ddev playwright codegen --viewport-size=<width>,<height>
 ```
 
@@ -359,6 +359,7 @@ ddev playwright show-report --host=0.0.0.0
 8. If you need to use Drush in your test, you will need to build the `page` variable manually.
 9. Sometimes Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page yet. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
 10. When using Layout Builder, you need to be aware of conditional fields. If fields require AJAX, be aware that you may need to manually tell Playwright to wait for the call, or you may need to mimic key presses to trigger the AJAX call.
+11. When using the codegen, try to keep the virtual browser size reasonable. I have found that it can freeze Playwright if the resolution is too large.
 
 ## PHPUnit
 

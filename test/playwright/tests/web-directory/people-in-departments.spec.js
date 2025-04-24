@@ -31,9 +31,27 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
 
     //--- Begin custom test steps
     await page.getByLabel('Required Component type').selectOption({ label: TYPE });
-    // await page.getByRole('checkbox', { name: 'Disable alphabetical filter' }).check();
-    // await page.getByRole('checkbox', { name: 'Display as grid' }).check();
-    // await page.getByRole('checkbox', { name: 'Use page' }).uncheck();
+    await page.waitForTimeout(3000);
+    await page.locator('[id="\\31 342"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.locator('[id="\\31 352"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.getByRole('treeitem', { name: 'SDA Operations And Facilities' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Nicolas Camillo, ncamillo,' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Kim Edwards, kedward2, SDA' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Rick Irwin, rirwin2, SDA' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Jumaane Parnell, jparnell,' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Deborah Thayer, dfarren, SDA' }).click();
+    await page.waitForTimeout(1000);
+
+    await page.getByRole('checkbox', { name: 'Disable alphabetical filter' }).check();
+    await page.getByRole('checkbox', { name: 'Display as grid' }).check();
+    await page.getByRole('checkbox', { name: 'Use pager' }).uncheck();
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -41,6 +59,16 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
   });
 
   test('verify', async () => {
+    const listView = page.getByRole('button', { name: 'List view' });
+    const profile = page.locator('.uds-person-profile').first();
+    const person = page.locator('.person-name').first();
 
+    await expect(profile).toHaveClass(/uds-grid-profile/);
+    await expect(person).toContainText('Nicolas Camillo');
+    await listView.click();
+    await page.getByLabel('Sort by').selectOption({ label: 'Last Name (descending)' });
+    await page.waitForTimeout(3000);
+    await expect(profile).not.toHaveClass(/uds-grid-profile/);
+    await expect(person).toContainText('Deborah Thayer');
   });
 });
