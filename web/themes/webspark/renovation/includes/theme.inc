@@ -123,7 +123,6 @@ function renovation_page_attachments_alter(array &$page) {
     '#tag' => 'meta',
     '#attributes' => array(
       'name' => 'cmsversion',
-      'http-equiv' => 'X-Name-of-Distro',
       'content' => 'Webspark2:' . $version,
     ),
   );
