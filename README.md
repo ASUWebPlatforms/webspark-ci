@@ -255,7 +255,9 @@ You can do this if you want to, but the point is to test what the user will expe
 
 ### Installing Playwright
 
-If you need to install Playwright from scratch, follow these steps:
+#### Installing Playwright (from scratch)
+
+Follow the steps below if you will be writing tests for the first time.
 
 ```bash
 ddev add-on get Lullabot/ddev-playwright
@@ -266,6 +268,8 @@ ddev exec -d /var/www/html/test/playwright yarn create playwright
 # Review the generated playwright.config.js file and make any necessary changes first
 ddev install-playwright
 ```
+
+#### Installing Playwright
 
 Otherwise, ensure Playwright is ready to run by running the following command:
 
