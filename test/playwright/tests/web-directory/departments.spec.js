@@ -31,6 +31,23 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
 
     //--- Begin custom test steps
     await page.getByLabel('Required Component type').selectOption({ label: TYPE });
+    await page.waitForTimeout(1000);
+    await page.locator('[id="\\31 342"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.getByRole('treeitem', { name: 'Office of University Provost' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Filter by campus' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'ASU at Tempe : TEMPE' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Filter by expertise areas' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Biochemistry', exact: true }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Filter by employee type' }).click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('treeitem', { name: 'Faculty', exact: true }).click();
+    await page.waitForTimeout(1000);
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -38,6 +55,8 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
   });
 
   test('verify', async () => {
+    const person = page.getByText('Anne Jones');
 
+    await expect(person).toBeVisible();
   });
 });
