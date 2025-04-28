@@ -31,6 +31,17 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
 
     //--- Begin custom test steps
     await page.getByLabel('Required Component type').selectOption({ label: TYPE });
+    await page.waitForTimeout(1000);
+    await page.locator('[id="\\31 342"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.locator('[id="\\31 345"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.locator('[id="\\31 404"] i').first().click();
+    await page.waitForTimeout(3000);
+    await page.getByRole('treeitem', { name: 'Barrett Honors Faculty' }).click();
+    await page.waitForTimeout(3000);
+    await page.getByRole('textbox', { name: 'Filter by title' }).fill('Teaching Professor');
+    await page.waitForTimeout(1000);
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -38,6 +49,8 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
   });
 
   test('verify', async () => {
+    const person = page.getByText('Rosemarie Dombrowski', { exact: true });
 
+    await expect(person).toBeVisible();
   });
 });
