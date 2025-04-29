@@ -36,13 +36,14 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@blocks'
     await page.getByRole('textbox', { name: 'Link text' }).fill('Block CTA');
     await page.getByRole('combobox', { name: 'Select a target' }).selectOption({ label: 'New window (_blank)' });
     await page.getByRole('combobox', { name: 'Required Style' }).selectOption({ label: 'Maroon' });
+
     // Not testing for this as it is currently buggy
     // await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Block content');
 
     // Timeout is needed because of
     // webspark_blocks/js/card-arrangement.js
-    // Just do it the normal way, I think this is the cause of the aformentioned bug.
     await page.waitForTimeout(4000);
+
     await page.getByLabel('Required Columns to Display').selectOption({ label: 'Two Columns' });
     //--- End custom test steps
 
