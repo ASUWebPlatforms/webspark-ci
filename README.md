@@ -247,7 +247,7 @@ ddev drush urol 'administrator' playwright
 
 #### Adding sample media
 
-Visit `/media/add`, and add media for each available media type. Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
+Visit `/media/add`, and add media for each available media type except Audio and Document (Webspark does not use those by default). Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
 
 #### Adding sample content
 
