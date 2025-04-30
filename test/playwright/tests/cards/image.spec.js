@@ -36,6 +36,12 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
     // Add Cards
     await page.getByRole('button', { name: 'Add Image based cards' }).click();
     await page.waitForTimeout(1000);
+    await drupal.addMediaField(page);
+    await page.getByRole('textbox', { name: 'URL', exact: true }).fill('https://asu.edu');
+    await page.getByRole('textbox', { name: 'Link text', exact: true }).fill('Card link');
+    await page.getByRole('combobox', { name: 'Required Loading', exact: true }).selectOption({ label: 'Eager' });
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Card content');
+    await page.getByRole('textbox', { name: 'Caption title', exact: true }).fill('Card caption');
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -43,6 +49,15 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
   });
 
   test('verify', async () => {
+    const link = page.getByRole('link', { name: 'sample image Card link' });
+    const img = page.locator('.ws2-img');
+    const caption = page.getByText('Card caption', { exact: true });
+    const content = page.getByText('Card content', { exact: true });
 
+    await expect(link).toHaveAttribute('href', 'https://asu.edu');
+    await expect(img).toBeVisible();
+    await expect(img).toHaveAttribute('loading', 'eager');
+    await expect(caption).toBeVisible();
+    await expect(content).toBeVisible();
   });
 });
