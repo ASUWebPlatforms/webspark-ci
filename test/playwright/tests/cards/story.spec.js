@@ -34,8 +34,12 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
     await page.getByRole('button', { name: 'Cards' }).click();
 
     // Add Cards
+    // This is the same as the default card with only a new class name, so can keep it simple
     await page.getByRole('button', { name: 'Add Card Group Story' }).click();
     await page.waitForTimeout(1000);
+    await drupal.addMediaField(page);
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Card heading');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Card content');
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -43,6 +47,8 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
   });
 
   test('verify', async () => {
+    const card = page.locator('.card');
 
+    await expect(card).toHaveClass(/card-story/);
   });
 });
