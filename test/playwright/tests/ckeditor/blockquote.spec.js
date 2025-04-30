@@ -27,18 +27,17 @@ test.describe(`CKEditor ${PLUGIN} tests`, { tag: ['@webspark', '@desktop', '@cke
     await page.getByRole('button', { name: PLUGIN, exact: true }).click();
 
     //--- Begin custom test steps
-    // await page.getByRole('button', { name: 'Show more items' }).click();
-    await page.locator('form').filter({ hasText: /^ContentCitation NameCitation DescriptionSaveCancel$/ }).locator('textarea').fill('Blockquote content');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(1).fill('Citation');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(2).fill('Description');
-    await page.getByLabel('Dropdown toolbar').getByRole('button', { name: 'Save' }).click();
+    await page.locator('form').filter({ hasText: /^ContentCitation NameCitation DescriptionSaveCancel$/ }).locator('textarea').fill('Content');
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').nth(1).fill('Citation');
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').nth(2).fill('Description');
+    await page.getByLabel('Editor toolbar').getByRole('button', { name: 'Save' }).click();
     //--- End custom test steps
 
-    await page.getByRole('button', { name: 'Save' }).click();
+    await page.locator('#edit-submit').click();
   });
 
   test('verify', async () => {
-    const content = page.getByText('Blockquote content');
+    const content = page.locator('#skip-to-content').getByText('Content');
     const citation = page.getByText('Citation');
     const description = page.getByText('Description');
     const quote = page.locator('.accent-maroon');
