@@ -36,6 +36,10 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
     // Add Cards
     await page.getByRole('button', { name: 'Add Card Group with Icon' }).click();
     await page.waitForTimeout(1000);
+    await page.getByRole('textbox', { name: 'Heading' }).fill('Card heading');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').fill('Card content');
+    await page.locator('.fip-icon-down-dir').first().click();
+    await page.getByTitle('Pyramid,ASUAwesome,Shapes,').first().click();
     //--- End custom test steps
 
     await page.getByRole('button', { name: 'Add block' }).click();
@@ -43,6 +47,8 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@car
   });
 
   test('verify', async () => {
+    const icon = page.getByTestId('card-icon');
 
+    await expect(icon).toBeVisible();
   });
 });
