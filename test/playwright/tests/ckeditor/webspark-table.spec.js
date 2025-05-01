@@ -27,28 +27,29 @@ test.describe(`CKEditor ${PLUGIN} tests`, { tag: ['@webspark', '@desktop', '@cke
     await page.getByRole('button', { name: PLUGIN }).click();
 
     //--- Begin custom test steps
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').first().fill('2');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(1).fill('3');
-    await page.getByRole('combobox').first().selectOption('row');
+    await page.getByRole('combobox').nth(0).selectOption('row');
     await page.getByRole('combobox').nth(1).selectOption('fixed');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(2).fill('Caption');
-    await page.getByLabel('Dropdown toolbar').getByRole('button', { name: 'Save' }).click();
-    await page.getByLabel('Editor editing area: main.').locator('thead span').first().click();
-    await page.getByRole('row', { name: '1' }).locator('span').nth(1).click();
-    await page.getByLabel('Editor editing area: main.').locator('thead').getByRole('textbox').filter({ hasText: /^$/ }).locator('span').click();
-    await page.getByLabel('Editor editing area: main.').locator('tbody span').first().click();
-    await page.getByRole('row', { name: '4' }).locator('span').nth(1).click();
-    await page.getByLabel('Editor editing area: main.').getByRole('textbox').filter({ hasText: /^$/ }).locator('span').click();
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').nth(2).fill('Caption');
+    await page.getByLabel('Editor toolbar').getByRole('button', { name: 'Save' }).click();
+    await page.getByLabel('Editor editing area: main.').locator('thead span').nth(0).fill('Header 1');
+    await page.getByLabel('Editor editing area: main.').locator('thead span').nth(1).fill('Header 2');
+    await page.getByLabel('Editor editing area: main.').locator('tbody span').nth(0).fill('1');
+    await page.getByLabel('Editor editing area: main.').locator('tbody span').nth(1).fill('2');
+    await page.getByLabel('Editor editing area: main.').locator('tbody span').nth(2).fill('3');
+    await page.getByLabel('Editor editing area: main.').locator('tbody span').nth(3).fill('4');
     //--- End custom test steps
 
-    await page.getByRole('button', { name: 'Save' }).click();
+    await page.locator('#edit-submit').click();
   });
 
   test('verify', async () => {
+    await expect(page.locator('.uds-table')).toHaveClass(/uds-table-fixed/);
     await expect(page.getByText('Caption', { exact: true })).toBeVisible();
-    await expect(page.getByRole('cell', { name: '1' })).toBeVisible();
-    await expect(page.getByRole('cell', { name: '4' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Previous' }).nth(3)).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Next' }).nth(3)).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Header 1', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Header 2', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: '1', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: '2', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: '3', exact: true })).toBeVisible();
+    await expect(page.getByRole('cell', { name: '4', exact: true })).toBeVisible();
   });
 });
