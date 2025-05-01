@@ -25,6 +25,7 @@ test.describe('header tests', { tag: ['@webspark', '@desktop', '@modules'] }, ()
     await page.close();
   });
 
+  // Add steps to create the needed data
   test('verify default', async () => {
     await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Report an accessibility problem' })).toBeVisible();
@@ -42,6 +43,7 @@ test.describe('header tests', { tag: ['@webspark', '@desktop', '@modules'] }, ()
     await expect(page.getByTestId('search-button')).toBeVisible();
   });
 
+  // TODO: Move this out of the header and make it its own test
   test('verify menu', async () => {
     const standard = page.getByTestId('navigation').getByRole('link', { name: 'Standard' });
     const dropdownButton = page.getByRole('link', { name: 'Drop down', exact: true });

@@ -279,6 +279,8 @@ ddev install-playwright
 
 ### Running Playwright tests
 
+You have three main options for running your tests, detailed below. If you plan to run the entire suite of tests at once, regardless of the method you choose, I have noticed that Playwright sometimes seems to get "tired" and a few tests will fail. If this occurs, immediately re-run those failed tests one-by-one. Often you will find that they will pass without issue. As we rely on the Layout Builder, failures can also happen if any of the CSS or JS for Layout Builder fails to execute. If a tests fails more than twice, take at look at the provided screenshots either in the repot or via the testing UI to narrow down the issue.
+
 Run Playwright tests using the CI:
 
 ```bash

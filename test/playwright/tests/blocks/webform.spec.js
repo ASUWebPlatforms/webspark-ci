@@ -52,7 +52,7 @@ test.describe(`${BLOCK} block tests`, { tag: ['@webspark', '@desktop', '@blocks'
     await expect(submit).toHaveClass(/btn-maroon/);
 
     await expect(name).toHaveValue('admin');
-    await expect(email).toHaveValue('mlsamuel@asu.edu');
+    await expect(email).toHaveValue('admin@example.com');
     await subject.fill('subject');
     await submit.click();
 

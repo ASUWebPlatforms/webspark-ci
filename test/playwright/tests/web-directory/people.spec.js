@@ -74,8 +74,8 @@ test.describe(`${BLOCK} (${TYPE}) tests`, { tag: ['@webspark', '@desktop', '@web
     const profile = page.locator('.uds-person-profile');
     const itzelLink = page.getByRole('link', { name: 'Itzel Morales Lizarraga' }).first();
     const itzel = page.getByText('Itzel Morales Lizarraga');
-    const role = page.getByRole('heading', { name: 'Director, Web & User' });
-    const department = page.getByText('Enterprise Technology');
+    const role = page.getByRole('heading', { name: 'Director, Research Operations' });
+    const department = page.getByText('Research Technology');
     const email = page.getByRole('link', { name: 'Mail to :Itzel.Morales@asu.edu' });
     const building = page.getByText('USB');
     const location = page.getByText('Tempe AZ');
