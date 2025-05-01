@@ -27,28 +27,28 @@ test.describe(`CKEditor ${PLUGIN} tests`, { tag: ['@webspark', '@desktop', '@cke
     await page.getByRole('button', { name: PLUGIN }).click();
 
     //--- Begin custom test steps
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').first().fill('Blockquote Animated');
-    await page.getByLabel('Dropdown toolbar').locator('form').filter({ hasText: 'Animated quotes only support' }).locator('textarea').fill('Content');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(2).fill('Citation');
-    await page.getByRole('toolbar', { name: 'Dropdown toolbar' }).getByRole('textbox').nth(3).fill('Description');
-    await page.getByLabel('Dropdown toolbar').getByRole('button', { name: 'Save' }).click();
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').first().fill('Title');
+    await page.getByLabel('Editor toolbar').locator('form').filter({ hasText: 'Animated quotes only support' }).locator('textarea').fill('Content');
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').nth(2).fill('Name');
+    await page.getByRole('toolbar', { name: 'Editor toolbar' }).getByRole('textbox').nth(3).fill('Description');
+    await page.getByLabel('Editor toolbar').getByRole('button', { name: 'Save' }).click();
     await page.getByRole('button', { name: 'Highlight' }).nth(1).click();
     //--- End custom test steps
 
-    await page.getByRole('button', { name: 'Save' }).click();
+    await page.locator('#edit-submit').click();
   });
 
   test('verify', async () => {
-    const title = page.getByRole('heading', { name: 'Blockquote Animated' });
-    const content = page.getByText('content', { exact: true });
-    const citation = page.getByText('citation');
-    const description = page.getByText('description');
+    const title = page.getByRole('heading', { name: 'Title' });
+    const content = page.getByRole('mark');
+    const name = page.getByText('Name', { exact: true });
+    const description = page.getByText('Description', { exact: true });
 
     await expect(title).toBeVisible();
     await expect(content).toBeVisible();
     await expect(content).toHaveClass(/pen-yellow/);
     await expect(content).toHaveClass(/animate-bg-in-scroll/);
-    await expect(citation).toBeVisible();
+    await expect(name).toBeVisible();
     await expect(description).toBeVisible();
   });
 });
