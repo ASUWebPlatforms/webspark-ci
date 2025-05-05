@@ -80,47 +80,6 @@ class DrupalHelpers {
   }
 
   /**
-   * Visit the Layout Builder for the Basic Page.
-   *
-   * @param page
-   * @returns {Promise<*>}
-   */
-  async visitLayoutBuilder(page) {
-    await this.loginAsAdmin(page);
-    return await page.goto('/node/35/layout');
-  }
-
-  /**
-   * Return to the Layout Builder page.
-   *
-   * @param page
-   * @returns {Promise<void>}
-   */
-  async visitLayoutBuilderForNode(page) {
-    await page.getByRole('link', { name: 'Layout' }).first().click();
-    await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
-    await page.getByRole('link', { name: 'Configure', exact: true }).click();
-  }
-
-  /**
-   * Close the cookie consent banner if it is visible.
-   * Deprecate. Dont use this any longer.
-   *
-   * @param page
-   * @param selector
-   * @returns {Promise<*>}
-   */
-  async removeElement(page, selector) {
-    const el = page.locator(selector);
-    const counts = await el.count();
-    if (counts > 0) {
-      await el.evaluate(el => el.remove());
-    } else {
-      console.log(`Element "${selector}" not found in the DOM.`);
-    }
-  }
-
-  /**
    * Add a new block to a page.
    *
    * @param page
@@ -132,20 +91,6 @@ class DrupalHelpers {
     await page.getByRole('link', { name: 'Create content block' }).click();
     await page.getByRole('link', { name: name, exact: true }).click();
     await page.getByRole('textbox', { name: 'Required Block admin title' }).fill(name);
-  }
-
-  /**
-   * Remove a block from the layout.
-   *
-   * @param page
-   * @returns {Promise<void>}
-   */
-  async removeBlock(page) {
-    await page.getByLabel('First region in Top').getByRole('button', { name: 'Open configuration options' }).click({ force: true });
-    await page.getByRole('link', { name: 'Remove block' }).click({ force: true });
-    await page.getByRole('button', { name: 'Remove' }).click({ force: true });
-    // todo: this click doesn't seem to actually save the changes
-    await page.getByRole('button', { name: 'Save layout' }).click({ force: true });
   }
 
   /**
@@ -200,27 +145,6 @@ class DrupalHelpers {
   }
 
   /**
-   * Add a card to a block.
-   *
-   * @param page
-   * @param card
-   * @returns {Promise<void>}
-   */
-  async addCard(page, card) {
-
-  }
-
-  /**
-   * Add an icon to a block.
-   *
-   * @param page
-   * @param icon
-   * @returns {Promise<void>}
-   */
-  async addIconField(page, icon) {
-  }
-
-  /**
    * General test for carousel functionality.
    *
    * @param page
@@ -265,20 +189,6 @@ class DrupalHelpers {
     await page.waitForTimeout(300);
 
     await expect(slide.nth(2)).not.toHaveClass(/glide__slide--active/);
-  }
-
-  /**
-   * General test for search pages.
-   *
-   * @param {*} page
-   */
-  async testSearch(page) {
-    const search = page.getByPlaceholder('Search asu.edu');
-
-    await search.fill('test');
-    await search.press('Enter');
-    await expect(page.getByRole('heading', { name: 'Search' }).locator('span')).toBeVisible();
-    await expect(search).toHaveValue('test');
   }
 }
 
