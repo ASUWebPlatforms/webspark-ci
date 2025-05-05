@@ -8,13 +8,21 @@ const links = [
   { name: 'Colleges and Schools', url: 'https://www.asu.edu/academics/colleges-schools' },
 ];
 
-test.describe('header tests', { tag: ['@webspark', '@desktop', '@modules'] }, () => {
+test.describe('header tests', { tag: ['@webspark', '@desktop', '@brand'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
   test.beforeAll('setup', async ({ browser }) => {
     page = await browser.newPage();
     await drupal.loginAsAdmin(page);
+
+    await page.goto('/admin/structure/block/manage/asubrandheader?destination=/admin/structure/block');
+    await page.getByRole('button', { name: 'ASU Partner Header' }).click();
+    await page.getByRole('checkbox', { name: 'Is Partner?' }).check();
+    await page.getByRole('textbox', { name: 'Partner URL *' }).fill('https://asu.edu');
+    await page.getByRole('textbox', { name: 'Partner Logo URL *' }).fill('https://placehold.co/400');
+    await page.getByRole('textbox', { name: 'Partner Logo Alt *' }).fill('Partner Logo');
+    await page.getByRole('button', { name: 'Save block' }).click();
   });
 
   test.beforeEach(async () => {
@@ -75,15 +83,6 @@ test.describe('header tests', { tag: ['@webspark', '@desktop', '@modules'] }, ()
     const link = page.getByTestId('partner').getByRole('link', { name: 'Partner Logo' });
     const img = page.getByTestId('partner').getByRole('img', { name: 'Partner Logo' });
 
-    await page.goto('/admin/structure/block/manage/asubrandheader?destination=/admin/structure/block');
-    await page.getByRole('button', { name: 'ASU Partner Header' }).click();
-    await page.getByRole('checkbox', { name: 'Is Partner?' }).check();
-    await page.getByRole('textbox', { name: 'Partner URL *' }).fill('https://asu.edu');
-    await page.getByRole('textbox', { name: 'Partner Logo URL *' }).fill('https://placehold.co/400');
-    await page.getByRole('textbox', { name: 'Partner Logo Alt *' }).fill('Partner Logo');
-    await page.getByRole('button', { name: 'Save block' }).click();
-
-    await page.goto('/');
     await expect(link).toHaveAttribute('href', 'https://asu.edu');
     await expect(img).toBeVisible();
   });

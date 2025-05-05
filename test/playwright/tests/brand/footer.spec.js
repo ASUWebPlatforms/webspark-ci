@@ -31,7 +31,7 @@ const socialLinks = [
   { name: 'LinkedIn Social Media Icon' },
 ];
 
-test.describe('footer tests', { tag: ['@webspark', '@desktop', '@modules'] }, () => {
+test.describe('footer tests', { tag: ['@webspark', '@desktop', '@brand'] }, () => {
   /** @type {import('@playwright/test').Page} */
   let page;
 
