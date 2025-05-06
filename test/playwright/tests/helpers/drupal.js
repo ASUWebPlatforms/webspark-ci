@@ -80,6 +80,24 @@ class DrupalHelpers {
   }
 
   /**
+   * Add a new article.
+   *
+   * @param page
+   * @param name
+   * @returns {Promise<void>}
+   */
+  async createArticle(page, name) {
+    await page.goto('/node/add/article');
+    await this.addMediaField(page);
+    await page.getByLabel('Hero Size').selectOption({ label: 'Large'});
+    await page.getByRole('textbox', { name: 'Title *' }).fill(`Playwright ${name}`);
+    await page.getByRole('textbox', { name: 'Article author' }).fill('Author');
+    await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1).fill('Article content');
+    await page.getByRole('button', { name: 'Save' }).click();
+    return page.url();
+  }
+
+  /**
    * Add a new block to a page.
    *
    * @param page
