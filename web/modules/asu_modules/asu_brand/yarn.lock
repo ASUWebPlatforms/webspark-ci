@@ -15,10 +15,10 @@
     react-dom ">= 16.14.0 < 18"
     styled-components "^5.3.0"
 
-"@asu/component-header-footer@1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@asu/component-header-footer/1.0.4/db928436fb7898e926fdce2fd253fde7854e7d91#db928436fb7898e926fdce2fd253fde7854e7d91"
-  integrity sha512-s446gv5d6Ev+GZRjzPFwVhNP2Ftwu/MNwR7xb75G4jYO/nKABZJueQnhjeuasbWFZjr11TId+5UGFO7hHUA1xA==
+"@asu/component-header-footer@1.0.8":
+  version "1.0.8"
+  resolved "https://npm.pkg.github.com/download/@asu/component-header-footer/1.0.8/89f3dbcfa4a8b2ca78464fd923d214dde3d323f1#89f3dbcfa4a8b2ca78464fd923d214dde3d323f1"
+  integrity sha512-+Bv3dg/4zkRd7uc7UVw3vCAYv+jy7n06PmUz7SG8CELIY/xcJ2LK0jTfsKMWfbN++fSiULvoqfV/h8V290Mi3w==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.4.2"
     "@fortawesome/free-brands-svg-icons" "^6.4.2"
