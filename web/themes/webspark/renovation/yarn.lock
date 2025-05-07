@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asu/unity-bootstrap-theme@1.23.2":
-  version "1.23.2"
-  resolved "https://npm.pkg.github.com/download/@asu/unity-bootstrap-theme/1.23.2/a0a004e0438d88889718adbe21e8d1d874925046#a0a004e0438d88889718adbe21e8d1d874925046"
-  integrity sha512-KibaJdxNTpl0dy7rSD8TtrRZnAQ5JSx5Dxxu6lhG3OPbMuxS3Ae/MLWcGIFg377phG+kNf0mCgBCptNvi9RrDw==
+"@asu/unity-bootstrap-theme@1.25.0":
+  version "1.25.0"
+  resolved "https://npm.pkg.github.com/download/@asu/unity-bootstrap-theme/1.25.0/b0132577ab578c809eeaeaf75826bcfeddf0376f#b0132577ab578c809eeaeaf75826bcfeddf0376f"
+  integrity sha512-xuW+fchwqEKvSbnRELv52XQuVp0LYtAELV0eFTYYnQBlsS5dPoHcN8zfALd+bT9J9xmnw8qLiyeznXUp9/+h2A==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.22.10", "@babel/code-frame@^7.22.5":
   version "7.22.10"
