@@ -1,4 +1,3 @@
-// Copy the code for the layout test but add the breadcrumb and verify it
 import { test, expect } from '@playwright/test';
 import drupal from '../helpers/drupal';
 
