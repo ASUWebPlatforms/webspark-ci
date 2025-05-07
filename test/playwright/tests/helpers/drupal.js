@@ -24,19 +24,42 @@ class DrupalHelpers {
    */
   async toggleUniversalGTM(enabled = 0) {
     // Make sure the cookie consent stays off
-    this.drush('config:set asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
-    this.drush(`config:set asu_brand.settings asu_brand.asu_brand_gtm_enabled ${enabled}`);
+    this.drush('cset asu_brand.settings asu_brand.asu_brand_cookie_consent_enabled 0');
+    this.drush(`cset asu_brand.settings asu_brand.asu_brand_gtm_enabled ${enabled}`);
     this.drush('cr');
   }
 
   /**
    * Toggle maintenance mode.
-   * @param int 0|1
+   *
+   * @param enabled int 0|1
    * @returns {Promise<*>}
    */
   async toggleMaintenanceMode(enabled = 1) {
-    this.drush(`state:set system.maintenance_mode ${enabled} --input-format=integer`);
-    this.drush('cache:rebuild');
+    this.drush(`sset system.maintenance_mode ${enabled} --input-format=integer`);
+    this.drush('cr');
+  }
+
+  /**
+   * Enable a module.
+   *
+   * @param name string The machine name of the module
+   * @returns {Promise<*>}
+   */
+  async enableModule(name) {
+    this.drush(`en ${name} -y`);
+    this.drush('cr');
+  }
+
+  /**
+   * Disable a module.
+   *
+   * @param name string The machine name of the module
+   * @returns {Promise<*>}
+   */
+  async disableModule(name) {
+    this.drush(`pmu ${name} -y`);
+    this.drush('cr');
   }
 
   /**
