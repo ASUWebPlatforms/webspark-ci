@@ -7,6 +7,6 @@
   "license": "MIT",
   "dependencies": {
     "@asu/component-cookie-consent": "2.1.0",
-    "@asu/component-header-footer": "1.0.8"
+    "@asu/component-header-footer": "1.0.4"
   }
 }
