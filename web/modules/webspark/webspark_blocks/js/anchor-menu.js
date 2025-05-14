@@ -161,7 +161,6 @@
     // Set click event of anchors
     for (let [anchor, anchorTarget] of anchorTargets) {
       anchor.addEventListener('click', function (e) {
-        e.preventDefault();
 
         // Compensate for height of navbar so content appears below it
         let scrollBy =
@@ -194,6 +193,12 @@
         }
 
         e.target.classList.add('active');
+
+        $('#collapseExample').removeClass('show');
+        const h2Element = document.querySelector('h2[data-bs-target="#collapseExample"]');
+        if (h2Element) {
+          h2Element.ariaExpanded = false;
+        }
       });
     }
   }
