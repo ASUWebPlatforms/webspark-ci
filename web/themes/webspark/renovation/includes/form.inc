@@ -33,6 +33,7 @@ function renovation_preprocess_input__submit(&$variables) {
  */
 function renovation_preprocess_input(&$variables) {
   $variables['attributes']['aria-describedby'][] = 'error-' . $variables['attributes']['name'];
+  unset($variables['attributes']['aria-required']);
 }
 
 /**
@@ -44,6 +45,7 @@ function renovation_preprocess_textarea(&$variables) {
   }
 
   $variables['attributes']->setAttribute('aria-describedby', 'error-' . $variables['attributes']['name']);
+  $variables['attributes']->removeAttribute('aria-required');
 }
 
 /**
