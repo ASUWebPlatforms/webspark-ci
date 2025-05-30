@@ -104,7 +104,7 @@ test.describe('degree listing page tests', { tag: ['@webspark', '@desktop', '@pa
     await drupal.addMediaField(page, 3);
 
     await page.getByRole('button', { name: 'Add Degree details next steps card' }).click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     await page.getByRole('textbox', { name: 'Card icon', exact: true }).fill('star');
     await page.getByRole('textbox', { name: 'Card title', exact: true }).fill('foo');
     await page.getByRole('textbox', { name: 'Card content', exact: true }).fill('foo');
@@ -114,14 +114,14 @@ test.describe('degree listing page tests', { tag: ['@webspark', '@desktop', '@pa
 
     await page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1).fill('Why choose content');
     await page.getByRole('button', { name: 'Add Degree Details Why Choose' }).nth(0).click();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     await drupal.addMediaField(page, 4);
     await page.getByRole('textbox', { name: 'Card title *', exact: true }).fill('foo');
     await page.getByRole('textbox', { name: 'Card content *', exact: true }).fill('foo');
     await page.getByRole('cell', { name: 'Degree Details Why Choose' }).getByLabel('URL').fill('https://asu.edu');
     await page.getByRole('cell', { name: 'Degree Details Why Choose' }).getByLabel('Link text').fill('foo');
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     await drupal.addMediaField(page, 5);
 
     await page.getByRole('textbox', { name: 'Program department URL', exact: true }).fill('foo');
@@ -159,7 +159,7 @@ test.describe('degree listing page tests', { tag: ['@webspark', '@desktop', '@pa
     await page.getByRole('button', { name: 'Save' }).click();
   });
 
-  test('verify degree detail', async () => {
+  test('verify degree detail page', async () => {
     await page.goto(degreeURL);
     await page.waitForLoadState();
     const props = await page.evaluate(() => {
@@ -169,6 +169,54 @@ test.describe('degree listing page tests', { tag: ['@webspark', '@desktop', '@pa
     await expect(props).toBeDefined();
     expect(typeof props).toBe('object');
 
-    await expect(props.foo).toBe('');
+    await expect(props.atAGlance.offeredBy.text).toBe('foo');
+    await expect(props.atAGlance.offeredBy.url).toBe('https://asu.edu');
+    await expect(props.atAGlance.locations[0].text).toBe('foo');
+    await expect(props.atAGlance.locations[0].url).toBe('https://asu.edu');
+    await expect(props.atAGlance.firstRequirementMathCourse).toBe('foo');
+    await expect(props.atAGlance.mathIntensity).toBe('foo');
+    await expect(props.atAGlance.timeCommitment).toBe('foo');
+    await expect(props.careerOutlook.image.altText).toBe('sample image');
+    await expect(props.globalOpportunity.image.altText).toBe('sample image');
+    await expect(props.nextSteps.cards.learnMore.title).toBe('foo');
+    await expect(props.nextSteps.cards.learnMore.icon[1]).toBe('star');
+    await expect(props.nextSteps.cards.learnMore.content).toBe('foo');
+    await expect(props.nextSteps.cards.learnMore.buttonLink.label).toBe('foo');
+    await expect(props.nextSteps.cards.learnMore.buttonLink.href).toBe('https://asu.edu');
+    await expect(props.nextSteps.cards.learnMore.buttonLink.color).toBe('maroon');
+    await expect(props.whyChooseAsu.sectionIntroText).toBe('<p>Why choose content</p>');
+    await expect(props.whyChooseAsu.cards.faculty.title).toBe('foo');
+    await expect(props.whyChooseAsu.cards.faculty.image.altText).toBe('sample image');
+    await expect(props.whyChooseAsu.cards.faculty.text).toBe('foo');
+    await expect(props.whyChooseAsu.cards.faculty.button.label).toBe('foo');
+    await expect(props.whyChooseAsu.cards.faculty.button.href).toBe('https://asu.edu');
+    await expect(props.whyChooseAsu.cards.faculty.button.color).toBe('maroon');
+    await expect(props.attendOnline.image.altText).toBe('sample image');
+    await expect(props.programContactInfo.departmentUrl).toBe('foo');
+    await expect(props.programContactInfo.emailUrl).toBe('foo');
+    await expect(props.anchorMenu.atAGlance).toBe(true);
+    await expect(props.anchorMenu.applicationRequirements).toBe(true);
+    await expect(props.anchorMenu.changeMajorRequirements).toBe(true);
+    await expect(props.anchorMenu.nextSteps).toBe(true);
+    await expect(props.anchorMenu.affordingCollege).toBe(true);
+    await expect(props.anchorMenu.careerOutlook).toBe(true);
+    await expect(props.anchorMenu.customizeYourCollegeExperience).toBe(true);
+    await expect(props.anchorMenu.exampleCareers).toBe(true);
+    await expect(props.anchorMenu.globalOpportunity).toBe(true);
+    await expect(props.anchorMenu.whyChooseAsu).toBe(true);
+    await expect(props.anchorMenu.attendOnline).toBe(true);
+    await expect(props.anchorMenu.programContactInfo).toBe(true);
+    await expect(props.anchorMenu.externalAnchors[0].text).toBe('foo');
+    await expect(props.affordingCollege.hide).toBe(true);
+    await expect(props.applicationRequirements.hide).toBe(true);
+    await expect(props.changeMajorRequirements.hide).toBe(true);
+    await expect(props.exampleCareers.hide).toBe(true);
+    await expect(props.flexibleDegreeOptions.hide).toBe(true);
+    await expect(props.introContent.hideMarketText).toBe(true);
+    await expect(props.introContent.hideProgramDesc).toBe(true);
+    await expect(props.introContent.hideRequiredCourses).toBe(true);
+    await expect(props.attendOnline.hide).toBe(true);
+    await expect(props.whyChooseAsu.hide).toBe(true);
+    await expect(props.globalOpportunity.hide).toBe(true);
   });
 });

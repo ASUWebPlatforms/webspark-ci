@@ -288,7 +288,10 @@ Run Playwright tests using the CI:
 ddev playwright test
 
 # Run a specific test file(s)
-# Ex: ddev playwright test homepage.spec.js charts.spec.js
+# Note that Playwright searches for any test for any part of the words
+# So degree.spec.js will also match card-degree.spec.js
+# For this reason, best to add the path
+# Ex: ddev playwright test pages/homepage.spec.js blocks/charts.spec.js
 ddev playwright test <file> <file>
 
 # Run a test(s) by tag
