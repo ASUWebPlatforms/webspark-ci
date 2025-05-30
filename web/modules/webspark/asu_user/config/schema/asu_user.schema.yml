@@ -1,0 +1,7 @@
+asu_user.settings:
+  type: config_object
+  label: 'ASU User settings'
+  mapping:
+    asu_user_elastic_query_url:
+      type: string
+      label: 'ASU User Elastic Query URL'
