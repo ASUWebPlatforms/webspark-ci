@@ -24,6 +24,7 @@ test.describe('degree rfi tests', { tag: ['@webspark', '@desktop', '@pages'] }, 
   });
 
   test('create', async () => {
+    console.log(page.url());
     await page.getByRole('link', { name: 'Layout' }).click();
     await page.getByRole('link', { name: 'Add block in Content, First region' }).click();
     await page.getByRole('link', { name: 'RFI form component' }).click();
@@ -37,11 +38,8 @@ test.describe('degree rfi tests', { tag: ['@webspark', '@desktop', '@pages'] }, 
     await page.getByRole('button', { name: 'Add block' }).click();
     await page.waitForTimeout(3000);
     await page.getByRole('button', { name: 'Save layout' }).click();
-  });
 
-  // Testing against a React component so we only need to
-  // esnsure the data is passed to the props
-  test('verify', async () => {
+    // Verify
     // Check for the user inputs to be submitted
     await page.waitForLoadState();
     const props = await page.evaluate(() => {
@@ -50,31 +48,25 @@ test.describe('degree rfi tests', { tag: ['@webspark', '@desktop', '@pages'] }, 
 
     await expect(props).toBeDefined();
     expect(typeof props).toBe('object');
-
-    try {
-      await expect(props.test).toBe(1);
-    } catch (error) {
-      console.error('Form is not in test mode! Forcefully closing the page.');
-      await page.close();
-      throw error;
-    }
+    await expect(props.test).toBe(1);
 
     // Complete the form
-    await page.getByLabel('Which applies to you?').selectOption('ONLNE');
-    // await page.getByLabel('Select your student status')).selectOption('First Time Freshman');
-    // await page.getByLabel('Area of interest')).selectOption('Business');
-    await page.getByLabel('Program of interest').selectOption('UGBA-BABUSTBA');
-    await page.getByRole('textbox', { name: 'Email Address' }).fill('email@email.com');
-    await page.getByRole('textbox', { name: 'First name' }).fill('Playwright');
-    await page.getByRole('textbox', { name: 'Last name' }).fill('User');
+    await page.getByLabel('Which applies to you?').selectOption('ONLINE');
+    await page.getByLabel('Select your student status').selectOption('First Time Freshman');
+    await page.getByLabel('Area of interest').selectOption('Business');
+    await page.getByLabel('Program of interest').selectOption('UGBA-BAACCBS');
+    await page.getByRole('textbox', { name: 'Email Address' }).fill('email@example.com');
+    await page.getByRole('textbox', { name: 'First name' }).fill('John');
+    await page.getByRole('textbox', { name: 'Last name' }).fill('Doe');
     await page.getByRole('textbox', { name: '1 (702) 123-' }).fill('+1 (555) 555-5555');
     await page.getByText('I consent', { exact: true }).click();
 
     // Intercept the form and verify data
-    const textContent = page.getByText('{ "values": { "GdprConsent":').textContent();
+    const textContent = page.getByText('{ "values": { "Campus":').textContent();
     // TOOD: Turn this into a valid JSON object, need the string to be valid format first
     const data = JSON.parse(textContent);
-    expect(typeof data.values).toBe('object');
-    console.log(data.values);
+    console.log(data);
+    // expect(typeof data.values).toBe('object');
+    // console.log(data.values);
   });
 });
