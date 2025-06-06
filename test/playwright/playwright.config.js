@@ -35,26 +35,27 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
+    storageState: 'auth.json'
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'firefox',
-      use: {
-         ...devices['Desktop Firefox'],
-         viewport: { width: 1920, height: 1080 },
-      },
-      testIgnore: /.*mobile.spec.js/,
-    },
     // {
-    //   name: 'chromium',
+    //   name: 'firefox',
     //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     viewport: { width: 1920, height: 1080 },
-    //    },
-    //    testIgnore: /.*mobile.spec.js/,
+    //      ...devices['Desktop Firefox'],
+    //      viewport: { width: 1920, height: 1080 },
+    //   },
+    //   testIgnore: /.*mobile.spec.js/,
     // },
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+       },
+       testIgnore: /.*mobile.spec.js/,
+    },
     // {
     //   name: 'webkit',
     //   use: {
@@ -65,11 +66,11 @@ export default defineConfig({
     // },
 
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-      testMatch: /.*mobile.spec.js/,
-    },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    //   testMatch: /.*mobile.spec.js/,
+    // },
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
