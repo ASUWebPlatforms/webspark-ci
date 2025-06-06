@@ -247,11 +247,15 @@ ddev drush urol 'administrator' playwright
 
 #### Adding sample media
 
-Visit `/media/add`, and add media for each available media type except Audio and Document (Webspark does not use those by default). Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA&t=54s). I chose this one because it is short and has a simple title.
+Visit `/media/add`, and add media for each available media type except Audio and Document (Webspark does not use those by default). Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA). I chose this one because it is short and has a simple title.
 
 #### Adding sample content
 
 You can do this if you want to, but the point is to test what the user will experience within Webspark. Since it is the users that will be creating content, we will want to also have the content created via the test itself instead of having pre-made content to test on. This allows us to test that our Webspark configurations give the editing experience we expect, as well as the visual experience we expect.
+
+#### Adding a source ID for the RFI components
+
+In order for all of the RFI components to work, we need a valid source ID to pull data from. First visit `/admin/modules` and enable the "ASU Degrees and RFI" module. Next, visit `/admin/config/asu_degree_rfi/settings` and enter any random string in the "Source ID" field. Since we are using jibberish, when we add RFI forms we just need to ensure they are running in test mode.
 
 ### Installing Playwright
 
