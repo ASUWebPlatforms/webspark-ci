@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Read environment variables from file.
@@ -35,7 +35,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
-    storageState: 'auth.json'
+    storageState: 'auth.json',
   },
 
   /* Configure projects for major browsers */
@@ -53,8 +53,8 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1920, height: 1080 },
-       },
-       testIgnore: /.*mobile.spec.js/,
+      },
+      testIgnore: /.*mobile.spec.js/,
     },
     // {
     //   name: 'webkit',
@@ -104,4 +104,4 @@ export default defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-});
+})
