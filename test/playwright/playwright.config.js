@@ -13,6 +13,7 @@ import { defineConfig, devices } from '@playwright/test'
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  // TODO: set a default timeout, considering Drupal ajax times
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
