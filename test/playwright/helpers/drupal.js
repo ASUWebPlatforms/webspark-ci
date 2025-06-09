@@ -22,29 +22,41 @@ class Drupal {
     await page.context().storageState({ path: path })
   }
 
-  async loginAsAdmin (page) {
-    const loginUrlBuffer = await drush.getAdminLogin()
-    const loginUrl = loginUrlBuffer.toString().trim()
+  async #login (page, buffer) {
+    const url = buffer.toString().trim()
 
-    await page.goto(loginUrl)
-    await page.getByRole('button', { name: 'Ok, I agree', timeout: 30000 })
-    await page.context().storageState({ path: 'auth.json' })
+    await page.goto(url)
+    await this.acceptCookies(page)
+  }
+
+  async loginAsAdmin (page) {
+    const buffer = await drush.getAdminLogin()
+
+    await this.#login(page, buffer)
   }
 
   async loginAsUser (page, name) {
-    const loginUrlBuffer = await drush.getUserLogin(name)
-    const loginUrl = loginUrlBuffer.toString().trim()
+    const buffer = await drush.getUserLogin(name)
 
-    await page.goto(loginUrl)
-    await page.getByRole('button', { name: 'Ok, I agree', timeout: 30000 })
-    await page.context().storageState({ path: 'auth.json' })
+    await this.#login(page, buffer)
   }
 
   async getNodeIdByAlias (alias) {
-    const formattedAlias = alias.startsWith('/') ? alias : `/${alias}`
-    const cmd = `print \Drupal::service('path_alias.manager')->getPathByAlias('${formattedAlias}');`
+    const formattedAlias = alias.startsWith('/') ? alias : `/${alias}`;
+    const cmd = `print \Drupal::service("path_alias.manager")->getPathByAlias("${formattedAlias}");`;
+    const buffer = drush.drush(`php:eval '${cmd}'`);
+    const path = buffer.toString().trim();
 
-    return await drush(`php:eval '${cmd}'`)
+    console.log('Raw path from Drush:', path);
+
+    if (path.startsWith('/node/')) {
+      const nid = path.substring('/node/' . length);
+      console.log('Extracted Node ID:', nid);
+      return nid;
+    }
+
+    console.warn(`Unexpected path format from Drush: ${path}. Expected to start with /node/`);
+    return path;
   }
 }
 
