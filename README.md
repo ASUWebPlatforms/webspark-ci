@@ -1,5 +1,5 @@
 <div align="center">
-# Webspark CI
+<h1 id="webspark-ci">Webspark CI</h1>
 
 [![CircleCI](https://circleci.com/gh/ASUWebPlatforms/webspark-ci.svg?style=shield)](https://circleci.com/gh/ASUWebPlatforms/webspark-ci)
 [![Dashboard webspark-ci](https://img.shields.io/badge/dashboard-webspark_ci-yellow.svg)](https://dashboard.pantheon.io/sites/aec2f75f-35eb-41f8-abe7-95b292415259#dev/code)
@@ -8,16 +8,15 @@
 To provide an automated, pull request-based development workflow to validate and build future releases of Webspark 2 (WS2) using continuous integration (CI).
 
 [Background](#background) •
+[Sprints](#sprints) •
 [Getting Started](#getting-started) •
 [Local Development](#local-development) •
-[Sprints](#sprints) •
-[Deployment](#deployment) •
+[Code Quality](#code-quality) •
 [Resources](#resources) •
-[JIRA](https://asudev.jira.com/jira/software/c/projects/WS2/boards/3360)
+[JIRA Board](https://asudev.jira.com/jira/software/c/projects/WS2/boards/3360)
 
 </div>
 <br>
-
 <br>
 
 # Background
@@ -29,6 +28,44 @@ This project aims to provide an automated, pull request-based development workfl
 This project leverages the [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools) workflow to streamline the development, testing, and deployment of the Webspark Drupal codebase.
 
 This approach enables us to use [GitHub](https://github.com/ASUWebPlatforms) as our preferred Git provider, [CircleCI](https://app.circleci.com) for Continuous Integration, and [Pantheon](https://pantheon.io) Multidev environments for testing builds.
+
+## Pantheon Build Tools
+
+The benefit of the Pantheon Build Tools workflow is its automated deployment process between the GitHub repository and the Pantheon website. Previously, developers had to create and manage their own Pantheon sites to test their work. The Pantheon Build Tools workflow allows for a centralized site for all team members to use and contribute to. Below, you will find a simplified breakdown of the Build Tools [Pull Request Workflow](https://docs.pantheon.io/guides/build-tools/pr-workflow):
+
+1. **Pull Request Issued:** A developer makes changes to a task branch in their local environment and pushes these changes to the remote `webspark-ci` repository. They then create a pull request (PR) to propose merging these changes into the sprint branch.
+2. **Continuous Integration (CI) Kicks In:** Upon the creation of the PR, the continuous integration (CI) process starts via CircleCI. CircleCI is configured to automatically pick up the PR event and initiate a series of tasks defined in a configuration file within the project, which Pantheon has already bootstrapped for us.
+3. **Automated Build Process:** CircleCI first checks out the proposed changes from the task branch, then performs tasks such as installing dependencies, compiling code, running unit tests, etc. The base configuration simply runs Composer, however, we have the flexibility to expand upon this process as we see fit.
+4. **Creation of the Pantheon Multidev:** If the build process is successful, CircleCI then uses Terminus to create a new Multidev environment in the `webspark-ci` Pantheon site, using the database and files from the `dev` environment. The Multidev will be named after the PR.
+5. **Automated Testing:** Depending on the project's configuration, CircleCI may then perform additional automated tests in the new Multidev environment. Pantheon provides Behat testing and visual regression testing by default, but we can expand these to include performance tests, accessibility tests, and more.
+6. **PR Review:** Once the Multidev environment is ready, CircleCI updates the original PR with the URL of the new Multidev. This allows the team to review the proposed changes in a fully functional environment. Additional commits made to the task branch for the PR will trigger the build process, ensuring the Multidev is always using the most up-to-date code.
+7. **Deletion of the Pantheon Multidev:** When the PR is merged into the sprint branch and closed, CircleCI will automatically destroy the Multidev environment for that PR.
+
+<div align="right"><a href="#webspark-ci">↑ Top</a></div>
+<br>
+<br>
+
+# Sprints
+
+Arizona State University follows [Agile](https://www.atlassian.com/agile) software development principles. As such, teams work in [sprints](https://www.atlassian.com/agile/scrum/sprints) to accomplish tasks in a timely, but orderly fashion. Webspark sprints are usually two weeks in length, and each sprint has a set number of tasks assigned to it.
+
+## How sprints fit into the Webspark CI workflow
+
+Each sprint has a name, often, it is simply the sprint number (ex: Sprint 39). To keep development organized, the Webspark CI GitHub repository will have a branch created for each specific sprint. So, if we are currently in Sprint 39, there will also be a `ws2-sprint-39` branch. This sprint branch will be used by all developers on the team as the base branch. All new branches should be created from this base branch, and all Pull Request(s) (PR) should be merged into this base branch. When the sprint is complete, the base branch will then be merged into the `master` branch via its own Pull Request.
+
+### Typical developer workflow
+
+> For this example, let's assume we are working on Sprint 39 and your task is WS2-1596
+
+As a developer working on the Webspark CI project, here is a typical workflow:
+
+1. `Sprint 39` is started in JIRA, and tasks are assigned to you.
+2. You begin your first task, `WS2-1596`.
+3. You fetch the `webspark-ci` repo from GitHub, gaining access to the `origin/ws2-sprint-39` branch.
+4. You create a new branch from `origin/ws2-sprint-39`, and name it after your task using all lowercase letters: `ws2-1596`.
+5. You complete your work, and push your branch to the repo, creating the `origin/ws2-1596` branch.
+6. You create a new PR, looking to merge `origin/ws2-1596` into `origin/ws2-sprint-39`, and assign the `webspark-maintainers` group as Reviewers.
+7. The build process deploys a new Pantheon multidev named after your PR, ready for other team members to review.
 
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
@@ -95,19 +132,15 @@ This workflow differs from a usual Pantheon workflow in that when developing loc
 
 ## Setting up a local development environment
 
-> Although you may use whatever tool you choose, it is always a good idea to use the tool with the best documentation!
-
-We recommend the use of [DDEV](https://ddev.com) or [Lando](https://docs.lando.dev) for local Drupal development. Both will require [Docker](https://www.docker.com) to be installed.
+We recommend the use of [DDEV](https://ddev.com) for local Drupal development. DDEV requires [Docker](https://www.docker.com) to be installed.
 
 - [DDEV installation](https://ddev.readthedocs.io/en/stable)
-- [Lando installation](https://docs.lando.dev/getting-started/installation.html)
 
-After your tool of choice is installed, you then need to set up that tool specifically for Pantheon. This gives you the benefit of having Pantheon and Drupal-specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
+After you have installed DDEV, next you want it setup for Pantheon. This gives you the benefit of having Pantheon and Drupal-specific tools pre-installed, as well as being able to match the Pantheon server configuration as closely as possible.
 
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-- [Lando for Pantheon](https://docs.lando.dev/pantheon)
 
-**_A note on DDEV:_** At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
+At this point, we only want to ensure the Pantheon machine token is added. The rest of the steps outlined in the article above do not apply specifically to the `webspark-ci` project.
 
 ## Cloning the site locally
 
@@ -141,11 +174,14 @@ Since we already installed the dependencies, DDEV will automatically configure i
 
 We now have a container for our `webspark-ci` project, so next it is time to pull down the database and files from the Pantheon site.
 
-First, we need to update the default PHP version in the DDEV config to 8.1, since Webspark expects us to use that:
+First, in the DDEV config we need to update the PHP version to `8.3`, and the MariaDB version to `10.6` since Webspark expects us to use those:
 
 ```yaml
 # .ddev/config.yaml
-php_version: "8.1"
+php_version: "8.3"
+database:
+  type: mariadb
+  version: "10.6"
 ```
 
 Next, we need to tell DDEV which site in Pantheon to pull the database and files from. In `.ddev/providers`, you will find a file named `pantheon.yaml.example`. Copy the contents of this file into a new file called `pantheon.yaml`. Next, we will add the Webspark CI Pantheon site as our target site:
@@ -169,51 +205,186 @@ ddev auth ssh
 ddev pull pantheon
 ```
 
-### Using Lando
-
-> Coming soon!
-
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
 <br>
 
-# Sprints
+# Code Quality
 
-Arizona State University follows [Agile](https://www.atlassian.com/agile) software development principles. As such, teams work in [sprints](https://www.atlassian.com/agile/scrum/sprints) to accomplish tasks in a timely, but orderly fashion. Webspark sprints are usually two weeks in length, and each sprint has a set number of tasks assigned to it.
+## Playwright
 
-## How sprints fit into the Webspark CI workflow
+We use [Playwright](https://playwright.dev) for front end testing. We have installed the [Playwright for DDEV add-on](https://github.com/Lullabot/ddev-playwright) to aid in the process. See the Playwright documentation for how to write tests.
 
-Each sprint has a name, often, it is simply the sprint number (ex: Sprint 39). To keep development organized, the Webspark CI GitHub repository will have a branch created for each specific sprint. So, if we are currently in Sprint 39, there will also be a `ws2-sprint-39` branch. This sprint branch will be used by all developers on the team as the base branch. All new branches should be created from this base branch, and all Pull Request(s) (PR) should be merged into this base branch. When the sprint is complete, the base branch will then be merged into the `master` branch via its own Pull Request.
+### What Playwright does and does not do
 
-### Typical developer workflow
+Playwright is an end-to-end framework, but our use case is to test the user experience. In a nutshell, we will use it to mimic user operations, to be able to see what users see on the front and back end of Webspark sites. Although we do have the ability to get preety advanced with things such as testing specific API calls or taking snapshots for visual regression, we will not utuilize those features just yet. For now, we simply use it as a bot for generating and testing content.
 
-> For this example, let's assume we are working on Sprint 39 and your task is WS2-1596
+The easiest way to put it is that if a user can do it on the front end (in the browser), we want to use Playwright to verufy it works. We do need to be conscious of _what_ we are writing tests for however. Do not write tests for anything that Drupal core should already have a test for, and do not write a test for anything that UDS should already test for. We only want to test what _Webspark_ is responsible for.
 
-As a developer working on the Webspark CI project, here is a typical workflow:
+Finally, do not use Playwright to attempt to test for purely server side operations. For example, do not test that upon user login a particular Drupal service gets called and performs some operation, or that some Drupal query is executed via the Drupal database API. If something happens purely in the PHP world, a tool like PHPUnit is the correct tool for that job.
 
-1. `Sprint 39` is started in JIRA, and tasks are assigned to you.
-2. You begin your first task, `WS2-1596`.
-3. You fetch the `webspark-ci` repo from GitHub, gaining access to the `origin/ws2-sprint-39` branch.
-4. You create a new branch from `origin/ws2-sprint-39`, and name it after your task using all lowercase letters: `ws2-1596`.
-5. You complete your work, and push your branch to the repo, creating the `origin/ws2-1596` branch.
-6. You create a new PR, looking to merge `origin/ws2-1596` into `origin/ws2-sprint-39`, and assign the `webspark-maintainers` group as Reviewers.
-7. The build process deploys a new Pantheon multidev named after your PR, ready for other team members to review.
+### Getting the site ready for Playwright
 
-<div align="right"><a href="#webspark-ci">↑ Top</a></div>
-<br>
-<br>
+We do not want any existing content in the database before we run our Playwright tests. This is because we do not want anything that might interfere with our tests (old database hooks that failed to run, existing garbage content or users, etc). We want to start with a clean slate and seed the website with our own content.
 
-# Deployment
+#### Wipe the existing databse (if not using a clean install)
 
-The benefit of the Pantheon Build Tools workflow is its automated deployment process between the GitHub repository and the Pantheon website. Previously, developers had to create and manage their own Pantheon sites to test their work. The Pantheon Build Tools workflow allows for a centralized site for all team members to use and contribute to. Below, you will find a simplified breakdown of the Build Tools [Pull Request Workflow](https://docs.pantheon.io/guides/build-tools/pr-workflow):
+Lets first ensure we are using a clean install of the site.
 
-1. **Pull Request Issued:** A developer makes changes to a task branch in their local environment and pushes these changes to the remote `webspark-ci` repository. They then create a pull request (PR) to propose merging these changes into the sprint branch.
-2. **Continuous Integration (CI) Kicks In:** Upon the creation of the PR, the continuous integration (CI) process starts via CircleCI. CircleCI is configured to automatically pick up the PR event and initiate a series of tasks defined in a configuration file within the project, which Pantheon has already bootstrapped for us.
-3. **Automated Build Process:** CircleCI first checks out the proposed changes from the task branch, then performs tasks such as installing dependencies, compiling code, running unit tests, etc. The base configuration simply runs Composer, however, we have the flexibility to expand upon this process as we see fit.
-4. **Creation of the Pantheon Multidev:** If the build process is successful, CircleCI then uses Terminus to create a new Multidev environment in the `webspark-ci` Pantheon site, using the database and files from the `dev` environment. The Multidev will be named after the PR.
-5. **Automated Testing:** Depending on the project's configuration, CircleCI may then perform additional automated tests in the new Multidev environment. Pantheon provides Behat testing and visual regression testing by default, but we can expand these to include performance tests, accessibility tests, and more.
-6. **PR Review:** Once the Multidev environment is ready, CircleCI updates the original PR with the URL of the new Multidev. This allows the team to review the proposed changes in a fully functional environment. Additional commits made to the task branch for the PR will trigger the build process, ensuring the Multidev is always using the most up-to-date code.
-7. **Deletion of the Pantheon Multidev:** When the PR is merged into the sprint branch and closed, CircleCI will automatically destroy the Multidev environment for that PR.
+```bash
+ddev drush site:install
+```
+
+#### Adding a sample user
+
+Let's first create a generic admin user. This user is most helpful to use when using tools such as the Playwright Codegen.
+
+```bash
+# Create an admin user for Playwright
+ddev drush ucrt playwright --mail='pw@example.com' --password='playwright'
+ddev drush urol 'administrator' playwright
+```
+
+#### Adding sample media
+
+Visit `/media/add`, and add media for each available media type except Audio and Document (Webspark does not use those by default). Name all of them `sample`, and for images provide the alt text of `sample image` as well as for captions use `sample caption`. For remote videos, be sure to choose an appropriate YoutTube video, prefereably one from the offical [Arizona State University](https://www.youtube.com/@arizonastateuniversity) channel. Here is a good one to use: [We build our future](https://www.youtube.com/watch?v=-pEMBc1mZZA). I chose this one because it is short and has a simple title.
+
+#### Adding sample content
+
+You can do this if you want to, but the point is to test what the user will experience within Webspark. Since it is the users that will be creating content, we will want to also have the content created via the test itself instead of having pre-made content to test on. This allows us to test that our Webspark configurations give the editing experience we expect, as well as the visual experience we expect.
+
+#### Adding a source ID for the RFI components
+
+In order for all of the RFI components to work, we need a valid source ID to pull data from. First visit `/admin/modules` and enable the "ASU Degrees and RFI" module. Next, visit `/admin/config/asu_degree_rfi/settings` and enter any random string in the "Source ID" field. Since we are using jibberish, when we add RFI forms we just need to ensure they are running in test mode.
+
+### Installing Playwright
+
+#### Installing Playwright (from scratch)
+
+Follow the steps below if you will be writing tests for the first time.
+
+```bash
+ddev add-on get Lullabot/ddev-playwright
+ddev restart
+mkdir -p test/playwright
+# When running the command below, use JavaScript and also install Playwright operating system dependencies
+ddev exec -d /var/www/html/test/playwright yarn create playwright
+# Review the generated playwright.config.js file and make any necessary changes first
+ddev install-playwright
+```
+
+#### Installing Playwright
+
+Otherwise, ensure Playwright is ready to run by running the following command:
+
+```bash
+ddev install-playwright
+```
+
+### Running Playwright tests
+
+You have three main options for running your tests, detailed below. If you plan to run the entire suite of tests at once, regardless of the method you choose, I have noticed that Playwright sometimes seems to get "tired" and a few tests will fail. If this occurs, immediately re-run those failed tests one-by-one. Often you will find that they will pass without issue. As we rely on the Layout Builder, failures can also happen if any of the CSS or JS for Layout Builder fails to execute. If a tests fails more than twice, take at look at the provided screenshots either in the repot or via the testing UI to narrow down the issue.
+
+Run Playwright tests using the CI:
+
+```bash
+# Run all tests for all browsers and projects
+ddev playwright test
+
+# Run a specific test file(s)
+# Note that Playwright searches for any test for any part of the words
+# So degree.spec.js will also match card-degree.spec.js
+# For this reason, best to add the path
+# Ex: ddev playwright test pages/homepage.spec.js blocks/charts.spec.js
+ddev playwright test <file> <file>
+
+# Run a test(s) by tag
+# Ex: ddev playwright test @desktop
+ddev playwright test --grep <tag>
+# You can also skip a tag
+ddev playwright test --grep-invert <tag>
+
+# Run any tests via keyword(s)
+# Ex: ddev playwright test footer chart
+ddev playwright test <keyword> <keyword>
+
+# Run a test with a specific title
+# Ex: ddev playwright test -g "search from 404"
+ddev playwright test -g "<title>"
+
+# Run tests for a specific project
+# Ex: ddev playwright test --project firefox
+ddev playwright test --project <project>
+```
+
+Run Playwright tests using the UI:
+
+```bash
+# Open the UI from https://webspark-ci.ddev.site:8444
+# Username is your local (computer home folder) username. Password is 'secret'.
+ddev playwright test --ui
+```
+
+Run Playwright tests and watch them run in the browser:
+
+```bash
+# Open the UI from https://webspark-ci.ddev.site:8444
+# Username is your local (computer home folder) username. Password is 'secret'.
+ddev playwright test --headed
+```
+
+Generate Playwright tests by browsing:
+
+> See [the docs](https://playwright.dev/docs/codegen#generate-tests-with-the-playwright-inspector) for all Codegen options
+
+```bash
+# Open the UI from https://webspark-ci.ddev.site:8444
+# Username is your local (computer home folder) username. Password is 'secret'.
+ddev playwright codegen
+
+# You can also open to a URL
+# ddev playwright codegen http://webspark-ci.ddev.site
+# Note the http vs https here
+ddev playwright codegen <url>
+
+# You can also tell it the size of the viewport to use
+# ddev playwright codegen http://webspark-ci.ddev.site --viewport-size=1440,720
+ddev playwright codegen --viewport-size=<width>,<height>
+```
+
+View HTML or other Playwright reports:
+
+```bash
+# Open the report from https://webspark-ci.ddev.site:9324
+# Note the port is changed from what is given in the Playwright prompt
+ddev playwright show-report --host=0.0.0.0
+```
+
+### Tips for writing Playwright tests
+
+1. Read the Playwright documentation before attempting to write tests. There **is** a small learning curve.
+2. Use accessible locators. The `getByRole` locator is your friend.
+3. Take advantage of implied visibility. For example, there is no reason to test `toBeVisible` on an element targeted by `getByText('foo')` because the element already needs to be visible in order for Playwright to target it to begin with.
+4. Writing tests for our codebase will highlight our weaknesses **very** fast. Take note of what we need to improve, and actually take action on it.
+5. Think about what you are actually trying to test. Do not test things that should have already been tested in Drupal core or UDS. Only test what Webspark has added.
+6. You will spend the most amount of time pinpointing the correct locators you want to use. The codegen won't always get what you need the first time around. Use the accessibility tools in your browsers dev tools for help.
+7. Some elements in the Layout Builder are dynamicly rendered, so you need to be sure that your Playwright locator uses a targeting method with that in mind. In these cases, the `drupal-data-selector` attribute is helpful.
+8. If you need to use Drush in your test, you will need to build the `page` variable manually.
+9. Sometimes Drupal is too slow for Playwright. When creating and testing your tests, you may find that some commands fail because either the page closes or because the targeted element does not exist on the page yet. In those cases, you will need to manually tell Playwright to wait for a few seconds to give everything time to load.
+10. When using Layout Builder, you need to be aware of conditional fields. If fields require AJAX, be aware that you may need to manually tell Playwright to wait for the call, or you may need to mimic key presses to trigger the AJAX call.
+11. When using the codegen, try to keep the virtual browser size reasonable. I have found that it can freeze Playwright if the resolution is too large.
+
+## PHPUnit
+
+Coming soon.
+
+## PHPStan
+
+Coming soon.
+
+## PHPCS
+
+Coming soon.
 
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
 <br>
@@ -221,18 +392,17 @@ The benefit of the Pantheon Build Tools workflow is its automated deployment pro
 
 # Resources
 
+- [Agile](https://www.atlassian.com/agile)
+- [GitHub](https://github.com/ASUWebPlatforms)
+- [Docker](https://www.docker.com)
+- [CircleCI](https://circleci.com)
 - [Pantheon Build Tools](https://docs.pantheon.io/guides/build-tools)
 - [Build Tools Plugin](https://github.com/pantheon-systems/terminus-build-tools-plugin)
-- [GitHub](https://github.com/ASUWebPlatforms)
-- [CircleCI](https://circleci.com)
-- [Docker](https://www.docker.com)
 - [DDEV](https://ddev.com)
 - [DDEV for Pantheon](https://ddev.readthedocs.io/en/stable/users/providers/pantheon)
-- [Lando](https://docs.lando.dev)
-- [Lando for Pantheon](https://docs.lando.dev/pantheon)
-- [Agile](https://www.atlassian.com/agile)
+- [Playwright](https://playwright.dev)
+- [Playwright for DDEV](https://github.com/Lullabot/ddev-playwright)
 
 <div align="right"><a href="#webspark-ci">↑ Top</a></div>
-
-
-
+<br>
+<br>
