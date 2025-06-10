@@ -16,5 +16,8 @@ test.afterAll(async () => {
 })
 
 test('node', async () => {
+  // When you know that the test might be slow, set the timeout for this test
+  // This way you should not need to manually do things like "page.waitForTimeout(500);"
+  test.setTimeout(120000);
   await node.addPage('test')
 })

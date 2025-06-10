@@ -22,7 +22,7 @@ class BasicPage {
     await this.page.goto('/node/add/page')
     await this.inputTitle.fill(title)
     await this.inputSave.click()
-    await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
+    await expect(this.status).toHaveClass(/alert-success/)
     await this.#setNodeUrl()
     await this.#setNodeAlias()
     await this.#setNodePath()

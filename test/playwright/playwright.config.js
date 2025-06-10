@@ -13,7 +13,6 @@ import { defineConfig, devices } from '@playwright/test'
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  // TODO: set a default timeout, considering Drupal ajax times
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -39,6 +38,7 @@ export default defineConfig({
     storageState: 'auth.json',
   },
 
+  // TODO: Try to readd the setup test for logging in and setting the auth state
   /* Configure projects for major browsers */
   projects: [
     // {
