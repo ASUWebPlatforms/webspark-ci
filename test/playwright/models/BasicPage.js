@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect } from '@playwright/test'
 import drupal from '../helpers/drupal'
 
 class BasicPage {
@@ -6,11 +6,14 @@ class BasicPage {
   constructor (page) {
     this.page = page
     this.url = null
+    this.alias = null
+    this.path = null
     this.nid = null
     this.inputTitle = page.getByRole('textbox', { name: 'Title *' })
     this.inputBody = page.getByLabel('Rich Text Editor').getByRole('textbox')
     this.inputSave = page.getByRole('button', { name: 'Save' })
-    this.success = page.getByRole('status', { name: 'Status message' }).filter({ hasText: 'has been created' })
+    this.inputDelete = page.getByRole('button', { name: 'Delete' })
+    this.status = page.getByRole('status', { name: 'Status message' })
   }
 
   async addPage (name) {
@@ -19,42 +22,89 @@ class BasicPage {
     await this.page.goto('/node/add/page')
     await this.inputTitle.fill(title)
     await this.inputSave.click()
-    await expect(this.success).toBeVisible({ timeout: 5000 })
-    await this.setNodeUrl(this.page.url())
-    await this.setNodeId(this.page.url())
+    await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
+    await this.#setNodeUrl()
+    await this.#setNodeAlias()
+    await this.#setNodePath()
+    await this.#setNodeId()
   }
 
   async viewPage () {
-    // go to the page url directly or click the view button?
+    await this.page.goto(this.alias)
   }
 
   async editPage () {
-    const path = `/node/${this.nid}/edit`
+    const path = `${this.path}/edit`
     await this.page.goto(path)
   }
 
-  async deletePage () {}
+  async deletePage () {
+    const path = `${this.path}/delete`
+    await this.page.goto(path)
+    await this.inputDelete.click()
+    await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
+  }
 
-  async editPageLayout () {}
+  async editPageLayout () {
+    const path = `${this.path}/layout`
+    await this.page.goto(path)
+  }
 
-  async editPageRevisions () {}
+  async editPageRevisions () {
+    const path = `${this.path}/revisions`
+    await this.page.goto(path)
+  }
 
-  async setNodeUrl (url) {
-    this.url = url
+  async #setNodeUrl () {
+    this.url = this.page.url()
   }
 
   async getNodeUrl () {
     return this.url
   }
 
-  async setNodeId (url) {
+  async #setNodeAlias () {
+    if (!this.url) {
+      console.error('Cannot set node alias because this.url is not set.')
+      this.alias = null
+      return
+    }
     try {
-      const obj = new URL(url)
-      const alias = obj.pathname
-
-      this.nid = await drupal.getNodeIdByAlias(alias)
+      const urlObject = new URL(this.url)
+      this.alias = urlObject.pathname
     } catch (error) {
-      console.error(`Error processing URL "${url}" to set Node ID:`, error)
+      console.error(`Error parsing URL "${this.url}" to set Node alias:`, error)
+      this.alias = null
+    }
+  }
+
+  async getNodeAlias () {
+    return this.alias
+  }
+
+  async #setNodePath () {
+    try {
+      if (!this.alias) {
+        console.error('Cannot set node path because this.alias is not set.')
+        this.path = null
+        return
+      }
+      this.path = await drupal.getNodePath(this.alias)
+    } catch (error) {
+      console.error('Error processing Node path:', error)
+      this.path = null
+    }
+  }
+
+  async getNodePath () {
+    return this.path
+  }
+
+  async #setNodeId () {
+    try {
+      this.nid = await drupal.getNodeIdByAlias(this.alias)
+    } catch (error) {
+      console.error(`Error processing alias to set Node ID:`, error)
       this.nid = null
     }
   }
@@ -63,7 +113,9 @@ class BasicPage {
     return this.nid
   }
 
-  async addLorem () {}
+  async addLorem () {
+    await this.inputBody.fill('Lorem ipsum dolor')
+  }
 }
 
 export { BasicPage }

@@ -24,39 +24,47 @@ class Drupal {
 
   async #login (page, buffer) {
     const url = buffer.toString().trim()
-
     await page.goto(url)
     await this.acceptCookies(page)
   }
 
   async loginAsAdmin (page) {
     const buffer = await drush.getAdminLogin()
-
     await this.#login(page, buffer)
   }
 
   async loginAsUser (page, name) {
     const buffer = await drush.getUserLogin(name)
-
     await this.#login(page, buffer)
   }
 
-  async getNodeIdByAlias (alias) {
-    const formattedAlias = alias.startsWith('/') ? alias : `/${alias}`;
-    const cmd = `print \Drupal::service("path_alias.manager")->getPathByAlias("${formattedAlias}");`;
-    const buffer = drush.drush(`php:eval '${cmd}'`);
-    const path = buffer.toString().trim();
+  async getNodePath (alias) {
+    const cmd = `print \Drupal::service("path_alias.manager")->getPathByAlias("${alias}");`
+    const buffer = drush.drush(`php:eval '${cmd}'`)
+    const path = buffer.toString().trim()
+    return path
+  }
 
-    console.log('Raw path from Drush:', path);
+  async getNodeAlias () {
+    const cmd = 'print \Drupal::requestStack()->getCurrentRequest()->getPathInfo();'
+    const buffer = drush.drush(`php:eval '${cmd}'`)
+    const alias = buffer.toString().trim()
+    return alias
+  }
+
+  async getNodeIdByAlias (alias) {
+    const formattedAlias = alias.startsWith('/') ? alias : `/${alias}`
+    const cmd = `print \Drupal::service("path_alias.manager")->getPathByAlias("${formattedAlias}");`
+    const buffer = drush.drush(`php:eval '${cmd}'`)
+    const path = buffer.toString().trim()
 
     if (path.startsWith('/node/')) {
-      const nid = path.substring('/node/' . length);
-      console.log('Extracted Node ID:', nid);
-      return nid;
+      const nid = path.substring('/node/'.length)
+      return nid
     }
 
-    console.warn(`Unexpected path format from Drush: ${path}. Expected to start with /node/`);
-    return path;
+    console.warn(`Unexpected path format from Drush: ${path}. Expected to start with /node/`)
+    return path
   }
 }
 
