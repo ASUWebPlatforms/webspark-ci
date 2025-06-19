@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test'
+import { faker } from '@faker-js/faker/locale/en';
 import drupal from '../helpers/drupal'
 
 class BasicPage {
@@ -15,13 +16,18 @@ class BasicPage {
     this.inputSave = page.getByRole('button', { name: 'Save' })
     this.inputDelete = page.getByRole('button', { name: 'Delete' })
     this.status = page.getByRole('status', { name: 'Status message' })
-    this.title = page.getByRole('heading', { name: /Playwright/i })
   }
 
   async addPage () {
+    const title = `Playwright ${this.name}`
+
     await this.page.goto('/node/add/page')
-    await this.addContent()
+    await this.inputTitle.fill(title)
+    await this.inputSave.click()
+
     await expect(this.status).toHaveClass(/alert-success/)
+    await expect(this.page.getByRole('heading', { name: title })).toBeVisible();
+
     await this.#setNodeUrl()
     await this.#setNodeAlias()
     await this.#setNodePath()
@@ -29,11 +35,12 @@ class BasicPage {
   }
 
   async addContent () {
-    const title = `Playwright ${this.name}`
+    const body = faker.lorem.sentence()
 
-    await this.inputTitle.fill(title)
-    await this.inputBody.fill('Lorem ipsum dolor')
+    await this.inputBody.fill(body)
     await this.inputSave.click()
+
+    await expect(this.page.getByText(body)).toBeVisible();
   }
 
   async viewPage () {
@@ -42,14 +49,17 @@ class BasicPage {
 
   async editPage () {
     const path = `${this.path}/edit`
+
     await this.page.goto(path)
   }
 
   async deletePage () {
     const path = `${this.path}/delete`
+
     await this.page.goto(path)
     await this.inputDelete.click()
-    await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
+
+    await expect(this.status).toHaveClass(/alert-success/)
   }
 
   async editPageLayout () {
@@ -118,11 +128,6 @@ class BasicPage {
 
   async getNodeId () {
     return this.nid
-  }
-
-  async verifyTitle(text) {
-    const title = `Playwright ${text}`;
-    expect(await this.page.getByText(title, { exact: true })).toBeVisible();
   }
 }
 

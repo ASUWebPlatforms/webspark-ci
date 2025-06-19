@@ -42,7 +42,7 @@ export default defineConfig({
     },
     {
       name: 'sample',
-      testMatch: '**/basic.spec.js',
+      testMatch: '**/article.spec.js',
       dependencies: ['setup'],
       use: {
         storageState: STORAGE_STATE,

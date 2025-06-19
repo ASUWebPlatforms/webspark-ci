@@ -10,7 +10,7 @@ test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
-    node = new BasicPage(page);
+    node = new BasicPage(page, title);
   });
 
   test.afterAll(async () => {
@@ -18,11 +18,11 @@ test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
   });
 
   test('create', async () => {
-    await node.addPage(title);
+    await node.addPage();
   });
 
-  test('verify', async () => {
-    await page.goto(node.path);
-    await node.verifyTitle(title);
+  test('edit', async () => {
+    await node.editPage();
+    await node.addContent();
   });
 });

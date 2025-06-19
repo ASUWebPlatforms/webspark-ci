@@ -18,13 +18,25 @@ class Article {
     this.inputSave = page.getByRole('button', { name: 'Save' })
     this.inputDelete = page.getByRole('button', { name: 'Delete' })
     this.status = page.getByRole('status', { name: 'Status message' })
-    this.title = page.getByRole('heading', { name: /Playwright/i })
+    this.hero = page.locator('.uds-story-hero');
+    this.image = page.getByRole('img', { name: 'sample image' });
+    this.date = page.getByRole('time');
+    this.lead = page.getByText('Replace or delete this "lead');
   }
 
   async addArticle () {
+    const title = `Playwright ${this.name}`
+    const body = faker.lorem.sentence()
+
     await this.page.goto('/node/add/article')
-    await this.addContent()
+    await this.inputTitle.fill(title)
+    await this.inputBody.fill(body)
+    await this.inputSave.click()
+
     await expect(this.status).toHaveClass(/alert-success/)
+    await expect(this.page.getByRole('heading', { name: title })).toBeVisible();
+    await expect(this.page.getByText(body)).toBeVisible();
+
     await this.#setNodeUrl()
     await this.#setNodeAlias()
     await this.#setNodePath()
@@ -32,14 +44,18 @@ class Article {
   }
 
   async addContent () {
-    const title = `Playwright ${this.name}`
+    const author = faker.person.fullName()
 
     await drupal.addMediaField(this.page);
     await this.inputHeroSize.selectOption({ label: 'Large' })
-    await this.inputTitle.fill(title)
-    await this.inputAuthor.fill('Author')
-    await this.inputBody.fill('Lorem ipsum dolor')
+    await this.inputAuthor.fill(author)
     await this.inputSave.click()
+
+    await expect(this.hero).toHaveClass(/uds-story-hero-lg/);
+    await expect(this.image).toBeVisible();
+    await expect(this.lead).toBeVisible();
+    await expect(this.page.getByText(author, { exact: true })).toBeVisible();
+    await expect(this.date).toBeVisible();
   }
 
   async viewArticle () {
@@ -48,23 +64,28 @@ class Article {
 
   async editArticle () {
     const path = `${this.path}/edit`
+
     await this.page.goto(path)
   }
 
   async deleteArticle () {
     const path = `${this.path}/delete`
+
     await this.page.goto(path)
     await this.inputDelete.click()
-    await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
+
+    await expect(this.status).toHaveClass(/alert-success/)
   }
 
   async editArticleLayout () {
     const path = `${this.path}/layout`
+
     await this.page.goto(path)
   }
 
   async editArticleRevisions () {
     const path = `${this.path}/revisions`
+
     await this.page.goto(path)
   }
 
@@ -124,11 +145,6 @@ class Article {
 
   async getNodeId () {
     return this.nid
-  }
-
-  async verifyTitle(text) {
-    const title = `Playwright ${text}`;
-    expect(await this.page.getByText(title, { exact: true })).toBeVisible();
   }
 }
 

@@ -11,7 +11,7 @@ if (!USERNAME || !PASSWORD) {
 
 setup('login', async ({ page }) => {
   await page.goto('/user/login');
-  await page.getByRole('button', { name: 'Ok, I agree' });
+  await page.getByRole('button', { name: 'Ok, I agree' }).click();
   await page.getByRole('textbox', { name: 'Required Username' }).fill(USERNAME);
   await page.getByRole('textbox', { name: 'Required Password' }).fill(PASSWORD);
   await page.getByRole('button', { name: 'Log In' }).click();
