@@ -1,0 +1,7 @@
+asu_news.settings:
+  type: config_object
+  label: 'ASU News settings'
+  mapping:
+    asu_news_feed_url:
+      type: string
+      label: 'ASU News Feed URL'

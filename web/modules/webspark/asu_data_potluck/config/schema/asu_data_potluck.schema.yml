@@ -1,0 +1,11 @@
+asu_data_potluck.settings:
+  type: config_object
+  label: 'ASU Data Potluck settings'
+  mapping:
+    asu_data_potluck:
+      type: mapping
+      label: 'ASU Data Potluck configuration'
+      mapping:
+        datasource_endpoint:
+          type: string
+          label: 'Data Potluck API endpoint'

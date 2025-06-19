@@ -155,13 +155,15 @@ upstream/web/
 # Ignore local .gitignore changes with .git/info/exclude and a symbolic link via .gitignore_local
 /.gitignore_local
 
+# Ignore the generated composer.patches.json file
+/composer.patches.json
+
 # Other ignores
 .DS_Store
 *.sql
 *.gz
-
-# Ignore the generated composer.patches.json file
-/composer.patches.json
-
-# Ignore the auth.json file
 auth.json
+/test/playwright/core
+/.npmrc
+yarn-error.log
+/test/playwright/.auth

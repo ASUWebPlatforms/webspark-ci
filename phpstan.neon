@@ -2,8 +2,9 @@ parameters:
 	customRulesetUsed: true
 	level: 0
 	paths:
-	  - web/modules/webspark/
-	  - web/themes/webspark/renovation
+	  - web/modules/webspark
+	  - web/themes/webspark
+	  - web/profiles/webspark
 	ignoreErrors:
 	  - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
 	  - '#Plugin definitions cannot be altered.#'
