@@ -1,19 +1,23 @@
 import { test, expect } from '@playwright/test';
-import drupal from '../helpers/drupal';
+import drush from '../../helpers/drush'
 
-test.describe('maintenance page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
-  /** @type {import('@playwright/test').Page} */
-  let page;
+/** @type {import('@playwright/test').Page} */
+let page
+const title = 'Maintenance Page'
 
-  test.beforeAll('setup', async ({ browser }) => {
-    page = await browser.newPage();
-    await drupal.toggleMaintenanceMode();
-  });
+// Reset storage state for this file to avoid being authenticated
+test.use({ storageState: { cookies: [], origins: [] } })
 
-  test.afterAll('cleanup', async () => {
-    await drupal.toggleMaintenanceMode(0);
-    await page.close();
-  });
+test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage()
+    await drush.enableMaintenanceMode()
+  })
+
+  test.afterAll(async () => {
+    await drush.disableMaintenanceMode()
+    await page.close()
+  })
 
   test('verify', async () => {
     const response = await page.goto('/');
@@ -21,5 +25,5 @@ test.describe('maintenance page tests', { tag: ['@webspark', '@desktop', '@pages
 
     expect(response.status()).toBe(503);
     await expect(content).toBeVisible();
-  });
-});
+  })
+})
