@@ -1,30 +1,28 @@
 import { test, expect } from '@playwright/test';
-import drupal from '../helpers/drupal';
+import { BasicPage } from '../../models/BasicPage.js'
 
-test.describe('basic page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
-  /** @type {import('@playwright/test').Page} */
-  let page;
-  let pageUrl;
+/** @type {import('@playwright/test').Page} */
+let page, node;
+const title = 'Basic Page';
 
-  test.beforeAll('setup', async ({ browser }) => {
+test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
+  test.describe.configure({ mode: 'serial' });
+
+  test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
-    await drupal.consent(page);
-    await drupal.toggleUniversalGTM();
-    await drupal.loginAsAdmin(page);
-    pageUrl = await drupal.createPage(page, 'Basic');
+    node = new BasicPage(page);
   });
 
-  test.beforeEach(async () => {
-    await page.goto(pageUrl);
-  });
-
-  test.afterAll('cleanup', async () => {
+  test.afterAll(async () => {
     await page.close();
   });
 
-  test('verify', async () => {
-    const title = page.getByText('Playwright Basic', { exact: true });
+  test('create', async () => {
+    await node.addPage(title);
+  });
 
-    await expect(title).toBeVisible();
+  test('verify', async () => {
+    await page.goto(node.path);
+    await node.verifyTitle(title);
   });
 });

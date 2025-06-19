@@ -1,13 +1,8 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test'
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+export const STORAGE_STATE = path.join(__dirname, '.auth/user.json');
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -26,6 +21,8 @@ export default defineConfig({
   reporter: 'html',
   /* Fail fast */
   maxFailures: process.env.CI ? 5 : undefined,
+  /* Default timeout, can override per test or step */
+  timeout: 45000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -35,74 +32,33 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
-    storageState: 'auth.json',
   },
 
-  // TODO: Try to readd the setup test for logging in and setting the auth state
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: 'firefox',
-    //   use: {
-    //      ...devices['Desktop Firefox'],
-    //      viewport: { width: 1920, height: 1080 },
-    //   },
-    //   testIgnore: /.*mobile.spec.js/,
-    // },
     {
-      name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1920, height: 1080 },
-      },
-      testIgnore: /.*mobile.spec.js/,
+      name: 'setup',
+      testMatch: '**/*.setup.js',
     },
-    // {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     viewport: { width: 1920, height: 1080 },
-    //   },
-    //   testIgnore: /.*mobile.spec.js/,
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    //   testMatch: /.*mobile.spec.js/,
-    // },
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    //   testMatch: /.*mobile.spec.js/,
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     ...devices['Desktop Edge'],
-    //     channel: 'msedge',
-    //     viewport: { width: 1920, height: 1080 },
-    //   },
-    //   testIgnore: /.*mobile.spec.js/,
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //      ...devices['Desktop Chrome'],
-    //      channel: 'chrome',
-    //      viewport: { width: 1920, height: 1080 },
-    //     },
-    //     testIgnore: /.*mobile.spec.js/,
-    // },
+    {
+      name: 'sample',
+      testMatch: '**/basic.spec.js',
+      dependencies: ['setup'],
+      use: {
+        storageState: STORAGE_STATE,
+      },
+    },
+    {
+      name: 'chrome',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
+      testIgnore: /.*mobile.spec.js/,
+      dependencies: ['setup'],
+    },
+    {
+      name: 'iphone',
+      use: {...devices['iPhone 14'], storageState: STORAGE_STATE, },
+      testMatch: /.*mobile.spec.js/,
+      dependencies: ['setup'],
+    },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 })

@@ -1,7 +1,8 @@
 import { expect } from '@playwright/test'
+import { faker } from '@faker-js/faker/locale/en';
 import drupal from '../helpers/drupal'
 
-class BasicPage {
+class Article {
   // @param {import('playwright').Page} page
   constructor (page, name) {
     this.page = page
@@ -11,15 +12,17 @@ class BasicPage {
     this.path = null
     this.nid = null
     this.inputTitle = page.getByRole('textbox', { name: 'Title *' })
-    this.inputBody = page.getByLabel('Rich Text Editor').getByRole('textbox')
+    this.inputAuthor = page.getByRole('textbox', { name: 'Article author' })
+    this.inputBody = page.getByLabel('Rich Text Editor').getByRole('textbox').nth(1)
+    this.inputHeroSize = page.getByLabel('Hero Size')
     this.inputSave = page.getByRole('button', { name: 'Save' })
     this.inputDelete = page.getByRole('button', { name: 'Delete' })
     this.status = page.getByRole('status', { name: 'Status message' })
     this.title = page.getByRole('heading', { name: /Playwright/i })
   }
 
-  async addPage () {
-    await this.page.goto('/node/add/page')
+  async addArticle () {
+    await this.page.goto('/node/add/article')
     await this.addContent()
     await expect(this.status).toHaveClass(/alert-success/)
     await this.#setNodeUrl()
@@ -31,33 +34,36 @@ class BasicPage {
   async addContent () {
     const title = `Playwright ${this.name}`
 
+    await drupal.addMediaField(this.page);
+    await this.inputHeroSize.selectOption({ label: 'Large' })
     await this.inputTitle.fill(title)
+    await this.inputAuthor.fill('Author')
     await this.inputBody.fill('Lorem ipsum dolor')
     await this.inputSave.click()
   }
 
-  async viewPage () {
+  async viewArticle () {
     await this.page.goto(this.alias)
   }
 
-  async editPage () {
+  async editArticle () {
     const path = `${this.path}/edit`
     await this.page.goto(path)
   }
 
-  async deletePage () {
+  async deleteArticle () {
     const path = `${this.path}/delete`
     await this.page.goto(path)
     await this.inputDelete.click()
     await expect(this.status).toHaveClass(/alert-success/, { timeout: 5000 })
   }
 
-  async editPageLayout () {
+  async editArticleLayout () {
     const path = `${this.path}/layout`
     await this.page.goto(path)
   }
 
-  async editPageRevisions () {
+  async editArticleRevisions () {
     const path = `${this.path}/revisions`
     await this.page.goto(path)
   }
@@ -126,4 +132,4 @@ class BasicPage {
   }
 }
 
-export { BasicPage }
+export { Article }

@@ -1,23 +1,20 @@
-import { test, expect } from '@playwright/test'
-import { BasicPage } from '../models/BasicPage.js'
-import drush from '../helpers/drush.js'
-import drupal from '../helpers/drupal.js'
+import { test, expect } from '@playwright/test';
+import { BasicPage } from '../models/BasicPage.js';
 
-let context, page, node
+let node;
+const USERNAME = process.env.DRUPAL_USER;
 
-test.beforeAll(async ({ browser }) => {
-  context = await browser.newContext()
-  page = await context.newPage()
-  node = new BasicPage(page)
-})
+test.beforeEach(async ({ page }) => {
+  await page.goto('/admin');
+});
 
-test.afterAll(async () => {
-  await context.close()
-})
+test('add page', async ({ page }) => {
+  node = new BasicPage(page);
+  await node.addPage('Sample Page');
+});
 
-test('node', async () => {
-  // When you know that the test might be slow, set the timeout for this test
-  // This way you should not need to manually do things like "page.waitForTimeout(500);"
-  test.setTimeout(120000);
-  await node.addPage('test')
-})
+// test('log out', async ({ page }) => {
+//   await page.getByRole('button', { name: USERNAME }).click();
+//   await page.getByRole('link', { name: 'Log out' }).click();
+//   await expect(page.getByTestId('title').getByRole('link', { name: 'Webspark CI' })).toBeVisible();
+// });

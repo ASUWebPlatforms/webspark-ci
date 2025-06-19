@@ -66,6 +66,12 @@ class Drupal {
     console.warn(`Unexpected path format from Drush: ${path}. Expected to start with /node/`)
     return path
   }
+
+  async addMediaField(page, n = 0, media = 'sample') {
+    await page.getByRole('button', { name: 'Add media' }).nth(n).click();
+    await page.getByRole('checkbox', { name: `Select ${media}`, exact: true }).check();
+    await page.getByRole('button', { name: 'Insert selected' }).click();
+  }
 }
 
 export default new Drupal()

@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.1"
   },
