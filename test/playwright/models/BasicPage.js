@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker/locale/en'
 import drupal from '../helpers/drupal'
 
 class BasicPage {
@@ -26,7 +26,7 @@ class BasicPage {
     await this.inputSave.click()
 
     await expect(this.status).toHaveClass(/alert-success/)
-    await expect(this.page.getByRole('heading', { name: title })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: title })).toBeVisible()
 
     await this.#setNodeUrl()
     await this.#setNodeAlias()
@@ -40,7 +40,7 @@ class BasicPage {
     await this.inputBody.fill(body)
     await this.inputSave.click()
 
-    await expect(this.page.getByText(body)).toBeVisible();
+    await expect(this.page.getByText(body)).toBeVisible()
   }
 
   async viewPage () {

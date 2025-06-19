@@ -166,3 +166,4 @@ auth.json
 /test/playwright/core
 /.npmrc
 yarn-error.log
+/test/playwright/.auth

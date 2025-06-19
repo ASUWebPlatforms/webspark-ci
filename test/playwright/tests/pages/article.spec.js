@@ -1,28 +1,28 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 import { Article } from '../../models/Article.js'
 
 /** @type {import('@playwright/test').Page} */
-let page, node;
-const title = 'Article';
+let page, node
+const title = 'Article'
 
 test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
-  test.describe.configure({ mode: 'serial' });
+  test.describe.configure({ mode: 'serial' })
 
   test.beforeAll(async ({ browser }) => {
-    page = await browser.newPage();
-    node = new Article(page, title);
-  });
+    page = await browser.newPage()
+    node = new Article(page, title)
+  })
 
   test.afterAll(async () => {
-    await page.close();
-  });
+    await page.close()
+  })
 
   test('create', async () => {
-    await node.addArticle();
-  });
+    await node.addArticle()
+  })
 
   test('edit', async () => {
-    await node.editArticle();
-    await node.addContent();
-  });
-});
+    await node.editArticle()
+    await node.addContent()
+  })
+})

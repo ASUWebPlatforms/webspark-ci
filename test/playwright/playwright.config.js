@@ -1,8 +1,8 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test'
-import path from 'path';
+import path from 'path'
 
-export const STORAGE_STATE = path.join(__dirname, '.auth/user.json');
+export const STORAGE_STATE = path.join(__dirname, '.auth/user.json')
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -44,7 +44,7 @@ export default defineConfig({
       name: 'sample',
       testMatch: '**/404.spec.js',
       dependencies: ['setup'],
-      use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
+      use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE },
     },
     // {
     //   name: 'chrome',

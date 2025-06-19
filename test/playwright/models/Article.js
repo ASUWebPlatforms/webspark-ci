@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test'
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker/locale/en'
 import drupal from '../helpers/drupal'
 
 class Article {
@@ -18,10 +18,10 @@ class Article {
     this.inputSave = page.getByRole('button', { name: 'Save' })
     this.inputDelete = page.getByRole('button', { name: 'Delete' })
     this.status = page.getByRole('status', { name: 'Status message' })
-    this.hero = page.locator('.uds-story-hero');
-    this.image = page.getByRole('img', { name: 'sample image' });
-    this.date = page.getByRole('time');
-    this.lead = page.getByText('Replace or delete this "lead');
+    this.hero = page.locator('.uds-story-hero')
+    this.image = page.getByRole('img', { name: 'sample image' })
+    this.date = page.getByRole('time')
+    this.lead = page.getByText('Replace or delete this "lead')
   }
 
   async addArticle () {
@@ -34,8 +34,8 @@ class Article {
     await this.inputSave.click()
 
     await expect(this.status).toHaveClass(/alert-success/)
-    await expect(this.page.getByRole('heading', { name: title })).toBeVisible();
-    await expect(this.page.getByText(body)).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: title })).toBeVisible()
+    await expect(this.page.getByText(body)).toBeVisible()
 
     await this.#setNodeUrl()
     await this.#setNodeAlias()
@@ -46,16 +46,16 @@ class Article {
   async addContent () {
     const author = faker.person.fullName()
 
-    await drupal.addMediaField(this.page);
+    await drupal.addMediaField(this.page)
     await this.inputHeroSize.selectOption({ label: 'Large' })
     await this.inputAuthor.fill(author)
     await this.inputSave.click()
 
-    await expect(this.hero).toHaveClass(/uds-story-hero-lg/);
-    await expect(this.image).toBeVisible();
-    await expect(this.lead).toBeVisible();
-    await expect(this.page.getByText(author, { exact: true })).toBeVisible();
-    await expect(this.date).toBeVisible();
+    await expect(this.hero).toHaveClass(/uds-story-hero-lg/)
+    await expect(this.image).toBeVisible()
+    await expect(this.lead).toBeVisible()
+    await expect(this.page.getByText(author, { exact: true })).toBeVisible()
+    await expect(this.date).toBeVisible()
   }
 
   async viewArticle () {
