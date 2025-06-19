@@ -1,25 +1,25 @@
 import { test, expect } from '@playwright/test';
+import { ErrorPage } from '../../models/ErrorPage.js'
 
-test.describe('404 page tests', { tag: ['@webspark', '@desktop', '@pages'] }, () => {
-  test('verify', async ({ page }) => {
-    const response = await page.goto('/foo-bar');
-    const content = page.getByRole('heading', { name: 'Hmm, we can\'t find that page' });
-    const title = page.getByRole('heading', { name: 'Search all of ASU' });
-    const input = page.getByRole('textbox', { name: 'Search asu.edu' });
+/** @type {import('@playwright/test').Page} */
+let page, error;
+const title = 'Error 404';
 
-    expect(response.status()).toBe(404);
-    await expect(content).toBeVisible();
-    await expect(title).toBeVisible();
+test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
+    error = new ErrorPage(page);
+  });
 
-    // This test is a more detailed search test
-    await input.fill('sparky');
-    await page.evaluate(() => {
-      document.getElementById('webspark-blocks-asu-search-form').submit();
-    });
-    await page.waitForURL('https://search.asu.edu/**');
+  test.afterAll(async () => {
+    await page.close();
+  });
 
-    const finalUrl = page.url();
-    expect(finalUrl).toContain('https://search.asu.edu/');
-    expect(finalUrl).toContain('q=sparky');
+  test('verify', async () => {
+    await error.visit404Page();
+  });
+
+  test('search', async () => {
+    await error.search();
   });
 });

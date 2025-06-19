@@ -42,23 +42,21 @@ export default defineConfig({
     },
     {
       name: 'sample',
-      testMatch: '**/article.spec.js',
+      testMatch: '**/404.spec.js',
       dependencies: ['setup'],
-      use: {
-        storageState: STORAGE_STATE,
-      },
+      use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
     },
-    {
-      name: 'chrome',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
-      testIgnore: /.*mobile.spec.js/,
-      dependencies: ['setup'],
-    },
-    {
-      name: 'iphone',
-      use: {...devices['iPhone 14'], storageState: STORAGE_STATE, },
-      testMatch: /.*mobile.spec.js/,
-      dependencies: ['setup'],
-    },
+    // {
+    //   name: 'chrome',
+    //   use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
+    //   testIgnore: /.*mobile.spec.js/,
+    //   dependencies: ['setup'],
+    // },
+    // {
+    //   name: 'iphone',
+    //   use: {...devices['iPhone 14'], storageState: STORAGE_STATE, },
+    //   testMatch: /.*mobile.spec.js/,
+    //   dependencies: ['setup'],
+    // },
   ],
 })
