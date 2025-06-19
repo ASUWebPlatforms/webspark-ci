@@ -130,21 +130,11 @@
         ],
         "unit-test": "echo 'No unit test step defined.'",
         "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff": [
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom"
-        ],
         "lint-webspark": "find web/profiles/webspark web/modules/webspark web/themes/webspark -name '*.php' -exec php -l {} \\;",
-        "code-sniff-webspark": [
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/webspark",
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/webspark",
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/webspark",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/profiles/webspark",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/webspark",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/webspark"
-        ],
+        "code-sniff": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor web/modules/custom web/themes/custom",
+        "code-sniff-webspark": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor web/profiles/webspark web/modules/webspark web/themes/webspark",
+        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom",
+        "phpstan-webspark": "vendor/bin/phpstan analyse",
         "pre-update-cmd": ["DrupalComposerManaged\\ComposerScripts::preUpdate"],
         "post-update-cmd": ["DrupalComposerManaged\\ComposerScripts::postUpdate"],
         "custom-require": ["WebsparkCustomScripts\\CustomComposerScripts::customRequire"],
