@@ -15,7 +15,7 @@ class Block {
     this.inputCreateContentBlock = page.getByRole('link', { name: 'Create content block' })
     this.inputAddByName = page.getByRole('link', { name: name, exact: true })
     this.inputBlockAdminTitle = page.getByRole('textbox', { name: 'Required Block admin title' })
-    this.inputAddBlock = page.getByRole('button', { name: 'Add block' })
+    this.inputSaveBlock = page.getByRole('button', { name: 'Add block' })
     this.inputUpdateBlock = page.getByRole('button', { name: 'Update' })
     this.inputSaveLayout = page.getByRole('button', { name: 'Save layout' })
     this.inputAppearanceSettings = page.getByRole('button', { name: 'Appearance Settings' })
@@ -35,23 +35,43 @@ class Block {
     await this.inputBlockAdminTitle.fill(this.name)
   }
 
+  /**
+   * Add content to the block.
+   * @returns {Promise<void>}
+   */
   async addContent () {
-    // This is meant to be overriden in the extending classes
+    throw new Error('addContent() must be implemented in the subclass')
   }
 
   async edit () {}
 
+  /**
+   * Save the block.
+   * @returns {Promise<void>}
+   */
   async save () {
-    await this.inputAddBlock.click()
+    await this.inputSaveBlock.click()
     await this.inputSaveLayout.click()
   }
 
+  /**
+   * Update the block.
+   * @returns {Promise<void>}
+   */
   async update () {
     await this.inputUpdateBlock.click()
     await this.inputSaveLayout.click()
   }
 
   async delete () {}
+
+  /**
+   * Verify the block via tests.
+   * @returns {Promise<void>}
+   */
+  async verify () {
+    throw new Error('verify() must be implemented in the subclass')
+  }
 
   /**
    * Add appearance settings to the block.

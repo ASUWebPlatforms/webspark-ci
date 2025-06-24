@@ -7,7 +7,7 @@ let page
 let node, block
 const title = 'Accordion'
 
-test.describe(title, { tag: ['@webspark', '@blocks'] }, () => {
+test.describe(title, { tag: ['@webspark', '@block'] }, () => {
   test.describe.configure({ mode: 'serial' })
 
   test.beforeAll(async ({ browser }) => {
@@ -29,11 +29,6 @@ test.describe(title, { tag: ['@webspark', '@blocks'] }, () => {
   })
 
   test('verify', async () => {
-    await expect(block.el).toBeVisible()
-    await expect(block.icon).toBeVisible()
-    await expect(block.heading).toBeVisible()
-    await expect(block.content).toBeVisible()
-    await block.heading.click()
-    await expect(block.content).toBeHidden()
+    await block.verify()
   })
 })

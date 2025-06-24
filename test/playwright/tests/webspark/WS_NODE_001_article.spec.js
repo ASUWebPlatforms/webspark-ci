@@ -6,7 +6,7 @@ let page
 let node
 const title = 'Article'
 
-test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
+test.describe(title, { tag: ['@webspark', '@node'] }, () => {
   test.describe.configure({ mode: 'serial' })
 
   test.beforeAll(async ({ browser }) => {

@@ -21,6 +21,22 @@ class Node {
   }
 
   /**
+   * Add a new node.
+   * @returns {Promise<void>}
+   */
+  async add () {
+    throw new Error('add() must be implemented in the subclass')
+  }
+
+  /**
+   * Add content to the node.
+   * @returns {Promise<void>}
+   */
+  async addContent () {
+    throw new Error('addContent() must be implemented in the subclass')
+  }
+
+  /**
    * Navigate to the node's view page.
    * @returns {Promise<void>}
    */
