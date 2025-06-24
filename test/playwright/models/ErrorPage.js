@@ -2,7 +2,10 @@ import { expect } from '@playwright/test'
 import { faker } from '@faker-js/faker/locale/en'
 
 class ErrorPage {
-  // @param {import('playwright').Page} page
+  /**
+   * ErrorPage model for Playwright tests.
+   * @param {import('playwright').Page} page
+   */
   constructor (page) {
     this.page = page
     this.url = '/dwhgdkwhfcbcdkwjcbdwkjcb'
@@ -11,6 +14,10 @@ class ErrorPage {
     this.inputSearch = page.getByRole('textbox', { name: 'Search asu.edu' })
   }
 
+  /**
+   * Visit the 404 error page.
+   * @returns {Promise<void>}
+   */
   async visit404Page () {
     const response = await this.page.goto(this.url)
 
@@ -20,6 +27,10 @@ class ErrorPage {
     await expect(this.inputSearch).toBeVisible()
   }
 
+  /**
+   * Search for a random name on the ASU search page.
+   * @returns {Promise<void>}
+   */
   async search () {
     const name = faker.person.firstName()
 

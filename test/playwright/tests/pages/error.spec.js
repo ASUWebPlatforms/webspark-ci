@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test'
 import { ErrorPage } from '../../models/ErrorPage.js'
 
 /** @type {import('@playwright/test').Page} */
-let page, error
+let page
+let error
 const title = 'Error 404'
 
 // Reset storage state for this file to avoid being authenticated

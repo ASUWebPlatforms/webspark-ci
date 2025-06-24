@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test'
 import { Article } from '../../models/Article.js'
 
 /** @type {import('@playwright/test').Page} */
-let page, node
+let page
+let node
 const title = 'Article'
 
 test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
