@@ -38,6 +38,14 @@ class Node {
   }
 
   /**
+   * Save the node.
+   * @returns {Promise<void>}
+   */
+  async save () {
+    await this.inputSave.click()
+  }
+
+  /**
    * Update the node's title.
    * @returns {Promise<void>}
    */

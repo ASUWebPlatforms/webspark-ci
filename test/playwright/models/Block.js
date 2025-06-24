@@ -33,11 +33,23 @@ class Block {
     await this.inputCreateContentBlock.click()
     await this.inputAddByName.click()
     await this.inputBlockAdminTitle.fill(this.name)
+  }
+
+  async addContent () {
+    // This is meant to be overriden in the extending classes
+  }
+
+  async edit () {}
+
+  async save () {
     await this.inputAddBlock.click()
     await this.inputSaveLayout.click()
   }
 
-  async edit () {}
+  async update () {
+    await this.inputUpdateBlock.click()
+    await this.inputSaveLayout.click()
+  }
 
   async delete () {}
 

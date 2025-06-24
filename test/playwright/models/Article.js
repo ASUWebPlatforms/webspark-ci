@@ -34,7 +34,7 @@ class Article extends Node {
     await this.inputTitle.fill(title)
     await this.inputByline.fill(byline)
     await this.inputBody.fill(body)
-    await this.inputSave.click()
+    await this.save()
 
     await expect(this.status).toHaveClass(/alert-success/)
     await expect(this.page.getByRole('heading', { name: title })).toBeVisible()
@@ -53,7 +53,7 @@ class Article extends Node {
     await drupal.addMediaField(this.page)
     await this.inputHeroSize.selectOption({ label: 'Large' })
     await this.inputAuthor.fill(author)
-    await this.inputSave.click()
+    await this.save()
 
     await expect(this.hero).toHaveClass(/uds-story-hero-lg/)
     await expect(this.image).toBeVisible()
