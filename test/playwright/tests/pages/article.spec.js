@@ -18,11 +18,11 @@ test.describe(title, { tag: ['@webspark', '@pages'] }, () => {
   })
 
   test('create', async () => {
-    await node.addArticle()
+    await node.add()
   })
 
   test('edit', async () => {
-    await node.editArticle()
+    await node.edit()
     await node.addContent()
   })
 })

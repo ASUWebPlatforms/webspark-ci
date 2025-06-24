@@ -42,7 +42,7 @@ export default defineConfig({
     },
     {
       name: 'sample',
-      testMatch: '**/maintenance.spec.js',
+      testMatch: '**/accordion.spec.js',
       dependencies: ['setup'],
       use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE },
     },
