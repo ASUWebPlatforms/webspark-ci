@@ -122,13 +122,38 @@ class Drupal {
     await page.getByRole('checkbox', { name: `Select ${media}`, exact: true }).check()
 
     const responsePromise = page.waitForResponse(resp =>
-      resp.url().includes('/layout') || resp.url().includes('/edit')
+      resp.url().includes('/layout') || resp.url().includes('/edit'),
     )
     await page.getByRole('button', { name: 'Insert selected' }).click()
     const response = await responsePromise
     if (!response.ok()) {
       throw new Error(`Failed to load media: ${response.status()} ${response.statusText()}`)
     }
+  }
+
+  /**
+   * Add a Call to Action field.
+   * @param {import('playwright').Page} page
+   * @param {number} n
+   * @returns {Promise<void>}
+   */
+  async addCTAField (page, n = 0) {
+    await page.getByRole('button', { name: 'Add CTA' }).nth(n).click()
+    await page.getByRole('textbox', { name: 'URL' }).nth(n).fill('https://asu.edu')
+    await page.getByRole('textbox', { name: 'Link text' }).nth(n).fill('Call to action')
+    await page.getByRole('combobox', { name: 'Select a target' }).nth(n).selectOption({ label: 'New window (_blank)' })
+    await page.getByRole('combobox', { name: 'Required Style' }).nth(n).selectOption({ label: 'Maroon' })
+  }
+
+  /**
+   * Add an Icon field.
+   * @param {import('playwright').Page} page
+   * @param {number} n
+   * @returns {Promise<void>}
+   */
+  async addIcon (page, n = 0) {
+    await page.locator('.fip-icon-down-dir').nth(n).click()
+    await page.getByTitle('Pyramid,ASUAwesome,Shapes,').nth(n).click()
   }
 }
 

@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test'
 import { faker } from '@faker-js/faker/locale/en'
 import { Block } from './Block'
+import { CardGroupDefault } from './WebsparkCards'
 import drupal from '../helpers/drupal'
 
 export class Accordion extends Block {
@@ -45,10 +46,10 @@ export class Accordion extends Block {
 export class Blockquote extends Block {
   constructor (page, name) {
     super(page, name)
-    this.content = 'Block content'
-    this.author = 'Block author'
-    this.title = 'Block title'
-    this.heading = 'Block heading'
+    this.content = faker.lorem.paragraph()
+    this.author = faker.person.fullName()
+    this.title = faker.lorem.words()
+    this.heading = faker.lorem.words()
 
     this.inputAccentColor = page.getByRole('combobox', { name: 'Required Accent Color' })
     this.inputTextColor = page.getByRole('combobox', { name: 'Required Text Color' })
@@ -76,7 +77,7 @@ export class Blockquote extends Block {
     await this.inputCitationTitle.fill(this.title)
   }
 
-  async addContentVariant() {
+  async addContentVariant () {
     await this.inputHeading.fill(this.heading)
     await this.inputHeadingHighlight.selectOption({ label: 'Gold' })
     await this.inputTextColor.selectOption({ label: 'White' })
@@ -95,7 +96,7 @@ export class Blockquote extends Block {
     await expect(this.elTitle.first()).toBeVisible()
   }
 
-  async verifyVariant() {
+  async verifyVariant () {
     await expect(this.el.last()).toHaveClass(/with-image/)
     await expect(this.el.last()).toHaveClass(/text-white/)
     await expect(this.el.last()).toHaveClass(/reversed/)
@@ -107,9 +108,101 @@ export class Blockquote extends Block {
 export class CardAndImage extends Block {
   constructor (page, name) {
     super(page, name)
+    this.heading = faker.lorem.words()
+    this.content = faker.lorem.paragraph()
+    this.author = faker.person.fullName()
+    this.title = faker.lorem.words()
+
+    this.inputParallax = page.getByRole('checkbox', { name: 'Parallax' })
+    this.inputHeading = page.getByRole('textbox', { name: 'Heading' })
+    this.inputBody = page.getByLabel('Rich Text Editor').getByRole('textbox')
+    this.inputShowBorders = page.getByRole('checkbox', { name: 'Show borders' })
+    this.inputContentPosition = page.getByRole('combobox', { name: 'Required Content Position' })
+
+    this.el = page.locator('.uds-card-and-image')
+    this.elIcon = page.getByTestId('card-icon')
+    this.elHeading = page.getByText(this.heading, { exact: true })
+    this.elContent = page.getByText(this.content, { exact: true })
+    this.elCTA = page.getByRole('link', { name: 'Call to action', exact: true })
+    this.elImage = page.getByRole('img', { name: 'sample image' })
   }
 
-  async addContent () {}
+  async addContent () {
+    await drupal.addMediaField(this.page)
+    await this.inputHeading.fill(this.heading)
+    await this.inputBody.fill(this.content)
+    await drupal.addCTAField(this.page)
+    await this.inputShowBorders.setChecked(true)
+    await drupal.addIcon(this.page)
+    await this.inputContentPosition.selectOption({ label: 'Right' })
+  }
 
-  async verify () {}
+  async addContentVariant () {
+    await drupal.addMediaField(this.page)
+    await this.inputParallax.setChecked(true)
+  }
+
+  async verify () {
+    await expect(this.el.first()).toHaveCSS('background-image', /.*sample.*/)
+    await expect(this.el.first()).toHaveClass(/uds-card-and-image-right/)
+    await expect(this.elIcon).toBeVisible()
+    await expect(this.elHeading).toBeVisible()
+    await expect(this.elContent).toBeVisible()
+    await this.verifyCTAField(this.elCTA)
+  }
+
+  async verifyVariant () {
+    await expect(this.el.last()).toHaveClass(/parallax-container-content/)
+    await expect(this.elImage).toBeVisible()
+
+    // Check the parallax effect is working
+    const initialPosition = await this.elImage.evaluate((img) => img.style.top)
+    await this.page.evaluate(() => window.scrollTo(0, window.innerHeight / 2))
+    await this.page.waitForTimeout(500)
+    const scrolledPosition = await this.elImage.evaluate((img) => img.style.top)
+    expect(initialPosition).not.toEqual(scrolledPosition)
+  }
+}
+
+export class CardCarousel extends Block {
+  constructor (page, name) {
+    super(page, name)
+
+    this.cards = new CardGroupDefault(page)
+    this.inputLayout = page.getByLabel('Layout', { exact: true })
+    this.inputCardOrientationLandscape = page.getByRole('radio', { name: 'Landscape' })
+
+    this.elSlides = page.locator('.glide__slide')
+    this.elBullets = page.locator('.glide__bullet')
+    this.elArrows = page.locator('.glide__arrow')
+    this.elCards = page.locator('.card-horizontal')
+  }
+
+  async addContent () {
+    await this.inputLayout.selectOption({ label: '1 Column' })
+    await this.inputCardOrientationLandscape.check()
+    await this.cards.addCardGroupDefault()
+    await this.cards.addCards(2)
+  }
+
+  async verify () {
+    await expect(this.elSlides).toHaveCount(2)
+    await expect(this.elSlides.nth(0)).toHaveClass(/glide__slide--active/)
+    await expect(this.elCards).toHaveCount(2)
+    await expect(this.elBullets).toHaveCount(2)
+    await expect(this.elBullets.nth(0)).toHaveClass(/glide__bullet--active/)
+    await expect(this.elArrows).toHaveCount(2)
+    await expect(this.elArrows.nth(0)).toHaveClass(/glide__arrow--disabled/)
+
+    // Interactions
+    await this.elBullets.nth(1).click()
+    await expect(this.elBullets.nth(1)).toHaveClass(/glide__bullet--active/)
+    await expect(this.elBullets.nth(0)).not.toHaveClass(/glide__bullet--active/)
+    await expect(this.elSlides.nth(0)).not.toHaveClass(/glide__slide--active/)
+    await expect(this.elSlides.nth(1)).toHaveClass(/glide__slide--active/)
+    await expect(this.elArrows.nth(0)).not.toHaveClass(/glide__arrow--disabled/)
+    await expect(this.elArrows.nth(1)).toHaveClass(/glide__arrow--disabled/)
+    await this.elArrows.nth(0).click()
+    await expect(this.elSlides.nth(0)).toHaveClass(/glide__slide--active/)
+  }
 }

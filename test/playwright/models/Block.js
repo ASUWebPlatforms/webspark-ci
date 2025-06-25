@@ -88,6 +88,23 @@ class Block {
     await expect(this.page.locator(`.spacing-top-8.spacing-bottom-8.block-inline-block${this.name}`)).toHaveCount(1)
     await expect(this.page.locator('.webspark-anchor-link-data')).toHaveAttribute('data-title', this.name)
   }
+
+  async verifyMediaField () {}
+
+  /**
+   * Verify the Call to Action field.
+   * NOTE: Should this really be in the Block class?
+   * @param {import('@playwright/test').Locator} locator
+   * @returns {Promise<void>}
+   */
+  async verifyCTAField (locator) {
+    await expect(locator).toBeVisible()
+    await expect(locator).toHaveClass(/btn-maroon/)
+    await expect(locator).toHaveAttribute('href', 'https://asu.edu')
+    await expect(locator).toHaveAttribute('target', '_blank')
+  }
+
+  async verifyIconField () {}
 }
 
 export { Block }
