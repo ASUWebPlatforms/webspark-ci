@@ -111,7 +111,7 @@ class Drupal {
   }
 
   /**
-   * Add a media field to a page.
+   * Add a media field.
    * @param {import('playwright').Page} page
    * @param {number} n
    * @param {string} media
@@ -121,7 +121,9 @@ class Drupal {
     await page.getByRole('button', { name: 'Add media' }).nth(n).click()
     await page.getByRole('checkbox', { name: `Select ${media}`, exact: true }).check()
 
-    const responsePromise = page.waitForResponse(resp => resp.url().includes('/edit'))
+    const responsePromise = page.waitForResponse(resp =>
+      resp.url().includes('/layout') || resp.url().includes('/edit')
+    )
     await page.getByRole('button', { name: 'Insert selected' }).click()
     const response = await responsePromise
     if (!response.ok()) {

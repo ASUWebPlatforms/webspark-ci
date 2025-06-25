@@ -26,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://webspark-ci.ddev.site',
+    baseURL: process.env.DDEV_PRIMARY_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -41,22 +41,22 @@ export default defineConfig({
       testMatch: '**/*.setup.js',
     },
     {
-      name: 'sample',
-      testMatch: '**/accordion.spec.js',
+      name: 'chrome',
+      testIgnore: /.*mobile.spec.js/,
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
       dependencies: ['setup'],
-      use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE },
     },
-    // {
-    //   name: 'chrome',
-    //   use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE, },
-    //   testIgnore: /.*mobile.spec.js/,
-    //   dependencies: ['setup'],
-    // },
-    // {
-    //   name: 'iphone',
-    //   use: {...devices['iPhone 14'], storageState: STORAGE_STATE, },
-    //   testMatch: /.*mobile.spec.js/,
-    //   dependencies: ['setup'],
-    // },
+    {
+      name: 'iphone',
+      testMatch: /.*mobile.spec.js/,
+      use: {...devices['iPhone 14'], storageState: STORAGE_STATE, },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'sample',
+      testMatch: '**/blockquote.spec.js',
+      use: { viewport: { width: 1920, height: 1080 }, storageState: STORAGE_STATE },
+      dependencies: ['setup'],
+    },
   ],
 })
