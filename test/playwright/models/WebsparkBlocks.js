@@ -185,7 +185,6 @@ export class CardCarousel extends Block {
     await this.cards.addContent()
   }
 
-  //TODO: Update to account for 3 cards instead of 2
   async verify () {
     await expect(this.elSlides).toHaveCount(3)
     await expect(this.elSlides.nth(0)).toHaveClass(/glide__slide--active/)
@@ -194,16 +193,14 @@ export class CardCarousel extends Block {
     await expect(this.elBullets.nth(0)).toHaveClass(/glide__bullet--active/)
     await expect(this.elArrows).toHaveCount(2)
     await expect(this.elArrows.nth(0)).toHaveClass(/glide__arrow--disabled/)
-
-    // Interactions
-    await this.elBullets.nth(1).click()
-    await expect(this.elBullets.nth(1)).toHaveClass(/glide__bullet--active/)
+    await this.elBullets.nth(2).click()
+    await expect(this.elBullets.nth(2)).toHaveClass(/glide__bullet--active/)
     await expect(this.elBullets.nth(0)).not.toHaveClass(/glide__bullet--active/)
     await expect(this.elSlides.nth(0)).not.toHaveClass(/glide__slide--active/)
-    await expect(this.elSlides.nth(1)).toHaveClass(/glide__slide--active/)
+    await expect(this.elSlides.nth(2)).toHaveClass(/glide__slide--active/)
     await expect(this.elArrows.nth(0)).not.toHaveClass(/glide__arrow--disabled/)
     await expect(this.elArrows.nth(1)).toHaveClass(/glide__arrow--disabled/)
     await this.elArrows.nth(0).click()
-    await expect(this.elSlides.nth(0)).toHaveClass(/glide__slide--active/)
+    await expect(this.elSlides.nth(1)).toHaveClass(/glide__slide--active/)
   }
 }

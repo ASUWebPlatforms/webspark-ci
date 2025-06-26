@@ -11,22 +11,27 @@ class React {
     this.page = page
   }
 
-  async addCards (number = 3) {
-    for (let i = 0; i < number; i++) {
-      if (i > 0) {
-        await this.inputAddCard.click()
-        // Check the AJAX for a better way than a hard wait
-        // Then put it in the Drupal helper and allow custom timeout value
-        await this.page.waitForTimeout(3000)
-      }
-      await this.addContent(i)
-    }
+  /**
+   * Add a new card to the card group.
+   * @param {number} i The locator index
+   * @returns {Promise<void>}
+   */
+  async #addCard (i = 0) {
+    throw new Error('addCard() must be implemented in the subclass, as a private method')
   }
 
+  /**
+   * Add a new card group.
+   * @returns {Promise<void>}
+   */
   async addCardGroup () {
     throw new Error('addCardGroup() must be implemented in the subclass')
   }
 
+  /**
+   * Add content to the card group.
+   * @returns {Promise<void>}
+   */
   async addContent () {
     throw new Error('addContent() must be implemented in the subclass')
   }

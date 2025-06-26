@@ -6,10 +6,7 @@ import { React } from './React'
 export class CardGroupDefault extends React {
   constructor (page) {
     super(page)
-    this.heading = faker.lorem.words()
-    this.content = faker.lorem.sentence()
     this.url = 'https://asu.edu'
-    this.text = faker.lorem.words()
 
     this.inputAddCard = page.getByRole('button', { name: 'Add Card' })
     this.inputAddCardGroup = page.getByRole('button', { name: 'Add Card Group Default' })
@@ -27,34 +24,29 @@ export class CardGroupDefault extends React {
     this.inputShowBorders = page.getByRole('checkbox', { name: 'Show borders' })
   }
 
-  /**
-   * Add a new card group.
-   * @returns {Promise<void>}
-   */
   async addCardGroup () {
     await this.inputAddCardGroup.click()
   }
 
-  async #addCard(n = 0) {
-    console.log(`Adding card ${n}`)
-    await drupal.addMediaField(this.page, n)
-    await this.inputCardHeading.nth(n).fill(faker.book.title())
-    await this.inputCardContent.nth(n).fill(faker.lorem.paragraph())
+  async #addCard (i = 0) {
+    await drupal.addMediaField(this.page, i)
+    await this.inputCardHeading.nth(i).fill(faker.book.title())
+    await this.inputCardContent.nth(i).fill(faker.lorem.paragraph())
     await this.inputAddCTA.first().click()
     await this.page.waitForTimeout(2500)
-    await this.inputCTAURL.nth(n).fill(this.url)
-    await this.inputCTAText.nth(n).fill(faker.lorem.words())
-    await this.inputSelectTarget.nth(n).selectOption({ label: 'New window (_blank)' })
-    await this.inputCTAStyle.nth(n).selectOption({ label: 'Maroon' })
+    await this.inputCTAURL.nth(i).fill(this.url)
+    await this.inputCTAText.nth(i).fill(faker.lorem.words())
+    await this.inputSelectTarget.nth(i).selectOption({ label: 'New window (_blank)' })
+    await this.inputCTAStyle.nth(i).selectOption({ label: 'Maroon' })
     await this.inputAddCTA.first().click()
     await this.page.waitForTimeout(2500)
-    await this.inputCTASecondaryURL.nth(n).fill(this.url)
-    await this.inputCTASecondaryText.nth(n).fill(faker.lorem.words())
-    await this.inputSelectTarget.nth(n+1).selectOption({ label: 'New window (_blank)' })
-    await this.inputCTAStyle.nth(n+1).selectOption({ label: 'Maroon' })
-    await this.inputLinkURL.nth(n).fill(this.url)
-    await this.inputLinkText.nth(n).fill(this.text)
-    await this.inputShowBorders.nth(n).check()
+    await this.inputCTASecondaryURL.nth(i).fill(this.url)
+    await this.inputCTASecondaryText.nth(i).fill(faker.lorem.words())
+    await this.inputSelectTarget.nth(i + 1).selectOption({ label: 'New window (_blank)' })
+    await this.inputCTAStyle.nth(i + 1).selectOption({ label: 'Maroon' })
+    await this.inputLinkURL.nth(i).fill(this.url)
+    await this.inputLinkText.nth(i).fill(faker.lorem.words())
+    await this.inputShowBorders.nth(i).check()
   }
 
   async addContent () {
