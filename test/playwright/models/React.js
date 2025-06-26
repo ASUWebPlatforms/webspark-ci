@@ -9,18 +9,6 @@ class React {
    */
   constructor (page) {
     this.page = page
-    this.inputAddCard = page.getByRole('button', { name: 'Add Card' })
-    this.inputAddCardGroupDefault = page.getByRole('button', { name: 'Add Card Group Default' })
-    this.inputCardHeading = page.getByRole('textbox', { name: 'Heading' })
-    this.inputCardContent = page.getByLabel('Rich Text Editor').getByRole('textbox')
-  }
-
-  /**
-   * Add a new card group.
-   * @returns {Promise<void>}
-   */
-  async addCardGroupDefault () {
-    await this.inputAddCardGroupDefault.click()
   }
 
   async addCards (number = 3) {
@@ -33,6 +21,10 @@ class React {
       }
       await this.addContent(i)
     }
+  }
+
+  async addCardGroup () {
+    throw new Error('addCardGroup() must be implemented in the subclass')
   }
 
   async addContent () {

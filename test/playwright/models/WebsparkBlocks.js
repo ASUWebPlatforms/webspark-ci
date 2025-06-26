@@ -181,15 +181,16 @@ export class CardCarousel extends Block {
   async addContent () {
     await this.inputLayout.selectOption({ label: '1 Column' })
     await this.inputCardOrientationLandscape.check()
-    await this.cards.addCardGroupDefault()
-    await this.cards.addCards(2)
+    await this.cards.addCardGroup()
+    await this.cards.addContent()
   }
 
+  //TODO: Update to account for 3 cards instead of 2
   async verify () {
-    await expect(this.elSlides).toHaveCount(2)
+    await expect(this.elSlides).toHaveCount(3)
     await expect(this.elSlides.nth(0)).toHaveClass(/glide__slide--active/)
-    await expect(this.elCards).toHaveCount(2)
-    await expect(this.elBullets).toHaveCount(2)
+    await expect(this.elCards).toHaveCount(3)
+    await expect(this.elBullets).toHaveCount(3)
     await expect(this.elBullets.nth(0)).toHaveClass(/glide__bullet--active/)
     await expect(this.elArrows).toHaveCount(2)
     await expect(this.elArrows.nth(0)).toHaveClass(/glide__arrow--disabled/)
