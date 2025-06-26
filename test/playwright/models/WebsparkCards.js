@@ -13,8 +13,6 @@ export class CardGroupDefault extends React {
     this.inputAddCardGroup = page.getByRole('button', { name: 'Add Card Group Default' })
     this.inputCardHeading = page.getByRole('textbox', { name: 'Heading' })
     this.inputCardContent = page.getByLabel('Rich Text Editor').getByRole('textbox')
-    this.inputLinkURL = page.locator('[data-drupal-selector*="field-link-0-uri"]')
-    this.inputLinkText = page.locator('[data-drupal-selector*="field-link-0-title"]')
     this.inputSelectTarget = page.getByRole('combobox', { name: 'Select a target' })
     this.inputCTAStyle = page.getByRole('combobox', { name: 'Required Style' })
     this.inputAddCTA = page.getByRole('button', { name: 'Add CTA' })
@@ -22,6 +20,8 @@ export class CardGroupDefault extends React {
     this.inputCTAText = page.locator('[data-drupal-selector*="field-cta-0-subform-field-cta-link-0-title"]')
     this.inputCTASecondaryURL = page.locator('[data-drupal-selector*="field-cta-secondary-0-subform-field-cta-link-0-uri"]')
     this.inputCTASecondaryText = page.locator('[data-drupal-selector*="field-cta-secondary-0-subform-field-cta-link-0-title"]')
+    this.inputLinkURL = page.locator('[data-drupal-selector*="field-link-0-uri"]')
+    this.inputLinkText = page.locator('[data-drupal-selector*="field-link-0-title"]')
     this.inputShowBorders = page.getByRole('checkbox', { name: 'Show borders' })
   }
 

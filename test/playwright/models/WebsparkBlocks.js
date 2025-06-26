@@ -242,3 +242,43 @@ export class CardImageAndContent extends Block {
     await expect(this.elTextParent).toHaveClass(/text-white/)
   }
 }
+
+export class ContentImageOverlap extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.heading = faker.lorem.words()
+    this.content = faker.lorem.paragraph()
+
+    this.inputHeading = page.getByRole('textbox', { name: 'Heading' })
+    this.inputContent = page.getByLabel('Rich Text Editor').getByRole('textbox')
+
+    this.el = page.locator('.uds-image-overlap')
+    this.elHeading = page.getByText(this.heading, { exact: true })
+    this.elContent = page.getByText(this.content, { exact: true })
+    this.elImage = page.getByRole('img', { name: 'sample image' })
+  }
+
+  async addContent () {
+    await drupal.addMediaField(this.page)
+    await this.inputHeading.fill(this.heading)
+    await this.inputContent.fill(this.content)
+  }
+
+  async verify () {
+    await expect(this.el).toHaveClass(/content-left/)
+    await expect(this.elHeading).toBeVisible()
+    await expect(this.elHeading).toHaveClass('highlight-gold')
+    await expect(this.elContent).toBeVisible()
+    await expect(this.elImage).toBeVisible()
+  }
+}
+
+export class Sample extends Block {
+  constructor (page, name) {
+    super(page, name)
+  }
+
+  async addContent () {}
+
+  async verify () {}
+}
