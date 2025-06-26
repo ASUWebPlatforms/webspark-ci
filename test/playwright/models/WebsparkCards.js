@@ -29,7 +29,7 @@ export class CardGroupDefault extends React {
     await this.inputAddCardGroup.click()
   }
 
-  async #addCard (i = 0) {
+  async addCard (i = 0) {
     await drupal.addMediaField(this.page, i)
     await this.inputCardHeading.nth(i).fill(faker.book.title())
     await this.inputCardContent.nth(i).fill(faker.lorem.paragraph())
@@ -49,11 +49,11 @@ export class CardGroupDefault extends React {
   }
 
   async addContent () {
-    await this.#addCard()
+    await this.addCard()
     await drupal.waitForAjax(this.page, this.inputAddCard, this.ajaxURL)
-    await this.#addCard(1)
+    await this.addCard(1)
     await drupal.waitForAjax(this.page, this.inputAddCard, this.ajaxURL)
-    await this.#addCard(2)
+    await this.addCard(2)
   }
 
   async verify () {}

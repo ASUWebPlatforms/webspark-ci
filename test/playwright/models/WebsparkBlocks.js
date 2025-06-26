@@ -204,3 +204,41 @@ export class CardCarousel extends Block {
     await expect(this.elSlides.nth(1)).toHaveClass(/glide__slide--active/)
   }
 }
+
+export class CardImageAndContent extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.heading = faker.lorem.words()
+    this.text = faker.lorem.paragraph()
+
+    this.inputHeading = page.getByRole('textbox', { name: 'Heading' })
+    this.inputHeadingColor = page.getByRole('combobox', { name: 'Required Heading color' })
+    this.inputText = page.getByLabel('Rich Text Editor').getByRole('textbox')
+    this.inputTextColor = page.getByRole('combobox', { name: 'Required Text Color' })
+
+    this.el = page.locator('.uds-card-image-and-content-image-container')
+    this.elTextParent = page.locator('.uds-card-image-and-content-content-container > .content')
+    this.elHeading = page.getByText(this.heading, { exact: true })
+    this.elText = page.getByText(this.text, { exact: true })
+  }
+
+  async addContent () {
+    await this.inputHeading.first().fill(this.heading)
+    await this.inputHeadingColor.selectOption({ label: 'Gray 7' })
+    await drupal.addMediaField(this.page)
+    await this.inputText.first().fill(this.text)
+    await this.inputTextColor.selectOption({ label: 'White' })
+
+    // Card -- only need this for layout
+    await drupal.addMediaField(this.page, 1)
+    await this.inputHeading.last().fill(faker.book.title())
+    await this.inputText.last().fill(faker.lorem.paragraph())
+  }
+
+  async verify () {
+    await expect(this.el).toHaveCSS('background-image', /.*sample.*/)
+    await expect(this.elHeading).toBeVisible()
+    await expect(this.elText).toBeVisible()
+    await expect(this.elTextParent).toHaveClass(/text-white/)
+  }
+}
