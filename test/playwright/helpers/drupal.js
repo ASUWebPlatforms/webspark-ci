@@ -155,6 +155,22 @@ class Drupal {
     await page.locator('.fip-icon-down-dir').nth(n).click()
     await page.getByTitle('Pyramid,ASUAwesome,Shapes,').nth(n).click()
   }
+
+  /**
+   * Click a button and wait for an AJAX response
+   * Helpful when Drupal fields are loaded in via AJAX (insert media, add cta, add tooltip, etc)
+   * @param {import('playwright').Page} page
+   * @param {import('@playwright/test').Locator} locator The button to click to initiate the AJAX
+   * @param {string} url URL pattern to match in the response
+   * @returns {Promise<void>}
+   */
+  async waitForAjax (page, locator, url) {
+    const responsePromise = page.waitForResponse(resp =>
+      resp.url().includes(url) && resp.status() === 200,
+    )
+    await locator.click()
+    await responsePromise
+  }
 }
 
 export default new Drupal()

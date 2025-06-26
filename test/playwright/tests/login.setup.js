@@ -5,8 +5,7 @@ const USERNAME = process.env.DRUPAL_USER
 const PASSWORD = process.env.DRUPAL_PASSWORD
 
 if (!USERNAME || !PASSWORD) {
-  console.warn('DRUPAL_USER and DRUPAL_PASSWORD must be set in \'.ddev/.env\'.')
-  throw new Error('Drupal credentials are not configured in the environment.')
+  throw new Error('DRUPAL_USER and DRUPAL_PASSWORD must be set in \'.ddev/.env\'.')
 }
 
 setup('login', async ({ page }) => {

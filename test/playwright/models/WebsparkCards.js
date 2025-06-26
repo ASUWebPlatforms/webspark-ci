@@ -7,6 +7,7 @@ export class CardGroupDefault extends React {
   constructor (page) {
     super(page)
     this.url = 'https://asu.edu'
+    this.ajaxURL = '/layout_builder/add/block/overrides'
 
     this.inputAddCard = page.getByRole('button', { name: 'Add Card' })
     this.inputAddCardGroup = page.getByRole('button', { name: 'Add Card Group Default' })
@@ -32,14 +33,12 @@ export class CardGroupDefault extends React {
     await drupal.addMediaField(this.page, i)
     await this.inputCardHeading.nth(i).fill(faker.book.title())
     await this.inputCardContent.nth(i).fill(faker.lorem.paragraph())
-    await this.inputAddCTA.first().click()
-    await this.page.waitForTimeout(2500)
+    await drupal.waitForAjax(this.page, this.inputAddCTA.first(), this.ajaxURL)
     await this.inputCTAURL.nth(i).fill(this.url)
     await this.inputCTAText.nth(i).fill(faker.lorem.words())
     await this.inputSelectTarget.nth(i).selectOption({ label: 'New window (_blank)' })
     await this.inputCTAStyle.nth(i).selectOption({ label: 'Maroon' })
-    await this.inputAddCTA.first().click()
-    await this.page.waitForTimeout(2500)
+    await drupal.waitForAjax(this.page, this.inputAddCTA.first(), this.ajaxURL)
     await this.inputCTASecondaryURL.nth(i).fill(this.url)
     await this.inputCTASecondaryText.nth(i).fill(faker.lorem.words())
     await this.inputSelectTarget.nth(i + 1).selectOption({ label: 'New window (_blank)' })
@@ -50,13 +49,10 @@ export class CardGroupDefault extends React {
   }
 
   async addContent () {
-    await this.page.waitForTimeout(2500)
     await this.#addCard()
-    await this.inputAddCard.click()
-    await this.page.waitForTimeout(2500)
+    await drupal.waitForAjax(this.page, this.inputAddCard, this.ajaxURL)
     await this.#addCard(1)
-    await this.inputAddCard.click()
-    await this.page.waitForTimeout(2500)
+    await drupal.waitForAjax(this.page, this.inputAddCard, this.ajaxURL)
     await this.#addCard(2)
   }
 
