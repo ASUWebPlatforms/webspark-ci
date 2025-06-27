@@ -36,6 +36,15 @@ class Block {
   }
 
   /**
+   * Add a repeater item content to the block.
+   * @param {number} i The locator index
+   * @returns {Promise<void>}
+   */
+  async addItem (i = 0) {
+    throw new Error('addItem() must be implemented in the subclass')
+  }
+
+  /**
    * Add content to the block.
    * @returns {Promise<void>}
    */

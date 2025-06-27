@@ -16,8 +16,8 @@ class React {
    * @param {number} i The locator index
    * @returns {Promise<void>}
    */
-  async #addCard (i = 0) {
-    throw new Error('addCard() must be implemented in the subclass, as a private method')
+  async addCard (i = 0) {
+    throw new Error('addCard() must be implemented in the subclass')
   }
 
   /**

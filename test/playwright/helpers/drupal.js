@@ -164,7 +164,7 @@ class Drupal {
    * @param {string} url URL pattern to match in the response
    * @returns {Promise<void>}
    */
-  async waitForAjax (page, locator, url) {
+  async waitForAjax (page, locator, url = '/layout_builder/add/block/overrides') {
     const responsePromise = page.waitForResponse(resp =>
       resp.url().includes(url) && resp.status() === 200,
     )

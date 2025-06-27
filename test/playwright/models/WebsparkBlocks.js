@@ -273,6 +273,38 @@ export class ContentImageOverlap extends Block {
   }
 }
 
+export class DisplayList extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.heading = faker.book.title()
+    this.body = faker.lorem.sentence()
+
+    this.inputHeading = page.locator('[data-drupal-selector*="field-heading-0-value"]')
+    this.inputBody = page.locator('[data-drupal-selector*="field-body-0-value"]')
+    this.inputAddItem = page.getByRole('button', { name: 'Add Display List Item' })
+
+    this.el = page.getByText(`${this.heading} ${this.body}`)
+  }
+
+  async addItem (i = 0) {
+    await this.inputHeading.nth(i).fill(this.heading)
+    await this.inputBody.nth(i).fill(this.body)
+  }
+
+  async addContent () {
+    await this.addItem()
+    await drupal.waitForAjax(this.page, this.inputAddItem)
+    await this.addItem(1)
+    await drupal.waitForAjax(this.page, this.inputAddItem)
+    await this.addItem(2)
+  }
+
+  async verify () {
+    await expect(this.el).toHaveCount(3)
+    await expect(this.el.first()).toBeVisible()
+  }
+}
+
 export class Sample extends Block {
   constructor (page, name) {
     super(page, name)
