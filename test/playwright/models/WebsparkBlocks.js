@@ -324,6 +324,36 @@ export class Divider extends Block {
   }
 }
 
+export class DonutChart extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.text = faker.lorem.sentence()
+
+    this.inputNumber = page.getByRole('spinbutton', { name: 'Required Number' })
+    this.inputTextColor = page.getByRole('combobox', { name: 'Required Text Color' })
+    this.inputText = page.getByRole('textbox', { name: 'Text' })
+
+    this.el = page.locator('.uds-charts-and-graphs-overlay')
+    this.elRing = page.locator('#uds-donut')
+    this.elNumber = page.locator('#percentage-display')
+    this.elText = page.locator('#percentage-display + span')
+  }
+
+  async addContent () {
+    await this.inputNumber.fill('85')
+    await this.inputTextColor.selectOption({ label: 'White' })
+    await this.inputText.fill(this.text)
+  }
+
+  async verify () {
+    await expect(this.el).toHaveClass(/text-white/)
+    await expect(this.elRing).toBeVisible()
+    await expect(this.elRing).toHaveCSS('height', '350px')
+    await expect(this.elNumber).toContainText('85%')
+    await expect(this.elText).toContainText(this.text)
+  }
+}
+
 export class Sample extends Block {
   constructor (page, name) {
     super(page, name)
