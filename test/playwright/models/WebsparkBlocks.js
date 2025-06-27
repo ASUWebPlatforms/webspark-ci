@@ -305,6 +305,25 @@ export class DisplayList extends Block {
   }
 }
 
+export class Divider extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.inputDivider = page.getByRole('combobox', { name: 'Required Divider type' })
+    this.el = page.getByRole('separator')
+  }
+
+  async addContent () {
+    await this.inputDivider.selectOption({ label: 'Gold body copy divider' })
+  }
+
+  async verify () {
+    await expect(this.el.first()).toBeVisible()
+    await expect(this.el.first()).toHaveClass('margin-width-divider')
+    await expect(this.el.last()).toBeVisible()
+    await expect(this.el.last()).toHaveClass('copy-divider')
+  }
+}
+
 export class Sample extends Block {
   constructor (page, name) {
     super(page, name)
