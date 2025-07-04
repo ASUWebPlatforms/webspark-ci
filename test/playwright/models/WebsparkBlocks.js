@@ -354,6 +354,50 @@ export class DonutChart extends Block {
   }
 }
 
+export class Events extends Block {
+  constructor (page, name) {
+    super(page, name)
+    this.heading = faker.lorem.sentence()
+    this.url = faker.internet.url()
+    this.text = faker.lorem.sentence()
+
+    this.inputTaxonomy = page.getByRole('textbox', { name: 'Feed taxonomy term' })
+    this.inputFilter = page.getByRole('textbox', { name: 'Feed Filter' })
+    this.inputItemsToDisplay = page.getByRole('combobox', { name: 'Required Items to Display' })
+    this.inputHeading = page.getByRole('textbox', { name: 'Heading', exact: true })
+    this.inputHeadingColor = page.getByRole('combobox', { name: 'Header Text Color' })
+    this.inputCTAURL = page.getByRole('textbox', { name: 'URL' })
+    this.inputCTAText = page.getByRole('textbox', { name: 'Link text' })
+    this.inputCTAColor = page.getByRole('combobox', { name: 'Required Header CTA color' })
+
+    this.el = page.getByTestId('list-view-container').getByRole('listitem')
+    this.elHeading = page.getByText(this.heading, { exact: true })
+    this.elCTA = page.getByRole('link', { name: this.text, exact: true })
+  }
+
+  async addContent () {
+    // await this.inputTaxonomy.fill('sports');
+    // await this.inputFilter.fill('golf');
+    await this.inputItemsToDisplay.selectOption({ label: 'Three' })
+    await this.inputHeading.fill(this.heading)
+    await this.inputHeadingColor.selectOption({ label: 'White' })
+    await this.inputCTAURL.fill(this.url)
+    await this.inputCTAText.fill(this.text)
+    await this.inputCTAColor.selectOption({ label: 'Maroon' })
+  }
+
+  // Although this is a React component, we cant yet test via the props
+  // since the props are deleted in the components JS, then data passed via
+  // the preprocess hook server side
+  async verify () {
+    await expect(this.el).toHaveCount(3)
+    await expect(this.elHeading).toBeVisible()
+    await expect(this.elHeading).toHaveClass('text-white')
+    await expect(this.elCTA).toHaveClass(/btn-maroon/)
+    await expect(this.elCTA).toHaveAttribute('href', this.url)
+  }
+}
+
 export class Sample extends Block {
   constructor (page, name) {
     super(page, name)
